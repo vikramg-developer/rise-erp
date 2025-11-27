@@ -29,6 +29,8 @@
 
 			<!-- Start::slide -->
 			<li class="slide has-sub">
+                            <?php //if($user_permission): ?>
+                                <?php //if(in_array('createUser', $user_permission)):  ?>
 				<a href="javascript:void(0);" class="side-menu__item">
 					<i class="bx bx-home side-menu__icon"></i>
 					<span class="side-menu__label">Dashboards<span class="badge bg-warning-transparent ms-2">12</span></span>
@@ -75,6 +77,7 @@
 						<a href="<?php echo base_url('index11'); ?>" class="side-menu__item">Personal</a>
 					</li>
 				</ul>
+                            <?php //endif; ?>
 			</li>
 			<!-- End::slide -->
 
