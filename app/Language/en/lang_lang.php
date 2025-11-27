@@ -6,3 +6,10 @@
  */
 
 $lang['list'] = 'List';
+$lang['registration'] = 'Registration';
+$lang['course'] = 'Course';
+$lang['year'] = 'Year';
+$lang['academic year'] = 'Academic Year';
+$lang['email'] = 'Email';
+$lang['admission'] = 'Admission';
+$lang['add'] = 'Add';
