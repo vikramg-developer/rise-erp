@@ -19,6 +19,8 @@ $lang['ticket'] = 'Ticket';
 $lang['rise'] = 'Rise';
 $lang['add'] = 'Add';
 $lang['registration'] = 'Registration';
+$lang['create'] = 'Create';
+$lang['contact'] = 'Contact';
 $lang['leaving'] = 'Leaving';
 $lang['certificate'] = 'Certificate';
 
