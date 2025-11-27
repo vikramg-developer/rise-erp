@@ -6,6 +6,7 @@
  */
 
 $lang['list'] = 'List';
+
 $lang['registration'] = 'Registration';
 $lang['course'] = 'Course';
 $lang['year'] = 'Year';
@@ -13,11 +14,15 @@ $lang['academic year'] = 'Academic Year';
 $lang['email'] = 'Email';
 $lang['admission'] = 'Admission';
 $lang['add'] = 'Add';
+
 $lang['ticket'] = 'Ticket';
 $lang['rise'] = 'Rise';
 $lang['add'] = 'Add';
 $lang['registration'] = 'Registration';
 $lang['feedback'] = 'Feedback';
 $lang['master'] = 'Master';
-$lang['add'] = 'Add';
+$lang['create'] = 'Create';
+$lang['contact'] = 'Contact';
+$lang['leaving'] = 'Leaving';
+$lang['certificate'] = 'Certificate';
 
