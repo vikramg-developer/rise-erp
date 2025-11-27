@@ -17,8 +17,14 @@ $lang['add'] = 'Add';
 
 $lang['ticket'] = 'Ticket';
 $lang['rise'] = 'Rise';
-$lang['add'] = 'Add';
 $lang['registration'] = 'Registration';
 
 $lang['update']='Update';
 $lang['delete']='Delete';
+$lang['feedback'] = 'Feedback';
+$lang['master'] = 'Master';
+$lang['create'] = 'Create';
+$lang['contact'] = 'Contact';
+$lang['leaving'] = 'Leaving';
+$lang['certificate'] = 'Certificate';
+
