@@ -6,3 +6,7 @@
  */
 
 $lang['list'] = 'List';
+$lang['ticket'] = 'Ticket';
+$lang['rise'] = 'Rise';
+$lang['add'] = 'Add';
+$lang['registration'] = 'Registration';
