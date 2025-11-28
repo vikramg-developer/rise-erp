@@ -1,52 +1,45 @@
 <?php
-//A
 
-
-    $lang['academic'] = 'Academic';
-    $lang['add'] = 'Add';
-
+return [
+    'academic' => 'Academic',
+    'add' => 'Add',
 //B
-
 //C
-   
-    
-
 //D
-
 //E
-
 //F
-    $lang['feedback'] = 'Feedback';
-
+    'feedback' => 'Feedback',
 //G
-
 //H
-
 //I
-
 //J
-
 //K
-
 //L
-    $lang['list'] = 'List';
-
+    'list' => 'List',
 //M
-    $lang['master'] = 'Master';
+    'master' => 'Master',
+    'manage' => 'Manage',
+    
 //N
+    'name' => 'Name',
+    'no' => 'No',
+//
 //O
 //P
-    $lang['part'] = 'Part';
+    'part' => 'Part',
 //Q
+'question' => 'Question',
 //R
 //S
-    $lang['semester'] = 'Semester';
+    'semester' => 'Semester',
+    'sr' => 'Sr',
 //T
-    $lang['type'] = 'Type';
+    'type' => 'Type',
 //U
 //V
 //W
 //X
 //Y
-    $lang['year'] = 'Year';
+    'year' => 'Year',
 //Z
+];
