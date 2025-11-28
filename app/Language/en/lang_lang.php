@@ -4,6 +4,42 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
  */
+//B
+
+//C
+
+//D
+
+//E
+
+//F
+
+//G
+
+//H
+
+//I
+
+//J
+
+//K
+
+//L
+
+//M
+//N
+//O
+//P
+//Q
+//R
+//S
+//T
+//U
+//V
+//W
+//X
+//Y
+//Z
 
 $lang['list'] = 'List';
 
