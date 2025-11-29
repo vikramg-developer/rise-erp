@@ -1,20 +1,18 @@
 <?php
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
- */
-
 namespace App\Controllers;
-use CodeIgniter\Controller;
-/**
- * Description of Ticket
- *
- * @author Admin
- */
-class Ticket extends Controller {
-    //put your code here
-//fgfdg 
-//    fhgfgfh
-//    fdhfgh
+use App\Models\ModelLeavingCertificate;
+
+class Ticket extends BaseController {
+public $ModelTicket;
+    public function __construct(){
+       $this->ModelTicket = new ModelLeavingCertificate();
+}
+
+public function index()
+    {
+        $data['ticket_data']=$this->ModelTicket->getLcData();
+        
+        render_page('ticket/ticket-index',$data);
+    }
 }
