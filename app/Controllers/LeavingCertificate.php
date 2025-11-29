@@ -16,4 +16,10 @@ class LeavingCertificate extends BaseController {
         
         render_page('certificate/leaving-certificate-index',$data);
     }
+    public function leaving_certificate_remark()
+    {
+        $data['lc_data']=$this->ModelLeavingCertificate->getLcData();
+        
+        render_page('certificate/leaving-certificate-remark',$data);
+    }
 }
