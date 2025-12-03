@@ -1,7 +1,7 @@
 <?php
 return[
     //A
-     'aadhar' => 'Aadhar',
+    'aadhar' => 'Aadhar',
     'academic' => 'Academic',
     'add' => 'Add',
     'admission' => 'Admission',
