@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no'>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title> YNEX - Codeigniter Bootstrap 5 Premium Admin & Dashboard Template </title>
+        <title> RISE</title>
         <meta name="Description" content="Bootstrap Codeigniter Responsive Admin Web Dashboard HTML5 Template">
         <meta name="Author" content="Spruko Technologies Private Limited">
         <meta name="keywords" content="bootstrap dashboard, bootstrap 5 admin template, admin template bootstrap 5, admin dashboard template, codeigniter, codeigniter template, bootstrap admin dashboard, codeigniter admin panel, admin dashboard, dashboard template, admin panel, bootstrap admin panel, template dashboard, bootstrap template, bootstrap themes.">

@@ -2,12 +2,12 @@
 
     <!-- Page Header -->
     <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-        <h1 class="page-title fw-semibold fs-18 mb-0">Leaving Certificate</h1>
+        <h1 class="page-title fw-semibold fs-18 mb-0"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?></h1>
         <div class="ms-md-1 ms-0">
             <nav>
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="#">Rise</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Leaving Certificate</li>
+                    <li class="breadcrumb-item"><a href="#"><?= lang('App.dashboard'); ?></a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?></li>
                 </ol>
             </nav>
         </div>
@@ -27,8 +27,8 @@
                                         <div class="row gy-3">
 
                                             <div class="col-xl-4">
-                                                <label for="product-category-add" class="form-label">Course</label>
-                                                <select class="form-control" data-trigger name="product-category-add" id="product-category-add">
+                                                <label for="course-id" class="form-label"><?= lang('App.course'); ?></label>
+                                                <select class="form-control" data-trigger name="course-id" id="course-id">
                                                     <option value="">Select Course</option>
                                                     <option value="1">Computer Science & Engineering</option>
                                                     <option value="2">Civil Engineering</option>
@@ -38,8 +38,8 @@
                                                 </select>
                                             </div>
                                             <div class="col-xl-4">
-                                                <label for="product-gender-add" class="form-label">Year</label>
-                                                <select class="form-control" data-trigger name="product-gender-add" id="product-gender-add">
+                                                <label for="year-id" class="form-label"><?= lang('App.year'); ?></label>
+                                                <select class="form-control" data-trigger name="year-id" id="year-id">
                                                     <option value="">Select Year</option>
                                                     <option value="1">First Year</option>
                                                     <option value="2">Second Year</option>
@@ -48,8 +48,8 @@
                                                 </select>
                                             </div>
                                             <div class="col-xl-4">
-                                                <label for="product-size-add" class="form-label">Academic Year</label>
-                                                <select class="form-control" data-trigger name="product-size-add" id="product-size-add">
+                                                <label for="aca-year-id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
+                                                <select class="form-control" data-trigger name="aca-year-id" id="aca-year-id">
                                                     <option value="">Select Academic Year</option>
                                                     <option value="Extra Small">2024-2025</option>
                                                     <option value="Small">2023-2024</option>
@@ -66,24 +66,23 @@
                         </div>
                     </div>
                     <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
-                        <button class="btn btn-primary-light m-1">Search</button>
+                        <button class="btn btn-primary-light m-1"><?= lang('App.search'); ?></button>
                     </div>
-                    <?php
-                    print_r($lc_data);
-                    ?>
+                  
                     <div class="p-4 border-top ">
+                        
                         <div class="table-responsive">
                             <table class="table text-nowrap table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Rise No</th>
-                                        <th scope="col">Student Name</th>
-                                        <th scope="col">Mobile No.</th>
-                                        <th scope="col">Academic Year</th>
-                                        <th scope="col">Course</th>
-                                        <th scope="col">Year</th>
-                                        <th scope="col">Print</th>
+                                        <th scope="col"><?= lang('App.registration'); ?> <?= lang('App.no'); ?></th>
+                                        <th scope="col"><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>
+                                        <th scope="col"><?= lang('App.mobile'); ?> <?= lang('App.no'); ?></th>
+                                        <th scope="col"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
+                                        <th scope="col"><?= lang('App.course'); ?></th>
+                                        <th scope="col"><?= lang('App.year'); ?></th>
+                                        <th scope="col"><?= lang('App.print'); ?></th>
 
                                     </tr>
                                 </thead>
@@ -97,9 +96,9 @@
                                         <td>Civil Engineering</td>
                                         <td>Third Year</td>
                                         <td>
-                                            <button class="btn btn-sm btn-success btn-wave">
+                                            <a href="<?php echo base_url('lc-remark'); ?>" class="btn btn-sm btn-success btn-wave">
                                                 <i class="ri-download-2-line align-middle me-2 d-inline-block"></i>Leaving Certificate
-                                            </button>
+                                            </a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -111,9 +110,9 @@
                                         <td>Civil Engineering</td>
                                         <td>Third Year</td>
                                         <td>
-                                            <button class="btn btn-sm btn-success btn-wave">
+                                            <a href="<?php echo base_url('lc-remark'); ?>" class="btn btn-sm btn-success btn-wave">
                                                 <i class="ri-download-2-line align-middle me-2 d-inline-block"></i>Leaving Certificate
-                                            </button>
+                                            </a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -125,9 +124,9 @@
                                         <td>Civil Engineering</td>
                                         <td>Third Year</td>
                                         <td>
-                                            <button class="btn btn-sm btn-success btn-wave">
+                                            <a href="<?php echo base_url('lc-remark'); ?>" class="btn btn-sm btn-success btn-wave">
                                                 <i class="ri-download-2-line align-middle me-2 d-inline-block"></i>Leaving Certificate
-                                            </button>
+                                            </a>
                                         </td>
                                     </tr>
 
@@ -144,4 +143,4 @@
     <!--End::row-1 -->
 
 
-</div>
+</div><!--End::container-fluid -->

@@ -26,9 +26,9 @@ class Database extends Config
      */
     public array $default = [
         'DSN'      => '',
-        'hostname' => 'localhost',
-        'username' => 'root',
-        'password' => '',
+        'hostname' => '192.168.1.247',
+        'username' => 'riseuser',
+        'password' => 'Rise@2025',
         'database' => 'rise',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
