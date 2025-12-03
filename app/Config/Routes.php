@@ -35,11 +35,18 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->add('/', 'Home::index');
-$routes->add('/home', 'Home::index');
-$routes->add('/leaving-certificate', 'LeavingCertificate::index');
+
 $routes->add('/lc-remark', 'LeavingCertificate::addLeavingCertificateRemark');
 
+$routes->get('/home', 'Home::index');
+$routes->get('/feedback', 'Feedback::index');
+$routes->get('/leaving-certificate', 'LeavingCertificate::index');
+$routes->get('/ticket', 'Ticket::index');
+$routes->add('/create_ticket', 'Ticket::create_ticket');
 
+$routes->add('/registration', 'Registration::index');
+$routes->add('/savesignup', 'Registration::saveSignup');
+$routes->add('/login', 'Registration::login');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
