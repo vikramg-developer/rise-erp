@@ -1,77 +1,106 @@
 <?php
-
-return [
+return[
     //A
-    'admission' => 'Admission',
-    'aadhar' => 'Aadhar',
+     'aadhar' => 'Aadhar',
     'academic' => 'Academic',
     'add' => 'Add',
-//    B
-//    C
-    'course' => 'Course',
-    'confirm' => 'Confirm',
-    'college' => 'College',
-    'code' => 'Code',
+    'admission' => 'Admission',
+
+    //B
+    'bonafide' => 'Bonafide',
+    //C
     'category' => 'Category',
-//    D
-    'distance' => 'Distance',
-    'develop' => 'Develop',
+    'certificate' => 'Certificate',
+    'code' => 'Code',
+    'college' => 'College',
+    'confirm' => 'Confirm',
+    'course' => 'Course',
+
+    
+    //D
+    'dashboard' => 'Dashboard',
+    'date' => 'Date',
     'description' => 'Description',
-//    E
+    'develop' => 'Develop',
+
+    //E
     'email' => 'Email',
-//    F
-    'first' => 'First',
+    'exam' => 'Exam',
+    'examination' => 'Examination',
+
+    //F
     'feedback' => 'Feedback',
     'file'=>'File',
-//    G
-//    H
-//    I
+    'first' => 'First',
+
+    //G
+    'general'=>'General',
+    //H
+    'held' => 'Held',
+    //I
+    'in' => 'In',
     'issue' => 'Issue',
-//    J
-//    K
-//    L
+    //J
+    //K
+    
+    //L
     'last' => 'Last',
+    'lc' => 'LC',
+    'leaving' => 'Leaving',
     'list' => 'List',
-//    M
+    //M
+    'manage' => 'Manage',
+    'master' => 'Master',
     'middle' => 'Middle',
     'mobile' => 'Mobile',
-    'master' => 'Master',
-    'manage' => 'Manage',
-//    N
+    'mother' => 'Mother',
+
+    //N
     'name' => 'Name',
+    'no' => 'No.', 
     'number' => 'Number',
-    'no' => 'No',
-//    O
-//    P
-    'password' => 'Password',
+    //O
+    'of' => 'of',
+    //P
     'part' => 'Part',
+    'password' => 'Password',
+    'print' => 'Print',
     'priority' => 'Priority',
-//    Q
+
+    //Q
     'question' => 'Question',
-//    R
+    //R
+    'register' => 'Register',
     'registration' => 'Registration',
-    'rise' => 'Rise',
+    'remark' => 'Remark',
     'reset' => 'Reset',
-//    S
-    'student' => 'Student',
-    'sign' => 'Sign',
-    'select' => 'Select',
-    'submit' => 'Submit',
-    'semester' => 'Semester',
-    'sr' => 'Sr',
-    'select' => 'Select',
+    'result' => 'Result',
+    'rise' => 'Rise',
+
+    //S
     'screenshot' =>'Screenshot',
-//    T
-    'type' => 'Type',
+    'search' => 'Search',
+    'select' => 'Select',
+    'select' => 'Select',
+    'semester' => 'Semester',
+    'sign' => 'Sign',
+    'sr' => 'Sr',
+    'status' => 'Status',
+    'student' => 'Student',
+    'submit' => 'Submit',
+
+    //T
     'ticket' => 'Ticket',
     'title' => 'Title',
-//    U
+    'type' => 'Type',
+
+    //U
     'up' => 'UP',
-//    V
-//    W
-//    X
-//    Y
-    'year' => 'Year',
+    //V
+    //W
+    //X
+    //Y
+    'year'=>'Year'
     'your'=>'Your',
-//    Z
+    //Z
 ];
