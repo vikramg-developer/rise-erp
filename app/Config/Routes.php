@@ -35,7 +35,7 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->add('/', 'Home::index');
-$routes->add('/Home', 'Home::index');
+$routes->add('/home', 'Home::index');
 $routes->add('/leaving-certificate', 'LeavingCertificate::index');
 $routes->add('/lc-remark', 'LeavingCertificate::addLeavingCertificateRemark');
 
