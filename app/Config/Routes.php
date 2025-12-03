@@ -37,7 +37,8 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->get('/Home', 'Home::index');
 $routes->get('/leaving-certificate', 'LeavingCertificate::index');
-$routes->get('/Ticket', 'Ticket::index');
+$routes->get('/ticket', 'Ticket::index');
+$routes->add('/create_ticket', 'Ticket::create_ticket');
 
 
 /*

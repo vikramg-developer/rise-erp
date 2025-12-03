@@ -28,6 +28,7 @@ return[
 //  S
     'select' => 'Select',
     'screenshot' =>'Screenshot',
+    'submit' =>'Submit',
     
 //  R
     'raise' => 'Raise',

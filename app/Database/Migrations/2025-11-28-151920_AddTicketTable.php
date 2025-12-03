@@ -41,7 +41,7 @@ class AddTicketTable extends Migration
                 'null' => false,
             ],
              'email' => [
-                'type' => 'int',
+                'type' => 'varchar',
                 'constraint' => '11',
                 'null' => false,
             ],
