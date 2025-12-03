@@ -1,109 +1,95 @@
-<div class="container-fluid">
-    <!-- Page Header -->
-    <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-        <h1 class="page-title fw-semibold fs-18 mb-0"><?= lang('App.registration'); ?></h1>
-        <div class="ms-md-1 ms-0">
-            <nav>
-                <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="#"><?= lang('App.rise'); ?></a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><?= lang('App.registration'); ?></li>
-                </ol>
-            </nav>                   
-        </div>
-    </div>                  
-    <!-- Page Header Close -->
-    
-   
-    <div class="row">
-        <div class="col-xl-12">
+
+<?= $this->extend('layouts/custom-main'); ?>
+
+<?= $this->section('styles'); ?>
+
+
+
+<?= $this->endSection('styles'); ?>
+
+<?= $this->section('content'); ?>
+
+<div class="container-lg">
+    <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
+        <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
+            <div class="my-5 d-flex justify-content-center">
+                <a href="<?php echo base_url('index'); ?>">
+                    <img src="<?php echo base_url('assets/images/brand-logos/desktop-logo.png'); ?>" alt="logo" class="desktop-logo">
+                    <img src="<?php echo base_url('assets/images/brand-logos/desktop-dark.png'); ?>" alt="logo" class="desktop-dark">
+                </a>
+            </div>
+
             <div class="card custom-card">
-               
-                <div class="card-body add-products p-0">
-                    <div class="p-4">
-                        <div class="row gx-5">
-                            <div class="col-xxl-6 col-xl-12 col-lg-12 col-md-6">
-                                <div class="card custom-card shadow-none mb-0 border-0">
-                                    <div class="card-body p-0">
-                                        <div class="row gy-3">
-                                            <div class="col-xl-4">
-                                                <label for="first-name" class="form-label"><?= lang('App.first'); ?> <?= lang('App.name'); ?></label>
-                                                <input type="text" class="form-control" id="first-name" placeholder=" <?= lang('App.first'); ?> <?= lang('App.name'); ?>">
-                                            </div>
-                                            <div class="col-xl-4">
-                                                <label for="middle-name" class="form-label"><?= lang('App.middle'); ?> <?= lang('App.name'); ?></label>
-                                                <input type="text" class="form-control" id="middle-name" placeholder="<?= lang('App.middle'); ?> <?= lang('App.name'); ?>">
-                                            </div>
-                                            <div class="col-xl-4">
-                                                <label for="last-name" class="form-label"><?= lang('App.last'); ?> <?= lang('App.name'); ?></label>
-                                                <input type="text" class="form-control" id="last-name" placeholder="<?= lang('App.last'); ?> <?= lang('App.name'); ?>">
-                                            </div>
-                                            <div class="col-xl-4">
-                                                <label for="mobile-no" class="form-label"><?= lang('App.mobile'); ?> <?= lang('App.number'); ?></label>
-                                                <input type="number" class="form-control" id="mobile-no" placeholder="<?= lang('App.mobile'); ?> <?= lang('App.number'); ?>">
-                                                <!--<label for="product-name-add" class="form-label mt-1 fs-12 op-5 text-muted mb-0">*Mobile Number must be 10 digits.</label>-->
-                                            </div>
-                                            <div class="col-xl-4">
-                                                <label for="aadhar-no" class="form-label"><?= lang('App.aadhar'); ?> <?= lang('App.number'); ?></label>
-                                                <input type="number" class="form-control" id="aadhar-no" placeholder="<?= lang('App.aadhar'); ?> <?= lang('App.number'); ?>">
-                                            </div>
-                                             <div class="col-xl-4">
-                                                <label for="emai" class="form-label"><?= lang('App.email'); ?></label>
-                                                <input type="email" class="form-control" id="email" placeholder="Email@xyz.com">
-                                            </div>
-                                            <div class="col-xl-4">
-                                                <label for="course-id" class="form-label"><?= lang('App.course'); ?> </label>
-                                                <select class="form-control" data-trigger name="course-id" id="course-id">
-                                                    <option value=""><?= lang('App.select'); ?> <?= lang('App.course'); ?></option>
-                                                    <option value="1">B.A</option>
-                                                    <option value="2">B.com</option>
-                                                    <option value="3">BSC</option>
-                                                </select>
-                                            </div>
-                                              <div class="col-xl-4">
-                                                <label for="year-id" class="form-label"><?= lang('App.year'); ?></label>
-                                                <select class="form-control" data-trigger name="year-id" id="year-id">
-                                                    <option value=""><?= lang('App.select'); ?> <?= lang('App.year'); ?></option>
-                                                    <option value="1">First Year</option>
-                                                    <option value="2">Second Year</option>
-                                                    <option value="3">Third Year</option>
-                                                    <option value="4">Fourth Year</option>
-                                                </select>
-                                            </div>
-                                             <div class="col-xl-4">
-                                                <label for="academic-year" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
-                                                <select class="form-control" data-trigger name="academic-year" id="academic-year">
-                                                    <option value=""><?= lang('App.select'); ?> <?= lang('App.academic'); ?> <?= lang('App.year'); ?></option>
-                                                    <option value="2025-2026">2025-2026</option>
-                                                    <option value="2024-2025">2024-2025</option>
-                                                    <option value="2023-2024">2023-2024</option>
-                                                    <option value="2022-2023">2022-2023</option>
-                                                </select>
-                                            </div>
-                                             <div class="col-xl-4">
-                                                <label for="password" class="form-label"><?= lang('App.password'); ?></label>
-                                                <input type="password" class="form-control" id="password" placeholder="<?= lang('App.password'); ?>">                                          
-                                            </div>
-                                            <div class="col-xl-4">
-                                                <label for="confirm-password" class="form-label"><?= lang('App.confirm'); ?> <?= lang('App.password'); ?></label>
-                                                <input type="password" class="form-control" id="confirm-password" placeholder="<?= lang('App.confirm'); ?> <?= lang('App.password'); ?>">                                          
-                                            </div>
-                                            
-                                            <div class="col-xl-4">
-                                                <label for="college-code" class="form-label"><?= lang('App.college'); ?> <?= lang('App.code'); ?></label>
-                                                <input type="text" class="form-control" id="college-code" placeholder=" <?= lang('App.college'); ?> <?= lang('App.code'); ?>">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                          </div>
-                        </div>  
-                    </div>  
-                    <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
-                        <button class="btn btn-primary-light m-1"><?= lang('App.submit'); ?></button>
+                <div class="card-body p-5">
+                    <?php if (session()->getFlashdata('success')): ?>
+                        <div class="alert alert-primary rounded-pill alert-dismissible fade show">
+                            <?= session()->getFlashdata('success'); ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-x"></i></button>                     
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (session()->getFlashdata('error')): ?>
+                        <div class="alert alert-danger rounded-pill alert-dismissible fade show">       
+                            <?= session()->getFlashdata('error'); ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-x"></i></button>
+                        </div>
+                    <?php endif; ?>
+
+                    <p class="h5 fw-semibold mb-2 text-center"><?= lang('App.sign'); ?> <?= lang('App.up'); ?></p>
+                    <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome to Rise Portal! Sign up to access your learning tools and updates.</p>
+                    <?= form_open('savesignup'); ?>
+                    <div class="row gy-3">
+                        <div class="col-xl-12">
+                            <label for="first-name" class="form-label"><?= lang('App.first'); ?> <?= lang('App.name'); ?></label>
+                            <input type="text" class="form-control" id="first-name" name="first-name" placeholder=" <?= lang('App.first'); ?> <?= lang('App.name'); ?>">
+                        </div>
+                        <div class="col-xl-12">
+                            <label for="middle-name" class="form-label"><?= lang('App.middle'); ?> <?= lang('App.name'); ?></label>
+                            <input type="text" class="form-control" id="middle-name" name="middle-name" placeholder="<?= lang('App.middle'); ?> <?= lang('App.name'); ?>">
+                        </div>
+                        <div class="col-xl-12">
+                            <label for="last-name" class="form-label"><?= lang('App.last'); ?> <?= lang('App.name'); ?></label>
+                            <input type="text" class="form-control" id="last-name" name="last-name" placeholder="<?= lang('App.last'); ?> <?= lang('App.name'); ?>">
+                        </div>
+                        <div class="col-xl-12">
+                            <label for="aadhar-number" class="form-label"><?= lang('App.aadhar'); ?> <?= lang('App.no'); ?></label>
+                            <input type="number" class="form-control" id="aadhar-number" name="aadhar-number" placeholder="<?= lang('App.aadhar'); ?> <?= lang('App.no'); ?>">
+                        </div>
+
+                        <div class="col-xl-12">
+                            <label for="signup-password" class="form-label text-default">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control form-control-lg" name="signup-password" id="signup-password" placeholder="password">
+                                <button class="btn btn-light" onclick="createpassword('signup-password', this)" type="button" id="button-addon2"><i class="ri-eye-off-line align-middle"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 mb-2">
+                            <label for="signup-confirmpassword" class="form-label text-default">Confirm Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control form-control-lg"name="signup-confirmpassword" id="signup-confirmpassword" placeholder="confirm password">
+                                <button class="btn btn-light" onclick="createpassword('signup-confirmpassword', this)" type="button" id="button-addon21"><i class="ri-eye-off-line align-middle"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 d-grid mt-2">
+                            <button class="btn btn-lg btn-primary"type="submit">Create Account</button>
+                        </div>
+                    </div>
+                    <?= form_close(); ?>
+
+                    <div class="text-center">
+                        <p class="fs-12 text-muted mt-3">Already have an account? <a href="<?php echo base_url('registration/login'); ?>" class="text-primary">Sign In</a></p>
                     </div>
                 </div>
-                 
             </div>
         </div>
-   </div>
+    </div>
+</div>
 
+<?= $this->endSection('content'); ?>
+
+<?= $this->section('scripts'); ?>
+
+<!-- Show Password JS -->
+<script src="<?php echo base_url('assets/js/show-password.js'); ?>"></script>
+
+<?= $this->endSection('scripts'); ?>

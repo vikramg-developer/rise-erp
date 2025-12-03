@@ -42,10 +42,13 @@ return [
     'rise' => 'Rise',
     'reset' => 'Reset',
 //    S
+    'student' => 'Student',
+    'sign' => 'Sign',
     'select' => 'Select',
     'submit' => 'Submit',
 //    T
 //    U
+    'up' => 'UP',
 //    V
 //    W
 //    X

@@ -38,8 +38,9 @@ $routes->get('/Home', 'Home::index');
 $routes->get('/', 'Home::index');
 $routes->get('/tejas', 'LeavingCertificate::index');
 
-$routes->get('/Registration', 'Registration::index');
-
+$routes->add('/registration', 'Registration::index');
+$routes->add('/savesignup', 'Registration::saveSignup');
+$routes->add('/login', 'Registration::login');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
