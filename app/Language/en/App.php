@@ -5,6 +5,7 @@ return[
     'academic' => 'Academic',
     'add' => 'Add',
     'admission' => 'Admission',
+    'attach' => 'Attach',
 
     //B
     'bonafide' => 'Bonafide',
@@ -15,7 +16,7 @@ return[
     'college' => 'College',
     'confirm' => 'Confirm',
     'course' => 'Course',
-
+    'create' => 'Create',
     
     //D
     'dashboard' => 'Dashboard',
@@ -61,6 +62,8 @@ return[
     'number' => 'Number',
     //O
     'of' => 'of',
+    'optional' => 'Optional',
+    
     //P
     'part' => 'Part',
     'password' => 'Password',

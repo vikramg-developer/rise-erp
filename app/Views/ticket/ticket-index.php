@@ -51,16 +51,16 @@ $page_session = \Config\Services::session();
                                                 <!-- Category -->
                                                 <div class="col-xl-6 mb-3">
                                                     <label class="form-label"><?= lang('App.category') ?> <span class="text-danger">*</span></label>
-                                                    <select name="category" class="form-control" data-trigger required>
+                                                    <select name="ticket_category" class="form-control" data-trigger>
                                                         <option value="">Select category</option>
-                                                        <option value="1" <?= set_value('category') == 1 ? "selected" : "" ?>>Admission / Registration</option>
-                                                        <option value="2" <?= set_value('category') == 2 ? "selected" : "" ?>>Fees / Payment</option>
-                                                        <option value="3" <?= set_value('category') == 3 ? "selected" : "" ?>>Attendance</option>
-                                                        <option value="4" <?= set_value('category') == 4 ? "selected" : "" ?>>Examination</option>
-                                                        <option value="5" <?= set_value('category') == 5 ? "selected" : "" ?>>Technical / System Error</option>
-                                                        <option value="6" <?= set_value('category') == 6 ? "selected" : "" ?>>Other</option>
+                                                        <option value="1" <?= set_value('ticket_category') == 1 ? "selected" : "" ?>>Admission / Registration</option>
+                                                        <option value="2" <?= set_value('ticket_category') == 2 ? "selected" : "" ?>>Fees / Payment</option>
+                                                        <option value="3" <?= set_value('ticket_category') == 3 ? "selected" : "" ?>>Attendance</option>
+                                                        <option value="4" <?= set_value('ticket_category') == 4 ? "selected" : "" ?>>Examination</option>
+                                                        <option value="5" <?= set_value('ticket_category') == 5 ? "selected" : "" ?>>Technical / System Error</option>
+                                                        <option value="6" <?= set_value('ticket_category') == 6 ? "selected" : "" ?>>Other</option>
                                                     </select>
-                                                    <span class="text-danger"><?= isset($validation) ? $validation->getError('category') : '' ?></span>
+                                                    <span class="text-danger"><?= isset($validation) ? $validation->getError('ticket_category') : '' ?></span>
                                                 </div>
 
                                                 <!-- Issue Title -->

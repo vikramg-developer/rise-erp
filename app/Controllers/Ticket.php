@@ -26,7 +26,7 @@ class Ticket extends BaseController {
         // Validation rules video no 28
         $rules = [
             'college_name' => 'required',
-            'category' => 'required',
+            'ticket_category' => 'required',
             'issue' => 'required|min_length[5]',
             'description' => 'required|min_length[10]',
             'priority' => 'required',
@@ -44,7 +44,7 @@ class Ticket extends BaseController {
 
         $data = [
             'college_name' => $this->request->getVar('college_name'),
-            'category_id' => $this->request->getVar('category'),
+            'category_id' => $this->request->getVar('ticket_category'),
             'issue_title' => $this->request->getVar('issue'),
             'description' => $this->request->getVar('description'),
             'priority' => $this->request->getVar('priority'),
