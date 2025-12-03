@@ -1,85 +1,77 @@
 <?php
 
 return [
+    //A
+    'admission' => 'Admission',
+    'aadhar' => 'Aadhar',
     'academic' => 'Academic',
     'add' => 'Add',
-//B
-//C
-//D
-//E
-//F
+//    B
+//    C
+    'course' => 'Course',
+    'confirm' => 'Confirm',
+    'college' => 'College',
+    'code' => 'Code',
+    'category' => 'Category',
+//    D
+    'distance' => 'Distance',
+    'develop' => 'Develop',
+    'description' => 'Description',
+//    E
+    'email' => 'Email',
+//    F
+    'first' => 'First',
     'feedback' => 'Feedback',
-//G
-//H
-//I
-//J
-//K
-//L
+    'file'=>'File',
+//    G
+//    H
+//    I
+    'issue' => 'Issue',
+//    J
+//    K
+//    L
+    'last' => 'Last',
     'list' => 'List',
-//M
+//    M
+    'middle' => 'Middle',
+    'mobile' => 'Mobile',
     'master' => 'Master',
     'manage' => 'Manage',
-    
-//N
+//    N
     'name' => 'Name',
+    'number' => 'Number',
     'no' => 'No',
-//
-//O
-//P
+//    O
+//    P
+    'password' => 'Password',
     'part' => 'Part',
-//Q
-'question' => 'Question',
-//R
-//S
+    'priority' => 'Priority',
+//    Q
+    'question' => 'Question',
+//    R
+    'registration' => 'Registration',
+    'rise' => 'Rise',
+    'reset' => 'Reset',
+//    S
+    'student' => 'Student',
+    'sign' => 'Sign',
+    'select' => 'Select',
+    'submit' => 'Submit',
     'semester' => 'Semester',
     'sr' => 'Sr',
-//T
-    'type' => 'Type',
-//U
-//V
-//W
-//X
-//Y
-    'year' => 'Year',
-//Z
-return[
-//  A
-
-//  C
-    'college' => 'College',
-    'category' => 'Category',
-    
-//  D   
-    'description' => 'Description',
-//  E
-    'email'=>'Email',
-    
-//  F
-    'file'=>'File',
-//  I
-    'issue' => 'Issue',
-//  M
-  'mobile'=>'Mobile',
-    
-//  N
-  'number'=>'Number',
-
-//  P
-    'priority' => 'Priority',
-    
-//  S
     'select' => 'Select',
     'screenshot' =>'Screenshot',
-    'submit' =>'Submit',
-    
-//  R
-    'raise' => 'Raise',
-    
-//  T   
+//    T
+    'type' => 'Type',
     'ticket' => 'Ticket',
     'title' => 'Title',
-    
- //Y
+//    U
+    'up' => 'UP',
+//    V
+//    W
+//    X
+//    Y
+    'year' => 'Year',
     'your'=>'Your',
-    
+//    Z
 ];

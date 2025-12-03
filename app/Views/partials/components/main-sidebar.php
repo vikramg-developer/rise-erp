@@ -41,7 +41,7 @@
 						<a href="javascript:void(0)">Dashboards</a>
 					</li>
 					<li class="slide">
-						<a href="<?php echo base_url('index'); ?>" class="side-menu__item">CRM</a>
+						<a href="<?php echo base_url('Registration/index'); ?>" class="side-menu__item">Student Registration</a>
 					</li>
 					
 				</ul>
@@ -59,11 +59,17 @@
 			<li class="slide has-sub">
 				<a href="javascript:void(0);" class="side-menu__item">
 					<i class="bx bx-file-blank side-menu__icon"></i>
+					<span class="side-menu__label">Pages<span class="badge bg-secondary-transparent ms-2">New</span></span>
 					<span class="side-menu__label">Feedback<span class="badge bg-secondary-transparent ms-2">New</span></span>
 					<i class="fe fe-chevron-right side-menu__angle"></i>
 				</a>
 				<ul class="slide-menu child1">
 					<li class="slide side-menu__label1">
+						<a href="javascript:void(0)">Pages</a>
+					</li>
+				</ul>
+			</li>
+			<!-- End::slide -->
 						<a href="javascript:void(0)">Feedback Master</a>
 					</li>
 					<li class="slide">

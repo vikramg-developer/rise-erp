@@ -41,7 +41,9 @@ $routes->get('/leaving-certificate', 'LeavingCertificate::index');
 $routes->get('/ticket', 'Ticket::index');
 $routes->add('/create_ticket', 'Ticket::create_ticket');
 
-
+$routes->add('/registration', 'Registration::index');
+$routes->add('/savesignup', 'Registration::saveSignup');
+$routes->add('/login', 'Registration::login');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
