@@ -15,36 +15,71 @@ class AddLeavingCertificateTable extends Migration
                 'constraint'=>11,
                 'auto_increment'=>true
             ],
-            'student_name'=>[
-                'type'=>'VARCHAR',
+            'registration_id'=>[
+                'type'=>'int',
+            ],            
+            'ysd_id'=>[
+                'type'=>'int',
+            ],
+            'gen_reg_id'=>[
+                'type'=>'varchar',
+                'constraint'=>50,
+            ],
+            'examination'=>[
+                'type'=>'varchar',
+                'constraint'=>255,
+            ],
+            
+            'exam_held_in'=>[
+                'type'=>'varchar',
+                'constraint'=>50,
+            ],
+            'status'=>[
+                'type'=>'varchar',
                 'constraint'=>500,
-            ],           
-           
-           
-            'is_deleted'=>[
-                'type'=>'TINYINT',
+            ],
+            'checkbox'=>[
+                'type'=>'tinyint',
                 'constraint'=>1,
             ],
-            'added_by'=>[
-                'type'=>'VARCHAR',
-                'constraint'=>200,
+             'date_of_admission'=>[
+                'type'=>'date',
+                'null'=>false
             ],
-            'added_date'=>[
+            'date_of_leaving'=>[
+                'type'=>'date',
+                'null'=>false
+            ],
+            'is_duplicate'=>[
+                'type'=>'int',
+            ],
+            'previous_lc_date'=>[
+                'type'=>'int',
+            ],
+            'added_by' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => false
+            ],
+            'added_at' => [
                 'type'=>'TIMESTAMP',
                 'null'=>false,
                 'default'=>new Rawsql('CURRENT_TIMESTAMP'),
-                
             ],
-            'updated_by'=>[
-                'type'=>'VARCHAR',
-                'constraint'=>200,
+            'updated_by'=> [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => false
             ],
-            'updated_date'=>[
+            'updated_at' =>[
                 'type'=>'TIMESTAMP',
                 'null'       => false,
                 'default'=>new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
-                
             ],
+            'is_deleted' => [
+                'type' => 'tinyint',
+                'constraint' => '1'
+            ]
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('lc_id');
