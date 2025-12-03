@@ -9,10 +9,5 @@ class Feedback extends BaseController {
 //       $this->ModelFeedback = new ModelFeedback();
     }
     
-    public function index()
-    {
-        
-//        $data['master_data']=$this->ModelFeedback->getData();
-        render_page('feedback/feedback-master');
-    }
+   
 }

@@ -20,11 +20,11 @@ class LeavingCertificate extends BaseController
     }
 
     public function addLeavingCertificateRemark() {
-        //        echo site_url('lc-remark');
-        //exit;
-        ////        echo "<pre>";
-        //    print_r($_SERVER['REQUEST_URI']);
-        //    exit;
+                echo site_url('lc-remark');
+        exit;
+        //        echo "<pre>";
+            print_r($_SERVER['REQUEST_URI']);
+            exit;
         if ($this->request->getMethod() == 'post') {
 
             $data['fname'] = $fname = $this->request->getVar('f-name');
