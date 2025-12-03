@@ -28,10 +28,7 @@ class LeavingCertificate extends BaseController {
             
         $data['fname']=$fname=$this->request->getVar('f-name');
         $lname=$this->request->getVar('l-name');
-        var_dump($fname);
-        //    echo "POST reached controller!";
-        //    exit;
-        }
+
         $data['lc_data']=$this->ModelLeavingCertificate->getLcData();
         
         render_page('certificate/leaving-certificate-remark',$data);
