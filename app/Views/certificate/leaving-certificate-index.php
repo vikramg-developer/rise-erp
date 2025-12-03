@@ -27,8 +27,8 @@
                                         <div class="row gy-3">
 
                                             <div class="col-xl-4">
-                                                <label for="product-category-add" class="form-label"><?= lang('App.course'); ?></label>
-                                                <select class="form-control" data-trigger name="product-category-add" id="product-category-add">
+                                                <label for="course-id" class="form-label"><?= lang('App.course'); ?></label>
+                                                <select class="form-control" data-trigger name="course-id" id="course-id">
                                                     <option value="">Select Course</option>
                                                     <option value="1">Computer Science & Engineering</option>
                                                     <option value="2">Civil Engineering</option>
@@ -38,8 +38,8 @@
                                                 </select>
                                             </div>
                                             <div class="col-xl-4">
-                                                <label for="product-gender-add" class="form-label"><?= lang('App.year'); ?></label>
-                                                <select class="form-control" data-trigger name="product-gender-add" id="product-gender-add">
+                                                <label for="year-id" class="form-label"><?= lang('App.year'); ?></label>
+                                                <select class="form-control" data-trigger name="year-id" id="year-id">
                                                     <option value="">Select Year</option>
                                                     <option value="1">First Year</option>
                                                     <option value="2">Second Year</option>
@@ -48,8 +48,8 @@
                                                 </select>
                                             </div>
                                             <div class="col-xl-4">
-                                                <label for="product-size-add" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
-                                                <select class="form-control" data-trigger name="product-size-add" id="product-size-add">
+                                                <label for="aca-year-id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
+                                                <select class="form-control" data-trigger name="aca-year-id" id="aca-year-id">
                                                     <option value="">Select Academic Year</option>
                                                     <option value="Extra Small">2024-2025</option>
                                                     <option value="Small">2023-2024</option>

@@ -7,6 +7,7 @@ use App\Models\ModelLeavingCertificate;
 class LeavingCertificate extends BaseController {
     public $ModelLeavingCertificate;
     public function __construct(){
+        
        $this->ModelLeavingCertificate = new ModelLeavingCertificate();
     }
     
@@ -16,8 +17,21 @@ class LeavingCertificate extends BaseController {
         
         render_page('certificate/leaving-certificate-index',$data);
     }
-    public function leaving_certificate_remark()
+    public function addLeavingCertificateRemark()
     {
+        //        echo site_url('lc-remark');
+        //exit;
+        ////        echo "<pre>";
+        //    print_r($_SERVER['REQUEST_URI']);
+        //    exit;
+        if ($this->request->getMethod() == 'post') {
+            
+        $data['fname']=$fname=$this->request->getVar('f-name');
+        $lname=$this->request->getVar('l-name');
+        var_dump($fname);
+        //    echo "POST reached controller!";
+        //    exit;
+        }
         $data['lc_data']=$this->ModelLeavingCertificate->getLcData();
         
         render_page('certificate/leaving-certificate-remark',$data);
