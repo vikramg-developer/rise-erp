@@ -32,6 +32,7 @@ return[
 
     //F
     'feedback' => 'Feedback',
+    'fees' => 'Fees',
     'file'=>'File',
     'first' => 'First',
 
@@ -52,6 +53,7 @@ return[
     'list' => 'List',
     //M
     'manage' => 'Manage',
+    'management' => 'Management',
     'master' => 'Master',
     'middle' => 'Middle',
     'mobile' => 'Mobile',
