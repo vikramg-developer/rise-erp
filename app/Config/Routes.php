@@ -43,7 +43,8 @@ $routes->get('/feedback', 'Feedback::index');
 $routes->get('/leaving-certificate', 'LeavingCertificate::index');
 $routes->get('/ticket', 'Ticket::index');
 $routes->add('/create_ticket', 'Ticket::create_ticket');
-$routes->add('/head-group', 'fees_maangement::head-group');
+$routes->add('/head-group', 'FeesManagement::head-group');
+$routes->add('/head', 'FeesManagement::head');
 
 $routes->add('/registration', 'Registration::index');
 $routes->add('/savesignup', 'Registration::saveSignup');

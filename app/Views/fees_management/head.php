@@ -19,7 +19,7 @@
         <div class="col-xl-12">
             <div class="card custom-card">
                 <?= form_open() ?>
-                <div class="card-body head-group p-0">
+                <div class="card-body head p-0">
                     <div class="p-4">
                         <div class="row gx-5">
                             <div class="col-xxl-6 col-xl-12 col-lg-12 col-md-6">
@@ -27,8 +27,8 @@
                                     <div class="card-body p-0">
                                         <div class="row gy-3">
                                             <div class="col-xl-12">
-                                                <label for="head-group" class="form-label"><?= lang('App.head'); ?> <?= lang('App.group'); ?></label>
-                                                <input type="text" class="form-control" id="head-group" name="head-group" placeholder="<?= lang('App.head'); ?> <?= lang('App.group'); ?>">
+                                                <label for="head" class="form-label"><?= lang('App.head'); ?> <?= lang('App.group'); ?></label>
+                                                <input type="text" class="form-control" id="head" name="head" placeholder="<?= lang('App.head'); ?> <?= lang('App.group'); ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -55,21 +55,21 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <?php if (!empty($head_group_datas)): ?>
+                    <?php if (!empty($head_datas)): ?>
                         <table id="responsiveDataTable" class="table table-bordered text-nowrap w-100">
                             <thead>
                                 <tr>
                                     <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
-                                    <th><?= lang('App.head'); ?> <?= lang('App.group'); ?> <?= lang('App.name'); ?></th>
+                                    <th><?= lang('App.head'); ?> <?= lang('App.name'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
                                 $i = 1;
-                                foreach ($head_group_datas as $head_group_data): ?>
+                                foreach ($head_datas as $head_data): ?>
                                 <tr>
                                     <td><?= $i++; ?></td>
-                                    <td><?= $head_group_data->head_group_name; ?></td>
+                                    <td><?= $head_data->head_name; ?></td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>

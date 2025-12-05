@@ -37,8 +37,10 @@ return[
     'first' => 'First',
 
     //G
-    'general'=>'General',
+    'general' => 'General',
+    'group' => 'Group',
     //H
+    'head' => 'Head',
     'held' => 'Held',
     //I
     'in' => 'In',
@@ -84,6 +86,7 @@ return[
     'rise' => 'Rise',
 
     //S
+    'save' => 'Save',
     'screenshot' =>'Screenshot',
     'search' => 'Search',
     'select' => 'Select',

@@ -43,7 +43,6 @@
                                                         <li class="slide">
                                                             <a href="<?php echo base_url('Registration/index'); ?>" class="side-menu__item">Student Registration</a>
                                                         </li>
-
                                                     </ul>
                                                     <?php //endif; ?>
                                                 </li>
@@ -85,7 +84,6 @@
                                                         <li class="slide">
                                                             <a href="<?php echo base_url('task-list-view'); ?>" class="side-menu__item"><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
                                                         </li>
-
                                                     </ul>
                                                 </li>
                                                 
@@ -97,10 +95,14 @@
                                                     </a>
                                                     <ul class="slide-menu child1">
                                                         <li class="slide side-menu__label1">
-                                                            <a href="javascript:void(0)">Error</a>
+                                                            <a href="javascript:void(0)"><?= lang('App.fees'); ?> <?= lang('App.management'); ?></a>
                                                         </li>
                                                         <li class="slide">
-                                                            <a href="<?php echo base_url('Ticket'); ?>" class="side-menu__item">Create Ticket</a>
+                                                            <a href="<?php echo base_url('head-group'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?> <?= lang('App.group'); ?></a>
+                                                        </li>
+                                                        <li class="slide">
+                                                            <a href="<?php echo base_url('head'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?></a>
+                                                        </li>
                                                     </ul>
                                                 </li>
                                                 
