@@ -44,6 +44,7 @@ $routes->get('/leaving-certificate', 'LeavingCertificate::index');
 $routes->get('/ticket', 'Ticket::index');
 $routes->add('/create_ticket', 'Ticket::create_ticket');
 $routes->add('/head-group', 'FeesManagement::head-group');
+$routes->add('/show-head-group', 'FeesManagement::show-head-group');
 $routes->add('/head', 'FeesManagement::head');
 
 $routes->add('/registration', 'Registration::index');

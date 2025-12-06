@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
-                <?= form_open() ?>
+                <?= form_open('FeesManagement/add_head_group') ?>
                 <div class="card-body head-group p-0">
                     <div class="p-4">
                         <div class="row gx-5">
@@ -55,31 +55,21 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <?php if (!empty($head_group_datas)): ?>
-                        <table id="responsiveDataTable" class="table table-bordered text-nowrap w-100">
+                    <?php // if (!empty($head_group_datas)): ?>
+                        <table id="manageTable" class="table table-bordered text-nowrap w-100">
                             <thead>
                                 <tr>
                                     <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
                                     <th><?= lang('App.head'); ?> <?= lang('App.group'); ?> <?= lang('App.name'); ?></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <?php 
-                                $i = 1;
-                                foreach ($head_group_datas as $head_group_data): ?>
-                                <tr>
-                                    <td><?= $i++; ?></td>
-                                    <td><?= $head_group_data->head_group_name; ?></td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
                         </table>
-                    <?php else: ?>
+                    <?php // else: ?>
                         <div class="alert alert-solid-warning alert-dismissible fade show">
                             Sorry! No record found!
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-x"></i></button>
                         </div>
-                    <?php endif; ?>
+                    <?php // endif; ?>
                 </div>
             </div>
         </div>
