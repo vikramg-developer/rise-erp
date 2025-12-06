@@ -12,17 +12,24 @@ class ModelLeavingCertificate extends Model{
    
     public function getLcData()
     {
-//        $db=\$config\database::connect();
-//        $this->db->table('leaving_certificate')->get()->getResult();
         $query=$this->db->query('select * from leaving_certificate');
 	$result=$query->getresult();
-	If(count($result)>0){
-	    return $result;
-	}
-	else{
-            echo 'No, Record Found!!';
-	}
 
+    }
+    
+    public function addLcData($lc_data)
+    {
+        $builder=$this->db->table('leaving_certificate');
+        $result=$builder->insert($lc_data);
+        if($this->db->affectedRows()==1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
     }
     
     //put your code here

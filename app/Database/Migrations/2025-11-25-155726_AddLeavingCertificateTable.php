@@ -14,16 +14,9 @@ class AddLeavingCertificateTable extends Migration
                 'type'=>'INT',
                 'constraint'=>11,
                 'auto_increment'=>true
-            ],
-            'registration_id'=>[
-                'type'=>'int',
-            ],            
+            ],         
             'ysd_id'=>[
                 'type'=>'int',
-            ],
-            'gen_reg_id'=>[
-                'type'=>'varchar',
-                'constraint'=>50,
             ],
             'examination'=>[
                 'type'=>'varchar',
@@ -33,18 +26,6 @@ class AddLeavingCertificateTable extends Migration
             'exam_held_in'=>[
                 'type'=>'varchar',
                 'constraint'=>50,
-            ],
-            'status'=>[
-                'type'=>'varchar',
-                'constraint'=>500,
-            ],
-            'checkbox'=>[
-                'type'=>'tinyint',
-                'constraint'=>1,
-            ],
-             'date_of_admission'=>[
-                'type'=>'date',
-                'null'=>false
             ],
             'date_of_leaving'=>[
                 'type'=>'date',
@@ -62,7 +43,7 @@ class AddLeavingCertificateTable extends Migration
                 'null' => false
             ],
             'added_at' => [
-                'type'=>'TIMESTAMP',
+                'type'=>'timestamp',
                 'null'=>false,
                 'default'=>new Rawsql('CURRENT_TIMESTAMP'),
             ],
@@ -72,7 +53,7 @@ class AddLeavingCertificateTable extends Migration
                 'null' => false
             ],
             'updated_at' =>[
-                'type'=>'TIMESTAMP',
+                'type'=>'timestamp',
                 'null'       => false,
                 'default'=>new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
             ],

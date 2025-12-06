@@ -48,3 +48,7 @@
 
         <!-- Custom JS -->
         <script src="<?php echo base_url('assets/js/custom.js'); ?>"></script>
+        
+        <!-- Datepicker -->
+        <script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/js/date&time_pickers.js'); ?>"></script>

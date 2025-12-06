@@ -3,6 +3,8 @@
     
     /* To choose date */
     flatpickr("#date", {});
+    flatpickr("#date-of-admission", {});
+    flatpickr("#date-of-leaving", {});
 
     /* To choose date and time */
     flatpickr("#datetime", {

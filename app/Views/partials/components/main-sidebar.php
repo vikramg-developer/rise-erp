@@ -72,18 +72,21 @@
                                                 <li class="slide has-sub">
                                                     <a href="javascript:void(0);" class="side-menu__item">
                                                         <i class="bx bx-task side-menu__icon"></i>
-                                                        <span class="side-menu__label"><?= lang('App.certificate'); ?></span>
+                                                        <span class="side-menu__label"><?= lang('App.certificates'); ?></span>
                                                         <i class="fe fe-chevron-right side-menu__angle"></i>
                                                     </a>
                                                     <ul class="slide-menu child1">
                                                         <li class="slide side-menu__label1">
-                                                            <a href="javascript:void(0)"><?= lang('App.certificate'); ?></a>
+                                                            <a href="javascript:void(0)"><?= lang('App.certificates'); ?></a>
                                                         </li>
                                                         <li class="slide">
                                                             <a href="<?php echo base_url('leaving-certificate'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?></a>
-                                                        </li>
+<!--                                                        </li>
                                                         <li class="slide">
-                                                            <a href="<?php echo base_url('task-list-view'); ?>" class="side-menu__item"><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
+                                                            <a href="<?php echo base_url('leaving-certificate-report'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?> <?= lang('App.report'); ?></a>
+                                                        </li>-->
+                                                        <li class="slide">
+                                                            <a href="<?php echo base_url('bonafide-certificate'); ?>" class="side-menu__item"><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
                                                         </li>
 
                                                     </ul>

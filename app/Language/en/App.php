@@ -3,15 +3,19 @@ return[
     //A
     'aadhar' => 'Aadhar',
     'academic' => 'Academic',
+    'action' => 'Action',
     'add' => 'Add',
     'admission' => 'Admission',
     'attach' => 'Attach',
 
     //B
+    'back' => 'Back',
     'bonafide' => 'Bonafide',
     //C
     'category' => 'Category',
     'certificate' => 'Certificate',
+    'certificates' => 'Certificates',
+    'close' => 'Close',
     'code' => 'Code',
     'college' => 'College',
     'confirm' => 'Confirm',
@@ -33,6 +37,7 @@ return[
     'feedback' => 'Feedback',
     'file'=>'File',
     'first' => 'First',
+    'full' => 'Full',
 
     //G
     'general'=>'General',
@@ -40,6 +45,7 @@ return[
     'held' => 'Held',
     //I
     'in' => 'In',
+    'information' => 'Information',
     'issue' => 'Issue',
     //J
     //K
@@ -76,6 +82,7 @@ return[
     'register' => 'Register',
     'registration' => 'Registration',
     'remark' => 'Remark',
+    'report' => 'Report',
     'reset' => 'Reset',
     'result' => 'Result',
     'rise' => 'Rise',

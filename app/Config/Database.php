@@ -24,11 +24,31 @@ class Database extends Config
     /**
      * The default database connection.
      */
+//    public array $default = [
+//        'DSN'      => '',
+//        'hostname' => '192.168.1.247',
+//        'username' => 'riseuser',
+//        'password' => 'Rise@2025',
+//        'database' => 'rise',
+//        'DBDriver' => 'MySQLi',
+//        'DBPrefix' => '',
+//        'pConnect' => false,
+//        'DBDebug'  => true,
+//        'charset'  => 'utf8',
+//        'DBCollat' => 'utf8_general_ci',
+//        'swapPre'  => '',
+//        'encrypt'  => false,
+//        'compress' => false,
+//        'strictOn' => false,
+//        'failover' => [],
+//        'port'     => 3306,
+//    ];
+    
     public array $default = [
         'DSN'      => '',
-        'hostname' => '192.168.1.247',
-        'username' => 'riseuser',
-        'password' => 'Rise@2025',
+        'hostname' => '127.0.0.1',
+        'username' => 'root',
+        'password' => '',
         'database' => 'rise',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',

@@ -36,12 +36,14 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->add('/', 'Home::index');
 
-$routes->add('/lc-remark', 'LeavingCertificate::addLeavingCertificateRemark');
+$routes->add('/add-lc-info', 'LeavingCertificate::addLeavingCertificateInfo');
 
-$routes->get('/home', 'Home::index');
-$routes->get('/feedback', 'Feedback::index');
-$routes->get('/leaving-certificate', 'LeavingCertificate::index');
-$routes->get('/ticket', 'Ticket::index');
+$routes->add('/home', 'Home::index');
+$routes->add('/feedback', 'Feedback::index');
+$routes->add('/leaving-certificate', 'LeavingCertificate::index');
+$routes->add('/leaving-certificate-report', 'LeavingCertificateReport::index');
+$routes->add('/bonafide-certificate', 'BonafideCertificate::index');
+$routes->add('/ticket', 'Ticket::index');
 $routes->add('/create_ticket', 'Ticket::create_ticket');
 
 $routes->add('/registration', 'Registration::index');
