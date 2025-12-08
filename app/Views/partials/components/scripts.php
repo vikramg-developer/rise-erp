@@ -50,7 +50,7 @@
 <script src="<?php echo base_url('assets/js/custom.js'); ?>"></script>
 
 <!-- Datatables Cdn -->
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.jgit statuss"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
@@ -62,6 +62,19 @@
 
 <!-- Internal Datatables JS -->
 <script src="<?php echo base_url('assets/js/datatables.js'); ?>"></script>
+
+<!-- Select2 Cdn -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<!-- Internal Select-2.js -->
+<script src="<?php echo base_url('assets/js/select2.js'); ?>"></script>
+
+<!-- Prism JS -->
+<script src="<?php echo base_url('assets/libs/prismjs/prism.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/prism-custom.js'); ?>"></script>
+
+<!-- Form Validation JS -->
+<script src="<?php echo base_url('assets/js/validation.js'); ?>"></script>
 
 <?php if (isset($jspath)): ?>
     <script src="<?php echo base_url('partials/js/') . $jspath . '.js'; ?>"></script>

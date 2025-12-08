@@ -5,7 +5,7 @@ $(document).ready(function () {
         serverSide: true, // ✅ IMPORTANT
 
         ajax: {
-            url: 'fetch-head-group',
+            url: 'fetch-head',
             type: "POST"
         }
     });

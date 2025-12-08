@@ -2,12 +2,12 @@
 
     <!-- Page Header -->
     <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-        <h1 class="page-title fw-semibold fs-18 mb-0"><?= lang('App.head'); ?> <?= lang('App.group'); ?></h1>
+        <h1 class="page-title fw-semibold fs-18 mb-0"><?= lang('App.head'); ?></h1>
         <div class="ms-md-1 ms-0">
             <nav>
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="#"><?= lang('App.dashboard'); ?></a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><?= lang('App.head'); ?> <?= lang('App.group'); ?></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?= lang('App.head'); ?></li>
                 </ol>
             </nav>
         </div>
@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
-                <?= form_open() ?>
+                <?= form_open('FeesManagement/add_head') ?>
                 <div class="card-body head p-0">
                     <div class="p-4">
                         <div class="row gx-5">
@@ -27,8 +27,8 @@
                                     <div class="card-body p-0">
                                         <div class="row gy-3">
                                             <div class="col-xl-12">
-                                                <label for="head" class="form-label"><?= lang('App.head'); ?> <?= lang('App.group'); ?></label>
-                                                <input type="text" class="form-control" id="head" name="head" placeholder="<?= lang('App.head'); ?> <?= lang('App.group'); ?>">
+                                                <label for="head" class="form-label"><?= lang('App.head'); ?></label>
+                                                <input type="text" class="form-control" id="head" name="head" placeholder="<?= lang('App.head'); ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -51,35 +51,21 @@
             <div class="card custom-card">
                 <div class="card-header">
                     <div class="card-title">
-                        <?= lang('App.head'); ?> <?= lang('App.group'); ?>
+                        <?= lang('App.head'); ?>
                     </div>
                 </div>
                 <div class="card-body">
-                    <?php if (!empty($head_datas)): ?>
-                        <table id="responsiveDataTable" class="table table-bordered text-nowrap w-100">
-                            <thead>
-                                <tr>
-                                    <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
-                                    <th><?= lang('App.head'); ?> <?= lang('App.name'); ?></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                $i = 1;
-                                foreach ($head_datas as $head_data): ?>
-                                <tr>
-                                    <td><?= $i++; ?></td>
-                                    <td><?= $head_data->head_name; ?></td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    <?php else: ?>
-                        <div class="alert alert-solid-warning alert-dismissible fade show">
-                            Sorry! No record found!
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-x"></i></button>
-                        </div>
-                    <?php endif; ?>
+                    <?php // if (!empty($head_group_datas)): ?>
+                    <table id="manageTable" class="table table-bordered text-nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
+                                <th><?= lang('App.head'); ?> <?= lang('App.name'); ?></th>
+                                <th><?= lang('App.action'); ?></th>
+                                <th><?= lang('App.remark'); ?></th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>

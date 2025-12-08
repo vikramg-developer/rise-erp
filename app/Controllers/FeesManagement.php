@@ -9,6 +9,7 @@ namespace App\Controllers;
 
 use App\Models\ModelFeesManagement;
 use App\Models\ModelHeadGroup;
+use App\Models\ModelHead;
 
 /**
  * Description of FeesManagement
@@ -17,10 +18,12 @@ use App\Models\ModelHeadGroup;
  */
 class FeesManagement extends BaseController {
 
-    public $modelfeesmanagement;
+    public $modelheadgroup;
+    public $modelhead;
 
     public function __construct() {
-        $this->modelfeesmanagement = model('ModelHeadGroup');
+        $this->modelheadgroup = model('ModelHeadGroup');
+        $this->modelhead = model('ModelHead');
     }
 
 //put your code here
@@ -29,45 +32,52 @@ class FeesManagement extends BaseController {
         render_page('fees_management/head_group', $data);
     }
 
-    public function show_head_group() {
+    public function fetch_head_group() {
+
+        $draw = $this->request->getPost('draw');
+        $start = $this->request->getPost('start');
+        $length = $this->request->getPost('length');
+        $search = $this->request->getPost('search')['value'] ?? '';
+
+        $model = $this->modelheadgroup;
+
+        // TOTAL RECORDS
+        $recordsTotal = $model->countAll();
+
+        // SEARCH FILTER
+        if ($search !== '') {
+            $model->like('head_group_name', $search);
+        }
+
+        // FILTERED RECORDS
+        $recordsFiltered = $model->countAllResults(false);
+
+        // PAGINATED DATA
+        $rows = $model->findAll($length, $start);
         
-$request = service('request');
+        $buttons = '';
+        
+        $buttons .= '<button class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill"><i class="ri-pencil-fill"></i></button>';
+        $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill"><i class="ri-delete-bin-fill"></i></button>';
 
-    $draw   = (int) $request->getPost('draw');
-    $start  = (int) $request->getPost('start');
-    $length = (int) $request->getPost('length');
-    $search = $request->getPost('search')['value'] ?? '';
+        $sr_no = 1;
+        
+        $data = [];
+        foreach ($rows as $row) {
+            $data[] = [
+                $sr_no++,
+                $row['head_group_name'],
+                $buttons,
+                ''
+            ];
+        }
 
-    $model = $this->modelfeesmanagement;
-
-    // TOTAL RECORDS
-    $recordsTotal = $model->countAll();
-
-    // SEARCH FILTER
-    if ($search !== '') {
-        $model->like('head_group_name', $search);
-    }
-
-    // FILTERED RECORDS
-    $recordsFiltered = $model->countAllResults(false);
-
-    // PAGINATED DATA
-    $rows = $model->findAll($length, $start);
-
-    $data = [];
-    foreach ($rows as $row) {
-        $data[] = [
-            $row['head_group_id'],
-            $row['head_group_name'],
-        ];
-    }
-
-    return $this->response->setJSON([
-        'draw'            => $draw,
-        'recordsTotal'    => $recordsTotal,
-        'recordsFiltered' => $recordsFiltered,
-        'data'            => $data
-    ]);
+        return $this->response->setJSON([
+                    'draw' => $draw,
+                    'recordsTotal' => $recordsTotal,
+                    'recordsFiltered' => $recordsFiltered,
+                    'data' => $data
+        ]);
     }
 
     public function add_head_group() {
@@ -81,17 +91,69 @@ $request = service('request');
     }
 
     public function head() {
-//        echo "Head Group";
+        $data['jspath'] = 'fees_management/head';
+        render_page('fees_management/head', $data);
+    }
+    
+    public function fetch_head() {
 
-        if ($this->request->getMethod() == 'post') {
-            $insert_data = [
-                'head_name' => $this->request->getVar('head', FILTER_SANITIZE_STRING),
-            ];
+        $draw = $this->request->getPost('draw');
+        $start = $this->request->getPost('start');
+        $length = $this->request->getPost('length');
+        $search = $this->request->getPost('search')['value'] ?? '';
 
-            $insert = $this->modelfeesmanagement->add_head($insert_data);
+        $model = $this->modelhead;
+
+        // TOTAL RECORDS
+        $recordsTotal = $model->countAll();
+
+        // SEARCH FILTER
+        if ($search !== '') {
+            $model->like('head_name', $search);
         }
 
-        $data['head_datas'] = $this->modelfeesmanagement->get_head_data();
-        render_page('fees_management/head', $data);
+        // FILTERED RECORDS
+        $recordsFiltered = $model->countAllResults(false);
+
+        // PAGINATED DATA
+        $rows = $model->findAll($length, $start);
+        
+        $buttons = '';
+        
+        $buttons .= '<button class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill"><i class="ri-pencil-fill"></i></button>';
+        $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill"><i class="ri-delete-bin-fill"></i></button>';
+
+        $sr_no = 1;
+
+        $data = [];
+        foreach ($rows as $row) {
+            $data[] = [
+                $sr_no++,
+                $row['head_name'],
+                $buttons,
+                ''
+            ];
+        }
+
+        return $this->response->setJSON([
+                    'draw' => $draw,
+                    'recordsTotal' => $recordsTotal,
+                    'recordsFiltered' => $recordsFiltered,
+                    'data' => $data
+        ]);
+    }
+    
+    public function head_fees() {
+        $data['jspath'] = 'fees_management/head_fees';
+        render_page('fees_management/head_fees', $data);
+    }
+    
+    public function collect_fees() {
+        $data['jspath'] = 'fees_management/collect_fees';
+        render_page('fees_management/collect_fees', $data);
+    }
+    
+    public function student_list() {
+        render_page('fees_management/student_list');
     }
 }

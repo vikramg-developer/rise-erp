@@ -56,20 +56,16 @@
                 </div>
                 <div class="card-body">
                     <?php // if (!empty($head_group_datas)): ?>
-                        <table id="manageTable" class="table table-bordered text-nowrap w-100">
-                            <thead>
-                                <tr>
-                                    <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
-                                    <th><?= lang('App.head'); ?> <?= lang('App.group'); ?> <?= lang('App.name'); ?></th>
-                                </tr>
-                            </thead>
-                        </table>
-                    <?php // else: ?>
-                        <div class="alert alert-solid-warning alert-dismissible fade show">
-                            Sorry! No record found!
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-x"></i></button>
-                        </div>
-                    <?php // endif; ?>
+                    <table id="manageTable" class="table table-bordered text-nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
+                                <th><?= lang('App.head'); ?> <?= lang('App.group'); ?> <?= lang('App.name'); ?></th>
+                                <th><?= lang('App.action'); ?></th>
+                                <th><?= lang('App.remark'); ?></th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>

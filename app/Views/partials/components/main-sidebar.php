@@ -103,6 +103,12 @@
                                                         <li class="slide">
                                                             <a href="<?php echo base_url('head'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?></a>
                                                         </li>
+                                                        <li class="slide">
+                                                            <a href="<?php echo base_url('head-fees'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?> <?= lang('App.fees'); ?></a>
+                                                        </li>
+                                                        <li class="slide">
+                                                            <a href="<?php echo base_url('collect-fees'); ?>" class="side-menu__item"><?= lang('App.collect'); ?> <?= lang('App.fees'); ?></a>
+                                                        </li>
                                                     </ul>
                                                 </li>
                                                 

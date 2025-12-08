@@ -4,6 +4,7 @@ return[
     //A
     'aadhar' => 'Aadhar',
     'academic' => 'Academic',
+    'action' => 'Action',
     'add' => 'Add',
     'admission' => 'Admission',
     'attach' => 'Attach',
@@ -14,6 +15,7 @@ return[
     'category' => 'Category',
     'certificate' => 'Certificate',
     'code' => 'Code',
+    'collect' => 'Collect',
     'college' => 'College',
     'confirm' => 'Confirm',
     'course' => 'Course',
@@ -72,6 +74,7 @@ return[
     //P
     'part' => 'Part',
     'password' => 'Password',
+    'payment' => 'Payment',
     'print' => 'Print',
     'priority' => 'Priority',
 
@@ -89,7 +92,6 @@ return[
     'save' => 'Save',
     'screenshot' =>'Screenshot',
     'search' => 'Search',
-    'select' => 'Select',
     'select' => 'Select',
     'semester' => 'Semester',
     'sign' => 'Sign',

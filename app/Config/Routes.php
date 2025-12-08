@@ -38,14 +38,18 @@ $routes->add('/', 'Home::index');
 
 $routes->add('/lc-remark', 'LeavingCertificate::addLeavingCertificateRemark');
 
-$routes->get('/home', 'Home::index');
-$routes->get('/feedback', 'Feedback::index');
-$routes->get('/leaving-certificate', 'LeavingCertificate::index');
-$routes->get('/ticket', 'Ticket::index');
+$routes->add('/home', 'Home::index');
+$routes->add('/feedback', 'Feedback::index');
+$routes->add('/leaving-certificate', 'LeavingCertificate::index');
+$routes->add('/ticket', 'Ticket::index');
 $routes->add('/create_ticket', 'Ticket::create_ticket');
 $routes->add('/head-group', 'FeesManagement::head-group');
-$routes->add('/show-head-group', 'FeesManagement::show-head-group');
+$routes->add('/fetch-head-group', 'FeesManagement::fetch-head-group');
 $routes->add('/head', 'FeesManagement::head');
+$routes->add('/fetch-head', 'FeesManagement::fetch-head');
+$routes->add('/head-fees', 'FeesManagement::head-fees');
+$routes->add('/collect-fees', 'FeesManagement::collect-fees');
+$routes->add('/student-list', 'FeesManagement::student-list');
 
 $routes->add('/registration', 'Registration::index');
 $routes->add('/savesignup', 'Registration::saveSignup');
