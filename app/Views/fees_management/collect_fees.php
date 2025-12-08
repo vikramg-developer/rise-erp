@@ -16,9 +16,9 @@
 
     <!-- Start::row-1 -->
     <div class="row">
-        <div class="col-xxl-5 col-xl-12">
+        <div class="col-xxl-12 col-xl-12">
             <div class="row">
-                <div class="col-xxl-6 col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-xxl-4 col-xl-3 col-lg-3 col-md-3 col-sm-12">
                     <div class="card custom-card hrm-main-card primary">
                         <a href="<?= base_url('student-list') ?>">
                             <div class="card-body">
@@ -44,7 +44,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-xxl-6 col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-xxl-4 col-xl-3 col-lg-3 col-md-3 col-sm-12">
                     <div class="card custom-card hrm-main-card primary">
                         <a href="<?= base_url('student-list') ?>">
                             <div class="card-body">
@@ -70,7 +70,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-xxl-6 col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-xxl-4 col-xl-3 col-lg-3 col-md-3 col-sm-12">
                     <div class="card custom-card hrm-main-card primary">
                         <a href="<?= base_url('student-list') ?>">
                             <div class="card-body">

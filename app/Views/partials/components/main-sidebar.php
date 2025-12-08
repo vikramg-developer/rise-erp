@@ -4,12 +4,12 @@
     <!-- Start::main-sidebar-header -->
     <div class="main-sidebar-header">
         <a href="<?php echo base_url('index'); ?>" class="header-logo">
-            <img src="<?php echo base_url('assets/images/brand-logos/desktop-logo.png'); ?>" alt="logo" class="desktop-logo">
-                <img src="<?php echo base_url('assets/images/brand-logos/toggle-logo.png'); ?>" alt="logo" class="toggle-logo">
-                    <img src="<?php echo base_url('assets/images/brand-logos/desktop-dark.png'); ?>" alt="logo" class="desktop-dark">
-                        <img src="<?php echo base_url('assets/images/brand-logos/toggle-dark.png'); ?>" alt="logo" class="toggle-dark">
-                            <img src="<?php echo base_url('assets/images/brand-logos/desktop-white.png'); ?>" alt="logo" class="desktop-white">
-                                <img src="<?php echo base_url('assets/images/brand-logos/toggle-white.png'); ?>" alt="logo" class="toggle-white">
+            <img src="<?php echo base_url('assets/images/brand-logos/rise.jpg'); ?>" alt="logo" class="desktop-logo">
+                <img src="<?php echo base_url('assets/images/brand-logos/toggle-rise.jpg'); ?>" alt="logo" class="toggle-logo">
+                    <img src="<?php echo base_url('assets/images/brand-logos/rise.jpg'); ?>" alt="logo" class="desktop-dark">
+                        <img src="<?php echo base_url('assets/images/brand-logos/toggle-rise.jpg'); ?>" alt="logo" class="toggle-dark">
+                            <img src="<?php echo base_url('assets/images/brand-logos/rise.jpg'); ?>" alt="logo" class="desktop-white">
+                                <img src="<?php echo base_url('assets/images/brand-logos/toggle-rise.jpg'); ?>" alt="logo" class="toggle-white">
                                     </a>
                                     </div>
                                     <!-- End::main-sidebar-header -->

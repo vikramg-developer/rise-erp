@@ -76,6 +76,15 @@
 <!-- Form Validation JS -->
 <script src="<?php echo base_url('assets/js/validation.js'); ?>"></script>
 
+<!-- Modal JS -->
+<script src="<?php echo base_url('assets/js/modal.js'); ?>"></script>
+
+<!-- Flat Picker JS -->
+<script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
+
+<!-- CRM Contacts JS -->
+<script src="<?php echo base_url('assets/js/crm-contacts.js'); ?>"></script>
+
 <?php if (isset($jspath)): ?>
     <script src="<?php echo base_url('partials/js/') . $jspath . '.js'; ?>"></script>
 <?php endif; ?>

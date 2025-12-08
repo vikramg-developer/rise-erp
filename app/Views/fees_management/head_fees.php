@@ -22,7 +22,7 @@
                 <div class="card-body head-group p-0">
                     <div class="p-4">
                         <div class="row gx-5">
-                            <div class="col-xxl-6 col-xl-12 col-lg-12 col-md-6">
+                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-6">
                                 <div class="card custom-card shadow-none mb-0 border-0">
                                     <div class="card-body p-0">
                                         <div class="row gy-3">
@@ -53,7 +53,7 @@
                                             </div>
 
                                             <div class="col-xl-4">
-                                                <label for="academic_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
+                                                <label for="academic_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label> <span class="text-danger">*</span>
                                                 <select class="form-control js-example-basic-single" name="academic_year_id" id="academic_year_id" required>
                                                     <option value="">-- <?= lang('App.select') ?> <?= lang('App.academic') ?> <?= lang('App.year'); ?> --</option>
                                                     <option value="1">2025-2026</option>
@@ -66,7 +66,7 @@
                                             </div>
 
                                             <div class="col-xl-4">
-                                                <label for="head_group_id" class="form-label"><?= lang('App.head'); ?> <?= lang('App.group'); ?></label>
+                                                <label for="head_group_id" class="form-label"><?= lang('App.head'); ?> <?= lang('App.group'); ?></label> <span class="text-danger">*</span>
                                                 <select class="form-control js-example-basic-single" name="head_group_id" id="head_group_id" required>
                                                     <option value="">-- <?= lang('App.select') ?> <?= lang('App.head') ?> <?= lang('App.group'); ?> --</option>
                                                     <option value="1">Fee Register</option>
@@ -78,7 +78,7 @@
                                             </div>
 
                                             <div class="col-xl-4">
-                                                <label for="payment_category_id" class="form-label"><?= lang('App.payment'); ?> <?= lang('App.category'); ?></label>
+                                                <label for="payment_category_id" class="form-label"><?= lang('App.payment'); ?> <?= lang('App.category'); ?></label> <span class="text-danger">*</span>
                                                 <select class="form-control js-example-basic-single" name="payment_category_id" id="payment_category_id" required>
                                                     <option value="">-- <?= lang('App.select') ?> <?= lang('App.payment') ?> <?= lang('App.category'); ?> --</option>
                                                     <option value="1">Paying</option>
@@ -86,7 +86,7 @@
                                                     <option value="2">EBC</option>
                                                 </select>
                                                 <div class="invalid-feedback">
-                                                    Please select Head Group
+                                                    Please select Payment Category
                                                 </div>
                                             </div>
                                         </div>
@@ -98,7 +98,7 @@
 
                     <div class="p-4">
                         <div class="row gx-5">
-                            <div class="col-xxl-6 col-xl-12 col-lg-12 col-md-6">
+                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-6">
                                 <div class="card custom-card shadow-none mb-0 border-0">
                                     <div class="card-body p-0">
                                         <div class="row gy-3">
