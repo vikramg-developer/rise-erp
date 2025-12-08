@@ -9,6 +9,7 @@ return[
 
     //B
     'bonafide' => 'Bonafide',
+    'back' => 'Back',
     //C
     'category' => 'Category',
     'certificate' => 'Certificate',
@@ -23,11 +24,14 @@ return[
     'date' => 'Date',
     'description' => 'Description',
     'develop' => 'Develop',
+    'download' => 'Download',
 
     //E
     'email' => 'Email',
     'exam' => 'Exam',
     'examination' => 'Examination',
+    'excel' => 'Excel',
+    'export' => 'Export',
 
     //F
     'feedback' => 'Feedback',
@@ -63,6 +67,7 @@ return[
     //O
     'of' => 'of',
     'optional' => 'Optional',
+    'option' => 'Option',
     
     //P
     'part' => 'Part',
@@ -91,6 +96,7 @@ return[
     'status' => 'Status',
     'student' => 'Student',
     'submit' => 'Submit',
+    
 
     //T
     'ticket' => 'Ticket',
@@ -99,8 +105,10 @@ return[
 
     //U
     'up' => 'UP',
+    'upload' => 'Upload',
     //V
     //W
+    'weightage' => 'Weightage',
     //X
     //Y
     'year'=>'Year',

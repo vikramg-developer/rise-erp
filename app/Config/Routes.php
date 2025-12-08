@@ -39,14 +39,13 @@ $routes->add('/', 'Home::index');
 $routes->add('/lc-remark', 'LeavingCertificate::addLeavingCertificateRemark');
 
 $routes->get('/home', 'Home::index');
-$routes->get('/feedback', 'Feedback::index');
-$routes->get('/leaving-certificate', 'LeavingCertificate::index');
-$routes->get('/ticket', 'Ticket::index');
-$routes->add('/create_ticket', 'Ticket::create_ticket');
 
-$routes->add('/registration', 'Registration::index');
-$routes->add('/savesignup', 'Registration::saveSignup');
-$routes->add('/login', 'Registration::login');
+$routes->add('/feedback', 'Feedback::index');
+$routes->add('/save_feedback_master', 'Feedback::save_feedback_master');
+$routes->add('/manage_question', 'Feedback::manage_question');
+$routes->add('/sample_excel_file', 'Feedback::sample_excel_file');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
