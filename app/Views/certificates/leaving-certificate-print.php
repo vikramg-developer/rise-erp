@@ -290,7 +290,7 @@ $monthName = ucwords($dateObj->format('F'));
     </div>
     <table id="header">
         <tr>
-        	<td rowspan="1"><img src="assets/images/sanstha_logo.png" style="width:70px; height:70px;"></td>
+        	<td rowspan="1"><img src="assets/images/kbp_logo.png" style="width:70px; height:70px;"></td>
                 <td style="text-align: center;"><h5>Rayat Shikshan Sanstha's<br><span style="font-family: times;font-size: 14pt;">Karmaveer Bhaurao Patil College of Engineering, Satara</span><br>Sadar Bazar, Camp Satara - 415001</h5></td>
         </tr>
 <!--    <tr>
@@ -313,7 +313,7 @@ $monthName = ucwords($dateObj->format('F'));
 
     <table>
         <tr>
-        	<td>Student ID No.:20212263<?php //echo $registration[0]['registration_id']; ?></td>
+        	<td>Rise No.:202610100001<?php //echo $registration[0]['registration_id']; ?></td>
         	<td>Gen. Reg No.:202220225<?php //echo $lc[0]['gen_reg_id']; ?></td>
         	<td style="text-align: right;">TC No.: 1<?php //echo $lc[0]['lc_id']; ?></td>
         </tr>
@@ -376,7 +376,7 @@ $monthName = ucwords($dateObj->format('F'));
     		<th>Result-Passed or Failed (Mention Class in case of Pass and Exemptions with subjects if any, in case of Failure)</th>
     	</tr>
     	<tr>
-    		<td>B.Tech Civil Engineering<?php //echo $lc[0]['examination']; ?></td>
+    		<td>S.Y Civil Engineering<?php //echo $lc[0]['examination']; ?></td>
     		<td>Summer Sem Exam 2025<?php //echo $lc[0]['exam_held_in']; ?></td>
     		<td>First Class<?php //echo $lc[0]['status']; ?></td>
     	</tr>

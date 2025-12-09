@@ -37,6 +37,7 @@ return[
     'feedback' => 'Feedback',
     'file'=>'File',
     'first' => 'First',
+    'from' => 'From',
     'full' => 'Full',
 
     //G
@@ -44,6 +45,7 @@ return[
     //H
     'held' => 'Held',
     //I
+    'icard' => 'I-Card',
     'in' => 'In',
     'information' => 'Information',
     'issue' => 'Issue',
@@ -102,6 +104,7 @@ return[
     //T
     'ticket' => 'Ticket',
     'title' => 'Title',
+    'to' => 'To',
     'type' => 'Type',
 
     //U

@@ -43,6 +43,9 @@ $routes->add('/feedback', 'Feedback::index');
 $routes->add('/leaving-certificate', 'LeavingCertificate::index');
 $routes->add('/leaving-certificate-report', 'LeavingCertificateReport::index');
 $routes->add('/bonafide-certificate', 'BonafideCertificate::index');
+$routes->add('/bonafide-print', 'BonafideCertificate::bonafidePrint');
+$routes->add('/icard', 'ICard::index');
+$routes->add('/icard-print', 'ICard::icardPrint');
 $routes->add('/ticket', 'Ticket::index');
 $routes->add('/create_ticket', 'Ticket::create_ticket');
 

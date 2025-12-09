@@ -71,7 +71,7 @@
                                                 </li>
                                                 <li class="slide has-sub">
                                                     <a href="javascript:void(0);" class="side-menu__item">
-                                                        <i class="bx bx-task side-menu__icon"></i>
+                                                        <i class="bx bx-medal side-menu__icon"></i>
                                                         <span class="side-menu__label"><?= lang('App.certificates'); ?></span>
                                                         <i class="fe fe-chevron-right side-menu__angle"></i>
                                                     </a>
@@ -81,8 +81,8 @@
                                                         </li>
                                                         <li class="slide">
                                                             <a href="<?php echo base_url('leaving-certificate'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?></a>
-<!--                                                        </li>
-                                                        <li class="slide">
+                                                        </li>
+<!--                                                        <li class="slide">
                                                             <a href="<?php echo base_url('leaving-certificate-report'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?> <?= lang('App.report'); ?></a>
                                                         </li>-->
                                                         <li class="slide">
@@ -92,6 +92,14 @@
                                                     </ul>
                                                 </li>
                                                 <!-- End::slide -->
+                                                
+                                                <!-- Start::slide -->
+                                                <li class="slide">
+                                                    <a href="<?php echo base_url('icard'); ?>" class="side-menu__item">
+                                                        <i class="bx bx-store-alt side-menu__icon"></i>
+                                                        <span class="side-menu__label"><?= lang('App.icard'); ?></span>
+                                                    </a>
+                                                </li>
 
                                                 <li class="slide has-sub">
                                                     <a href="javascript:void(0);" class="side-menu__item">

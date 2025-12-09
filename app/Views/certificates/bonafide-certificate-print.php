@@ -310,7 +310,7 @@ if (!empty($registration[0]['dob'])) {
                                 <td colspan='3' align="right">No: 1<?php //echo $bonafide[0]['bonafide_id']; ?></td>
                             </tr>
                             <tr>
-                                <td colspan='1' rowspan="1"><img src="assets/images/sanstha_logo.png" style="width:70px; height:70px;"></td>
+                                <td colspan='1' rowspan="1"><img src="assets/images/kbp_logo.png" style="width:70px; height:70px;"></td>
                                 <td colspan='11' style="text-align: center;"><h5>Rayat Shikshan Sanstha's<br><span style="font-family: times;font-size: 14pt;">Karmaveer Bhaurao Patil College of Engineering, Satara</span><br>Sadar Bazar, Camp Satara - 415001</h5></td>
                             </tr>
 
