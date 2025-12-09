@@ -4,11 +4,17 @@
         <!-- Main Js -->
         <script src="<?php echo base_url('assets/js/main.js'); ?>"></script>
         
+         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+         <!-- Prism CSS -->
+        <link rel="stylesheet" href="<?php echo base_url('assets/libs/prismjs/themes/prism-coy.min.css'); ?>">
+
         <!-- Bootstrap Css -->
         <link id="style" href="<?php echo base_url('assets/libs/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" >
 
         <!-- Style Css -->
         <link href="<?php echo base_url('assets/css/styles.css'); ?>" rel="stylesheet" >
+        
+        
 
         <!-- Icons Css -->
         <link href="<?php echo base_url('assets/css/icons.css'); ?>" rel="stylesheet" >

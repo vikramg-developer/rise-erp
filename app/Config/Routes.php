@@ -42,11 +42,13 @@ $routes->get('/home', 'Home::index');
 $routes->get('/feedback', 'Feedback::index');
 $routes->get('/leaving-certificate', 'LeavingCertificate::index');
 $routes->get('/ticket', 'Ticket::index');
-$routes->add('/create_ticket', 'Ticket::create_ticket');
+$routes->add('/create-ticket', 'Ticket::create_ticket');
 
 $routes->add('/registration', 'Registration::index');
 $routes->add('/savesignup', 'Registration::saveSignup');
 $routes->add('/login', 'Registration::login');
+$routes->add('/faculty-profile', 'FacultyProfile::index');
+$routes->add('/faculty-personal-info', 'FacultyProfile::update_personal_info');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

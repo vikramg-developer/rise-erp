@@ -3,6 +3,8 @@
     
     /* To choose date */
     flatpickr("#date", {});
+    flatpickr("#dob", {});
+    flatpickr("#joining", {});
 
     /* To choose date and time */
     flatpickr("#datetime", {
