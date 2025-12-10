@@ -10,12 +10,6 @@
                         <img src="<?php echo base_url('assets/images/brand-logos/toggle-rise.jpg'); ?>" alt="logo" class="toggle-dark">
                             <img src="<?php echo base_url('assets/images/brand-logos/rise.jpg'); ?>" alt="logo" class="desktop-white">
                                 <img src="<?php echo base_url('assets/images/brand-logos/toggle-rise.jpg'); ?>" alt="logo" class="toggle-white">
-            <!--<img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-logo">-->
-                <!--<img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="toggle-logo">-->
-                    <!--<img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-dark">-->
-                        <!--<img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="toggle-dark">-->
-                            <!--<img src="<?php echo base_url('assets/images/brand-logos/desktop-white.png'); ?>" alt="logo" class="desktop-white">-->
-                                <!--<img src="<?php echo base_url('assets/images/brand-logos/toggle-white.png'); ?>" alt="logo" class="toggle-white">-->
                                     </a>
                                     </div>
                                     <!-- End::main-sidebar-header -->
@@ -55,7 +49,7 @@
                                                 <!-- End::slide -->
 
                                                 <!-- Start::slide__category -->
-                                                <!--<li class="slide__category"><span class="category-name">Pages</span></li>-->
+                                                <li class="slide__category"><span class="category-name">Pages</span></li>
                                                 <!-- End::slide__category -->
 
                                                 <!-- Start::slide -->
@@ -78,7 +72,6 @@
 
                                                 <!-- Start::slide -->
                                                 <li class="slide has-sub">
-<!--                                                <li class="slide has-sub">
                                                     <a href="javascript:void(0);" class="side-menu__item">
                                                         <i class="bx bx-medal side-menu__icon"></i>
                                                         <span class="side-menu__label"><?= lang('App.certificate'); ?></span>
@@ -95,15 +88,11 @@
                                                             <a href="<?php echo base_url('task-list-view'); ?>" class="side-menu__item"><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
                                                         </li>
                                                     </ul>
-                                                </li>-->
+                                                </li>
                                                 <!-- End::slide -->
-
-
-<!--                                                <li class="slide has-sub">
 
                                                 <!-- Start::slide -->
                                                 <li class="slide has-sub">
-
                                                     <a href="javascript:void(0);" class="side-menu__item">
                                                         <i class="bx bx-rupee side-menu__icon"></i>
                                                         <span class="side-menu__label"><?= lang('App.fees'); ?> <?= lang('App.management'); ?></span>
@@ -143,12 +132,8 @@
                                                         <li class="slide">
                                                             <a href="<?php echo base_url('Ticket'); ?>" class="side-menu__item">Create Ticket</a>
                                                     </ul>
-
-                                                </li>
-
                                                 </li>
                                                 <!-- End::slide -->
-
 
                                                 <!-- Start::slide -->
                                                 <li class="slide has-sub">
