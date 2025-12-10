@@ -8,19 +8,20 @@ return [
     // A
     'aadhar'            => 'Aadhar',
     'academic'          => 'Academic',
-    'activities'        => 'Activities',            
+    'activities'        => 'Activities',
+    'action'            => 'Action',
     'add'               => 'Add',
     'address'           => 'Address',
     'address_proof'     => 'Address Proof',
     'admission'         => 'Admission',
     'affiliation'       => 'Affiliation',
-    'author'            => 'Author',
-    'authors'           => 'Authors',
-    'agency'            => 'Agency',                  
+    'agency'            => 'Agency',
     'appointment'       => 'Appointment',
     'area'              => 'Area',
     'attach'            => 'Attach',
     'attended'          => 'Attended',
+    'author'            => 'Author',
+    'authors'           => 'Authors',
     'award'             => 'Award',
     'awarded'           => 'Awarded',
 
@@ -40,19 +41,18 @@ return [
     'class'             => 'Class',
     'citation'          => 'Citation',
     'code'              => 'Code',
+    'collect'           => 'Collect',
     'college'           => 'College',
     'conference'        => 'Conference',
-    'consultancy'       => 'Consultancy',          
+    'consultancy'       => 'Consultancy',
     'confirm'           => 'Confirm',
     'conducted'         => 'Conducted',
-    'consultancy'       => 'Consultancy',
     'copyright'         => 'Copyright',
     'course'            => 'Course',
     'courses'           => 'Courses',
-    'cost'              => 'Cost',               
+    'cost'              => 'Cost',
     'create'            => 'Create',
-    'citation'          => 'Citation',
-  
+
     // D
     'dashboard'         => 'Dashboard',
     'date'              => 'Date',
@@ -75,24 +75,26 @@ return [
     'examination'       => 'Examination',
     'experience'        => 'Experience',
     'experience_note'   => 'Please fill Experience Details in sequential order of service',
-    'experience'        => 'Experience',
     'excluding'         => 'Excluding',
 
     // F
     'faculty'           => 'Faculty',
+    'factor'            => 'Factor',
     'feedback'          => 'Feedback',
+    'fees'              => 'Fees',
     'file'              => 'File',
     'first'             => 'First',
     'from_date'         => 'From Date',
     'full'              => 'Full',
-    'factor'            => 'Factor',
 
     // G
     'general'           => 'General',
     'google'            => 'Google',
+    'group'             => 'Group',
     'guided'            => 'Guided',
 
     // H
+    'head'              => 'Head',
     'held'              => 'Held',
 
     // I
@@ -101,17 +103,16 @@ return [
     'impact'            => 'Impact',
     'in'                => 'In',
     'information'       => 'Information',
-    'issue'             => 'Issue',
     'indexed'           => 'Indexed',
+    'index'             => 'Index',
+    'issue'             => 'Issue',
     'issn'              => 'ISSN',
     'isbn'              => 'ISBN',
-    'issue'             => 'Issue',
-    'index'             => 'Index',
 
     // J
     'joining'           => 'Joining',
-    'journals'          => 'Journals',
     'journal'           => 'Journal',
+    'journals'          => 'Journals',
 
     // L
     'last'              => 'Last',
@@ -123,6 +124,7 @@ return [
 
     // M
     'manage'            => 'Manage',
+    'management'        => 'Management',
     'master'            => 'Master',
     'marksheet'         => 'Marksheet',
     'membership'        => 'Membership',
@@ -140,7 +142,6 @@ return [
     'no'                => 'No.',
     'note'              => 'Note',
     'number'            => 'Number',
-    'excluding'         => 'Excluding',
 
     // O
     'of'                => 'of',
@@ -159,7 +160,6 @@ return [
     'percentage'        => 'Percentage',
     'personal'          => 'Personal',
     'person'            => 'Person',
-    'personal'          => 'Personal',
     'pdf_condition'     => 'Upload PDF only. File size must be less than 300KB.',
     'phd'               => 'Ph.D',
     'photo'             => 'Photo',
@@ -175,7 +175,7 @@ return [
     'paper'             => 'Paper',
     'proceeding'        => 'Proceeding',
     'publisher'         => 'Publisher',
-  
+
     // Q
     'qualification'     => 'Qualification',
     'question'          => 'Question',
@@ -201,7 +201,6 @@ return [
     'semester'          => 'Semester',
     'scholar'           => 'Scholar',
     'sign'              => 'Sign',
-    'site'              => 'Site',
     'society'           => 'Society',
     'specialization'    => 'Specialization',
     'sr'                => 'Sr',
@@ -210,9 +209,8 @@ return [
     'student'           => 'Student',
     'submit'            => 'Submit',
     'submitted'         => 'Submitted',
-    'show'              => 'Show',
     'self'              => 'Self',
-    'scholar'              => 'Scholar',
+    'show'              => 'Show',
 
     // T
     'taluka'            => 'Taluka',
@@ -220,10 +218,8 @@ return [
     'ticket'            => 'Ticket',
     'title'             => 'Title',
     'to_date'           => 'To Date',
-    'type'              => 'Type',
     'type'              => 'Type of Journal',
-    'select'            => 'Select',
-    'total'             =>  'Total',
+    'total'             => 'Total',
 
     // U
     'university'        => 'University',
@@ -238,10 +234,11 @@ return [
     'website'           => 'Website',
     'whether'           => 'Whether',
 
-   // Y
+    // Y
     'year'              => 'Year',
     'years'             => 'Years',
     'your'              => 'Your',
+
 
     // ============================================================
     // COMMON ERRORS
@@ -254,10 +251,10 @@ return [
     'error_pincode'         => 'Enter a valid 6-digit pincode.',
     'error_month'           => 'Please select month.',
     'error_year'            => 'Please select year.',
-    
-    
+
+
     // ============================================================
-    // PERSONAL INFORMATION ERRORS (NEW)
+    // PERSONAL INFORMATION ERRORS
     // ============================================================
 
     'error_title'             => 'Please select a title.',
@@ -269,12 +266,10 @@ return [
     'error_email'             => 'Enter a valid email address.',
     'error_joining'           => 'Please select a valid joining date.',
     'error_aadhar'            => 'Enter a valid 12-digit Aadhar number.',
-    'error_specialization'    => 'Enter area of specialization.',
     'error_number'            => 'Enter a valid number.',
     'error_google_scholar'    => 'Enter a valid Google Scholar link.',
     'error_personal_site'     => 'Enter a valid website URL.',
     'error_photo'             => 'Please upload a valid photo.',
-
 
     // ============================================================
     // RESIDENTIAL ERRORS
@@ -313,20 +308,20 @@ return [
     // JOURNAL ERRORS
     // ============================================================
 
-    'error_title_paper'            => 'Enter title of paper.',
-    'error_number_authors'         => 'Enter number of authors.',
-    'error_first_author'           => 'Please select whether first author.',
-    'error_name_of_journal'        => 'Enter name of journal.',
-    'error_type_of_journal'        => 'Please select type of journal.',
-    'error_affiliation_author'     => 'Enter affiliation of author.',
-    'error_month_publication'      => 'Please select month of publication.',
-    'error_year_publication'       => 'Please select year of publication.',
-    'error_volume_issue'           => 'Enter volume and issue.',
-    'error_page_from'              => 'Enter starting page number.',
-    'error_page_to'                => 'Enter ending page number.',
-    'error_listed_in'              => 'Please select listed in.',
-    'error_publication_link'       => 'Enter link of publication.',
-    'error_first_page'             => 'Please upload first page PDF.',
+    'error_title_paper'         => 'Enter title of paper.',
+    'error_number_authors'      => 'Enter number of authors.',
+    'error_first_author'        => 'Please select whether first author.',
+    'error_name_of_journal'     => 'Enter name of journal.',
+    'error_type_of_journal'     => 'Please select type of journal.',
+    'error_affiliation_author'  => 'Enter affiliation of author.',
+    'error_month_publication'   => 'Please select month of publication.',
+    'error_year_publication'    => 'Please select year of publication.',
+    'error_volume_issue'        => 'Enter volume and issue.',
+    'error_page_from'           => 'Enter starting page number.',
+    'error_page_to'             => 'Enter ending page number.',
+    'error_listed_in'           => 'Please select listed in.',
+    'error_publication_link'    => 'Enter link of publication.',
+    'error_first_page'          => 'Please upload first page PDF.',
 
     // ============================================================
     // BOOK & BOOK CHAPTER ERRORS
@@ -339,10 +334,9 @@ return [
     'error_isbn_number'       => 'Enter ISBN number.',
     'error_reference_link'    => 'Enter reference link.',
     'error_show_on_resume'    => 'Please select show on resume.',
-    
-    
+
     // ============================================================
-    // CONFERENCE ERRORS (NEW)
+    // CONFERENCE ERRORS
     // ============================================================
 
     'error_paperTitle'          => 'Please enter title of paper.',
@@ -359,9 +353,8 @@ return [
     'error_showResume'          => 'Please select show on resume.',
     'error_uploadCertificate'   => 'Please upload certificate (PDF only).',
 
-
     // ============================================================
-    // CONSULTANCY ERRORS (NEW)
+    // CONSULTANCY ERRORS
     // ============================================================
 
     'error_title_consultancy' => 'Enter title of consultancy.',
