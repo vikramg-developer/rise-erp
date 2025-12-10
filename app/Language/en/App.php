@@ -38,7 +38,7 @@ return [
     'chapter'           => 'Chapter',
     'choose_date'       => 'Choose date',
     'class'             => 'Class',
-    'citation_index'    => 'Citation Index',
+    'citation'          => 'Citation',
     'code'              => 'Code',
     'college'           => 'College',
     'conference'        => 'Conference',
@@ -69,13 +69,13 @@ return [
     'education'         => 'Education',
     'educational'       => 'Educational',
     'email'             => 'Email',
-    'enter_address'     => 'Enter full address',
+    'enter'             => 'Enter',
     'enter_pincode'     => 'Enter 6-digit pincode',
     'exam'              => 'Exam',
     'examination'       => 'Examination',
     'experience'        => 'Experience',
     'experience_note'   => 'Please fill Experience Details in sequential order of service',
-    'experience_total'  => 'Total Experience',
+    'experience'        => 'Experience',
     'excluding'         => 'Excluding',
 
     // F
@@ -90,25 +90,23 @@ return [
     // G
     'general'           => 'General',
     'google'            => 'Google',
-    'google_scholar'    => 'Google Scholar',
     'guided'            => 'Guided',
 
     // H
     'held'              => 'Held',
 
     // I
-    'id_proof'          => 'ID Proof',
+    'id'                => 'ID',
     'image_upload_condition' => 'Upload image only. File size must be less than 300KB.',
     'impact'            => 'Impact',
     'in'                => 'In',
     'information'       => 'Information',
     'issue'             => 'Issue',
-    'issn_number'       => 'ISSN Number',
-    'isbn_number'       => 'ISBN Number',
     'indexed'           => 'Indexed',
     'issn'              => 'ISSN',
     'isbn'              => 'ISBN',
     'issue'             => 'Issue',
+    'index'             => 'Index',
 
     // J
     'joining'           => 'Joining',
@@ -144,19 +142,16 @@ return [
     'number'            => 'Number',
     'excluding'         => 'Excluding',
 
-
     // O
     'of'                => 'of',
     'one'               => 'One',
     'optional'          => 'Optional',
-    'organization'      =>'Organization',
+    'organization'      => 'Organization',
     'on'                => 'On',
-    'order'             =>'Order',
+    'order'             => 'Order',
 
     // P
     'page'              => 'Page',
-    'page_from'         => 'Page Number From',
-    'page_to'           => 'Page Number To',
     'part'              => 'Part',
     'password'          => 'Password',
     'passing'           => 'Passing',
@@ -164,7 +159,7 @@ return [
     'percentage'        => 'Percentage',
     'personal'          => 'Personal',
     'person'            => 'Person',
-    'personal_site'     => 'Personal Website',
+    'personal'          => 'Personal',
     'pdf_condition'     => 'Upload PDF only. File size must be less than 300KB.',
     'phd'               => 'Ph.D',
     'photo'             => 'Photo',
@@ -177,11 +172,10 @@ return [
     'program'           => 'Program',
     'project'           => 'Project',
     'publication'       => 'Publication',
-    'publication_link'  => 'Link of Paper Publication',
     'paper'             => 'Paper',
     'proceeding'        => 'Proceeding',
     'publisher'         => 'Publisher',
-    
+  
     // Q
     'qualification'     => 'Qualification',
     'question'          => 'Question',
@@ -193,14 +187,11 @@ return [
     'remark'            => 'Remark',
     'reset'             => 'Reset',
     'result'            => 'Result',
-    'result_class'      => 'Result Class',
     'residential'       => 'Residential',
     'resource'          => 'Resource',
     'resume'            => 'Resume',
     'rise'              => 'Rise',
-    'reference_link'    => 'Reference Link',
-    'reference'   => 'Reference',
-
+    'reference'         => 'Reference',
 
     // S
     'save'              => 'Save',
@@ -209,7 +200,6 @@ return [
     'select'            => 'Select',
     'semester'          => 'Semester',
     'scholar'           => 'Scholar',
-    'show_on_resume'    => 'Show on Resume',
     'sign'              => 'Sign',
     'site'              => 'Site',
     'society'           => 'Society',
@@ -222,18 +212,18 @@ return [
     'submitted'         => 'Submitted',
     'show'              => 'Show',
     'self'              => 'Self',
-
+    'scholar'              => 'Scholar',
 
     // T
     'taluka'            => 'Taluka',
     'thesis'            => 'Thesis',
     'ticket'            => 'Ticket',
     'title'             => 'Title',
-    'title_of_paper'    => 'Title of Paper',
     'to_date'           => 'To Date',
     'type'              => 'Type',
-    'type_of_journal'   => 'Type of Journal',
-    'select_type'       => 'Select Type',
+    'type'              => 'Type of Journal',
+    'select'            => 'Select',
+    'total'             =>  'Total',
 
     // U
     'university'        => 'University',
@@ -262,11 +252,13 @@ return [
     'error_address'         => 'Please enter a valid address.',
     'error_specialization'  => 'Enter specialization.',
     'error_pincode'         => 'Enter a valid 6-digit pincode.',
+    'error_month'           => 'Please select month.',
+    'error_year'            => 'Please select year.',
     
     
     // ============================================================
-// PERSONAL INFORMATION ERRORS (NEW)
-// ============================================================
+    // PERSONAL INFORMATION ERRORS (NEW)
+    // ============================================================
 
     'error_title'             => 'Please select a title.',
     'error_first_name'        => 'Enter valid first name.',

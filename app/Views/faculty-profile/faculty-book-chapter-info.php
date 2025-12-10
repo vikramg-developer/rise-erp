@@ -1,8 +1,8 @@
 <?= form_open('faculty-books', ['class' => 'needs-validation', 'novalidate' => true]); ?>
 
 <h5 class="mb-3">
-       <p class="mb-1 fw-semibold text-muted op-5 fs-20">06</p>
-       <?= lang('App.book'); ?> &   <?= lang('App.book'); ?> <?= lang('App.chapter'); ?>
+    <p class="mb-1 fw-semibold text-muted op-5 fs-20">06</p>
+    <?= lang('App.book'); ?> &   <?= lang('App.book'); ?> <?= lang('App.chapter'); ?>
 </h5>
 
 <div class="row gy-4">
@@ -97,10 +97,10 @@
             <?= lang('App.show'); ?> <?= lang('App.on'); ?> <?= lang('App.resume'); ?>
             <span class="text-danger">*</span>
         </label>
-        <select class="form-control" name="show_resume" required>
+        <select class="form-select" name="show_resume" required>
             <option value=""><?= lang('App.select'); ?></option>
-            <option value="Yes"><?= lang('App.yes'); ?></option>
-            <option value="No"><?= lang('App.no'); ?></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
         </select>
         <div class="invalid-feedback"><?= lang('App.error_show_on_resume'); ?></div>
     </div>
@@ -122,17 +122,18 @@
     <table class="table">
         <thead class="table-success">
             <tr>
-                <th><?= lang('App.action'); ?></th>
-                <th><?= lang('App.sr_no'); ?></th>
-                <th><?= lang('App.type'); ?></th>
-                <th><?= lang('App.title_of_book'); ?></th>
-                <th><?= lang('App.year'); ?>  <?= lang('App.of'); ?>  <?= lang('App.publication'); ?></th>
-                <th><?= lang('App.name_of_publisher'); ?></th>
-                <th><?= lang('App.issn_number'); ?></th>
-                <th><?= lang('App.isbn_number'); ?></th>
-                <th><?= lang('App.reference_link'); ?></th>
-                <th><?= lang('App.show_on_resume'); ?></th>
+                <th>Action</th>
+                <th>Sr. No</th>
+                <th>Type</th>
+                <th>Title of Book</th>
+                <th>Year of Publication</th>
+                <th>Name of Publisher</th>
+                <th>ISSN Number</th>
+                <th>ISBN Number</th>
+                <th>Reference Link</th>
+                <th>Show on Resume</th>
             </tr>
+
         </thead>
 
         <tbody>
@@ -164,7 +165,7 @@
                     </a>
                 </td>
 
-                <td><?= lang('App.yes'); ?></td>
+                <td>Yes</td>
             </tr>
 
         </tbody>

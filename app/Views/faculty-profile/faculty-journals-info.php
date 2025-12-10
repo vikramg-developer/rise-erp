@@ -41,8 +41,8 @@
 
         <select class="form-select" name="first_author" required>
             <option value=""><?= lang('App.select'); ?></option>
-            <option value="Yes"><?= lang('App.yes'); ?></option>
-            <option value="No"><?= lang('App.no'); ?></option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
         </select>
 
         <div class="invalid-feedback"><?= lang('App.error_first_author'); ?></div>
@@ -133,7 +133,7 @@
             <?= lang('App.volume'); ?>  <?= lang('App.issue'); ?> <span class="text-danger">*</span>
         </label>
         <input class="form-control" name="volume_issue" required
-            placeholder="<?= lang('App.volume_issue'); ?>">
+            placeholder=" <?= lang('App.volume'); ?>  <?= lang('App.issue'); ?>">
         <div class="invalid-feedback"><?= lang('App.error_volume_issue'); ?></div>
     </div>
 
@@ -164,7 +164,7 @@
     <!-- Listed In -->
     <div class="col-xl-4 col-lg-6 col-md-6">
         <label class="form-label">
-            <?= lang('App.listed'); ?> <?= lang('App.ln'); ?><span class="text-danger">*</span>
+            <?= lang('App.listed'); ?> <?= lang('App.in'); ?><span class="text-danger">*</span>
         </label>
 
         <select class="form-select" name="listed_in" required>
@@ -186,16 +186,16 @@
 
     <!-- Citations -->
     <div class="col-xl-4 col-lg-6 col-md-6">
-        <label class="form-label"><?= lang('App.number_citation'); ?></label>
+        <label class="form-label"><?= lang('App.number'); ?> <?= lang('App.citation'); ?></label>
         <input class="form-control" name="citation"
-            placeholder="<?= lang('App.number_citation'); ?>">
+            placeholder="<?= lang('App.number'); ?> <?= lang('App.citation'); ?>">
     </div>
 
     <!-- Citations Excluding Self -->
     <div class="col-xl-4 col-lg-6 col-md-6">
-        <label class="form-label"><?= lang('App.number'); ?> <?= lang('App.of'); ?> <?= lang('App.citation'); ?> <?= lang('App.excluding'); ?> <?= lang('App.self'); ?> <?= lang('App.Citation'); ?></label>
+        <label class="form-label"><?= lang('App.number'); ?> <?= lang('App.of'); ?> <?= lang('App.citation'); ?> <?= lang('App.excluding'); ?> <?= lang('App.self'); ?> <?= lang('App.citation'); ?></label>
         <input class="form-control" name="citation_excluding"
-            placeholder="<?= lang('App.number'); ?> <?= lang('App.of'); ?> <?= lang('App.citation'); ?> <?= lang('App.excluding'); ?> <?= lang('App.self'); ?> <?= lang('App.Citation'); ?>">
+            placeholder="<?= lang('App.number'); ?> <?= lang('App.of'); ?> <?= lang('App.citation'); ?> <?= lang('App.excluding'); ?> <?= lang('App.self'); ?> <?= lang('App.citation'); ?>">
     </div>
 
     <!-- Link of Publication -->

@@ -77,7 +77,7 @@
 
     <!-- Show on Resume -->
     <div class="col-xl-4 col-lg-6 col-md-6">
-        <label class="form-label"><?= lang('App.show_on_resume'); ?>  <span class="text-danger">*</span></label>
+        <label class="form-label"> <?= lang('App.show'); ?> <?= lang('App.on'); ?> <?= lang('App.resume'); ?>  <span class="text-danger">*</span></label>
         <select class="form-select" name="show_resume" required>
             <option value="">--Select--</option>
             <option value="Yes">Yes</option>

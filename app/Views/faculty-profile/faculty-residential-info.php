@@ -11,7 +11,7 @@
     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
         <label class="form-label"><?= lang('App.address'); ?>  <span class="text-danger">*</span></label>
         <textarea class="form-control" name="address" required
-                  placeholder="<?= lang('App.enter_address'); ?>"></textarea>
+                  placeholder="<?= lang('App.enter'); ?> <?= lang('App.full'); ?> <?= lang('App.address'); ?>"></textarea>
         <div class="invalid-feedback"><?= lang('App.error_address'); ?></div>
     </div>
 

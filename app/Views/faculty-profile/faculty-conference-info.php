@@ -107,7 +107,7 @@
             <?= lang('App.month'); ?> <?= lang('App.of'); ?> <?= lang('App.publication'); ?>
             <span class="text-danger">*</span>
         </label>
-        <select class="form-control" name="month" required>
+        <select class="form-select" name="month" required>
             <option value=""><?= lang('App.select'); ?></option>
             <?php
             $months = [
@@ -158,7 +158,7 @@
             <?= lang('App.show'); ?> <?= lang('App.on'); ?> <?= lang('App.resume'); ?>
             <span class="text-danger">*</span>
         </label>
-        <select class="form-control" name="show_resume" required>
+        <select class="form-select" name="show_resume" required>
             <option value=""><?= lang('App.select'); ?></option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
