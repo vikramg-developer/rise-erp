@@ -36,16 +36,16 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->add('/', 'Home::index');
 
-$routes->add('/add-lc-info', 'LeavingCertificate::addLeavingCertificateInfo');
+$routes->add('/add-lc-info', 'LeavingCertificate::add_lc_info');
 
 $routes->add('/home', 'Home::index');
 $routes->add('/feedback', 'Feedback::index');
 $routes->add('/leaving-certificate', 'LeavingCertificate::index');
-$routes->add('/leaving-certificate-report', 'LeavingCertificateReport::index');
+$routes->add('/leaving-certificate-report', 'leaving_certificate_report::index');
 $routes->add('/bonafide-certificate', 'BonafideCertificate::index');
-$routes->add('/bonafide-print', 'BonafideCertificate::bonafidePrint');
-$routes->add('/icard', 'ICard::index');
-$routes->add('/icard-print', 'ICard::icardPrint');
+$routes->add('/bonafide-print', 'BonafideCertificate::bonafide_print');
+$routes->add('/i-card', 'ICard::index');
+$routes->add('/i-card-print', 'ICard::i_card_print');
 $routes->add('/ticket', 'Ticket::index');
 $routes->add('/create_ticket', 'Ticket::create_ticket');
 

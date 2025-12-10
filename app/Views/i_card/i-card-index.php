@@ -108,7 +108,7 @@
                                                             <td>Civil Engineering</td>
                                                             <td>Third Year</td>
                                                             <td>
-                                                                <a href="<?= base_url('icard-print'); ?>" target="_blank"  class="btn btn-warning mb-1" ><?= lang('App.icard'); ?></a>
+                                                                <a href="<?= base_url('i-card-print'); ?>" target="_blank"  class="btn btn-warning mb-1" ><?= lang('App.icard'); ?></a>
                                                             </td>
                                                         </tr>
                                                         <tr>

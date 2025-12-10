@@ -12,13 +12,12 @@ class LeavingCertificate extends BaseController
         $this->ModelLeavingCertificate = new ModelLeavingCertificate();
     }
 
-    public function index() {
-        $data['lc_data'] = $this->ModelLeavingCertificate->getLcData();
+    public function index() {     
 
         render_page('certificates/leaving-certificate-index');
     }
 
-    public function addLeavingCertificateInfo() 
+    public function add_lc_info() 
     {   
         
         $data=[];

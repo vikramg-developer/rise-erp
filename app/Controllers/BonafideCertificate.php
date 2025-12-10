@@ -9,7 +9,7 @@ class BonafideCertificate extends BaseController{
         render_page('certificates/bonafide-certificate-index');
     }
     
-    public function bonafidePrint(){
+    public function bonafide_print(){
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L']);
         $mpdf->shrink_tables_to_fit = 0;
         $mpdf->simpleTables = false;

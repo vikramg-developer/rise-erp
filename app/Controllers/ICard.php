@@ -8,10 +8,10 @@ class ICard extends BaseController {
     
     public function index(){
         
-        render_page('icard/icard-index');
+        render_page('i_card/i-card-index');
         
     }
-    public function icardPrint(){
+    public function i_card_print(){
          // ---------- HARD CODED DATA SAMPLE ----------
          ob_start();
 
