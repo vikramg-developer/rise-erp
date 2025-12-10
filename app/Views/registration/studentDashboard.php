@@ -26,14 +26,6 @@
                                 <p class="mb-0 fs-11 op-5 text-fixed-white">Rise No</p>
                             </div>
 
-                            <!--                                                    <div class="me-4">
-                                                                                    <p class="fw-bold fs-20 text-fixed-white text-shadow mb-0">12.2k</p>
-                                                                                    <p class="mb-0 fs-11 op-5 text-fixed-white">Followers</p>
-                                                                                </div>
-                                                                                <div class="me-4">
-                                                                                    <p class="fw-bold fs-20 text-fixed-white text-shadow mb-0">128</p>
-                                                                                    <p class="mb-0 fs-11 op-5 text-fixed-white">Following</p>
-                                                                                </div>-->
                         </div>
                     </div>
                 </div>

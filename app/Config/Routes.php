@@ -36,23 +36,29 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->add('/', 'Home::index');
 
-$routes->add('/lc-remark', 'LeavingCertificate::addLeavingCertificateRemark');
-
-$routes->get('/home', 'Home::index');
-$routes->get('/feedback', 'Feedback::index');
-$routes->get('/leaving-certificate', 'LeavingCertificate::index');
-$routes->get('/ticket', 'Ticket::index');
+$routes->add('/collect-fees', 'FeesManagement::collect-fees');
 $routes->add('/create_ticket', 'Ticket::create_ticket');
-
+$routes->add('/delete-head-group', 'FeesManagement::delete-head-group');
+$routes->add('/feedback', 'Feedback::index');
+$routes->add('/fetch-head', 'FeesManagement::fetch-head');
+$routes->add('/fetch-head-group', 'FeesManagement::fetch-head-group');
+$routes->add('/add-group', 'Group::add-group');
+$routes->add('/head', 'FeesManagement::head');
+$routes->add('/head-fees', 'FeesManagement::head-fees');
+$routes->add('/head-group', 'FeesManagement::head-group');
+$routes->add('/home', 'Home::index');
+$routes->add('/lc-remark', 'LeavingCertificate::addLeavingCertificateRemark');
+$routes->add('/leaving-certificate', 'LeavingCertificate::index');
+$routes->add('/login', 'Login::login');
 $routes->add('/registration', 'Registration::index');
 $routes->add('/student-profile', 'Registration::studentProfile');
 $routes->add('/authenticate', 'Registration::authenticate');
-
 $routes->add('/savesignup', 'Registration::saveSignup');
-$routes->add('/login', 'Login::login');
 $routes->add('/studentDashboard', 'Login::studentDashboard');
 $routes->add('/studentProfile', 'Registration::studentProfile');
-//$routes->post('authenticate', 'Login::authenticate');
+$routes->add('/student-list', 'FeesManagement::student-list');
+$routes->add('/ticket', 'Ticket::index');
+
 
 /*
  * --------------------------------------------------------------------

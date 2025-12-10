@@ -29,19 +29,14 @@
                             <label for="login-username" class="form-label text-default"><?= lang('App.rise') ?> <?= lang('App.number') ?></label>
                             <input type="text" class="form-control form-control-lg" id="login-username" maxlength="13" minlength="13"name="login-username" placeholder="<?= lang('App.rise') ?> <?= lang('App.number') ?>"required>
                         </div>
-                        <div class="col-xl-12 mb-2">
+                        <div class="col-xl-12">
                             <label for="login-password" class="form-label text-default d-block"><?= lang('App.password') ?><a href="" class="float-end text-danger">Forget password ?</a></label>
                             <div class="input-group">
-                                <input type="password" class="form-control form-control-lg"  maxlength="8" minlength="8"id="login-password" name="login-password"placeholder="<?= lang('App.password') ?>"required>
+                                <input type="password" class="form-control form-control-lg"  maxlength="8" minlength="8"id="signin-password" name="login-password"placeholder="<?= lang('App.password') ?>"required>
                                 <button class="btn btn-light" type="button" onclick="createpassword('signin-password', this)" id="button-addon2"><i class="ri-eye-off-line align-middle"></i></button>
                             </div>
-<!--                              <div class="col-xl-12">
-                                  <label for="login-password" class="form-label text-default"><?= lang('App.password'); ?><a href="" class="float-end text-danger">Forget password ?</a></label>
-                            <div class="input-group">
-                                <input type="password" class="form-control form-control-lg required-input" name="signup-password" id="signup-password" placeholder="<?= lang('App.password') ?>" maxlength="8" minlength="8"value=""required>
-                                <button class="btn btn-light" onclick="createpassword('signup-password', this)" type="button" id="button-addon2"><i class="ri-eye-off-line align-middle"></i></button>
-                            </div>
-                        </div>-->
+                        </div>
+
                             <div class="mt-2">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">

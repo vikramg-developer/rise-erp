@@ -1,16 +1,17 @@
 <?php
+
 return[
     //A
     'aadhar' => 'Aadhar',
     'academic' => 'Academic',
-    'account' => 'Account',
+'account' => 'Account',
     'address' => 'Address',
+     'action' => 'Action',
     'add' => 'Add',
     'admission' => 'Admission',
     'apply' => 'Apply',
     'attach' => 'Attach',
     'already' => 'Already',
-    
     //B
     'bonafide' => 'Bonafide',
     'birth' => 'Birth',
@@ -23,12 +24,12 @@ return[
     'code' => 'Code',
     'country' => 'Country',
     'contact' => 'Contact',
+    'collect' => 'Collect',
     'college' => 'College',
     'confirm' => 'Confirm',
     'course' => 'Course',
     'current' => 'Current',
     'create' => 'Create',
-    
     //D
     'dashboard' => 'Dashboard',
     'date' => 'Date',
@@ -37,13 +38,11 @@ return[
     'develop' => 'Develop',
     'district' => 'District',
     'document' => 'Document',
-
     //E
     'educational' => 'Educational',
     'email' => 'Email',
     'exam' => 'Exam',
     'examination' => 'Examination',
-
     //F
     'father' => 'Father',
     'family' => 'Family',
@@ -51,15 +50,19 @@ return[
     'female' => 'Female',
     'for' => 'For',
     'form' => 'Form',
+    'fees' => 'Fees',
     'file'=>'File',
     'first' => 'First',
-
     //G
     'general'=>'General',
     'gender'=>'Gender',
     'group'=>'Group',
     //H
     'handicap' => 'Handicap',
+   'general' => 'General',
+    'group' => 'Group',
+    //H
+    'head' => 'Head',
     'held' => 'Held',
     'here' => 'Here',
     //I
@@ -69,7 +72,6 @@ return[
     'issue' => 'Issue',
     //J
     //K
-    
     //L
     'last' => 'Last',
     'lc' => 'LC',
@@ -80,12 +82,12 @@ return[
     'manage' => 'Manage',
     'marital' => 'Marital',
     'male' => 'Male',
+    'management' => 'Management',
     'master' => 'Master',
     'middle' => 'Middle',
     'minority' => 'Minority',
     'mobile' => 'Mobile',
     'mother' => 'Mother',
-
     //N
     'name' => 'Name',
     'nationality' => 'Nationality',
@@ -109,7 +111,6 @@ return[
     'profile' => 'Profile',
     'place' => 'Place',
     'physical'=> 'Physical',
-
     //Q
     'question' => 'Question',
     //R
@@ -121,11 +122,10 @@ return[
     'religion' => 'Religion',
     'result' => 'Result',
     'rise' => 'Rise',
-
     //S
+    'save' => 'Save',
     'screenshot' =>'Screenshot',
     'search' => 'Search',
-    'select' => 'Select',
     'select' => 'Select',
     'semester' => 'Semester',
     'sign' => 'Sign',
