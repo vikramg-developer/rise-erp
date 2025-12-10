@@ -4,18 +4,14 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ModelRegistration extends Model {
+class ModelLogin extends Model {
 
     public function checkAadharExists($aadhar) {
         $builder = $this->db->table('student_registration');
         $row = $builder->where('student_aadhar_number', $aadhar)->get()->getRow();
     }
 
-//  public function getRiseNO()
-//{
-// $builder = $this->db->table('student_registration');
-//$row = $builder->get()->getRow();
-//}
+
     public function getRiseNO() {
         // Get last rise number
         $row = $this->db->table('student_registration')
@@ -30,15 +26,7 @@ class ModelRegistration extends Model {
         return $lastRiseNO + 1;
     }
 
-    public function add_registration_data($data) {
-
-        $builder = $this->db->table('student_registration');
-
-        $res = $builder->insert($data);
-
-        return $this->db->affectedRows() > 0 ? true : false;
-    }
-
+    
     public function checkAuthenticate($riseNo, $password) {
         return $this->db->table('student_registration')
                         ->where('student_rise_no', $riseNo)

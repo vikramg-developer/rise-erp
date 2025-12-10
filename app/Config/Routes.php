@@ -55,10 +55,14 @@ $routes->add('/home', 'Home::index');
 $routes->add('/i-card', 'ICard::index');
 $routes->add('/i-card-print', 'ICard::i_card_print');
 $routes->add('/leaving-certificate', 'LeavingCertificate::index');
+$routes->add('/login', 'Login::login');
 $routes->add('/leaving-certificate-report', 'LeavingCertificateReport::index');
-$routes->add('/login', 'Registration::login');
 $routes->add('/registration', 'Registration::index');
+$routes->add('/student-profile', 'Registration::studentProfile');
+$routes->add('/authenticate', 'Registration::authenticate');
 $routes->add('/savesignup', 'Registration::saveSignup');
+$routes->add('/studentDashboard', 'Login::studentDashboard');
+$routes->add('/studentProfile', 'Registration::studentProfile');
 $routes->add('/student-list', 'FeesManagement::student-list');
 $routes->add('/ticket', 'Ticket::index');
 /*

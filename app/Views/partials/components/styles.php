@@ -52,4 +52,3 @@
 
 <!-- FlatPickr CSS -->
 <link rel="stylesheet" href="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.css'); ?>">
-

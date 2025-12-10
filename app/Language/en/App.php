@@ -8,6 +8,7 @@ return [
     // A
     'aadhar'            => 'Aadhar',
     'academic'          => 'Academic',
+    'account'           => 'Account',
     'activities'        => 'Activities',
     'action'            => 'Action',
     'add'               => 'Add',
@@ -16,25 +17,29 @@ return [
     'admission'         => 'Admission',
     'affiliation'       => 'Affiliation',
     'agency'            => 'Agency',
+    'apply'             => 'Apply',
     'appointment'       => 'Appointment',
     'area'              => 'Area',
     'attach'            => 'Attach',
     'attended'          => 'Attended',
     'author'            => 'Author',
     'authors'           => 'Authors',
+    'already'           => 'Already',
     'award'             => 'Award',
     'awarded'           => 'Awarded',
 
     // B
     'back'              => 'Back',
     'biodata'           => 'Bio-Data',
-    'birth'             => 'Birth',
-    'book'              => 'Book',
     'bonafide'          => 'Bonafide',
+    'birth'             => 'Birth',
+    'blood'             => 'Blood',
+    'book'              => 'Book',
     'btech'             => 'B.Tech',
 
     // C
     'calendar'          => 'Calendar',
+    'caste'             => 'Caste',
     'category'          => 'Category',
     'certificate'       => 'Certificate',
     'certificates'      => 'Certificates',
@@ -43,6 +48,8 @@ return [
     'class'             => 'Class',
     'citation'          => 'Citation',
     'code'              => 'Code',
+    'country'           => 'Country',
+    'contact'           => 'Contact',
     'collect'           => 'Collect',
     'college'           => 'College',
     'conference'        => 'Conference',
@@ -52,18 +59,20 @@ return [
     'copyright'         => 'Copyright',
     'course'            => 'Course',
     'courses'           => 'Courses',
+    'current'           => 'Current',
     'cost'              => 'Cost',
     'create'            => 'Create',
 
     // D
     'dashboard'         => 'Dashboard',
     'date'              => 'Date',
-    'days'              => 'Days',
+    'details'           => 'Details',
     'degree'            => 'Degree',
     'designation'       => 'Designation',
     'description'       => 'Description',
     'develop'           => 'Develop',
     'district'          => 'District',
+    'document'          => 'Document',
     'dob'               => 'Date of Birth',
     'dr'                => 'Dr.',
 
@@ -80,29 +89,36 @@ return [
     'excluding'         => 'Excluding',
 
     // F
-    'faculty'           => 'Faculty',
-    'factor'            => 'Factor',
+    'father'            => 'Father',
+    'family'            => 'Family',
     'feedback'          => 'Feedback',
+    'female'            => 'Female',
     'fees'              => 'Fees',
     'file'              => 'File',
     'first'             => 'First',
+    'for'               => 'For',
+    'form'              => 'Form',
     'from'              => 'From',
     'from_date'         => 'From Date',
     'full'              => 'Full',
 
     // G
     'general'           => 'General',
+    'gender'            => 'Gender',
     'google'            => 'Google',
     'group'             => 'Group',
     'guided'            => 'Guided',
 
     // H
+    'handicap'          => 'Handicap',
     'head'              => 'Head',
     'held'              => 'Held',
+    'here'              => 'Here',
 
     // I
     'icard'             => 'I-Card',
     'id'                => 'ID',
+    'income'            => 'Income',
     'image_upload_condition' => 'Upload image only. File size must be less than 300KB.',
     'impact'            => 'Impact',
     'in'                => 'In',
@@ -125,14 +141,18 @@ return [
     'link'              => 'Link',
     'list'              => 'List',
     'listed'            => 'Listed',
+    'login'             => 'Login',
 
     // M
     'manage'            => 'Manage',
     'management'        => 'Management',
+    'marital'           => 'Marital',
+    'male'              => 'Male',
     'master'            => 'Master',
     'marksheet'         => 'Marksheet',
     'membership'        => 'Membership',
     'middle'            => 'Middle',
+    'minority'          => 'Minority',
     'mobile'            => 'Mobile',
     'month'             => 'Month',
     'months'            => 'Months',
@@ -143,11 +163,13 @@ return [
 
     // N
     'name'              => 'Name',
+    'nationality'       => 'Nationality',
     'no'                => 'No.',
     'note'              => 'Note',
     'number'            => 'Number',
 
     // O
+    'occupation'        => 'Occupation',
     'of'                => 'of',
     'one'               => 'One',
     'optional'          => 'Optional',
@@ -159,6 +181,9 @@ return [
     'page'              => 'Page',
     'part'              => 'Part',
     'password'          => 'Password',
+    'payment'           => 'Payment',
+    'parent'            => 'Parent',
+    'permanent'         => 'Permanent',
     'passing'           => 'Passing',
     'patent'            => 'Patent',
     'percentage'        => 'Percentage',
@@ -173,6 +198,8 @@ return [
     'prof'              => 'Prof.',
     'professional'      => 'Professional',
     'profile'           => 'Profile',
+    'place'             => 'Place',
+    'physical'          => 'Physical',
     'program'           => 'Program',
     'project'           => 'Project',
     'publication'       => 'Publication',
@@ -188,6 +215,7 @@ return [
     'recognitions'      => 'Recognitions',
     'register'          => 'Register',
     'registration'      => 'Registration',
+    'registered'        => 'Registered',
     'remark'            => 'Remark',
     'report'            => 'Report',
     'reset'             => 'Reset',
@@ -196,6 +224,7 @@ return [
     'resource'          => 'Resource',
     'resume'            => 'Resume',
     'rise'              => 'Rise',
+    'religion'          => 'Religion',
     'reference'         => 'Reference',
 
     // S
@@ -206,9 +235,11 @@ return [
     'semester'          => 'Semester',
     'scholar'           => 'Scholar',
     'sign'              => 'Sign',
+    'signature'         => 'Signature',
     'society'           => 'Society',
     'specialization'    => 'Specialization',
     'sr'                => 'Sr',
+    'state'             => 'State',
     'status'            => 'Status',
     'stream'            => 'Stream',
     'student'           => 'Student',
@@ -216,15 +247,15 @@ return [
     'submitted'         => 'Submitted',
     'self'              => 'Self',
     'show'              => 'Show',
+    'subcaste'          => 'Subcaste',
 
     // T
     'taluka'            => 'Taluka',
-    'thesis'            => 'Thesis',
+    'transgender'       => 'Transgender',
     'ticket'            => 'Ticket',
     'title'             => 'Title',
     'to_date'           => 'To Date',
-    'type'              => 'Type of Journal',
-    'total'             => 'Total',
+    'type'              => 'Type',
 
     // U
     'university'        => 'University',
@@ -246,7 +277,7 @@ return [
 
 
     // ============================================================
-    // COMMON ERRORS
+    // COMMON & SPECIFIC ERRORS (unchanged)
     // ============================================================
 
     'error_required'        => 'This field is required.',
@@ -257,10 +288,7 @@ return [
     'error_month'           => 'Please select month.',
     'error_year'            => 'Please select year.',
 
-    // ============================================================
-    // PERSONAL INFORMATION ERRORS
-    // ============================================================
-
+    // PERSONAL ERRORS
     'error_title'             => 'Please select a title.',
     'error_first_name'        => 'Enter valid first name.',
     'error_middle_name'       => 'Enter valid middle name.',
@@ -275,19 +303,13 @@ return [
     'error_personal_site'     => 'Enter a valid website URL.',
     'error_photo'             => 'Please upload a valid photo.',
 
-    // ============================================================
     // RESIDENTIAL ERRORS
-    // ============================================================
-
     'error_address_proof'  => 'Please upload valid address proof.',
     'error_district'       => 'Please select a district.',
     'error_taluka'         => 'Please select a taluka.',
     'error_id_proof'       => 'Please upload valid ID proof.',
 
-    // ============================================================
-    // EDUCATIONAL QUALIFICATION ERRORS
-    // ============================================================
-
+    // EDUCATION ERRORS
     'error_degree_type'     => 'Please select degree type.',
     'error_stream'          => 'Please select stream.',
     'error_percentage'      => 'Enter valid percentage.',
@@ -297,10 +319,7 @@ return [
     'error_year_passing'    => 'Please select year of passing.',
     'error_marksheet'       => 'Please upload marksheet (PDF only).',
 
-    // ============================================================
     // EXPERIENCE ERRORS
-    // ============================================================
-
     'error_organization_name'   => 'Enter organization name.',
     'error_designation'         => 'Please select designation.',
     'error_organization_type'   => 'Please select organization type.',
@@ -308,10 +327,7 @@ return [
     'error_to_date'             => 'Please enter to date.',
     'error_appointment_order'   => 'Please upload appointment order (PDF only).',
 
-    // ============================================================
     // JOURNAL ERRORS
-    // ============================================================
-
     'error_title_paper'         => 'Enter title of paper.',
     'error_number_authors'      => 'Enter number of authors.',
     'error_first_author'        => 'Please select whether first author.',
@@ -327,10 +343,7 @@ return [
     'error_publication_link'    => 'Enter link of publication.',
     'error_first_page'          => 'Please upload first page PDF.',
 
-    // ============================================================
-    // BOOK & BOOK CHAPTER ERRORS
-    // ============================================================
-
+    // BOOK ERRORS
     'error_type'              => 'Please select type.',
     'error_title_of_book'     => 'Enter title of book.',
     'error_name_of_publisher' => 'Enter name of publisher.',
@@ -339,10 +352,7 @@ return [
     'error_reference_link'    => 'Enter reference link.',
     'error_show_on_resume'    => 'Please select show on resume.',
 
-    // ============================================================
     // CONFERENCE ERRORS
-    // ============================================================
-
     'error_paperTitle'          => 'Please enter title of paper.',
     'error_proceedingTitle'     => 'Please enter title of proceeding.',
     'error_conferenceName'      => 'Please enter name of conference.',
@@ -357,10 +367,7 @@ return [
     'error_showResume'          => 'Please select show on resume.',
     'error_uploadCertificate'   => 'Please upload certificate (PDF only).',
 
-    // ============================================================
     // CONSULTANCY ERRORS
-    // ============================================================
-
     'error_title_consultancy' => 'Enter title of consultancy.',
     'error_agency_name'       => 'Enter agency name.',
     'error_cost'              => 'Enter valid cost.',
