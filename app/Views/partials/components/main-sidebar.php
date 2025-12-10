@@ -4,12 +4,12 @@
     <!-- Start::main-sidebar-header -->
     <div class="main-sidebar-header">
         <a href="<?php echo base_url('index'); ?>" class="header-logo">
-            <img src="<?php echo base_url('assets/images/brand-logos/desktop-logo.png'); ?>" alt="logo" class="desktop-logo">
-                <img src="<?php echo base_url('assets/images/brand-logos/toggle-logo.png'); ?>" alt="logo" class="toggle-logo">
-                    <img src="<?php echo base_url('assets/images/brand-logos/desktop-dark.png'); ?>" alt="logo" class="desktop-dark">
-                        <img src="<?php echo base_url('assets/images/brand-logos/toggle-dark.png'); ?>" alt="logo" class="toggle-dark">
-                            <img src="<?php echo base_url('assets/images/brand-logos/desktop-white.png'); ?>" alt="logo" class="desktop-white">
-                                <img src="<?php echo base_url('assets/images/brand-logos/toggle-white.png'); ?>" alt="logo" class="toggle-white">
+            <img src="<?php echo base_url('assets/images/brand-logos/rise.jpg'); ?>" alt="logo" class="desktop-logo">
+                <img src="<?php echo base_url('assets/images/brand-logos/toggle-rise.jpg'); ?>" alt="logo" class="toggle-logo">
+                    <img src="<?php echo base_url('assets/images/brand-logos/rise.jpg'); ?>" alt="logo" class="desktop-dark">
+                        <img src="<?php echo base_url('assets/images/brand-logos/toggle-rise.jpg'); ?>" alt="logo" class="toggle-dark">
+                            <img src="<?php echo base_url('assets/images/brand-logos/rise.jpg'); ?>" alt="logo" class="desktop-white">
+                                <img src="<?php echo base_url('assets/images/brand-logos/toggle-rise.jpg'); ?>" alt="logo" class="toggle-white">
                                     </a>
                                     </div>
                                     <!-- End::main-sidebar-header -->
@@ -43,7 +43,6 @@
                                                         <li class="slide">
                                                             <a href="<?php echo base_url('Registration/index'); ?>" class="side-menu__item">Student Registration</a>
                                                         </li>
-
                                                     </ul>
                                                     <?php //endif; ?>
                                                 </li>
@@ -56,7 +55,7 @@
                                                 <!-- Start::slide -->
                                                 <li class="slide has-sub">
                                                     <a href="javascript:void(0);" class="side-menu__item">
-                                                        <i class="bx bx-task side-menu__icon"></i>
+                                                        <i class="bx bx-message-edit side-menu__icon"></i>
                                                         <span class="side-menu__label"><?= lang('App.feedback'); ?></span>
                                                         <i class="fe fe-chevron-right side-menu__angle"></i>
                                                     </a>
@@ -69,9 +68,12 @@
                                                         </li>
                                                     </ul>
                                                 </li>
+                                                <!-- End::slide -->
+
+                                                <!-- Start::slide -->
                                                 <li class="slide has-sub">
                                                     <a href="javascript:void(0);" class="side-menu__item">
-                                                        <i class="bx bx-task side-menu__icon"></i>
+                                                        <i class="bx bx-medal side-menu__icon"></i>
                                                         <span class="side-menu__label"><?= lang('App.certificate'); ?></span>
                                                         <i class="fe fe-chevron-right side-menu__angle"></i>
                                                     </a>
@@ -85,14 +87,41 @@
                                                         <li class="slide">
                                                             <a href="<?php echo base_url('task-list-view'); ?>" class="side-menu__item"><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
                                                         </li>
-
                                                     </ul>
                                                 </li>
                                                 <!-- End::slide -->
 
+                                                <!-- Start::slide -->
                                                 <li class="slide has-sub">
                                                     <a href="javascript:void(0);" class="side-menu__item">
-                                                        <i class="bx bx-task side-menu__icon"></i>
+                                                        <i class="bx bx-rupee side-menu__icon"></i>
+                                                        <span class="side-menu__label"><?= lang('App.fees'); ?> <?= lang('App.management'); ?></span>
+                                                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                                                    </a>
+                                                    <ul class="slide-menu child1">
+                                                        <li class="slide side-menu__label1">
+                                                            <a href="javascript:void(0)"><?= lang('App.fees'); ?> <?= lang('App.management'); ?></a>
+                                                        </li>
+                                                        <li class="slide">
+                                                            <a href="<?php echo base_url('head-group'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?> <?= lang('App.group'); ?></a>
+                                                        </li>
+                                                        <li class="slide">
+                                                            <a href="<?php echo base_url('head'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?></a>
+                                                        </li>
+                                                        <li class="slide">
+                                                            <a href="<?php echo base_url('head-fees'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?> <?= lang('App.fees'); ?></a>
+                                                        </li>
+                                                        <li class="slide">
+                                                            <a href="<?php echo base_url('collect-fees'); ?>" class="side-menu__item"><?= lang('App.collect'); ?> <?= lang('App.fees'); ?></a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <!-- End::slide -->
+
+                                                <!-- Start::slide -->
+                                                <li class="slide has-sub">
+                                                    <a href="javascript:void(0);" class="side-menu__item">
+                                                        <i class="bx bx-receipt side-menu__icon"></i>
                                                         <span class="side-menu__label">Ticket</span>
                                                         <i class="fe fe-chevron-right side-menu__angle"></i>
                                                     </a>
@@ -104,8 +133,28 @@
                                                             <a href="<?php echo base_url('Ticket'); ?>" class="side-menu__item">Create Ticket</a>
                                                     </ul>
                                                 </li>
+                                                <!-- End::slide -->
 
-
+                                                <!-- Start::slide -->
+                                                <li class="slide has-sub">
+                                                    <a href="javascript:void(0);" class="side-menu__item">
+                                                        <i class="bx bx-rupee side-menu__icon"></i>
+                                                        <span class="side-menu__label"><?= lang('App.group'); ?></span>
+                                                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                                                    </a>
+                                                    <ul class="slide-menu child1">
+                                                        <li class="slide side-menu__label1">
+                                                            <a href="javascript:void(0)"><?= lang('App.group'); ?></a>
+                                                        </li>
+                                                        <li class="slide">
+                                                            <a href="<?php echo base_url('add-group'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.group'); ?></a>
+                                                        </li>
+                                                        <li class="slide">
+                                                            <a href="<?php echo base_url('manage-group'); ?>" class="side-menu__item"><?= lang('App.manage'); ?> <?= lang('App.group'); ?></a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <!-- End::slide -->
                                             </ul>
                                             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path> </svg></div>
                                         </nav>
