@@ -41,7 +41,7 @@
 			<!-- End::main-header -->
 
 			<!-- Start::main-sidebar -->
-            <?= $this->include('partials/components/main-sidebar'); ?>
+            //<?= $this->include('partials/components/main-sidebar'); ?>
 			<!-- End::main-sidebar -->
 
             <!-- Start::app-content -->
