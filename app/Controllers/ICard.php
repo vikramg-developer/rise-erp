@@ -4,11 +4,6 @@
 namespace App\Controllers;
 use TCPDF;
 
-/**
- * Description of ICard
- *
- * @author Dell
- */
 class ICard extends BaseController {
     
     public function index(){

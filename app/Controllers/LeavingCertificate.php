@@ -9,7 +9,6 @@ class LeavingCertificate extends BaseController
     public $ModelLeavingCertificate;
 
     public function __construct() {
-//        helper("form");
         $this->ModelLeavingCertificate = new ModelLeavingCertificate();
     }
 

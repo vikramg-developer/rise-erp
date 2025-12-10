@@ -40,8 +40,8 @@
                                     <div class="card-body p-0">                                        
                                         <div class="row gy-3">
                                             <div class="col-xl-4">
-                                                <label for="course-id" class="form-label"><?= lang('App.course'); ?></label>
-                                                <select class="form-control js-example-basic-single" name="course-id" id="course-id" required>
+                                                <label for="course_id" class="form-label"><?= lang('App.course'); ?></label>
+                                                <select class="form-control js-example-basic-single" name="course_id" id="course_id" required>
                                                     <option value="">Select Course</option>
                                                     <option value="1">Computer Science & Engineering</option>
                                                     <option value="2">Civil Engineering</option>
@@ -50,8 +50,8 @@
                                                 </select>
                                             </div>                                            
                                             <div class="col-xl-4">
-                                                <label for="year-id" class="form-label"><?= lang('App.year'); ?></label>
-                                                <select class="form-control js-example-basic-single" name="year-id" id="year-id" required>
+                                                <label for="year_id" class="form-label"><?= lang('App.year'); ?></label>
+                                                <select class="form-control js-example-basic-single" name="year_id" id="year_id" required>
                                                     <option value="">Select Year</option>
                                                     <option value="1">First Year</option>
                                                     <option value="2">Second Year</option>
@@ -60,8 +60,8 @@
                                                 </select>
                                             </div>
                                             <div class="col-xl-4">
-                                                <label for="aca-year-id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
-                                                <select class="js-example-basic-single" name="aca-year-id" id="aca-year-id" required>
+                                                <label for="aca_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
+                                                <select class="js-example-basic-single" name="aca_year_id" id="aca_year_id" required>
                                                     <option value="">Select Academic Year</option>
                                                     <option value="Extra Small">2025-2026</option>
                                                     <option value="Extra Small">2024-2025</option>
@@ -98,34 +98,6 @@
                 <div class="modal-body">
 
                     <div class="row gy-3">
-<!--                        <div class="col-xl-8">
-                            <label for="full-name" class="form-label mt-3 mt-xl-0"><?= lang('App.full'); ?> <?= lang('App.name'); ?></label>
-                            <input type="text" class="form-control" id="full-name" name="full-name" value="<?= set_value('full-name'); ?>" placeholder="<?= lang('App.full'); ?> <?= lang('App.name'); ?>" required>
-                            <span class="text-danger"><?= displayError($validation, 'full-name') ?></span>
-                        </div>
-                        <div class="col-xl-4">
-                            <label for="mother-name" class="form-label"><?= lang('App.mother'); ?> <?= lang('App.name'); ?></label>
-                            <input type="text" class="form-control" name="mother-name" id="mother-name" placeholder="<?= lang('App.mother'); ?> <?= lang('App.name'); ?>" required>
-                            <span class="text-danger"><?= displayError($validation, 'mother-name') ?></span>
-                        </div>
-                        <div class="col-xl-4">
-                            <label for="course-id" class="form-label"><?= lang('App.course'); ?></label>
-                            <input type="text" class="form-control" name="course-id" id="course-id" placeholder="<?= lang('App.course'); ?>" required>
-                            <span class="text-danger"><?= displayError($validation, 'course-id') ?></span>
-                        </div>
-                        <div class="col-xl-4">
-                            <label for="general-register-no" class="form-label"><?= lang('App.general'); ?> <?= lang('App.register'); ?> <?= lang('App.no'); ?></label>
-                            <input type="text" class="form-control" name="general-register-no" id="general-register-no" placeholder="<?= lang('App.general'); ?> <?= lang('App.register'); ?> <?= lang('App.no'); ?>" required>
-                            <span class="text-danger"><?= displayError($validation, 'general-register-no') ?></span>
-                        </div>
-                        <div class="col-xl-4">
-                            <label for="date-of-admission" class="form-label"><?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.admission'); ?></label>
-                            <div class="input-group">
-                                <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
-                                <input type="text" class="form-control" name="date-of-admission" id="date" placeholder="<?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.admission'); ?>" required>
-                                <span class="text-danger"><?= displayError($validation, 'date-of-admission') ?></span>
-                            </div>  
-                        </div>    -->
                         <div class="col-xl-4">
                             <label for="examination" class="form-label"><?= lang('App.examination'); ?></label>
                             <input type="text" class="form-control" name="examination" id="examination" value="S.Y. Civil Engineering" placeholder="<?= lang('App.examination'); ?>" required>
@@ -133,16 +105,16 @@
                         </div>
 
                         <div class="col-xl-4">
-                            <label for="exam-held-in" class="form-label"><?= lang('App.exam'); ?> <?= lang('App.held'); ?> <?= lang('App.in'); ?></label>
-                            <input type="text" class="form-control" name="exam-held-in" id="exam-held-in" value="Summer Sem Exam 2025" placeholder="<?= lang('App.exam'); ?> <?= lang('App.held'); ?> <?= lang('App.in'); ?>" required>
+                            <label for="exam_held_in" class="form-label"><?= lang('App.exam'); ?> <?= lang('App.held'); ?> <?= lang('App.in'); ?></label>
+                            <input type="text" class="form-control" name="exam_held_in" id="exam_held_in" value="Summer Sem Exam 2025" placeholder="<?= lang('App.exam'); ?> <?= lang('App.held'); ?> <?= lang('App.in'); ?>" required>
                             <span class="text-danger"><?= displayError($validation, 'exam-held-in') ?></span>
                         </div>
 
                         <div class="col-xl-4">
-                            <label for="date-of-leaving" class="form-label"><?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?></label>
+                            <label for="date_of_leaving" class="form-label"><?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?></label>
                             <div class="input-group">
                                 <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
-                                <input type="text" class="form-control" name="date-of-leaving" id="date" value="2025-06-30" placeholder="<?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?>" required>
+                                <input type="text" class="form-control" name="date_of_leaving" id="date_of_leaving" value="2025-06-30" placeholder="<?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?>" required>
                                 <span class="text-danger"><?= displayError($validation, 'date-of-leaving') ?></span>
 
                             </div>
@@ -181,7 +153,6 @@
                                                             <th scope="col"><?= lang('App.course'); ?></th>
                                                             <th scope="col"><?= lang('App.year'); ?></th>
                                                             <th scope="col"><?= lang('App.action'); ?></th>
-
                                                         </tr>
                                                     </thead>
                                                     <tbody>

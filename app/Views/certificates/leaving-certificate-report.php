@@ -26,24 +26,24 @@
                                     <div class="card-body p-0">                                        
                                         <div class="row gy-3">
                                             <div class="col-xl-4">
-                                                <label for="from-date" class="form-label"><?= lang('App.from'); ?> <?= lang('App.date'); ?></label>
+                                                <label for="from_date" class="form-label"><?= lang('App.from'); ?> <?= lang('App.date'); ?></label>
                                                 <div class="input-group">
                                                     <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
-                                                    <input type="text" class="form-control" name="from-date" id="from-date" placeholder="<?= lang('App.from'); ?> <?= lang('App.date'); ?>" required>
+                                                    <input type="text" class="form-control" name="from_date" id="from_date" placeholder="<?= lang('App.from'); ?> <?= lang('App.date'); ?>" required>
                                                     <!--<div class="invalid-feedback"><?= lang('App.date'); ?></div>-->
                                                 </div>
                                             </div>                                           
                                             <div class="col-xl-4">
-                                                <label for="date-of-leaving" class="form-label"><?= lang('App.to'); ?> <?= lang('App.date'); ?></label>
+                                                <label for="to_date" class="form-label"><?= lang('App.to'); ?> <?= lang('App.date'); ?></label>
                                                 <div class="input-group">
                                                     <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
-                                                    <input type="text" class="form-control" name="to-date" id="to-date" placeholder="<?= lang('App.to'); ?> <?= lang('App.date'); ?>" required>
+                                                    <input type="text" class="form-control" name="to_date" id="to_date" placeholder="<?= lang('App.to'); ?> <?= lang('App.date'); ?>" required>
                                                     <!--<div class="invalid-feedback"><?= lang('App.date'); ?></div>-->
                                                 </div>
                                             </div>
                                             <div class="col-xl-4">
-                                                <label for="course-id" class="form-label"><?= lang('App.course'); ?></label>
-                                                <select class="form-control js-example-basic-single" name="course-id" id="course-id" required>
+                                                <label for="course_id" class="form-label"><?= lang('App.course'); ?></label>
+                                                <select class="form-control js-example-basic-single" name="course_id" id="course_id" required>
                                                     <option value="">Select Course</option>
                                                     <option value="1">Computer Science & Engineering</option>
                                                     <option value="2">Civil Engineering</option>

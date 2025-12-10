@@ -26,8 +26,8 @@
                                     <div class="card-body p-0">                                        
                                         <div class="row gy-3">
                                             <div class="col-xl-4">
-                                                <label for="course-id" class="form-label"><?= lang('App.course'); ?></label>
-                                                <select class="form-control js-example-basic-single" name="course-id" id="course-id" required>
+                                                <label for="course_id" class="form-label"><?= lang('App.course'); ?></label>
+                                                <select class="form-control js-example-basic-single" name="course_id" id="course_id" required>
                                                     <option value="">Select Course</option>
                                                     <option value="1">Computer Science & Engineering</option>
                                                     <option value="2">Civil Engineering</option>
@@ -36,8 +36,8 @@
                                                 </select>
                                             </div>                                            
                                             <div class="col-xl-4">
-                                                <label for="year-id" class="form-label"><?= lang('App.year'); ?></label>
-                                                <select class="form-control js-example-basic-single" name="year-id" id="year-id" required>
+                                                <label for="year_id" class="form-label"><?= lang('App.year'); ?></label>
+                                                <select class="form-control js-example-basic-single" name="year_id" id="year_id" required>
                                                     <option value="">Select Year</option>
                                                     <option value="1">First Year</option>
                                                     <option value="2">Second Year</option>
@@ -46,8 +46,8 @@
                                                 </select>
                                             </div>
                                             <div class="col-xl-4">
-                                                <label for="aca-year-id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
-                                                <select class="js-example-basic-single" name="aca-year-id" id="aca-year-id" required>
+                                                <label for="aca_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
+                                                <select class="js-example-basic-single" name="aca_year_id" id="aca_year_id" required>
                                                     <option value="">Select Academic Year</option>
                                                     <option value="Extra Small">2025-2026</option>
                                                     <option value="Extra Small">2024-2025</option>
