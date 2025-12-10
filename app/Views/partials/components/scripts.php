@@ -7,7 +7,7 @@
 <!-- Scroll To Top -->
 
 
-
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
 <!-- Popper JS -->
 <script src="<?php echo base_url('assets/libs/@popperjs/core/umd/popper.min.js'); ?>"></script>
@@ -43,25 +43,11 @@
 <!-- Chartjs Chart JS -->
 <script src="<?php echo base_url('assets/libs/chart.js/chart.min.js'); ?>"></script>
 
-<!-- CRM-Dashboard -->
-<script src="<?php echo base_url('assets/js/crm-dashboard.js'); ?>"></script> 
-
 <!-- Custom-Switcher JS -->
 <script src="<?php echo base_url('assets/js/custom-switcher.min.js'); ?>"></script>
 
 <!-- Custom JS -->
 <script src="<?php echo base_url('assets/js/custom.js'); ?>"></script>
-
-
-
-<!---Jquery Cdn -->
-<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-
-<!--Select2 Cdn -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-<!----Internal Select-2.js -->
-<script src="<?php echo base_url('assets/js/select2.js'); ?>"></script>
 
 <!-- Datatables Cdn -->
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
@@ -77,3 +63,28 @@
 <!-- Internal Datatables JS -->
 <script src="<?php echo base_url('assets/js/datatables.js'); ?>"></script>
 
+<!-- Select2 Cdn -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<!-- Internal Select-2.js -->
+<script src="<?php echo base_url('assets/js/select2.js'); ?>"></script>
+
+<!-- Prism JS -->
+<script src="<?php echo base_url('assets/libs/prismjs/prism.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/prism-custom.js'); ?>"></script>
+
+<!-- Form Validation JS -->
+<script src="<?php echo base_url('assets/js/validation.js'); ?>"></script>
+
+<!-- Modal JS -->
+<script src="<?php echo base_url('assets/js/modal.js'); ?>"></script>
+
+<!-- Flat Picker JS -->
+<script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
+
+<!-- CRM Contacts JS -->
+<script src="<?php echo base_url('assets/js/crm-contacts.js'); ?>"></script>
+
+<?php if (isset($jspath)): ?>
+    <script src="<?php echo base_url('partials/js/') . $jspath . '.js'; ?>"></script>
+<?php endif; ?>

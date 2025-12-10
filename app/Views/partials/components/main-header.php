@@ -12,12 +12,12 @@
 						<div class="header-element">
 							<div class="horizontal-logo">
 								<a href="<?php echo base_url('index'); ?>" class="header-logo">
-									<img src="<?php echo base_url('assets/images/brand-logos/desktop-logo.png'); ?>" alt="logo" class="desktop-logo">
-									<img src="<?php echo base_url('assets/images/brand-logos/toggle-logo.png'); ?>" alt="logo" class="toggle-logo">
-									<img src="<?php echo base_url('assets/images/brand-logos/desktop-dark.png'); ?>" alt="logo" class="desktop-dark">
-									<img src="<?php echo base_url('assets/images/brand-logos/toggle-dark.png'); ?>" alt="logo" class="toggle-dark">
-									<img src="<?php echo base_url('assets/images/brand-logos/desktop-white.png'); ?>" alt="logo" class="desktop-white">
-									<img src="<?php echo base_url('assets/images/brand-logos/toggle-white.png'); ?>" alt="logo" class="toggle-white">
+									<img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-logo">
+									<img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="toggle-logo">
+									<img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-dark">
+									<img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="toggle-dark">
+									<img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-white">
+									<img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="toggle-white">
 								</a>
 							</div>
 						</div>
@@ -38,22 +38,22 @@
 					<div class="header-content-right">
 
 						<!-- Start::header-element -->
-						<div class="header-element header-search">
-							<!-- Start::header-link -->
+<!--						<div class="header-element header-search">
+							 Start::header-link 
 							<a href="javascript:void(0);" class="header-link" data-bs-toggle="modal" data-bs-target="#searchModal">
 								<i class="bx bx-search-alt-2 header-link-icon"></i>
 							</a>
-							<!-- End::header-link -->
-						</div>
+							 End::header-link 
+						</div>-->
 						<!-- End::header-element -->
 
 						<!-- Start::header-element -->
-						<div class="header-element country-selector">
-							<!-- Start::header-link|dropdown-toggle -->
+<!--						<div class="header-element country-selector">
+							 Start::header-link|dropdown-toggle 
 							<a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-auto-close="outside" data-bs-toggle="dropdown">
 								<img src="<?php echo base_url('assets/images/flags/us_flag.jpg'); ?>" alt="img" class="rounded-circle header-link-icon">
 							</a>
-							<!-- End::header-link|dropdown-toggle -->
+							 End::header-link|dropdown-toggle 
 							<ul class="main-header-dropdown dropdown-menu dropdown-menu-end" data-popper-placement="none">
 								<li>
 									<a class="dropdown-item d-flex align-items-center" href="javascript:void(0);">
@@ -104,7 +104,7 @@
 									</a>
 								</li>
 							</ul>
-						</div>
+						</div>-->
 						<!-- End::header-element -->
 
 						<!-- Start::header-element -->
@@ -549,13 +549,13 @@
 						<!-- End::header-element -->
 
 						<!-- Start::header-element -->
-						<div class="header-element">
-							<!-- Start::header-link|switcher-icon -->
+<!--						<div class="header-element">
+							 Start::header-link|switcher-icon 
 							<a href="javascript:void(0);" class="header-link switcher-icon" data-bs-toggle="offcanvas" data-bs-target="#switcher-canvas">
 								<i class="bx bx-cog header-link-icon"></i>
 							</a>
-							<!-- End::header-link|switcher-icon -->
-						</div>
+							 End::header-link|switcher-icon 
+						</div>-->
 						<!-- End::header-element -->
 
 					</div>

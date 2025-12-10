@@ -1,8 +1,10 @@
 <?php
+
 return[
     //A
     'aadhar' => 'Aadhar',
     'academic' => 'Academic',
+    'action' => 'Action',
     'add' => 'Add',
     'admission' => 'Admission',
     'attach' => 'Attach',
@@ -14,6 +16,7 @@ return[
     'category' => 'Category',
     'certificate' => 'Certificate',
     'code' => 'Code',
+    'collect' => 'Collect',
     'college' => 'College',
     'confirm' => 'Confirm',
     'course' => 'Course',
@@ -35,12 +38,15 @@ return[
 
     //F
     'feedback' => 'Feedback',
+    'fees' => 'Fees',
     'file'=>'File',
     'first' => 'First',
 
     //G
-    'general'=>'General',
+    'general' => 'General',
+    'group' => 'Group',
     //H
+    'head' => 'Head',
     'held' => 'Held',
     //I
     'in' => 'In',
@@ -55,6 +61,7 @@ return[
     'list' => 'List',
     //M
     'manage' => 'Manage',
+    'management' => 'Management',
     'master' => 'Master',
     'middle' => 'Middle',
     'mobile' => 'Mobile',
@@ -72,6 +79,7 @@ return[
     //P
     'part' => 'Part',
     'password' => 'Password',
+    'payment' => 'Payment',
     'print' => 'Print',
     'priority' => 'Priority',
 
@@ -86,9 +94,9 @@ return[
     'rise' => 'Rise',
 
     //S
+    'save' => 'Save',
     'screenshot' =>'Screenshot',
     'search' => 'Search',
-    'select' => 'Select',
     'select' => 'Select',
     'semester' => 'Semester',
     'sign' => 'Sign',
