@@ -37,6 +37,7 @@ abstract class BaseController extends Controller
      */
     protected $helpers = [];
     protected $validation;
+
     /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
@@ -53,8 +54,13 @@ abstract class BaseController extends Controller
 
         // Preload any models, libraries, etc, here.
 
+
         // E.g.: $this->session = \Config\Services::session(); 
          $validation = \Config\Services::validation();
          service('renderer')->setVar('validation',$this->validation);
+
+        // E.g.: $this->session = \Config\Services::session();
+        $this->validation = \Config\Services::validation();
+        service('renderer')->setVar('validation', $this->validation);
     }
 }

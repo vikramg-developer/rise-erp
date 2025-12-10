@@ -26,6 +26,7 @@ return [
     'awarded'           => 'Awarded',
 
     // B
+    'back'              => 'Back',
     'biodata'           => 'Bio-Data',
     'birth'             => 'Birth',
     'book'              => 'Book',
@@ -36,6 +37,7 @@ return [
     'calendar'          => 'Calendar',
     'category'          => 'Category',
     'certificate'       => 'Certificate',
+    'certificates'      => 'Certificates',
     'chapter'           => 'Chapter',
     'choose_date'       => 'Choose date',
     'class'             => 'Class',
@@ -84,6 +86,7 @@ return [
     'fees'              => 'Fees',
     'file'              => 'File',
     'first'             => 'First',
+    'from'              => 'From',
     'from_date'         => 'From Date',
     'full'              => 'Full',
 
@@ -98,6 +101,7 @@ return [
     'held'              => 'Held',
 
     // I
+    'icard'             => 'I-Card',
     'id'                => 'ID',
     'image_upload_condition' => 'Upload image only. File size must be less than 300KB.',
     'impact'            => 'Impact',
@@ -185,6 +189,7 @@ return [
     'register'          => 'Register',
     'registration'      => 'Registration',
     'remark'            => 'Remark',
+    'report'            => 'Report',
     'reset'             => 'Reset',
     'result'            => 'Result',
     'residential'       => 'Residential',
@@ -251,7 +256,6 @@ return [
     'error_pincode'         => 'Enter a valid 6-digit pincode.',
     'error_month'           => 'Please select month.',
     'error_year'            => 'Please select year.',
-
 
     // ============================================================
     // PERSONAL INFORMATION ERRORS
