@@ -36,7 +36,7 @@
                                 <!-- Start::add Question modal -->
                                 <div class="modal fade" id="create-task" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
-                                        <?= form_open('feedback/save_question'); ?>  
+                                        <?= form_open('feedback/save-question'); ?>  
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h6 class="modal-title"><?= lang('App.add') ?> <?= lang('App.question') ?></h6>
@@ -86,7 +86,7 @@
                                 </div>
                                 <!-- End::add Question modal --> 
                                 <!------------------------export excel Button-------------------------------------------------------->
-                                <a href="<?php echo base_url('sample_excel_file'); ?>" 
+                                <a href="<?php echo base_url('sample-excel-file'); ?>" 
                                    class="btn btn-warning  btn-wave me-2">
                                     <i class="ri-download-line align-middle me-2 d-inline-block"></i>
                                     <?= lang('App.export') ?> <?= lang('App.excel') ?> 
@@ -293,19 +293,4 @@
                 <!--End::row-1 -->
             </div>
 
-            <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-
-
-            <!-- Datatables Cdn -->
-            <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-            <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-            <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-            <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-            <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.6/pdfmake.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-            <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-
-            <!-- Internal Datatables JS -->
-            <script src="<?php echo base_url('assets/js/datatables.js'); ?>"></script>
+         

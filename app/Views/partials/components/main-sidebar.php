@@ -4,10 +4,10 @@
     <!-- Start::main-sidebar-header -->
     <div class="main-sidebar-header">
         <a href="<?php echo base_url('index'); ?>" class="header-logo">
-            <img src="<?php echo base_url('assets/images/brand-logos/desktop-logo.png'); ?>" alt="logo" class="desktop-logo">
-                <img src="<?php echo base_url('assets/images/brand-logos/toggle-logo.png'); ?>" alt="logo" class="toggle-logo">
-                    <img src="<?php echo base_url('assets/images/brand-logos/desktop-dark.png'); ?>" alt="logo" class="desktop-dark">
-                        <img src="<?php echo base_url('assets/images/brand-logos/toggle-dark.png'); ?>" alt="logo" class="toggle-dark">
+            <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-logo">
+                <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="toggle-logo">
+                    <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-dark">
+                        <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="toggle-dark">
                             <img src="<?php echo base_url('assets/images/brand-logos/desktop-white.png'); ?>" alt="logo" class="desktop-white">
                                 <img src="<?php echo base_url('assets/images/brand-logos/toggle-white.png'); ?>" alt="logo" class="toggle-white">
                                     </a>
@@ -50,7 +50,7 @@
                                                 <!-- End::slide -->
 
                                                 <!-- Start::slide__category -->
-                                                <li class="slide__category"><span class="category-name">Pages</span></li>
+                                                <!--<li class="slide__category"><span class="category-name">Pages</span></li>-->
                                                 <!-- End::slide__category -->
 
                                                 <!-- Start::slide -->
@@ -69,7 +69,7 @@
                                                         </li>
                                                     </ul>
                                                 </li>
-                                                <li class="slide has-sub">
+<!--                                                <li class="slide has-sub">
                                                     <a href="javascript:void(0);" class="side-menu__item">
                                                         <i class="bx bx-task side-menu__icon"></i>
                                                         <span class="side-menu__label"><?= lang('App.certificate'); ?></span>
@@ -87,10 +87,10 @@
                                                         </li>
 
                                                     </ul>
-                                                </li>
+                                                </li>-->
                                                 <!-- End::slide -->
 
-                                                <li class="slide has-sub">
+<!--                                                <li class="slide has-sub">
                                                     <a href="javascript:void(0);" class="side-menu__item">
                                                         <i class="bx bx-task side-menu__icon"></i>
                                                         <span class="side-menu__label">Ticket</span>
@@ -103,7 +103,7 @@
                                                         <li class="slide">
                                                             <a href="<?php echo base_url('Ticket'); ?>" class="side-menu__item">Create Ticket</a>
                                                     </ul>
-                                                </li>
+                                                </li>-->
 
 
                                             </ul>

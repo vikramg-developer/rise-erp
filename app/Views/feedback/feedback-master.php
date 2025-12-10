@@ -1,6 +1,6 @@
 <div class="container-fluid">
     
-    <style>
+<!--    <style>
 .select2-container {
     z-index: 9999 !important;
 }
@@ -10,7 +10,7 @@
 .select2-dropdown {
     z-index: 999999 !important;
 }
-</style>
+</style>-->
 
 
     <!-- Page Header -->
@@ -42,7 +42,7 @@
                         <!-- Start::add modal -->
                         <div class="modal fade" id="create-task" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
-                                <?= form_open('feedback/save_feedback_master'); ?>  
+                                <?= form_open('feedback/save-feedback-master'); ?>  
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h6 class="modal-title"><?= lang('App.feedback') ?> <?= lang('App.master') ?></h6>
@@ -59,7 +59,8 @@
                                             <!---------------------feedback_type----------------------------------->
                                             <div class="col-xl-6">
                                                 <label class="form-label"><?= lang('App.feedback') ?> <?= lang('App.type') ?></label>
-                                                <select class="js-example-basic-single" id="type_id" name="type_id" required>
+                                                <select class="form-select" id="type_id" name="type_id" required>
+                                                <!--<select class="js-example-basic-single" id="type_id" name="type_id" required>-->
                                                     <option value="" >Select Type</option>
                                                     <option value="1">Theory</option>
                                                     <option value="2">Practical</option>
@@ -148,7 +149,7 @@
                                         <span class="fw-semibold text-warning">Pending</span>
                                     </td>-->
                                     <td>
-                                        <a href="<?php echo base_url('manage_question'); ?>" class="btn btn-sm btn-success btn-wave">
+                                        <a href="<?php echo base_url('manage-question'); ?>" class="btn btn-sm btn-success btn-wave">
                                             <i class="ri-upload-2-line align-middle me-2 d-inline-block"></i><?= lang('App.manage') ?> <?= lang('App.question') ?> 
                                         </a>
                                         <!--<button class="btn btn-sm btn-success btn-wave">-->
@@ -168,7 +169,7 @@
                                         <span class="fw-semibold text-warning">Pending</span>
                                     </td>-->
                                     <td>
-                                        <a href="<?php echo base_url('manage_question'); ?>" class="btn btn-sm btn-success btn-wave">
+                                        <a href="<?php echo base_url('manage-question'); ?>" class="btn btn-sm btn-success btn-wave">
                                             <i class="ri-upload-2-line align-middle me-2 d-inline-block"></i><?= lang('App.manage') ?> <?= lang('App.question') ?> 
                                         </a>
                                     </td>

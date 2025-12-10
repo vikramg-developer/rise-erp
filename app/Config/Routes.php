@@ -41,9 +41,9 @@ $routes->add('/lc-remark', 'LeavingCertificate::addLeavingCertificateRemark');
 $routes->get('/home', 'Home::index');
 
 $routes->add('/feedback', 'Feedback::index');
-$routes->add('/save_feedback_master', 'Feedback::save_feedback_master');
-$routes->add('/manage_question', 'Feedback::manage_question');
-$routes->add('/sample_excel_file', 'Feedback::sample_excel_file');
+$routes->add('/save-feedback-master', 'Feedback::save_feedback_master');
+$routes->add('/manage-question', 'Feedback::manage_question');
+$routes->add('/sample-excel-file', 'Feedback::sample_excel_file');
 
 
 /*
