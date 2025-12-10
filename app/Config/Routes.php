@@ -42,6 +42,8 @@ $routes->add('/bonafide-print', 'BonafideCertificate::bonafide_print');
 $routes->add('/collect-fees', 'FeesManagement::collect-fees');
 $routes->add('/create_ticket', 'Ticket::create_ticket');
 $routes->add('/delete-head-group', 'FeesManagement::delete-head-group');
+$routes->add('/faculty-profile', 'FacultyProfile::index');
+$routes->add('/faculty-personal-info', 'FacultyProfile::update_personal_info');
 $routes->add('/feedback', 'Feedback::index');
 $routes->add('/feedback', 'Feedback::index');
 $routes->add('/fetch-head', 'FeesManagement::fetch-head');
@@ -59,13 +61,6 @@ $routes->add('/registration', 'Registration::index');
 $routes->add('/savesignup', 'Registration::saveSignup');
 $routes->add('/student-list', 'FeesManagement::student-list');
 $routes->add('/ticket', 'Ticket::index');
-
-
-
-
-
-
-
 /*
  * --------------------------------------------------------------------
  * Additional Routing

@@ -1,10 +1,20 @@
 <!-- Choices JS -->
 <script src="<?php echo base_url('assets/libs/choices.js/public/assets/scripts/choices.min.js'); ?>"></script>
 
-<!-- Main Js -->
-<script src="<?php echo base_url('assets/js/main.js'); ?>"></script>
+        <!-- Main Js -->
+        <script src="<?php echo base_url('assets/js/main.js'); ?>"></script>
+        
+         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+         <!-- Prism CSS -->
+        <link rel="stylesheet" href="<?php echo base_url('assets/libs/prismjs/themes/prism-coy.min.css'); ?>">
 
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+        <!-- Bootstrap Css -->
+        <link id="style" href="<?php echo base_url('assets/libs/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" >
+
+        <!-- Style Css -->
+        <link href="<?php echo base_url('assets/css/styles.css'); ?>" rel="stylesheet" >
+        
+        
 
 <!-- Bootstrap Css -->
 <link id="style" href="<?php echo base_url('assets/libs/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" >
@@ -37,7 +47,9 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css">
+
 <link rel="stylesheet" href="<?php echo base_url('assets/libs/swiper/swiper-bundle.min.css'); ?>">
 
 <!-- FlatPickr CSS -->
 <link rel="stylesheet" href="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.css'); ?>">
+

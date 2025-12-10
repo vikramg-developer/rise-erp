@@ -36,7 +36,7 @@ $page_session = \Config\Services::session();
                                 <div class="card custom-card shadow-none mb-0 border-0">
                                     <div class="card-body p-0">
 
-                                        <?= form_open('create_ticket'); ?>
+                                        <?= form_open('create-ticket'); ?>
 
                                         <div class="row gy-3">
 
