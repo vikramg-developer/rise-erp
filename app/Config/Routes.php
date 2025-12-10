@@ -35,21 +35,28 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->add('/', 'Home::index');
-
+$routes->add('/add-group', 'Group::add-group');
+$routes->add('/add-lc-info', 'LeavingCertificate::add_lc_info');
+$routes->add('/bonafide-certificate', 'BonafideCertificate::index');
+$routes->add('/bonafide-print', 'BonafideCertificate::bonafide_print');
 $routes->add('/collect-fees', 'FeesManagement::collect-fees');
 $routes->add('/create_ticket', 'Ticket::create_ticket');
 $routes->add('/delete-head-group', 'FeesManagement::delete-head-group');
+$routes->add('/faculty-profile', 'FacultyProfile::index');
+$routes->add('/faculty-personal-info', 'FacultyProfile::update_personal_info');
+$routes->add('/feedback', 'Feedback::index');
 $routes->add('/feedback', 'Feedback::index');
 $routes->add('/fetch-head', 'FeesManagement::fetch-head');
 $routes->add('/fetch-head-group', 'FeesManagement::fetch-head-group');
-$routes->add('/add-group', 'Group::add-group');
 $routes->add('/head', 'FeesManagement::head');
 $routes->add('/head-fees', 'FeesManagement::head-fees');
 $routes->add('/head-group', 'FeesManagement::head-group');
 $routes->add('/home', 'Home::index');
-$routes->add('/lc-remark', 'LeavingCertificate::addLeavingCertificateRemark');
+$routes->add('/i-card', 'ICard::index');
+$routes->add('/i-card-print', 'ICard::i_card_print');
 $routes->add('/leaving-certificate', 'LeavingCertificate::index');
 $routes->add('/login', 'Login::login');
+$routes->add('/leaving-certificate-report', 'LeavingCertificateReport::index');
 $routes->add('/registration', 'Registration::index');
 $routes->add('/student-profile', 'Registration::studentProfile');
 $routes->add('/authenticate', 'Registration::authenticate');
@@ -58,8 +65,6 @@ $routes->add('/studentDashboard', 'Login::studentDashboard');
 $routes->add('/studentProfile', 'Registration::studentProfile');
 $routes->add('/student-list', 'FeesManagement::student-list');
 $routes->add('/ticket', 'Ticket::index');
-
-
 /*
  * --------------------------------------------------------------------
  * Additional Routing
