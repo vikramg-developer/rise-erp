@@ -10,10 +10,13 @@ return[
     'attach' => 'Attach',
 
     //B
+    'back' => 'Back',
     'bonafide' => 'Bonafide',
     //C
     'category' => 'Category',
     'certificate' => 'Certificate',
+    'certificates' => 'Certificates',
+    'close' => 'Close',
     'code' => 'Code',
     'collect' => 'Collect',
     'college' => 'College',
@@ -37,6 +40,8 @@ return[
     'fees' => 'Fees',
     'file'=>'File',
     'first' => 'First',
+    'from' => 'From',
+    'full' => 'Full',
 
     //G
     'general' => 'General',
@@ -45,7 +50,9 @@ return[
     'head' => 'Head',
     'held' => 'Held',
     //I
+    'icard' => 'I-Card',
     'in' => 'In',
+    'information' => 'Information',
     'issue' => 'Issue',
     //J
     //K
@@ -84,6 +91,7 @@ return[
     'register' => 'Register',
     'registration' => 'Registration',
     'remark' => 'Remark',
+    'report' => 'Report',
     'reset' => 'Reset',
     'result' => 'Result',
     'rise' => 'Rise',
@@ -103,6 +111,7 @@ return[
     //T
     'ticket' => 'Ticket',
     'title' => 'Title',
+    'to' => 'To',
     'type' => 'Type',
 
     //U
