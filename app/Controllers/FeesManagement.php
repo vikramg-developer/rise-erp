@@ -28,8 +28,8 @@ class FeesManagement extends BaseController {
 
 //put your code here
     public function head_group() {
-        $data['jspath'] = 'fees_management/head_group';
-        render_page('fees_management/head_group', $data);
+        $data['jspath'] = 'fees_management/head-group';
+        render_page('fees_management/head-group', $data);
     }
 
     public function fetch_head_group() {
@@ -89,6 +89,13 @@ class FeesManagement extends BaseController {
             $insert = $this->modelfeesmanagement->add_head_group($insert_data);
         }
     }
+    
+    public function delete_head_group(){
+        $this->modelheadgroup->update(2,['is_deleted'=> 1]);
+        
+        echo $this->modelheadgroup->db->getLastQuery();
+
+    }
 
     public function head() {
         $data['jspath'] = 'fees_management/head';
@@ -144,16 +151,16 @@ class FeesManagement extends BaseController {
     }
     
     public function head_fees() {
-        $data['jspath'] = 'fees_management/head_fees';
-        render_page('fees_management/head_fees', $data);
+        $data['jspath'] = 'fees_management/head-fees';
+        render_page('fees_management/head-fees', $data);
     }
     
     public function collect_fees() {
-        $data['jspath'] = 'fees_management/collect_fees';
-        render_page('fees_management/collect_fees', $data);
+        $data['jspath'] = 'fees_management/collect-fees';
+        render_page('fees_management/collect-fees', $data);
     }
     
     public function student_list() {
-        render_page('fees_management/student_list');
+        render_page('fees_management/student-list');
     }
 }
