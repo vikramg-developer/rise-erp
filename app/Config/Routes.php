@@ -14,8 +14,8 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
     require SYSTEMPATH . 'Config/Routes.php';
 }
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Pages');
-$routes->setDefaultMethod('index');
+$routes->setDefaultController('Login');
+$routes->setDefaultMethod('login');
 $routes->setTranslateURIDashes(true);
 $routes->set404Override();
 $routes->setAutoRoute(true);
@@ -34,7 +34,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->add('/', 'Home::index');
+$routes->add('/', 'Login::login');
 $routes->add('/add-group', 'Group::add-group');
 $routes->add('/add-lc-info', 'LeavingCertificate::add_lc_info');
 $routes->add('/bonafide-certificate', 'BonafideCertificate::index');
@@ -57,6 +57,7 @@ $routes->add('/i-card-print', 'ICard::i_card_print');
 $routes->add('/leaving-certificate', 'LeavingCertificate::index');
 $routes->add('/login', 'Login::login');
 $routes->add('/leaving-certificate-report', 'LeavingCertificateReport::index');
+$routes->add('/manage-question', 'Feedback::manage_question');
 $routes->add('/registration', 'Registration::index');
 $routes->add('/student-profile', 'Registration::studentProfile');
 $routes->add('/authenticate', 'Registration::authenticate');
@@ -64,7 +65,10 @@ $routes->add('/savesignup', 'Registration::saveSignup');
 $routes->add('/studentDashboard', 'Login::studentDashboard');
 $routes->add('/studentProfile', 'Registration::studentProfile');
 $routes->add('/student-list', 'FeesManagement::student-list');
+$routes->add('/save-feedback-master', 'Feedback::save_feedback_master');
+$routes->add('/sample-excel-file', 'Feedback::sample_excel_file');
 $routes->add('/ticket', 'Ticket::index');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
