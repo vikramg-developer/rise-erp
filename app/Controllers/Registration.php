@@ -17,14 +17,11 @@ class Registration extends BaseController {
         return view('registration/student-registration');
     }
 
-    public function login() {
-//        render_page('registration/student-registration');
-        return view('registration/login-page');
-    }
-    public function studentDashboard() {
-//        render_page('registration/student-registration');
-        render_page('registration/studentDashboard');
-    }
+//    public function login() {
+////        render_page('registration/student-registration');
+//        return view('registration/login-page');
+//    }
+   
     public function studentProfile() {
 //        render_page('registration/student-registration');
         render_page('registration/student-profile');

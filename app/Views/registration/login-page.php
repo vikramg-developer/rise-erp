@@ -14,9 +14,9 @@
     <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
             <div class="my-5 d-flex justify-content-center">
-                <a href="<?php //echo base_url('registration'); ?>">
+                <a href="<?php //echo base_url('registration');  ?>">
                     <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-logo">
-                    <img src="<?php  echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-dark">
+                    <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-dark">
                 </a>
             </div>
             <div class="card custom-card">
@@ -53,8 +53,8 @@
                     <div class="text-center">
                         <p class="fs-12 text-muted mt-3">Dont have an account? <a href="<?php echo base_url('registration'); ?>" class="text-primary"><?= lang('App.register') ?></a></p>
                     </div>
-                 </div>
-             </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

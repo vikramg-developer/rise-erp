@@ -46,10 +46,11 @@ $routes->add('/create_ticket', 'Ticket::create_ticket');
 
 $routes->add('/registration', 'Registration::index');
 $routes->add('/student-profile', 'Registration::studentProfile');
-$routes->add('/savesignup', 'Registration::saveSignup');
-$routes->add('/login', 'Registration::login');
 $routes->add('/authenticate', 'Registration::authenticate');
-$routes->add('/studentDashboard', 'Registration::studentDashboard');
+
+$routes->add('/savesignup', 'Registration::saveSignup');
+$routes->add('/login', 'Login::login');
+$routes->add('/studentDashboard', 'Login::studentDashboard');
 $routes->add('/studentProfile', 'Registration::studentProfile');
 //$routes->post('authenticate', 'Login::authenticate');
 

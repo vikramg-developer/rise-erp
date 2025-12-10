@@ -40,7 +40,7 @@ $page_session = \Config\Services::session();
                     <div class="row gy-3">
                        <!--First name-->
                        <div class="col-xl-12">
-                            <label class="form-label"><?= lang('App.first') ?> <?= lang('App.name') ?> </label>
+                            <label for="first-name" class="form-label"><?= lang('App.first') ?> <?= lang('App.name') ?> </label>
                             <input type="text" class="form-control  required-input" name="first-name" placeholder="<?= lang('App.first'); ?> <?= lang('App.name'); ?>"onkeypress="return isAlphaKey(event)"value=""required>
                         </div>
                             <!--Middle name-->
