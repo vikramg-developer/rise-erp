@@ -61,7 +61,7 @@
                                             </div>
                                             <div class="col-xl-4">
                                                 <label for="aca_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
-                                                <select class="js-example-basic-single" name="aca_year_id" id="aca_year_id" required>
+                                                <select class="form-select" name="aca_year_id" id="aca_year_id" required>
                                                     <option value="">Select Academic Year</option>
                                                     <option value="Extra Small">2025-2026</option>
                                                     <option value="Extra Small">2024-2025</option>

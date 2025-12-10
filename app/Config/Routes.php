@@ -14,8 +14,8 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
     require SYSTEMPATH . 'Config/Routes.php';
 }
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Pages');
-$routes->setDefaultMethod('index');
+$routes->setDefaultController('Login');
+$routes->setDefaultMethod('login');
 $routes->setTranslateURIDashes(true);
 $routes->set404Override();
 $routes->setAutoRoute(true);
@@ -34,7 +34,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->add('/', 'Home::index');
+$routes->add('/', 'Login::login');
 $routes->add('/add-group', 'Group::add-group');
 $routes->add('/add-lc-info', 'LeavingCertificate::add_lc_info');
 $routes->add('/bonafide-certificate', 'BonafideCertificate::index');
