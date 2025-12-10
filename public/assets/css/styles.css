@@ -71,7 +71,8 @@
   --default-font-family: "Inter", sans-serif;
   --default-font-weight: 400;
   --default-text-color: #333335;
-  --default-border: #f3f3f3;
+  /*--default-border: #f3f3f3;*/
+  --default-border: #bcbec1;
   --default-background: #f7f8f9;
   --menu-bg: #fff;
   --menu-prime-color: #536485;
@@ -84,7 +85,8 @@
   --bootstrap-card-border: #f3f3f3;
   --list-hover-focus-bg: #f5f6f7;
   --text-muted: #8c9097;
-  --input-border: #e9edf6;
+  /*--input-border: #e9edf6;*/
+  --input-border: #bcbec1;
   --form-control-bg: #ffffff;
   --gray-1: #f9fafb;
   --gray-2: #f2f4f5;
