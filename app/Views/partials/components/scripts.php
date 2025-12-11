@@ -41,7 +41,6 @@
 <script src="<?php echo base_url('assets/js/custom.js'); ?>"></script>
 
 <!-- Date & Time Picker JS -->
-<script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/date&time_pickers.js'); ?>"></script>
 
 <!-- Chartjs Chart JS -->
@@ -74,6 +73,9 @@
 <script src="<?php echo base_url('assets/libs/prismjs/prism.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/prism-custom.js'); ?>"></script>
 
+<!-- Toast JS -->
+<script src="<?php echo base_url('assets/js/Toasts.js'); ?>"></script>
+
 <!-- Form Validation JS -->
 <script src="<?php echo base_url('assets/js/validation.js'); ?>"></script>
 
@@ -85,6 +87,11 @@
 
 <!-- CRM Contacts JS -->
 <script src="<?php echo base_url('assets/js/crm-contacts.js'); ?>"></script>
+
+<script>
+    let csrfName = "<?= csrf_token() ?>";
+    let csrfHash = "<?= csrf_hash() ?>";
+</script>
 
 <?php if (isset($jspath)): ?>
     <script src="<?php echo base_url('partials/js/') . $jspath . '.js'; ?>"></script>
