@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-    $('#manageTable').DataTable({
+    $('#head-group-table').DataTable({
+        destroy: true,
         processing: true,
         serverSide: true, // ✅ IMPORTANT
 

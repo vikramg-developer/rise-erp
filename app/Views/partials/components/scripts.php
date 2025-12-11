@@ -9,13 +9,6 @@
 <!-- Jquery Cdn -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
-<!-- Scroll To Top -->
-<div class="scrollToTop">
-    <span class="arrow"><i class="ri-arrow-up-s-fill fs-20"></i></span>
-</div>
-<div id="responsive-overlay"></div>
-<!-- Scroll To Top -->
-
 <!-- Popper JS -->
 <script src="<?php echo base_url('assets/libs/@popperjs/core/umd/popper.min.js'); ?>"></script>
 
@@ -96,5 +89,3 @@
 <?php if (isset($jspath)): ?>
     <script src="<?php echo base_url('partials/js/') . $jspath . '.js'; ?>"></script>
 <?php endif; ?>
-
-<script src="<?= base_url('assets/js/registrationpage.js') ?>"></script>

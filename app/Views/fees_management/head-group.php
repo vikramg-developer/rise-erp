@@ -55,20 +55,29 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <?php // if (!empty($head_group_datas)): ?>
-                    <table id="manageTable" class="table table-bordered text-nowrap w-100">
-                        <thead>
-                            <tr>
-                                <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
-                                <th><?= lang('App.head'); ?> <?= lang('App.group'); ?> <?= lang('App.name'); ?></th>
-                                <th><?= lang('App.action'); ?></th>
-                                <th><?= lang('App.remark'); ?></th>
-                            </tr>
-                        </thead>
-                    </table>
+                    <div class="table-responsive">
+                        <?php // if (!empty($head_group_datas)): ?>
+                        <table id="head-group-table" class="table table-bordered text-nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
+                                    <th><?= lang('App.head'); ?> <?= lang('App.group'); ?> <?= lang('App.name'); ?></th>
+                                    <th><?= lang('App.action'); ?></th>
+                                    <th><?= lang('App.remark'); ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>dsfsdfs</td>
+                                    <td>xcdgd443</td>
+                                    <td>54645</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>

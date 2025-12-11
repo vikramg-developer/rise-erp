@@ -67,7 +67,7 @@ class FeesManagement extends BaseController {
             $data[] = [
                 $sr_no++,
                 $row['head_group_name'],
-                $buttons,
+                '',
                 ''
             ];
         }
@@ -83,10 +83,10 @@ class FeesManagement extends BaseController {
     public function add_head_group() {
         if ($this->request->getMethod() == 'post') {
             $insert_data = [
-                'head_group_name' => $this->request->getVar('head-group', FILTER_SANITIZE_STRING),
+                'head_group_name' => $this->request->getVar('head-group', FILTER_saniti),
             ];
 
-            $insert = $this->modelfeesmanagement->add_head_group($insert_data);
+            $insert = $this->modelheadgroup->insert($insert_data);
         }
     }
     
