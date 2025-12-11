@@ -1,4 +1,3 @@
-
 <!-- Start::row-1 -->
 <div class="row">
     <div class="col-xxl-4 col-xl-12">
@@ -13,7 +12,7 @@
                     <div class="flex-fill main-profile-info">
                         <div class="d-flex align-items-center justify-content-between">
                             <h6 class="fw-semibold mb-1 text-fixed-white">SHINDE NAGESH TUKARAM</h6>
-                            <a href="<?php echo base_url('studentProfile'); ?>" <button class="btn btn-light btn-wave"><i class="ri-eye-line me-1 align-middle d-inline-block"></i>View Profile</button></a>
+                            <a href="<?php echo base_url('studentProfile'); ?>" class="btn btn-light btn-wave"><i class="ri-eye-line me-1 align-middle d-inline-block"></i>View Profile</a>
                         </div>
                         <p class="mb-1 text-muted text-fixed-white op-7">Student</p>
                         <p class="fs-12 text-fixed-white mb-4 op-5">  
@@ -33,7 +32,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <!--End::row-1 -->
 <!-- Start::row-1 -->
@@ -50,29 +48,29 @@
 
                     </div>
                     <div class="card-body p-0">
-                       <div class="table-responsive">
-            <table class="table text-nowrap table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Course Name</th>
-                        <th scope="col">Total Fee</th>
-                        <th scope="col">Paid Fee</th>
-                        <th scope="col">Pending Fee</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">B.com First Year</th>
-                        <td>10000</td>
-                        <td>6000</td>
-                        <td>4000</td>
-                         <td><span class="badge bg-outline-secondary">Pending</span></td>
-                    </tr>
-                    
-                </tbody>
-            </table>
-        </div>
+                        <div class="table-responsive">
+                            <table class="table text-nowrap table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Course Name</th>
+                                        <th scope="col">Total Fee</th>
+                                        <th scope="col">Paid Fee</th>
+                                        <th scope="col">Pending Fee</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">B.com First Year</th>
+                                        <td>10000</td>
+                                        <td>6000</td>
+                                        <td>4000</td>
+                                        <td><span class="badge bg-outline-secondary">Pending</span></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
 
 
 
@@ -102,7 +100,7 @@
                                         <div class="d-flex align-items-center">
                                             <div class="me-2">
                                                 <span class="avatar bg-success">
-                                                 <i class="bi bi-calendar-plus"></i>
+                                                    <i class="bi bi-calendar-plus"></i>
                                                 </span>
                                             </div>
                                             <div>
@@ -112,22 +110,20 @@
                                         </div>
                                         <div class="text-end">
                                             <p class="mb-0 fw-semibold">
-                                              9-12-2025
+                                                9-12-2025
                                             </p>
                                             <p class="mb-0 op-7 text-muted fs-11">
-<!--                                               Classteacher-->
+                                                <!--                                               Classteacher-->
                                             </p>
                                         </div>
                                     </div>
                                 </a>
                             </li>
-                           
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 <!--End::row-1 -->

@@ -1,4 +1,4 @@
-<?php //$page_session=\config\services::session();?>
+<?php //$page_session=\config\services::session();   ?>
 <div class="container-fluid">
     <!-- Page Header -->
     <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
@@ -15,31 +15,32 @@
     <!-- Page Header Close -->
     <?php
 //    if($php_session->getTempdata('error'))
-//    { ?>
-<!--        <div class="toast align-items-center text-bg-success border-0 fade show mb-4" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    Hello, world! This is the Success toast message.
+//    { 
+    ?>
+    <!--        <div class="toast align-items-center text-bg-success border-0 fade show mb-4" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        Hello, world! This is the Success toast message.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>-->
-    <?php    
+            </div>-->
+    <?php
 //    }
     ?>
     <!-- Start::row-1 -->
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
-                <?= form_open('leaving-certificate');?>
+                <?= form_open('leaving-certificate'); ?>
                 <div class="card-body add-products p-0">
                     <div class="p-4">
                         <div class="row gx-5">
-                            <div class="col-xxl-6 col-xl-12 col-lg-12 col-md-6">
+                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-6">
                                 <div class="card custom-card shadow-none mb-0 border-0">
                                     <div class="card-body p-0">                                        
                                         <div class="row gy-3">
-                                            <div class="col-xl-4">
+                                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
                                                 <label for="course_id" class="form-label"><?= lang('App.course'); ?></label>
                                                 <select class="form-control js-example-basic-single" name="course_id" id="course_id" required>
                                                     <option value="">Select Course</option>
@@ -49,7 +50,7 @@
                                                     <option value="4">E & TC Engineering</option>
                                                 </select>
                                             </div>                                            
-                                            <div class="col-xl-4">
+                                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
                                                 <label for="year_id" class="form-label"><?= lang('App.year'); ?></label>
                                                 <select class="form-control js-example-basic-single" name="year_id" id="year_id" required>
                                                     <option value="">Select Year</option>
@@ -59,9 +60,9 @@
                                                     <option value="4">Fourth Year</option>
                                                 </select>
                                             </div>
-                                            <div class="col-xl-4">
+                                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
                                                 <label for="aca_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
-                                                <select class="form-select" name="aca_year_id" id="aca_year_id" required>
+                                                <select class="js-example-basic-single" name="aca_year_id" id="aca_year_id" required>
                                                     <option value="">Select Academic Year</option>
                                                     <option value="Extra Small">2025-2026</option>
                                                     <option value="Extra Small">2024-2025</option>
@@ -81,7 +82,7 @@
                         <button type="submit" class="btn btn-primary m-1"><?= lang('App.search'); ?></button>
                     </div>
                 </div>
-                <?= form_close();?>
+                <?= form_close(); ?>
             </div>
         </div>
     </div>
@@ -98,19 +99,19 @@
                 <div class="modal-body">
 
                     <div class="row gy-3">
-                        <div class="col-xl-4">
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
                             <label for="examination" class="form-label"><?= lang('App.examination'); ?></label>
                             <input type="text" class="form-control" name="examination" id="examination" value="S.Y. Civil Engineering" placeholder="<?= lang('App.examination'); ?>" required>
                             <span class="text-danger"><?= displayError($validation, 'examination') ?></span>
                         </div>
 
-                        <div class="col-xl-4">
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
                             <label for="exam_held_in" class="form-label"><?= lang('App.exam'); ?> <?= lang('App.held'); ?> <?= lang('App.in'); ?></label>
                             <input type="text" class="form-control" name="exam_held_in" id="exam_held_in" value="Summer Sem Exam 2025" placeholder="<?= lang('App.exam'); ?> <?= lang('App.held'); ?> <?= lang('App.in'); ?>" required>
                             <span class="text-danger"><?= displayError($validation, 'exam-held-in') ?></span>
                         </div>
 
-                        <div class="col-xl-4">
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
                             <label for="date_of_leaving" class="form-label"><?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?></label>
                             <div class="input-group">
                                 <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
@@ -130,81 +131,72 @@
         </div>
     </div>
     <!--End::modal-->
-    <!-- Start::row-2 -->
+    <!-- Start:: row-2 -->
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
-                <div class="card-body add-products p-0">
-                    <div class="p-4">
-                        <div class="row gx-5">
-                            <div class="col-xxl-6 col-xl-12 col-lg-12 col-md-6">
-                                <div class="card custom-card shadow-none mb-0 border-0">
-                                    <div class="card-body p-0">
-                                        <div class="row gy-3">
-                                            <div class="table-responsive">
-                                                <table class="table text-nowrap table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col"><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
-                                                            <th scope="col"><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>
-                                                            <th scope="col"><?= lang('App.mobile'); ?> <?= lang('App.no'); ?></th>
-                                                            <th scope="col"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
-                                                            <th scope="col"><?= lang('App.course'); ?></th>
-                                                            <th scope="col"><?= lang('App.year'); ?></th>
-                                                            <th scope="col"><?= lang('App.action'); ?></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>202610100001</td>
-                                                            <td>SHINDE NAGESH TUKARAM</td>
-                                                            <td>9876543210</td>
-                                                            <td>2025-2026</td>
-                                                            <td>Civil Engineering</td>
-                                                            <td>Third Year</td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-warning mb-1" data-bs-toggle="modal" data-bs-target="#exampleModalLg">Add Lc Info</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">2</th>
-                                                            <td>202610100002</td>
-                                                            <td>KALE RAJ AJAY</td>
-                                                            <td>9876656560</td>
-                                                            <td>2025-2026</td>
-                                                            <td>Civil Engineering</td>
-                                                            <td>Third Year</td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-warning mb-1" data-bs-toggle="modal" data-bs-target="#exampleModalLg">Add Lc Info</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">3</th>
-                                                            <td>202610100003</td>
-                                                            <td>PATIL ANIL SHANKAR</td>
-                                                            <td>9876543210</td>
-                                                            <td>2025-2026</td>
-                                                            <td>Civil Engineering</td>
-                                                            <td>Third Year</td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-warning mb-1" data-bs-toggle="modal" data-bs-target="#exampleModalLg">Add Lc Info</button>
-                                                            </td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div> <!--end table -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="card-header">
+                    <div class="card-title">
+                        <?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?>
                     </div>
+                </div>
+                <div class="card-body">
+                    <table id="responsiveDataTable" class="table table-bordered text-nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col"><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
+                                <th scope="col"><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>
+                                <th scope="col"><?= lang('App.mobile'); ?> <?= lang('App.no'); ?></th>
+                                <th scope="col"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
+                                <th scope="col"><?= lang('App.course'); ?></th>
+                                <th scope="col"><?= lang('App.year'); ?></th>
+                                <th scope="col"><?= lang('App.action'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>202610100001</td>
+                                <td>SHINDE NAGESH TUKARAM</td>
+                                <td>9876543210</td>
+                                <td>2025-2026</td>
+                                <td>Civil Engineering</td>
+                                <td>Third Year</td>
+                                <td>
+                                    <button type="button" class="btn btn-warning mb-1" data-bs-toggle="modal" data-bs-target="#exampleModalLg">Add Lc Info</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>202610100002</td>
+                                <td>KALE RAJ AJAY</td>
+                                <td>9876656560</td>
+                                <td>2025-2026</td>
+                                <td>Civil Engineering</td>
+                                <td>Third Year</td>
+                                <td>
+                                    <button type="button" class="btn btn-warning mb-1" data-bs-toggle="modal" data-bs-target="#exampleModalLg">Add Lc Info</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>202610100003</td>
+                                <td>PATIL ANIL SHANKAR</td>
+                                <td>9876543210</td>
+                                <td>2025-2026</td>
+                                <td>Civil Engineering</td>
+                                <td>Third Year</td>
+                                <td>
+                                    <button type="button" class="btn btn-warning mb-1" data-bs-toggle="modal" data-bs-target="#exampleModalLg">Add Lc Info</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    <!--End::row-2 -->
+    <!-- End:: row-2 -->
 </div><!--End::container-fluid -->
