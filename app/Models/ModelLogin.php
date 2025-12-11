@@ -27,7 +27,7 @@ class ModelLogin extends Model {
     }
 
     
-    public function checkAuthenticate($riseNo, $password) {
+    public function checkuser($riseNo, $password) {
         return $this->db->table('student_registration')
                         ->where('student_rise_no', $riseNo)
                         ->where('student_password', $password)

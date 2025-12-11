@@ -23,7 +23,7 @@
                 <div class="card-body p-5">
                     <p class="h5 fw-semibold mb-2 text-center"><?= lang('App.login'); ?></p>
                     <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome back !</p>
-                    <?= form_open('authenticate'); ?>
+                    <?= form_open('checkuser'); ?>
                     <div class="row gy-3">
                         <div class="col-xl-12">
                             <label for="login-username" class="form-label text-default"><?= lang('App.rise') ?> <?= lang('App.number') ?></label>
@@ -66,5 +66,4 @@
 <?= $this->endSection('content'); ?>
 <?= $this->section('scripts'); ?>
 <script src="<?php echo base_url('assets/js/show-password.js'); ?>"></script>
-<script src="<?= base_url('assets/js/registrationpage.js') ?>"></script>
 <?= $this->endSection('scripts'); ?>

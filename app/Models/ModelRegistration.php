@@ -39,12 +39,6 @@ class ModelRegistration extends Model {
         return $this->db->affectedRows() > 0 ? true : false;
     }
 
-    public function checkAuthenticate($riseNo, $password) {
-        return $this->db->table('student_registration')
-                        ->where('student_rise_no', $riseNo)
-                        ->where('student_password', $password)
-                        ->get()
-                        ->getRowArray();
-    }
+   
 
 }

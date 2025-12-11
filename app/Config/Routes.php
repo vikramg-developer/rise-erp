@@ -50,9 +50,13 @@ $routes->add('/home', 'Home::index');
 $routes->add('/lc-remark', 'LeavingCertificate::addLeavingCertificateRemark');
 $routes->add('/leaving-certificate', 'LeavingCertificate::index');
 $routes->add('/login', 'Login::login');
-$routes->add('/registration', 'Registration::index');
+
+//$routes->add('/registration', 'Registration::index');
+$routes->add('/student-registration', 'StudentRegistration::index');
+$routes->add('/save-registration', 'StudentRegistration::add_registration');
+
 $routes->add('/student-profile', 'Registration::studentProfile');
-$routes->add('/authenticate', 'Registration::authenticate');
+$routes->add('/checkuser', 'Login::checkuser');
 $routes->add('/savesignup', 'Registration::saveSignup');
 $routes->add('/studentDashboard', 'Login::studentDashboard');
 $routes->add('/studentProfile', 'Registration::studentProfile');

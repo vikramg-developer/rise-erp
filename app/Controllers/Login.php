@@ -6,7 +6,7 @@ use App\Models\ModelLogin;
 
 class Login extends BaseController {
 
-    public $ModelRegistration;
+    public $ModelLogin;
 
     public function __construct() {
         $this->ModelLogin= new ModelLogin();
@@ -20,14 +20,14 @@ class Login extends BaseController {
     }
    
 
-    public function authenticate() {
+    public function checkuser() {
         $session = session();
         $request = $this->request;
 
         $riseNo = $request->getPost('login-username');
         $password = $request->getPost('login-password');
 
-        $user = $this->ModelRegistration->checkAuthenticate($riseNo, $password);
+        $user = $this->ModelLogin->checkuser($riseNo, $password);
 
         if (!$user) {
             // no such rise number

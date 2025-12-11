@@ -36,7 +36,7 @@ $page_session = \Config\Services::session();
 
                     <p class="h5 fw-semibold mb-2 text-center"><?= lang('App.register'); ?> </p>
                     <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome to Rise Portal! Sign up to access your learning tools and updates.</p>
-                    <?= form_open('savesignup'); ?>
+                    <?= form_open('save-registration'); ?>
                     <div class="row gy-3">
                        <!--First name-->
                        <div class="col-xl-12">
@@ -61,9 +61,9 @@ $page_session = \Config\Services::session();
                         </div>
                         <!--Password-->
                         <div class="col-xl-12">
-                            <label for="signup-password" class="form-label text-default"><?= lang('App.password'); ?></label>
+                            <label for="student-password" class="form-label text-default"><?= lang('App.password'); ?></label>
                             <div class="input-group">
-                                <input type="password" class="form-control form-control-lg required-input" name="signup-password" id="signup-password" placeholder="password" maxlength="8" minlength="8"value="" onkeyup='check();'required>
+                                <input type="password" class="form-control form-control-lg required-input" name="student-password" id="signup-password" placeholder="password" maxlength="8" minlength="8"value="" onkeyup='check();'required>
                                 <button class="btn btn-light" onclick="createpassword('signup-password', this)" type="button" id="button-addon2"><i class="ri-eye-off-line align-middle"></i></button>
                             </div>
                         </div>

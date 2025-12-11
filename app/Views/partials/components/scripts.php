@@ -62,7 +62,9 @@
         <script src="<?php echo base_url('assets/js/date&time_pickers.js'); ?>"></script>
            <!-- FlatPickr CSS -->
         <link rel="stylesheet" href="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.css'); ?>">
-        <script src="<?= base_url('assets/js/registrationpage.js') ?>"></script>
+<!--Registration Page JS -->
+<script src="<?= base_url('partials/js/student_registration/registrationpage.js') ?>"></script>
+
 <!-- Chartjs Chart JS -->
 <script src="<?php echo base_url('assets/libs/chart.js/chart.min.js'); ?>"></script>
 
