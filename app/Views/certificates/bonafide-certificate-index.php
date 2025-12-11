@@ -73,80 +73,72 @@
     </div>
     <!--End::row-1 
 
-    <!-- Start::row-2 -->
+   <!-- Start:: row-2 -->
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
-                <div class="card-body add-products p-0">
-                    <div class="p-4">
-                        <div class="row gx-5">
-                            <div class="col-xxl-6 col-xl-12 col-lg-12 col-md-6">
-                                <div class="card custom-card shadow-none mb-0 border-0">
-                                    <div class="card-body p-0">
-                                        <div class="row gy-3">
-                                            <div class="table-responsive">
-                                                <table class="table text-nowrap table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col"><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
-                                                            <th scope="col"><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>
-                                                            <th scope="col"><?= lang('App.mobile'); ?> <?= lang('App.no'); ?></th>
-                                                            <th scope="col"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
-                                                            <th scope="col"><?= lang('App.course'); ?></th>
-                                                            <th scope="col"><?= lang('App.year'); ?></th>
-                                                            <th scope="col"><?= lang('App.action'); ?></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>202610100001</td>
-                                                            <td>SHINDE NAGESH TUKARAM</td>
-                                                            <td>9876543210</td>
-                                                            <td>2025-2026</td>
-                                                            <td>Civil Engineering</td>
-                                                            <td>Third Year</td>
-                                                            <td>
-                                                                <a href="<?= base_url('bonafide-print'); ?>" target="_blank"  class="btn btn-warning mb-1" >Bonafide Certificate</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">2</th>
-                                                            <td>202610100002</td>
-                                                            <td>KALE RAJ AJAY</td>
-                                                            <td>9876656560</td>
-                                                            <td>2025-2026</td>
-                                                            <td>Civil Engineering</td>
-                                                            <td>Third Year</td>
-                                                            <td>
-                                                                <a target="_blank"  class="btn btn-warning mb-1" >Bonafide Certificate</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">3</th>
-                                                            <td>202610100003</td>
-                                                            <td>PATIL ANIL SHANKAR</td>
-                                                            <td>9876543210</td>
-                                                            <td>2025-2026</td>
-                                                            <td>Civil Engineering</td>
-                                                            <td>Third Year</td>
-                                                            <td>
-                                                                <a target="_blank"  class="btn btn-warning mb-1" >Bonafide Certificate</a>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div> <!--end table -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="card-header">
+                    <div class="card-title">
+                        <?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?>
                     </div>
+                </div>
+                <div class="card-body">
+                    <table id="responsiveDataTable" class="table table-bordered text-nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col"><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
+                                <th scope="col"><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>
+                                <th scope="col"><?= lang('App.mobile'); ?> <?= lang('App.no'); ?></th>
+                                <th scope="col"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
+                                <th scope="col"><?= lang('App.course'); ?></th>
+                                <th scope="col"><?= lang('App.year'); ?></th>
+                                <th scope="col"><?= lang('App.action'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>202610100001</td>
+                                <td>SHINDE NAGESH TUKARAM</td>
+                                <td>9876543210</td>
+                                <td>2025-2026</td>
+                                <td>Civil Engineering</td>
+                                <td>Third Year</td>
+                                <td>
+                                    <a href="<?php echo base_url('bonafide-print'); ?>" target="_blank" class="btn btn-warning mb-1" ><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>202610100002</td>
+                                <td>KALE RAJ AJAY</td>
+                                <td>9876656560</td>
+                                <td>2025-2026</td>
+                                <td>Civil Engineering</td>
+                                <td>Third Year</td>
+                                <td>
+                                    <a target="_blank" class="btn btn-warning mb-1" ><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>202610100003</td>
+                                <td>PATIL ANIL SHANKAR</td>
+                                <td>9876543210</td>
+                                <td>2025-2026</td>
+                                <td>Civil Engineering</td>
+                                <td>Third Year</td>
+                                <td>
+                                    <a target="_blank" class="btn btn-warning mb-1" ><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    <!--End::row-2 -->
+    <!-- End:: row-2 -->
 </div>
