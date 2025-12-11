@@ -21,7 +21,7 @@ class ModelHeadGroup extends Model{
     protected $returnType     = 'array';
 //    protected $useSoftDeletes = true;
 //
-    protected $allowedFields = ['head_group_name'];
+    protected $allowedFields = ['head_group_name','is_deleted'];
 //
 //    protected bool $allowEmptyInserts = false;
 //    protected bool $updateOnlyChanged = true;

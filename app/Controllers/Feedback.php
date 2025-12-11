@@ -7,13 +7,63 @@ class Feedback extends BaseController {
     
     public function __construct()
     {
-       $this->ModelFeedback = new ModelFeedback();
+       $this->ModelFeedback = model('ModelFeedback');
+//       $this->ModelFeedback = new ModelFeedback();
     }
     
     public function index()
     {
+         $data['mater_data'] = 'fees_management/head-group';
 //          $data['feedbacks'] = $this->modelFeedback->findAll();
         render_page('feedback/feedback-master');
+    }
+    
+    public function fetch_master_data() {
+
+        $draw = $this->request->getPost('draw');
+        $start = $this->request->getPost('start');
+        $length = $this->request->getPost('length');
+        $search = $this->request->getPost('search')['value'] ?? '';
+
+        $model = $this->ModelFeedback;
+
+        // TOTAL RECORDS
+        $recordsTotal = $model->countAll();
+
+        // SEARCH FILTER
+        if ($search !== '') {
+            $model->like('head_group_name', $search);
+        }
+
+        // FILTERED RECORDS
+        $recordsFiltered = $model->countAllResults(false);
+
+        // PAGINATED DATA
+        $rows = $model->findAll($length, $start);
+        
+        $buttons = '';
+        
+        $buttons .= '<button class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill"><i class="ri-pencil-fill"></i></button>';
+        $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill"><i class="ri-delete-bin-fill"></i></button>';
+
+        $sr_no = 1;
+        
+        $data = [];
+        foreach ($rows as $row) {
+            $data[] = [
+                $sr_no++,
+                $row['head_group_name'],
+                $buttons,
+                ''
+            ];
+        }
+
+        return $this->response->setJSON([
+                    'draw' => $draw,
+                    'recordsTotal' => $recordsTotal,
+                    'recordsFiltered' => $recordsFiltered,
+                    'data' => $data
+        ]);
     }
     
     public function save_feedback_master()
