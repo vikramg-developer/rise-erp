@@ -10,7 +10,7 @@ use CodeIgniter\Model;
 /**
  * Description of ModelStudentRegistration
  *
- * @author Shoeb
+ * @author Sonal
  */
 class ModelStudentRegistration extends Model{
     protected $table      = 'student_registration';
@@ -50,5 +50,19 @@ class ModelStudentRegistration extends Model{
 //    protected $beforeDelete   = [];
 //    protected $afterDelete    = [];
  
+public function getLastRiseNo()
+{
+    $last = $this->select('student_registration_id')
+                 ->orderBy('student_registration_id', 'DESC')
+                 ->first();
+
+    if ($last) {
+        return $last['student_registration_id'] + 1;  
+    } else {
+        return 1;  
+    }
+}
+
+
 
 }

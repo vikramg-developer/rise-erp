@@ -28,36 +28,48 @@ class StudentRegistration extends BaseController {
         
        return view('student_registration/registration-page');
     }
-    public function add_registration() {
-        if ($this->request->getMethod() == 'post') {
-            
-//            $lastrise = $this->modelstudentregistration->getLastRiseNo();
-            $lastrise = $this->modelstudentregistration->findAll();
-            if ($lastrise) {
-            $nextRiseNo = $lastrise['student_registration_id'] + 1;
-            } else {
-                $nextRiseNo = 1; 
+    public function add_registration()
+    {
+        $page_session = \Config\Services::session();
+
+        if ($this->request->getMethod() === 'post') {
+
+            $aadhar = $this->request->getVar('aadhar-number', FILTER_SANITIZE_STRING);
+
+            $allAadhar = $this->modelstudentregistration->findColumn('student_aadhar_number');
+
+            if ($allAadhar && in_array($aadhar, $allAadhar)) {
+                $page_session->setTempdata('error', 'This Aadhar Number is already registered!', 4);
+                return redirect()->back();
             }
-            $newRiseNo = 'S20261010000' . $nextRiseNo;
+
+            $lastrise = $this->modelstudentregistration->getLastRiseNo();
+            $newRiseNo = 'S20261010000' . $lastrise;
+
             $insert_data = [
-                'student_first_name' => $this->request->getVar('first-name', FILTER_SANITIZE_STRING),
-                'student_middle_name' => $this->request->getVar('middle-name', FILTER_SANITIZE_STRING),
-                'student_last_name' => $this->request->getVar('last-name', FILTER_SANITIZE_STRING),
-                'student_last_name' => $this->request->getVar('last-name', FILTER_SANITIZE_STRING),
-                'student_aadhar_number' => $this->request->getVar('aadhar-number', FILTER_SANITIZE_STRING),
-                'student_password' => $this->request->getVar('student-password', FILTER_SANITIZE_STRING),
-                 'student_rise_no'  => $newRiseNo,
-                ];
+                'student_first_name'    => $this->request->getVar('first-name', FILTER_SANITIZE_STRING),
+                'student_middle_name'   => $this->request->getVar('middle-name', FILTER_SANITIZE_STRING),
+                'student_last_name'     => $this->request->getVar('last-name', FILTER_SANITIZE_STRING),
+                'student_aadhar_number' => $aadhar,
+                'student_password'      => password_hash($this->request->getVar('student-password', FILTER_SANITIZE_STRING),PASSWORD_DEFAULT),
+                'student_rise_no'       => $newRiseNo,
+            ];
 
             $insert = $this->modelstudentregistration->save($insert_data);
-            if ($insert) {
-            return redirect()->to('/student-registration');
-        } else {
-            return redirect()->back()->with('error', 'Failed to register');
-        }
-            
-        }
-    }
 
-    
+            if ($insert) {
+                $page_session->setTempdata(
+                    'success',
+                    'Account created successfully! Please Login. Your Rise No is: <b>' . $newRiseNo . '</b>',
+                    4
+                );
+            } else {
+                $page_session->setTempdata('error', 'Sorry! Something went wrong. Try again.', 4);
+            }
+
+            return redirect()->to('/student-registration');
+        }
+
+       
+    }
 }
