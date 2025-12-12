@@ -15,4 +15,5 @@ class ModelParentsRegistration extends Model{
     protected $primaryKey ='parents_registration_id';
     protected $useAutoIncrement ='true';
     protected $returnType     = 'array';
+    protected allowedFields = 'parents';
 }
