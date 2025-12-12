@@ -9,13 +9,6 @@
 <!-- Jquery Cdn -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
-<!-- Scroll To Top -->
-<div class="scrollToTop">
-    <span class="arrow"><i class="ri-arrow-up-s-fill fs-20"></i></span>
-</div>
-<div id="responsive-overlay"></div>
-<!-- Scroll To Top -->
-
 <!-- Popper JS -->
 <script src="<?php echo base_url('assets/libs/@popperjs/core/umd/popper.min.js'); ?>"></script>
 
@@ -48,7 +41,6 @@
 <script src="<?php echo base_url('assets/js/custom.js'); ?>"></script>
 
 <!-- Date & Time Picker JS -->
-<script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/date&time_pickers.js'); ?>"></script>
 
 <!-- Chartjs Chart JS -->
@@ -81,6 +73,9 @@
 <script src="<?php echo base_url('assets/libs/prismjs/prism.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/prism-custom.js'); ?>"></script>
 
+<!-- Toast JS -->
+<script src="<?php echo base_url('assets/js/Toasts.js'); ?>"></script>
+
 <!-- Form Validation JS -->
 <script src="<?php echo base_url('assets/js/validation.js'); ?>"></script>
 
@@ -93,8 +88,11 @@
 <!-- CRM Contacts JS -->
 <script src="<?php echo base_url('assets/js/crm-contacts.js'); ?>"></script>
 
+<script>
+    let csrfName = "<?= csrf_token() ?>";
+    let csrfHash = "<?= csrf_hash() ?>";
+</script>
+
 <?php if (isset($jspath)): ?>
     <script src="<?php echo base_url('partials/js/') . $jspath . '.js'; ?>"></script>
 <?php endif; ?>
-
-<script src="<?= base_url('assets/js/registrationpage.js') ?>"></script>
