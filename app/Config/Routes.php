@@ -68,6 +68,9 @@ $routes->add('/student-list', 'FeesManagement::student-list');
 $routes->add('/save-feedback-master', 'Feedback::save_feedback_master');
 $routes->add('/sample-excel-file', 'Feedback::sample_excel_file');
 $routes->add('/ticket', 'Ticket::index');
+$routes->add('/faculty', 'Faculty::index');
+$routes->add('/add-faculty', 'Faculty::add_faculty');
+$routes->add('/manage-faculty', 'Faculty::update-faculty');
 
 /*
  * --------------------------------------------------------------------
