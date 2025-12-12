@@ -36,6 +36,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->add('/', 'Login::login');
 $routes->add('/add-group', 'Group::add-group');
+$routes->add('/add-head-group', 'FeesManagement::add-head-group');
 $routes->add('/add-lc-info', 'LeavingCertificate::add_lc_info');
 $routes->add('/bonafide-certificate', 'BonafideCertificate::index');
 $routes->add('/bonafide-print', 'BonafideCertificate::bonafide_print');
@@ -68,7 +69,7 @@ $routes->add('/student-list', 'FeesManagement::student-list');
 $routes->add('/save-feedback-master', 'Feedback::save_feedback_master');
 $routes->add('/sample-excel-file', 'Feedback::sample_excel_file');
 $routes->add('/ticket', 'Ticket::index');
-
+$routes->add('/update-head-group', 'FeesManagement::update-head-group');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

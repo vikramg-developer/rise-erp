@@ -34,8 +34,14 @@ class ModelHeadGroup extends Model{
 //    protected $deletedField  = 'deleted_at';
 //
 //    // Validation
-//    protected $validationRules      = [];
-//    protected $validationMessages   = [];
+    protected $validationRules      = [
+        'head_group_name' => 'required|alpha_numeric_space'
+    ];
+    protected $validationMessages   = [
+        'head_group_name' => [
+            'required' => 'Head Group is required'
+        ]
+    ];
 //    protected $skipValidation       = false;
 //    protected $cleanValidationRules = true;
 //
