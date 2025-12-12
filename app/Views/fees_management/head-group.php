@@ -42,8 +42,10 @@
                                         <div class="card-body p-0">
                                             <div class="row gy-3">
                                                 <div class="col-xl-12">
+                                                    <input type="hidden" id="head_group_id" name="head_group_id">
                                                     <label for="head_group" class="form-label"><?= lang('App.head'); ?> <?= lang('App.group'); ?></label>
                                                     <input type="text" class="form-control" id="head_group" name="head_group" placeholder="<?= lang('App.head'); ?> <?= lang('App.group'); ?>">
+                                                    <small class="text-danger" id="head_group_error" style="display:none;"></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -52,7 +54,7 @@
                             </div>
                         </div>
                         <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
-                            <button class="btn btn-success m-1"><?= lang('App.save'); ?><i class="bi bi-save2 ms-2"></i></button>
+                            <button class="btn btn-success m-1" id="submit_btn"><?= lang('App.save'); ?><i class="bi bi-save2 ms-2"></i></button>
                         </div>
                     </div>
                 </form>
