@@ -30,7 +30,7 @@ class Feedback extends BaseController {
         // TOTAL RECORDS
         $recordsTotal = $model->countAll();
 
-        // SEARCH FILTER
+        // SEARCH FILTERgit
         if ($search !== '') {
             $model->like('head_group_name', $search);
         }
