@@ -7,14 +7,29 @@ use App\Models\ModelLeavingCertificate;
 class LeavingCertificate extends BaseController
 {
     public $ModelLeavingCertificate;
+    public $ModelYearwiseStudentData;
 
     public function __construct() {
-        $this->ModelLeavingCertificate = new ModelLeavingCertificate();
+        $this->ModelLeavingCertificate = model('$ModelLeavingCertificate');
+        $this->$ModelYearwiseStudentData = model('$ModelYearwiseStudentData');
     }
 
     public function index() {     
-
+        $data['jspath']='certificates/leaving-certificate-index';
         render_page('certificates/leaving-certificate-index');
+    }
+    
+    public function fetch_student_list(){
+        if($this->requesst->getMethod()=='post'){
+            $data=[
+                $course_id= clean_name($this->request->getVar('course_id')),
+                $year_id= clean_name($this->request->getVar('year_id')),
+                $aca_year_id= clean_name($this->request->getVar('aca_year_id')),
+            
+            ];
+            $student_list=$this->$ModelYearwiseStudentData->fetch_student_list($data);
+        }
+        
     }
 
     public function add_lc_info() 

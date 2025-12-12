@@ -1,4 +1,4 @@
-<?php //$page_session=\config\services::session();   ?>
+<?php //$page_session=\config\services::session();      ?>
 <div class="container-fluid">
     <!-- Page Header -->
     <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
@@ -32,57 +32,73 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
-                <?= form_open('leaving-certificate'); ?>
-                <div class="card-body add-products p-0">
-                    <div class="p-4">
-                        <div class="row gx-5">
-                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-6">
-                                <div class="card custom-card shadow-none mb-0 border-0">
-                                    <div class="card-body p-0">                                        
-                                        <div class="row gy-3">
-                                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                                                <label for="course_id" class="form-label"><?= lang('App.course'); ?></label>
-                                                <select class="form-control js-example-basic-single" name="course_id" id="course_id" required>
-                                                    <option value="">Select Course</option>
-                                                    <option value="1">Computer Science & Engineering</option>
-                                                    <option value="2">Civil Engineering</option>
-                                                    <option value="3">Mechanical Engineering</option>
-                                                    <option value="4">E & TC Engineering</option>
-                                                </select>
-                                            </div>                                            
-                                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                                                <label for="year_id" class="form-label"><?= lang('App.year'); ?></label>
-                                                <select class="form-control js-example-basic-single" name="year_id" id="year_id" required>
-                                                    <option value="">Select Year</option>
-                                                    <option value="1">First Year</option>
-                                                    <option value="2">Second Year</option>
-                                                    <option value="3">Third Year</option>
-                                                    <option value="4">Fourth Year</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                                                <label for="aca_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
-                                                <select class="js-example-basic-single" name="aca_year_id" id="aca_year_id" required>
-                                                    <option value="">Select Academic Year</option>
-                                                    <option value="Extra Small">2025-2026</option>
-                                                    <option value="Extra Small">2024-2025</option>
-                                                    <option value="Small">2023-2024</option>
-                                                    <option value="Medium">2022-2023</option>
-                                                    <option value="Large">2021-2022</option>
-                                                    <option value="Extra Large">2020-2021</option>
-                                                </select>
-                                            </div>
-                                        </div>                                        
+                <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+                    <div id="successToast" class="toast colored-toast bg-success-transparent" role="alert" aria-live="assertive"
+                         aria-atomic="true">
+                        <div class="toast-header bg-success text-fixed-white">
+                            <img class="bd-placeholder-img rounded me-2" src="<?php echo base_url('assets/images/brand-logos/toggle-rise.jpg'); ?>" alt="...">
+                            <strong class="me-auto"><?= lang('App.rise') ?></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            Your,toast message here.
+                        </div>
+                    </div>
+                </div>
+                <form method="post" action="" id="fetch_student">
+                    <div class="card-body add-products p-0">
+                        <div class="p-4">
+                            <div class="row gx-5">
+                                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-6">
+                                    <div class="card custom-card shadow-none mb-0 border-0">
+                                        <div class="card-body p-0">                                        
+                                            <div class="row gy-3">
+                                                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                                    <label for="course_id" class="form-label"><?= lang('App.course'); ?></label>
+                                                    <select class="form-control js-example-basic-single" name="course_id" id="course_id" required>
+                                                        <option value="">Select Course</option>
+                                                        <option value="1">Computer Science & Engineering</option>
+                                                        <option value="2">Civil Engineering</option>
+                                                        <option value="3">Mechanical Engineering</option>
+                                                        <option value="4">E & TC Engineering</option>
+                                                    </select>
+                                                    <small class="text-danger" id="fetch_student_error" style="display:none;"></small>
+                                                </div>                                            
+                                                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                                    <label for="year_id" class="form-label"><?= lang('App.year'); ?></label>
+                                                    <select class="form-control js-example-basic-single" name="year_id" id="year_id" required>
+                                                        <option value="">Select Year</option>
+                                                        <option value="1">First Year</option>
+                                                        <option value="2">Second Year</option>
+                                                        <option value="3">Third Year</option>
+                                                        <option value="4">Fourth Year</option>
+                                                    </select>
+                                                    <small class="text-danger" id="fetch_student_error" style="display:none;"></small>
+                                                </div>
+                                                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                                    <label for="aca_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
+                                                    <select class="js-example-basic-single" name="aca_year_id" id="aca_year_id" required>
+                                                        <option value="">Select Academic Year</option>
+                                                        <option value="Extra Small">2025-2026</option>
+                                                        <option value="Extra Small">2024-2025</option>
+                                                        <option value="Small">2023-2024</option>
+                                                        <option value="Medium">2022-2023</option>
+                                                        <option value="Large">2021-2022</option>
+                                                        <option value="Extra Large">2020-2021</option>
+                                                    </select>
+                                                    <small class="text-danger" id="fetch_student_error" style="display:none;"></small>
+                                                </div>
+                                            </div>                                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary m-1"><?= lang('App.search'); ?></button>
+                        </div>
                     </div>
-                    <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary m-1"><?= lang('App.search'); ?></button>
-                    </div>
-                </div>
-                <?= form_close(); ?>
+                </form>
             </div>
         </div>
     </div>
@@ -191,7 +207,6 @@
                                     <button type="button" class="btn btn-warning mb-1" data-bs-toggle="modal" data-bs-target="#exampleModalLg">Add Lc Info</button>
                                 </td>
                             </tr>
-
                         </tbody>
                     </table>
                 </div>
