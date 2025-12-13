@@ -18,10 +18,7 @@ class FacultyProfile extends BaseController
         return render_page('faculty-profile/index', []);
     }
 
-    public function demo()
-    {
-        return render_page('faculty-profile/index', []);
-    }
+    
 
     public function update_personal_info()
     {
