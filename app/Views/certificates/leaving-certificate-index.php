@@ -38,13 +38,13 @@
                                         <div class="card-body p-0">                                        
                                             <div class="row gy-3">
                                                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                                                    <label for="course_id" class="form-label"><?= lang('App.course'); ?></label>
-                                                    <select class="form-control js-example-basic-single" name="course_id" id="course_id" required>
-                                                        <option value="">Select Course</option>
+                                                    <label for="department_id" class="form-label"><?= lang('App.department'); ?></label>
+                                                    <select class="form-control js-example-basic-single" name="department_id" id="department_id" required>
+                                                        <option value="">Select Department</option>
                                                         <?php
-                                                        foreach ($Courses as $course) {
+                                                        foreach ($departments as $department) {
                                                             ?>
-                                                            <option value="<?php echo $course['course_id']; ?>"><?php echo $course['course_name']; ?></option>
+                                                            <option value="<?php echo $department['department_id']; ?>"><?php echo $department['department_name']; ?></option>
                                                         <?php }
                                                         ?> 
                                                     </select>

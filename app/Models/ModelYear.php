@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ModelYear {
+class ModelYear extends Model {
 
     protected $table = 'year';
     protected $primaryKey = 'year_id';
@@ -19,6 +19,6 @@ class ModelYear {
 
     //    Reusable Query Methods
     public function get_years() {
-        return $this->where(['is_deleted' => 0])->findAll();
+        return $this->where('is_deleted', 0)->findAll();
     }
 }

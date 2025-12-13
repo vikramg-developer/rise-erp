@@ -3,7 +3,7 @@ $("#fetch_student").on("submit", function (e) {
     $("#lc_index").text('').hide();
     let formData = $(this).serializeArray();
     formData.push({name: csrfName, value: csrfHash});
-    let course_id = $('#course_id').val();
+    let department_id = $('#department_id').val();
     let year_id = $('#year_id').val();
     let aca_year_id = $('#aca_year_id').val();
     $.ajax({

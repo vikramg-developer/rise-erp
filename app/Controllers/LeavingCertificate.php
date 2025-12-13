@@ -9,25 +9,29 @@ class LeavingCertificate extends BaseController {
     public $ModelLeavingCertificate;
     public $ModelYearwiseStudentData;
     public $ModelAcademicYear;
+    public $ModelYear;
+    public $ModelDepartment;
 
     public function __construct() {
         $this->ModelLeavingCertificate = model('ModelLeavingCertificate');
         $this->ModelYearwiseStudentData = model('ModelYearwiseStudentData');
         $this->ModelAcademicYear = model('ModelAcademicYear');
+        $this->ModelYear = model('ModelYear');
+        $this->ModelDepartment = model('ModelDepartment');
     }
 
     public function index() {
         $data['jspath'] = 'certificates/leaving-certificate-index';
         $data['academic_year'] = $this->ModelAcademicYear->get_active_aca_years();
-        $data['years'] = $this->ModelAcademicYear->get_years();
-        $data['courses'] = $this->ModelAcademicYear->get_courses();
+        $data['years'] = $this->ModelYear->get_years();
+        $data['departments'] = $this->ModelDepartment->get_departments();
         render_page('certificates/leaving-certificate-index', $data);
     }
 
     public function fetch_student_list() {
         if ($this->requesst->getMethod() == 'post') {
             $data = [
-                $course_id = clean_name($this->request->getVar('course_id')),
+                $department_id = clean_name($this->request->getVar('department_id')),
                 $year_id = clean_name($this->request->getVar('year_id')),
                 $aca_year_id = clean_name($this->request->getVar('aca_year_id')),
             ];
