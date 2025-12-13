@@ -62,13 +62,26 @@ class FeesManagement extends BaseController {
             $buttons = '';
 
             $buttons .= '<button class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill edit" data-id="' . $row['head_group_id'] . '" data-name="' . $row['head_group_name'] . '"><i class="ri-pencil-fill"></i></button>';
-            $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill"><i class="ri-delete-bin-fill"></i></button>';
+
+            if ($row['is_deleted'] != 1):
+                $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete" data-id="' . $row['head_group_id'] . '"><i class="ri-delete-bin-fill"></i></button>';
+            elseif ($row['is_deleted'] == 1):
+                $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-id="' . $row['head_group_id'] . '"><i class="ri-arrow-go-back-fill"></i></button>';
+            endif;
+
+            if ($row['is_deleted'] == 1):
+                $remark = "Deleted By Admin";
+            elseif ($row['is_deleted'] == 2):
+                $remark = "Reverted By Admin";
+            else:
+                $remark = "";
+            endif;
 
             $data[] = [
                 $sr_no++,
                 $row['head_group_name'],
                 $buttons,
-                ''
+                $remark
             ];
         }
 
@@ -133,9 +146,12 @@ class FeesManagement extends BaseController {
     }
 
     public function delete_head_group() {
-        $this->modelheadgroup->update(2, ['is_deleted' => 1]);
-
-        echo $this->modelheadgroup->db->getLastQuery();
+        if ($this->request->getMethod() == 'post') {
+            $id = $this->request->getPost('head_group_id');
+            $this->modelheadgroup->update($id, ['is_deleted' => 1]);
+        } else {
+            render_page('error_page/error404');
+        }
     }
 
     public function head() {
