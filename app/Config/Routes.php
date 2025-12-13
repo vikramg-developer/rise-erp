@@ -18,7 +18,7 @@ $routes->setDefaultController('Login');
 $routes->setDefaultMethod('login');
 $routes->setTranslateURIDashes(true);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
 // where controller filters or CSRF protection are bypassed.
@@ -36,40 +36,48 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->add('/', 'Login::login');
 $routes->add('/add-group', 'Group::add-group');
-$routes->add('/add-head-group', 'FeesManagement::add-head-group');
+$routes->add('/add-head-group', 'FeesManagement::add_head_group');
 $routes->add('/add-lc-info', 'LeavingCertificate::add_lc_info');
 $routes->add('/bonafide-certificate', 'BonafideCertificate::index');
 $routes->add('/bonafide-print', 'BonafideCertificate::bonafide_print');
-$routes->add('/collect-fees', 'FeesManagement::collect-fees');
+$routes->add('/collect-fees', 'FeesManagement::collect_fees');
 $routes->add('/create_ticket', 'Ticket::create_ticket');
-$routes->add('/delete-head-group', 'FeesManagement::delete-head-group');
+$routes->add('/delete-head-group', 'FeesManagement::delete_head_group');
 $routes->add('/faculty-profile', 'FacultyProfile::index');
 $routes->add('/faculty-personal-info', 'FacultyProfile::update_personal_info');
 $routes->add('/feedback', 'Feedback::index');
 $routes->add('/save-feedback-master', 'Feedback::save_feedback_master');
 $routes->add('/fetch-head', 'FeesManagement::fetch-head');
-$routes->add('/fetch-head-group', 'FeesManagement::fetch-head-group');
+$routes->add('/fetch-head-group', 'FeesManagement::fetch_head_group');
 $routes->add('/head', 'FeesManagement::head');
-$routes->add('/head-fees', 'FeesManagement::head-fees');
-$routes->add('/head-group', 'FeesManagement::head-group');
+$routes->add('/head-fees', 'FeesManagement::head_fees');
+$routes->add('/head-group', 'FeesManagement::head_group');
 $routes->add('/home', 'Home::index');
 $routes->add('/i-card', 'ICard::index');
 $routes->add('/i-card-print', 'ICard::i_card_print');
 $routes->add('/leaving-certificate', 'LeavingCertificate::index');
 $routes->add('/login', 'Login::login');
+$routes->add('/check-user', 'Login::check_user');
+$routes->add('/student-registration', 'StudentRegistration::index');
+$routes->add('/save-registration', 'StudentRegistration::add_registration');
+$routes->add('/studentDashboard', 'Login::studentDashboard');
+//$routes->add('/studentProfile', 'Registration::studentProfile');
 $routes->add('/leaving-certificate-report', 'LeavingCertificateReport::index');
 $routes->add('/manage-question', 'Feedback::manage_question');
 $routes->add('/registration', 'Registration::index');
 $routes->add('/student-profile', 'Registration::studentProfile');
-$routes->add('/authenticate', 'Registration::authenticate');
+$routes->add('/check-user', 'login::check_user');
 $routes->add('/savesignup', 'Registration::saveSignup');
-$routes->add('/studentDashboard', 'Login::studentDashboard');
+$routes->add('/student-dashboard', 'Login::student_dashboard');
 $routes->add('/studentProfile', 'Registration::studentProfile');
-$routes->add('/student-list', 'FeesManagement::student-list');
-$routes->add('/save-feedback-master', 'Feedback::save_feedback_master');
+$routes->add('/student-list', 'FeesManagement::student_list');
 $routes->add('/sample-excel-file', 'Feedback::sample_excel_file');
 $routes->add('/ticket', 'Ticket::index');
+$routes->add('/faculty', 'Faculty::index');
+$routes->add('/add-faculty', 'Faculty::add_faculty');
+$routes->add('/manage-faculty', 'Faculty::update-faculty');
 $routes->add('/update-head-group', 'FeesManagement::update-head-group');
+$routes->add('/delete-head-group', 'FeesManagement::delete_head_group');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

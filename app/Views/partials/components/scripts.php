@@ -43,6 +43,9 @@
 <!-- Date & Time Picker JS -->
 <script src="<?php echo base_url('assets/js/date&time_pickers.js'); ?>"></script>
 
+<!-- FlatPickr CSS -->
+<link rel="stylesheet" href="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.css'); ?>">
+
 <!-- Chartjs Chart JS -->
 <script src="<?php echo base_url('assets/libs/chart.js/chart.min.js'); ?>"></script>
 
@@ -88,9 +91,14 @@
 <!-- CRM Contacts JS -->
 <script src="<?php echo base_url('assets/js/crm-contacts.js'); ?>"></script>
 
+<!-- Sweetalerts JS -->
+<script src="<?php echo base_url('assets/libs/sweetalert2/sweetalert2.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/sweet-alerts.js'); ?>"></script>
+
 <script>
     let csrfName = "<?= csrf_token() ?>";
     let csrfHash = "<?= csrf_hash() ?>";
+    const BASE_URL = "<?= base_url() ?>";
 </script>
 
 <?php if (isset($jspath)): ?>
