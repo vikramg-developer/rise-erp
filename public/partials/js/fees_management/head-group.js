@@ -34,7 +34,7 @@ $("#head-group-form").on("submit", function (e) {
 
     let head_group_id = $('#head_group_id').val();
 
-    let url = (head_group_id === "") ? 'add-head-group' : 'update-head-group';
+    let url = (head_group_id === "") ? 'add-head-group' : 'update-head-group'
 
     $.ajax({
         url: url,
@@ -89,42 +89,42 @@ $(document).on("click", ".edit", function () {
     $("#submit_btn").html('Update <i class="bi bi-save2 ms-2"></i>'); // change button text
 });
 
-//$(document).on("click", ".delete", function () {
-//
-//    let id = $(this).data("id");
-//
-//    Swal.fire({
-//        title: "Delete this item?",
-//        icon: "warning",
-//        showCancelButton: true,
-//        confirmButtonText: "Yes, Delete"
-//    }).then(result => {
-//        if (result.isConfirmed) {
-//
-//            $.ajax({
-//                url: "delete-head-group",
-//                type: "POST",
-//                data: {id: id, [csrfName]: csrfHash},
-//                dataType: "json",
-//
-//                success: res => {
-//                    csrfHash = res.csrfHash;
-//
-//                    Swal.fire({
-//                        toast: true,
-//                        position: "top-end",
-//                        icon: "success",
-//                        title: "Deleted!",
-//                        showConfirmButton: false,
-//                        timer: 1500
-//                    });
-//
-//                    table.settings()[0].ajax.data = d => {
-//                        d[csrfName] = csrfHash
-//                    };
-//                    table.ajax.reload(null, false);
-//                }
-//            });
-//        }
-//    });
-//});
+$(document).on("click", ".delete", function () {
+    console.log("Delete");
+    let id = $(this).data("id");
+
+    Swal.fire({
+        title: "Delete this item?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, Delete"
+    }).then(result => {
+        if (result.isConfirmed) {
+
+            $.ajax({
+                url: "delete-head-group",
+                type: "POST",
+                data: {id: id, [csrfName]: csrfHash},
+                dataType: "json",
+
+                success: res => {
+                    csrfHash = res.csrfHash;
+
+                    Swal.fire({
+                        toast: true,
+                        position: "top-end",
+                        icon: "success",
+                        title: "Deleted!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    table.settings()[0].ajax.data = d => {
+                        d[csrfName] = csrfHash
+                    };
+                    table.ajax.reload(null, false);
+                }
+            });
+        }
+    });
+});

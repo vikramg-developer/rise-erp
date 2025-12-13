@@ -18,7 +18,7 @@ $routes->setDefaultController('Login');
 $routes->setDefaultMethod('login');
 $routes->setTranslateURIDashes(true);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
 // where controller filters or CSRF protection are bypassed.
@@ -77,6 +77,7 @@ $routes->add('/faculty', 'Faculty::index');
 $routes->add('/add-faculty', 'Faculty::add_faculty');
 $routes->add('/manage-faculty', 'Faculty::update-faculty');
 $routes->add('/update-head-group', 'FeesManagement::update-head-group');
+$routes->add('/delete-head-group', 'FeesManagement::delete_head_group');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

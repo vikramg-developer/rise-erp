@@ -41,3 +41,6 @@
 
 <!-- FlatPickr CSS -->
 <link rel="stylesheet" href="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.css'); ?>">
+
+<!-- Sweetalerts CSS -->
+<link rel="stylesheet" href="<?php echo base_url('assets/libs/sweetalert2/sweetalert2.min.css'); ?>">
