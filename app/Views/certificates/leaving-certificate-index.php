@@ -57,10 +57,12 @@
                                                     <label for="course_id" class="form-label"><?= lang('App.course'); ?></label>
                                                     <select class="form-control js-example-basic-single" name="course_id" id="course_id" required>
                                                         <option value="">Select Course</option>
-                                                        <option value="1">Computer Science & Engineering</option>
-                                                        <option value="2">Civil Engineering</option>
-                                                        <option value="3">Mechanical Engineering</option>
-                                                        <option value="4">E & TC Engineering</option>
+                                                        <?php
+                                                        foreach($Courses as $course){
+                                                        ?>
+                                                            <option value="<?php echo $course['course_id']; ?>"><?php echo $course['course_name']; ?></option>
+                                                        <?php
+                                                        } ?> 
                                                     </select>
                                                     <small class="text-danger" id="fetch_student_error" style="display:none;"></small>
                                                 </div>                                            
@@ -68,10 +70,12 @@
                                                     <label for="year_id" class="form-label"><?= lang('App.year'); ?></label>
                                                     <select class="form-control js-example-basic-single" name="year_id" id="year_id" required>
                                                         <option value="">Select Year</option>
-                                                        <option value="1">First Year</option>
-                                                        <option value="2">Second Year</option>
-                                                        <option value="3">Third Year</option>
-                                                        <option value="4">Fourth Year</option>
+                                                        <?php
+                                                        foreach($years as $year){
+                                                        ?>
+                                                            <option value="<?php echo $year['year_id']; ?>"><?php echo $year['year_name']; ?></option>
+                                                        <?php
+                                                        } ?> 
                                                     </select>
                                                     <small class="text-danger" id="fetch_student_error" style="display:none;"></small>
                                                 </div>
@@ -79,12 +83,12 @@
                                                     <label for="aca_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
                                                     <select class="js-example-basic-single" name="aca_year_id" id="aca_year_id" required>
                                                         <option value="">Select Academic Year</option>
-                                                        <option value="Extra Small">2025-2026</option>
-                                                        <option value="Extra Small">2024-2025</option>
-                                                        <option value="Small">2023-2024</option>
-                                                        <option value="Medium">2022-2023</option>
-                                                        <option value="Large">2021-2022</option>
-                                                        <option value="Extra Large">2020-2021</option>
+                                                        <?php
+                                                        foreach($academic_year as $aca_year){
+                                                        ?>
+                                                            <option value="<?php echo $aca_year['academic_year_id']; ?>"><?php echo $aca_year['academic_year_name']; ?></option>
+                                                        <?php
+                                                        } ?>   
                                                     </select>
                                                     <small class="text-danger" id="fetch_student_error" style="display:none;"></small>
                                                 </div>
