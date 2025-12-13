@@ -29,7 +29,7 @@
 
                                                 <li class="slide has-sub">
                                                     <a href="javascript:void(0);" class="side-menu__item">
-                                                        <i class="bx bx-group side-menu__icon"></i>
+                                                        <i class="bx bx-user-pin side-menu__icon"></i>
                                                         <span class="side-menu__label"><?= lang('App.faculty'); ?></span>
                                                         <i class="fe fe-chevron-right side-menu__angle"></i>
                                                     </a>
@@ -120,7 +120,7 @@
                                                 <!-- Start::slide -->
                                                 <li class="slide">
                                                     <a href="<?php echo base_url('i-card'); ?>" class="side-menu__item">
-                                                        <i class="bx bx-store-alt side-menu__icon"></i>
+                                                        <i class="bx bx-id-card side-menu__icon"></i>
                                                         <span class="side-menu__label"><?= lang('App.icard'); ?></span>
                                                     </a>
 
@@ -187,7 +187,7 @@
                                                     <!-- Start::slide -->
                                                     <li class="slide has-sub">
                                                         <a href="javascript:void(0);" class="side-menu__item">
-                                                            <i class="bx bx-rupee side-menu__icon"></i>
+                                                            <i class="bx bx-group side-menu__icon"></i>
                                                             <span class="side-menu__label"><?= lang('App.group'); ?></span>
                                                             <i class="fe fe-chevron-right side-menu__angle"></i>
                                                         </a>
