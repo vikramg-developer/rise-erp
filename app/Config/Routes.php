@@ -46,6 +46,7 @@ $routes->add('/delete-head-group', 'FeesManagement::delete-head-group');
 $routes->add('/faculty-profile', 'FacultyProfile::index');
 $routes->add('/faculty-personal-info', 'FacultyProfile::update_personal_info');
 $routes->add('/feedback', 'Feedback::index');
+$routes->add('/save-feedback-master', 'Feedback::save_feedback_master');
 $routes->add('/fetch-head', 'FeesManagement::fetch-head');
 $routes->add('/fetch-head-group', 'FeesManagement::fetch-head-group');
 $routes->add('/head', 'FeesManagement::head');
