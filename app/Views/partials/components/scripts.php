@@ -43,6 +43,9 @@
 <!-- Date & Time Picker JS -->
 <script src="<?php echo base_url('assets/js/date&time_pickers.js'); ?>"></script>
 
+<!-- FlatPickr CSS -->
+<link rel="stylesheet" href="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.css'); ?>">
+
 <!-- Chartjs Chart JS -->
 <script src="<?php echo base_url('assets/libs/chart.js/chart.min.js'); ?>"></script>
 
