@@ -8,13 +8,11 @@ class Feedback extends BaseController {
     public function __construct()
     {
        $this->ModelFeedback = model('ModelFeedback');
-//       $this->ModelFeedback = new ModelFeedback();
     }
     
     public function index()
     {
-         $data['mater_data'] = 'fees_management/head-group';
-//          $data['feedbacks'] = $this->modelFeedback->findAll();
+        $data['jspath'] = 'feedback/feedback-master';
         render_page('feedback/feedback-master');
     }
     
@@ -43,8 +41,8 @@ class Feedback extends BaseController {
         
         $buttons = '';
         
-        $buttons .= '<button class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill"><i class="ri-pencil-fill"></i></button>';
-        $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill"><i class="ri-delete-bin-fill"></i></button>';
+        $buttons .= '<button class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill"><i class="ri-upload-2-line align-middle me-2 d-inline-block"></i></button>';
+//        $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill"><i class="ri-delete-bin-fill"></i></button>';
 
         $sr_no = 1;
         
@@ -52,7 +50,11 @@ class Feedback extends BaseController {
         foreach ($rows as $row) {
             $data[] = [
                 $sr_no++,
-                $row['head_group_name'],
+                $row['feedback_name'],
+                $row['type_id'],
+                $row['semester_id'],
+                $row['part_id'],
+                $row['academic_year_id'],
                 $buttons,
                 ''
             ];
@@ -65,36 +67,41 @@ class Feedback extends BaseController {
                     'data' => $data
         ]);
     }
-    
-    public function save_feedback_master()
-    {
+    public function save_feedback_master() 
+     {
+        if ($this->request->getMethod() == 'post') {
 
-       $data = [
-            'feedback_name' => $this->request->getPost('feedback_name'),
-            'type_id'  => $this->request->getPost('type_id'),
-            'semester_id'       => $this->request->getPost('semester_id'),
-            'part_id'           => $this->request->getPost('part_id'),
-            'academic_year_id'     => $this->request->getPost('academic_year_id'),
+            $insert_data = [
+                'feedback_name' => clean_name($this->request->getVar('feedback_name')),
+                'type_id' => clean_name($this->request->getVar('type_id')),
+                'semester_id'=> clean_name($this->request->getVar('semester_id')),
+                'part_id' =>clean_name($this->request->getVar('part_id')),
+                'academic_year_id' =>clean_name($this->request->getVar('academic_year_id')),
+            ];
 
-        ];
-        $feedback_master = $this->ModelFeedback->add_master_data($data);
-//        var_dump($this->db->last_query());die();
-        if ($feedback_master) {
-            session()->setFlashdata('success', 'Added successfully!');
-
-            return redirect()->to(base_url('feedback/index'));
+            if ($this->ModelFeedback->insert($insert_data)) {
+                return $this->response->setJSON([
+                            'status' => 'success',
+                            'message' => 'feedback_name added successfully',
+                            'csrfHash' => csrf_hash()
+                ]);
+            } else {
+                return $this->response->setJSON([
+                            'status' => 'error',
+                            'errors' => $this->ModelFeedback->errors(),
+                            'csrfHash' => csrf_hash()
+                ]);
+            }
         } else {
-            session()->setFlashdata('error', 'Something went wrong. Please try again.');
+            render_page('error_page/error404');
         }
-        
     }
-    
+
+
     public function sample_excel_file()
     {
-        // File path inside public folder or writable folder
-        $filePath = FCPATH . 'uploads\Sample_file.xlsx'; // example path
+        $filePath = FCPATH . 'uploads\Sample_file.xlsx';      // example path
 
-//        var_dump($filePath);die();
         if(file_exists($filePath))
         {
             return $this->response->download($filePath, null);
@@ -107,10 +114,7 @@ class Feedback extends BaseController {
     
     public function manage_question($id = null)
     {
-    // $id will help you load questions related to that feedback_master
-    // Example fetch if needed:
     // $data['feedback'] = $this->modelFeedback->find($id);
-
         render_page('feedback/manage-question'); // view path
     }   
 
