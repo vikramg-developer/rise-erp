@@ -78,7 +78,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-light"
                                                         data-bs-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-primary"><?= lang('App.add') ?> <?= lang('App.question') ?></button>
+                                                <button type="submit" class="btn btn-success m-1"><?= lang('App.save') ?>  <i class="bi bi-save2 ms-2"></i></button>
                                             </div>
                                         </div>
                                         <?= form_close(); ?>

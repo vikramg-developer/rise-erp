@@ -21,7 +21,7 @@ class ModelHeadGroup extends Model{
     protected $returnType     = 'array';
 //    protected $useSoftDeletes = true;
 //
-    protected $allowedFields = ['head_group_name'];
+    protected $allowedFields = ['head_group_name','is_deleted'];
 //
 //    protected bool $allowEmptyInserts = false;
 //    protected bool $updateOnlyChanged = true;
@@ -34,8 +34,14 @@ class ModelHeadGroup extends Model{
 //    protected $deletedField  = 'deleted_at';
 //
 //    // Validation
-//    protected $validationRules      = [];
-//    protected $validationMessages   = [];
+    protected $validationRules      = [
+        'head_group_name' => 'required|alpha_numeric_space'
+    ];
+    protected $validationMessages   = [
+        'head_group_name' => [
+            'required' => 'Head Group is required'
+        ]
+    ];
 //    protected $skipValidation       = false;
 //    protected $cleanValidationRules = true;
 //
