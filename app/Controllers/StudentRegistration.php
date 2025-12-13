@@ -23,53 +23,59 @@ class StudentRegistration extends BaseController {
         $this->modelstudentregistration = model('ModelStudentRegistration');
     }
 
-//put your code here
+
     public function index() {
         
        return view('student_registration/registration-page');
     }
-    public function add_registration()
-    {
-        $page_session = \Config\Services::session();
-
-        if ($this->request->getMethod() === 'post') {
-
-            $aadhar = $this->request->getVar('aadhar-number', FILTER_SANITIZE_STRING);
-
-            $allAadhar = $this->modelstudentregistration->findColumn('student_aadhar_number');
-
-            if ($allAadhar && in_array($aadhar, $allAadhar)) {
-                $page_session->setTempdata('error', 'This Aadhar Number is already registered!', 4);
-                return redirect()->back();
-            }
-
-            $lastrise = $this->modelstudentregistration->getLastRiseNo();
-            $newRiseNo = 'S20261010000' . $lastrise;
-
-            $insert_data = [
-                'student_first_name'    => $this->request->getVar('first-name', FILTER_SANITIZE_STRING),
-                'student_middle_name'   => $this->request->getVar('middle-name', FILTER_SANITIZE_STRING),
-                'student_last_name'     => $this->request->getVar('last-name', FILTER_SANITIZE_STRING),
-                'student_aadhar_number' => $aadhar,
-                'student_password'      => password_hash($this->request->getVar('student-password', FILTER_SANITIZE_STRING),PASSWORD_DEFAULT),
-                'student_rise_no'       => $newRiseNo,
-            ];
-
-            $insert = $this->modelstudentregistration->save($insert_data);
-
-            if ($insert) {
-                $page_session->setTempdata(
-                    'success',
-                    'Account created successfully! Please Login. Your Rise No is: <b>' . $newRiseNo . '</b>',
-                    4
-                );
-            } else {
-                $page_session->setTempdata('error', 'Sorry! Something went wrong. Try again.', 4);
-            }
-
+        public function add_registration()
+        {
+            $page_session = \Config\Services::session();
+ 
+        if ($this->request->getMethod() !== 'post') {
             return redirect()->to('/student-registration');
         }
+            if ($this->request->getMethod() === 'post') {
 
-       
-    }
+                $aadhar = clean_name($this->request->getVar('student_aadhar_number'));
+
+                $allAadhar = $this->modelstudentregistration->findColumn('student_aadhar_number');
+
+                if ($allAadhar && in_array($aadhar, $allAadhar)) {
+                    $page_session->setTempdata('error', 'This Aadhar Number is already registered!', 4);
+                    return redirect()->back();
+                }
+
+                $insert_data = [
+                    'student_first_name'    => clean_name($this->request->getVar('student_first_name')),
+                    'student_middle_name'   => clean_name($this->request->getVar('student_middle_name')),
+                    'student_last_name'     => clean_name($this->request->getVar('student_last_name')),
+                    'student_aadhar_number' => $aadhar,
+                    'student_password'  => password_hash($this->request->getVar('student_password'), PASSWORD_DEFAULT),
+
+                    
+                ];
+
+                $insert = $this->modelstudentregistration->save($insert_data);
+                $insertId =$this->modelstudentregistration->getInsertID();
+                $newRiseNo = 'S20261010000' . $insertId;
+                $this->modelstudentregistration->update($insertId, ['student_rise_no' => $newRiseNo]);
+
+                if ($insert) {
+                    $page_session->setTempdata(
+                        'success',
+                        'Account created successfully! Please Login. Your Rise No is: <b>' . $newRiseNo . '</b>',
+                        4
+                    );
+                } else {
+   
+
+                    return view('student_registration/registration-page', ['errors' => $this->modelstudentregistration->errors()]);
+                 }
+
+                return redirect()->to('/student-registration');
+            }
+           
+
+        }
 }

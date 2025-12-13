@@ -1,5 +1,6 @@
-X<?php
+<?php
 $page_session = \Config\Services::session();
+$errors = $errors ?? [];
 ?>
 <?= $this->extend('layouts/custom-main'); ?>
 
@@ -15,52 +16,58 @@ $page_session = \Config\Services::session();
     <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
             <div class="my-5 d-flex justify-content-center">
-                <a href="<?php //echo base_url('index');  ?>">
+                <a href="<?php //echo base_url('index');   ?>">
                     <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-logo">
                     <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-dark">
                 </a>
             </div>
 
             <div class="card custom-card">
-
                 <div class="card-body p-5">
-
                     <?php if ($page_session->getTempdata('success')): ?>
                         <div class="alert alert-primary rounded-pill alert-dismissible fade show"><?= $page_session->getTempdata('success'); ?></div>
                     <?php endif; ?>
-
                     <?php if ($page_session->getTempdata('error')): ?>
                         <div class="alert alert-danger rounded-pill alert-dismissible fade show">       
                             <?= $page_session->getTempdata('error'); ?></div>
                     <?php endif; ?>
-
-
-
                     <p class="h5 fw-semibold mb-2 text-center"><?= lang('App.register'); ?> </p>
                     <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome to Rise Portal! Sign up to access your learning tools and updates.</p>
                     <?= form_open('save-registration'); ?>
+                    <?= csrf_field() ?>
+                   
                     <div class="row gy-3">
                         <!--First name-->
                         <div class="col-xl-12">
-                            <label for="first-name" class="form-label"><?= lang('App.first') ?> <?= lang('App.name') ?> </label>
-                            <input type="text" class="form-control  required-input" name="first-name" placeholder="<?= lang('App.first'); ?> <?= lang('App.name'); ?>"onkeypress="return isAlphaKey(event)"value=""required>
-                       <div class="invalid-feedback"><?= lang('App.error_last_name'); ?></div>
+                            <label for="student_first_name" class="form-label"><?= lang('App.first') ?> <?= lang('App.name') ?></label>
+                            <input type="text" class="form-control required-input" name="student_first_name" id="student_first_name" placeholder="<?= lang('App.first'); ?> <?= lang('App.name'); ?>"value="<?= set_value('student_first_name'); ?>"onkeypress="return isAlphaKey(event)"required>
+                            <?php if (isset($errors['student_first_name'])): ?>
+                                <small class="text-danger"><?= esc($errors['student_first_name']); ?></small>
+                            <?php endif; ?>
                         </div>
                         <!--Middle name-->
                         <div class="col-xl-12">
-                            <label for="middle-name" class="form-label"><?= lang('App.middle'); ?> <?= lang('App.name'); ?></label>
-                            <input type="text" class="form-control required-input" id="middle-name" name="middle-name" placeholder="<?= lang('App.middle'); ?> <?= lang('App.name'); ?>" onkeypress="return isAlphaKey(event)"value=""required>
+                            <label for="student_middle_name" class="form-label"><?= lang('App.middle'); ?> <?= lang('App.name'); ?></label>
+                            <input type="text" class="form-control required-input" id="student_middle_name" name="student_middle_name" placeholder="<?= lang('App.middle'); ?> <?= lang('App.name'); ?>" onkeypress="return isAlphaKey(event)"value="<?= set_value('student_middle_name'); ?>"required>
+                            <?php if (isset($errors['student_middle_name'])): ?>
+                                <small class="text-danger"><?= esc($errors['student_middle_name']); ?></small>
+                            <?php endif; ?>
                         </div>
                         <!--Last name-->
                         <div class="col-xl-12">
-                            <label for="last-name" class="form-label"><?= lang('App.last'); ?> <?= lang('App.name'); ?></label>
-                            <input type="text" class="form-control required-input" id="last-name" name="last-name" placeholder="<?= lang('App.last'); ?> <?= lang('App.name'); ?>"onkeypress="return isAlphaKey(event)"value=""required>
+                            <label for="student_last_name" class="form-label"><?= lang('App.last'); ?> <?= lang('App.name'); ?></label>
+                            <input type="text" class="form-control required-input" id="student_last_name" name="student_last_name" placeholder="<?= lang('App.last'); ?> <?= lang('App.name'); ?>"onkeypress="return isAlphaKey(event)"value="<?= set_value('student_last_name'); ?>"required>
+                            <?php if (isset($errors['student_last_name'])): ?>
+                                <small class="text-danger"><?= esc($errors['student_last_name']); ?></small>
+                            <?php endif; ?>
                         </div>
                         <!--Aadhar Number-->
                         <div class="col-xl-12">
-                            <label for="aadhar-number" class="form-label"><?= lang('App.aadhar'); ?> <?= lang('App.no'); ?></label>
-                            <input type="text" class="form-control required-input" id="aadhar-number" name="aadhar-number"  maxlength="12" minlength="12" placeholder="<?= lang('App.aadhar'); ?> <?= lang('App.no'); ?>"onkeypress="return isNumber(event)"value=""required>
-
+                            <label for="student_aadhar_number" class="form-label"><?= lang('App.aadhar'); ?> <?= lang('App.no'); ?></label>
+                            <input type="text" class="form-control" id="student_aadhar_number" name="student_aadhar_number"onkeypress="return isNumber(event)" maxlength="12" minlength="12" placeholder="<?= lang('App.aadhar'); ?> <?= lang('App.no'); ?>"value="<?= set_value('student_aadhar_number'); ?>"required>
+                            <?php if (isset($errors['student_aadhar_number'])): ?>
+                                <small class="text-danger"><?= esc($errors['student_aadhar_number']); ?></small>
+                            <?php endif; ?>
                         </div>
                         <!--Password-->
                         <div class="col-xl-12">

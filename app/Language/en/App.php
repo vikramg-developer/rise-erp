@@ -247,6 +247,7 @@ return [
     'update' => 'Update',
     'upload' => 'Upload',
     'up' => 'UP',
+    'user' => 'User',
     // V
     'volume' => 'Volume',
     // W
