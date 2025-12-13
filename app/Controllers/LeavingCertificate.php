@@ -4,23 +4,44 @@ namespace App\Controllers;
 
 use App\Models\ModelLeavingCertificate;
 
-class LeavingCertificate extends BaseController
-{
+class LeavingCertificate extends BaseController {
+
     public $ModelLeavingCertificate;
+    public $ModelYearwiseStudentData;
+    public $ModelAcademicYear;
+    public $ModelYear;
+    public $ModelDepartment;
 
     public function __construct() {
-        $this->ModelLeavingCertificate = new ModelLeavingCertificate();
+        $this->ModelLeavingCertificate = model('ModelLeavingCertificate');
+        $this->ModelYearwiseStudentData = model('ModelYearwiseStudentData');
+        $this->ModelAcademicYear = model('ModelAcademicYear');
+        $this->ModelYear = model('ModelYear');
+        $this->ModelDepartment = model('ModelDepartment');
     }
 
-    public function index() {     
-
-        render_page('certificates/leaving-certificate-index');
+    public function index() {
+        $data['jspath'] = 'certificates/leaving-certificate-index';
+        $data['academic_year'] = $this->ModelAcademicYear->get_active_aca_years();
+        $data['years'] = $this->ModelYear->get_years();
+        $data['departments'] = $this->ModelDepartment->get_departments();
+        render_page('certificates/leaving-certificate-index', $data);
     }
 
-    public function add_lc_info() 
-    {   
-        
-        $data=[];
+    public function fetch_student_list() {
+        if ($this->requesst->getMethod() == 'post') {
+            $data = [
+                $department_id = clean_name($this->request->getVar('department_id')),
+                $year_id = clean_name($this->request->getVar('year_id')),
+                $aca_year_id = clean_name($this->request->getVar('aca_year_id')),
+            ];
+            $student_list = $this->$ModelYearwiseStudentData->fetch_student_list($data);
+        }
+    }
+
+    public function add_lc_info() {
+
+        $data = [];
 //        $data['validation'] = \Config\Services::validation();
 //        $rules=[
 //            'full-name'=>'required',
@@ -48,23 +69,21 @@ class LeavingCertificate extends BaseController
 //                $add_lc_data=$this->ModelLeavingCertificate->addLcData($lc_data);
 //                if($add_lc_data)
 //                {                
-                    // Correct mPDF 8.2+ constructor
-                    $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8','format' => 'A4-P']);
-                    $mpdf->shrink_tables_to_fit = 0;
-                    $html = view('certificates/leaving-certificate-print');
-                    $mpdf->simpleTables = false;
-                    $mpdf->WriteHTML($html);
-                    $mpdf->use_kwt = true;
-                    $mpdf->falseBoldWeight = 8;
-                    $mpdf->fonttrans['freeserif'] = 'freeserif2';
-                    $mpdf->useFixedNormalLineHeight = true;
-                    $mpdf->useFixedTextBaseline = true;
-                    $mpdf->adjustFontDescLineheight = 100;
-                    // header('Content-Type: application/pdf');
-                    // header('Content-Disposition: inline; filename="Leaving-Certificate.pdf"');
-                    // Output PDF
-                    $mpdf->Output('Leaving-Certificate.pdf', 'I');
-                    exit; // VERY IMPORTANT
+        // Correct mPDF 8.2+ constructor
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $mpdf->shrink_tables_to_fit = 0;
+        $html = view('certificates/leaving-certificate-print');
+        $mpdf->simpleTables = false;
+        $mpdf->WriteHTML($html);
+        $mpdf->use_kwt = true;
+        $mpdf->falseBoldWeight = 8;
+        $mpdf->fonttrans['freeserif'] = 'freeserif2';
+        $mpdf->useFixedNormalLineHeight = true;
+        $mpdf->useFixedTextBaseline = true;
+        $mpdf->adjustFontDescLineheight = 100;
+        // Output PDF
+        $mpdf->Output('Leaving-Certificate.pdf', 'I');
+        exit; // VERY IMPORTANT
 //                }
 //                else
 //                {
