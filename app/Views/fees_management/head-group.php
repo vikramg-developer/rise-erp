@@ -30,9 +30,9 @@
                                             <div class="row gy-3">
                                                 <div class="col-xl-12">
                                                     <input type="hidden" id="head_group_id" name="head_group_id">
-                                                    <label for="head_group" class="form-label"><?= lang('App.head'); ?> <?= lang('App.group'); ?></label>
-                                                    <input type="text" class="form-control" id="head_group" name="head_group" placeholder="<?= lang('App.head'); ?> <?= lang('App.group'); ?>">
-                                                    <small class="text-danger" id="head_group_error" style="display:none;"></small>
+                                                    <label for="head_group_name" class="form-label"><?= lang('App.head'); ?> <?= lang('App.group'); ?></label>
+                                                    <input type="text" class="form-control" id="head_group_name" name="head_group_name" placeholder="<?= lang('App.head'); ?> <?= lang('App.group'); ?>">
+                                                    <small class="text-danger" id="head_group_name_error" style="display:none;"></small>
                                                 </div>
                                             </div>
                                         </div>

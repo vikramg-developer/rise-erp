@@ -101,6 +101,8 @@
     const BASE_URL = "<?= base_url() ?>";
 </script>
 
+<script src="<?php echo base_url('partials/js/alert.js'); ?>"></script>
+
 <?php if (isset($jspath)): ?>
     <script src="<?php echo base_url('partials/js/') . $jspath . '.js'; ?>"></script>
 <?php endif; ?>
