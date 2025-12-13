@@ -4,62 +4,78 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\FacultyRegistrationModel;
+use App\Models\ModelBranch;
 
-class Faculty extends BaseController
-{
-    public function index()
-    {
+class Faculty extends BaseController {
+
+    public $facultyModel;
+    public $branchModel;
+
+    public function __construct() {
+        $this->facultyModel = new FacultyRegistrationModel();
+        $this->branchModel = new ModelBranch();
+    }
+
+    public function index() {
         $data['jspath'] = 'faculty/add-faculty';
         return render_page('faculty/index', $data);
     }
 
-    public function add_faculty()
-    {
-        $model = new FacultyRegistrationModel();
+    public function add_faculty() {
+        if ($this->request->getMethod() == 'post') {
 
-        $input = $this->request->getPost();
+            $postData = $this->request->getPost();
 
-        // Step 1: Validate input (CI4 auto validation)
-        if (!$model->validate($input)) {
+            if (!$this->facultyModel->validate($postData)) {
+                return $this->response->setJSON([
+                            'status' => 'error',
+                            'errors' => $this->facultyModel->errors(),
+                            'csrfHash' => csrf_hash()
+                ]);
+            }
+           
+            $insert_data = [
+                'faculty_role_id' => $this->request->getVar('faculty_role_id'),
+                'faculty_first_name' => clean_name($this->request->getVar('faculty_first_name')),
+                'faculty_middle_name' => clean_name($this->request->getVar('faculty_middle_name')),
+                'faculty_last_name' => clean_name($this->request->getVar('faculty_last_name')),
+                'faculty_mobile_number' => $this->request->getVar('faculty_mobile_number'),
+                'faculty_email_id' => clean_name($this->request->getVar('faculty_email_id')),
+                'faculty_aadhar_number' => $this->request->getVar('faculty_aadhar_number'),
+                'faculty_pan_number' => clean_name($this->request->getVar('faculty_pan_number')),
+                'faculty_password' => password_hash($this->request->getVar('confirm_password'),PASSWORD_BCRYPT),               
+                'added_by' => session()->get('user_id') ?? null
+            ];
 
-            return redirect()
-                ->to(current_url())
-                ->withInput()
-                ->with('errors', $model->errors());
+            $facultyId = $this->facultyModel->insert($insert_data);
+
+            if (!$facultyId) {
+                return $this->response->setJSON([
+                            'status' => 'error',
+                            'errors' => $this->facultyModel->errors(),
+                            'csrfHash' => csrf_hash()
+                ]);
+            }
+
+            $branch = $this->branchModel->getSingleBranch();
+
+            $branchCode = $branch['branch_code'] ?? '000';
+
+            $year = date('Y');
+            $serial = str_pad($facultyId, 3, '0', STR_PAD_LEFT);
+
+            $facultyRiseNo = 'F' . $year . $branchCode . $serial;
+
+            $this->facultyModel->update($facultyId, [
+                'faculty_rise_no' => $facultyRiseNo
+            ]);
+            return $this->response->setJSON([
+                        'status' => 'success',
+                        'message' => 'Faculty added successfully. ID: ' . $facultyRiseNo,
+                        'csrfHash' => csrf_hash()
+            ]);
         }
 
-        // Step 2: Prepare data (without rise number)
-        $data = [
-            'faculty_first_name'      => $input['first_name'],
-            'faculty_middle_name'     => $input['middle_name'],
-            'faculty_last_name'       => $input['last_name'],
-            'faculty_mobile_number'   => $input['mobile'],
-            'faculty_email_id'        => $input['email'],
-            'faculty_aadhar_number'   => $input['aadhar'],
-            'faculty_pan_number'      => $input['pan'],
-            'faculty_password'        => password_hash($input['password'], PASSWORD_BCRYPT),
-            'added_by'                => session()->get('user_id') ?? 'SYSTEM',
-            'updated_by'              => session()->get('user_id') ?? 'SYSTEM',
-        ];
-
-        // Step 3: Insert first → get auto-increment ID
-        $id = $model->insert($data);
-
-        if (!$id) {
-            return redirect()
-                ->to(current_url())
-                ->withInput()
-                ->with('errors', $model->errors());
-        }
-
-        // Step 4: Generate Rise No
-        $$riseNo = 'F2026' . str_pad($id, 4, '0', STR_PAD_LEFT);
-
-
-        // Step 5: Update Rise No
-        $model->update($id, ['faculty_rise_no' => $riseNo]);
-
-        // Step 6: Redirect with success
-        return redirect() ->to(current_url())->with('success', "Faculty added successfully. Rise No: $riseNo");
+        return render_page('error_page/error404');
     }
 }

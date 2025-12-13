@@ -13,13 +13,16 @@ class AddFacultyRegistration extends Migration
 
             'faculty_registration_id' => [
                 'type'           => 'INT',
-                'unsigned'       => true,
                 'auto_increment' => true,
             ],
 
             'faculty_rise_no' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
+            ],
+            'faculty_role_id' => [
+                'type'       => 'INT',
+                'constraint' => '10',
             ],
 
             'faculty_first_name' => [
