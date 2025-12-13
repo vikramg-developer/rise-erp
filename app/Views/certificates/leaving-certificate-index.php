@@ -1,4 +1,3 @@
-<?php //$page_session=\config\services::session();      ?>
 <div class="container-fluid">
     <!-- Page Header -->
     <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
@@ -12,22 +11,7 @@
             </nav>
         </div>
     </div>
-    <!-- Page Header Close -->
-    <?php
-//    if($php_session->getTempdata('error'))
-//    { 
-    ?>
-    <!--        <div class="toast align-items-center text-bg-success border-0 fade show mb-4" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="d-flex">
-                    <div class="toast-body">
-                        Hello, world! This is the Success toast message.
-                    </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-            </div>-->
-    <?php
-//    }
-    ?>
+    <!-- Page Header Close --> 
     <!-- Start::row-1 -->
     <div class="row">
         <div class="col-xl-12">
@@ -58,11 +42,11 @@
                                                     <select class="form-control js-example-basic-single" name="course_id" id="course_id" required>
                                                         <option value="">Select Course</option>
                                                         <?php
-                                                        foreach($Courses as $course){
-                                                        ?>
+                                                        foreach ($Courses as $course) {
+                                                            ?>
                                                             <option value="<?php echo $course['course_id']; ?>"><?php echo $course['course_name']; ?></option>
-                                                        <?php
-                                                        } ?> 
+                                                        <?php }
+                                                        ?> 
                                                     </select>
                                                     <small class="text-danger" id="fetch_student_error" style="display:none;"></small>
                                                 </div>                                            
@@ -71,11 +55,11 @@
                                                     <select class="form-control js-example-basic-single" name="year_id" id="year_id" required>
                                                         <option value="">Select Year</option>
                                                         <?php
-                                                        foreach($years as $year){
-                                                        ?>
+                                                        foreach ($years as $year) {
+                                                            ?>
                                                             <option value="<?php echo $year['year_id']; ?>"><?php echo $year['year_name']; ?></option>
-                                                        <?php
-                                                        } ?> 
+                                                        <?php }
+                                                        ?> 
                                                     </select>
                                                     <small class="text-danger" id="fetch_student_error" style="display:none;"></small>
                                                 </div>
@@ -84,11 +68,11 @@
                                                     <select class="js-example-basic-single" name="aca_year_id" id="aca_year_id" required>
                                                         <option value="">Select Academic Year</option>
                                                         <?php
-                                                        foreach($academic_year as $aca_year){
-                                                        ?>
+                                                        foreach ($academic_year as $aca_year) {
+                                                            ?>
                                                             <option value="<?php echo $aca_year['academic_year_id']; ?>"><?php echo $aca_year['academic_year_name']; ?></option>
-                                                        <?php
-                                                        } ?>   
+                                                        <?php }
+                                                        ?>   
                                                     </select>
                                                     <small class="text-danger" id="fetch_student_error" style="display:none;"></small>
                                                 </div>

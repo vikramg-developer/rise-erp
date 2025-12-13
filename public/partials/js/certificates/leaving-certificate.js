@@ -1,17 +1,17 @@
-$("#fetch_student").on("submit",function(e){
+$("#fetch_student").on("submit", function (e) {
     e.preventDefault();
     $("#lc_index").text('').hide();
     let formData = $(this).serializeArray();
     formData.push({name: csrfName, value: csrfHash});
-    let course_id=$('#course_id').val();
-    let year_id=$('#year_id').val();
-    let aca_year_id=$('#aca_year_id').val();
+    let course_id = $('#course_id').val();
+    let year_id = $('#year_id').val();
+    let aca_year_id = $('#aca_year_id').val();
     $.ajax({
-        url:'fetch_student_list',
-        type:"POST",
-        data:formData,
-        dataType:"json",
-        success:function(response){
+        url: 'fetch_student_list',
+        type: "POST",
+        data: formData,
+        dataType: "json",
+        success: function (response) {
             // 1️⃣ Update CSRF token
             csrfHash = response.csrfHash;
             // handle validation errors
@@ -34,7 +34,7 @@ $("#fetch_student").on("submit",function(e){
             // Optional: Reset form
             $("#fetch_student")[0].reset();
         }
-        
+
     });
-    
+
 });

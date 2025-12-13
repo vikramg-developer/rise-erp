@@ -4,21 +4,24 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ModelYear {
+class ModelCourse {
 
-    protected $table = 'year';
-    protected $primaryKey = 'year_id';
+    protected $table = 'course';
+    protected $primaryKey = 'course_id';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $allowedFields = [
-        'year_name',
+        'course_name',
+        'is_deleted',
         'added_by',
         'updated_by',
-        'is_deleted'
     ];
+    // Validation
+    protected $validationRules = [];
+    protected $validationMessages = [];
 
     //    Reusable Query Methods
-    public function get_years() {
+    public function get_courses() {
         return $this->where(['is_deleted' => 0])->findAll();
     }
 }
