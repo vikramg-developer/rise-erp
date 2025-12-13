@@ -119,7 +119,7 @@
 
                                                 <!-- Start::slide -->
                                                 <li class="slide">
-                                                    <a href="<?php echo base_url('icard'); ?>" class="side-menu__item">
+                                                    <a href="<?php echo base_url('i-card'); ?>" class="side-menu__item">
                                                         <i class="bx bx-store-alt side-menu__icon"></i>
                                                         <span class="side-menu__label"><?= lang('App.icard'); ?></span>
                                                     </a>
