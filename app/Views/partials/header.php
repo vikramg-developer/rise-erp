@@ -40,9 +40,9 @@
             <?= $this->include('partials/components/main-header'); ?>
             <!-- End::main-header -->
 
-            <!-- Start::main-sidebar -->
+			<!-- Start::main-sidebar -->
             <?= $this->include('partials/components/main-sidebar'); ?>
-            <!-- End::main-sidebar -->
+			<!-- End::main-sidebar -->
 
             <!-- Start::app-content -->
             <div class="main-content app-content">

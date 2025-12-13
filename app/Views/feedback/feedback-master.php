@@ -1,17 +1,4 @@
 <div class="container-fluid">
-    
-<!--    <style>
-.select2-container {
-    z-index: 9999 !important;
-}
-.select2-container--open {
-    z-index: 99999 !important;
-}
-.select2-dropdown {
-    z-index: 999999 !important;
-}
-</style>-->
-
 
     <!-- Page Header -->
     <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
@@ -30,6 +17,20 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
+                <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+                    <div id="successToast" class="toast colored-toast bg-success-transparent" role="alert" aria-live="assertive"
+                         aria-atomic="true">
+                        <div class="toast-header bg-success text-fixed-white">
+                            <img class="bd-placeholder-img rounded me-2" src="<?php echo base_url('assets/images/brand-logos/toggle-rise.jpg'); ?>" alt="...">
+                            <strong class="me-auto"><?= lang('App.rise') ?></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            Your,toast message here.
+                        </div>
+                    </div>
+                </div>
                 <!---------------------------Start Add master-------------------------------------------------------------->
                 <div class="card-header justify-content-between">
                     <div class="card-title">
@@ -53,12 +54,12 @@
                                         <div class="row gy-2">
                                             <!---------------------feedback_name----------------------------------->
                                             <div class="col-xl-12">
-                                                <label for="feedback_name" class="form-label"><?= lang('App.feedback') ?> <?= lang('App.name') ?></label>
+                                                <label for="feedback_name" class="form-label"><?= lang('App.feedback') ?> <?= lang('App.name') ?></label> <span class="text-danger">*</span>
                                                 <input type="text" class="form-control" id="feedback_name" name="feedback_name" placeholder="<?= lang('App.feedback') ?> <?= lang('App.name') ?>" required>
                                             </div>
                                             <!---------------------feedback_type----------------------------------->
                                             <div class="col-xl-6">
-                                                <label class="form-label"><?= lang('App.feedback') ?> <?= lang('App.type') ?></label>
+                                                <label class="form-label"><?= lang('App.feedback') ?> <?= lang('App.type') ?></label>  <span class="text-danger">*</span>
                                                 <select class="form-select" id="type_id" name="type_id" required>
                                                 <!--<select class="js-example-basic-single" id="type_id" name="type_id" required>-->
                                                     <option value="" >Select Type</option>
@@ -69,19 +70,9 @@
                                                     <option value="5">Tutorial</option>
                                                 </select>
                                             </div>
-                                            
-<!--                                            <div class="card-body">
-                                        <select class="js-example-basic-single" name="state">
-                                            <option value="s-1">Selection-1</option>
-                                            <option value="s-2">Selection-2</option>
-                                            <option value="s-3">Selection-3</option>
-                                            <option value="s-4">Selection-4</option>
-                                            <option value="s-5">Selection-5</option>
-                                        </select>
-                                    </div>-->
                                             <!---------------------semester_id----------------------------------->
                                             <div class="col-xl-6">
-                                                <label class="form-label"><?= lang('App.semester') ?></label>
+                                                <label class="form-label"><?= lang('App.semester') ?></label> <span class="text-danger">*</span>
                                                 <select class="form-select" id="semester_id" name="semester_id" required>
                                                     <option value="" >Select Semester</option>
                                                     <option value="1">Odd</option>
@@ -90,7 +81,7 @@
                                             </div>
 
                                             <div class="col-xl-6">
-                                                <label class="form-label"><?= lang('App.part') ?></label>
+                                                <label class="form-label"><?= lang('App.part') ?></label> <span class="text-danger">*</span>
                                                 <select class="form-select" id="part_id" name="part_id" required>
                                                     <option value="" >Select Part</option>
                                                     <option value="1">Pre</option>
@@ -99,7 +90,7 @@
                                             </div>
 
                                             <div class="col-xl-6">
-                                                <label class="form-label"><?= lang('App.academic') ?> <?= lang('App.year') ?></label>
+                                                <label class="form-label"><?= lang('App.academic') ?> <?= lang('App.year') ?></label> <span class="text-danger">*</span>
                                                 <select class="form-select"  id="academic_year_id" name="academic_year_id" required>
                                                     <option value="">Select Academic Year</option>
                                                     <option value="2">2025-2026</option>
@@ -111,7 +102,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-light"
                                                 data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-primary"><?= lang('App.add') ?> <?= lang('App.master') ?></button>
+                                        <button type="submit" class="btn btn-success m-1"> <?= lang('App.save') ?>  <i class="bi bi-save2 ms-2"></i></button>
                                     </div>
                                 </div>
                                 <?= form_close(); ?>
@@ -144,17 +135,10 @@
                                     <td>Odd</td>
                                     <td>pre Semester</td>
                                     <td>2025-2026</td>
-<!--                                    <td>
-                                         <span class="fw-semibold text-success">Completed</span>
-                                        <span class="fw-semibold text-warning">Pending</span>
-                                    </td>-->
                                     <td>
                                         <a href="<?php echo base_url('manage-question'); ?>" class="btn btn-sm btn-success btn-wave">
                                             <i class="ri-upload-2-line align-middle me-2 d-inline-block"></i><?= lang('App.manage') ?> <?= lang('App.question') ?> 
                                         </a>
-                                        <!--<button class="btn btn-sm btn-success btn-wave">-->
-                                            <!--<i class="ri-upload-2-line align-middle me-2 d-inline-block"></i>-->
-
                                     </td>
                                 </tr>
 
@@ -165,47 +149,18 @@
                                     <td>Odd</td>
                                     <td>Pre Semester</td>
                                     <td>2025-2026</td>
-<!--                                    <td>
-                                        <span class="fw-semibold text-warning">Pending</span>
-                                    </td>-->
                                     <td>
                                         <a href="<?php echo base_url('manage-question'); ?>" class="btn btn-sm btn-success btn-wave">
                                             <i class="ri-upload-2-line align-middle me-2 d-inline-block"></i><?= lang('App.manage') ?> <?= lang('App.question') ?> 
                                         </a>
-                                    </td>
-
-                                    <!--<button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>-->
-                                    <!--<button class="btn btn-danger-light btn-icon ms-1 btn-sm task-delete-btn"><i class="ri-delete-bin-5-line"></i></button>-->
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <!--------------------------paging------------------------------------------------------------->
-                <div class="card-footer">
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination mb-0 float-end">
-                            <li class="page-item disabled">
-                                <a class="page-link">Previous</a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item " aria-current="page">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <!--------------------------paging-------------------------------------------------------------->
             </div>
         </div>
-
     </div>
     <!--End::row-1 -->
-
-
 </div>

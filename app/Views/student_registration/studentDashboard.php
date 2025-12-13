@@ -13,7 +13,9 @@
                     <div class="flex-fill main-profile-info">
                         <div class="d-flex align-items-center justify-content-between">
                             <h6 class="fw-semibold mb-1 text-fixed-white">SHINDE NAGESH TUKARAM</h6>
-                            <a href="<?php echo base_url('studentProfile'); ?>" <button class="btn btn-light btn-wave"><i class="ri-eye-line me-1 align-middle d-inline-block"></i>View Profile</button></a>
+                            <a href="<?php echo base_url('studentProfile'); ?>"> 
+                               <button class="btn btn-light btn-wave">
+                                    <i class="ri-eye-line me-1 align-middle d-inline-block"></i>View Profile</button></a>
                         </div>
                         <p class="mb-1 text-muted text-fixed-white op-7">Student</p>
                         <p class="fs-12 text-fixed-white mb-4 op-5">  
