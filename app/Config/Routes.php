@@ -42,7 +42,6 @@ $routes->add('/bonafide-certificate', 'BonafideCertificate::index');
 $routes->add('/bonafide-print', 'BonafideCertificate::bonafide_print');
 $routes->add('/collect-fees', 'FeesManagement::collect_fees');
 $routes->add('/create_ticket', 'Ticket::create_ticket');
-$routes->add('/delete-head-group', 'FeesManagement::delete_head_group');
 $routes->add('/faculty-profile', 'FacultyProfile::index');
 $routes->add('/faculty-personal-info', 'FacultyProfile::update_personal_info');
 $routes->add('/feedback', 'Feedback::index');
