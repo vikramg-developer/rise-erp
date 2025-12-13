@@ -24,8 +24,13 @@ class Database extends Config
     /**
      * The default database connection.
      */
+    
     public array $default = [
         'DSN'      => '',
+//        'hostname' => 'localhost',
+//        'username' => 'root',
+//        'password' => '',
+//        'database' => 'rise',
         'hostname' => '192.168.1.247',
         'username' => 'riseuser',
         'password' => 'Rise@2025',
