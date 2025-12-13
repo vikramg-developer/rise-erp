@@ -264,7 +264,8 @@ return [
     'to_date'               => 'To Date',
     'type'                  => 'Type',
 
-    // U
+    // U    
+
     'university'            => 'University',
     'update'                => 'Update',
     'upload'                => 'Upload',
