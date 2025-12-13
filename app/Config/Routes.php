@@ -78,6 +78,7 @@ $routes->add('/add-faculty', 'Faculty::add_faculty');
 $routes->add('/manage-faculty', 'Faculty::update-faculty');
 $routes->add('/update-head-group', 'FeesManagement::update-head-group');
 $routes->add('/delete-head-group', 'FeesManagement::delete_head_group');
+$routes->add('/revert-head-group', 'FeesManagement::revert_head_group');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

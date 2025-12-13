@@ -61,12 +61,12 @@ class FeesManagement extends BaseController {
         foreach ($rows as $row) {
             $buttons = '';
 
-            $buttons .= '<button class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill edit" data-id="' . $row['head_group_id'] . '" data-name="' . $row['head_group_name'] . '"><i class="ri-pencil-fill"></i></button>';
+            $buttons .= '<button class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill edit" data-head_group_id="' . $row['head_group_id'] . '" data-head_group_name="' . $row['head_group_name'] . '"><i class="ri-pencil-fill"></i></button>';
 
             if ($row['is_deleted'] != 1):
-                $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete" data-id="' . $row['head_group_id'] . '"><i class="ri-delete-bin-fill"></i></button>';
+                $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete" data-head_group_id="' . $row['head_group_id'] . '" data-head_group_name="' . $row['head_group_name'] . '"><i class="ri-delete-bin-fill"></i></button>';
             elseif ($row['is_deleted'] == 1):
-                $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-id="' . $row['head_group_id'] . '"><i class="ri-arrow-go-back-fill"></i></button>';
+                $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-head_group_id="' . $row['head_group_id'] . '" data-head_group_name="' . $row['head_group_name'] . '"><i class="ri-arrow-go-back-fill"></i></button>';
             endif;
 
             if ($row['is_deleted'] == 1):
@@ -98,7 +98,7 @@ class FeesManagement extends BaseController {
         if ($this->request->getMethod() == 'post') {
 
             $insert_data = [
-                'head_group_name' => clean_name($this->request->getVar('head_group')),
+                'head_group_name' => clean_name($this->request->getVar('head_group_name')),
             ];
 
             if ($this->modelheadgroup->insert($insert_data)) {
@@ -124,7 +124,7 @@ class FeesManagement extends BaseController {
             $id = $this->request->getPost('head_group_id');
 
             $update_data = [
-                'head_group_name' => clean_name($this->request->getVar('head_group')),
+                'head_group_name' => clean_name($this->request->getVar('head_group_name')),
             ];
 
             if ($this->modelheadgroup->update($id, $update_data)) {
@@ -147,8 +147,29 @@ class FeesManagement extends BaseController {
 
     public function delete_head_group() {
         if ($this->request->getMethod() == 'post') {
-            $id = $this->request->getPost('head_group_id');
-            $this->modelheadgroup->update($id, ['is_deleted' => 1]);
+            $head_group_id = $this->request->getPost('head_group_id');
+
+            if ($this->modelheadgroup->update($head_group_id, ['is_deleted' => 1])) {
+
+                return $this->response->setJSON([
+                            'csrfHash' => csrf_hash()
+                ]);
+            }
+        } else {
+            render_page('error_page/error404');
+        }
+    }
+
+    public function revert_head_group() {
+        if ($this->request->getMethod() == 'post') {
+            $head_group_id = $this->request->getPost('head_group_id');
+
+            if ($this->modelheadgroup->update($head_group_id, ['is_deleted' => 2])) {
+
+                return $this->response->setJSON([
+                            'csrfHash' => csrf_hash()
+                ]);
+            }
         } else {
             render_page('error_page/error404');
         }
