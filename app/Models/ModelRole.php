@@ -1,22 +1,27 @@
 <?php
 
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
+ */
+
 namespace App\Models;
 use CodeIgniter\Model;
 /**
- * Description of ModelHeadGroup
+ * Description of ModelRole
  *
- * @author Shoeb
+ * @author Dell
  */
-class ModelHeadGroup extends Model{
-    protected $table      = 'head_group';
-    protected $primaryKey = 'head_group_id';
+class ModelRole extends Model{
+    protected $table      = 'role';
+    protected $primaryKey = 'role_id';
 
     protected $useAutoIncrement = true;
 
     protected $returnType     = 'array';
 //    protected $useSoftDeletes = true;
 //
-    protected $allowedFields = ['head_group_name','is_deleted'];
+    protected $allowedFields = ['role_id','role_name','permissions','added_by','updated_by','is_deleted'];
 //
 //    protected bool $allowEmptyInserts = false;
 //    protected bool $updateOnlyChanged = true;
@@ -30,11 +35,11 @@ class ModelHeadGroup extends Model{
 //
 //    // Validation
     protected $validationRules      = [
-        'head_group_name' => 'required|alpha_numeric_space'
+        'role_name' => 'required|alpha_numeric_space'
     ];
     protected $validationMessages   = [
-        'head_group_name' => [
-            'required' => 'Head Group is required'
+        'role_name' => [
+            'required' => 'Role name is required'
         ]
     ];
 //    protected $skipValidation       = false;

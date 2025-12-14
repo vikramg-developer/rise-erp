@@ -25,7 +25,7 @@ class LeavingCertificate extends BaseController {
         $data['academic_year'] = $this->ModelAcademicYear->get_active_aca_years();
         $data['years'] = $this->ModelYear->get_years();
         $data['departments'] = $this->ModelDepartment->get_departments();
-        render_page('certificates/leaving-certificate-index', $data);
+        return render_page('certificates/leaving-certificate-index', $data);
     }
 
     public function fetch_student_list() {
@@ -94,12 +94,12 @@ class LeavingCertificate extends BaseController {
 //            else
 //            {
 //                $data['validation']=$this->validator;
-//                render_page('certificate/leaving-certificate-index');
+//                return render_page('certificate/leaving-certificate-index');
 //                
 //            }
 ////            
 //            
 //        }
-        render_page('certificate/leaving-certificate-index');
+        return render_page('certificate/leaving-certificate-index');
     }
 }

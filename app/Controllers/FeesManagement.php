@@ -29,7 +29,7 @@ class FeesManagement extends BaseController {
 //put your code here
     public function head_group() {
         $data['jspath'] = 'fees_management/head-group';
-        render_page('fees_management/head-group', $data);
+        return render_page('fees_management/head-group', $data);
     }
 
     public function fetch_head_group() {
@@ -115,7 +115,7 @@ class FeesManagement extends BaseController {
                 ]);
             }
         } else {
-            render_page('error_page/error404');
+            return render_page('error_page/error404');
         }
     }
 
@@ -141,7 +141,7 @@ class FeesManagement extends BaseController {
                 ]);
             }
         } else {
-            render_page('error_page/error404');
+            return render_page('error_page/error404');
         }
     }
 
@@ -156,7 +156,7 @@ class FeesManagement extends BaseController {
                 ]);
             }
         } else {
-            render_page('error_page/error404');
+            return render_page('error_page/error404');
         }
     }
 
@@ -171,13 +171,13 @@ class FeesManagement extends BaseController {
                 ]);
             }
         } else {
-            render_page('error_page/error404');
+            return render_page('error_page/error404');
         }
     }
 
     public function head() {
         $data['jspath'] = 'fees_management/head';
-        render_page('fees_management/head', $data);
+        return render_page('fees_management/head', $data);
     }
 
     public function fetch_head() {
@@ -230,15 +230,15 @@ class FeesManagement extends BaseController {
 
     public function head_fees() {
         $data['jspath'] = 'fees_management/head-fees';
-        render_page('fees_management/head-fees', $data);
+        return render_page('fees_management/head-fees', $data);
     }
 
     public function collect_fees() {
         $data['jspath'] = 'fees_management/collect-fees';
-        render_page('fees_management/collect-fees', $data);
+        return render_page('fees_management/collect-fees', $data);
     }
 
     public function student_list() {
-        render_page('fees_management/student-list');
+        return render_page('fees_management/student-list');
     }
 }

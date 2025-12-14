@@ -20,9 +20,9 @@ class AddFacultyRegistration extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
             ],
-            'faculty_role_id' => [
+            'role_id' => [
                 'type'       => 'INT',
-                'constraint' => '10',
+                'constraint' => '11',
             ],
 
             'faculty_first_name' => [

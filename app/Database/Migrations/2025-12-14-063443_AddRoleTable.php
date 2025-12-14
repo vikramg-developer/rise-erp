@@ -3,24 +3,23 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-use CodeIgniter\Database\RawSql;
 
-class AddGroupsTable extends Migration
+class AddRoleTable extends Migration
 {
     public function up()
     {
         $fields = [
-            'group_id' => [
+            'role_id' => [
                 'type' => 'int',
                 'constraint' => '11',
                 'auto_increment' => true,
             ],
-            'group_name' => [
+            'role_name' => [
                 'type' => 'varchar',
                 'constraint' => '100',
                 'null' => false,
             ],
-            'permission' => [
+            'permissions' => [
                 'type' => 'text',
             ],
             'added_by' => [
@@ -50,13 +49,13 @@ class AddGroupsTable extends Migration
         ];
         
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('group_id');
+        $this->forge->addPrimaryKey('role_id');
         
-        $this->forge->createTable('groups');
+        $this->forge->createTable('role');
     }
 
     public function down()
     {
-        $this->forge->dropTable('groups');
+        $this->forge->dropTable('role');
     }
 }

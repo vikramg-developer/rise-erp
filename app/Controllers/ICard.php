@@ -8,7 +8,7 @@ class ICard extends BaseController {
     
     public function index(){
         
-        render_page('i_card/i-card-index');
+        return render_page('i_card/i-card-index');
         
     }
     public function i_card_print(){

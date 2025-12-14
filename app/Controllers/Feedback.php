@@ -13,7 +13,7 @@ class Feedback extends BaseController {
     public function index()
     {
         $data['jspath'] = 'feedback/feedback-master';
-        render_page('feedback/feedback-master');
+        return render_page('feedback/feedback-master');
     }
     
     public function fetch_master_data() {
@@ -93,7 +93,7 @@ class Feedback extends BaseController {
                 ]);
             }
         } else {
-            render_page('error_page/error404');
+            return render_page('error_page/error404');
         }
     }
 
@@ -115,7 +115,7 @@ class Feedback extends BaseController {
     public function manage_question($id = null)
     {
     // $data['feedback'] = $this->modelFeedback->find($id);
-        render_page('feedback/manage-question'); // view path
+        return render_page('feedback/manage-question'); // view path
     }   
 
     

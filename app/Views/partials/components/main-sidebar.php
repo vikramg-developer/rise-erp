@@ -188,18 +188,18 @@
                                                     <li class="slide has-sub">
                                                         <a href="javascript:void(0);" class="side-menu__item">
                                                             <i class="bx bx-group side-menu__icon"></i>
-                                                            <span class="side-menu__label"><?= lang('App.group'); ?></span>
+                                                            <span class="side-menu__label"><?= lang('App.role'); ?></span>
                                                             <i class="fe fe-chevron-right side-menu__angle"></i>
                                                         </a>
                                                         <ul class="slide-menu child1">
                                                             <li class="slide side-menu__label1">
-                                                                <a href="javascript:void(0)"><?= lang('App.group'); ?></a>
+                                                                <a href="javascript:void(0)"><?= lang('App.role'); ?></a>
                                                             </li>
                                                             <li class="slide">
-                                                                <a href="<?php echo base_url('add-group'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.group'); ?></a>
+                                                                <a href="<?php echo base_url('roles/add-role'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.role'); ?></a>
                                                             </li>
                                                             <li class="slide">
-                                                                <a href="<?php echo base_url('manage-group'); ?>" class="side-menu__item"><?= lang('App.manage'); ?> <?= lang('App.group'); ?></a>
+                                                                <a href="<?php echo base_url('roles'); ?>" class="side-menu__item"><?= lang('App.manage'); ?> <?= lang('App.role'); ?></a>
                                                             </li>
                                                         </ul>
                                                     </li>
