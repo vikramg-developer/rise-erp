@@ -27,7 +27,7 @@ class Login extends BaseController {
             return redirect()->to('/login');
         }
 
-        render_page('student_registration/studentDashboard');
+        return render_page('student_registration/studentDashboard');
     }
 
    public function check_user() {
@@ -84,7 +84,7 @@ class Login extends BaseController {
 //                $userdata = $this->ModelFacultyRegistration->verify_rise_no($data);
 //                if ($userdata) {
 //                    if (password_verify($password, $userdata['password'])) {
-//                        render_page('faculty/faculty-dashboard');
+//                        return render_page('faculty/faculty-dashboard');
 //                    } else {
 //                        return view('login/login-page', ['errors' => $this->ModelFacultyRegistration->errors()]);
 //                    }
@@ -96,7 +96,7 @@ class Login extends BaseController {
 //                $userdata = $this->ModelStudentRegistration->verify_rise_no($data);
 //                if ($userdata) {
 //                    if (password_verify($password, $userdata['password'])) {
-//                        render_page('student/student-dashboard');
+//                        return render_page('student/student-dashboard');
 //                    } else {
 //                        return view('login/login-page', ['errors' => $this->ModelStudentRegistration->errors()]);
 //                    }
@@ -108,7 +108,7 @@ class Login extends BaseController {
 //                $userdata = $this->ModelParentsRegistration->verify_rise_no($data);
 //                if ($userdata) {
 //                    if (password_verify($password, $userdata['password'])) {
-//                        render_page('parents/parents-dashboard');
+//                        return render_page('parents/parents-dashboard');
 //                    } else {
 //                        return view('login/login-page', ['errors' => $this->ModelParentsRegistration->errors()]);
 //                    }

@@ -1,5 +1,4 @@
 let table;
-let toast;
 
 $(document).ready(function () {
 
@@ -55,11 +54,8 @@ $("#head-group-form").on("submit", function (e) {
                 }
                 return;
             }
-
-            $("#successToast .toast-body").text(response.message);
-
-            toast = new bootstrap.Toast(document.getElementById('successToast'));
-            toast.show();
+            
+            showToast('success', response.message);
 
             // 2️⃣ Update DataTable token handler
             table.settings()[0].ajax.data = function (d) {

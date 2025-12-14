@@ -16,7 +16,7 @@ class Ticket extends BaseController {
         $data = [];
         $data['ticket_data'] = $this->ModelTicket->getTicketData();
 
-        render_page('ticket/ticket-index', $data);
+        return render_page('ticket/ticket-index', $data);
     }
 
     public function create_ticket() {

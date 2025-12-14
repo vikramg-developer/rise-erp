@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
+                        <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-start">
                             <button class="btn btn-success m-1" id="submit_btn"><?= lang('App.save'); ?><i class="bi bi-save2 ms-2"></i></button>
                         </div>
                     </div>
