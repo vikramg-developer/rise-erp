@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class FacultyRegistrationModel extends Model {
+class ModelFacultyRegistration extends Model {
 
     protected $table = 'faculty_registration';
     protected $primaryKey = 'faculty_registration_id';
@@ -36,6 +36,7 @@ class FacultyRegistrationModel extends Model {
         
     ];
     protected $validationMessages = [
+        
         'faculty_role_id' => [
             'required' => 'Faculty Role is required.',
         ],
@@ -85,4 +86,11 @@ class FacultyRegistrationModel extends Model {
         
     ];
     protected $skipValidation = false;
+//    Reusable Functions
+    
+    public function verify_rise_no($rise_no)
+    {
+        return $this->where('faculty_rise_no', $rise_no)->first(); 
+    }
 }
+

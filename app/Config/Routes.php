@@ -34,7 +34,8 @@ $routes->setAutoRoute(false);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->match(['get','post'],'/', 'Login::login');
+$routes->match(['get','post'],'/', 'Login::login',['as' => 'login']);
+$routes->match(['get','post'],'login', 'Login::login');
 $routes->match(['get','post'],'/add-group', 'Group::add-group');
 $routes->match(['get','post'],'/add-head-group', 'FeesManagement::add_head_group');
 $routes->match(['get','post'],'/add-lc-info', 'LeavingCertificate::add_lc_info');
@@ -57,6 +58,7 @@ $routes->match(['get','post'],'/i-card-print', 'ICard::i_card_print');
 $routes->match(['get','post'],'/leaving-certificate', 'LeavingCertificate::index');
 $routes->match(['get','post'],'/login', 'Login::login');
 $routes->match(['get','post'],'/check-user', 'Login::check_user');
+$routes->match(['get','post'],'/logout', 'Login::logout');
 $routes->match(['get','post'],'/student-registration', 'StudentRegistration::index');
 $routes->match(['get','post'],'/save-registration', 'StudentRegistration::add_registration');
 $routes->match(['get','post'],'/studentDashboard', 'Login::studentDashboard');
@@ -65,9 +67,8 @@ $routes->match(['get','post'],'/leaving-certificate-report', 'LeavingCertificate
 $routes->match(['get','post'],'/manage-question', 'Feedback::manage_question');
 $routes->match(['get','post'],'/registration', 'Registration::index');
 $routes->match(['get','post'],'/student-profile', 'Registration::studentProfile');
-$routes->match(['get','post'],'/check-user', 'login::check_user');
 $routes->match(['get','post'],'/savesignup', 'Registration::saveSignup');
-$routes->match(['get','post'],'/student-dashboard', 'Login::student_dashboard');
+$routes->match(['get','post'],'/student-dashboard', 'Login::studentDashboard');
 $routes->match(['get','post'],'/studentProfile', 'Registration::studentProfile');
 $routes->match(['get','post'],'/student-list', 'FeesManagement::student_list');
 $routes->match(['get','post'],'/sample-excel-file', 'Feedback::sample_excel_file');

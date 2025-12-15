@@ -542,7 +542,7 @@
                     <li><a class="dropdown-item d-flex" href="<?php echo base_url('mail-settings'); ?>"><i class="ti ti-adjustments-horizontal fs-18 me-2 op-7"></i>Settings</a></li>
                     <li><a class="dropdown-item d-flex border-block-end" href="javascript:void(0);"><i class="ti ti-wallet fs-18 me-2 op-7"></i>Bal: $7,12,950</a></li>
                     <li><a class="dropdown-item d-flex" href="<?php echo base_url('chat'); ?>"><i class="ti ti-headset fs-18 me-2 op-7"></i>Support</a></li>
-                    <li><a class="dropdown-item d-flex" href="<?php echo base_url('sign-in-cover'); ?>"><i class="ti ti-logout fs-18 me-2 op-7"></i>Log Out</a></li>
+                    <li><a class="dropdown-item d-flex" href="<?php echo base_url('logout'); ?>"><i class="ti ti-logout fs-18 me-2 op-7"></i>Log Out</a></li>
                 </ul>
             </div>  
             <!-- End::header-element -->

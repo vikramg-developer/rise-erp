@@ -8,19 +8,21 @@ use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
+use App\Filters\PermissionAuthFilter;
 
-class Filters extends BaseConfig
-{
+class Filters extends BaseConfig {
+
     /**
      * Configures aliases for Filter classes to
      * make reading things nicer and simpler.
      */
     public array $aliases = [
-        'csrf'          => CSRF::class,
-        'toolbar'       => DebugToolbar::class,
-        'honeypot'      => Honeypot::class,
-        'invalidchars'  => InvalidChars::class,
+        'csrf' => CSRF::class,
+        'toolbar' => DebugToolbar::class,
+        'honeypot' => Honeypot::class,
+        'invalidchars' => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'permauth' => PermissionAuthFilter::class,
     ];
 
     /**
@@ -30,13 +32,22 @@ class Filters extends BaseConfig
     public array $globals = [
         'before' => [
             // 'honeypot',
-             'csrf',
-            // 'invalidchars',
+            'csrf',
+            'permauth' => [
+                'before' => [
+                    '*', //apply to all filters
+                ],
+                'except' => [
+                '/', //skip login page
+                    'login', //skip login page
+                ]
+            ]
+        // 'invalidchars',
         ],
         'after' => [
             'toolbar',
-            // 'honeypot',
-            // 'secureheaders',
+        // 'honeypot',
+        // 'secureheaders',
         ],
     ];
 
@@ -60,5 +71,6 @@ class Filters extends BaseConfig
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
-    public array $filters = [];
+    public array $filters = [
+    ];
 }

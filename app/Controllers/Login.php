@@ -5,13 +5,16 @@ namespace App\Controllers;
 class Login extends BaseController {
 
     public $ModelStudentRegistration;
-
-//    public $ModelFacultyRegistration;
+    public $ModelFacultyRegistration;
+    public $ModelLogin;
 //    public $ModelParentsRegistration;
+    protected $session;
 
     public function __construct() {
+        $this->session = session();
         $this->ModelStudentRegistration = model('ModelStudentRegistration');
-//        $this->ModelFacultyRegistration = model('ModelFacultyRegistration');   
+        $this->ModelFacultyRegistration = model('ModelFacultyRegistration');
+        $this->ModelLogin = model('ModelLogin');
 //        $this->ModelParentsRegistration = model('ModelParentsRegistration');
     }
 
@@ -20,106 +23,88 @@ class Login extends BaseController {
     }
 
     public function studentDashboard() {
-        $session = session();
 
-        if (!$session->get('student_logged_in')) {
-            $session->setFlashdata('error', 'Please login first');
+
+        if (!$this->session->get('logged_in')) {
+            $this->session->setFlashdata('error', 'Please login first');
             return redirect()->to('/login');
         }
 
         return render_page('student_registration/studentDashboard');
     }
 
-   public function check_user() {
-    $session = session();
+    public function check_user() {
+        $data = [];
+        $rules = [
+            'role_id' => 'required',
+            'login_username' => 'required|exact_length[12]',
+            'login_password' => 'required'
+        ];
+        $messages = [
+            'role_id' => [
+                'required' => 'Please select a role.'
+            ],
+            'login_username' => [
+                'required' => 'Rise number is required.',
+                'exact_length' => 'Rise number must be exactly 12 characters.'
+            ],
+            'login_password' => [
+                'required' => 'Password cannot be empty.'
+            ]
+        ];
 
-    // Only allow POST requests
-    if ($this->request->getMethod() !== 'post') {
-        $session->setFlashdata('error', 'Please login first');
-        return redirect()->to('/login');
-    }
+        if ($this->request->getMethod() == 'post') {
 
-    $user_type = clean_name($this->request->getVar('user_type'));
-    $riseNo = clean_name($this->request->getVar('login_username')); // fixed missing $
-    $password = trim($this->request->getVar('login_password'));
+            if ($this->validate($rules, $messages)) {
+                // Validation passed, now process input
+                $role_id = clean_name($this->request->getVar('role_id'));
+                $username = clean_name($this->request->getVar('login_username'));
+                $password = trim($this->request->getVar('login_password'));
 
-    // Fetch student by rise number
-    $user = $this->ModelStudentRegistration->verify_rise_no($riseNo);
+                if ($role_id === '1') {
+                    $faculty_data = $this->ModelFacultyRegistration->verify_rise_no($username);
 
-    if ($user) {
-        if (password_verify($password, $user['student_password'])) {
-            // Set session data
-            $session->set([
-                'student_id' => $user['student_registration_id'],
-                'rise_no' => $user['student_rise_no'],
-                'student_logged_in' => true
-            ]);
+                    if ($faculty_data) {
+                        if (password_verify($password, $faculty_data['faculty_password'])) {
+                            $this->session->set([
+                                'faculty_registration_id' => $faculty_data['faculty_registration_id'],
+                                'faculty_rise_no' => $faculty_data['faculty_rise_no'],
+                                'role_id' => '1',
+                                'logged_in' => true,
+                                'permissions' => $faculty_data['permissions']
+                            ]);
+                            return redirect()->to('/student-dashboard');
+                        } else {
+                            // Wrong password
+                            return redirect()->to('/login')
+                                            ->with('error', 'Password is Invalid!')
+                                            ->withInput();
+                        }
+                    } else {
+                        // Rise No not found
+                        return redirect()->to('/login')
+                                        ->with('error', 'Rise No is Invalid!')
+                                        ->withInput();
+                    }
+                }
 
-            // Redirect to dashboard
-            return redirect()->to('/studentDashboard'); 
-        } else {
-            // Password incorrect
-            $session->setFlashdata('error', 'Invalid password');
-            return redirect()->to('/login');
+                // You can add other roles here: 2 => Student, 3 => Parent
+            } else {
+                // Validation failed, go back to login with validation errors and old input
+                return redirect()->to('/login')
+                                ->withInput()
+                                ->with('validation', $this->validator);
+            }
         }
-    } else {
-        // Student not found
-        $session->setFlashdata('error', 'Student not found');
+
+        // If someone accesses check_user() directly, redirect to login
         return redirect()->to('/login');
     }
-}
 
+    public function logout() {
+        // Destroy all session data
+        $this->session->destroy();
 
-//    public function check_user() {
-//        $session = session();
-//        $request = $this->request;
-//        $data = [];
-//        if ($this->request->getMethod() == 'post') {
-//            $user_type = clean_name($this->request->getVar('user_type'));
-//            $rise_no = clean_name($this->request->getVar('login_username'));
-//            $password = clean_name($this->request->getVar('login_password'));
-//
-//            if ($user_type == 1) {
-//
-//                $userdata = $this->ModelFacultyRegistration->verify_rise_no($data);
-//                if ($userdata) {
-//                    if (password_verify($password, $userdata['password'])) {
-//                        return render_page('faculty/faculty-dashboard');
-//                    } else {
-//                        return view('login/login-page', ['errors' => $this->ModelFacultyRegistration->errors()]);
-//                    }
-//                } else {
-//                    return view('login/login-page', ['errors' => $this->ModelFacultyRegistration->errors()]);
-//                }
-//            } 
-//            elseif ($user_type == 2) {
-//                $userdata = $this->ModelStudentRegistration->verify_rise_no($data);
-//                if ($userdata) {
-//                    if (password_verify($password, $userdata['password'])) {
-//                        return render_page('student/student-dashboard');
-//                    } else {
-//                        return view('login/login-page', ['errors' => $this->ModelStudentRegistration->errors()]);
-//                    }
-//                } else {
-//                    return view('login/login-page', ['errors' => $this->ModelStudentRegistration->errors()]);
-//                }
-//            } 
-//            elseif ($user_type == 3) {
-//                $userdata = $this->ModelParentsRegistration->verify_rise_no($data);
-//                if ($userdata) {
-//                    if (password_verify($password, $userdata['password'])) {
-//                        return render_page('parents/parents-dashboard');
-//                    } else {
-//                        return view('login/login-page', ['errors' => $this->ModelParentsRegistration->errors()]);
-//                    }
-//                } else {
-//                    return view('login/login-page', ['errors' => $this->ModelParentsRegistration->errors()]);
-//                }
-//            }
-//        } 
-//        else {
-//            $this->session->setTempdata('error', 'Please Login Again', 3);
-//            return redirect()->to(current_url());
-//        }
-//    }
+        return redirect()->to('/login');
+    }
 }
