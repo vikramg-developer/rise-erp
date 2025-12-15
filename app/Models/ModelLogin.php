@@ -5,36 +5,18 @@ namespace App\Models;
 use CodeIgniter\Model;
 
 class ModelLogin extends Model {
-    protected $table = '';
-    protected $primary_key='student_registration_id';
 
-//    public function checkAadharExists($aadhar) {
-//        $builder = $this->db->table('student_registration');
-//        $row = $builder->where('student_aadhar_number', $aadhar)->get()->getRow();
-//    }
-//
-//    public function getRiseNO(){
-//        // Get last rise number
-//        $row = $this->db->table('student_registration')
-//                ->select('student_registration_id')
-//                ->orderBy('student_registration_id', 'DESC')
-//                ->get()
-//                ->getRow();
-//
-//        $lastRiseNO = $row->student_registration_id ?? 0;
-//
-//        // Return next rise number
-//        return $lastRiseNO + 1;
-//    }
-    
-
-    public function check_user($riseNo, $password) {
-
-        return $this->db->table('student_registration')
-                        ->where('student_rise_no', $riseNo)
-                        ->where('student_password', $password)
-                        ->get()
-                        ->getRowArray();
-    }
-
+    protected $validationRules = [
+        'login_username' => 'required|exact_length[12]',
+        'login_password' => 'required',
+    ];
+    protected $validationMessages = [
+        'login_username' => [
+            'required' => 'Rise No is Invalid.',
+            'exact_length' => 'Rise No must be exact 12 characters.',
+        ],
+        'login_password' => [
+            'required' => 'Password is Invalid.',
+        ],
+    ];
 }
