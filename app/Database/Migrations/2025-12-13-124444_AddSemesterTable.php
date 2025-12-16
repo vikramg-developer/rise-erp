@@ -36,11 +36,11 @@ class AddSemesterTable extends Migration {
             'updated_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
-                'null' => false
+                'null' => true
             ],
             'updated_at' => [
                 'type' => 'timestamp',
-                'null' => false,
+                'null' => true,
                 'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
             ],
             'is_deleted' => [

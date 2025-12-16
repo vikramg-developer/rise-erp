@@ -3,17 +3,23 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+
 use CodeIgniter\Database\RawSql;
 
-class AddReligionTable extends Migration {
+class AddDepartmentTable extends Migration {
 
     public function up() {
         $fields = [
-            'religion_id' => [
+            'department_id' => [
                 'type' => 'int',
                 'auto_increment' => true,
             ],
-            'religion_name' => [
+            'department_name' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => false
+            ],
+            'department_abbreviation' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
@@ -31,12 +37,12 @@ class AddReligionTable extends Migration {
             'updated_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
-                'null' => false
+                'null' => true
             ],
             'updated_at' => [
-                'type' => 'timestamp',
-                'null' => false,
-                'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+                'type' => '',
+                'null' => true,
+                'default' => new Rawsql('NULL ON UPDATE CURRENT_TIMESTAMP'),
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
@@ -44,11 +50,11 @@ class AddReligionTable extends Migration {
             ]
         ];
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('religion_id');
-        $this->forge->createTable('religion');
+        $this->forge->addPrimaryKey('department_id');
+        $this->forge->createTable('department');
     }
 
     public function down() {
-        $this->forge->dropTable('religion');
+        $this->forge->dropTable('department');
     }
 }

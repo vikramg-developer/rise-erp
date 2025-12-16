@@ -5,7 +5,7 @@ namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
 
-class AddAbbrivationData extends Seeder
+class AddAbbreviationData extends Seeder
 {
      public function run()
     {
@@ -35,6 +35,6 @@ class AddAbbrivationData extends Seeder
         ];
 
         // Insert multiple rows
-        $this->db->table('abbrivation')->insertBatch($data);
+        $this->db->table('abbreviation')->ignore()->insertBatch($data);
     }
 }
