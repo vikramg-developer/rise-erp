@@ -55,4 +55,9 @@ class ModelRole extends Model{
 //    protected $afterFind      = [];
 //    protected $beforeDelete   = [];
 //    protected $afterDelete    = [];
+    
+    public function findAllRecord($length,$start)
+    {
+        return $this->orderBy('role_id', 'DESC')->findAll($length, $start);
+    }
 }

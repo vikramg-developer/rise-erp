@@ -42,7 +42,7 @@
                                                         </li>
 
                                                         <li class="slide">
-                                                            <a href="<?php echo base_url('manage-faculty'); ?>" class="side-menu__item"> <?= lang('App.manage'); ?> <?= lang('App.faculty'); ?></a>
+                                                            <a href="<?php echo base_url('faculty/manage-faculty'); ?>" class="side-menu__item"> <?= lang('App.manage'); ?> <?= lang('App.faculty'); ?></a>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -152,7 +152,7 @@
                                                                 <a href="javascript:void(0)"><?= lang('App.fees'); ?> <?= lang('App.management'); ?></a>
                                                             </li>
                                                             <li class="slide">
-                                                                <a href="<?php echo base_url('head-group'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?> <?= lang('App.group'); ?></a>
+                                                                <a href="<?php echo base_url('headgroup'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?> <?= lang('App.group'); ?></a>
                                                             </li>
                                                             <li class="slide">
                                                                 <a href="<?php echo base_url('head'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?></a>

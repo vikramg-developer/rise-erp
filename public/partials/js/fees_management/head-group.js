@@ -8,7 +8,7 @@ $(document).ready(function () {
         destroy: true,
 
         ajax: {
-            url: "fetch-head-group",
+            url: "headgroup/fetch-head-group",
             type: "POST",
             data: function (d) {
                 d[csrfName] = csrfHash; // ALWAYS send current token
@@ -34,7 +34,7 @@ $("#head-group-form").on("submit", function (e) {
 
     let head_group_id = $('#head_group_id').val();
 
-    let url = (head_group_id === "") ? 'add-head-group' : 'update-head-group'
+    let url = (head_group_id === "") ? 'headgroup/add-head-group' : 'headgroup/update-head-group'
 
     $.ajax({
         url: url,
@@ -93,7 +93,7 @@ $(document).on("click", ".delete", function () {
     confirmDelete(head_group_name).then(result => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "delete-head-group",
+                url: "headgroup/delete-head-group",
                 type: "POST",
                 data: {head_group_id: head_group_id, [csrfName]: csrfHash},
                 dataType: "json",
@@ -124,7 +124,7 @@ $(document).on("click", ".revert", function () {
     confirmRevert(head_group_name).then(result => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "revert-head-group",
+                url: "headgroup/revert-head-group",
                 type: "POST",
                 data: {head_group_id: head_group_id, [csrfName]: csrfHash},
                 dataType: "json",
