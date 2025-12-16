@@ -4,23 +4,25 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddRoleTable extends Migration
+use CodeIgniter\Database\RawSql;
+
+class AddFinancialYearTable extends Migration
 {
     public function up()
     {
         $fields = [
-            'role_id' => [
+            'financial_year_id' => [
                 'type' => 'int',
-                'constraint' => '11',
                 'auto_increment' => true,
             ],
-            'role_name' => [
+            'financial_year_name' => [
                 'type' => 'varchar',
-                'constraint' => '100',
-                'null' => false,
+                'constraint' => '50',
+                'null' => false
             ],
-            'permissions' => [
-                'type' => 'text',
+            'is_active' => [
+                'type' => 'tinyint',
+                'constraint' => '1'
             ],
             'added_by' => [
                 'type' => 'varchar',
@@ -28,34 +30,32 @@ class AddRoleTable extends Migration
                 'null' => false
             ],
             'added_at' => [
-                'type'=>'TIMESTAMP',
-                'null'=>false,
-                'default'=>new Rawsql('CURRENT_TIMESTAMP'),
+                'type' => 'timestamp',
+                'null' => false,
+                'default' => new Rawsql('CURRENT_TIMESTAMP'),
             ],
-            'updated_by'=> [
+            'updated_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
             ],
-            'updated_at' =>[
-                'type'=>'TIMESTAMP',
-                'null'       => false,
-                'default'=>new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+            'updated_at' => [
+                'type' => 'timestamp',
+                'null' => true,
+                'default' => new Rawsql('NULL ON UPDATE CURRENT_TIMESTAMP'),
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
                 'constraint' => '1'
             ]
         ];
-        
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('role_id');
-        
-        $this->forge->createTable('role');
+        $this->forge->addPrimaryKey('financial_year_id');
+        $this->forge->createTable('financial_year');
     }
 
     public function down()
     {
-        $this->forge->dropTable('role');
+         $this->forge->dropTable('financial_year');
     }
 }
