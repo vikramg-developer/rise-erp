@@ -38,7 +38,7 @@ class Filters extends BaseConfig {
                     '*', //apply to all filters
                 ],
                 'except' => [
-                '/', //skip login page
+                    '/', //skip login page
                     'login', //skip login page
                 ]
             ]
