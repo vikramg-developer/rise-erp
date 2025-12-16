@@ -39,7 +39,8 @@ $errors = $errors ?? [];
                     <p class="h5 fw-semibold mb-2 text-center"><?= lang('App.login'); ?></p>
                     <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome back !</p>
 
-                    <?= form_open('check-user'); ?>
+                    <?= form_open('/check-user'); ?>
+                    
                     <div class="row gy-3">
                         <div class="col-xl-12">
                             <label for="role_id" class="form-label"><?= lang('App.role'); ?></label>

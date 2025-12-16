@@ -95,8 +95,6 @@ class FeesManagement extends BaseController {
     }
 
     public function add_head_group() {
-        if ($this->request->getMethod() == 'post') {
-
             $insert_data = [
                 'head_group_name' => clean_name($this->request->getVar('head_group_name')),
             ];
@@ -114,9 +112,6 @@ class FeesManagement extends BaseController {
                             'csrfHash' => csrf_hash()
                 ]);
             }
-        } else {
-            return render_page('error_page/error404');
-        }
     }
 
     public function update_head_group() {

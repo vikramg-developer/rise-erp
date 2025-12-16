@@ -12,7 +12,7 @@ class ModelFacultyRegistration extends Model {
     protected $returnType = 'array';
     protected $allowedFields = [
         'faculty_rise_no',
-        'faculty_role_id',
+        'role_id',
         'faculty_first_name',
         'faculty_middle_name',
         'faculty_last_name',
@@ -24,7 +24,7 @@ class ModelFacultyRegistration extends Model {
         'added_by',
     ];
     protected $validationRules = [
-        'faculty_role_id' => 'required',
+        'role_id' => 'required',
         'faculty_first_name' => 'required|min_length[2]',
         'faculty_middle_name' => 'required|min_length[2]',
         'faculty_last_name' => 'required|min_length[2]',
@@ -37,7 +37,7 @@ class ModelFacultyRegistration extends Model {
     ];
     protected $validationMessages = [
         
-        'faculty_role_id' => [
+        'role_id' => [
             'required' => 'Faculty Role is required.',
         ],
         'faculty_first_name' => [

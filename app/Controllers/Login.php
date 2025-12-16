@@ -9,12 +9,14 @@ class Login extends BaseController {
     public $ModelLogin;
 //    public $ModelParentsRegistration;
     protected $session;
+    protected $modelrole;
 
     public function __construct() {
         $this->session = session();
         $this->ModelStudentRegistration = model('ModelStudentRegistration');
         $this->ModelFacultyRegistration = model('ModelFacultyRegistration');
         $this->ModelLogin = model('ModelLogin');
+        $this->modelrole = model('ModelRole');
 //        $this->ModelParentsRegistration = model('ModelParentsRegistration');
     }
 
@@ -34,6 +36,7 @@ class Login extends BaseController {
     }
 
     public function check_user() {
+
         $data = [];
         $rules = [
             'role_id' => 'required',
@@ -54,11 +57,10 @@ class Login extends BaseController {
         ];
 
         if ($this->request->getMethod() == 'post') {
-
             if ($this->validate($rules, $messages)) {
                 // Validation passed, now process input
-                $role_id = clean_name($this->request->getVar('role_id'));
-                $username = clean_name($this->request->getVar('login_username'));
+                $role_id = ($this->request->getVar('role_id'));
+                $username = ($this->request->getVar('login_username'));
                 $password = trim($this->request->getVar('login_password'));
 
                 if ($role_id === '1') {
@@ -66,12 +68,14 @@ class Login extends BaseController {
 
                     if ($faculty_data) {
                         if (password_verify($password, $faculty_data['faculty_password'])) {
+
+                            $permissions = $this->modelrole->find($faculty_data['role_id']);
                             $this->session->set([
                                 'faculty_registration_id' => $faculty_data['faculty_registration_id'],
                                 'faculty_rise_no' => $faculty_data['faculty_rise_no'],
-                                'role_id' => '1',
+                                'role_id' => '5',
                                 'logged_in' => true,
-                                'permissions' => $faculty_data['permissions']
+                                'permissions' => json_decode($permissions['permissions'], true)
                             ]);
                             return redirect()->to('/student-dashboard');
                         } else {
@@ -97,7 +101,7 @@ class Login extends BaseController {
             }
         }
 
-        // If someone accesses check_user() directly, redirect to login
+//        // If someone accesses check_user() directly, redirect to login
         return redirect()->to('/login');
     }
 

@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\FacultyRegistrationModel;
+use App\Models\ModelFacultyRegistration;
 use App\Models\ModelBranch;
 
 class Faculty extends BaseController {
@@ -12,7 +12,7 @@ class Faculty extends BaseController {
     public $branchModel;
 
     public function __construct() {
-        $this->facultyModel = new FacultyRegistrationModel();
+        $this->facultyModel = new ModelFacultyRegistration();
         $this->branchModel = new ModelBranch();
     }
 
@@ -20,22 +20,15 @@ class Faculty extends BaseController {
         $data['jspath'] = 'faculty/add-faculty';
         return render_page('faculty/index', $data);
     }
+    
+    public function demo(){
+        echo "add faculty";
+    }
 
     public function add_faculty() {
-        if ($this->request->getMethod() == 'post') {
 
-            $postData = $this->request->getPost();
-
-            if (!$this->facultyModel->validate($postData)) {
-                return $this->response->setJSON([
-                            'status' => 'error',
-                            'errors' => $this->facultyModel->errors(),
-                            'csrfHash' => csrf_hash()
-                ]);
-            }
-           
             $insert_data = [
-                'faculty_role_id' => $this->request->getVar('faculty_role_id'),
+                'role_id' => $this->request->getVar('faculty_role_id'),
                 'faculty_first_name' => clean_name($this->request->getVar('faculty_first_name')),
                 'faculty_middle_name' => clean_name($this->request->getVar('faculty_middle_name')),
                 'faculty_last_name' => clean_name($this->request->getVar('faculty_last_name')),
@@ -43,12 +36,17 @@ class Faculty extends BaseController {
                 'faculty_email_id' => clean_name($this->request->getVar('faculty_email_id')),
                 'faculty_aadhar_number' => $this->request->getVar('faculty_aadhar_number'),
                 'faculty_pan_number' => clean_name($this->request->getVar('faculty_pan_number')),
-                'faculty_password' => password_hash($this->request->getVar('confirm_password'),PASSWORD_BCRYPT),               
-                'added_by' => session()->get('user_id') ?? null
+                'faculty_password' => password_hash($this->request->getVar('faculty_password'),PASSWORD_DEFAULT),               
+//                'added_by' => session()->get('user_id') ?? null
             ];
-
+//
             $facultyId = $this->facultyModel->insert($insert_data);
+            
+//            echo '<pre>';
+//print_r($this->request->getPost());
+//exit;
 
+//
             if (!$facultyId) {
                 return $this->response->setJSON([
                             'status' => 'error',
@@ -74,8 +72,5 @@ class Faculty extends BaseController {
                         'message' => 'Faculty added successfully. ID: ' . $facultyRiseNo,
                         'csrfHash' => csrf_hash()
             ]);
-        }
-
-        return render_page('error_page/error404');
     }
 }
