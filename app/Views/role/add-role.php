@@ -29,8 +29,8 @@
                                             <div class="col-xl-12">
                                                 <label for="role_name" class="form-label"><?= lang('App.role'); ?> <?= lang('App.name'); ?></label>
                                                 <input type="text" class="form-control" id="role_name" name="role_name" placeholder="<?= lang('App.role'); ?> <?= lang('App.name'); ?>">
-                                                <?php if(session('errors')): ?>
-                                                <small class="text-danger"><?= esc(session('errors.role_name'))?></small>
+                                                <?php if (session('errors')): ?>
+                                                    <small class="text-danger"><?= esc(session('errors.role_name')) ?></small>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
@@ -39,36 +39,105 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="card-header">
-                    <div class="card-title">
-                        <?= lang('App.permission'); ?>
+                        <div class="card-title">
+                            <?= lang('App.permission'); ?>
+                        </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <?php // if (!empty($head_role_datas)): ?>
-                    <table id="manageTable" class="table table-bordered table-primary text-nowrap w-100">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th><?= lang('App.create'); ?></th>
-                                <th><?= lang('App.update'); ?></th>
-                                <th><?= lang('App.view'); ?></th>
-                                <th><?= lang('App.delete'); ?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><?= lang('App.fees'); ?> <?= lang('App.management'); ?></td>
-                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createFeesManagement"></td>
-                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateFeesManagement"></td>
-                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewFeesManagement"></td>
-                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteFeesManagement"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                    
+                    <div class="card-body">
+                        <?php // if (!empty($head_role_datas)): ?>
+                        <table id="manageTable" class="table table-bordered table-primary text-nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th><?= lang('App.create'); ?></th>
+                                    <th><?= lang('App.update'); ?></th>
+                                    <th><?= lang('App.view'); ?></th>
+                                    <th><?= lang('App.delete'); ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--faculty_registration-->
+    <!--                            <tr>
+                                    <td><?= lang('App.faculty'); ?></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createFaculty"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateFaculty"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewFaculty"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteFaculty"></td>
+                                </tr>
+                                Student_Profile
+                                 <tr>
+                                    <td><?= lang('App.student'); ?> <?= lang('App.profile'); ?></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createStudentProfile"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateStudentProfile"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewStudentProfile"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteStudentProfile"></td>
+                                </tr>
+                                 Feedback
+                                 <tr>
+                                    <td><?= lang('App.feedback'); ?></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createFeedback"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateFeedback"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewFeedback"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteFeedback"></td>
+                                </tr>
+                                 Certificates
+                                 <tr>
+                                    <td><?= lang('App.certificate'); ?>s</td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createCertificate"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateCertificate"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewCertificate"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteCertificate"></td>
+                                </tr>
+                                 i-card
+                                 <tr>
+                                    <td><?= lang('App.icard'); ?></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createIcard"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateIcard"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewIcard"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteIcard"></td>
+                                </tr>
+                                  Faculty_Profile
+                                 <tr>
+                                    <td><?= lang('App.certificate'); ?></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createFacultyProfile"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateFacultyProfile"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewFacultyProfile"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteFacultyProfile"></td>
+                                </tr>
+                                Fee_Management
+                                <tr>
+                                    <td><?= lang('App.fees'); ?> <?= lang('App.management'); ?></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createFeesManagement"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateFeesManagement"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewFeesManagement"></td>
+                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteFeesManagement"></td>
+                                </tr>-->
+
+                                <?php foreach ($permissions as $module): ?>
+                                    <tr>
+                                        
+                                        <td><?= $module['label'] ?></td>
+
+                                        <?php foreach ($module['actions'] as $action): ?>
+                                            <td>
+                                                <input
+                                                    class="form-check-input"
+                                                    type="checkbox"
+                                                    name="permission[]"
+                                                    id="permission"
+                                                    value="<?= esc($action) ?>"
+                                                    >
+                                            </td>
+                                        <?php endforeach; ?>
+
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+
                     <div class="px-4 py-3 border-top border-block-start d-sm-flex justify-content-start">
                         <a href="<?= esc($backUrl); ?>" class="btn btn-info m-1"><?= lang('App.back'); ?><i class="bi bi-skip-backward ms-2"></i></a>
                         <button class="btn btn-success m-1"><?= lang('App.save'); ?><i class="bi bi-save2 ms-2"></i></button>
