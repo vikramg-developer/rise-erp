@@ -17,7 +17,9 @@ $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Login');
 $routes->setDefaultMethod('login');
 $routes->setTranslateURIDashes(true);
-$routes->set404Override();
+$routes->set404Override(function () {
+    return view('error-page/error404');
+});
 $routes->setAutoRoute(false);
 
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
@@ -34,60 +36,67 @@ $routes->setAutoRoute(false);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->match(['get','post'],'/', 'Login::login',['as' => 'login']);
-$routes->match(['get','post'],'login', 'Login::login');
-$routes->match(['get','post'],'/add-group', 'Group::add-group');
-$routes->match(['get','post'],'/add-head-group', 'FeesManagement::add_head_group');
-$routes->match(['get','post'],'/add-lc-info', 'LeavingCertificate::add_lc_info');
-$routes->match(['get','post'],'/bonafide-certificate', 'BonafideCertificate::index');
-$routes->match(['get','post'],'/bonafide-print', 'BonafideCertificate::bonafide_print');
-$routes->match(['get','post'],'/collect-fees', 'FeesManagement::collect_fees');
-$routes->match(['get','post'],'/create_ticket', 'Ticket::create_ticket');
-$routes->match(['get','post'],'/faculty-profile', 'FacultyProfile::index');
-$routes->match(['get','post'],'/faculty-personal-info', 'FacultyProfile::update_personal_info');
-$routes->match(['get','post'],'/feedback', 'Feedback::index');
-$routes->match(['get','post'],'/save-feedback-master', 'Feedback::save_feedback_master');
-$routes->match(['get','post'],'/fetch-head', 'FeesManagement::fetch-head');
-$routes->match(['get','post'],'/fetch-head-group', 'FeesManagement::fetch_head_group');
-$routes->match(['get','post'],'/head', 'FeesManagement::head');
-$routes->match(['get','post'],'/head-fees', 'FeesManagement::head_fees');
-$routes->match(['get','post'],'/head-group', 'FeesManagement::head_group');
-$routes->match(['get','post'],'/home', 'Home::index');
-$routes->match(['get','post'],'/i-card', 'ICard::index');
-$routes->match(['get','post'],'/i-card-print', 'ICard::i_card_print');
-$routes->match(['get','post'],'/leaving-certificate', 'LeavingCertificate::index');
-$routes->match(['get','post'],'/login', 'Login::login');
-$routes->match(['get','post'],'/check-user', 'Login::check_user');
-$routes->match(['get','post'],'/logout', 'Login::logout');
-$routes->match(['get','post'],'/student-registration', 'StudentRegistration::index');
-$routes->match(['get','post'],'/save-registration', 'StudentRegistration::add_registration');
-$routes->match(['get','post'],'/studentDashboard', 'Login::studentDashboard');
-//$routes->match(['get','post'],'/studentProfile', 'Registration::studentProfile');
-$routes->match(['get','post'],'/leaving-certificate-report', 'LeavingCertificateReport::index');
-$routes->match(['get','post'],'/manage-question', 'Feedback::manage_question');
-$routes->match(['get','post'],'/registration', 'Registration::index');
-$routes->match(['get','post'],'/student-profile', 'Registration::studentProfile');
-$routes->match(['get','post'],'/savesignup', 'Registration::saveSignup');
-$routes->match(['get','post'],'/student-dashboard', 'Login::studentDashboard');
-$routes->match(['get','post'],'/studentProfile', 'Registration::studentProfile');
-$routes->match(['get','post'],'/student-list', 'FeesManagement::student_list');
-$routes->match(['get','post'],'/sample-excel-file', 'Feedback::sample_excel_file');
-$routes->match(['get','post'],'/ticket', 'Ticket::index');
-$routes->match(['get','post'],'/faculty', 'Faculty::index');
-$routes->match(['get','post'],'/add-faculty', 'Faculty::add_faculty');
-$routes->match(['get','post'],'/manage-faculty', 'Faculty::update-faculty');
-$routes->match(['get','post'],'/update-head-group', 'FeesManagement::update-head-group');
-$routes->match(['get','post'],'/delete-head-group', 'FeesManagement::delete_head_group');
-$routes->match(['get','post'],'/revert-head-group', 'FeesManagement::revert_head_group');
+$routes->get('/', 'Login::login');
+$routes->get('login', 'Login::login');
+$routes->post('/add-group', 'Group::add-group');
+$routes->post('/add-lc-info', 'LeavingCertificate::add_lc_info');
+$routes->post('/bonafide-certificate', 'BonafideCertificate::index');
+$routes->post('/bonafide-print', 'BonafideCertificate::bonafide_print');
+$routes->post('/collect-fees', 'FeesManagement::collect_fees');
+$routes->post('/create_ticket', 'Ticket::create_ticket');
+$routes->post('/faculty-profile', 'FacultyProfile::index');
+$routes->post('/faculty-personal-info', 'FacultyProfile::update_personal_info');
+$routes->post('/feedback', 'Feedback::index');
+$routes->post('/save-feedback-master', 'Feedback::save_feedback_master');
+$routes->post('/fetch-head', 'FeesManagement::fetch-head');
+$routes->post('/head', 'FeesManagement::head');
+$routes->post('/head-fees', 'FeesManagement::head_fees');
 
+$routes->post('/home', 'Home::index');
+$routes->post('/i-card', 'ICard::index');
+$routes->post('/i-card-print', 'ICard::i_card_print');
+$routes->post('/leaving-certificate', 'LeavingCertificate::index');
+$routes->post('/check-user', 'Login::check_user');
+$routes->get('logout', 'Login::logout');
+$routes->get('student-registration', 'StudentRegistration::index');
+$routes->post('save-registration', 'StudentRegistration::add_registration');
+//$routes->post('/studentProfile', 'Registration::studentProfile');
+$routes->post('/leaving-certificate-report', 'LeavingCertificateReport::index');
+$routes->post('/manage-question', 'Feedback::manage_question');
+$routes->post('/student-profile', 'Registration::studentProfile');
+$routes->post('/savesignup', 'Registration::saveSignup');
+$routes->get('/student-dashboard', 'Login::studentDashboard');
+$routes->get('/studentDashboard', 'Login::studentDashboard');
+$routes->post('/studentProfile', 'Registration::studentProfile');
+$routes->post('/student-list', 'FeesManagement::student_list');
+$routes->post('/sample-excel-file', 'Feedback::sample_excel_file');
+$routes->post('/ticket', 'Ticket::index');
+
+$routes->group('faculty', function ($routes) {
+    $routes->get('/', 'Faculty::index', ['filter' => 'permauth:createFeesManagement']);
+    $routes->post('demo', 'Faculty::demo', ['filter' => 'permauth:createFeesManagement']);
+    $routes->post('add-faculty', 'Faculty::add_faculty', ['filter' => 'permauth:createFeesManagement']);
+    $routes->post('manage-faculty', 'Faculty::update-faculty', ['filter' => 'permauth:createFeesManagement']);
+});
+$routes->group('headgroup', function ($routes) {
+    $routes->get('/', 'FeesManagement::head_group', ['filter' => 'permauth:createFeesManagement']);
+    $routes->post('fetch-head-group', 'FeesManagement::fetch_head_group', ['filter' => 'permauth:createFeesManagement']);
+    $routes->post('add-head-group', 'FeesManagement::add_head_group', ['filter' => 'permauth:createFeesManagement']);
+    $routes->post('update-head-group', 'FeesManagement::update-head-group', ['filter' => 'permauth:createFeesManagement']);
+    $routes->post('delete-head-group', 'FeesManagement::delete_head_group', ['filter' => 'permauth:createFeesManagement']);
+    $routes->post('revert-head-group', 'FeesManagement::revert_head_group', ['filter' => 'permauth:createFeesManagement']);
+});
+
+$routes->get('forbidden', 'Error::forbidden');
 $routes->group('roles', function ($routes) {
-    $routes->match(['get','post'],'/', 'Role::index');
-    $routes->match(['get','post'],'fetch-role', 'Role::fetch_role');
-    $routes->match(['get','post'],'add-role', 'Role::add_role');
-    $routes->match(['get','post'],'save-role', 'Role::save_role');
-    $routes->match(['get','post'],'update-role/(:num)', 'Role::update_role/$1');
-    $routes->match(['get','post'],'delete-role', 'Role::delete_role');
-    $routes->match(['get','post'],'revert-role', 'Role::revert_role');
+    $routes->get('/', 'Role::index', ['filter' => 'permauth:createFeesManagement']);
+    $routes->post('fetch-role', 'Role::fetch_role', ['filter' => 'permauth:createFeesManagement']);
+    $routes->get('add-role', 'Role::add_role', ['filter' => 'permauth:createFeesManagement']);
+    $routes->post('save-role', 'Role::save_role');
+    $routes->get('edit-role/(:num)', 'Role::edit_role/$1', ['filter' => 'permauth:createFeesManagement']);
+    $routes->post('update-role/(:num)', 'Role::update_role/$1');
+    $routes->post('delete-role', 'Role::delete_role');
+    $routes->post('revert-role', 'Role::revert_role');
 });
 
 /*
@@ -106,3 +115,4 @@ $routes->group('roles', function ($routes) {
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
+

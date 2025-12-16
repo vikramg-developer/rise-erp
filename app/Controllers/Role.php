@@ -11,7 +11,7 @@ use CodeIgniter\Controller;
  */
 class Role extends BaseController {
 
-    public $modelrole;
+    protected $modelrole;
 
     public function __construct() {
         $this->modelrole = model('ModelRole');
@@ -42,7 +42,7 @@ class Role extends BaseController {
         $recordsFiltered = $this->modelrole->countAllResults(false);
 
 // PAGINATED DATA
-        $rows = $this->modelrole->orderBy('role_id', 'ASC')->findAll($length, $start);
+        $rows = $this->modelrole->findAllRecord($length, $start);
 
         $sr_no = 1;
 
@@ -50,7 +50,7 @@ class Role extends BaseController {
         foreach ($rows as $row) {
             $buttons = '';
 
-            $buttons .= '<a href="roles/update-role/' . $row['role_id'] . '" class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill edit"><i class="ri-pencil-fill"></i></a>';
+            $buttons .= '<a href="roles/edit-role/' . $row['role_id'] . '" class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill edit"><i class="ri-pencil-fill"></i></a>';
 
             if ($row['is_deleted'] != 1):
                 $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete" data-role_id="' . $row['role_id'] . '" data-role_name="' . $row['role_name'] . '"><i class="ri-delete-bin-fill"></i></button>';
@@ -86,101 +86,89 @@ class Role extends BaseController {
     }
 
     public function add_role() {
-        $data['backUrl'] = session('back_url') ?? route_to('roles');
+        $data['backUrl'] = previous_url() ?? base_url('roles');
         return render_page('role/add-role', $data);
     }
 
     public function save_role() {
 
-        if ($this->request->getMethod() == 'post') {
-            $permissions = $this->request->getVar('permission') ?? [];
-            $permission = json_encode($permissions);
+        $permissions = $this->request->getVar('permission') ?? [];
+        $permission = json_encode($permissions);
 
-            $insert_data = [
-                'role_name' => clean_name($this->request->getVar('role_name')),
-                'permissions' => $permission
-            ];
+        $insert_data = [
+            'role_name' => clean_name($this->request->getVar('role_name')),
+            'permissions' => $permission
+        ];
 
-            if ($this->modelrole->insert($insert_data)) {
+        if ($this->modelrole->insert($insert_data)) {
 
-                return redirect()
-                                ->to(route_to('roles'))
-                                ->with('toast', [
-                                    'status' => 'success',
-                                    'message' => 'Role added successfully'
-                ]);
-            }
-
-            return redirect()->back()
-                            ->withInput()
-                            ->with('errors', $this->modelrole->errors());
-        } else {
-            return render_page('error_page/error404');
+            return redirect()
+                            ->to('roles')
+                            ->with('toast', [
+                                'status' => 'success',
+                                'message' => 'Role added successfully'
+            ]);
         }
+
+        return redirect()->back()
+                        ->withInput()
+                        ->with('errors', $this->modelrole->errors());
+    }
+
+    public function edit_role($role_id) {
+        $data['backUrl'] = previous_url() ?? base_url('roles');
+        $data['role_data'] = $this->modelrole->find($role_id);
+
+        return render_page('role/update-role', $data);
     }
 
     public function update_role($role_id) {
-        $data['backUrl'] = session('back_url') ?? route_to('roles');
         $update_data = [];
-        if ($this->request->getMethod() == 'post') {
 
-            $permissions = $this->request->getVar('permission') ?? [];
-            $permission = json_encode($permissions);
+        $permissions = $this->request->getVar('permission') ?? [];
+        $permission = json_encode($permissions);
 
-            $update_data = [
-                'role_name' => clean_name($this->request->getVar('role_name')),
-                'permissions' => $permission
-            ];
+        $update_data = [
+            'role_name' => clean_name($this->request->getVar('role_name')),
+            'permissions' => $permission
+        ];
 
-            if ($this->modelrole->update($role_id, $update_data)) {
+        if ($this->modelrole->update($role_id, $update_data)) {
 
-                return redirect()
-                                ->to(route_to('roles'))
-                                ->with('toast', [
-                                    'status' => 'success',
-                                    'message' => 'Role updated successfully'
-                ]);
-            }
-
-            return redirect()->back()
-                            ->withInput()
-                            ->with('errors', $this->modelrole->errors());
-        } else if ($this->request->getMethod() == 'get') {
-            $data['role_data'] = $this->modelrole->find($role_id);
-
-            return render_page('role/update-role', $data);
-        } else {
-            return render_page('error_page/error404');
+            return redirect()
+                            ->to('roles')
+                            ->with('toast', [
+                                'status' => 'success',
+                                'message' => 'Role updated successfully'
+            ]);
         }
+
+        return redirect()->back()
+                        ->withInput()
+                        ->with('errors', $this->modelrole->errors());
     }
 
     public function delete_role() {
-        if ($this->request->getMethod() == 'post') {
-            $role_id = $this->request->getPost('role_id');
 
-            if ($this->modelrole->update($role_id, ['is_deleted' => 1])) {
+        $role_id = $this->request->getPost('role_id');
 
-                return $this->response->setJSON([
-                            'csrfHash' => csrf_hash()
-                ]);
-            }
-        } else {
-            return render_page('error_page/error404');
+        if ($this->modelrole->update($role_id, ['is_deleted' => 1])) {
+
+            return $this->response->setJSON([
+                        'csrfHash' => csrf_hash()
+            ]);
         }
     }
 
     public function revert_role() {
-        if ($this->request->getMethod() == 'post') {
-            $role_id = $this->request->getPost('role_id');
 
-            if ($this->modelrole->update($role_id, ['is_deleted' => 2])) {
+        $role_id = $this->request->getPost('role_id');
 
-                return $this->response->setJSON([
-                            'csrfHash' => csrf_hash()
-                ]);
-            }
-        } else {
-            return render_page('error_page/error404');
+        if ($this->modelrole->update($role_id, ['is_deleted' => 2])) {
+
+            return $this->response->setJSON([
+                        'csrfHash' => csrf_hash()
+            ]);
         }
     }
 }

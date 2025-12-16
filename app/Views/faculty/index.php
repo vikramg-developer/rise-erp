@@ -166,7 +166,7 @@
                                        class="form-control"
                                        placeholder="Confirm Password" >
                                 <small class="text-danger" id="confirm_password_error" style="display:none;" ></small>
-                            </div
+                            </div>
 
                         </div>
 

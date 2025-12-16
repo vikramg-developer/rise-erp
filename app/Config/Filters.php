@@ -40,6 +40,11 @@ class Filters extends BaseConfig {
                 'except' => [
                     '/', //skip login page
                     'login', //skip login page
+                    'check-user', //skip login page
+                    'student-dashboard', //skip student dashboard page
+                    'student-registration', //skip student registration page
+                    'save-registration', //skip student registration save page
+                    'logout' //skip logout page
                 ]
             ]
         // 'invalidchars',
