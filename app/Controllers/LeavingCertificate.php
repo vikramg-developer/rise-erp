@@ -28,14 +28,14 @@ class LeavingCertificate extends BaseController {
         return render_page('certificates/leaving-certificate-index', $data);
     }
 
-    public function fetch_student_list() {
+    public function fetch_lc_student_list() {
         if ($this->requesst->getMethod() == 'post') {
             $data = [
-                $department_id = clean_name($this->request->getVar('department_id')),
-                $year_id = clean_name($this->request->getVar('year_id')),
-                $aca_year_id = clean_name($this->request->getVar('aca_year_id')),
+                $department_id => $this->request->getVar('department_id'),
+                $year_id => $this->request->getVar('year_id'),
+                $academic_year_id => $this->request->getVar('academic_year_id'),
             ];
-            $student_list = $this->$ModelYearwiseStudentData->fetch_student_list($data);
+            $student_list = $this->ModelYearwiseStudentData->fetch_ysd_student_for_lc($data);
         }
     }
 

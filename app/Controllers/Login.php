@@ -69,7 +69,7 @@ class Login extends BaseController {
                     if ($faculty_data) {
                         if (password_verify($password, $faculty_data['faculty_password'])) {
 
-                            $permissions = $this->modelrole->find($faculty_data['role_id']);
+                            $permissions = $this->modelrole->find($faculty_data['faculty_role_id']);
                             $this->session->set([
                                 'faculty_registration_id' => $faculty_data['faculty_registration_id'],
                                 'faculty_rise_no' => $faculty_data['faculty_rise_no'],

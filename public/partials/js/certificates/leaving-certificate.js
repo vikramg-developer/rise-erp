@@ -1,4 +1,4 @@
-$("#fetch_student").on("submit", function (e) {
+$("#fetch_lc_student").on("submit", function (e) {
     e.preventDefault();
     $("#lc_index").text('').hide();
     let formData = $(this).serializeArray();
@@ -7,7 +7,7 @@ $("#fetch_student").on("submit", function (e) {
     let year_id = $('#year_id').val();
     let aca_year_id = $('#aca_year_id').val();
     $.ajax({
-        url: 'fetch_student_list',
+        url: 'fetch_lc_student_list',
         type: "POST",
         data: formData,
         dataType: "json",

@@ -106,7 +106,7 @@
                                 <td>Civil Engineering</td>
                                 <td>Third Year</td>
                                 <td>
-                                    <a href="<?php echo base_url('bonafide-print'); ?>" target="_blank" class="btn btn-warning mb-1" ><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
+                                    <a href="<?php echo base_url('bonafidecertificate/bonafide-print'); ?>" target="_blank" class="btn btn-warning mb-1" ><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
                                 </td>
                             </tr>
                             <tr>

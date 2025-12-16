@@ -29,7 +29,7 @@
                         </div>
                     </div>
                 </div>
-                <form method="post" action="" id="fetch_student">
+                <form method="post" action="" id="fetch_lc_student">
                     <div class="card-body add-products p-0">
                         <div class="p-4">
                             <div class="row gx-5">
@@ -64,8 +64,8 @@
                                                     <small class="text-danger" id="fetch_student_error" style="display:none;"></small>
                                                 </div>
                                                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                                                    <label for="aca_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
-                                                    <select class="js-example-basic-single" name="aca_year_id" id="aca_year_id" required>
+                                                    <label for="academic_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
+                                                    <select class="js-example-basic-single" name="academic_year_id" id="academic_year_id" required>
                                                         <option value="">Select Academic Year</option>
                                                         <?php
                                                         foreach ($academic_year as $aca_year) {
@@ -94,7 +94,7 @@
     <!--modal to add leaving certificate info-->
     <div class="modal fade" id="exampleModalLg" tabindex="-1" aria-labelledby="exampleModalLgLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <?= form_open('add-lc-info', ['target' => '_blank']); ?>
+            <?= form_open('leavingcertificate/add-lc-info', ['target' => '_blank']); ?>
             <div class="modal-content">
                 <div class="modal-header">
                     <h6 class="modal-title" id="exampleModalLgLabel"><?= lang('App.add'); ?> <?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?> <?= lang('App.information'); ?></h6>
