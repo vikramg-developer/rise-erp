@@ -11,7 +11,7 @@ class ModelYearwiseStudentData {
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $allowedFields = [
-        'registration_id',
+        'student_registration_id',
         'academic_year_id',
         'department_id',
         'year_id',
@@ -32,13 +32,9 @@ class ModelYearwiseStudentData {
         'year_id' => 'required',
         'department_id' => 'required'
     ];
-    protected $validationMessages = [
-        'head_group_name' => [
-            'required' => 'Head Group is required'
-        ]
-    ];
+    protected $validationMessages = [];
     
-//    Reusable function 
+//  Reusable function 
     public function fetch_ysd_student_for_lc($data){
         return $this->select('
             ysd.*,
