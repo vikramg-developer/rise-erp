@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <?php $user_permissions = json_decode($role_data['permissions'],true) ?>
+                    <?php $user_permissions = json_decode($role_data['permissions'],true)??[] ?>
                     <table id="manageTable" class="table table-bordered table-primary text-nowrap w-100">
                         <thead>
                             <tr>

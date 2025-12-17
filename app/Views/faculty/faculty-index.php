@@ -149,10 +149,21 @@
                                 <label class="form-label">
                                     <?= lang('App.password'); ?> <span class="text-danger">*</span>
                                 </label>
-                                <input type="password"
-                                       name="faculty_password"
-                                       class="form-control"
-                                       placeholder="Enter Password">
+
+                                <div class="input-group">
+                                    <input type="password"
+                                           id="faculty_password"
+                                           name="faculty_password"
+                                           class="form-control"
+                                           placeholder="Enter Password">
+
+                                    <button class="btn btn-light"
+                                            type="button"
+                                            onclick="createpassword('faculty_password', this)">
+                                        <i class="ri-eye-off-line align-middle"></i>
+                                    </button>
+                                </div>
+
                                 <small class="text-danger" id="faculty_password_error" style="display:none;"></small>
                             </div>
 
@@ -161,17 +172,30 @@
                                 <label class="form-label">
                                     <?= lang('App.confirm'); ?> <?= lang('App.password'); ?> <span class="text-danger">*</span>
                                 </label>
-                                <input type="password"
-                                       name="confirm_password"
-                                       class="form-control"
-                                       placeholder="Confirm Password" >
-                                <small class="text-danger" id="confirm_password_error" style="display:none;" ></small>
+
+                                <div class="input-group">
+                                    <input type="password"
+                                           id="confirm_password"
+                                           name="confirm_password"
+                                           class="form-control"
+                                           placeholder="Confirm Password">
+
+                                    <button class="btn btn-light"
+                                            type="button"
+                                            onclick="createpassword('confirm_password', this)">
+                                        <i class="ri-eye-off-line align-middle"></i>
+                                    </button>
+                                </div>
+
+                                <small id="password-message" class="fw-semibold"></small>
+                                <small class="text-danger" id="confirm_password_error" style="display:none;"></small>
                             </div>
+
 
                         </div>
 
                         <div class="text-end mt-4">
-                            <button type="submit" class="btn btn-success btn-lg">
+                            <button type="submit" class="btn btn-success btn-lg" disabled>
                                 <i class="fe fe-save"></i> <?= lang('App.save'); ?>
                             </button>
                         </div>
@@ -183,3 +207,4 @@
         </div>
     </div>
 </div>
+
