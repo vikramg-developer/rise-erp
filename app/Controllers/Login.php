@@ -49,7 +49,7 @@ class Login extends BaseController {
             ]
         ];
 
-        if ($this->request->getMethod() == 'post') {
+//        if ($this->request->getMethod() == 'post') {
             if ($this->validate($rules, $messages)) {
                 // Validation passed, now process input
                 $user_type = ($this->request->getVar('user_type'));
@@ -124,10 +124,10 @@ class Login extends BaseController {
                                 ->withInput()
                                 ->with('validation', $this->validator);
             }
-        }
-
-//        // If someone accesses check_user() directly, redirect to login
-        return redirect()->to('/login');
+//        }
+//
+////        // If someone accesses check_user() directly, redirect to login
+//        return redirect()->to('/login');
     }
 
     public function logout() {
