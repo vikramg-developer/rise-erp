@@ -67,7 +67,7 @@ class Login extends BaseController {
                             'username' => $faculty_data['faculty_first_name'] . " " . $faculty_data['faculty_middle_name'] . " " . $faculty_data['faculty_last_name'],
                             'role_id' => $faculty_data['faculty_role_id'],
                             'logged_in' => true,
-                            'permissions' => json_decode($permissions['permissions'], true)
+                            'permissions' => json_decode($permissions['permissions'], true)??[]
                         ]);
                         return redirect()->to('/student-dashboard');
                     } else {
@@ -98,7 +98,7 @@ class Login extends BaseController {
                             'username' => $student_data['student_first_name'] . " " . $student_data['student_middle_name'] . " " . $student_data['student_last_name'],
                             'role_id' => $student_data['student_role_id'],
                             'logged_in' => true,
-                            'permissions' => json_decode($permissions['permissions'], true)
+                            'permissions' => json_decode($permissions['permissions'], true)??[]
                         ]);
                         return redirect()->to('/student-dashboard');
                     } else {

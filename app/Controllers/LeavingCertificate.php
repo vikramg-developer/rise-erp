@@ -6,36 +6,57 @@ use App\Models\ModelLeavingCertificate;
 
 class LeavingCertificate extends BaseController {
 
-    public $ModelLeavingCertificate;
-    public $ModelYearwiseStudentData;
-    public $ModelAcademicYear;
-    public $ModelYear;
-    public $ModelDepartment;
+    protected $modelleavingcertificate;
+    protected $modelyearwisestudentdata;
+    protected $modelacademicyear;
+    protected $modelyear;
+    protected $modeldepartment;
 
     public function __construct() {
-        $this->ModelLeavingCertificate = model('ModelLeavingCertificate');
-        $this->ModelYearwiseStudentData = model('ModelYearwiseStudentData');
-        $this->ModelAcademicYear = model('ModelAcademicYear');
-        $this->ModelYear = model('ModelYear');
-        $this->ModelDepartment = model('ModelDepartment');
+        $this->modelleavingcertificate = model('ModelLeavingCertificate');
+        $this->modelyearwisestudentdata = model('ModelYearwiseStudentData');
+        $this->modelacademicyear = model('ModelAcademicYear');
+        $this->modelyear = model('ModelYear');
+        $this->modeldepartment = model('ModelDepartment');
     }
 
     public function index() {
-        $data['jspath'] = 'certificates/leaving-certificate-index';
-        $data['academic_year'] = $this->ModelAcademicYear->get_active_aca_years();
-        $data['years'] = $this->ModelYear->get_years();
-        $data['departments'] = $this->ModelDepartment->get_departments();
+        $data['jspath'] = 'certificates/leaving-certificate';
+        $data['academic_year'] = $this->modelacademicyear->get_active_academic_years();
+        $data['years'] = $this->modelyear->get_years();
+        $data['departments'] = $this->modeldepartment->get_departments();
         return render_page('certificates/leaving-certificate-index', $data);
     }
 
     public function fetch_lc_student_list() {
-        if ($this->requesst->getMethod() == 'post') {
-            $data = [
-                $department_id => $this->request->getVar('department_id'),
-                $year_id => $this->request->getVar('year_id'),
-                $academic_year_id => $this->request->getVar('academic_year_id'),
+
+        $draw = $this->request->getPost('draw');
+        $start = $this->request->getPost('start');
+        $length = $this->request->getPost('length');
+        $search = $this->request->getPost('search')['value'] ?? '';
+        
+        $fields = [
+            'department_id' => $this->request->getVar('department_id'),
+            'year_id' => $this->request->getVar('year_id'),
+            'academic_year_id' => $this->request->getVar('academic_year_id'),
+        ];
+        // PAGINATED DATA
+        $student_list = $this->modelyearwisestudentdata->fetch_ysd_student_for_lc($fields, $length, $start);
+        print_r($student_list); die();
+        $recordsTotal = count($student_list);
+        $recordsFiltered = $recordsTotal;
+        $sr_no = 1;
+
+        $data = [];
+        foreach ($rows as $row) {
+            $buttons = '';
+
+            $buttons .= '<button class="btn btn-icon btn-sm btn-secondary" data-yearwise_student_data_id="' . $row['yearwise_student_data_id'] . '" data-student_rise_no="' . $row['student_rise_no'] . '">Add LC Info</button>';
+            $data[] = [
+                $sr_no++,
+                $row['head_group_name'],
+                $buttons,
             ];
-            $student_list = $this->ModelYearwiseStudentData->fetch_ysd_student_for_lc($data);
         }
     }
 
@@ -57,7 +78,7 @@ class LeavingCertificate extends BaseController {
 //       
 //        if ($this->request->getMethod() == 'post') 
 //        {
-////             $data['lc_data'] = $this->ModelLeavingCertificate->getLcData();
+////             $data['lc_data'] = $this->modelleavingcertificate->getLcData();
 //            if($this->validate($rules))
 //            {
 //                $lc_data=
@@ -66,7 +87,7 @@ class LeavingCertificate extends BaseController {
 //                    'exam_held_in'=>$this->request->getVar('exam-held-in', FILTER_SANITIZE_STRING),
 //                    'date_of_leaving'=>$this->request->getVar('date-of-leaving', FILTER_SANITIZE_NUMBER_INT)
 //                ];
-//                $add_lc_data=$this->ModelLeavingCertificate->addLcData($lc_data);
+//                $add_lc_data=$this->modelleavingcertificate->addLcData($lc_data);
 //                if($add_lc_data)
 //                {                
         // Correct mPDF 8.2+ constructor

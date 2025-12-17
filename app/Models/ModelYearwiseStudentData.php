@@ -33,16 +33,16 @@ class ModelYearwiseStudentData {
         'department_id' => 'required'
     ];
     protected $validationMessages = [];
-    
+
 //  Reusable function 
-    public function fetch_ysd_student_for_lc($data){
+    public function fetch_ysd_student_for_lc($fields, $length, int $start) {
         return $this->select('
             ysd.*,
             sr.student_first_name,
             sr.student_middle_name,
             sr.student_last_name,
             sr.student_rise_no,
-            spi.student_general_register_no
+            spi.student_general_register_no,
             spi.student_birthdate
         ')
         ->from('yearwise_student_data AS ysd')
@@ -57,11 +57,12 @@ class ModelYearwiseStudentData {
             'left'
         )
         ->where([
-            'ysd.academic_year_id' => $data['academic_year_id'],
-            'ysd.year_id' => $data['year_id'],
-            'ysd.department_id' => $data['department_id'],
-            'ysd.is_deleted'       => 0,
+            'ysd.academic_year_id' => $fields['academic_year_id'],
+            'ysd.year_id' => $fields['year_id'],
+            'ysd.department_id' => $fields['department_id'],
+            'ysd.is_deleted' => 0,
         ])
-        ->findAll();
+        ->orderBy('ysd.student_rise_no', 'DESC')
+        ->findAll($length, $start);
     }
 }
