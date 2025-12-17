@@ -38,10 +38,13 @@ class Filters extends BaseConfig {
                     '*', //apply to all filters
                 ],
                 'except' => [
+                    '/', //skip login page
                     'login', //skip login page
                     'check-user', //skip login page
-                    'student-dashboard',
-                    'logout'
+                    'student-dashboard', //skip student dashboard page
+                    'student-registration', //skip student registration page
+                    'save-registration', //skip student registration save page
+                    'logout' //skip logout page
                 ]
             ]
         // 'invalidchars',
@@ -74,6 +77,5 @@ class Filters extends BaseConfig {
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
     public array $filters = [
-        
     ];
 }

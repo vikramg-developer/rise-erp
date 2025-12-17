@@ -40,6 +40,7 @@ class ModelStudentRegistration extends Model {
         'student_middle_name' => 'required|alpha',
         'student_last_name' => 'required|alpha',
         'student_aadhar_number' => 'required|exact_length[12]|numeric|is_unique[student_registration.student_aadhar_number]',
+        'student_password' => 'required|min_length[8]',
     ];
     protected $validationMessages = [
         'student_first_name' => [
@@ -60,22 +61,25 @@ class ModelStudentRegistration extends Model {
             'is_unique' => 'This Aadhaar number is already registered'
         ],
         'student_password' => [
-            'required' => 'Password is required',
-            'min_length' => 'Password must be 8 characters',
-            'max_length' => 'Password must be 8 characters'
+            'rules' => 'required|min_length[8]',
+            'errors' => [
+                'required' => 'Password is required',
+                'min_length' => 'Password must be at least 8 characters',
+            ],
         ],
-        'signup-confirmpassword' => [
-            'required' => 'Confirm Password is required',
-            'matches' => 'Passwords do not match'
-        ]
+        'confirm_password' => [
+            'rules' => 'required|matches[student_password]',
+            'errors' => [
+                'required' => 'Confirm Password is required.',
+                'matches' => 'Password and Confirm Password must match.',
+            ],
+        ],
     ];
     protected $skipValidation = false;
     protected $cleanValidationRules = true;
-    protected $afterDelete    = [];
-    
-    public function verify_rise_no($rise_no)
-    {
-        return $this->where('student_rise_no', $rise_no)->first(); 
+    protected $afterDelete = [];
+
+    public function verify_rise_no($rise_no) {
+        return $this->where('student_rise_no', $rise_no)->first();
     }
-    
 }

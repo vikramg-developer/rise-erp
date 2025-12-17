@@ -16,7 +16,7 @@ $errors = $errors ?? [];
     <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
             <div class="my-5 d-flex justify-content-center">
-                <a href="<?php //echo base_url('index');   ?>">
+                <a href="<?php //echo base_url('index');       ?>">
                     <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-logo">
                     <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-dark">
                 </a>
@@ -34,13 +34,12 @@ $errors = $errors ?? [];
                     <p class="h5 fw-semibold mb-2 text-center"><?= lang('App.register'); ?> </p>
                     <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome to Rise Portal! Sign up to access your learning tools and updates.</p>
                     <?= form_open('save-registration'); ?>
-                    <?= csrf_field() ?>
-                   
+
                     <div class="row gy-3">
                         <!--First name-->
                         <div class="col-xl-12">
                             <label for="student_first_name" class="form-label"><?= lang('App.first') ?> <?= lang('App.name') ?></label>
-                            <input type="text" class="form-control required-input" name="student_first_name" id="student_first_name" placeholder="<?= lang('App.first'); ?> <?= lang('App.name'); ?>"value="<?= set_value('student_first_name'); ?>"onkeypress="return isAlphaKey(event)"required>
+                            <input type="text" class="form-control required-input" name="student_first_name" id="student_first_name" placeholder="<?= lang('App.first'); ?> <?= lang('App.name'); ?>"value="<?= set_value('student_first_name'); ?>" oninput="forceUppercase(this)"onkeypress="return isAlphaKey(event)">
                             <?php if (isset($errors['student_first_name'])): ?>
                                 <small class="text-danger"><?= esc($errors['student_first_name']); ?></small>
                             <?php endif; ?>
@@ -48,7 +47,7 @@ $errors = $errors ?? [];
                         <!--Middle name-->
                         <div class="col-xl-12">
                             <label for="student_middle_name" class="form-label"><?= lang('App.middle'); ?> <?= lang('App.name'); ?></label>
-                            <input type="text" class="form-control required-input" id="student_middle_name" name="student_middle_name" placeholder="<?= lang('App.middle'); ?> <?= lang('App.name'); ?>" onkeypress="return isAlphaKey(event)"value="<?= set_value('student_middle_name'); ?>"required>
+                            <input type="text" class="form-control required-input" id="student_middle_name" name="student_middle_name" placeholder="<?= lang('App.middle'); ?> <?= lang('App.name'); ?>" onkeypress="return isAlphaKey(event)"oninput="forceUppercase(this)"value="<?= set_value('student_middle_name'); ?>">
                             <?php if (isset($errors['student_middle_name'])): ?>
                                 <small class="text-danger"><?= esc($errors['student_middle_name']); ?></small>
                             <?php endif; ?>
@@ -56,7 +55,7 @@ $errors = $errors ?? [];
                         <!--Last name-->
                         <div class="col-xl-12">
                             <label for="student_last_name" class="form-label"><?= lang('App.last'); ?> <?= lang('App.name'); ?></label>
-                            <input type="text" class="form-control required-input" id="student_last_name" name="student_last_name" placeholder="<?= lang('App.last'); ?> <?= lang('App.name'); ?>"onkeypress="return isAlphaKey(event)"value="<?= set_value('student_last_name'); ?>"required>
+                            <input type="text" class="form-control required-input" id="student_last_name" name="student_last_name" placeholder="<?= lang('App.last'); ?> <?= lang('App.name'); ?>"onkeypress="return isAlphaKey(event)"oninput="forceUppercase(this)"value="<?= set_value('student_last_name'); ?>">
                             <?php if (isset($errors['student_last_name'])): ?>
                                 <small class="text-danger"><?= esc($errors['student_last_name']); ?></small>
                             <?php endif; ?>
@@ -64,24 +63,38 @@ $errors = $errors ?? [];
                         <!--Aadhar Number-->
                         <div class="col-xl-12">
                             <label for="student_aadhar_number" class="form-label"><?= lang('App.aadhar'); ?> <?= lang('App.no'); ?></label>
-                            <input type="text" class="form-control" id="student_aadhar_number" name="student_aadhar_number"onkeypress="return isNumber(event)" maxlength="12" minlength="12" placeholder="<?= lang('App.aadhar'); ?> <?= lang('App.no'); ?>"value="<?= set_value('student_aadhar_number'); ?>"required>
+                            <input type="text" class="form-control" id="student_aadhar_number" name="student_aadhar_number"onkeypress="return isNumber(event)" maxlength="12" minlength="12" placeholder="<?= lang('App.aadhar'); ?> <?= lang('App.no'); ?>"value="<?= set_value('student_aadhar_number'); ?>">
                             <?php if (isset($errors['student_aadhar_number'])): ?>
                                 <small class="text-danger"><?= esc($errors['student_aadhar_number']); ?></small>
                             <?php endif; ?>
                         </div>
                         <!--Password-->
+                        <!-- Password -->
                         <div class="col-xl-12">
-                            <label for="student-password" class="form-label text-default"><?= lang('App.password'); ?></label>
+                            <label for="student_password" class="form-label text-default">
+                                <?= lang('App.password'); ?>
+                            </label>
                             <div class="input-group">
-                                <input type="password" class="form-control form-control-lg required-input" name="student-password" id="signup-password" placeholder="password" maxlength="8" minlength="8"value="" onkeyup='check();'required>
-                                <button class="btn btn-light" onclick="createpassword('signup-password', this)" type="button" id="button-addon2"><i class="ri-eye-off-line align-middle"></i></button>
+                                <input type="password"class="form-control form-control-lg required-input <?= isset($errors['student_password']) ? 'is-invalid' : '' ?>"name="student_password"id="student_password"minlength="8"placeholder="  <?= lang('App.password'); ?>"onkeyup="check();"required>
+                                <button class="btn btn-light"
+                                        type="button"
+                                        onclick="createpassword('student_password', this)">
+                                    <i class="ri-eye-off-line align-middle"></i>
+                                </button>
                             </div>
+
+                            <?php if (isset($errors['student_password'])): ?>
+                                <small class="text-danger">
+                                    <?= esc($errors['student_password']); ?>
+                                </small>
+                            <?php endif; ?>
                         </div>
+
                         <!--Confirm Password-->
                         <div class="col-xl-12 mb-2">
                             <label for="signup-confirmpassword" class="form-label text-default"><?= lang('App.confirm'); ?> <?= lang('App.password'); ?></label>
                             <div class="input-group">
-                                <input type="password" class="form-control form-control-lg required-input"name="signup-confirmpassword" id="signup-confirmpassword" placeholder="confirm password"maxlength="8" minlength="8"onkeyup='check();'required>
+                                <input type="password" class="form-control form-control-lg required-input"name="confirmpassword" id="signup-confirmpassword" placeholder="confirm password" minlength="8"onkeyup='check();'required>
                                 <button class="btn btn-light" onclick="createpassword('signup-confirmpassword', this)" type="button" id="button-addon21"><i class="ri-eye-off-line align-middle"></i></button>
                             </div>
                             <small id="password-message"></small>
