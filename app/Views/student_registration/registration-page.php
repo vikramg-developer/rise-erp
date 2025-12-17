@@ -16,7 +16,7 @@ $errors = $errors ?? [];
     <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
             <div class="my-5 d-flex justify-content-center">
-                <a href="<?php //echo base_url('index');      ?>">
+                <a href="<?php //echo base_url('index');       ?>">
                     <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-logo">
                     <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-dark">
                 </a>
@@ -75,7 +75,7 @@ $errors = $errors ?? [];
                                 <?= lang('App.password'); ?>
                             </label>
                             <div class="input-group">
-                                <input type="password"class="form-control form-control-lg required-input <?= isset($errors['student_password']) ? 'is-invalid' : '' ?>"name="student_password"id="student_password"placeholder="  <?= lang('App.password'); ?>"onkeyup="check();"required>
+                                <input type="password"class="form-control form-control-lg required-input <?= isset($errors['student_password']) ? 'is-invalid' : '' ?>"name="student_password"id="student_password"minlength="8"placeholder="  <?= lang('App.password'); ?>"onkeyup="check();"required>
                                 <button class="btn btn-light"
                                         type="button"
                                         onclick="createpassword('student_password', this)">
@@ -94,7 +94,7 @@ $errors = $errors ?? [];
                         <div class="col-xl-12 mb-2">
                             <label for="signup-confirmpassword" class="form-label text-default"><?= lang('App.confirm'); ?> <?= lang('App.password'); ?></label>
                             <div class="input-group">
-                                <input type="password" class="form-control form-control-lg required-input"name="confirmpassword" id="signup-confirmpassword" placeholder="confirm password"maxlength="8" minlength="8"onkeyup='check();'required>
+                                <input type="password" class="form-control form-control-lg required-input"name="confirmpassword" id="signup-confirmpassword" placeholder="confirm password" minlength="8"onkeyup='check();'required>
                                 <button class="btn btn-light" onclick="createpassword('signup-confirmpassword', this)" type="button" id="button-addon21"><i class="ri-eye-off-line align-middle"></i></button>
                             </div>
                             <small id="password-message"></small>

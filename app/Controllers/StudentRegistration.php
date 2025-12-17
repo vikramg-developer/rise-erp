@@ -46,7 +46,7 @@ class StudentRegistration extends BaseController {
                 'student_middle_name' => clean_name($this->request->getVar('student_middle_name')),
                 'student_last_name' => clean_name($this->request->getVar('student_last_name')),
                 'student_aadhar_number' => $aadhar,
-                'student_password' => password_hash($this->request->getVar('student_password'), PASSWORD_DEFAULT),
+                'student_password' => password_hash($this->request->getVar('student_password'),PASSWORD_DEFAULT),
             ];
 
             $insert = $this->modelstudentregistration->save($insert_data);
