@@ -73,10 +73,9 @@ $routes->post('/sample-excel-file', 'Feedback::sample_excel_file');
 $routes->post('/ticket', 'Ticket::index');
 
 $routes->group('faculty', function ($routes) {
-    $routes->get('/', 'Faculty::index', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('demo', 'Faculty::demo', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('add-faculty', 'Faculty::add_faculty', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('manage-faculty', 'Faculty::update-faculty', ['filter' => 'permission:createFeesManagement']);
+    $routes->get('/', 'Faculty::index', ['filter' => 'permission:viewFaculty']);
+    $routes->post('add-faculty', 'Faculty::add_faculty', ['filter' => 'permission:createFaculty']);
+    $routes->post('manage-faculty', 'Faculty::update-faculty', ['filter' => 'permission:editFaculty']);
 });
 $routes->group('headgroup', function ($routes) {
     $routes->get('/', 'FeesManagement::head_group', ['filter' => 'permission:createFeesManagement']);

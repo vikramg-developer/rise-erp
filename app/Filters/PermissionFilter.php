@@ -13,7 +13,7 @@ class PermissionFilter implements FilterInterface {
             return redirect()->to('login');
         }
         // admin bypass
-        if (session('role_id') == 1) {
+        if (in_array(session('role_id'),array(1,2))) {
             return;
         }
 

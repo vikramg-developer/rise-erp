@@ -19,7 +19,7 @@ class Role extends BaseController {
 
     public function index() {
         session()->set('back_url', current_url());
-        $data['jspath'] = 'roles/role';
+        $data['jspath'] = 'roles/index-role';
         return render_page('role/index-role', $data);
     }
 
@@ -50,12 +50,15 @@ class Role extends BaseController {
         foreach ($rows as $row) {
             $buttons = '';
 
-            $buttons .= '<a href="roles/edit-role/' . $row['role_id'] . '" class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill edit"><i class="ri-pencil-fill"></i></a>';
+            $buttons .= '<a href="roles/edit-role/' . $row['role_id'] . '" class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill tooltips edit" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-secondary"
+            data-bs-placement="top" title="Edit"><i class="ri-pencil-fill"></i></a>';
 
             if ($row['is_deleted'] != 1):
-                $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete" data-role_id="' . $row['role_id'] . '" data-role_name="' . $row['role_name'] . '"><i class="ri-delete-bin-fill"></i></button>';
+                $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-danger"
+            data-bs-placement="top" title="Delete" data-role_id="' . $row['role_id'] . '" data-role_name="' . $row['role_name'] . '"><i class="ri-delete-bin-fill"></i></button>';
             elseif ($row['is_deleted'] == 1):
-                $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-role_id="' . $row['role_id'] . '" data-role_name="' . $row['role_name'] . '"><i class="ri-arrow-go-back-fill"></i></button>';
+                $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-warning"
+            data-bs-placement="top" title="Revert" data-role_id="' . $row['role_id'] . '" data-role_name="' . $row['role_name'] . '"><i class="ri-arrow-go-back-fill"></i></button>';
             endif;
 
             if ($row['is_deleted'] == 1):
@@ -123,8 +126,9 @@ class Role extends BaseController {
         $data['permissions'] = json_decode(file_get_contents($permissionsPath), true);
         $data['backUrl'] = previous_url() ?? base_url('roles');
         $data['role_data'] = $this->modelrole->find($role_id);
+        $data['jspath'] = 'roles/edit-role';
 
-        return render_page('role/update-role', $data);
+        return render_page('role/edit-role', $data);
     }
 
     public function update_role($role_id) {

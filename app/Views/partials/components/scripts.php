@@ -101,6 +101,12 @@
     const BASE_URL = "<?= base_url() ?>";
 </script>
 
+<script>
+    $(document).ready(function () {
+        $("body").tooltip({selector: '[data-bs-toggle=tooltip]'});
+    });
+</script>
+
 <script src="<?php echo base_url('partials/js/alert.js'); ?>"></script>
 <script src="<?php echo base_url('partials/js/toast.js'); ?>"></script>
 

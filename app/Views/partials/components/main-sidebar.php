@@ -23,6 +23,7 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path> </svg>
                                             </div>
                                             <ul class="main-menu">
+                                                <?php if(hasPermission('createFaculty') || hasPermission('viewFaculty') || hasPermission('updateFaculty') || hasPermission('deleteFaculty')):?>
                                                 <!------------------------------------------------------- start::users-------------------------------------------------------------->
                                                 <li class="slide__category"><span class="category-name"><?= lang('App.faculty'); ?></span></li>
                                                 <!-- End::slide__category -->
@@ -46,6 +47,7 @@
                                                         </li>
                                                     </ul>
                                                 </li>
+                                                <?php endif;?>
                                                 <!-- End::slide -->
 
                                                 <!------------------------------------------------------- End::users-------------------------------------------------------------->
@@ -185,7 +187,8 @@
                                                     <!-- End::slide -->
 
                                                     <!-- Start::slide -->
-                                                    <li class="slide has-sub">
+                                                    
+                                                    <li id="mainRoleNav" class="slide has-sub">
                                                         <a href="javascript:void(0);" class="side-menu__item">
                                                             <i class="bx bx-group side-menu__icon"></i>
                                                             <span class="side-menu__label"><?= lang('App.role'); ?></span>
@@ -195,10 +198,10 @@
                                                             <li class="slide side-menu__label1">
                                                                 <a href="javascript:void(0)"><?= lang('App.role'); ?></a>
                                                             </li>
-                                                            <li class="slide">
+                                                            <li id="addroleNav" class="slide">
                                                                 <a href="<?php echo base_url('roles/add-role'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.role'); ?></a>
                                                             </li>
-                                                            <li class="slide">
+                                                            <li id="manageroleNav" class="slide">
                                                                 <a href="<?php echo base_url('roles'); ?>" class="side-menu__item"><?= lang('App.manage'); ?> <?= lang('App.role'); ?></a>
                                                             </li>
                                                         </ul>
