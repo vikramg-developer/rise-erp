@@ -6,26 +6,21 @@ use CodeIgniter\Database\Migration;
 
 use CodeIgniter\Database\RawSql;
 
-class AddDepartmentTable extends Migration
+class AddYearTable extends Migration
 {
     public function up()
     {
-        $fields = [
-            'department_id' => [
+         $fields = [
+            'year_id' => [
                 'type' => 'int',
                 'auto_increment' => true,
             ],
-            'department_name' => [
+            'year_name' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
             ],
-            'department_abbrivation' => [
-                'type' => 'varchar',
-                'constraint' => '50',
-                'null' => false
-            ],
-         'added_by' => [
+            'added_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
@@ -51,12 +46,12 @@ class AddDepartmentTable extends Migration
             ]
         ];
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('department_id');
-        $this->forge->createTable('department');
+        $this->forge->addPrimaryKey('year_id');
+        $this->forge->createTable('year');
     }
 
     public function down()
     {
-        $this->forge->dropTable('department');
+         $this->forge->dropTable('year');
     }
 }

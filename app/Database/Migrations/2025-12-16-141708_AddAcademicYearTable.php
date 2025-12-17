@@ -6,18 +6,23 @@ use CodeIgniter\Database\Migration;
 
 use CodeIgniter\Database\RawSql;
 
-class AddYearTable extends Migration {
-
-    public function up() {
-        $fields = [
-            'year_id' => [
+class AddAcademicYearTable extends Migration
+{
+    public function up()
+    {
+         $fields = [
+            'academic_year_id' => [
                 'type' => 'int',
                 'auto_increment' => true,
             ],
-            'year_name' => [
+            'academic_year_name' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
+            ],
+            'is_active' => [
+                'type' => 'tinyint',
+                'constraint' => '1'
             ],
             'added_by' => [
                 'type' => 'varchar',
@@ -36,8 +41,8 @@ class AddYearTable extends Migration {
             ],
             'updated_at' => [
                 'type' => 'timestamp',
-                'null' => false,
-                'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+                'null' => true,
+                'default' => new Rawsql('NULL ON UPDATE CURRENT_TIMESTAMP'),
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
@@ -45,12 +50,12 @@ class AddYearTable extends Migration {
             ]
         ];
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('year_id');
-        $this->forge->createTable('year');
-                
+        $this->forge->addPrimaryKey('academic_year_id');
+        $this->forge->createTable('academic_year');
     }
 
-    public function down() {
-       $this->forge->dropTable('year');
+    public function down()
+    {
+        $this->forge->dropTable('academic_year');
     }
 }

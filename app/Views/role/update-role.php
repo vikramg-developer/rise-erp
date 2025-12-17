@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <?php $permissions = json_decode($role_data['permissions'],true) ?>
+                    <?php $user_permissions = json_decode($role_data['permissions'],true) ?>
                     <table id="manageTable" class="table table-bordered table-primary text-nowrap w-100">
                         <thead>
                             <tr>
@@ -58,13 +58,75 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <!--faculty_registration-->
+<!--                            <tr>
+                                <td><?= lang('App.faculty'); ?></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createFaculty"<?php if(in_array('createFaculty', $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateFaculty"<?php if(in_array('updateFaculty', $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewFaculty"<?php if(in_array('viewFaculty', $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteFaculty"<?php if(in_array('deleteFaculty', $permissions)){echo "checked";} ?>></td>
+                            </tr>
+                              Student_Profile
+                            <tr>
+                                <td><?= lang('App.student'); ?> <?= lang('App.profile'); ?></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createStudentProfile"<?php if(in_array('createStudentProfile', $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateStudentProfile"<?php if(in_array('updateStudentProfile', $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewStudentProfile"  <?php if(in_array('viewStudentProfile', $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteStudentProfile"<?php if(in_array('deleteStudentProfile', $permissions)){echo "checked";} ?>></td>
+                            </tr>
+                              Feedback
+                            <tr>
+                                <td><?= lang('App.feedback'); ?></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createFeedback"<?php if(in_array('createFeedback', $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateFeedback"<?php if(in_array('updateFeedback', $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewFeedback"  <?php if(in_array('viewFeedback',   $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteFeedback"<?php if(in_array('deleteFeedback', $permissions)){echo "checked";} ?>></td>
+                            </tr>
+                              certificate
+                            <tr>
+                                <td><?= lang('App.feedback'); ?></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createcertificate"<?php if(in_array('createCertificate', $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateCertificate"<?php if(in_array('updateCertificate', $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewCertificate"  <?php if(in_array('viewCertificate',   $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteCertificate"<?php if(in_array('deleteCertificate', $permissions)){echo "checked";} ?>></td>
+                            </tr>
+                              Faculty Profile
+                            <tr>
+                                <td><?= lang('App.faculty'); ?> <?= lang('App.profile'); ?></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createFacultyProfile"<?php if(in_array('createFacultyProfile', $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateFacultyProfile"<?php if(in_array('updateFacultyProfile', $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewFacultyProfile"  <?php if(in_array('viewFacultyProfile',   $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteFacultyProfile"<?php if(in_array('deleteFacultyProfile', $permissions)){echo "checked";} ?>></td>
+                            </tr>
+                            
+                             Fee_Management
                             <tr>
                                 <td><?= lang('App.fees'); ?> <?= lang('App.management'); ?></td>
                                 <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createFeesManagement" <?php if(in_array('createFeesManagement', $permissions)){echo "checked";} ?>></td>
                                 <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateFeesManagement" <?php if(in_array('updateFeesManagement', $permissions)){echo "checked";} ?>></td>
-                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewFeesManagement" <?php if(in_array('viewFeesManagement', $permissions)){echo "checked";} ?>></td>
+                                <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewFeesManagement" <?php if(in_array('viewFeesManagement',     $permissions)){echo "checked";} ?>></td>
                                 <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteFeesManagement" <?php if(in_array('deleteFeesManagement', $permissions)){echo "checked";} ?>></td>
-                            </tr>
+                            </tr>-->
+                            <?php foreach ($permissions as $module): ?>
+                                    <tr>
+                                        
+                                        <td><?= $module['label'] ?></td>
+
+                                        <?php foreach ($module['actions'] as $action): ?>
+                                            <td>
+                                                <input
+                                                    class="form-check-input"
+                                                    type="checkbox"
+                                                    name="permission[]"
+                                                    id="permission"
+                                                    value="<?= esc($action) ?>"
+                                                    <?php if(in_array(esc($action), $user_permissions)){echo "checked";} ?>
+                                                    >
+                                            </td>
+                                        <?php endforeach; ?>
+
+                                    </tr>
+                                <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

@@ -1,29 +1,27 @@
 <?php
-
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+
 use CodeIgniter\Database\RawSql;
 
-class AddAbbrivationTable extends Migration
+class AddAbbreviationTable extends Migration
 {
     public function up()
     {
-        $this->forge->addField([
-            'id' => [
+       $this->forge->addField([
+            'abbreviation_id' => [
                 'type'           => 'INT',
                 'constraint'     => 10,
-                'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'title' => [
+            'abbreviation_name' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 20, 
             ],
             'is_active' => [
-                'type'       => 'TINYINT',
+                'type'       => 'tinyint',
                 'constraint' => 1,
-                'default'    => 1,
             ],
             'added_by' => [
                 'type' => 'varchar',
@@ -31,19 +29,19 @@ class AddAbbrivationTable extends Migration
                 'null' => false
             ],
             'added_at' => [
-                'type'=>'TIMESTAMP',
+                'type'=>'timestamp',
                 'null'=>false,
                 'default'=>new Rawsql('CURRENT_TIMESTAMP'),
             ],
             'updated_by'=> [
                 'type' => 'varchar',
                 'constraint' => '50',
-                'null' => false
+                'null' => true
             ],
             'updated_at' =>[
-                'type'=>'TIMESTAMP',
-                'null'       => false,
-                'default'=>new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+                'type'=>'timestamp',
+                'null'       => true,
+                'default'=>new Rawsql('NULL ON UPDATE CURRENT_TIMESTAMP'),
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
@@ -51,12 +49,14 @@ class AddAbbrivationTable extends Migration
             ]
         ]);
 
-        $this->forge->addKey('id', true);
-        $this->forge->createTable('abbrivation', true);
+        $$this->forge->addField($fields);
+        $this->forge->addPrimaryKey('abbreviation_id');
+        $this->forge->addUniqueKey('abbreviation_name');    
+        $this->forge->createTable('abbreviation');
     }
 
     public function down()
     {
-        $this->forge->dropTable('abbrivation', true);
+        $this->forge->dropTable('abbreviation', true);
     }
 }

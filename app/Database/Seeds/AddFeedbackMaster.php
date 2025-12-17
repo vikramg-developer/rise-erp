@@ -31,6 +31,6 @@ class AddFeedbackMaster extends Seeder
             
             
         ];
-        $this->db->table('feedback_master')->insertBatch($data);
+        $this->db->table('feedback_master')->ignore()->insertBatch($data);
     }
 }
