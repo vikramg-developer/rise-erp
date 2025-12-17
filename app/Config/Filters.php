@@ -8,7 +8,8 @@ use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
-use App\Filters\PermissionAuthFilter;
+use App\Filters\PermissionFilter;
+use App\Filters\AuthFilter;
 
 class Filters extends BaseConfig {
 
@@ -22,7 +23,8 @@ class Filters extends BaseConfig {
         'honeypot' => Honeypot::class,
         'invalidchars' => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
-        'permauth' => PermissionAuthFilter::class,
+        'permission' => PermissionFilter::class,
+        'auth' => AuthFilter::class,
     ];
 
     /**
@@ -33,7 +35,7 @@ class Filters extends BaseConfig {
         'before' => [
             // 'honeypot',
             'csrf',
-            'permauth' => [
+            'auth' => [
                 'before' => [
                     '*', //apply to all filters
                 ],
@@ -41,10 +43,22 @@ class Filters extends BaseConfig {
                     '/', //skip login page
                     'login', //skip login page
                     'check-user', //skip login page
+                    'student-registration', //skip student registration page
+                    'save-registration', //skip student registration save page
+                ]
+            ],
+            'permission' => [
+                'before' => [
+                    '*', //apply to all filters
+                ],
+                'except' => [
+                    '/', //skip login page
+                    'login', //skip login page
+                    'check-user', //skip login page
+                    'logout', //skip logout
                     'student-dashboard', //skip student dashboard page
                     'student-registration', //skip student registration page
                     'save-registration', //skip student registration save page
-                    'logout' //skip logout page
                 ]
             ]
         // 'invalidchars',
