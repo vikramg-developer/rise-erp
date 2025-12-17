@@ -23,6 +23,6 @@ class AddAcademicYear extends Seeder
             ];
         }
 
-        $this->db->table('academic_year')->insertBatch($data);
+         $this->db->table('academic_year')->ignore()->insertBatch($data);
     }
 }

@@ -16,7 +16,7 @@ $errors = $errors ?? [];
     <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
             <div class="my-5 d-flex justify-content-center">
-                <a href="<?php //echo base_url('registration');        ?>">
+                <a href="<?php //echo base_url('registration');          ?>">
                     <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-logo">
                     <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-dark">
                 </a>
@@ -40,25 +40,25 @@ $errors = $errors ?? [];
                     <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome back !</p>
 
                     <?= form_open('/check-user'); ?>
-                    
+
                     <div class="row gy-3">
                         <div class="col-xl-12">
-                            <label for="role_id" class="form-label"><?= lang('App.role'); ?></label>
-                            <select class="form-select js-example-basic-single" name="role_id" id="role_id" >
-                                <option value="">-- <?= lang('App.select') ?> <?= lang('App.role'); ?>  --</option>
-                                <option value="1" <?= old('role_id') == '1' ? 'selected' : '' ?>>Faculty</option>
-                                <option value="2" <?= old('role_id') == '2' ? 'selected' : '' ?>>Student</option>
-                                <option value="3" <?= old('role_id') == '3' ? 'selected' : '' ?>>Parent</option>
+                            <label for="user_type" class="form-label"><?= lang('App.user'); ?> <?= lang('App.type'); ?></label>
+                            <select class="form-select js-example-basic-single" name="user_type" id="user_type" >
+                                <option value="">-- <?= lang('App.select') ?> <?= lang('App.user'); ?> <?= lang('App.type'); ?>  --</option>
+                                <option value="1" <?= old('user_type') == '1' ? 'selected' : '' ?>>Faculty</option>
+                                <option value="2" <?= old('user_type') == '2' ? 'selected' : '' ?>>Student</option>
+                                <option value="3" <?= old('user_type') == '3' ? 'selected' : '' ?>>Parent</option>
                             </select>
 
-                            <?php if (isset($validation) && $validation->getError('role_id')): ?>
-                                <small class="text-danger"><?= $validation->getError('role_id') ?></small>
+                            <?php if (isset($validation) && $validation->getError('user_type')): ?>
+                                <small class="text-danger"><?= $validation->getError('user_type') ?></small>
                             <?php endif; ?>
 
                         </div>
                         <div class="col-xl-12">
                             <label for="login_username" class="form-label text-default"><?= lang('App.rise') ?> <?= lang('App.number') ?></label>
-                            <input type="text" class="form-control form-control-lg" id="login_username" value="<?= old('login_username') ?>" name="login_username" placeholder="<?= lang('App.rise') ?> <?= lang('App.number') ?>">
+                            <input type="text" class="form-control form-control-lg" id="login_username" value="<?= old('login_username') ?>" name="login_username" maxlength="12" placeholder="<?= lang('App.rise') ?> <?= lang('App.number') ?>">
                             <?php if (isset($validation) && $validation->getError('login_username')): ?>
                                 <small class="text-danger"><?= $validation->getError('login_username') ?></small>
                             <?php endif; ?>
@@ -67,8 +67,11 @@ $errors = $errors ?? [];
                             <label for="login_password" class="form-label text-default d-block"><?= lang('App.password') ?><a href="" class="float-end text-danger">Forget password ?</a></label>
                             <div class="input-group">
                                 <input type="password" class="form-control form-control-lg" id="login_password" name="login_password" placeholder="<?= lang('App.password') ?>">
-                                <!--<button class="btn btn-light" type="button" id="button-addon2"><i class="ri-eye-off-line align-middle"></i></button>-->
-                            </div>
+                                <button class="btn btn-light"
+                                        type="button"
+                                        onclick="createpassword('login_password', this)">
+                                    <i class="ri-eye-off-line align-middle"></i>
+                                </button>                            </div>
                             <?php if (isset($validation) && $validation->getError('login_password')): ?>
                                 <small class="text-danger"><?= $validation->getError('login_password') ?></small>
                             <?php endif; ?>

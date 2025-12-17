@@ -6,15 +6,16 @@ use CodeIgniter\Database\Migration;
 
 use CodeIgniter\Database\RawSql;
 
-class AddSemesterPartTable extends Migration {
-
-    public function up() {
-        $fields = [
-            'semester_part_id' => [
+class AddYearTable extends Migration
+{
+    public function up()
+    {
+         $fields = [
+            'year_id' => [
                 'type' => 'int',
                 'auto_increment' => true,
             ],
-            'semester_part_name' => [
+            'year_name' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
@@ -32,11 +33,11 @@ class AddSemesterPartTable extends Migration {
             'updated_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
-                'null' => true
+                'null' => false
             ],
             'updated_at' => [
                 'type' => 'timestamp',
-                'null' => true,
+                'null' => false,
                 'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
             ],
             'is_deleted' => [
@@ -45,11 +46,12 @@ class AddSemesterPartTable extends Migration {
             ]
         ];
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('semester_part_id');
-        $this->forge->createTable('semester_part');
+        $this->forge->addPrimaryKey('year_id');
+        $this->forge->createTable('year');
     }
 
-    public function down() {
-        $this->forge->dropTable('semester_part');
+    public function down()
+    {
+         $this->forge->dropTable('year');
     }
 }

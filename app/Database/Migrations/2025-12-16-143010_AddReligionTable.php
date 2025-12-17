@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+
 use CodeIgniter\Database\RawSql;
 
 class AddReligionTable extends Migration {
@@ -35,8 +36,8 @@ class AddReligionTable extends Migration {
             ],
             'updated_at' => [
                 'type' => 'timestamp',
-                'null' => false,
-                'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+                'null' => true,
+                'default' => new Rawsql('NULL ON UPDATE CURRENT_TIMESTAMP'),
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
@@ -45,6 +46,7 @@ class AddReligionTable extends Migration {
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('religion_id');
+        $this->forge->addUniqueKey('religion_name');    //
         $this->forge->createTable('religion');
     }
 

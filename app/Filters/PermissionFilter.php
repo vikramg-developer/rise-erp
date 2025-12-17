@@ -6,13 +6,12 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class PermissionAuthFilter implements FilterInterface {
+class PermissionFilter implements FilterInterface {
 
     public function before(RequestInterface $request, $arguments = null) {
         if (!session()->has('logged_in')) {
             return redirect()->to('login');
         }
-
         // admin bypass
         if (session('role_id') == 1) {
             return;

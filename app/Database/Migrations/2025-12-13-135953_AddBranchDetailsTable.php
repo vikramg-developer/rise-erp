@@ -46,7 +46,6 @@ class AddBranchDetailsTable extends Migration {
             ],
             'branch_type_id' => [
                 'type'       => 'INT',
-                'constraint' => 11,
                 'null'       => false,
             ],
             'branch_address' => [
@@ -56,29 +55,24 @@ class AddBranchDetailsTable extends Migration {
             ],
              'branch_region_id' => [
                 'type'       => 'INT',
-                'constraint' => 10,
                 'null'       => false,
                 'comment'    => 'central/western etc from branch_region table',
             ],
             'branch_location_id' => [
                 'type'       => 'INT',
-                'constraint' => 5,
                 'null'       => false,
                 'comment'    => 'urban/rural/hilly etc from region table',
             ],
             'branch_district_id' => [
                 'type'       => 'INT',
-                'constraint' => 10,
                 'null'       => false,
             ],
             'branch_taluka_id' => [
                 'type'       => 'INT',
-                'constraint' => 5,
                 'null'       => false,
             ],
             'branch_pincode_id' => [
                 'type'       => 'INT',
-                'constraint' => 11,
                 'null'       => false,
             ],
             'branch_principal_name' => [
@@ -108,7 +102,6 @@ class AddBranchDetailsTable extends Migration {
             ],
             'branch_otp' => [
                 'type'       => 'INT',
-                'constraint' => 20,
                 'null'       => false,
             ],
             'added_by' => [
@@ -124,11 +117,11 @@ class AddBranchDetailsTable extends Migration {
             'updated_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
-                'null' => false
+                'null' => true
             ],
             'updated_at' => [
                 'type' => 'timestamp',
-                'null' => false,
+                'null' => true,
                 'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
             ],
             'is_deleted' => [

@@ -86,6 +86,9 @@ class Role extends BaseController {
     }
 
     public function add_role() {
+        $permissionsPath = APPPATH . 'Config/permissions.json';
+        $data['permissions'] = json_decode(file_get_contents($permissionsPath), true);
+
         $data['backUrl'] = previous_url() ?? base_url('roles');
         return render_page('role/add-role', $data);
     }
@@ -116,6 +119,8 @@ class Role extends BaseController {
     }
 
     public function edit_role($role_id) {
+        $permissionsPath = APPPATH . 'Config/permissions.json';
+        $data['permissions'] = json_decode(file_get_contents($permissionsPath), true);
         $data['backUrl'] = previous_url() ?? base_url('roles');
         $data['role_data'] = $this->modelrole->find($role_id);
 
