@@ -54,20 +54,21 @@ class Login extends BaseController {
             $user_type = ($this->request->getVar('user_type'));
             $username = ($this->request->getVar('login_username'));
             $password = trim($this->request->getVar('login_password'));
-//                Faculty Login--start
+//================================================Faculty Login--start================================================
             if ($user_type === '1') {
                 $faculty_data = $this->modelfacultyregistration->verify_rise_no($username);
 
                 if ($faculty_data) {
                     if (password_verify($password, $faculty_data['faculty_password'])) {
-                        $permissions = $this->modelrole->find($faculty_data['faculty_role_id']);
+
+                        $role_data = $this->modelrole->find($faculty_data['faculty_role_id']);
                         session()->set([
                             'registration_id' => $faculty_data['faculty_registration_id'],
                             'rise_no' => $faculty_data['faculty_rise_no'],
                             'username' => $faculty_data['faculty_first_name'] . " " . $faculty_data['faculty_middle_name'] . " " . $faculty_data['faculty_last_name'],
                             'role_id' => $faculty_data['faculty_role_id'],
                             'logged_in' => true,
-                            'permissions' => json_decode($permissions['permissions'], true)??[]
+                            'permissions' => json_decode($role_data['permissions'], true) ?? []
                         ]);
                         return redirect()->to('/student-dashboard');
                     } else {
@@ -83,22 +84,23 @@ class Login extends BaseController {
                                     ->withInput();
                 }
             }
-            //                Faculty Login--end
-            //                Student Login--start
+//================================================Faculty Login--end================================================
+
+//================================================Student Login--start================================================
             if ($user_type === '2') {
                 $student_data = $this->modelstudentregistration->verify_rise_no($username);
 //                    print_r($student_data);die();
                 if ($student_data) {
                     if (password_verify($password, $student_data['student_password'])) {
 
-                        $permissions = $this->modelrole->find($student_data['student_role_id']);
+                        $role_data = $this->modelrole->find($student_data['student_role_id']);
                         session()->set([
                             'registration_id' => $student_data['student_registration_id'],
                             'rise_no' => $student_data['student_rise_no'],
-                            'username' => $student_data['student_first_name'] . " " . $student_data['student_middle_name'] . " " . $student_data['student_last_name'],
+                            'username' => $student_data['student_first_name']. " " . $student_data['student_last_name'],
                             'role_id' => $student_data['student_role_id'],
                             'logged_in' => true,
-                            'permissions' => json_decode($permissions['permissions'], true)??[]
+                            'permissions' => json_decode($role_data['permissions'], true)
                         ]);
                         return redirect()->to('/student-dashboard');
                     } else {
