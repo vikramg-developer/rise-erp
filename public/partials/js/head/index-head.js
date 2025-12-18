@@ -8,7 +8,7 @@ $(document).ready(function () {
         destroy: true,
 
         ajax: {
-            url: "head/fetch-head",
+            url: BASE_URL + "head/fetch-head",
             type: "POST",
             data: function (d) {
                 d[csrfName] = csrfHash; // ALWAYS send current token
@@ -34,7 +34,7 @@ $("#head-form").on("submit", function (e) {
 
     let head_id = $('#head_id').val();
 
-    let url = (head_id === "") ? 'head/save-head' : 'head/update-head'
+    let url = (head_id === "") ? BASE_URL + 'head/save-head' : BASE_URL + 'head/update-head'
 
     $.ajax({
         url: url,
