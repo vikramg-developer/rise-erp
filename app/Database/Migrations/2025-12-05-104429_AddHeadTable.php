@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+
 use CodeIgniter\Database\RawSql;
 
 class AddHeadTable extends Migration
@@ -31,11 +32,11 @@ class AddHeadTable extends Migration
             'updated_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
-                'null' => false
+                'null' => true
             ],
             'updated_at' => [
                 'type' => 'timestamp',
-                'null' => false,
+                'null' => true,
                 'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
             ],
             'is_deleted' => [
@@ -49,7 +50,8 @@ class AddHeadTable extends Migration
         $this->forge->createTable('head');
     }
 
-    public function down() {
+    public function down() 
+    {
         $this->forge->dropTable('head');
     }
 }

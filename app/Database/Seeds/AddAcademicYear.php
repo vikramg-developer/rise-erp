@@ -24,5 +24,6 @@ class AddAcademicYear extends Seeder
         }
 
          $this->db->table('academic_year')->ignore()->insertBatch($data);
+        
     }
 }
