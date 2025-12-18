@@ -39,7 +39,7 @@ $routes->setAutoRoute(false);
 $routes->get('/', 'Login::login');
 $routes->get('login', 'Login::login');
 $routes->post('/add-group', 'Group::add-group');
-$routes->post('/add-lc-info', 'LeavingCertificate::add_lc_info');
+
 $routes->post('/bonafide-certificate', 'BonafideCertificate::index');
 $routes->post('/bonafide-print', 'BonafideCertificate::bonafide_print');
 $routes->post('/collect-fees', 'FeesManagement::collect_fees');
@@ -55,13 +55,13 @@ $routes->post('/head-fees', 'FeesManagement::head_fees');
 $routes->post('/home', 'Home::index');
 $routes->post('/i-card', 'ICard::index');
 $routes->post('/i-card-print', 'ICard::i_card_print');
-$routes->get('leaving-certificate', 'LeavingCertificate::index');
+
 $routes->post('/check-user', 'Login::check_user');
 $routes->get('logout', 'Login::logout');
 $routes->get('student-registration', 'StudentRegistration::index');
 $routes->post('save-registration', 'StudentRegistration::add_registration');
 //$routes->post('/studentProfile', 'Registration::studentProfile');
-$routes->post('/leaving-certificate-report', 'LeavingCertificateReport::index');
+
 $routes->post('/manage-question', 'Feedback::manage_question');
 $routes->post('/student-profile', 'Registration::studentProfile');
 $routes->post('/savesignup', 'Registration::saveSignup');
@@ -71,6 +71,13 @@ $routes->post('/studentProfile', 'Registration::studentProfile');
 $routes->post('/student-list', 'FeesManagement::student_list');
 $routes->post('/sample-excel-file', 'Feedback::sample_excel_file');
 $routes->post('/ticket', 'Ticket::index');
+$routes->group('leavingcertificate', function ($routes) {    
+    $routes->get('/', 'LeavingCertificate::index', ['filter' => 'permission:createFeesManagement']);
+    $routes->post('fetch_lc_student_list', 'LeavingCertificate::fetch_lc_student_list', ['filter' => 'permission:createFeesManagement']);
+    $routes->post('add-lc-info', 'LeavingCertificate::add_lc_info', ['filter' => 'permission:createFeesManagement']);   
+    $routes->get('leaving-certificate-report', 'LeavingCertificateReport::index', ['filter' => 'permission:createFeesManagement']);
+    
+});
 
 $routes->group('faculty', function ($routes) {
     $routes->get('/', 'Faculty::index', ['filter' => 'permission:createFeesManagement']);
