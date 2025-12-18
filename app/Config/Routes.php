@@ -46,8 +46,7 @@ $routes->post('/collect-fees', 'FeesManagement::collect_fees');
 $routes->post('/create_ticket', 'Ticket::create_ticket');
 $routes->post('/faculty-profile', 'FacultyProfile::index');
 $routes->post('/faculty-personal-info', 'FacultyProfile::update_personal_info');
-$routes->post('/feedback', 'Feedback::index');
-$routes->post('/save-feedback-master', 'Feedback::save_feedback_master');
+
 $routes->post('/fetch-head', 'FeesManagement::fetch-head');
 $routes->post('/head', 'FeesManagement::head');
 $routes->post('/head-fees', 'FeesManagement::head_fees');
@@ -62,15 +61,21 @@ $routes->get('student-registration', 'StudentRegistration::index');
 $routes->post('save-registration', 'StudentRegistration::add_registration');
 //$routes->post('/studentProfile', 'Registration::studentProfile');
 $routes->post('/leaving-certificate-report', 'LeavingCertificateReport::index');
-$routes->post('/manage-question', 'Feedback::manage_question');
 $routes->post('/student-profile', 'Registration::studentProfile');
 $routes->post('/savesignup', 'Registration::saveSignup');
 $routes->get('/student-dashboard', 'Login::studentDashboard');
 $routes->get('/studentDashboard', 'Login::studentDashboard');
 $routes->post('/studentProfile', 'Registration::studentProfile');
 $routes->post('/student-list', 'FeesManagement::student_list');
-$routes->post('/sample-excel-file', 'Feedback::sample_excel_file');
 $routes->post('/ticket', 'Ticket::index');
+
+$routes->group('feedback', function ($routes) {
+    $routes->get('/', 'Feedback::index',['filter' => 'permission:createFeedback']);
+    $routes->post('save-feedback-master', 'Feedback::save_feedback_master',['filter' => 'permission:createFeedback']);
+    $routes->post('fetch-feedback-master', 'Feedback::fetch_feedback_master',['filter' => 'permission:createFeedback']);
+    $routes->get('manage-question', 'Feedback::manage_question' , ['filter' => 'permission:createFeedback']);
+    $routes->get('sample-excel-file', 'Feedback::sample_excel_file' , ['filter' => 'permission:createFeedback']);
+});
 
 $routes->group('faculty', function ($routes) {
     $routes->get('/', 'Faculty::index', ['filter' => 'permission:createFeesManagement']);

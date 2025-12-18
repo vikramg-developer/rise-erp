@@ -11,22 +11,22 @@ class AddAbbreviationData extends Seeder
     {
         $data = [
             [
-                'title'         => 'Dr.',
+                'abbreviation_name'         => 'Dr.',
                 'is_active'     => 1,
                 'is_deleted' => 0
             ],
             [
-                'title'         => 'Mr.',
+                'abbreviation_name'         => 'Mr.',
                 'is_active'     => 1,
                 'is_deleted' => 0
             ],
             [
-                'title'         => 'Mrs.',
+                'abbreviation_name'         => 'Mrs.',
                 'is_active'     => 1,
                 'is_deleted' => 0
             ],
             [
-                'title'         => 'Prof.',
+                'abbreviation_name'         => 'Prof.',
                 'is_active'     => 1,
                 'is_deleted' => 0
             ],
