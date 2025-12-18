@@ -15,9 +15,6 @@
 <!-- Style Css -->
 <link href="<?php echo base_url('assets/css/styles.css'); ?>" rel="stylesheet" >
 
-<!-- Style Css -->
-<link href="<?php echo base_url('assets/css/styles.css'); ?>" rel="stylesheet" >
-
 <!-- Icons Css -->
 <link href="<?php echo base_url('assets/css/icons.css'); ?>" rel="stylesheet" >
 
@@ -28,7 +25,6 @@
 <link href="<?php echo base_url('assets/libs/simplebar/simplebar.min.css'); ?>" rel="stylesheet" >
 
 <!-- Color Picker Css -->
-<link rel="stylesheet" href="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/libs/@simonwep/pickr/themes/nano.min.css'); ?>">
 
 <!-- Choices Css -->
@@ -45,3 +41,6 @@
 
 <!-- FlatPickr CSS -->
 <link rel="stylesheet" href="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.css'); ?>">
+
+<!-- Sweetalerts CSS -->
+<link rel="stylesheet" href="<?php echo base_url('assets/libs/sweetalert2/sweetalert2.min.css'); ?>">

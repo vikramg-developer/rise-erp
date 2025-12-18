@@ -6,7 +6,7 @@
         <div class="ms-md-1 ms-0">
             <nav>
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="#">Rise</a></li>
+                    <li class="breadcrumb-item"><a href="#"><?= lang('App.feedback') ?></a></li>
                     <li class="breadcrumb-item active" aria-current="page"><?= lang('App.manage') ?> <?= lang('App.question') ?></li>
                 </ol>
             </nav>
@@ -78,7 +78,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-light"
                                                         data-bs-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-primary"><?= lang('App.add') ?> <?= lang('App.question') ?></button>
+                                                <button type="submit" class="btn btn-success m-1"><?= lang('App.save') ?>  <i class="bi bi-save2 ms-2"></i></button>
                                             </div>
                                         </div>
                                         <?= form_close(); ?>
@@ -86,7 +86,7 @@
                                 </div>
                                 <!-- End::add Question modal --> 
                                 <!------------------------export excel Button-------------------------------------------------------->
-                                <a href="<?php echo base_url('sample-excel-file'); ?>" 
+                                <a href="<?php echo base_url('feedback/sample-excel-file'); ?>" 
                                    class="btn btn-warning  btn-wave me-2">
                                     <i class="ri-download-line align-middle me-2 d-inline-block"></i>
                                     <?= lang('App.export') ?> <?= lang('App.excel') ?> 
@@ -110,7 +110,7 @@
                                                     <div class="col-xl-12 mb-3">
                                                         <label for="excel_file" class="form-label"><?= lang('App.upload') ?> <?= lang('App.excel') ?></label>
                                                         <input type="file" class="form-control" id="excel_file" name="excel_file"
-                                                        accesskey=""accept=".xlsx, .xls" required>
+                                                               accesskey=""accept=".xlsx, .xls" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -124,173 +124,173 @@
                                 </div>
                                 <!-- End::upload modal --> 
                             </div>
-                        <!--=====================================================================-->
-                                        <div class="card-body">
-                                            <table id="responsiveDataTable" class="table table-bordered w-100">
-                                                <thead>
-                                                    <tr>
-                                                        <th><?= lang('App.sr') ?> <?= lang('App.no') ?></th>
-                                                        <th> <?= lang('App.question')?> </th>
-                                                        <th><?= lang('App.option')?>1 </th>
-                                                        <th><?= lang('App.option')?>2 </th>
-                                                        <th><?= lang('App.option') ?>3 </th>
-                                                        <th><?= lang('App.option') ?>4 </th>
-                                                        <th><?= lang('App.option') ?>5 </th>
-                                                        <th><?= lang('App.weightage') ?>  </th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <!-----------------------------1------------------------------->
-                                                    <tr>
-                                                        <td><span class="fw-semibold">1</span></td>
-                                                        <td><span class="fw-semibold">The teacher has given teaching plan, course objectives and course outcomes before starting the course and it is implemented satisfactorily.</span></td>
-                                                        <td>Below Average</td>
-                                                        <td>Average</td>
-                                                        <td>Good</td>
-                                                        <td>Very Good </td>
-                                                        <td>Excellent</td>
-                                                        <td>0.10</td>
-                                                        <td> 
-                                                            <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <!-------------------------------2----------------------------->
-                                                    <tr>
-                                                        <td><span class="fw-semibold">2</span></td>
-                                                        <td><span class="fw-semibold">The teacher delivered the course contents in simple language with practical examples and creating interest in the course.</span></td>
-                                                        <td>Below Average</td>
-                                                        <td>Average</td>
-                                                        <td>Good</td>
-                                                        <td>Very Good </td>
-                                                        <td>Excellent</td>
-                                                        <td>0.10</td>
-                                                        <td> 
-                                                            <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <!-------------------------------3----------------------------->
-                                                    <tr>
-                                                        <td><span class="fw-semibold">3</span></td>
-                                                        <td><span class="fw-semibold">Usage of active learning / innovative tools.</span></td>
-                                                        <td>Below Average</td>
-                                                        <td>Average</td>
-                                                        <td>Good</td>
-                                                        <td>Very Good </td>
-                                                        <td>Excellent</td>
-                                                        <td>0.10</td>
-                                                        <td> 
-                                                            <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <!-------------------------------4----------------------------->
-                                                    <tr>
-                                                        <td><span class="fw-semibold">4</span></td>
-                                                        <td><span class="fw-semibold">The teacher was regular and covered all units from syllabus.</span></td>
-                                                        <td>Below Average</td>
-                                                        <td>Average</td>
-                                                        <td>Good</td>
-                                                        <td>Very Good </td>
-                                                        <td>Excellent</td>
-                                                        <td>0.10</td>
-                                                        <td> 
-                                                            <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <!-------------------------------5----------------------------->
-                                                    <tr>
-                                                        <td><span class="fw-semibold">5</span></td>
-                                                        <td><span class="fw-semibold">The teacher clears the doubts raised by students within and outside class-room.</span></td>
-                                                        <td>Below Average</td>
-                                                        <td>Average</td>
-                                                        <td>Good</td>
-                                                        <td>Very Good </td>
-                                                        <td>Excellent</td>
-                                                        <td>0.10</td>
-                                                        <td> 
-                                                            <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <!------------------------------6------------------------------>
-                                                    <tr>
-                                                        <td><span class="fw-semibold">6</span></td>
-                                                        <td><span class="fw-semibold">The teacher has good communication skill, effective class control, overall course teaching and learning is enjoyable and satisfactory.</span></td>
-                                                        <td>Below Average</td>
-                                                        <td>Average</td>
-                                                        <td>Good</td>
-                                                        <td>Very Good </td>
-                                                        <td>Excellent</td>
-                                                        <td>0.10</td>
-                                                        <td> 
-                                                            <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <!------------------------------7------------------------------>
-                                                    <tr>
-                                                        <td><span class="fw-semibold">7</span></td>
-                                                        <td><span class="fw-semibold">The teacher taught the entire course with adequate knowledge about the course content.</span></td>
-                                                        <td>Below Average</td>
-                                                        <td>Average</td>
-                                                        <td>Good</td>
-                                                        <td>Very Good </td>
-                                                        <td>Excellent</td>
-                                                        <td>0.10</td>
-                                                        <td> 
-                                                            <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <!-----------------------------8------------------------------->
-                                                    <tr>
-                                                        <td><span class="fw-semibold">8</span></td>
-                                                        <td><span class="fw-semibold">The teacher provided references like notes, ppt, links, model answers, videos, NPTEL/SWAYAM links to students for the course content. (online/offline).</span></td>
-                                                        <td>Below Average</td>
-                                                        <td>Average</td>
-                                                        <td>Good</td>
-                                                        <td>Very Good </td>
-                                                        <td>Excellent</td>
-                                                        <td>0.10</td>
-                                                        <td> 
-                                                            <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <!--------------------------9---------------------------------->
-                                                    <tr>
-                                                        <td><span class="fw-semibold">9</span></td>
-                                                        <td><span class="fw-semibold">Fairness in the continuous Internal Evaluation Process.</span></td>
-                                                        <td>Below Average</td>
-                                                        <td>Average</td>
-                                                        <td>Good</td>
-                                                        <td>Very Good </td>
-                                                        <td>Excellent</td>
-                                                        <td>0.10</td>
-                                                        <td> 
-                                                            <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <!--------------------------10---------------------------------->
-                                                    <tr>
-                                                        <td><span class="fw-semibold">10</span></td>
-                                                        <td><span class="fw-semibold">Your satisfaction with quality of teaching of teacher. (Please give a rating on a five-point scale)</span></td>
-                                                        <td>Below Average</td>
-                                                        <td>Average</td>
-                                                        <td>Good</td>
-                                                        <td>Very Good </td>
-                                                        <td>Excellent</td>
-                                                        <td>0.10</td>
-                                                        <td> 
-                                                            <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                            <!--=====================================================================-->
+                            <div class="card-body">
+                                <table id="responsiveDataTable" class="table table-bordered w-100">
+                                    <thead>
+                                        <tr>
+                                            <th><?= lang('App.sr') ?> <?= lang('App.no') ?></th>
+                                            <th> <?= lang('App.question') ?> </th>
+                                            <th><?= lang('App.option') ?>1 </th>
+                                            <th><?= lang('App.option') ?>2 </th>
+                                            <th><?= lang('App.option') ?>3 </th>
+                                            <th><?= lang('App.option') ?>4 </th>
+                                            <th><?= lang('App.option') ?>5 </th>
+                                            <th><?= lang('App.weightage') ?>  </th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-----------------------------1------------------------------->
+                                        <tr>
+                                            <td><span class="fw-semibold">1</span></td>
+                                            <td><span class="fw-semibold">The teacher has given teaching plan, course objectives and course outcomes before starting the course and it is implemented satisfactorily.</span></td>
+                                            <td>Below Average</td>
+                                            <td>Average</td>
+                                            <td>Good</td>
+                                            <td>Very Good </td>
+                                            <td>Excellent</td>
+                                            <td>0.10</td>
+                                            <td> 
+                                                <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
+                                            </td>
+                                        </tr>
+                                        <!-------------------------------2----------------------------->
+                                        <tr>
+                                            <td><span class="fw-semibold">2</span></td>
+                                            <td><span class="fw-semibold">The teacher delivered the course contents in simple language with practical examples and creating interest in the course.</span></td>
+                                            <td>Below Average</td>
+                                            <td>Average</td>
+                                            <td>Good</td>
+                                            <td>Very Good </td>
+                                            <td>Excellent</td>
+                                            <td>0.10</td>
+                                            <td> 
+                                                <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
+                                            </td>
+                                        </tr>
+                                        <!-------------------------------3----------------------------->
+                                        <tr>
+                                            <td><span class="fw-semibold">3</span></td>
+                                            <td><span class="fw-semibold">Usage of active learning / innovative tools.</span></td>
+                                            <td>Below Average</td>
+                                            <td>Average</td>
+                                            <td>Good</td>
+                                            <td>Very Good </td>
+                                            <td>Excellent</td>
+                                            <td>0.10</td>
+                                            <td> 
+                                                <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
+                                            </td>
+                                        </tr>
+                                        <!-------------------------------4----------------------------->
+                                        <tr>
+                                            <td><span class="fw-semibold">4</span></td>
+                                            <td><span class="fw-semibold">The teacher was regular and covered all units from syllabus.</span></td>
+                                            <td>Below Average</td>
+                                            <td>Average</td>
+                                            <td>Good</td>
+                                            <td>Very Good </td>
+                                            <td>Excellent</td>
+                                            <td>0.10</td>
+                                            <td> 
+                                                <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
+                                            </td>
+                                        </tr>
+                                        <!-------------------------------5----------------------------->
+                                        <tr>
+                                            <td><span class="fw-semibold">5</span></td>
+                                            <td><span class="fw-semibold">The teacher clears the doubts raised by students within and outside class-room.</span></td>
+                                            <td>Below Average</td>
+                                            <td>Average</td>
+                                            <td>Good</td>
+                                            <td>Very Good </td>
+                                            <td>Excellent</td>
+                                            <td>0.10</td>
+                                            <td> 
+                                                <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
+                                            </td>
+                                        </tr>
+                                        <!------------------------------6------------------------------>
+                                        <tr>
+                                            <td><span class="fw-semibold">6</span></td>
+                                            <td><span class="fw-semibold">The teacher has good communication skill, effective class control, overall course teaching and learning is enjoyable and satisfactory.</span></td>
+                                            <td>Below Average</td>
+                                            <td>Average</td>
+                                            <td>Good</td>
+                                            <td>Very Good </td>
+                                            <td>Excellent</td>
+                                            <td>0.10</td>
+                                            <td> 
+                                                <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
+                                            </td>
+                                        </tr>
+                                        <!------------------------------7------------------------------>
+                                        <tr>
+                                            <td><span class="fw-semibold">7</span></td>
+                                            <td><span class="fw-semibold">The teacher taught the entire course with adequate knowledge about the course content.</span></td>
+                                            <td>Below Average</td>
+                                            <td>Average</td>
+                                            <td>Good</td>
+                                            <td>Very Good </td>
+                                            <td>Excellent</td>
+                                            <td>0.10</td>
+                                            <td> 
+                                                <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
+                                            </td>
+                                        </tr>
+                                        <!-----------------------------8------------------------------->
+                                        <tr>
+                                            <td><span class="fw-semibold">8</span></td>
+                                            <td><span class="fw-semibold">The teacher provided references like notes, ppt, links, model answers, videos, NPTEL/SWAYAM links to students for the course content. (online/offline).</span></td>
+                                            <td>Below Average</td>
+                                            <td>Average</td>
+                                            <td>Good</td>
+                                            <td>Very Good </td>
+                                            <td>Excellent</td>
+                                            <td>0.10</td>
+                                            <td> 
+                                                <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
+                                            </td>
+                                        </tr>
+                                        <!--------------------------9---------------------------------->
+                                        <tr>
+                                            <td><span class="fw-semibold">9</span></td>
+                                            <td><span class="fw-semibold">Fairness in the continuous Internal Evaluation Process.</span></td>
+                                            <td>Below Average</td>
+                                            <td>Average</td>
+                                            <td>Good</td>
+                                            <td>Very Good </td>
+                                            <td>Excellent</td>
+                                            <td>0.10</td>
+                                            <td> 
+                                                <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
+                                            </td>
+                                        </tr>
+                                        <!--------------------------10---------------------------------->
+                                        <tr>
+                                            <td><span class="fw-semibold">10</span></td>
+                                            <td><span class="fw-semibold">Your satisfaction with quality of teaching of teacher. (Please give a rating on a five-point scale)</span></td>
+                                            <td>Below Average</td>
+                                            <td>Average</td>
+                                            <td>Good</td>
+                                            <td>Very Good </td>
+                                            <td>Excellent</td>
+                                            <td>0.10</td>
+                                            <td> 
+                                                <button class="btn btn-primary-light btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ri-edit-line"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--End::row-1 -->
             </div>
+        </div>
+    </div>
+    <!--End::row-1 -->
+</div>
 
-         
+

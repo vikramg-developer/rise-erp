@@ -8791,7 +8791,7 @@ caption {
   color: #000;
   border-color: var(--bs-table-border-color);
   --bs-table-bg: rgba(var(--primary-rgb), 0.1);
-  --bs-table-border-color: rgba(var(--primary-rgb), 0.1);
+  --bs-table-border-color: rgba(var(--primary-rgb), 0.5);
   --bs-table-striped-bg: rgba(var(--primary-rgb), 0.2);
   --bs-table-active-bg: rgba(var(--primary-rgb), 0.2);
   --bs-table-hover-bg: rgba(var(--primary-rgb), 0.2);
@@ -8820,7 +8820,7 @@ caption {
   color: #000;
   border-color: var(--bs-table-border-color);
   --bs-table-bg: rgba(var(--secondary-rgb), 0.1);
-  --bs-table-border-color: rgba(var(--secondary-rgb), 0.1);
+  --bs-table-border-color: rgba(var(--secondary-rgb), 0.5);
   --bs-table-striped-bg: rgba(var(--secondary-rgb), 0.2);
   --bs-table-active-bg: rgba(var(--secondary-rgb), 0.2);
   --bs-table-hover-bg: rgba(var(--secondary-rgb), 0.2);
@@ -8849,7 +8849,7 @@ caption {
   color: #000;
   border-color: var(--bs-table-border-color);
   --bs-table-bg: rgba(var(--warning-rgb), 0.1);
-  --bs-table-border-color: rgba(var(--warning-rgb), 0.1);
+  --bs-table-border-color: rgba(var(--warning-rgb), 0.5);
   --bs-table-striped-bg: rgba(var(--warning-rgb), 0.2);
   --bs-table-active-bg: rgba(var(--warning-rgb), 0.2);
   --bs-table-hover-bg: rgba(var(--warning-rgb), 0.2);
@@ -8878,7 +8878,7 @@ caption {
   color: #000;
   border-color: var(--bs-table-border-color);
   --bs-table-bg: rgba(var(--success-rgb), 0.1);
-  --bs-table-border-color: rgba(var(--success-rgb), 0.1);
+  --bs-table-border-color: rgba(var(--success-rgb), 0.5);
   --bs-table-striped-bg: rgba(var(--success-rgb), 0.2);
   --bs-table-active-bg: rgba(var(--success-rgb), 0.2);
   --bs-table-hover-bg: rgba(var(--success-rgb), 0.2);
@@ -8907,7 +8907,7 @@ caption {
   color: #000;
   border-color: var(--bs-table-border-color);
   --bs-table-bg: rgba(var(--danger-rgb), 0.1);
-  --bs-table-border-color: rgba(var(--danger-rgb), 0.1);
+  --bs-table-border-color: rgba(var(--danger-rgb), 0.5);
   --bs-table-striped-bg: rgba(var(--danger-rgb), 0.2);
   --bs-table-active-bg: rgba(var(--danger-rgb), 0.2);
   --bs-table-hover-bg: rgba(var(--danger-rgb), 0.2);

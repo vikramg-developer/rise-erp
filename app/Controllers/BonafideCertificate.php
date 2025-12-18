@@ -6,7 +6,7 @@ namespace App\Controllers;
 class BonafideCertificate extends BaseController{
     public function index(){
      
-        render_page('certificates/bonafide-certificate-index');
+        return render_page('certificates/bonafide-certificate-index');
     }
     
     public function bonafide_print(){

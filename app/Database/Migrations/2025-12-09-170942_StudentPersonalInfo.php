@@ -17,7 +17,7 @@ class StudentPersonalInfo extends Migration
             ],
             'student_registration_id' => [
                 'type'       => 'INT',
-                'constraint' => 11,               
+                'constraint' => 11,
                 'null'       => false,
             ],
             'student_prn_no' => [

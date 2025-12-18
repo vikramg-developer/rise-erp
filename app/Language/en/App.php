@@ -64,6 +64,7 @@ return [
     'date' => 'Date',
     'declaration' => 'Declaration',
     'degree' => 'Degree',
+    'department' => 'Department',
     'designation' => 'Designation',
     'description' => 'Description',
     'details' => 'Details',
@@ -214,6 +215,7 @@ return [
     'rise' => 'Rise',
     'religion' => 'Religion',
     'reference' => 'Reference',
+    'role' => 'Role',
     // S
     'save' => 'Save',
     'screenshot' => 'Screenshot',
@@ -225,7 +227,7 @@ return [
     'signature' => 'Signature',
     'society' => 'Society',
     'specialization' => 'Specialization',
-    'sr' => 'Sr',
+    'sr' => 'Sr.',
     'state' => 'State',
     'status' => 'Status',
     'stream' => 'Stream',
@@ -242,11 +244,13 @@ return [
     'title' => 'Title',
     'to_date' => 'To Date',
     'type' => 'Type',
-    // U
+    // U    
     'university' => 'University',
     'update' => 'Update',
     'upload' => 'Upload',
     'up' => 'UP',
+    'user' => 'User',
+    'users' => 'Users',
     // V
     'volume' => 'Volume',
     // W
@@ -258,7 +262,7 @@ return [
     'years' => 'Years',
     'your' => 'Your',
     // ============================================================
-    // COMMON & SPECIFIC ERRORS (unchanged)
+    // COMMON & SPECIFIC ERRORS
     // ============================================================
     'error_required' => 'This field is required.',
     'error_invalid_input' => 'Invalid input provided.',
@@ -344,4 +348,16 @@ return [
     'error_agency_name' => 'Enter agency name.',
     'error_cost' => 'Enter valid cost.',
     'error_certificate' => 'Please upload PDF certificate.',
+    // ADD FACULTY MODULE ERRORS
+    'error_pan' => 'Enter a valid PAN number.',
+    'error_password' => 'Password is required.',
+    'error_confirm_password' => 'Passwords do not match.',
+    'error_faculty_role' => 'Please select faculty role.',
+    'permission' => 'Permission',
+    'view' => 'View',
+    'delete' => 'Delete',
+    'added' => 'Added',
+    'updated' => 'Updated',
+    'by' => 'By',
+    'department' => 'Department',
 ];

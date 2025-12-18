@@ -8,19 +8,23 @@ use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
+use App\Filters\PermissionFilter;
+use App\Filters\AuthFilter;
 
-class Filters extends BaseConfig
-{
+class Filters extends BaseConfig {
+
     /**
      * Configures aliases for Filter classes to
      * make reading things nicer and simpler.
      */
     public array $aliases = [
-        'csrf'          => CSRF::class,
-        'toolbar'       => DebugToolbar::class,
-        'honeypot'      => Honeypot::class,
-        'invalidchars'  => InvalidChars::class,
+        'csrf' => CSRF::class,
+        'toolbar' => DebugToolbar::class,
+        'honeypot' => Honeypot::class,
+        'invalidchars' => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'permission' => PermissionFilter::class,
+        'auth' => AuthFilter::class,
     ];
 
     /**
@@ -30,13 +34,39 @@ class Filters extends BaseConfig
     public array $globals = [
         'before' => [
             // 'honeypot',
-            // 'csrf',
-            // 'invalidchars',
+            'csrf',
+            'auth' => [
+                'before' => [
+                    '*', //apply to all filters
+                ],
+                'except' => [
+                    '/', //skip login page
+                    'login', //skip login page
+                    'check-user', //skip login page
+                    'student-registration', //skip student registration page
+                    'save-registration', //skip student registration save page
+                ]
+            ],
+            'permission' => [
+                'before' => [
+                    '*', //apply to all filters
+                ],
+                'except' => [
+                    '/', //skip login page
+                    'login', //skip login page
+                    'check-user', //skip login page
+                    'logout', //skip logout
+                    'student-dashboard', //skip student dashboard page
+                    'student-registration', //skip student registration page
+                    'save-registration', //skip student registration save page
+                ]
+            ]
+        // 'invalidchars',
         ],
         'after' => [
             'toolbar',
-            // 'honeypot',
-            // 'secureheaders',
+        // 'honeypot',
+        // 'secureheaders',
         ],
     ];
 
@@ -60,5 +90,6 @@ class Filters extends BaseConfig
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
-    public array $filters = [];
+    public array $filters = [
+    ];
 }
