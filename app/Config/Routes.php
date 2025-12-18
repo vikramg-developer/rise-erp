@@ -78,12 +78,12 @@ $routes->group('faculty', function ($routes) {
     $routes->post('manage-faculty', 'Faculty::update-faculty', ['filter' => 'permission:editFaculty']);
 });
 $routes->group('headgroup', function ($routes) {
-    $routes->get('/', 'HeadGroup::index', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('fetch-head-group', 'HeadGroup::fetch_head_group', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('add-head-group', 'HeadGroup::add_head_group', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('update-head-group', 'HeadGroup::update-head-group', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('delete-head-group', 'HeadGroup::delete_head_group', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('revert-head-group', 'HeadGroup::revert_head_group', ['filter' => 'permission:createFeesManagement']);
+    $routes->get('/', 'HeadGroup::index', ['filter' => 'permission:createHeadGroup']);
+    $routes->post('fetch-head-group', 'HeadGroup::fetch_head_group', ['filter' => 'permission:createHeadGroup']);
+    $routes->post('add-head-group', 'HeadGroup::add_head_group', ['filter' => 'permission:createHeadGroup']);
+    $routes->post('update-head-group', 'HeadGroup::update-head-group', ['filter' => 'permission:createHeadGroup']);
+    $routes->post('delete-head-group', 'HeadGroup::delete_head_group', ['filter' => 'permission:createHeadGroup']);
+    $routes->post('revert-head-group', 'HeadGroup::revert_head_group', ['filter' => 'permission:createHeadGroup']);
 });
 
 $routes->get('forbidden', 'Error::forbidden');
