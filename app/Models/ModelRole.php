@@ -57,29 +57,40 @@ class ModelRole extends Model {
 //    protected $afterFind      = [];
 //    protected $beforeDelete   = [];
 //    protected $afterDelete    = [];
+//    public function findAllRecord($length, $start) {
+//        $result = $this->where('role_id!=', '1')->orderBy('role_id', 'DESC')->findAll($length, $start);
+//
+//        $this->resetQuery();
+//
+//        return $result;
+//    }
 
-    public function findAllRecord($length, $start) {
-//        return $this->orderBy('role_id', 'DESC')->findAll($length, $start);
-        return $this->where('role_id !=', 1)
-                        ->where('is_deleted', 0)
-                        ->orderBy('role_id', 'DESC')
-                        ->findAll($length, $start);
+    public function countAllRoles() {
+        return $this->builder()
+                        ->where('role_id !=', 1)
+                        ->countAllResults();
     }
 
-    public function getRoles() {
-        return $this->whereNotIn('role_id', [1, 2])  
-                        ->where('is_deleted', 0)
-                        ->orderBy('role_id')
-                        ->findAll();
+    public function countFilteredRoles($search) {
+        $builder = $this->builder()
+                ->where('role_id !=', 1);
+
+        if (!empty($search)) {
+            $builder->like('role_name', $search);
+        }
+
+        return $builder->countAllResults();
     }
 
-    /* ==========================================
-      3️⃣ Single Row Fetch
-      ========================================== */
+    public function getFilteredRoles($length, $start, $search) {
+        $builder = $this->builder()
+                ->where('role_id !=', 1)
+                ->orderBy('role_id', 'DESC');
 
-    public function getRoleById($roleId) {
-        return $this->where('role_id', $roleId)
-                        ->where('is_deleted', 0)
-                        ->first();   // returns single row (array)
+        if (!empty($search)) {
+            $builder->like('role_name', $search);
+        }
+
+        return $builder->get($length, $start)->getResultArray();
     }
 }

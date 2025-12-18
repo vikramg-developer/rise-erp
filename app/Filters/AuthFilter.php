@@ -9,8 +9,10 @@ use CodeIgniter\HTTP\ResponseInterface;
 class AuthFilter implements FilterInterface {
 
     public function before(RequestInterface $request, $arguments = null) {
+        
+        //User not logged in redirect to login page
         if (!session()->has('logged_in')) {
-            return redirect()->to('login');
+            return redirect()->to('login')->with('error', 'Please login first');
         }
     }
 

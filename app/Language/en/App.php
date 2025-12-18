@@ -358,4 +358,5 @@ return [
     'added' => 'Added',
     'updated' => 'Updated',
     'by' => 'By',
+    'department' => 'Department',
 ];

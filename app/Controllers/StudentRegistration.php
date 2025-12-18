@@ -88,27 +88,28 @@ class StudentRegistration extends BaseController {
             if ($insert) {
                 $page_session->setTempdata(
                         'success',
-                        'Account created successfully! Please Login. Your Rise No is: <b>' . $newRiseNo . '</b>',4);
+                        'Account created successfully! Please Login. Your Rise No is: <b>' . $newRiseNo . '</b>', 4);
             } else {
-            $this->modelstudentregistration
-                    ->skipValidation(true)
-                    ->update($insertId, [
-                        'student_rise_no' => $finalRiseNo
-            ]);
+                $this->modelstudentregistration
+                        ->skipValidation(true)
+                        ->update($insertId, [
+                            'student_rise_no' => $finalRiseNo
+                ]);
 
-            $this->db->table('rise_number_counter')
-                    ->where('user_type_id', 4)
-                    ->where('academic_year_id', 36)
-                    ->update(['rise_no' => $nextRise]);
+                $this->db->table('rise_number_counter')
+                        ->where('user_type_id', 4)
+                        ->where('academic_year_id', 36)
+                        ->update(['rise_no' => $nextRise]);
 
-            $this->db->transCommit();
+                $this->db->transCommit();
 
-            $session->setTempdata(
-                    'success',
-                    'Registration successful! Your Rise No is <b>' . $finalRiseNo . '</b>',
-                    4
-            );
-        } catch (\Throwable $e) {
+                $session->setTempdata(
+                        'success',
+                        'Registration successful! Your Rise No is <b>' . $finalRiseNo . '</b>',
+                        4
+                );
+            }
+        } catch (Throwable $e) {
 
 
             $this->db->transRollback();

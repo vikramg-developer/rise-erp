@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
-                <?= form_open('roles/save-role') ?>
+                <?= form_open('roles/update-role/' . $role_data['role_id']) ?>
                 <div class="card-body add-role p-0">
                     <div class="p-4">
                         <div class="row gx-5">
@@ -28,7 +28,7 @@
                                         <div class="row gy-3">
                                             <div class="col-xl-12">
                                                 <label for="role_name" class="form-label"><?= lang('App.role'); ?> <?= lang('App.name'); ?></label>
-                                                <input type="text" class="form-control" id="role_name" name="role_name" placeholder="<?= lang('App.role'); ?> <?= lang('App.name'); ?>">
+                                                <input type="text" class="form-control" id="role_name" name="role_name" value="<?= esc($role_data['role_name']) ?>" placeholder="<?= lang('App.role'); ?> <?= lang('App.name'); ?>">
                                                 <?php if (session('errors')): ?>
                                                     <small class="text-danger"><?= esc(session('errors.role_name')) ?></small>
                                                 <?php endif; ?>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <?php // if (!empty($head_role_datas)): ?>
+                        <?php $user_permissions = json_decode($role_data['permissions'], true)??[]; ?>
                         <table id="manageTable" class="table table-bordered table-primary text-nowrap w-100">
                             <thead>
                                 <tr>
@@ -58,7 +58,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--faculty_registration-->
+
                                 <?php foreach ($permissions as $module): ?>
                                     <tr>
 
@@ -72,6 +72,11 @@
                                                     name="permission[]"
                                                     id="permission"
                                                     value="<?= esc($action) ?>"
+                                                    <?php
+                                                    if (in_array(esc($action), $user_permissions)) {
+                                                        echo "checked";
+                                                    }
+                                                    ?>
                                                     >
                                             </td>
                                         <?php endforeach; ?>
@@ -93,3 +98,4 @@
     </div>
     <!--End::row-1 -->
 </div>
+

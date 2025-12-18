@@ -9,14 +9,19 @@ use CodeIgniter\HTTP\ResponseInterface;
 class PermissionFilter implements FilterInterface {
 
     public function before(RequestInterface $request, $arguments = null) {
+        
+//        This filter runs and override Auth filter thats why is_logged in block repeated
+        //User not logged in redirect to login page
         if (!session()->has('logged_in')) {
-            return redirect()->to('login');
+            return redirect()->to('login')->with('error', 'Please login first');
         }
         // admin bypass
-        if (session('role_id') == 1) {
+        if (in_array(session('role_id'),array(1))) {
             return;
         }
 
+//        Written this block if we forget to provide permissions in routes
+//        
         // no permission defined
         if (empty($arguments)) {
             return service('response')
