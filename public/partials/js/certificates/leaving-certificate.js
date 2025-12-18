@@ -14,6 +14,7 @@ $("#fetch_lc_student").on("submit", function (e) {
         data: formData,
         dataType: "json",
         success: function (response) {
+            console.log(response);
             // 1️⃣ Update CSRF token
             csrfHash = response.csrfHash;
             // handle validation errors

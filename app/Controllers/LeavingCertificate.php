@@ -23,42 +23,58 @@ class LeavingCertificate extends BaseController {
     public function index() {
         $data['jspath'] = 'certificates/leaving-certificate';
         $data['academic_year'] = $this->modelacademicyear->get_active_academic_years();
-        $data['years'] = $this->modelyear->get_years();
+        $data['years'] = $this->modelyear->get_years();  
         $data['departments'] = $this->modeldepartment->get_departments();
         return render_page('certificates/leaving-certificate-index', $data);
     }
 
-    public function fetch_lc_student_list() {
+    /* =============================DATATABLE AJAX================================== */
+    public function fetch_lc_student_list()
+    {
+        $draw   = (int) $this->request->getVar('draw');
+        $start  = (int) $this->request->getVar('start');
+        $length = (int) $this->request->getVar('length');
+        $search = $this->request->getVar('search')['value'] ?? '';
 
-        $draw = $this->request->getPost('draw');
-        $start = $this->request->getPost('start');
-        $length = $this->request->getPost('length');
-        $search = $this->request->getPost('search')['value'] ?? '';
-        
-        $fields = [
-            'department_id' => $this->request->getVar('department_id'),
-            'year_id' => $this->request->getVar('year_id'),
+        $filters = [
+            'department_id'    => $this->request->getVar('department_id'),
+            'year_id'          => $this->request->getVar('year_id'),
             'academic_year_id' => $this->request->getVar('academic_year_id'),
         ];
-        // PAGINATED DATA
-        $student_list = $this->modelyearwisestudentdata->fetch_ysd_student_for_lc($fields, $length, $start);
-        print_r($student_list); die();
-        $recordsTotal = count($student_list);
-        $recordsFiltered = $recordsTotal;
-        $sr_no = 1;
-
+//        print_r($filters); die();
+        // Data rows (paginated + searched)
+        $rows = $this->modelyearwisestudentdata->getStudentsForTable($filters,$length,$start,$search);
+        
+//        print_r($rows);die();
+        // Single count (search-aware)
+        $count = $this->modelyearwisestudentdata->countStudents($filters, $search);
+        
         $data = [];
+
         foreach ($rows as $row) {
             $buttons = '';
-
-            $buttons .= '<button class="btn btn-icon btn-sm btn-secondary" data-yearwise_student_data_id="' . $row['yearwise_student_data_id'] . '" data-student_rise_no="' . $row['student_rise_no'] . '">Add LC Info</button>';
+            $buttons .= '<button class="btn btn-icon btn-sm btn-secondary" data-yearwise_student_data_id="' . $row['yearwise_student_data_id'] . '">Leaving Certificate</button>';
+                        
             $data[] = [
-                $sr_no++,
-                $row['head_group_name'],
-                $buttons,
+                $row['student_rise_no'],
+                $row['student_first_name'] . ' '.$row['student_middle_name'].' ' . $row['student_last_name'],
+                $row['department_name'],
+                $row['year_name'],
+                $row['academic_year_name'],
+                date('d-m-Y', strtotime($row['student_birthdate'])),
+                $button,
             ];
         }
+
+        return $this->response->setJSON([
+            'draw'            => $draw,
+            'recordsTotal'    => $count,
+            'recordsFiltered' => $count,
+            'data'            => $data,
+            'csrfHash'        => csrf_hash(),
+        ]);
     }
+
 
     public function add_lc_info() {
 
