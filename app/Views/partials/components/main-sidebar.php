@@ -83,10 +83,10 @@
                                                         <i class="fe fe-chevron-right side-menu__angle"></i>
                                                     </a>
                                                     <ul class="slide-menu child1">
-                                                        <li class="slide side-menu__label1">
+                                                        <li class="slide side-menu__label1"  id="feedbackNav">
                                                             <a href="javascript:void(0)"><?= lang('App.feedback'); ?></a>
                                                         </li>
-                                                        <li class="slide">
+                                                        <li class="slide" id="feedbacmasterkNav" >
                                                             <a href="<?php echo base_url('feedback'); ?>" class="side-menu__item"> <?= lang('App.feedback'); ?> <?= lang('App.master'); ?></a>
                                                         </li>
                                                     </ul>
@@ -105,13 +105,13 @@
                                                             <a href="javascript:void(0)"><?= lang('App.certificate'); ?></a>
                                                         </li>
                                                         <li class="slide">
-                                                            <a href="<?php echo base_url('leaving-certificate'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?></a>
+                                                            <a href="<?php echo base_url('leavingcertificate'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?></a>
                                                         </li>
                                                         <!--                                                        <li class="slide">
                                                                                                                     <a href="<?php echo base_url('leaving-certificate-report'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?> <?= lang('App.report'); ?></a>
                                                                                                                 </li>-->
                                                         <li class="slide">
-                                                            <a href="<?php echo base_url('bonafide-certificate'); ?>" class="side-menu__item"><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
+                                                            <a href="<?php echo base_url('bonafidecertificate'); ?>" class="side-menu__item"><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -119,7 +119,7 @@
 
                                                 <!-- Start::slide -->
                                                 <li class="slide">
-                                                    <a href="<?php echo base_url('i-card'); ?>" class="side-menu__item">
+                                                    <a href="<?php echo base_url('icard'); ?>" class="side-menu__item">
                                                         <i class="bx bx-id-card side-menu__icon"></i>
                                                         <span class="side-menu__label"><?= lang('App.icard'); ?></span>
                                                     </a>

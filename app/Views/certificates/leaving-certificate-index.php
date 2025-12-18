@@ -29,7 +29,7 @@
                         </div>
                     </div>
                 </div>
-                <form method="post" action="" id="fetch_student">
+                <form method="post" action="" id="fetch_lc_student">
                     <div class="card-body add-products p-0">
                         <div class="p-4">
                             <div class="row gx-5">
@@ -64,8 +64,8 @@
                                                     <small class="text-danger" id="fetch_student_error" style="display:none;"></small>
                                                 </div>
                                                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                                                    <label for="aca_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
-                                                    <select class="js-example-basic-single" name="aca_year_id" id="aca_year_id" required>
+                                                    <label for="academic_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
+                                                    <select class="js-example-basic-single" name="academic_year_id" id="academic_year_id" required>
                                                         <option value="">Select Academic Year</option>
                                                         <?php
                                                         foreach ($academic_year as $aca_year) {
@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary m-1"><?= lang('App.search'); ?></button>
+                            <button class="btn btn-primary m-1"><?= lang('App.search'); ?></button>
                         </div>
                     </div>
                 </form>
@@ -94,7 +94,7 @@
     <!--modal to add leaving certificate info-->
     <div class="modal fade" id="exampleModalLg" tabindex="-1" aria-labelledby="exampleModalLgLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <?= form_open('add-lc-info', ['target' => '_blank']); ?>
+            <?= form_open('leavingcertificate/add-lc-info', ['target' => '_blank']); ?>
             <div class="modal-content">
                 <div class="modal-header">
                     <h6 class="modal-title" id="exampleModalLgLabel"><?= lang('App.add'); ?> <?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?> <?= lang('App.information'); ?></h6>
@@ -145,6 +145,20 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <table id="lc-student-list" class="table table-bordered text-nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col"><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
+                                <th scope="col"><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>
+                                <th scope="col"><?= lang('App.mobile'); ?> <?= lang('App.no'); ?></th>
+                                <th scope="col"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
+                                <th scope="col"><?= lang('App.course'); ?></th>
+                                <th scope="col"><?= lang('App.year'); ?></th>
+                                <th scope="col"><?= lang('App.action'); ?></th>
+                            </tr>
+                        </thead>
+                    </table>
                     <table id="responsiveDataTable" class="table table-bordered text-nowrap w-100">
                         <thead>
                             <tr>

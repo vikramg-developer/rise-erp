@@ -20,7 +20,7 @@ class ModelAcademicYear extends \CodeIgniter\Model {
     ];
 
     //    Reusable Query Methods
-    public function get_active_aca_years() {
+    public function get_active_academic_years() {
         return $this->where(['is_active' => 1, 'is_deleted' => 0])->findAll();
     }
     
