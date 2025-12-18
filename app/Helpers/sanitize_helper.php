@@ -1,6 +1,6 @@
 <?php
 
-function clean_name($name){
+function clean_name($name) {
     // Remove HTML tags
     $name = strip_tags($name);
 
@@ -15,3 +15,26 @@ function clean_name($name){
 
     return trim($name);
 }
+
+function clean_number($number) {
+    $number = strip_tags($number);
+    $number = preg_replace('/script|javascript|on\w+=/i', '', $number);
+    $number = preg_replace('/[^0-9]/', '', $number);
+    $number = preg_replace('/\s+/', '', $number);
+
+    return $number;
+}
+
+function clean_email($email)
+{
+    $email = strip_tags($email);
+    $email = preg_replace('/script|javascript|on\w+=/i', '', $email);
+
+    // allow only valid email characters
+    $email = preg_replace('/[^a-zA-Z0-9@._+-]/', '', $email);
+
+    $email = strtolower(trim($email));
+
+    return $email;
+}
+
