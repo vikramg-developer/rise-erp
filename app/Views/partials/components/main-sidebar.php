@@ -83,10 +83,10 @@
                                                         <i class="fe fe-chevron-right side-menu__angle"></i>
                                                     </a>
                                                     <ul class="slide-menu child1">
-                                                        <li class="slide side-menu__label1">
+                                                        <li class="slide side-menu__label1"  id="feedbackNav">
                                                             <a href="javascript:void(0)"><?= lang('App.feedback'); ?></a>
                                                         </li>
-                                                        <li class="slide">
+                                                        <li class="slide" id="feedbacmasterkNav" >
                                                             <a href="<?php echo base_url('feedback'); ?>" class="side-menu__item"> <?= lang('App.feedback'); ?> <?= lang('App.master'); ?></a>
                                                         </li>
                                                     </ul>

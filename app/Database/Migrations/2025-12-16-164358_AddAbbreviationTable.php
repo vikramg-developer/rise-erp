@@ -9,7 +9,7 @@ class AddAbbreviationTable extends Migration
 {
     public function up()
     {
-       $this->forge->addField([
+       $fields=[
             'abbreviation_id' => [
                 'type'           => 'INT',
                 'constraint'     => 10,
@@ -47,9 +47,9 @@ class AddAbbreviationTable extends Migration
                 'type' => 'tinyint',
                 'constraint' => '1'
             ]
-        ]);
+        ];
 
-        $$this->forge->addField($fields);
+        $this->forge->addField($fields);
         $this->forge->addPrimaryKey('abbreviation_id');
         $this->forge->addUniqueKey('abbreviation_name');    
         $this->forge->createTable('abbreviation');
