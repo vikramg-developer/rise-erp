@@ -42,7 +42,7 @@
                                                         </li>
 
                                                         <li class="slide">
-                                                            <a href="<?php echo base_url('faculty/manage-faculty'); ?>" class="side-menu__item"> <?= lang('App.manage'); ?> <?= lang('App.faculty'); ?></a>
+                                                            <a href="<?php echo base_url('faculty/fetch-faculty'); ?>" class="side-menu__item"> <?= lang('App.manage'); ?> <?= lang('App.faculty'); ?></a>
                                                         </li>
                                                     </ul>
                                                 </li>

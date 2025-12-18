@@ -12,7 +12,7 @@ class ModelFacultyRegistration extends Model {
     protected $returnType = 'array';
     protected $allowedFields = [
         'faculty_rise_no',
-        'role_id',
+        'faculty_role_id',
         'faculty_first_name',
         'faculty_middle_name',
         'faculty_last_name',
@@ -22,35 +22,38 @@ class ModelFacultyRegistration extends Model {
         'faculty_pan_number',
         'faculty_password',
         'added_by',
+        'updated_by',
+        'is_deleted',
     ];
     protected $validationRules = [
-        'role_id' => 'required',
-        'faculty_first_name' => 'required|min_length[2]',
-        'faculty_middle_name' => 'required|min_length[2]',
-        'faculty_last_name' => 'required|min_length[2]',
+        'faculty_role_id' => 'required',
+        'faculty_first_name' => 'required|min_length[2]|alpha_space',
+        'faculty_middle_name' => 'required|min_length[2]|alpha_space',
+        'faculty_last_name' => 'required|min_length[2]|alpha_space',
         'faculty_mobile_number' => 'required|numeric|exact_length[10]|is_unique[faculty_registration.faculty_mobile_number]',
-        'faculty_email_id' => 'required|is_unique[faculty_registration.faculty_email_id]',
+        'faculty_email_id' => 'required|trim|valid_email|is_unique[faculty_registration.faculty_email_id]',
         'faculty_aadhar_number' => 'required|numeric|exact_length[12]|is_unique[faculty_registration.faculty_aadhar_number]',
         'faculty_pan_number' => 'required|regex_match[/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/]|is_unique[faculty_registration.faculty_pan_number]',
         'faculty_password' => 'required|min_length[6]',
-        
     ];
     protected $validationMessages = [
-        
-        'role_id' => [
+        'faculty_role_id' => [
             'required' => 'Faculty Role is required.',
         ],
         'faculty_first_name' => [
             'required' => 'First Name is required.',
             'min_length' => 'First Name must be at least 2 characters.',
+            'alpha_space' => 'First Name must contain only letters.',
         ],
         'faculty_middle_name' => [
             'required' => 'Middle Name is required.',
             'min_length' => 'Middle Name must be at least 2 characters.',
+            'alpha_space' => 'Middle Name must contain only letters.',
         ],
         'faculty_last_name' => [
             'required' => 'Last Name is required.',
             'min_length' => 'Last Name must be at least 2 characters.',
+            'alpha_space' => 'Last Name must contain only letters.',
         ],
         'faculty_mobile_number' => [
             'required' => 'Mobile Number is required.',
@@ -79,18 +82,35 @@ class ModelFacultyRegistration extends Model {
             'min_length' => 'Password must be at least 6 characters.',
         ],
         'confirm_password' => [
-        'required' => 'Confirm Password is required.',
-        'matches'  => 'Password and Confirm Password must match.',
-    ],
-        
-        
+            'required' => 'Confirm Password is required.',
+            'matches' => 'Password and Confirm Password must match.',
+        ],
     ];
     protected $skipValidation = false;
-//    Reusable Functions
     
-    public function verify_rise_no($rise_no)
-    {
-        return $this->where('faculty_rise_no', $rise_no)->first(); 
+    protected $beforeInsert   = ['hashPassword'];
+    
+    protected function hashPassword(array $data)
+{
+    if (! empty($data['data']['faculty_password'])) {
+        $data['data']['faculty_password'] =
+            password_hash($data['data']['faculty_password'], PASSWORD_DEFAULT);
     }
+    return $data;
 }
 
+//    Reusable Functions
+
+    public function verify_rise_no($rise_no) {
+        return $this->where('faculty_rise_no', $rise_no)->first();
+    }
+    
+    public function findAllRecord($length, $start)
+{
+    return $this->where('faculty_registration_id !=', 1)
+                ->orderBy('faculty_registration_id', 'DESC')
+                ->findAll($length, $start);
+}
+
+   
+}

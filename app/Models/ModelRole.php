@@ -6,22 +6,23 @@
  */
 
 namespace App\Models;
+
 use CodeIgniter\Model;
+
 /**
  * Description of ModelRole
  *
  * @author Dell
  */
-class ModelRole extends Model{
-    protected $table      = 'role';
+class ModelRole extends Model {
+
+    protected $table = 'role';
     protected $primaryKey = 'role_id';
-
     protected $useAutoIncrement = true;
-
-    protected $returnType     = 'array';
+    protected $returnType = 'array';
 //    protected $useSoftDeletes = true;
 //
-    protected $allowedFields = ['role_id','role_name','permissions','added_by','updated_by','is_deleted'];
+    protected $allowedFields = ['role_id', 'role_name', 'permissions', 'added_by', 'updated_by', 'is_deleted'];
 //
 //    protected bool $allowEmptyInserts = false;
 //    protected bool $updateOnlyChanged = true;
@@ -34,14 +35,15 @@ class ModelRole extends Model{
 //    protected $deletedField  = 'deleted_at';
 //
 //    // Validation
-    protected $validationRules      = [
+    protected $validationRules = [
         'role_name' => 'required|alpha_numeric_space'
     ];
-    protected $validationMessages   = [
+    protected $validationMessages = [
         'role_name' => [
             'required' => 'Role name is required'
         ]
     ];
+
 //    protected $skipValidation       = false;
 //    protected $cleanValidationRules = true;
 //
@@ -55,9 +57,29 @@ class ModelRole extends Model{
 //    protected $afterFind      = [];
 //    protected $beforeDelete   = [];
 //    protected $afterDelete    = [];
-    
-    public function findAllRecord($length,$start)
-    {
-        return $this->orderBy('role_id', 'DESC')->findAll($length, $start);
+
+    public function findAllRecord($length, $start) {
+//        return $this->orderBy('role_id', 'DESC')->findAll($length, $start);
+        return $this->where('role_id !=', 1)
+                        ->where('is_deleted', 0)
+                        ->orderBy('role_id', 'DESC')
+                        ->findAll($length, $start);
+    }
+
+    public function getRoles() {
+        return $this->whereNotIn('role_id', [1, 2])  
+                        ->where('is_deleted', 0)
+                        ->orderBy('role_id')
+                        ->findAll();
+    }
+
+    /* ==========================================
+      3️⃣ Single Row Fetch
+      ========================================== */
+
+    public function getRoleById($roleId) {
+        return $this->where('role_id', $roleId)
+                        ->where('is_deleted', 0)
+                        ->first();   // returns single row (array)
     }
 }

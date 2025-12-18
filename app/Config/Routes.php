@@ -84,11 +84,14 @@ $routes->group('feedback', function ($routes) {
 });
 
 $routes->group('faculty', function ($routes) {
-    $routes->get('/', 'Faculty::index', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('demo', 'Faculty::demo', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('add-faculty', 'Faculty::add_faculty', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('manage-faculty', 'Faculty::update-faculty', ['filter' => 'permission:createFeesManagement']);
+
+    $routes->get('/', 'Faculty::index', ['filter' => 'permission:createfaculty']);
+    $routes->get('fetch-faculty', 'Faculty::faculty_data', ['filter' => 'permission:createfaculty']);
+    $routes->post('fetch-faculty-data', 'Faculty::fetch_faculty', ['filter' => 'permission:createfaculty']);
+    $routes->post('add-faculty', 'Faculty::add_faculty', ['filter' => 'permission:createfaculty']);
+//    $routes->post('manage-faculty', 'Faculty::update_faculty', ['filter' => 'permission:createfaculty']);
 });
+
 $routes->group('headgroup', function ($routes) {
     $routes->get('/', 'FeesManagement::head_group', ['filter' => 'permission:createFeesManagement']);
     $routes->post('fetch-head-group', 'FeesManagement::fetch_head_group', ['filter' => 'permission:createFeesManagement']);

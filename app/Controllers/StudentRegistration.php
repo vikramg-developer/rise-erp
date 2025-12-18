@@ -85,6 +85,11 @@ class StudentRegistration extends BaseController {
 
             $finalRiseNo = 'S' . $year . $branchCode . str_pad($currentRise, 4, '0', STR_PAD_LEFT);
 
+            if ($insert) {
+                $page_session->setTempdata(
+                        'success',
+                        'Account created successfully! Please Login. Your Rise No is: <b>' . $newRiseNo . '</b>',4);
+            } else {
             $this->modelstudentregistration
                     ->skipValidation(true)
                     ->update($insertId, [
@@ -101,7 +106,7 @@ class StudentRegistration extends BaseController {
             $session->setTempdata(
                     'success',
                     'Registration successful! Your Rise No is <b>' . $finalRiseNo . '</b>',
-                    5
+                    4
             );
         } catch (\Throwable $e) {
 
@@ -111,7 +116,7 @@ class StudentRegistration extends BaseController {
             $session->setTempdata(
                     'error',
                     'Registration failed: ' . $e->getMessage(),
-                    5
+                    4
             );
         }
 
