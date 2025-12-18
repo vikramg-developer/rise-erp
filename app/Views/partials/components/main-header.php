@@ -529,7 +529,7 @@
                             <img src="<?php echo base_url('assets/images/faces/9.jpg'); ?>" alt="img" width="32" height="32" class="rounded-circle">
                         </div>
                         <div class="d-sm-block d-none">
-                            <p class="fw-semibold mb-0 lh-1">Json Taylor</p>
+                            <p class="fw-semibold mb-0 lh-1"><?= session('username'); ?></p>
                             <span class="op-7 fw-normal d-block fs-11">Web Designer</span>
                         </div>
                     </div>
@@ -537,11 +537,11 @@
                 <!-- End::header-link|dropdown-toggle -->
                 <ul class="main-header-dropdown dropdown-menu pt-0 overflow-hidden header-profile-dropdown dropdown-menu-end" aria-labelledby="mainHeaderProfile">
                     <li><a class="dropdown-item d-flex" href="<?php echo base_url('profile'); ?>"><i class="ti ti-user-circle fs-18 me-2 op-7"></i>Profile</a></li>
-                    <li><a class="dropdown-item d-flex" href="<?php echo base_url('mail'); ?>"><i class="ti ti-inbox fs-18 me-2 op-7"></i>Inbox <span class="badge bg-success-transparent ms-auto">25</span></a></li>
-                    <li><a class="dropdown-item d-flex border-block-end" href="<?php echo base_url('to-do-list'); ?>"><i class="ti ti-clipboard-check fs-18 me-2 op-7"></i>Task Manager</a></li>
-                    <li><a class="dropdown-item d-flex" href="<?php echo base_url('mail-settings'); ?>"><i class="ti ti-adjustments-horizontal fs-18 me-2 op-7"></i>Settings</a></li>
-                    <li><a class="dropdown-item d-flex border-block-end" href="javascript:void(0);"><i class="ti ti-wallet fs-18 me-2 op-7"></i>Bal: $7,12,950</a></li>
-                    <li><a class="dropdown-item d-flex" href="<?php echo base_url('chat'); ?>"><i class="ti ti-headset fs-18 me-2 op-7"></i>Support</a></li>
+                    <!--<li><a class="dropdown-item d-flex" href="<?php echo base_url('mail'); ?>"><i class="ti ti-inbox fs-18 me-2 op-7"></i>Inbox <span class="badge bg-success-transparent ms-auto">25</span></a></li>-->
+                    <!--<li><a class="dropdown-item d-flex border-block-end" href="<?php echo base_url('to-do-list'); ?>"><i class="ti ti-clipboard-check fs-18 me-2 op-7"></i>Task Manager</a></li>-->
+                    <!--<li><a class="dropdown-item d-flex" href="<?php echo base_url('mail-settings'); ?>"><i class="ti ti-adjustments-horizontal fs-18 me-2 op-7"></i>Settings</a></li>-->
+                    <!--<li><a class="dropdown-item d-flex border-block-end" href="javascript:void(0);"><i class="ti ti-wallet fs-18 me-2 op-7"></i>Bal: $7,12,950</a></li>-->
+                    <!--<li><a class="dropdown-item d-flex" href="<?php echo base_url('chat'); ?>"><i class="ti ti-headset fs-18 me-2 op-7"></i>Support</a></li>-->
                     <li><a class="dropdown-item d-flex" href="<?php echo base_url('logout'); ?>"><i class="ti ti-logout fs-18 me-2 op-7"></i>Log Out</a></li>
                 </ul>
             </div>  

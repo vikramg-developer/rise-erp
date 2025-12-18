@@ -30,35 +30,30 @@ class Role extends BaseController {
         $length = $this->request->getPost('length');
         $search = $this->request->getPost('search')['value'] ?? '';
 
-// TOTAL RECORDS
-        $recordsTotal = $this->modelrole->countAll();
+        // TOTAL (without search, but with base filters)
+        $recordsTotal = $this->modelrole->countAllRoles();
 
-// SEARCH FILTER
-        if ($search !== '') {
-            $this->modelrole->like('role_name', $search);
-        }
+        // FILTERED
+        $recordsFiltered = $this->modelrole->countFilteredRoles($search);
 
-// FILTERED RECORDS
-        $recordsFiltered = $this->modelrole->countAllResults(false);
-
-// PAGINATED DATA
-        $rows = $this->modelrole->findAllRecord($length, $start);
+        // DATA
+        $rows = $this->modelrole->getFilteredRoles($length, $start, $search);
 
         $sr_no = 1;
 
         $data = [];
         foreach ($rows as $row) {
             $buttons = '';
+            if (hasPermission('updateRole')):
+                $buttons .= '<a href="roles/edit-role/' . $row['role_id'] . '" class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill tooltips edit" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-secondary" data-bs-placement="top" title="Edit"><i class="ri-pencil-fill"></i></a>';
+            endif;
 
-            $buttons .= '<a href="roles/edit-role/' . $row['role_id'] . '" class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill tooltips edit" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-secondary"
-            data-bs-placement="top" title="Edit"><i class="ri-pencil-fill"></i></a>';
-
-            if ($row['is_deleted'] != 1):
-                $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-danger"
-            data-bs-placement="top" title="Delete" data-role_id="' . $row['role_id'] . '" data-role_name="' . $row['role_name'] . '"><i class="ri-delete-bin-fill"></i></button>';
-            elseif ($row['is_deleted'] == 1):
-                $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-warning"
-            data-bs-placement="top" title="Revert" data-role_id="' . $row['role_id'] . '" data-role_name="' . $row['role_name'] . '"><i class="ri-arrow-go-back-fill"></i></button>';
+            if (hasPermission('deleteRole')):
+                if ($row['is_deleted'] != 1):
+                    $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-danger" data-bs-placement="top" title="Delete" data-role_id="' . $row['role_id'] . '" data-role_name="' . $row['role_name'] . '"><i class="ri-delete-bin-fill"></i></button>';
+                elseif ($row['is_deleted'] == 1):
+                    $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-warning" data-bs-placement="top" title="Revert" data-role_id="' . $row['role_id'] . '" data-role_name="' . $row['role_name'] . '"><i class="ri-arrow-go-back-fill"></i></button>';
+                endif;
             endif;
 
             if ($row['is_deleted'] == 1):
@@ -72,10 +67,10 @@ class Role extends BaseController {
             $data[] = [
                 $sr_no++,
                 $row['role_name'],
-                $buttons,
                 '',
                 '',
-                $remark
+                $remark,
+                (hasPermission('viewRole') || hasPermission('deleteRole')) ? $buttons : '',
             ];
         }
 

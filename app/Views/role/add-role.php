@@ -59,65 +59,9 @@
                             </thead>
                             <tbody>
                                 <!--faculty_registration-->
-    <!--                            <tr>
-                                    <td><?= lang('App.faculty'); ?></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createFaculty"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateFaculty"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewFaculty"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteFaculty"></td>
-                                </tr>
-                                Student_Profile
-                                 <tr>
-                                    <td><?= lang('App.student'); ?> <?= lang('App.profile'); ?></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createStudentProfile"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateStudentProfile"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewStudentProfile"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteStudentProfile"></td>
-                                </tr>
-                                 Feedback
-                                 <tr>
-                                    <td><?= lang('App.feedback'); ?></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createFeedback"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateFeedback"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewFeedback"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteFeedback"></td>
-                                </tr>
-                                 Certificates
-                                 <tr>
-                                    <td><?= lang('App.certificate'); ?>s</td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createCertificate"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateCertificate"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewCertificate"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteCertificate"></td>
-                                </tr>
-                                 i-card
-                                 <tr>
-                                    <td><?= lang('App.icard'); ?></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createIcard"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateIcard"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewIcard"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteIcard"></td>
-                                </tr>
-                                  Faculty_Profile
-                                 <tr>
-                                    <td><?= lang('App.certificate'); ?></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createFacultyProfile"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateFacultyProfile"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewFacultyProfile"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteFacultyProfile"></td>
-                                </tr>
-                                Fee_Management
-                                <tr>
-                                    <td><?= lang('App.fees'); ?> <?= lang('App.management'); ?></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="createFeesManagement"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="updateFeesManagement"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="viewFeesManagement"></td>
-                                    <td><input class="form-check-input" type="checkbox" id="permission" name="permission[]" value="deleteFeesManagement"></td>
-                                </tr>-->
-
                                 <?php foreach ($permissions as $module): ?>
                                     <tr>
-                                        
+
                                         <td><?= $module['label'] ?></td>
 
                                         <?php foreach ($module['actions'] as $action): ?>

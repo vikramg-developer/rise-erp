@@ -187,7 +187,7 @@
                                                     <!-- End::slide -->
 
                                                     <!-- Start::slide -->
-                                                    
+                                                    <?php if(hasPermission('createRole') || hasPermission('viewRole') || hasPermission('updateRole') || hasPermission('deleteRole')): ?>
                                                     <li id="mainRoleNav" class="slide has-sub">
                                                         <a href="javascript:void(0);" class="side-menu__item">
                                                             <i class="bx bx-group side-menu__icon"></i>
@@ -198,14 +198,19 @@
                                                             <li class="slide side-menu__label1">
                                                                 <a href="javascript:void(0)"><?= lang('App.role'); ?></a>
                                                             </li>
+                                                            <?php if(hasPermission('createRole')): ?>
                                                             <li id="addroleNav" class="slide">
                                                                 <a href="<?php echo base_url('roles/add-role'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.role'); ?></a>
                                                             </li>
+                                                            <?php endif; ?>
+                                                            <?php if(hasPermission('viewRole')): ?>
                                                             <li id="manageroleNav" class="slide">
                                                                 <a href="<?php echo base_url('roles'); ?>" class="side-menu__item"><?= lang('App.manage'); ?> <?= lang('App.role'); ?></a>
                                                             </li>
+                                                            <?php endif; ?>
                                                         </ul>
                                                     </li>
+                                                    <?php endif; ?>
                                                     <!-- End::slide -->
 
                                             </ul>

@@ -78,24 +78,24 @@ $routes->group('faculty', function ($routes) {
     $routes->post('manage-faculty', 'Faculty::update-faculty', ['filter' => 'permission:editFaculty']);
 });
 $routes->group('headgroup', function ($routes) {
-    $routes->get('/', 'FeesManagement::head_group', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('fetch-head-group', 'FeesManagement::fetch_head_group', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('add-head-group', 'FeesManagement::add_head_group', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('update-head-group', 'FeesManagement::update-head-group', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('delete-head-group', 'FeesManagement::delete_head_group', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('revert-head-group', 'FeesManagement::revert_head_group', ['filter' => 'permission:createFeesManagement']);
+    $routes->get('/', 'HeadGroup::index', ['filter' => 'permission:createFeesManagement']);
+    $routes->post('fetch-head-group', 'HeadGroup::fetch_head_group', ['filter' => 'permission:createFeesManagement']);
+    $routes->post('add-head-group', 'HeadGroup::add_head_group', ['filter' => 'permission:createFeesManagement']);
+    $routes->post('update-head-group', 'HeadGroup::update-head-group', ['filter' => 'permission:createFeesManagement']);
+    $routes->post('delete-head-group', 'HeadGroup::delete_head_group', ['filter' => 'permission:createFeesManagement']);
+    $routes->post('revert-head-group', 'HeadGroup::revert_head_group', ['filter' => 'permission:createFeesManagement']);
 });
 
 $routes->get('forbidden', 'Error::forbidden');
 $routes->group('roles', function ($routes) {
-    $routes->get('/', 'Role::index', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('fetch-role', 'Role::fetch_role', ['filter' => 'permission:createFeesManagement']);
-    $routes->get('add-role', 'Role::add_role', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('save-role', 'Role::save_role');
-    $routes->get('edit-role/(:num)', 'Role::edit_role/$1', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('update-role/(:num)', 'Role::update_role/$1');
-    $routes->post('delete-role', 'Role::delete_role');
-    $routes->post('revert-role', 'Role::revert_role');
+    $routes->get('/', 'Role::index', ['filter' => 'permission:viewRole']);
+    $routes->post('fetch-role', 'Role::fetch_role', ['filter' => 'permission:viewRole']);
+    $routes->get('add-role', 'Role::add_role', ['filter' => 'permission:createRole']);
+    $routes->post('save-role', 'Role::save_role', ['filter' => 'permission:createRole']);
+    $routes->get('edit-role/(:num)', 'Role::edit_role/$1', ['filter' => 'permission:updateRole']);
+    $routes->post('update-role/(:num)', 'Role::update_role/$1', ['filter' => 'permission:updateRole']);
+    $routes->post('delete-role', 'Role::delete_role', ['filter' => 'permission:deleteRole']);
+    $routes->post('revert-role', 'Role::revert_role', ['filter' => 'permission:deletteRole']);
 });
 
 /*
