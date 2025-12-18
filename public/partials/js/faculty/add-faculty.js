@@ -7,9 +7,25 @@ $(document).on(
     'input',
     'input[name="faculty_first_name"], input[name="faculty_middle_name"], input[name="faculty_last_name"]',
     function () {
-        this.value = this.value.toUpperCase();
+       this.value = this.value
+            .replace(/[^a-zA-Z\s]/g, '') // remove numbers & special chars
+            .toUpperCase();              // convert to uppercase
     }
 );
+$(document).on('input', 'input[name="faculty_password"]', function () {
+    const password = this.value;
+
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (!regex.test(password)) {
+        $('#faculty_password_error')
+            .text('Password must be at least 8 characters and include at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character')
+            .show();
+    } else {
+        $('#faculty_password_error').text('').hide();
+    }
+});
+
 
 $(document).on('input', '#faculty_password, #confirm_password', function () {
 
@@ -77,3 +93,30 @@ $("#faculty-registration-form").on("submit", function (e) {
         }
     });
 });
+
+
+let table;
+
+$(document).ready(function () {
+
+    table = $('#faculty-table').DataTable({
+        processing: true,
+        serverSide: true,
+        destroy: true,
+
+        ajax: {
+            url: BASE_URL + "faculty/fetch-faculty-data",
+            type: "POST",
+            data: function (d) {
+                d[csrfName] = csrfHash; // ALWAYS send current token
+            },
+            complete: function (res) {
+                if (res.responseJSON && res.responseJSON.csrfHash) {
+                    csrfHash = res.responseJSON.csrfHash; // UPDATE for next request
+                }
+            }
+        }
+    });
+
+});
+

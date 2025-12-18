@@ -68,9 +68,7 @@ class StudentRegistration extends BaseController {
             if ($insert) {
                 $page_session->setTempdata(
                         'success',
-                        'Account created successfully! Please Login. Your Rise No is: <b>' . $newRiseNo . '</b>',
-                        4
-                );
+                        'Account created successfully! Please Login. Your Rise No is: <b>' . $newRiseNo . '</b>',4);
             } else {
 
 

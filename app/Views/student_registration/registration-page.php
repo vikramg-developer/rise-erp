@@ -6,8 +6,6 @@ $errors = $errors ?? [];
 
 <?= $this->section('styles'); ?>
 
-
-
 <?= $this->endSection('styles'); ?>
 
 <?= $this->section('content'); ?>

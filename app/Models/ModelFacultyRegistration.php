@@ -22,6 +22,8 @@ class ModelFacultyRegistration extends Model {
         'faculty_pan_number',
         'faculty_password',
         'added_by',
+        'updated_by',
+        'is_deleted',
     ];
     protected $validationRules = [
         'faculty_role_id' => 'required',
@@ -29,7 +31,7 @@ class ModelFacultyRegistration extends Model {
         'faculty_middle_name' => 'required|min_length[2]|alpha_space',
         'faculty_last_name' => 'required|min_length[2]|alpha_space',
         'faculty_mobile_number' => 'required|numeric|exact_length[10]|is_unique[faculty_registration.faculty_mobile_number]',
-        'faculty_email_id' => 'required|is_unique[faculty_registration.faculty_email_id]',
+        'faculty_email_id' => 'required|trim|valid_email|is_unique[faculty_registration.faculty_email_id]',
         'faculty_aadhar_number' => 'required|numeric|exact_length[12]|is_unique[faculty_registration.faculty_aadhar_number]',
         'faculty_pan_number' => 'required|regex_match[/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/]|is_unique[faculty_registration.faculty_pan_number]',
         'faculty_password' => 'required|min_length[6]',
@@ -102,4 +104,13 @@ class ModelFacultyRegistration extends Model {
     public function verify_rise_no($rise_no) {
         return $this->where('faculty_rise_no', $rise_no)->first();
     }
+    
+    public function findAllRecord($length, $start)
+{
+    return $this->where('faculty_registration_id !=', 1)
+                ->orderBy('faculty_registration_id', 'DESC')
+                ->findAll($length, $start);
+}
+
+   
 }
