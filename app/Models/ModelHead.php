@@ -1,14 +1,9 @@
 <?php
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
- */
-
 namespace App\Models;
 use CodeIgniter\Model;
 /**
- * Description of ModelHeadGroup
+ * Description of ModelHead
  *
  * @author Shoeb
  */
@@ -21,7 +16,7 @@ class ModelHead extends Model{
     protected $returnType     = 'array';
 //    protected $useSoftDeletes = true;
 //
-    protected $allowedFields = ['head_name'];
+    protected $allowedFields = ['head_name','added_by','updated_by','is_deleted'];
 //
 //    protected bool $allowEmptyInserts = false;
 //    protected bool $updateOnlyChanged = true;
@@ -34,8 +29,14 @@ class ModelHead extends Model{
 //    protected $deletedField  = 'deleted_at';
 //
 //    // Validation
-//    protected $validationRules      = [];
-//    protected $validationMessages   = [];
+    protected $validationRules      = [
+        'head_name' => 'required|alpha_numeric_space'
+    ];
+    protected $validationMessages   = [
+        'head_name' => [
+            'required' => 'Head is required'
+        ]
+    ];
 //    protected $skipValidation       = false;
 //    protected $cleanValidationRules = true;
 //

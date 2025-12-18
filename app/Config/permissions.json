@@ -1,135 +1,134 @@
 {  
     "faculty": {
-    "label": "Faculty",
-    "actions": [
-      "createFaculty",
-      "updateFaculty",
-      "viewFaculty",
-      "deleteFaculty"
-    ]
-  },
-  
+        "label": "Faculty",
+        "actions": [
+            "createFaculty",
+            "updateFaculty",
+            "viewFaculty",
+            "deleteFaculty"
+        ]
+    },
+
     "studet_profile": {
-    "label": "Student Profile",
-    "actions": [
-      "createStudentProfile",
-      "updateStudentProfile",
-      "viewStudentProfile",
-      "deleteStudentProfile"
-    ]
-  },
+        "label": "Student Profile",
+        "actions": [
+            "createStudentProfile",
+            "updateStudentProfile",
+            "viewStudentProfile",
+            "deleteStudentProfile"
+        ]
+    },
     "Feedback": {
-    "label": "Feedback",
-    "actions": [
-      "createFeedback",
-      "updateFeedback",
-      "viewFeedback",
-      "deleteFeedback"
-    ]
-  },
-   "leaving_certificate": {
-    "label": "Leaving Certificate",
-    "actions": [
-      "createLeavingCertificate",
-      "updateLeavingCertificate",
-      "viewLeavingCertificate",
-      "deleteLeavingCertificate"
-    ]
-  },
+        "label": "Feedback",
+        "actions": [
+            "createFeedback",
+            "updateFeedback",
+            "viewFeedback",
+            "deleteFeedback"
+        ]
+    },
+    "leaving_certificate": {
+        "label": "Leaving Certificate",
+        "actions": [
+            "createLeavingCertificate",
+            "updateLeavingCertificate",
+            "viewLeavingCertificate",
+            "deleteLeavingCertificate"
+        ]
+    },
     "Bonafide_Certificate": {
-    "label": "Bonafide Certificate",
-    "actions": [
-      "createBonafideCertificate",
-      "updateBonafideCertificate",
-      "viewBonafideCertificate",
-      "deleteBonafideCertificate"
-    ]
-  },
-  
-   "I_card": {
-    "label": "I-Card",
-    "actions": [
-      "createICard",
-      "updateICard",
-      "viewICard",
-      "deleteICard"
-    ]
-  },
-  
-  "Faculty_profile": {
-    "label": "FacultyProfile",
-    "actions": [
-      "createFacultyProfile",
-      "updateFacultyProfile",
-      "viewFacultyProfile",
-      "deleteFacultyProfile"
-    ]
-  },
-  
-  "Head_Group": {
-    "label": "Add Head Group",
-    "actions": [
-      "createHeadGroup",
-      "updateHeadGroup",
-      "viewHeadGroup",
-      "deleteHeadGroup"
-    ]
-  },
-  
-   "Head": {
-    "label": "Add Head",
-    "actions": [
-      "createHead",
-      "updateHead",
-      "viewHead",
-      "deleteHead"
-    ]
-  },
-   "Head_Group_Fees": {
-    "label": "Add Head Fees",
-    "actions": [
-      "createHeadFees",
-      "updateHeadFees",
-      "viewHeadFees",
-      "deleteHeadFees"
-    ]
-  },
+        "label": "Bonafide Certificate",
+        "actions": [
+            "createBonafideCertificate",
+            "updateBonafideCertificate",
+            "viewBonafideCertificate",
+            "deleteBonafideCertificate"
+        ]
+    },
+
+    "I_card": {
+        "label": "I-Card",
+        "actions": [
+            "createICard",
+            "updateICard",
+            "viewICard",
+            "deleteICard"
+        ]
+    },
+
+    "Faculty_profile": {
+        "label": "FacultyProfile",
+        "actions": [
+            "createFacultyProfile",
+            "updateFacultyProfile",
+            "viewFacultyProfile",
+            "deleteFacultyProfile"
+        ]
+    },
+
+    "Head_Group": {
+        "label": "Add Head Group",
+        "actions": [
+            "createHeadGroup",
+            "updateHeadGroup",
+            "viewHeadGroup",
+            "deleteHeadGroup"
+        ]
+    },
+
+    "Head": {
+        "label": "Add Head",
+        "actions": [
+            "createHead",
+            "updateHead",
+            "viewHead",
+            "deleteHead"
+        ]
+    },
+    "Head_Group_Fees": {
+        "label": "Add Head Fees",
+        "actions": [
+            "createHeadFees",
+            "updateHeadFees",
+            "viewHeadFees",
+            "deleteHeadFees"
+        ]
+    },
     "Collect_Fees": {
-    "label": "Collect Fees",
-    "actions": [
-      "createCollectFees",
-      "updateCollectFees",
-      "viewCollectFees",
-      "deleteCollectFees"
-    ]
-  },
-   "Ticket": {
-    "label": "Ticket",
-    "actions": [
-      "createTicket",
-      "updateTicket",
-      "viewTicket",
-      "deleteTicket"
-    ]
-  }, 
+        "label": "Collect Fees",
+        "actions": [
+            "createCollectFees",
+            "updateCollectFees",
+            "viewCollectFees",
+            "deleteCollectFees"
+        ]
+    },
+    "Ticket": {
+        "label": "Ticket",
+        "actions": [
+            "createTicket",
+            "updateTicket",
+            "viewTicket",
+            "deleteTicket"
+        ]
+    }, 
     "Role": {
-    "label": "Role",
-    "actions": [
-      "createRole",
-      "updateRole",
-      "viewRole",
-      "deleteRole"
-    ]
-  },
-    "Manage_Role": {
-    "label": "Manage Role",
-    "actions": [
-      "createManageRole",
-      "updateManageRole",
-      "viewManageRole",
-      "deleteManageRole"
-    ]
-  }
-  
- 
+        "label": "Role",
+        "actions": [
+            "createRole",
+            "updateRole",
+            "viewRole",
+            "deleteRole"
+        ]
+    },
+    
+    "Department":{
+        "label": "Add Department",
+        "actions": [
+            "createDepartment",
+            "updateDepartment",
+            "viewDepartment",
+            "deleteDepartment"
+        ]
+    }
 }

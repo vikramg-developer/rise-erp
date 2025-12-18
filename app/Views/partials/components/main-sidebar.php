@@ -1,4 +1,6 @@
-
+<?php
+$permissions = config('Permissions');
+?>
 <aside class="app-sidebar sticky" id="sidebar">
 
     <!-- Start::main-sidebar-header -->
@@ -152,13 +154,7 @@
                                                         <ul class="slide-menu child1">
                                                             <li class="slide side-menu__label1">
                                                                 <a href="javascript:void(0)"><?= lang('App.fees'); ?> <?= lang('App.management'); ?></a>
-                                                            </li>
-                                                            <li class="slide">
-                                                                <a href="<?php echo base_url('headgroup'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?> <?= lang('App.group'); ?></a>
-                                                            </li>
-                                                            <li class="slide">
-                                                                <a href="<?php echo base_url('head'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?></a>
-                                                            </li>
+                                                            </li>                                          
                                                             <li class="slide">
                                                                 <a href="<?php echo base_url('head-fees'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?> <?= lang('App.fees'); ?></a>
                                                             </li>
@@ -203,7 +199,7 @@
                                                                 <a href="<?php echo base_url('roles/add-role'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.role'); ?></a>
                                                             </li>
                                                             <?php endif; ?>
-                                                            <?php if(hasPermission('viewRole')): ?>
+                                                            <?php if(hasPermission('viewRole') || hasPermission('updateRole') || hasPermission('deleteRole')): ?>
                                                             <li id="manageroleNav" class="slide">
                                                                 <a href="<?php echo base_url('roles'); ?>" class="side-menu__item"><?= lang('App.manage'); ?> <?= lang('App.role'); ?></a>
                                                             </li>
@@ -212,7 +208,44 @@
                                                     </li>
                                                     <?php endif; ?>
                                                     <!-- End::slide -->
-
+                                                    
+                                                    <!--========================= MASTER START =========================-->
+                                                    <?php if (hasAnyPermission($permissions->master_category)): ?>
+                                                    <li class="slide__category"><span class="category-name"><?= lang('App.master'); ?></span></li>
+                                                    <?php endif; ?>
+                                                    
+                                                    <?php if (hasAnyPermission($permissions->master)): ?>
+                                                    <li id="mainRoleNav" class="slide has-sub">
+                                                        <a href="javascript:void(0);" class="side-menu__item">
+                                                            <i class="bx bx-group side-menu__icon"></i>
+                                                            <span class="side-menu__label"><?= lang('App.master'); ?></span>
+                                                            <i class="fe fe-chevron-right side-menu__angle"></i>
+                                                        </a>
+                                                        <ul class="slide-menu child1">
+                                                            <li class="slide side-menu__label1">
+                                                                <a href="javascript:void(0)"><?= lang('App.role'); ?></a>
+                                                            </li>
+                                                            <?php if (hasAnyPermission($permissions->headGroup)): ?>
+                                                            <li class="slide">
+                                                                <a href="<?php echo base_url('headgroup'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?> <?= lang('App.group'); ?></a>
+                                                            </li>                                                            
+                                                            <?php endif; ?>
+                                                            
+                                                            <?php if (hasAnyPermission($permissions->head)): ?>
+                                                            <li class="slide">
+                                                                <a href="<?php echo base_url('head'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?></a>
+                                                            </li>
+                                                            <?php endif; ?>
+                                                            
+                                                            <?php if (hasAnyPermission($permissions->department)): ?>
+                                                            <li class="slide">
+                                                                <a href="<?php echo base_url('department'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.department'); ?></a>
+                                                            </li>
+                                                            <?php endif; ?>
+                                                        </ul>
+                                                    </li>
+                                                    <?php endif; ?>
+                                                    <!--========================= MASTER END =========================-->
                                             </ul>
                                             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path> </svg></div>
                                         </nav>

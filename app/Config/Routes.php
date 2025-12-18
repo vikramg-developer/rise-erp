@@ -38,6 +38,8 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 $routes->get('/', 'Login::login');
 $routes->get('login', 'Login::login');
+$routes->get('forbidden', 'Error::forbidden');
+$routes->get('logout', 'Login::logout');
 $routes->post('/add-group', 'Group::add-group');
 $routes->post('/add-lc-info', 'LeavingCertificate::add_lc_info');
 $routes->post('/bonafide-certificate', 'BonafideCertificate::index');
@@ -57,7 +59,7 @@ $routes->post('/i-card', 'ICard::index');
 $routes->post('/i-card-print', 'ICard::i_card_print');
 $routes->get('leaving-certificate', 'LeavingCertificate::index');
 $routes->post('/check-user', 'Login::check_user');
-$routes->get('logout', 'Login::logout');
+
 $routes->get('student-registration', 'StudentRegistration::index');
 $routes->post('save-registration', 'StudentRegistration::add_registration');
 //$routes->post('/studentProfile', 'Registration::studentProfile');
@@ -80,13 +82,31 @@ $routes->group('faculty', function ($routes) {
 $routes->group('headgroup', function ($routes) {
     $routes->get('/', 'HeadGroup::index', ['filter' => 'permission:createHeadGroup']);
     $routes->post('fetch-head-group', 'HeadGroup::fetch_head_group', ['filter' => 'permission:createHeadGroup']);
-    $routes->post('add-head-group', 'HeadGroup::add_head_group', ['filter' => 'permission:createHeadGroup']);
-    $routes->post('update-head-group', 'HeadGroup::update-head-group', ['filter' => 'permission:createHeadGroup']);
+    $routes->post('save-head-group', 'HeadGroup::save_head_group', ['filter' => 'permission:createHeadGroup']);
+    $routes->post('update-head-group', 'HeadGroup::update_head_group', ['filter' => 'permission:createHeadGroup']);
     $routes->post('delete-head-group', 'HeadGroup::delete_head_group', ['filter' => 'permission:createHeadGroup']);
     $routes->post('revert-head-group', 'HeadGroup::revert_head_group', ['filter' => 'permission:createHeadGroup']);
 });
 
-$routes->get('forbidden', 'Error::forbidden');
+$routes->group('head', function ($routes) {
+    $routes->get('/', 'Head::index', ['filter' => 'permission:createHead']);
+    $routes->post('fetch-head', 'Head::fetch_head', ['filter' => 'permission:createHead']);
+    $routes->post('save-head', 'Head::save_head', ['filter' => 'permission:createHead']);
+    $routes->post('update-head', 'Head::update_head', ['filter' => 'permission:createHead']);
+    $routes->post('delete-head', 'Head::delete_head', ['filter' => 'permission:createHead']);
+    $routes->post('revert-head', 'Head::revert_head', ['filter' => 'permission:createHead']);
+});
+
+$routes->group('department', function ($routes) {
+    $routes->get('/', 'Department::index', ['filter' => 'permission:createDepartment']);
+    $routes->post('fetch-department', 'Department::fetch_department', ['filter' => 'permission:createDepartment']);
+    $routes->post('save-department', 'Department::save_department', ['filter' => 'permission:createDepartment']);
+    $routes->post('update-department', 'Department::update_department', ['filter' => 'permission:createDepartment']);
+    $routes->post('delete-department', 'Department::delete_department', ['filter' => 'permission:createDepartment']);
+    $routes->post('revert-department', 'Department::revert_department', ['filter' => 'permission:createDepartment']);
+});
+
+
 $routes->group('roles', function ($routes) {
     $routes->get('/', 'Role::index', ['filter' => 'permission:viewRole']);
     $routes->post('fetch-role', 'Role::fetch_role', ['filter' => 'permission:viewRole']);

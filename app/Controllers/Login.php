@@ -61,14 +61,15 @@ class Login extends BaseController {
                 if ($faculty_data) {
                     if (password_verify($password, $faculty_data['faculty_password'])) {
 
-                        $permissions = $this->modelrole->find($faculty_data['faculty_role_id']);
+                        $role_data = $this->modelrole->find($faculty_data['faculty_role_id']);
                         session()->set([
                             'registration_id' => $faculty_data['faculty_registration_id'],
                             'rise_no' => $faculty_data['faculty_rise_no'],
-                            'username' => $faculty_data['faculty_first_name'] . " " . $faculty_data['faculty_middle_name'] . " " . $faculty_data['faculty_last_name'],
+                            'username' => $faculty_data['faculty_first_name'] . " " . $faculty_data['faculty_last_name'],
                             'role_id' => $faculty_data['faculty_role_id'],
+                            'role_name' => $role_data['role_name'],
                             'logged_in' => true,
-                            'permissions' => json_decode($permissions['permissions'], true)??[]
+                            'permissions' => json_decode($role_data['permissions'], true)??[]
                         ]);
                         return redirect()->to('/student-dashboard');
                     } else {

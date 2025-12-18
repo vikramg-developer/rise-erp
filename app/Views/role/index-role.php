@@ -16,17 +16,15 @@
 
 
     <!-- Start::row-1 -->
-    <div class="row">
-        <div class="col-xl-12">
-            <!--            <div class="card custom-card">
-                            <div class="card-body head-group p-0">-->
-            <div class="px-4 py-3 d-sm-flex justify-content-start">
-                <a href="<?= base_url('roles/add-role'); ?>" class="btn btn-success m-1"><?= lang('App.add'); ?> <?= lang('App.role'); ?><i class="bi bi-plus ms-2"></i></a>
+    <?php if (hasPermission('createRole')): ?>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="px-4 py-3 d-sm-flex justify-content-start">
+                    <a href="<?= base_url('roles/add-role'); ?>" class="btn btn-success m-1"><?= lang('App.add'); ?> <?= lang('App.role'); ?><i class="bi bi-plus ms-2"></i></a>
+                </div>
             </div>
-            <!--                </div>
-                        </div>-->
         </div>
-    </div>
+    <?php endif; ?>
     <!--End::row-1 -->
 
     <div class="row">
@@ -48,8 +46,8 @@
                                     <th><?= lang('App.added'); ?> <?= lang('App.by'); ?></th>
                                     <th><?= lang('App.updated'); ?> <?= lang('App.by'); ?></th>
                                     <th><?= lang('App.remark'); ?></th>
-                                    <?php if(hasPermission('viewRole') || hasPermission('deleteRole')): ?>
-                                    <th><?= lang('App.action'); ?></th>
+                                    <?php if (hasPermission('viewRole') || hasPermission('deleteRole')): ?>
+                                        <th><?= lang('App.action'); ?></th>
                                     <?php endif; ?>
                                 </tr>
                             </thead>
@@ -62,12 +60,12 @@
 </div>
 
 <?php if (session()->has('toast')): ?>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        showToast(
-                "<?= esc(session('toast.status')) ?>",
-                "<?= esc(session('toast.message')) ?>"
-                );
-    });
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            showToast(
+                    "<?= esc(session('toast.status')) ?>",
+                    "<?= esc(session('toast.message')) ?>"
+                    );
+        });
+    </script>
 <?php endif; ?>
