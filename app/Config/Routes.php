@@ -91,6 +91,9 @@ $routes->group('faculty', function ($routes) {
     $routes->get('fetch-faculty', 'Faculty::faculty_data', ['filter' => 'permission:createfaculty']);
     $routes->post('fetch-faculty-data', 'Faculty::fetch_faculty', ['filter' => 'permission:createfaculty']);
     $routes->post('add-faculty', 'Faculty::add_faculty', ['filter' => 'permission:createfaculty']);
+    $routes->get('edit-faculty/(:num)', 'Faculty::edit_faculty/$1', ['filter' => 'permission:updatefaculty']);
+    $routes->post('update-faculty', 'Faculty::update_faculty', ['filter' => 'permission:updatefaculty']);
+
 });
 
 $routes->group('headgroup', function ($routes) {
