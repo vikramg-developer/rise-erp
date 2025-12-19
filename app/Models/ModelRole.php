@@ -93,4 +93,12 @@ class ModelRole extends Model {
 
         return $builder->get($length, $start)->getResultArray();
     }
+        
+//        for faculty registration dropdwon
+       public function getRoles() {
+        return $this->whereNotIn('role_id', [1,3])  
+                        ->where('is_deleted', 0)
+                        ->orderBy('role_id')
+                        ->findAll();
+    }
 }

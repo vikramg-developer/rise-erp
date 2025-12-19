@@ -26,7 +26,7 @@
                             <th><?= lang('App.faculty'); ?> <?= lang('App.name'); ?></th>
                             <th><?= lang('App.mobile'); ?></th>
                             <th><?= lang('App.email'); ?></th>
-                            <!--<th><?= lang('App.action'); ?></th>-->
+                            <th><?= lang('App.action'); ?></th>
                         </tr>
                     </thead>
                 </table>

@@ -12,7 +12,7 @@ class AuthFilter implements FilterInterface {
         
         //User not logged in redirect to login page
         if (!session()->has('logged_in')) {
-            return redirect()->to('login')->with('error', 'Please login first');
+            return redirect()->to('login');
         }
     }
 

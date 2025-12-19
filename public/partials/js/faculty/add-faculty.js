@@ -98,25 +98,28 @@ $("#faculty-registration-form").on("submit", function (e) {
 let table;
 
 $(document).ready(function () {
-
-    table = $('#faculty-table').DataTable({
-        processing: true,
-        serverSide: true,
-        destroy: true,
-
-        ajax: {
-            url: BASE_URL + "faculty/fetch-faculty-data",
-            type: "POST",
-            data: function (d) {
-                d[csrfName] = csrfHash; // ALWAYS send current token
-            },
-            complete: function (res) {
-                if (res.responseJSON && res.responseJSON.csrfHash) {
-                    csrfHash = res.responseJSON.csrfHash; // UPDATE for next request
+    if ($('#faculty-table').length) {
+        table = $('#faculty-table').DataTable({
+            processing: true,
+            serverSide: true,
+            destroy: true,
+            ajax: {
+                url: BASE_URL + "faculty/fetch-faculty-data",
+                type: "POST",
+                data: function (d) {
+                    d[csrfName] = csrfHash;
+                },
+                complete: function (res) {
+                    if (res.responseJSON?.csrfHash) {
+                        csrfHash = res.responseJSON.csrfHash;
+                    }
                 }
             }
-        }
-    });
-
+        });
+    }
 });
+
+
+
+
 

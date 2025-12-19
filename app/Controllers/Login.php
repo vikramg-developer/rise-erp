@@ -71,7 +71,7 @@ class Login extends BaseController {
                             'logged_in' => true,
                             'permissions' => json_decode($role_data['permissions'], true) ?? []
                         ]);
-                        return redirect()->to('/student-dashboard');
+                        return redirect()->to('/dashboard');
                     } else {
                         // Wrong password
                         return redirect()->to('/login')
@@ -86,7 +86,6 @@ class Login extends BaseController {
                 }
             }
 //================================================Faculty Login--end================================================
-
 //================================================Student Login--start================================================
             if ($user_type === '2') {
                 $student_data = $this->modelstudentregistration->verify_rise_no($username);
@@ -98,12 +97,13 @@ class Login extends BaseController {
                         session()->set([
                             'registration_id' => $student_data['student_registration_id'],
                             'rise_no' => $student_data['student_rise_no'],
-                            'username' => $student_data['student_first_name']. " " . $student_data['student_last_name'],
+                            'username' => $student_data['student_first_name'] . " " . $student_data['student_last_name'],
                             'role_id' => $student_data['student_role_id'],
+                            'role_name' => $role_data['role_name'],
                             'logged_in' => true,
                             'permissions' => json_decode($role_data['permissions'], true) ?? []
                         ]);
-                        return redirect()->to('/student-dashboard');
+                        return redirect()->to('/dashboard');
                     } else {
                         // Wrong password
                         return redirect()->to('/login')
