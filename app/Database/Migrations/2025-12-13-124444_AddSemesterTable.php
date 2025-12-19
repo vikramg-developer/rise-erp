@@ -50,6 +50,7 @@ class AddSemesterTable extends Migration {
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('semester_id');
+        $this->forge->addUniqueKey('semester_name');
         $this->forge->createTable('semester');
     }
 

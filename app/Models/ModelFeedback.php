@@ -10,18 +10,16 @@ class ModelFeedback extends Model {
     protected $primaryKey = 'feedback_master_id';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-
     protected $allowedFields = [
-        'feedback_name', 
-        'type_id', 
+        'feedback_name',
+        'type_id',
         'semester_id',
-        'part_id', 
-        'academic_year_id', 
+        'part_id',
+        'academic_year_id',
         'is_deleted',
         'added_by',
         'updated_by',
-     ];
-
+    ];
     // Validation
     protected $validationRules = [
         'feedback_name' => 'required|min_length[3]',
@@ -48,34 +46,7 @@ class ModelFeedback extends Model {
             'required' => 'Academic Year is required'
         ],
     ];
-    
-//    protected $skipValidation = false;
-   
-//
-//    protected bool $allowEmptyInserts = false;
-//    protected bool $updateOnlyChanged = true;
-//
-//    // Dates
-//    protected $useTimestamps = false;
-//    protected $dateFormat    = 'datetime';
-//    protected $createdField  = 'created_at';
-//    protected $updatedField  = 'updated_at';
-//    protected $deletedField  = 'deleted_at';
-//
 
-//    protected $skipValidation       = false;
-//    protected $cleanValidationRules = true;
-//
-//    // Callbacks
-//    protected $allowCallbacks = true;
-//    protected $beforeInsert   = [];
-//    protected $afterInsert    = [];
-//    protected $beforeUpdate   = [];
-//    protected $afterUpdate    = [];
-//    protected $beforeFind     = [];
-//    protected $afterFind      = [];
-//    protected $beforeDelete   = [];
-//    protected $afterDelete    = [];
 //    public function add_master_data($data) {
 //        
 //        $builder = $this->db->table('feedback_master');
@@ -85,4 +56,43 @@ class ModelFeedback extends Model {
 //        return $this->db->affectedRows() > 0 ? true : false;
 //    }
     //put your code here
+
+    /* ==========================
+      JOIN QUERY FOR DATATABLE
+      =========================== */
+
+//    public function getFeedbackMasterList($length, $start ,$search='') {
+    public function getFeedbackMasterList($length, $start) {
+//        print_r("ello"); die();
+        $builder = $this->db->table('feedback_master fm');
+
+        $builder->select([
+            'fm.feedback_master_id',
+            'fm.feedback_name',
+            'st.subject_type_name',
+            's.semester_name',
+            'sem_part.semester_part_name',
+            'aca_year.academic_year_name',
+        ]);
+
+        // 🔗 JOINS
+        $builder->join('subject_type st', 'st.subject_type_id  = fm.type_id', 'left');
+        $builder->join('semester s', 's.semester_id = fm.semester_id', 'left');
+        $builder->join('semester_part sem_part', 'sem_part.semester_part_id = fm.part_id', 'left');
+        $builder->join('academic_year aca_year', 'aca_year.academic_year_id = fm.academic_year_id', 'left');
+
+        // ❌ Soft delete filter
+        $builder->where('fm.is_deleted', 0);
+
+        //🔍 Search
+//        if (!empty($search)) {
+//            $builder->groupStart()
+//                ->like('fm.feedback_name', $search)
+//                ->like('s.semester_name', $search)
+//                ->like('st.subject_type_name', $search)
+//                ->groupEnd();
+//        }
+
+        return $builder->limit($length, $start)->get()->getResultArray();
+    }
 }

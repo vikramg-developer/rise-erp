@@ -87,6 +87,14 @@ class Permissions extends BaseConfig{
 
 
     
+    /** feedback permissions */
+    public array $feedback = [
+        'createFeedback',
+        'viewFeedback',
+        'updateFeedback',
+        'deleteFeedback',
+    ];
+    
     /** Master permissions (auto-merged) */
         public array $master;
         public array $dashboard;
