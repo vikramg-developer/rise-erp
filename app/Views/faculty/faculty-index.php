@@ -34,7 +34,7 @@
                                     <?= lang('App.faculty'); ?> <?= lang('App.role'); ?> <span class="text-danger">*</span>
                                 </label>
                                 <select class="from-control js-example-basic-single" name="faculty_role_id" id="faculty_role_id">
-                                    <option value="">Select Department</option>
+                                    <option value="">Select Role</option>
                                     <?php
                                     foreach ($roles as $role) {
                                         ?>
