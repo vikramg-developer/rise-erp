@@ -40,7 +40,7 @@ class Filters extends BaseConfig {
                     '*', //apply to all filters
                 ],
                 'except' => [
-                    '/', //skip login page
+                   
                     'login', //skip login page
                     'check-user', //skip login page
                     'student-registration', //skip student registration page
@@ -52,7 +52,7 @@ class Filters extends BaseConfig {
                     '*', //apply to all filters
                 ],
                 'except' => [
-                    '/', //skip login page
+                   
                     'login', //skip login page
                     'check-user', //skip login page
                     'logout', //skip logout

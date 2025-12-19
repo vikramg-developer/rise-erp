@@ -121,14 +121,69 @@
             "deleteRole"
         ]
     },
-    
-    "Department":{
+
+    "Department": {
         "label": "Add Department",
         "actions": [
             "createDepartment",
             "updateDepartment",
             "viewDepartment",
             "deleteDepartment"
+        ]
+    },
+
+    "Admin Dashboard": {
+        "label": "Admin Dashboard",
+        "actions": [
+            "createAdminDashboard",
+            "updateAdminDashboard",
+            "viewAdminDashboard",
+            "deleteAdminDashboard"
+        ]
+    },
+    "Faculty Dashboard": {
+        "label": "Faculty Dashboard",
+        "actions": [
+            "createFacultyDashboard",
+            "updateFacultyDashboard",
+            "viewFacultyDashboard",
+            "deleteFacultyDashboard"
+        ]
+    },
+    "Librarian Dashboard": {
+        "label": "Librarian Dashboard",
+        "actions": [
+            "createLibrarianDashboard",
+            "updateLibrarianDashboard",
+            "viewLibrarianDashboard",
+            "deleteLibrarianDashboard"
+        ]
+    },
+    "Accontant Dashboard": {
+        "label": "Accontant Dashboard",
+        "actions": [
+            "createAccontantDashboard",
+            "updateAccontantDashboard",
+            "viewAccontantDashboard",
+            "deleteAccontantDashboard"
+        ]
+    },
+    "IQAC Dashboard": {
+        "label": "IQAC Dashboard",
+        "actions": [
+            "createIqacDashboard",
+            "updateIqacDashboard",
+            "viewIqacDashboard",
+            "deleteIqacDashboard"
+        ]
+    },
+    "Student Dashboard": {
+        "label": "Student Dashboard",
+        "actions": [
+            "createStudentDashboard",
+            "updateStudentDashboard",
+            "viewStudentDashboard",
+            "deleteStudentDashboard"
         ]
     }
 }

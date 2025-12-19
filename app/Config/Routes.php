@@ -14,8 +14,8 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
     require SYSTEMPATH . 'Config/Routes.php';
 }
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Login');
-$routes->setDefaultMethod('login');
+$routes->setDefaultController('Dahboard');
+$routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(true);
 $routes->set404Override(function () {
     return view('error-page/error404');
@@ -36,7 +36,15 @@ $routes->setAutoRoute(false);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Login::login');
+$routes->get('/', 'Dashboard::index');
+$routes->get('dashboard', 'Dashboard::index');
+$routes->get('admin-dashboard', 'Dashboard::admin_dashboard');
+$routes->get('faculty-dashboard', 'Dashboard::faculty_dashboard');
+$routes->get('librarian-dashboard', 'Dashboard::librarian_dashboard');
+$routes->get('accountant-dashboard', 'Dashboard::accountant_dashboard');
+$routes->get('iqac-dashboard', 'Dashboard::iqac_dashboard');
+$routes->get('student-dashboard', 'Dashboard::student_dashboard');
+
 $routes->get('login', 'Login::login');
 $routes->get('forbidden', 'Error::forbidden');
 $routes->get('logout', 'Login::logout');
