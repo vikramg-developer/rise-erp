@@ -23,133 +23,131 @@ class LeavingCertificate extends BaseController {
     public function index() {
         $data['jspath'] = 'certificates/leaving-certificate';
         $data['academic_year'] = $this->modelacademicyear->get_active_academic_years();
-        $data['years'] = $this->modelyear->get_years();  
+        $data['years'] = $this->modelyear->get_years();
         $data['departments'] = $this->modeldepartment->get_departments();
         return render_page('certificates/leaving-certificate-index', $data);
     }
 
     /* =============================DATATABLE AJAX================================== */
-    public function fetch_lc_student_list()
-    {
-        $draw   = (int) $this->request->getVar('draw');
-        $start  = (int) $this->request->getVar('start');
-        $length = (int) $this->request->getVar('length');
-        $search = $this->request->getVar('search')['value'] ?? '';
 
-        $filters = [
-            'department_id'    => $this->request->getVar('department_id'),
-            'year_id'          => $this->request->getVar('year_id'),
-            'academic_year_id' => $this->request->getVar('academic_year_id'),
+    public function fetch_lc_student_list() {
+        $rules = [
+            'department_id' => 'required',
+            'year_id' => 'required',
+            'academic_year_id' => 'required'
         ];
-//        print_r($filters); die();
-        // Data rows (paginated + searched)
-        $rows = $this->modelyearwisestudentdata->getStudentsForTable($filters,$length,$start,$search);
-        
-//        print_r($rows);die();
-        // Single count (search-aware)
-        $count_filter = $this->modelyearwisestudentdata->count_filter_results($filters, $search);
-        $count_all = $this->modelyearwisestudentdata->count_all_results($filters);
-        
-        $data = [];
+        $messages = [
+            'department_id' => [
+                'required' => 'Please select department.'
+            ],
+            'year_id' => [
+                'required' => 'Please select year.',
+            ],
+            'academic_year_id' => [
+                'required' => 'Please select academic year.'
+            ]
+        ];
+        if ($this->validate($rules, $messages)) {
+            $draw = (int) $this->request->getVar('draw');
+            $start = (int) $this->request->getVar('start');
+            $length = (int) $this->request->getVar('length');
+            $search = $this->request->getVar('search')['value'] ?? '';
 
-        foreach ($rows as $row) {
-            $buttons = '';
-            $buttons .= '<button class="btn btn-icon btn-sm btn-secondary" data-yearwise_student_data_id="' . $row['yearwise_student_data_id'] . '">Leaving Certificate</button>';
-                        
-//            $data[] = [
-//                '',
-//                $row['student_rise_no'],
-//                $row['student_first_name'] . ' '.$row['student_middle_name'].' ' . $row['student_last_name'],
-//                $row['department_name'],
-//                $row['year_name'],
-//                $row['academic_year_name'],
-//                date('d-m-Y', strtotime($row['student_birthdate'])),
-//                $buttons,
-//            ];
-            
-            $data[] = [
-                $row['yearwise_student_data_id'],
-                $row['student_rise_no'],
-                $row['student_first_name'] . ' '.$row['student_middle_name'].' ' . $row['student_last_name'],
-                '',
-                $row['academic_year_name'],                
-                $row['department_name'],
-                $row['year_name'],
-                $buttons,
+            $filters = [
+                'department_id' => $this->request->getVar('department_id'),
+                'year_id' => $this->request->getVar('year_id'),
+                'academic_year_id' => $this->request->getVar('academic_year_id'),
             ];
-        }
 
-        return $this->response->setJSON([
-            'draw'            => $draw,
-            'recordsTotal'    => $count,
-            'recordsFiltered' => $count,
-            'data'            => $data,
-            'csrfHash'        => csrf_hash(),
-        ]);
+            // Data rows (paginated + searched)
+            $students = $this->modelyearwisestudentdata->get_lc_student_list($filters, $length, $start, $search);
+
+            // Single count (search-aware)
+            $count_filter = $this->modelyearwisestudentdata->count_filter_results($filters, $search);
+            $count_all = $this->modelyearwisestudentdata->count_all_results($filters);
+
+            $data = [];
+
+            foreach ($students as $student) {
+                $buttons = '';
+                $buttons .= '<button class="btn btn-secondary lc_btn" data-bs-toggle="modal" data-bs-target="#lc_modal" data-yearwise_student_data_id="' . $student['yearwise_student_data_id'] . '">Leaving Certificate</button>';
+
+                $data[] = [
+                    $student['yearwise_student_data_id'],
+                    $student['student_rise_no'],
+                    $student['student_first_name'] . ' ' . $student['student_middle_name'] . ' ' . $student['student_last_name'],
+                    $student['academic_year_name'],
+                    $student['department_name'],
+                    $student['year_name'],
+                    $buttons,
+                ];
+            }
+            return $this->response->setJSON([
+                        'draw' => $draw,
+                        'recordsTotal' => $count_all,
+                        'recordsFiltered' => $count_filter,
+                        'data' => $data,
+                        'csrfHash' => csrf_hash(),
+            ]);
+        } else {
+            return $this->response->setJSON([
+                        'status' => 'error',
+                        'errors' => $this->validator->getErrors(),
+                        'draw' => (int) $this->request->getPost('draw'),
+                        'recordsTotal' => 0,
+                        'recordsFiltered' => 0,
+                        'data' => [],
+                        'csrfHash' => csrf_hash(),
+            ]);
+        }
     }
 
+    public function add_leaving_certificate_data() {
 
-    public function add_lc_info() {
+        $data = [
+            'yearwise_student_data_id' => $this->request->getVar('yearwise_student_data_id'),
+            'examination' => $this->request->getVar('examination'),
+            'exam_period' => $this->request->getVar('exam_period'),
+            'date_of_leaving' => $this->request->getVar('date_of_leaving')
+        ];
+        $lc_id = $this->modelleavingcertificate->insert($data, true);
+        if ($lc_id) {
+            return $this->response->setJSON([
+                        'status' => 'success',
+                        'lc_id' => $lc_id,
+                        'csrfHash' => csrf_hash()
+            ]);
+        } else {
+            return $this->response->setJSON([
+                        'status' => 'error',
+                        'errors' => $this->modelleavingcertificate->errors(),
+                        'csrfHash' => csrf_hash(),
+            ]);
+        }
+    }
 
-        $data = [];
-//        $data['validation'] = \Config\Services::validation();
-//        $rules=[
-//            'full-name'=>'required',
-//            'mother-name'=>'required',
-//            'course-id'=>'required',
-//            'examination'=>'required',
-//            'exam-held-in'=>'required',
-//            'date-of-admission'=>'required',
-//            'date-of-leaving'=>'required|valid_date[Y-m-d]',
-//            'general-register-no'=>'required',
-//        ];
-////        
-//       
-//        if ($this->request->getMethod() == 'post') 
-//        {
-////             $data['lc_data'] = $this->modelleavingcertificate->getLcData();
-//            if($this->validate($rules))
-//            {
-//                $lc_data=
-//                [
-//                    'examination'=>$this->request->getVar('examination', FILTER_SANITIZE_STRING),
-//                    'exam_held_in'=>$this->request->getVar('exam-held-in', FILTER_SANITIZE_STRING),
-//                    'date_of_leaving'=>$this->request->getVar('date-of-leaving', FILTER_SANITIZE_NUMBER_INT)
-//                ];
-//                $add_lc_data=$this->modelleavingcertificate->addLcData($lc_data);
-//                if($add_lc_data)
-//                {                
-        // Correct mPDF 8.2+ constructor
-        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
-        $mpdf->shrink_tables_to_fit = 0;
-        $html = view('certificates/leaving-certificate-print');
-        $mpdf->simpleTables = false;
-        $mpdf->WriteHTML($html);
-        $mpdf->use_kwt = true;
-        $mpdf->falseBoldWeight = 8;
-        $mpdf->fonttrans['freeserif'] = 'freeserif2';
-        $mpdf->useFixedNormalLineHeight = true;
-        $mpdf->useFixedTextBaseline = true;
-        $mpdf->adjustFontDescLineheight = 100;
-        // Output PDF
-        $mpdf->Output('Leaving-Certificate.pdf', 'I');
-        exit; // VERY IMPORTANT
-//                }
-//                else
-//                {
-//                    $this->session->setTempdata('error','Sorry! Leaving certificate is not created, try again!');
-//                }
-//                
-//            }
-//            else
-//            {
-//                $data['validation']=$this->validator;
-//                return render_page('certificate/leaving-certificate-index');
-//                
-//            }
-////            
-//            
-//        }
-        return render_page('certificate/leaving-certificate-index');
+    public function print_leaving_certificate($lc_id) {
+        if ($lc_id) {
+            $data['lc_data'] = $lc_data = $this->modelleavingcertificate->find($lc_id);
+
+            $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_lc($lc_data['yearwise_student_data_id']);
+//            print_r($data['yearwise_data']);
+//            die();
+            // Correct mPDF 8.2+ constructor
+            $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+            $mpdf->shrink_tables_to_fit = 0;
+            $html = view('certificates/leaving-certificate-print',$data);
+            $mpdf->simpleTables = false;
+            $mpdf->WriteHTML($html);
+            $mpdf->use_kwt = true;
+            $mpdf->falseBoldWeight = 8;
+            $mpdf->fonttrans['freeserif'] = 'freeserif2';
+            $mpdf->useFixedNormalLineHeight = true;
+            $mpdf->useFixedTextBaseline = true;
+            $mpdf->adjustFontDescLineheight = 100;
+            // Output PDF
+            $mpdf->Output('Leaving-Certificate.pdf', 'I');
+            exit;
+        }
     }
 }

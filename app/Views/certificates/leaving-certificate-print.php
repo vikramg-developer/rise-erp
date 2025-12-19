@@ -164,9 +164,9 @@ $rettxt .= " ".$ones[substr($decnum,1,1)];
 return $rettxt; 
 } 
 
-if(!empty($registration[0]['dob']))  
+if(!empty($yearwise_data[0]['dob']))  
 {
-$birth_date = $registration[0]['dob'];
+$birth_date = $yearwise_data[0]['dob'];
 $new_birth_date = explode('-', $birth_date);
 $year = $new_birth_date[0];
 $month = $new_birth_date[1];
@@ -178,7 +178,7 @@ $dateObj = DateTime::createFromFormat('!m', $monthNum);//Convert the number into
 $monthName = ucwords($dateObj->format('F'));
 // echo "<p align='center' style='color:blue'>$birth_day $monthName $birth_year</p>";
 }
-//        $up_dt =$this->db->select('*')->get_where('registration',array('registration_id'=>$registration[0]['registration_id']))->result_array();
+//        $up_dt =$this->db->select('*')->get_where('registration',array('registration_id'=>$yearwise_data[0]['registration_id']))->result_array();
 //        $s = explode(" ",$up_dt[0]['up_dt']);
 //        $t=array_slice($s, 0,1);
 //        $e = implode(" ",$t);
@@ -313,9 +313,9 @@ $monthName = ucwords($dateObj->format('F'));
 
     <table>
         <tr>
-        	<td>Rise No.:202610100001<?php //echo $registration[0]['registration_id']; ?></td>
-        	<td>Gen. Reg No.:202220225<?php //echo $lc[0]['gen_reg_id']; ?></td>
-        	<td style="text-align: right;">TC No.: 1<?php //echo $lc[0]['lc_id']; ?></td>
+        	<td>Rise No.:<?php echo $yearwise_data['student_rise_no']; ?></td>
+        	<td>Gen. Reg No.:<?php echo $yearwise_data['student_general_register_no']; ?></td>
+        	<td style="text-align: right;">LC No.: <?php echo $lc_data['leaving_certificate_id']; ?></td>
         </tr>
     </table>
 
@@ -324,7 +324,7 @@ $monthName = ucwords($dateObj->format('F'));
     	<tr>
     		<td rowspan="2" style="vertical-align: top;">1)</td>
     		<td rowspan="1" style="vertical-align: top;">Name in Full (Beginnig with Surname)</td>
-    		<td style="font-weight: bold;"><b>SHINDE NAGESH TUKARAM<?php //echo strtoupper($registration[0]['last_name']." ".$registration[0]['first_name']." ".$registration[0]['middle_name']); ?></b></td>
+    		<td style="font-weight: bold;"><b><?php echo esc($yearwise_data['student_last_name']." ".$yearwise_data['student_first_name']." ".$yearwise_data['student_middle_name']); ?></b></td>
     	</tr>
     	<tr>
     		<td rowspan="1" style="vertical-align: top;">Mother's Name</td>
@@ -343,7 +343,7 @@ $monthName = ucwords($dateObj->format('F'));
     	<tr>
     		<td>4)</td>
     		<td>Date of Birth (Both in figures & words)</td>
-    		<td>15/10/2002<?php //echo date('d/m/Y',strtotime($registration[0]['dob'])); ?><br>Fifteenth October Two Thousand Two<?php //echo $birth_day." ".$monthName." ".$birth_year;?></td>
+    		<td>15/10/2002<?php //echo date('d/m/Y',strtotime($yearwise_data[0]['dob'])); ?><br>Fifteenth October Two Thousand Two<?php //echo $birth_day." ".$monthName." ".$birth_year;?></td>
     	</tr>
     	<tr>
     		<td>5)</td>
@@ -367,7 +367,7 @@ $monthName = ucwords($dateObj->format('F'));
     	</tr>
     </table>
 
-    <p style="margin-top:1%; text-indent: -18px;">b) <?php //echo ($registration[0]['gender']=='Male')?"He":"She"; ?> Appeared for the following examination in this college, since <?php //echo ($registration[0]['gender']=='Male')?"his":"her"; ?> last University Board examination, with the result shown against them-</p>
+    <p style="margin-top:1%; text-indent: -18px;">b) <?php //echo ($yearwise_data[0]['gender']=='Male')?"He":"She"; ?> Appeared for the following examination in this college, since <?php //echo ($yearwise_data[0]['gender']=='Male')?"his":"her"; ?> last University Board examination, with the result shown against them-</p>
 
     <table id="exam" border="1">
     	<tr>
@@ -376,14 +376,14 @@ $monthName = ucwords($dateObj->format('F'));
     		<th>Result-Passed or Failed (Mention Class in case of Pass and Exemptions with subjects if any, in case of Failure)</th>
     	</tr>
     	<tr>
-    		<td>S.Y Civil Engineering<?php //echo $lc[0]['examination']; ?></td>
-    		<td>Summer Sem Exam 2025<?php //echo $lc[0]['exam_held_in']; ?></td>
+    		<td><?php echo esc($lc_data['examination']); ?></td>
+    		<td><?php echo $lc_data['exam_period']; ?></td>
     		<td>First Class<?php //echo $lc[0]['status']; ?></td>
     	</tr>
     </table>
 
-    <p >c) <?php //echo ($registration[0]['gender']=='Male')?"He":"She"; ?> Bears a good moral character.&nbsp;&nbsp;<?php //echo (count($duplicate_lc) > 1) ? "This Certificate is issued for Migration.": "";?></p>
-    <p style="text-indent: -18px;">d) <?php //echo ($registration[0]['gender']=='Male')?"His":"Her"; ?> Voluntary subject or Group of subjects in which <?php //echo ($registration[0]['gender']=='Male')?"he":"she"; ?> attended the course of instructions in this college was <?php //echo $course[0]['course_name']; ?>.</p>
+    <p >c) <?php //echo ($yearwise_data[0]['gender']=='Male')?"He":"She"; ?> Bears a good moral character.&nbsp;&nbsp;<?php //echo (count($duplicate_lc) > 1) ? "This Certificate is issued for Migration.": "";?></p>
+    <p style="text-indent: -18px;">d) <?php //echo ($yearwise_data[0]['gender']=='Male')?"His":"Her"; ?> Voluntary subject or Group of subjects in which <?php //echo ($yearwise_data[0]['gender']=='Male')?"he":"she"; ?> attended the course of instructions in this college was <?php //echo $course[0]['course_name']; ?>.</p>
     <br>
     
     <table>

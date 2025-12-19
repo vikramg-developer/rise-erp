@@ -80,9 +80,9 @@ $routes->post('/ticket', 'Ticket::index');
 $routes->group('leavingcertificate', function ($routes) {    
     $routes->get('/', 'LeavingCertificate::index', ['filter' => 'permission:createFeesManagement']);
     $routes->post('fetch_lc_student_list', 'LeavingCertificate::fetch_lc_student_list', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('add-lc-info', 'LeavingCertificate::add_lc_info', ['filter' => 'permission:createFeesManagement']);   
-    $routes->get('leaving-certificate-report', 'LeavingCertificateReport::index', ['filter' => 'permission:createFeesManagement']);
-    
+    $routes->post('add-leaving-certificate-data', 'LeavingCertificate::add_leaving_certificate_data', ['filter' => 'permission:createFeesManagement']);   
+    $routes->get('print-leaving-certificate/(:num)', 'LeavingCertificate::print_leaving_certificate/$1', ['filter' => 'permission:createFeesManagement']);   
+    $routes->get('leaving-certificate-report', 'LeavingCertificateReport::index', ['filter' => 'permission:createFeesManagement']);    
 });
 
 $routes->group('feedback', function ($routes) {

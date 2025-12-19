@@ -101,7 +101,7 @@ class Login extends BaseController {
                             'role_id' => $student_data['student_role_id'],
                             'role_name' => $role_data['role_name'],
                             'logged_in' => true,
-                            'permissions' => json_decode($role_data['permissions'], true)
+                            'permissions' => json_decode($role_data['permissions'], true) ?? []
                         ]);
                         return redirect()->to('/dashboard');
                     } else {
