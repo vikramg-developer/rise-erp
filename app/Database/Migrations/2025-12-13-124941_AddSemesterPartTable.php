@@ -46,6 +46,7 @@ class AddSemesterPartTable extends Migration {
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('semester_part_id');
+        $this->forge->addUniqueKey('semester_part_name');
         $this->forge->createTable('semester_part');
     }
 

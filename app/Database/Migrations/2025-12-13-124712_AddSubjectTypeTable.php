@@ -46,6 +46,7 @@ class AddSubjectTypeTable extends Migration {
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('subject_type_id');
+        $this->forge->addUniqueKey('subject_type_name');
         $this->forge->createTable('subject_type');
     }
 

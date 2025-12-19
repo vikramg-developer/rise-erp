@@ -25,6 +25,11 @@ class StudentPersonalInfo extends Migration
                 'constraint' => 50,
                 'null' => false,
             ],
+            'student_abc_id' => [
+                'type' => 'VARCHAR',
+                'constraint' => 50,
+                'null' => false,
+            ],
             'student_general_register_no' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
@@ -137,6 +142,8 @@ class StudentPersonalInfo extends Migration
         $this->forge->addPrimaryKey('student_personal_info_id');
         $this->forge->addUniqueKey('student_mobile_no');
         $this->forge->addUniqueKey('student_registration_id');
+        $this->forge->addUniqueKey('student_prn_no');
+        $this->forge->addUniqueKey('student_abc_id');
 
         $this->forge->addForeignKey(
             'student_registration_id',

@@ -40,7 +40,7 @@ class AddDepartmentTable extends Migration {
                 'null' => true
             ],
             'updated_at' => [
-                'type' => '',
+                'type' => 'varchar',
                 'null' => true,
                 'default' => new Rawsql('NULL ON UPDATE CURRENT_TIMESTAMP'),
             ],
@@ -51,6 +51,7 @@ class AddDepartmentTable extends Migration {
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('department_id');
+        $this->forge->addUniqueKey('department_name');
         $this->forge->createTable('department');
     }
 

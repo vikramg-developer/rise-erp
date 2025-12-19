@@ -41,6 +41,14 @@ class Permissions extends BaseConfig{
         'deleteDepartment',
     ];
     
+    /** feedback permissions */
+    public array $feedback = [
+        'createFeedback',
+        'viewFeedback',
+        'updateFeedback',
+        'deleteFeedback',
+    ];
+    
     /** Master permissions (auto-merged) */
     public array $master;
     
