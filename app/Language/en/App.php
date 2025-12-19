@@ -180,6 +180,7 @@ return [
     'percentage' => 'Percentage',
     'personal' => 'Personal',
     'person' => 'Person',
+    'period' => 'Period',    
     'pdf_condition' => 'Upload PDF only. File size must be less than 300KB.',
     'phd' => 'Ph.D',
     'photo' => 'Photo',

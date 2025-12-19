@@ -7,28 +7,36 @@ use CodeIgniter\Model;
 class ModelLeavingCertificate extends Model {
 
     protected $table = 'leaving_certificate';
-    protected $primaryKey = 'lc_id';
+    protected $primaryKey = 'leaving_certificate_id';
     protected $useAutoIncrement = true;
     protected $returnType = 'array'; // You can change to 'object' if needed
     protected $useSoftDeletes = false;   // You are using is_deleted instead of softDelete()
     protected $allowedFields = [
-        'ysd_id',
+        'yearwise_student_data_id',
         'examination',
-        'exam_held_in',
+        'exam_period',
         'date_of_leaving',
-        'is_duplicate',
-        'previous_lc_date',
+        'is_duplicate',        
+        'is_cancelled',        
+        'added_by',        
+        'updated_by',        
         'is_deleted'
     ];
     // Validation Rules (Optional - add later if required)
     protected $validationRules = [
-        'course_id' => 'required',
-        'year_id' => 'required',
-        'aca_year_id' => 'required'
+        'examination' => 'required',
+            'exam_period' => 'required',
+            'date_of_leaving' => 'required'
     ];
     protected $validationMessages = [
-        'course_id' => ['required' => 'course is required'],
-        'year_id' => ['required' => 'course is required'],
-        'aca_year_id' => ['required' => 'course is required'],
+        'examination' => [
+                'required' => 'Examination field is required.'
+            ],
+            'exam_period' => [
+                'required' => 'Exam Period field is required',
+            ],
+            'date_of_leaving' => [
+                'required' => 'Date of Leaving field is required'
+            ]
     ];
 }

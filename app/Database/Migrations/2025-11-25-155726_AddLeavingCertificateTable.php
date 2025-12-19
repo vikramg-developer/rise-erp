@@ -5,37 +5,37 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class AddLeavingCertificateTable extends Migration
-{
-    public function up()
-    {
-        $fields=[
-            'lc_id'=>[
-                'type'=>'INT',
-                'constraint'=>11,
-                'auto_increment'=>true
-            ],         
-            'ysd_id'=>[
-                'type'=>'int',
+class AddLeavingCertificateTable extends Migration {
+
+    public function up() {
+        $fields = [
+            'leaving_certificate_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'auto_increment' => true
             ],
-            'examination'=>[
-                'type'=>'varchar',
-                'constraint'=>255,
+            'yearwise_student_data_id' => [
+                'type' => 'int',
             ],
-            
-            'exam_held_in'=>[
-                'type'=>'varchar',
-                'constraint'=>50,
+            'examination' => [
+                'type' => 'varchar',
+                'constraint' => 150,
             ],
-            'date_of_leaving'=>[
-                'type'=>'date',
-                'null'=>false
+            'exam_period' => [
+                'type' => 'varchar',
+                'constraint' => 100,
             ],
-            'is_duplicate'=>[
-                'type'=>'int',
+            'date_of_leaving' => [
+                'type' => 'date',
+                'null' => false
             ],
-            'previous_lc_date'=>[
-                'type'=>'int',
+            'is_duplicate' => [
+                'type' => 'tinyint',
+                'constraint' => '1'
+            ],
+            'is_cancelled' => [
+                'type' => 'tinyint',
+                'constraint' => '1'
             ],
             'added_by' => [
                 'type' => 'varchar',
@@ -43,19 +43,19 @@ class AddLeavingCertificateTable extends Migration
                 'null' => false
             ],
             'added_at' => [
-                'type'=>'timestamp',
-                'null'=>false,
-                'default'=>new Rawsql('CURRENT_TIMESTAMP'),
+                'type' => 'timestamp',
+                'null' => false,
+                'default' => new Rawsql('CURRENT_TIMESTAMP'),
             ],
-            'updated_by'=> [
+            'updated_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
-                'null' => false
+                'null' => true
             ],
-            'updated_at' =>[
-                'type'=>'timestamp',
-                'null'       => false,
-                'default'=>new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+            'updated_at' => [
+                'type' => 'timestamp',
+                'null' => true,
+                'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
@@ -63,13 +63,18 @@ class AddLeavingCertificateTable extends Migration
             ]
         ];
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('lc_id');
-         
+        $this->forge->addPrimaryKey('leaving_certificate_id');
+        $this->forge->addForeignKey(
+                'yearwise_student_data_id',
+                'yearwise_student_data',
+                'yearwise_student_data_id',
+                'CASCADE',
+                'CASCADE'
+        );
         $this->forge->createTable('leaving_certificate');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->forge->dropTable('leaving_certificate');
     }
 }

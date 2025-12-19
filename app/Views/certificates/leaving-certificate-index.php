@@ -79,48 +79,48 @@
     </div>
     <!--End::row-1 
     <!--modal to add leaving certificate info-->
-    <div class="modal fade" id="exampleModalLg" tabindex="-1" aria-labelledby="exampleModalLgLabel" aria-hidden="true">
+    <div class="modal fade" id="lc_modal" tabindex="-1" aria-labelledby="lcModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <?= form_open('leavingcertificate/generate-lc', ['target' => '_blank','id' => 'lc_form']); ?>
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="exampleModalLgLabel"><?= lang('App.add'); ?> <?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?> <?= lang('App.information'); ?></h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+            <form method="post" action="" id ="lc_modal_form">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="lcModalLabel"><?= lang('App.add'); ?> <?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?> <?= lang('App.information'); ?></h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
 
-                    <div class="row gy-3">
-                        <?= csrf_field(); ?>
-                        <input type="hidden" id="yearwise_student_data_id" name="yearwise_student_data_id">
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                            <label for="examination" class="form-label"><?= lang('App.examination'); ?></label>
-                            <input type="text" class="form-control" name="examination" id="examination" value="S.Y. Civil Engineering" placeholder="<?= lang('App.examination'); ?>" required>
-                            
-                        </div>
-
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                            <label for="exam_held_in" class="form-label"><?= lang('App.exam'); ?> <?= lang('App.held'); ?> <?= lang('App.in'); ?></label>
-                            <input type="text" class="form-control" name="exam_held_in" id="exam_held_in" value="Summer Sem Exam 2025" placeholder="<?= lang('App.exam'); ?> <?= lang('App.held'); ?> <?= lang('App.in'); ?>" required>
-                            
-                        </div>
-
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                            <label for="date_of_leaving" class="form-label"><?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?></label>
-                            <div class="input-group">
-                                <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
-                                <input type="text" class="form-control" name="date_of_leaving" id="date_of_leaving" value="2025-06-30" placeholder="<?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?>" required>
-                                
-
+                        <div class="row gy-3">
+                            <?= csrf_field(); ?>
+                            <input type="hidden" id="yearwise_student_data_id" name="yearwise_student_data_id">
+                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                <label for="examination" class="form-label"><?= lang('App.examination'); ?></label>
+                                <input type="text" class="form-control" name="examination" id="examination" value="" placeholder="<?= lang('App.examination'); ?>">
+                                <small class="text-danger field-error" id="examination_error"></small>
                             </div>
-                        </div>
-                    </div> 
+
+                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                <label for="exam_period" class="form-label"><?= lang('App.exam'); ?> <?= lang('App.period'); ?> <?= lang('App.in'); ?></label>
+                                <input type="text" class="form-control" name="exam_period" id="exam_period" value="" placeholder="<?= lang('App.exam'); ?> <?= lang('App.held'); ?> <?= lang('App.in'); ?>">
+                                <small class="text-danger field-error" id="exam_period_error"></small>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                <label for="date_of_leaving" class="form-label"><?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?></label>
+                                <div class="input-group">
+                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                    <input type="text" class="form-control" name="date_of_leaving" id="date_of_leaving" value="" placeholder="<?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?>">
+
+                                </div>
+                                <small class="text-danger field-error" id="date_of_leaving_error"></small>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= lang('App.close'); ?></button>
+                        <button type="submit" class="btn btn-success"><?= lang('App.submit'); ?></button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= lang('App.close'); ?></button>
-                    <button type="submit" class="btn btn-success"><?= lang('App.submit'); ?></button>
-                </div>
-            </div>
-            <?= form_close(); ?>
+            </form>
         </div>
     </div>
     <!--End::modal-->
@@ -134,19 +134,21 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="lc-student-list" class="table table-bordered text-nowrap w-100">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col"><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
-                                <th scope="col"><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>                               
-                                <th scope="col"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
-                                <th scope="col"><?= lang('App.department'); ?></th>
-                                <th scope="col"><?= lang('App.year'); ?></th>
-                                <th scope="col"><?= lang('App.action'); ?></th>
-                            </tr>
-                        </thead>
-                    </table>                    
+                    <div class="table-responsive">
+                        <table id="lc-student-list" class="table table-bordered text-nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col"><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
+                                    <th scope="col"><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>                               
+                                    <th scope="col"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
+                                    <th scope="col"><?= lang('App.department'); ?></th>
+                                    <th scope="col"><?= lang('App.year'); ?></th>
+                                    <th scope="col"><?= lang('App.action'); ?></th>
+                                </tr>
+                            </thead>
+                        </table>                    
+                    </div>
                 </div>
             </div>
         </div>

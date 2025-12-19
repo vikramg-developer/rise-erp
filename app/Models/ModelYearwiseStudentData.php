@@ -34,29 +34,7 @@ class ModelYearwiseStudentData extends Model {
     ];
     protected $validationMessages = [];
 
-    /* =====================================================
-      COMMON SEARCH (UNCHANGED)
-      ===================================================== */
-
-//    private function applySearch($builder, $search) {
-//        if ($search === '') {
-//            return;
-//        }
-//
-//        $builder->groupStart()
-//                ->like('sr.student_rise_no', $search)
-//                ->orLike('sr.student_first_name', $search)
-//                ->orLike('sr.student_middle_name', $search)
-//                ->orLike('sr.student_last_name', $search)
-//                ->orLike('dept.department_name', $search)
-//                ->orLike('yr.year_name', $search)
-//                ->orLike('aca.academic_year_name', $search)
-//                ->groupEnd();
-//    }
-
-    /* =====================================================
-      BASE QUERY (LIST + COUNT)
-      ===================================================== */
+    /* ======================BASE QUERY (LIST + COUNT)=============*/
 
     public function baseQuery($filters) {
         $builder = $this->db->table('yearwise_student_data AS ysd');
@@ -84,19 +62,12 @@ class ModelYearwiseStudentData extends Model {
             'ysd.academic_year_id' => $filters['academic_year_id'],
             'ysd.is_deleted' => 0,
         ]);
-
-//        // 🔍 common search used everywhere
-//        $this->applySearch($builder, $search);
-
         return $builder;
     }
 
-    /* =====================================================
-      DATATABLE DATA (PAGINATED)
-      ===================================================== */
+    /* ====================================DATATABLE DATA (PAGINATED)============================= */
 
-//    public function getStudentsForTable(array $filters, int $limit, int $offset, string $search = '') {
-    public function getStudentsForTable($filters, $limit, $offset, $search) {
+    public function get_lc_student_list($filters, $limit, $offset, $search) {
         $builder = $this->baseQuery($filters)->orderBy('sr.student_rise_no', 'DESC');
         if (!empty($search)) {
             $builder->groupStart()
@@ -111,12 +82,9 @@ class ModelYearwiseStudentData extends Model {
         }
         return $builder->get($limit, $offset)->getResultArray();
 
-//        return $this->orderBy('yearwise_student_data_id', 'DESC')->findAll($limit, $offset);
     }
 
-    /* =====================================================
-      SINGLE COUNT (SEARCH-AWARE)
-      ===================================================== */
+    /* =============================SINGLE COUNT (SEARCH-AWARE)=========================== */
 
     public function count_all_results($filters) {
         return $this->baseQuery($filters)
@@ -127,29 +95,24 @@ class ModelYearwiseStudentData extends Model {
         return $this->baseQuery($filters, $search)
                         ->countAllResults();
     }
-
-    /* =====================================================
-      CERTIFICATE DATA (FULL DATA, ONE ROW)
-      ===================================================== */
-//    public function getCertificateData(int $ysdId): array
-//    {
-//        return $this->db->table('yearwise_student_data AS ysd')
-//            ->select('
-//                ysd.*,
-//                sr.*,
-//                spi.*,
-//                d.department_name,
-//                y.year_name,
-//                ay.academic_year_name
-//            ')
-//            ->join('student_registration sr', 'sr.student_registration_id = ysd.student_registration_id AND sr.is_deleted=0', 'left')
-//            ->join('student_personal_info spi', 'spi.student_registration_id = ysd.student_registration_id AND spi.is_deleted=0', 'left')
-//            ->join('department d', 'd.department_id = ysd.department_id AND dept.is_deleted=0', 'left')
-//            ->join('year y', 'y.year_id = ysd.year_id AND yr.is_deleted=0', 'left')
-//            ->join('academic_year ay', 'ay.academic_year_id = ysd.academic_year_id AND aca.is_deleted=0', 'left')
-//            ->where('ysd.yearwise_student_data_id', $ysdId)
-//            ->where('ysd.is_deleted', 0)
-//            ->get()
-//            ->getRowArray();
-//    }
+    /* ========================CERTIFICATE DATA (FULL DATA, ONE ROW)============================= */
+    public function get_student_data_for_lc(int $yearwise_student_data_id): array
+    {
+        return $this->db->table('yearwise_student_data AS ysd')
+            ->select('
+                sr.student_rise_no,sr.student_first_name,
+                sr.student_middle_name,sr.student_last_name,
+                dept.department_name,yr.year_name,aca.academic_year_name,spi.student_general_register_no,
+                student_birthdate
+            ')
+            ->join('student_registration sr', 'sr.student_registration_id = ysd.student_registration_id AND sr.is_deleted=0', 'left')
+            ->join('student_personal_info spi', 'spi.student_registration_id = ysd.student_registration_id AND spi.is_deleted=0', 'left')
+            ->join('department dept', 'dept.department_id = ysd.department_id AND dept.is_deleted=0', 'left')
+            ->join('year yr', 'yr.year_id = ysd.year_id AND yr.is_deleted=0', 'left')
+            ->join('academic_year aca', 'aca.academic_year_id = ysd.academic_year_id AND aca.is_deleted=0', 'left')
+            ->where('ysd.yearwise_student_data_id', $yearwise_student_data_id)
+            ->where('ysd.is_deleted', 0)
+            ->get()
+            ->getRowArray();
+    }
 }
