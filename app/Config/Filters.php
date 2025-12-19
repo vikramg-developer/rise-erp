@@ -56,7 +56,7 @@ class Filters extends BaseConfig {
                     'login', //skip login page
                     'check-user', //skip login page
                     'logout', //skip logout
-                    'student-dashboard', //skip student dashboard page
+                    'dashboard', //skip dashboard page
                     'student-registration', //skip student registration page
                     'save-registration', //skip student registration save page
                 ]
