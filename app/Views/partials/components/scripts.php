@@ -101,8 +101,17 @@
     const BASE_URL = "<?= base_url() ?>";
 </script>
 
+<script>
+    $(document).ready(function () {
+        $("body").tooltip({selector: '[data-bs-toggle=tooltip]'});
+    });
+</script>
+
 <script src="<?php echo base_url('partials/js/alert.js'); ?>"></script>
+<script src="<?php echo base_url('partials/js/toast.js'); ?>"></script>
 
 <?php if (isset($jspath)): ?>
     <script src="<?php echo base_url('partials/js/') . $jspath . '.js'; ?>"></script>
 <?php endif; ?>
+
+<script src="<?php echo base_url('assets/js/show-password.js'); ?>"></script>

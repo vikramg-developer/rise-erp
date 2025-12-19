@@ -5,28 +5,28 @@ namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
 
-class AddAbbrivationData extends Seeder
+class AddAbbreviationData extends Seeder
 {
      public function run()
     {
         $data = [
             [
-                'title'         => 'Dr.',
+                'abbreviation_name'         => 'Dr.',
                 'is_active'     => 1,
                 'is_deleted' => 0
             ],
             [
-                'title'         => 'Mr.',
+                'abbreviation_name'         => 'Mr.',
                 'is_active'     => 1,
                 'is_deleted' => 0
             ],
             [
-                'title'         => 'Mrs.',
+                'abbreviation_name'         => 'Mrs.',
                 'is_active'     => 1,
                 'is_deleted' => 0
             ],
             [
-                'title'         => 'Prof.',
+                'abbreviation_name'         => 'Prof.',
                 'is_active'     => 1,
                 'is_deleted' => 0
             ],
@@ -35,6 +35,6 @@ class AddAbbrivationData extends Seeder
         ];
 
         // Insert multiple rows
-        $this->db->table('abbrivation')->insertBatch($data);
+        $this->db->table('abbreviation')->ignore()->insertBatch($data);
     }
 }

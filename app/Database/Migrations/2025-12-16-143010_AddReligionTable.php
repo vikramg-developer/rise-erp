@@ -6,15 +6,15 @@ use CodeIgniter\Database\Migration;
 
 use CodeIgniter\Database\RawSql;
 
-class AddYearTable extends Migration {
+class AddReligionTable extends Migration {
 
     public function up() {
         $fields = [
-            'year_id' => [
+            'religion_id' => [
                 'type' => 'int',
                 'auto_increment' => true,
             ],
-            'year_name' => [
+            'religion_name' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
@@ -36,8 +36,8 @@ class AddYearTable extends Migration {
             ],
             'updated_at' => [
                 'type' => 'timestamp',
-                'null' => false,
-                'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+                'null' => true,
+                'default' => new Rawsql('NULL ON UPDATE CURRENT_TIMESTAMP'),
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
@@ -45,12 +45,12 @@ class AddYearTable extends Migration {
             ]
         ];
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('year_id');
-        $this->forge->createTable('year');
-                
+        $this->forge->addPrimaryKey('religion_id');
+        $this->forge->addUniqueKey('religion_name');    //
+        $this->forge->createTable('religion');
     }
 
     public function down() {
-       $this->forge->dropTable('year');
+        $this->forge->dropTable('religion');
     }
 }

@@ -3,17 +3,19 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+
 use CodeIgniter\Database\RawSql;
 
-class AddReligionTable extends Migration {
-
-    public function up() {
-        $fields = [
-            'religion_id' => [
+class AddYearTable extends Migration
+{
+    public function up()
+    {
+         $fields = [
+            'year_id' => [
                 'type' => 'int',
                 'auto_increment' => true,
             ],
-            'religion_name' => [
+            'year_name' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
@@ -44,11 +46,12 @@ class AddReligionTable extends Migration {
             ]
         ];
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('religion_id');
-        $this->forge->createTable('religion');
+        $this->forge->addPrimaryKey('year_id');
+        $this->forge->createTable('year');
     }
 
-    public function down() {
-        $this->forge->dropTable('religion');
+    public function down()
+    {
+         $this->forge->dropTable('year');
     }
 }

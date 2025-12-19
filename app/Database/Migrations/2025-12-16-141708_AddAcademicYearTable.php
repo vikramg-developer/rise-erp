@@ -6,26 +6,29 @@ use CodeIgniter\Database\Migration;
 
 use CodeIgniter\Database\RawSql;
 
-class AddDepartmentTable extends Migration
+class AddAcademicYearTable extends Migration
 {
     public function up()
     {
-        $fields = [
-            'department_id' => [
+         $fields = [
+            'academic_year_id' => [
                 'type' => 'int',
                 'auto_increment' => true,
             ],
-            'department_name' => [
+            'academic_year_name' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
             ],
-            'department_abbrivation' => [
-                'type' => 'varchar',
-                'constraint' => '50',
-                'null' => false
+             'is_current' => [
+                'type' => 'tinyint',
+                'constraint' => '1'
             ],
-         'added_by' => [
+            'is_active' => [
+                'type' => 'tinyint',
+                'constraint' => '1'
+            ],
+            'added_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
@@ -42,8 +45,8 @@ class AddDepartmentTable extends Migration
             ],
             'updated_at' => [
                 'type' => 'timestamp',
-                'null' => false,
-                'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+                'null' => true,
+                'default' => new Rawsql('NULL ON UPDATE CURRENT_TIMESTAMP'),
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
@@ -51,12 +54,13 @@ class AddDepartmentTable extends Migration
             ]
         ];
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('department_id');
-        $this->forge->createTable('department');
+        $this->forge->addPrimaryKey('academic_year_id');
+        $this->forge->addUniqueKey('academic_year_name');
+        $this->forge->createTable('academic_year');
     }
 
     public function down()
     {
-        $this->forge->dropTable('department');
+        $this->forge->dropTable('academic_year');
     }
 }

@@ -45,12 +45,14 @@ function isAlphaKey(evt)
         return true;
     return false;
 }
-function check() {
-    let password = document.getElementById('signup-password').value;
-    let confirmPassword = document.getElementById('signup-confirmpassword').value;
-    let msg = document.getElementById('password-message');
-    let submitBtn = document.getElementById('signup-submit');
 
+function check() {
+    const password = document.getElementById('student_password').value;
+    const confirmPassword = document.getElementById('signup-confirmpassword').value;
+    const msg = document.getElementById('password-message');
+    const submitBtn = document.getElementById('signup-submit');
+
+    // If both fields are empty
     if (password === "" && confirmPassword === "") {
         msg.innerHTML = "";
         document.getElementById('signup-confirmpassword').style.borderColor = "";
@@ -58,18 +60,31 @@ function check() {
         return;
     }
 
+    // If passwords match
     if (password === confirmPassword) {
         msg.style.color = "green";
         msg.innerHTML = "✓ Passwords match";
         document.getElementById('signup-confirmpassword').style.borderColor = "green";
-        submitBtn.disabled = false;  // enable submit
-    } else {
+        submitBtn.disabled = false;
+    }
+    // If passwords do not match
+    else {
         msg.style.color = "red";
         msg.innerHTML = "✗ Passwords do not match";
         document.getElementById('signup-confirmpassword').style.borderColor = "red";
-        submitBtn.disabled = true;  // disable submit
+        submitBtn.disabled = true;
     }
 }
+
+function forceUppercase(el) {
+    el.value = el.value.toUpperCase();
+}
+
+
+
+
+
+
 
 
 

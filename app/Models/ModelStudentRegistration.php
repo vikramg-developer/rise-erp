@@ -1,9 +1,6 @@
 <?php
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
- */
+
 
 namespace App\Models;
 
@@ -22,7 +19,7 @@ class ModelStudentRegistration extends Model {
     protected $returnType = 'array';
 //    protected $useSoftDeletes = true;
 //
-    protected $allowedFields = ['student_rise_no', 'student_first_name', 'student_middle_name', 'student_last_name', 'student_aadhar_number', 'student_password',];
+    protected $allowedFields = ['student_rise_no', 'student_role_id', 'student_first_name', 'student_middle_name', 'student_last_name', 'student_aadhar_number', 'student_password',];
 //
     protected bool $allowEmptyInserts = false;
 //    protected bool $updateOnlyChanged = true;
@@ -40,6 +37,7 @@ class ModelStudentRegistration extends Model {
         'student_middle_name' => 'required|alpha',
         'student_last_name' => 'required|alpha',
         'student_aadhar_number' => 'required|exact_length[12]|numeric|is_unique[student_registration.student_aadhar_number]',
+        'student_password' => 'required|min_length[8]',
     ];
     protected $validationMessages = [
         'student_first_name' => [
@@ -60,22 +58,28 @@ class ModelStudentRegistration extends Model {
             'is_unique' => 'This Aadhaar number is already registered'
         ],
         'student_password' => [
-            'required' => 'Password is required',
-            'min_length' => 'Password must be 8 characters',
-            'max_length' => 'Password must be 8 characters'
-        ],
-        'signup-confirmpassword' => [
-            'required' => 'Confirm Password is required',
-            'matches' => 'Passwords do not match'
-        ]
+        'required'   => 'Student Password is required',
+        'min_length' => 'Password must be at least 8 characters',
+    ],
+   
     ];
-    protected $skipValidation = false;
-    protected $cleanValidationRules = true;
-    protected $afterDelete    = [];
+     protected $skipValidation = false;
     
-    public function verify_rise_no($rise_no)
-    {
-        return $this->where('student_rise_no', $rise_no)->first(); 
+    protected $beforeInsert   = ['hashPassword'];
+    
+    protected function hashPassword(array $data)
+{
+    if (! empty($data['data']['faculty_password'])) {
+        $data['data']['faculty_password'] =
+            password_hash($data['data']['faculty_password'], PASSWORD_DEFAULT);
     }
-    
+    return $data;
+}
+
+//    protected $cleanValidationRules = true;
+//    protected $afterDelete = [];
+
+    public function verify_rise_no($rise_no) {
+        return $this->where('student_rise_no', $rise_no)->first();
+    }
 }

@@ -1,15 +1,14 @@
 let table;
-let toast;
 
 $(document).ready(function () {
 
-    table = $('#head-group-table').DataTable({
+    table = $('#head-table').DataTable({
         processing: true,
         serverSide: true,
         destroy: true,
 
         ajax: {
-            url: "fetch-head-group",
+            url: BASE_URL + "head/fetch-head",
             type: "POST",
             data: function (d) {
                 d[csrfName] = csrfHash; // ALWAYS send current token
@@ -24,18 +23,18 @@ $(document).ready(function () {
 });
 
 
-$("#head-group-form").on("submit", function (e) {
+$("#head-form").on("submit", function (e) {
     e.preventDefault();
 
     // clear errors
-    $("#head_group_name_error").text('').hide();
+    $("#head_name_error").text('').hide();
 
     let formData = $(this).serializeArray();
     formData.push({name: csrfName, value: csrfHash});
 
-    let head_group_id = $('#head_group_id').val();
+    let head_id = $('#head_id').val();
 
-    let url = (head_group_id === "") ? 'add-head-group' : 'update-head-group'
+    let url = (head_id === "") ? BASE_URL + 'head/save-head' : BASE_URL + 'head/update-head'
 
     $.ajax({
         url: url,
@@ -50,16 +49,13 @@ $("#head-group-form").on("submit", function (e) {
 
             // handle validation errors
             if (response.status === 'error' && response.errors) {
-                if (response.errors.head_group_name) {
-                    $("#head_group_name_error").text(response.errors.head_group_name).show();
+                if (response.errors.head_name) {
+                    $("#head_name_error").text(response.errors.head_name).show();
                 }
                 return;
             }
-
-            $("#successToast .toast-body").text(response.message);
-
-            toast = new bootstrap.Toast(document.getElementById('successToast'));
-            toast.show();
+            
+            showToast('success', response.message);
 
             // 2️⃣ Update DataTable token handler
             table.settings()[0].ajax.data = function (d) {
@@ -70,41 +66,41 @@ $("#head-group-form").on("submit", function (e) {
             table.ajax.reload(null, false);
 
             // Optional: Reset form
-            $("#head-group-form")[0].reset();
+            $("#head-form")[0].reset();
 
             $("#submit_btn").html('Save <i class="bi bi-save2 ms-2"></i>');
 
             // OPTIONAL: Clear hidden ID so next submit becomes 'add'
-            $("#head_group_id").val("");
+            $("#head_id").val("");
         }
     });
 });
 
 $(document).on("click", ".edit", function () {
-    let head_group_id = $(this).data("head_group_id");
-    let head_group_name = $(this).data("head_group_name");
+    let head_id = $(this).data("head_id");
+    let head_name = $(this).data("head_name");
 
-    $("#head_group_id").val(head_group_id);
-    $("#head_group_name").val(head_group_name);
+    $("#head_id").val(head_id);
+    $("#head_name").val(head_name);
 
     $("#submit_btn").html('Update <i class="bi bi-save2 ms-2"></i>'); // change button text
 });
 
 $(document).on("click", ".delete", function () {
-    let head_group_id = $(this).data("head_group_id");
-    let head_group_name = $(this).data("head_group_name");
+    let head_id = $(this).data("head_id");
+    let head_name = $(this).data("head_name");
 
-    confirmDelete(head_group_name).then(result => {
+    confirmDelete(head_name).then(result => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "delete-head-group",
+                url: "head/delete-head",
                 type: "POST",
-                data: {head_group_id: head_group_id, [csrfName]: csrfHash},
+                data: {head_id: head_id, [csrfName]: csrfHash},
                 dataType: "json",
 
                 success: res => {
                     csrfHash = res.csrfHash;
-                    successDelete(head_group_name);
+                    successDelete(head_name);
                     table.settings()[0].ajax.data = d => {
                         d[csrfName] = csrfHash
                     };
@@ -116,26 +112,26 @@ $(document).on("click", ".delete", function () {
             });
             
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            cancelDelete(head_group_name);
+            cancelDelete(head_name);
         }
     });
 });
 
 $(document).on("click", ".revert", function () {
-    let head_group_id = $(this).data("head_group_id");
-    let head_group_name = $(this).data("head_group_name");
+    let head_id = $(this).data("head_id");
+    let head_name = $(this).data("head_name");
 
-    confirmRevert(head_group_name).then(result => {
+    confirmRevert(head_name).then(result => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "revert-head-group",
+                url: "head/revert-head",
                 type: "POST",
-                data: {head_group_id: head_group_id, [csrfName]: csrfHash},
+                data: {head_id: head_id, [csrfName]: csrfHash},
                 dataType: "json",
 
                 success: res => {
                     csrfHash = res.csrfHash;
-                    successRevert(head_group_name);
+                    successRevert(head_name);
                     table.settings()[0].ajax.data = d => {
                         d[csrfName] = csrfHash
                     };
@@ -147,7 +143,7 @@ $(document).on("click", ".revert", function () {
             });
             
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            cancelRevert(head_group_name);
+            cancelRevert(head_name);
         }
     });
 });

@@ -13,13 +13,24 @@ class ModelAcademicYear extends \CodeIgniter\Model {
     protected $allowedFields = [
         'academic_year_name',
         'is_active',
+        'is_current',
         'added_by',
         'updated_by',
         'is_deleted',
     ];
 
     //    Reusable Query Methods
-    public function get_active_aca_years() {
+    public function get_active_academic_years() {
         return $this->where(['is_active' => 1, 'is_deleted' => 0])->findAll();
     }
+    
+    //get current academicyear
+    public function getCurrentAcademicYear()
+{
+    return $this->where([
+        'is_current' => 1,
+        'is_deleted' => 0
+    ])->first();
+}
+
 }

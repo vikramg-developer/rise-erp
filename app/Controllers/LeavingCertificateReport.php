@@ -18,6 +18,6 @@ class LeavingCertificateReport extends BaseController{
     }
     public function index()
     {
-        render_page('certificates/leaving-certificate-report');
+        return render_page('certificates/leaving-certificate-report');
     }
 }

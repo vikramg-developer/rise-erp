@@ -3,27 +3,25 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+
 use CodeIgniter\Database\RawSql;
 
-class AddAbbrivationTable extends Migration
+class AddRoleTable extends Migration
 {
     public function up()
     {
-        $this->forge->addField([
-            'id' => [
-                'type'           => 'INT',
-                'constraint'     => 10,
-                'unsigned'       => true,
+        $fields = [
+            'role_id' => [
+                'type' => 'int',
                 'auto_increment' => true,
             ],
-            'title' => [
-                'type'       => 'VARCHAR',
-                'constraint' => 20, 
+            'role_name' => [
+                'type' => 'varchar',
+                'constraint' => '100',
+                'null' => false,
             ],
-            'is_active' => [
-                'type'       => 'TINYINT',
-                'constraint' => 1,
-                'default'    => 1,
+            'permissions' => [
+                'type' => 'text',
             ],
             'added_by' => [
                 'type' => 'varchar',
@@ -42,21 +40,22 @@ class AddAbbrivationTable extends Migration
             ],
             'updated_at' =>[
                 'type'=>'TIMESTAMP',
-                'null'       => false,
-                'default'=>new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+                'null'       => true,
+                'default'=>new Rawsql('NULL ON UPDATE CURRENT_TIMESTAMP'),
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
                 'constraint' => '1'
             ]
-        ]);
-
-        $this->forge->addKey('id', true);
-        $this->forge->createTable('abbrivation', true);
+        ];
+        
+        $this->forge->addField($fields);
+        $this->forge->addPrimaryKey('role_id');
+        $this->forge->createTable('role');
     }
 
     public function down()
     {
-        $this->forge->dropTable('abbrivation', true);
+        $this->forge->dropTable('role');
     }
 }
