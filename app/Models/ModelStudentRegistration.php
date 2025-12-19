@@ -69,9 +69,9 @@ class ModelStudentRegistration extends Model {
     
     protected function hashPassword(array $data)
 {
-    if (! empty($data['data']['faculty_password'])) {
-        $data['data']['faculty_password'] =
-            password_hash($data['data']['faculty_password'], PASSWORD_DEFAULT);
+    if (! empty($data['data']['student_password'])) {
+        $data['data']['student_password'] =
+            password_hash($data['data']['student_password'], PASSWORD_DEFAULT);
     }
     return $data;
 }

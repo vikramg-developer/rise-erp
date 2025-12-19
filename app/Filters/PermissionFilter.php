@@ -24,9 +24,10 @@ class PermissionFilter implements FilterInterface {
 //        
         // no permission defined
         if (empty($arguments)) {
-            return service('response')
-                            ->setStatusCode(403)
-                            ->setBody(view('error-page/error403'));
+//            return service('response')
+//                            ->setStatusCode(403)
+//                            ->setBody(view('error-page/error403'));
+            return;
         }
 
         $userPermissions = session('permissions') ?? [];

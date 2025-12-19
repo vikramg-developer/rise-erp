@@ -60,7 +60,7 @@ $permissions = config('Permissions');
 
                                                 <!-- Start::Dashboard -->
                                                 <li class="slide">
-                                                    <a href="<?php echo base_url('studentDashboard'); ?>" class="side-menu__item">
+                                                    <a href="<?php echo base_url('student-dashboard'); ?>" class="side-menu__item">
                                                         <i class="bx bx-home side-menu__icon"></i>
                                                         <span class="side-menu__label"><?= lang('App.dashboard') ?></span>
                                                     </a>
@@ -74,6 +74,61 @@ $permissions = config('Permissions');
                                                     </a>
                                                 </li>
                                                 <!-- End::StudentProfile --> 
+                                                
+                                                           <!--========================= Dashboard START =========================-->
+                                                    <?php //if (hasAnyPermission($permissions->master_dashboard)): ?>
+                                                    <li class="slide__category"><span class="category-name"><?= lang('App.dashboard'); ?></span></li>
+                                                    <?php// endif; ?>
+                                                    
+                                                    <?php if (hasAnyPermission($permissions->dashboard)): ?>
+                                                    <li id="dashboardNav" class="slide has-sub">
+                                                        <a href="javascript:void(0);" class="side-menu__item">
+                                                          <i class='bx  bx-dashboard'></i> 
+                                                            <span class="side-menu__label"><?= lang('App.dashboard'); ?></span>
+                                                            <i class="fe fe-chevron-right side-menu__angle"></i>
+                                                        </a>
+                                                        <ul class="slide-menu child1">
+                                                            <li class="slide side-menu__label1">
+                                                                <a href="javascript:void(0)"><?= lang('App.dashboard'); ?></a>
+                                                            </li>
+                                                            <?php if (hasAnyPermission($permissions->adminDashboard)): ?>
+                                                            <li class="slide">
+                                                                <a href="<?php echo base_url('admin-dashboard'); ?>" class="side-menu__item"> <?= lang('App.dashboard'); ?> 1</a>
+                                                            </li>                                                            
+                                                            <?php endif; ?>
+                                                            
+                                                            <?php if (hasAnyPermission($permissions->facultyDashboard)): ?>
+                                                            <li class="slide">
+                                                                <a href="<?php echo base_url('faculty-dashboard'); ?>" class="side-menu__item"><?= lang('App.dashboard'); ?> 2</a>
+                                                            </li>
+                                                            <?php endif; ?>
+                                                            
+                                                            <?php if (hasAnyPermission($permissions->librarianDashboard)): ?>
+                                                            <li class="slide">
+                                                                <a href="<?php echo base_url('librarian-dashboard'); ?>" class="side-menu__item"><?= lang('App.dashboard'); ?> 3</a>
+                                                            </li>
+                                                            <?php endif; ?>
+                                                            <?php if (hasAnyPermission($permissions->accountantDashboard)): ?>
+                                                            <li class="slide">
+                                                                <a href="<?php echo base_url('accountant-dashboard'); ?>" class="side-menu__item"><?= lang('App.dashboard'); ?> 4</a>
+                                                            </li>
+                                                            <?php endif; ?>
+                                                            <?php if (hasAnyPermission($permissions->iqacDashboard)): ?>
+                                                            <li class="slide">
+                                                                <a href="<?php echo base_url('iqac-dashboard'); ?>" class="side-menu__item"><?= lang('App.dashboard'); ?> 5</a>
+                                                            </li>
+                                                            <?php endif; ?>
+                                                            <?php if (hasAnyPermission($permissions->studentDashboard)): ?>
+                                                            <li class="slide">
+                                                                <a href="<?php echo base_url('student-dashboard'); ?>" class="side-menu__item"><?= lang('App.dashboard'); ?> 6</a>
+                                                            </li>
+                                                            <?php endif; ?>
+                                                        </ul>
+                                                    </li>
+                                                    <?php endif; ?>
+                                                    
+                                                    <!--========================= Dashboard END =========================-->
+                                            
 
                                                 <!-- Start::slide__category -->
                                                 <li class="slide__category"><span class="category-name">Pages</span></li>
