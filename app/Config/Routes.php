@@ -38,12 +38,12 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 $routes->get('/', 'Dashboard::index');
 $routes->get('dashboard', 'Dashboard::index');
-$routes->get('admin-dashboard', 'Dashboard::admin_dashboard');
-$routes->get('faculty-dashboard', 'Dashboard::faculty_dashboard');
-$routes->get('librarian-dashboard', 'Dashboard::librarian_dashboard');
-$routes->get('accountant-dashboard', 'Dashboard::accountant_dashboard');
-$routes->get('iqac-dashboard', 'Dashboard::iqac_dashboard');
-$routes->get('student-dashboard', 'Dashboard::student_dashboard');
+$routes->get('admin-dashboard', 'Dashboard::admin_dashboard',['filter' => 'permission:viewAdminDashboard']);
+$routes->get('faculty-dashboard', 'Dashboard::faculty_dashboard',['filter' => 'permission:viewFacultyDashboard']);
+$routes->get('librarian-dashboard', 'Dashboard::librarian_dashboard',['filter' => 'permission:viewLibrarianDashboard']);
+$routes->get('accountant-dashboard', 'Dashboard::accountant_dashboard',['filter' => 'permission:viewAccountantDashboard']);
+$routes->get('iqac-dashboard', 'Dashboard::iqac_dashboard',['filter' => 'permission:viewIqacDashboard']);
+$routes->get('student-dashboard', 'Dashboard::student_dashboard',['filter' => 'permission:viewStudentDashboard']);
 
 $routes->get('login', 'Login::login');
 $routes->get('forbidden', 'Error::forbidden');

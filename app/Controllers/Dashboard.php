@@ -4,22 +4,22 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
-class Dashboard extends BaseController
-{
-    public function index()
-    {
+class Dashboard extends BaseController {
+
+    public function index() {
         // Login check
-        if (! session('logged_in')) {
+        if (!session('logged_in')) {
             return redirect()->to('/login');
         }
 
         $dashboards = [
-            'viewAdminDashboard'      => 'dashboard/admin-dashboard',
-            'viewFacultyDashboard'    => 'dashboard/faculty-dashboard',
-            'viewLibrarianDashboard'  => 'dashboard/librarian-dashboard',
+//             'permission' =>'views'
+            'viewAdminDashboard' => 'dashboard/admin-dashboard',
+            'viewFacultyDashboard' => 'dashboard/faculty-dashboard',
+            'viewLibrarianDashboard' => 'dashboard/librarian-dashboard',
             'viewAccountantDashboard' => 'dashboard/accountant-dashboard',
-            'viewIqacDashboard'       => 'dashboard/iqac-dashboard',
-            'viewStudentDashboard'    => 'dashboard/student-dashboard',
+            'viewIqacDashboard' => 'dashboard/iqac-dashboard',
+            'viewStudentDashboard' => 'dashboard/student-dashboard',
         ];
 
         foreach ($dashboards as $permission => $view) {
@@ -28,41 +28,35 @@ class Dashboard extends BaseController
             }
         }
 
-        return redirect()->to('/unauthorized');
+        return redirect()->to('forbidden');
     }
 
-    public function admin_dashboard()
-    {
+    public function admin_dashboard() {
         $this->authorize('viewAdminDashboard');
         return render_page('dashboard/admin-dashboard');
     }
 
-    public function faculty_dashboard()
-    {
+    public function faculty_dashboard() {
         $this->authorize('viewFacultyDashboard');
         return render_page('dashboard/faculty-dashboard');
     }
 
-    public function librarian_dashboard()
-    {
+    public function librarian_dashboard() {
         $this->authorize('viewLibrarianDashboard');
         return render_page('dashboard/librarian-dashboard');
     }
 
-    public function accountant_dashboard()
-    {
+    public function accountant_dashboard() {
         $this->authorize('viewAccountantDashboard');
         return render_page('dashboard/accountant-dashboard');
     }
 
-    public function iqac_dashboard()
-    {
+    public function iqac_dashboard() {
         $this->authorize('viewIqacDashboard');
         return render_page('dashboard/iqac-dashboard');
     }
 
-    public function student_dashboard()
-    {
+    public function student_dashboard() {
         $this->authorize('viewStudentDashboard');
         return render_page('dashboard/student-dashboard');
     }
@@ -70,9 +64,8 @@ class Dashboard extends BaseController
     /**
      * Simple authorization helper
      */
-    private function authorize(string $permission)
-    {
-        if (! hasPermission($permission)) {
+    private function authorize(string $permission) {
+        if (!hasPermission($permission)) {
             return redirect()->to('/unauthorized')->send();
             exit;
         }
