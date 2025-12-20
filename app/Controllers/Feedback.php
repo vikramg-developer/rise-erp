@@ -43,33 +43,50 @@ class Feedback extends BaseController {
         $model = $this->modelfeedback;
 
         // TOTAL RECORDS
-        $recordsTotal    = $model->where('is_deleted', 0)->countAllResults();
-        
+        $recordsTotal = $model->where('is_deleted', 0)->countAllResults();
+
         // FILTERED RECORDS
         $recordsFiltered = $model->countAllResults(false);
 //        $recordsFiltered = $model->countFiltered($search);
-
-
         //SEARCH FILTERgit
 //        if ($search !== '') {
 //            $model->like('feedback_name', $search);
 //        }
-
-      
         // PAGINATED DATA
 //        $rows = $model->findAll($length, $start);
         $rows = $model->getFeedbackMasterList($length, $start);
 //        print_r($rows);die();
-        $buttons = '';
+//        $buttons = '';
 
-//        $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill"><i class="ri-delete-bin-fill"></i></button>';
-        $buttons = '<a href="' . base_url('feedback/manage-question') . '"  class="btn btn-sm btn-success btn-wave">
-                       <i class="ri-upload-2-line align-middle me-2 d-inline-block"></i>' . lang('App.manage') . ' ' . lang('App.question') . '
-                     </a>';
+
         $sr_no = 1;
 
         $data = [];
         foreach ($rows as $row) {
+            $buttons = '';
+
+            $manage_button = '<a href="' . base_url('feedback/manage-question') . '"  class="btn btn-sm btn-success btn-wave">
+                       <i class="ri-upload-2-line align-middle me-2 d-inline-block"></i>' . lang('App.manage') . ' ' . lang('App.question') . '
+                     </a>';
+
+            $buttons .= '<a href="' . base_url() . 'feedback/manage-question/' . $row['feedback_master_id'] . '" 
+                        class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill">
+                        <i class="ri-pencil-fill"></i>
+                     </a>';
+
+            if ($row['is_deleted'] != 1):
+                $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete" data-feedback_master_id="' . $row['feedback_master_id'] . '" data-feedback_name="' . $row['feedback_name'] . '"><i class="ri-delete-bin-fill"></i></button>';
+            elseif ($row['is_deleted'] == 1):
+                $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-feedback_master_id="' . $row['feedback_master_id'] . '" data-feedback_name="' . $row['feedback_name'] . '"><i class="ri-arrow-go-back-fill"></i></button>';
+            endif;
+
+            if ($row['is_deleted'] == 1):
+                $remark = "Deleted By Admin";
+            elseif ($row['is_deleted'] == 2):
+                $remark = "Reverted By Admin";
+            else:
+                $remark = "";
+            endif;
 
             $data[] = [
                 $sr_no++,
@@ -79,6 +96,8 @@ class Feedback extends BaseController {
                 $row['semester_part_name'],
                 $row['academic_year_name'],
                 $buttons,
+                $remark,
+                $manage_button,
             ];
         }
 
@@ -98,6 +117,7 @@ class Feedback extends BaseController {
             'semester_id' => ($this->request->getVar('semester_id')),
             'part_id' => ($this->request->getVar('part_id')),
             'academic_year_id' => ($this->request->getVar('academic_year_id')),
+            'added_by' => session('rise_no'),
         ];
 
         if ($this->modelfeedback->insert($insert_data)) {
@@ -112,6 +132,36 @@ class Feedback extends BaseController {
                         'errors' => $this->modelfeedback->errors(),
                         'csrfHash' => csrf_hash()
             ]);
+        }
+    }
+
+    public function delete_feedback_master() {
+        if ($this->request->getMethod() == 'post') {
+            $feedback_master_id = $this->request->getPost('feedback_master_id');
+
+            if ($this->modelfeedback->update($feedback_master_id, ['is_deleted' => 1])) {
+
+                return $this->response->setJSON([
+                            'csrfHash' => csrf_hash()
+                ]);
+            }
+        } else {
+            return render_page('error_page/error404');
+        }
+    }
+
+    public function revert_feedback_master() {
+        if ($this->request->getMethod() == 'post') {
+            $feedback_master_id = $this->request->getPost('feedback_master_id');
+
+            if ($this->modelfeedback->update($feedback_master_id, ['is_deleted' => 2])) {
+
+                return $this->response->setJSON([
+                            'csrfHash' => csrf_hash()
+                ]);
+            }
+        } else {
+            return render_page('error_page/error404');
         }
     }
 

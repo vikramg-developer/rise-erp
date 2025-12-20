@@ -19,7 +19,7 @@ class AddFeedbackMaster extends Migration
                 'type'=>'VARCHAR',
                 'constraint'=>500,
             ],  
-            'type_id'=>[
+            'subject_type_id'=>[
                 'type'=>'INT',
                 'constraint'=>11,
             ],
@@ -27,7 +27,7 @@ class AddFeedbackMaster extends Migration
                 'type'=>'INT',
                 'constraint'=>11,
             ],
-            'part_id'=>[
+            'semester_part_id'=>[
                 'type'=>'INT',
                 'constraint'=>11,
             ],

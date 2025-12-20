@@ -83,10 +83,6 @@ class Permissions extends BaseConfig{
         'deleteStudentDashboard',
     ];
     
-   
-
-
-    
     /** feedback permissions */
     public array $feedback = [
         'createFeedback',
@@ -98,8 +94,9 @@ class Permissions extends BaseConfig{
     /** Master permissions (auto-merged) */
         public array $master;
         public array $dashboard;
-    
-    public array $master_category;
+        public array $feedback_module;
+        public array $master_category;
+        public array $feedback_module_category;
 
     public function __construct()
     {
@@ -109,7 +106,7 @@ class Permissions extends BaseConfig{
             $this->department,
                 
         );
-          $this->dashboard = array_merge(
+        $this->dashboard = array_merge(
             $this->adminDashboard,
             $this->facultyDashboard,
             $this->librarianDashboard,
@@ -117,11 +114,20 @@ class Permissions extends BaseConfig{
             $this->iqacDashboard,
             $this->studentDashboard
         );
-
         
+        $this->feedback_module = array_merge(
+            $this->feedback
+        );
+
+        //-------------------------------------------------------------//
         $this->master_category = array_merge(
                $this->master 
         );
+        
+        $this->feedback_module_category = array_merge(
+               $this->feedback_module 
+        );
+        
     }
     
 }

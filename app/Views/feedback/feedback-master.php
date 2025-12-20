@@ -78,7 +78,7 @@
                                                 </div>
                                                 <!---------------------semester_part---------------------------------->
                                                 <div class="col-xl-6">
-                                                    <label class="form-label"><?= lang('App.part') ?></label> <span class="text-danger">*</span>
+                                                    <label class="form-label"><?= lang('App.semester') ?> <?= lang('App.part') ?></label> <span class="text-danger">*</span>
                                                     <select class="form-select" id="part_id" name="part_id" >
                                                         <option value="" >Select Part</option>
                                                         <?php
@@ -133,7 +133,10 @@
                                 <th scope="col"><?= lang('App.semester') ?> </th>
                                 <th scope="col"><?= lang('App.part') ?> </th>
                                 <th scope="col"><?= lang('App.academic') ?> <?= lang('App.year') ?> </th>
-                                <th scope="col">Action</th>
+                                 <th scope="col"><?= lang('App.action') ?></th>
+                                 <th scope="col"><?= lang('App.remark') ?></th>
+                                <th scope="col"><?= lang('App.manage') ?> <?= lang('App.question') ?> </th>
+                               
                             </tr>
                         </thead>
                     </table>

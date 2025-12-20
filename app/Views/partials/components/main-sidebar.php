@@ -25,31 +25,31 @@ $permissions = config('Permissions');
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path> </svg>
                                             </div>
                                             <ul class="main-menu">
-                                                <?php if(hasPermission('createFaculty') || hasPermission('viewFaculty') || hasPermission('updateFaculty') || hasPermission('deleteFaculty')):?>
-                                                <!------------------------------------------------------- start::users-------------------------------------------------------------->
-                                                <li class="slide__category"><span class="category-name"><?= lang('App.faculty'); ?></span></li>
-                                                <!-- End::slide__category -->
+                                                <?php if (hasPermission('createFaculty') || hasPermission('viewFaculty') || hasPermission('updateFaculty') || hasPermission('deleteFaculty')): ?>
+                                                    <!------------------------------------------------------- start::users-------------------------------------------------------------->
+                                                    <li class="slide__category"><span class="category-name"><?= lang('App.faculty'); ?></span></li>
+                                                    <!-- End::slide__category -->
 
-                                                <li class="slide has-sub">
-                                                    <a href="javascript:void(0);" class="side-menu__item">
-                                                        <i class="bx bx-user-pin side-menu__icon"></i>
-                                                        <span class="side-menu__label"><?= lang('App.faculty'); ?></span>
-                                                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                                                    </a>
-                                                    <ul class="slide-menu child1">
-                                                        <li class="slide side-menu__label1">
-                                                            <a href="javascript:void(0)">Error</a>
-                                                        </li>
-                                                        <li class="slide">
-                                                            <a href="<?php echo base_url('faculty'); ?>" class="side-menu__item"> <?= lang('App.add'); ?> <?= lang('App.faculty'); ?></a>
-                                                        </li>
+                                                    <li class="slide has-sub">
+                                                        <a href="javascript:void(0);" class="side-menu__item">
+                                                            <i class="bx bx-user-pin side-menu__icon"></i>
+                                                            <span class="side-menu__label"><?= lang('App.faculty'); ?></span>
+                                                            <i class="fe fe-chevron-right side-menu__angle"></i>
+                                                        </a>
+                                                        <ul class="slide-menu child1">
+                                                            <li class="slide side-menu__label1">
+                                                                <a href="javascript:void(0)">Error</a>
+                                                            </li>
+                                                            <li class="slide">
+                                                                <a href="<?php echo base_url('faculty'); ?>" class="side-menu__item"> <?= lang('App.add'); ?> <?= lang('App.faculty'); ?></a>
+                                                            </li>
 
-                                                        <li class="slide">
-                                                            <a href="<?php echo base_url('faculty/fetch-faculty'); ?>" class="side-menu__item"> <?= lang('App.manage'); ?> <?= lang('App.faculty'); ?></a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <?php endif;?>
+                                                            <li class="slide">
+                                                                <a href="<?php echo base_url('faculty/fetch-faculty'); ?>" class="side-menu__item"> <?= lang('App.manage'); ?> <?= lang('App.faculty'); ?></a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                <?php endif; ?>
                                                 <!-- End::slide -->
 
                                                 <!------------------------------------------------------- End::users-------------------------------------------------------------->
@@ -74,16 +74,16 @@ $permissions = config('Permissions');
                                                     </a>
                                                 </li>
                                                 <!-- End::StudentProfile --> 
-                                                
-                                                           <!--========================= Dashboard START =========================-->
-                                                    <?php //if (hasAnyPermission($permissions->master_dashboard)): ?>
-                                                    <li class="slide__category"><span class="category-name"><?= lang('App.dashboard'); ?></span></li>
-                                                    <?php// endif; ?>
-                                                    
-                                                    <?php if (hasAnyPermission($permissions->dashboard)): ?>
+
+                                                <!--========================= Dashboard START =========================-->
+                                                <?php //if (hasAnyPermission($permissions->master_dashboard)): ?>
+                                                <li class="slide__category"><span class="category-name"><?= lang('App.dashboard'); ?></span></li>
+                                                <?php // endif; ?>
+
+                                                <?php if (hasAnyPermission($permissions->dashboard)): ?>
                                                     <li id="dashboardNav" class="slide has-sub">
                                                         <a href="javascript:void(0);" class="side-menu__item">
-                                                          <i class='bx  bx-dashboard'></i> 
+                                                            <i class='bx  bx-dashboard'></i> 
                                                             <span class="side-menu__label"><?= lang('App.dashboard'); ?></span>
                                                             <i class="fe fe-chevron-right side-menu__angle"></i>
                                                         </a>
@@ -92,65 +92,70 @@ $permissions = config('Permissions');
                                                                 <a href="javascript:void(0)"><?= lang('App.dashboard'); ?></a>
                                                             </li>
                                                             <?php if (hasAnyPermission($permissions->adminDashboard)): ?>
-                                                            <li class="slide">
-                                                                <a href="<?php echo base_url('admin-dashboard'); ?>" class="side-menu__item"> <?= lang('App.dashboard'); ?> 1</a>
-                                                            </li>                                                            
+                                                                <li class="slide">
+                                                                    <a href="<?php echo base_url('admin-dashboard'); ?>" class="side-menu__item"> <?= lang('App.dashboard'); ?> 1</a>
+                                                                </li>                                                            
                                                             <?php endif; ?>
-                                                            
+
                                                             <?php if (hasAnyPermission($permissions->facultyDashboard)): ?>
-                                                            <li class="slide">
-                                                                <a href="<?php echo base_url('faculty-dashboard'); ?>" class="side-menu__item"><?= lang('App.dashboard'); ?> 2</a>
-                                                            </li>
+                                                                <li class="slide">
+                                                                    <a href="<?php echo base_url('faculty-dashboard'); ?>" class="side-menu__item"><?= lang('App.dashboard'); ?> 2</a>
+                                                                </li>
                                                             <?php endif; ?>
-                                                            
+
                                                             <?php if (hasAnyPermission($permissions->librarianDashboard)): ?>
-                                                            <li class="slide">
-                                                                <a href="<?php echo base_url('librarian-dashboard'); ?>" class="side-menu__item"><?= lang('App.dashboard'); ?> 3</a>
-                                                            </li>
+                                                                <li class="slide">
+                                                                    <a href="<?php echo base_url('librarian-dashboard'); ?>" class="side-menu__item"><?= lang('App.dashboard'); ?> 3</a>
+                                                                </li>
                                                             <?php endif; ?>
                                                             <?php if (hasAnyPermission($permissions->accountantDashboard)): ?>
-                                                            <li class="slide">
-                                                                <a href="<?php echo base_url('accountant-dashboard'); ?>" class="side-menu__item"><?= lang('App.dashboard'); ?> 4</a>
-                                                            </li>
+                                                                <li class="slide">
+                                                                    <a href="<?php echo base_url('accountant-dashboard'); ?>" class="side-menu__item"><?= lang('App.dashboard'); ?> 4</a>
+                                                                </li>
                                                             <?php endif; ?>
                                                             <?php if (hasAnyPermission($permissions->iqacDashboard)): ?>
-                                                            <li class="slide">
-                                                                <a href="<?php echo base_url('iqac-dashboard'); ?>" class="side-menu__item"><?= lang('App.dashboard'); ?> 5</a>
-                                                            </li>
+                                                                <li class="slide">
+                                                                    <a href="<?php echo base_url('iqac-dashboard'); ?>" class="side-menu__item"><?= lang('App.dashboard'); ?> 5</a>
+                                                                </li>
                                                             <?php endif; ?>
                                                             <?php if (hasAnyPermission($permissions->studentDashboard)): ?>
-                                                            <li class="slide">
-                                                                <a href="<?php echo base_url('student-dashboard'); ?>" class="side-menu__item"><?= lang('App.dashboard'); ?> 6</a>
-                                                            </li>
+                                                                <li class="slide">
+                                                                    <a href="<?php echo base_url('student-dashboard'); ?>" class="side-menu__item"><?= lang('App.dashboard'); ?> 6</a>
+                                                                </li>
                                                             <?php endif; ?>
                                                         </ul>
                                                     </li>
-                                                    <?php endif; ?>
-                                                    
-                                                    <!--========================= Dashboard END =========================-->
-                                            
+                                                <?php endif; ?>
+
+                                                <!--========================= Dashboard END =========================-->
+                                                <!--========================= Feedback Module START =========================-->
+                                                <?php if (hasAnyPermission($permissions->feedback_module_category)): ?>
+                                                    <li class="slide__category"><span class="category-name"><?= lang('App.feedback'); ?> <?= lang('App.module'); ?></span></li>
+                                                <?php endif; ?>
+                                                <?php if (hasAnyPermission($permissions->feedback_module)): ?>
+                                                    <li  id="mainFeedbackNav" class="slide has-sub">
+                                                        <a href="javascript:void(0);" class="side-menu__item">
+                                                            <i class="bx bx-message-edit side-menu__icon"></i>
+                                                            <span class="side-menu__label"><?= lang('App.feedback'); ?></span>
+                                                            <i class="fe fe-chevron-right side-menu__angle"></i>
+                                                        </a>
+                                                        <ul class="slide-menu child1">
+                                                            <li class="slide side-menu__label1"  id="feedbackNav">
+                                                                <a href="javascript:void(0)"><?= lang('App.feedback'); ?></a>
+                                                            </li>
+                                                            <?php if (hasAnyPermission($permissions->feedback)): ?>
+                                                                <li class="slide" id="feedbacmasterkNav" >
+                                                                    <a href="<?php echo base_url('feedback'); ?>" class="side-menu__item"> <?= lang('App.feedback'); ?> <?= lang('App.master'); ?></a>
+                                                                </li>
+                                                            <?php endif; ?>
+                                                        </ul>
+                                                    </li>
+                                                <?php endif; ?>
+                                                <!--========================= Feedback Module END =========================-->
 
                                                 <!-- Start::slide__category -->
                                                 <li class="slide__category"><span class="category-name">Pages</span></li>
                                                 <!-- End::slide__category -->
-
-                                                <!-- Start::slide -->
-                                                <li class="slide has-sub">
-                                                    <a href="javascript:void(0);" class="side-menu__item">
-                                                        <i class="bx bx-message-edit side-menu__icon"></i>
-                                                        <span class="side-menu__label"><?= lang('App.feedback'); ?></span>
-                                                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                                                    </a>
-                                                    <ul class="slide-menu child1">
-                                                        <li class="slide side-menu__label1"  id="feedbackNav">
-                                                            <a href="javascript:void(0)"><?= lang('App.feedback'); ?></a>
-                                                        </li>
-                                                        <li class="slide" id="feedbacmasterkNav" >
-                                                            <a href="<?php echo base_url('feedback'); ?>" class="side-menu__item"> <?= lang('App.feedback'); ?> <?= lang('App.master'); ?></a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <!-- End::slide -->
 
                                                 <!-- Start::slide -->
                                                 <li class="slide has-sub">
@@ -238,67 +243,67 @@ $permissions = config('Permissions');
                                                     <!-- End::slide -->
 
                                                     <!-- Start::slide -->
-                                                    <?php if(hasPermission('createRole') || hasPermission('viewRole') || hasPermission('updateRole') || hasPermission('deleteRole')): ?>
-                                                    <li id="mainRoleNav" class="slide has-sub">
-                                                        <a href="javascript:void(0);" class="side-menu__item">
-                                                            <i class="bx bx-group side-menu__icon"></i>
-                                                            <span class="side-menu__label"><?= lang('App.role'); ?></span>
-                                                            <i class="fe fe-chevron-right side-menu__angle"></i>
-                                                        </a>
-                                                        <ul class="slide-menu child1">
-                                                            <li class="slide side-menu__label1">
-                                                                <a href="javascript:void(0)"><?= lang('App.role'); ?></a>
-                                                            </li>
-                                                            <?php if(hasPermission('createRole')): ?>
-                                                            <li id="addroleNav" class="slide">
-                                                                <a href="<?php echo base_url('roles/add-role'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.role'); ?></a>
-                                                            </li>
-                                                            <?php endif; ?>
-                                                            <?php if(hasPermission('viewRole') || hasPermission('updateRole') || hasPermission('deleteRole')): ?>
-                                                            <li id="manageroleNav" class="slide">
-                                                                <a href="<?php echo base_url('roles'); ?>" class="side-menu__item"><?= lang('App.manage'); ?> <?= lang('App.role'); ?></a>
-                                                            </li>
-                                                            <?php endif; ?>
-                                                        </ul>
-                                                    </li>
+                                                    <?php if (hasPermission('createRole') || hasPermission('viewRole') || hasPermission('updateRole') || hasPermission('deleteRole')): ?>
+                                                        <li id="mainRoleNav" class="slide has-sub">
+                                                            <a href="javascript:void(0);" class="side-menu__item">
+                                                                <i class="bx bx-group side-menu__icon"></i>
+                                                                <span class="side-menu__label"><?= lang('App.role'); ?></span>
+                                                                <i class="fe fe-chevron-right side-menu__angle"></i>
+                                                            </a>
+                                                            <ul class="slide-menu child1">
+                                                                <li class="slide side-menu__label1">
+                                                                    <a href="javascript:void(0)"><?= lang('App.role'); ?></a>
+                                                                </li>
+                                                                <?php if (hasPermission('createRole')): ?>
+                                                                    <li id="addroleNav" class="slide">
+                                                                        <a href="<?php echo base_url('roles/add-role'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.role'); ?></a>
+                                                                    </li>
+                                                                <?php endif; ?>
+                                                                <?php if (hasPermission('viewRole') || hasPermission('updateRole') || hasPermission('deleteRole')): ?>
+                                                                    <li id="manageroleNav" class="slide">
+                                                                        <a href="<?php echo base_url('roles'); ?>" class="side-menu__item"><?= lang('App.manage'); ?> <?= lang('App.role'); ?></a>
+                                                                    </li>
+                                                                <?php endif; ?>
+                                                            </ul>
+                                                        </li>
                                                     <?php endif; ?>
                                                     <!-- End::slide -->
-                                                    
+
                                                     <!--========================= MASTER START =========================-->
                                                     <?php if (hasAnyPermission($permissions->master_category)): ?>
-                                                    <li class="slide__category"><span class="category-name"><?= lang('App.master'); ?></span></li>
+                                                        <li class="slide__category"><span class="category-name"><?= lang('App.master'); ?></span></li>
                                                     <?php endif; ?>
-                                                    
+
                                                     <?php if (hasAnyPermission($permissions->master)): ?>
-                                                    <li id="mainRoleNav" class="slide has-sub">
-                                                        <a href="javascript:void(0);" class="side-menu__item">
-                                                            <i class="bx bx-group side-menu__icon"></i>
-                                                            <span class="side-menu__label"><?= lang('App.master'); ?></span>
-                                                            <i class="fe fe-chevron-right side-menu__angle"></i>
-                                                        </a>
-                                                        <ul class="slide-menu child1">
-                                                            <li class="slide side-menu__label1">
-                                                                <a href="javascript:void(0)"><?= lang('App.role'); ?></a>
-                                                            </li>
-                                                            <?php if (hasAnyPermission($permissions->headGroup)): ?>
-                                                            <li class="slide">
-                                                                <a href="<?php echo base_url('headgroup'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?> <?= lang('App.group'); ?></a>
-                                                            </li>                                                            
-                                                            <?php endif; ?>
-                                                            
-                                                            <?php if (hasAnyPermission($permissions->head)): ?>
-                                                            <li class="slide">
-                                                                <a href="<?php echo base_url('head'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?></a>
-                                                            </li>
-                                                            <?php endif; ?>
-                                                            
-                                                            <?php if (hasAnyPermission($permissions->department)): ?>
-                                                            <li class="slide">
-                                                                <a href="<?php echo base_url('department'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.department'); ?></a>
-                                                            </li>
-                                                            <?php endif; ?>
-                                                        </ul>
-                                                    </li>
+                                                        <li id="mainRoleNav" class="slide has-sub">
+                                                            <a href="javascript:void(0);" class="side-menu__item">
+                                                                <i class="bx bx-group side-menu__icon"></i>
+                                                                <span class="side-menu__label"><?= lang('App.master'); ?></span>
+                                                                <i class="fe fe-chevron-right side-menu__angle"></i>
+                                                            </a>
+                                                            <ul class="slide-menu child1">
+                                                                <li class="slide side-menu__label1">
+                                                                    <a href="javascript:void(0)"><?= lang('App.role'); ?></a>
+                                                                </li>
+                                                                <?php if (hasAnyPermission($permissions->headGroup)): ?>
+                                                                    <li class="slide">
+                                                                        <a href="<?php echo base_url('headgroup'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?> <?= lang('App.group'); ?></a>
+                                                                    </li>                                                            
+                                                                <?php endif; ?>
+
+                                                                <?php if (hasAnyPermission($permissions->head)): ?>
+                                                                    <li class="slide">
+                                                                        <a href="<?php echo base_url('head'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?></a>
+                                                                    </li>
+                                                                <?php endif; ?>
+
+                                                                <?php if (hasAnyPermission($permissions->department)): ?>
+                                                                    <li class="slide">
+                                                                        <a href="<?php echo base_url('department'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.department'); ?></a>
+                                                                    </li>
+                                                                <?php endif; ?>
+                                                            </ul>
+                                                        </li>
                                                     <?php endif; ?>
                                                     <!--========================= MASTER END =========================-->
                                             </ul>

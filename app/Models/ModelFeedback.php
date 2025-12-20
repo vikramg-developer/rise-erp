@@ -34,41 +34,29 @@ class ModelFeedback extends Model {
 //            'min_length' => 'Feedback Name must be at least 3 characters'
         ],
         'type_id' => [
-            'required' => 'Feedback Type is required'
+            'required' => 'Feedback Subject Type is required'
         ],
         'semester_id' => [
             'required' => 'Semester is required'
         ],
         'part_id' => [
-            'required' => 'Part is required'
+            'required' => 'Semester Part is required'
         ],
         'academic_year_id' => [
             'required' => 'Academic Year is required'
         ],
     ];
 
-//    public function add_master_data($data) {
-//        
-//        $builder = $this->db->table('feedback_master');
-//
-//        $res = $builder->insert($data);
-//
-//        return $this->db->affectedRows() > 0 ? true : false;
-//    }
-    //put your code here
-
-    /* ==========================
-      JOIN QUERY FOR DATATABLE
-      =========================== */
-
+    
 //    public function getFeedbackMasterList($length, $start ,$search='') {
     public function getFeedbackMasterList($length, $start) {
 //        print_r("ello"); die();
         $builder = $this->db->table('feedback_master fm');
 
         $builder->select([
-            'fm.feedback_master_id',
-            'fm.feedback_name',
+            'fm.*',
+//            'fm.feedback_master_id',
+//            'fm.feedback_name',
             'st.subject_type_name',
             's.semester_name',
             'sem_part.semester_part_name',
@@ -82,7 +70,7 @@ class ModelFeedback extends Model {
         $builder->join('academic_year aca_year', 'aca_year.academic_year_id = fm.academic_year_id', 'left');
 
         // ❌ Soft delete filter
-        $builder->where('fm.is_deleted', 0);
+//        $builder->where('fm.is_deleted', 0);
 
         //🔍 Search
 //        if (!empty($search)) {

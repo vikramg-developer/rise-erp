@@ -153,6 +153,7 @@ return [
     'mr' => 'Mr.',
     'mrs' => 'Mrs.',
     'mtech' => 'M.Tech',
+    'module' => 'Module',
     // N
     'name' => 'Name',
     'nationality' => 'Nationality',
@@ -170,6 +171,7 @@ return [
     'order' => 'Order',
     // P
     'page' => 'Page',
+    'pages' => 'Pages',
     'part' => 'Part',
     'password' => 'Password',
     'payment' => 'Payment',
