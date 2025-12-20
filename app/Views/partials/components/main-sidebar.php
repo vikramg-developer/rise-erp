@@ -54,33 +54,13 @@ $permissions = config('Permissions');
 
                                                 <!------------------------------------------------------- End::users-------------------------------------------------------------->
 
-                                                <!-- Start::slide__category -->
-                                                <li class="slide__category"><span class="category-name">Student</span></li>
-                                                <!-- End::slide__category -->
-
-                                                <!-- Start::Dashboard -->
-                                                <li class="slide">
-                                                    <a href="<?php echo base_url('student-dashboard'); ?>" class="side-menu__item">
-                                                        <i class="bx bx-home side-menu__icon"></i>
-                                                        <span class="side-menu__label"><?= lang('App.dashboard') ?></span>
-                                                    </a>
-                                                </li>
-                                                <!-- End::Dashboard -->
-                                                <!-- Start::StudentProfile -->
-                                                <li class="slide">
-                                                    <a href="<?php echo base_url('studentProfile'); ?>" class="side-menu__item">
-                                                        <i class="bx bx-user side-menu__icon"></i>
-                                                        <span class="side-menu__label"><?= lang('App.student'); ?> <?= lang('App.profile'); ?></span>
-                                                    </a>
-                                                </li>
-                                                <!-- End::StudentProfile --> 
-
-                                                <!--========================= Dashboard START =========================-->
-                                                <?php //if (hasAnyPermission($permissions->master_dashboard)): ?>
-                                                <li class="slide__category"><span class="category-name"><?= lang('App.dashboard'); ?></span></li>
-                                                <?php // endif; ?>
-
-                                                <?php if (hasAnyPermission($permissions->dashboard)): ?>
+                                                
+                                                           <!--========================= Dashboard START =========================-->
+                                                    <?php //if (hasAnyPermission($permissions->master_dashboard)): ?>
+                                                    <li class="slide__category"><span class="category-name"><?= lang('App.dashboard'); ?></span></li>
+                                                    <?php// endif; ?>
+                                                    
+                                                    <?php if (hasAnyPermission($permissions->dashboard)): ?>
                                                     <li id="dashboardNav" class="slide has-sub">
                                                         <a href="javascript:void(0);" class="side-menu__item">
                                                             <i class='bx  bx-dashboard'></i> 
