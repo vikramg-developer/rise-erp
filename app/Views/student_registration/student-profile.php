@@ -24,9 +24,9 @@
                         <ul class="nav nav-tabs tab-style-2 d-sm-flex d-block border-bottom border-block-end-dashed" id="myTab1" role="tablist">
                             <!--Personal Details TAB-->
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="confirmed-tab" data-bs-toggle="tab"
-                                        data-bs-target="#confirm-tab-pane" type="button" role="tab"
-                                        aria-controls="confirmed-tab" aria-selected="false"><i
+                                <button class="nav-link active" id="personalInformatiom-tab" data-bs-toggle="tab"
+                                        data-bs-target="#personalinfo-tab-pane" type="button" role="tab"
+                                        aria-controls="personalInformatiom-tab" aria-selected="false"><i
                                         class="ri-user-3-line me-2 align-middle"></i><?= lang('App.personal'); ?> <?= lang('App.details'); ?></button>
                             </li>
                             <!--Address Details TAB-->
@@ -92,8 +92,8 @@
                         <div class="tab-content" id="myTabContent">
                             <!--Personal Details START-->
 
-                            <div class="tab-pane show active fade border-0 p-0" id="confirm-tab-pane"
-                                 role="tabpanel" aria-labelledby="confirm-tab-pane" tabindex="0">
+                            <div class="tab-pane show active fade border-0 p-0" id="personalinfo-tab-pane"
+                                 role="tabpanel" aria-labelledby="personalinfo-tab-pane" tabindex="0">
                                 <div class="p-4">
                                     <p class="mb-1 fw-semibold text-muted op-5 fs-20">01</p>
                                     <div class="fs-15 fw-semibold d-sm-flex d-block align-items-center justify-content-between mb-3">
@@ -102,19 +102,20 @@
                                     <div class="row gy-4">
                                         <div class="col-xl-4">
                                             <label for="student-first-name" class="form-label"><?= lang('App.first'); ?> <?= lang('App.name'); ?></label>
-                                            <input type="text" class="form-control" id="student-first-name" placeholder="<?= lang('App.first'); ?> <?= lang('App.name'); ?>" name="student-first-name"onkeypress="return isAlphaKey(event)"value="NAGESH"readonly>
+                                            <input type="text" class="form-control" id="student-first-name" placeholder="<?= lang('App.first'); ?> <?= lang('App.name'); ?>" name="student-first-name"onkeypress="return isAlphaKey(event)"value="<?= esc($StudentRegistrationData['student_first_name']) ?>"
+                                                   "readonly>
                                         </div>
                                         <div class="col-xl-4">
                                             <label for="student-middle-name" class="form-label"><?= lang('App.middle'); ?> <?= lang('App.name'); ?></label>
-                                            <input type="text" class="form-control" id="student-middle-name" name="student-middle-name"placeholder="<?= lang('App.middle'); ?> <?= lang('App.name'); ?>" onkeypress="return isAlphaKey(event)"value="TUKARAM"readonly>
+                                            <input type="text" class="form-control" id="student-middle-name" name="student-middle-name"placeholder="<?= lang('App.middle'); ?> <?= lang('App.name'); ?>" onkeypress="return isAlphaKey(event)"value="<?= esc($StudentRegistrationData['student_middle_name']) ?>"readonly>
                                         </div>
                                         <div class="col-xl-4">
                                             <label for="student-last-name" class="form-label"><?= lang('App.last'); ?> <?= lang('App.name'); ?></label>
-                                            <input type="text" class="form-control" id="student-last-name" name="student-last-name"placeholder="<?= lang('App.last'); ?> <?= lang('App.name'); ?>"onkeypress="return isAlphaKey(event)" value="SHINDE"readonly>
+                                            <input type="text" class="form-control" id="student-last-name" name="student-last-name"placeholder="<?= lang('App.last'); ?> <?= lang('App.name'); ?>"onkeypress="return isAlphaKey(event)" value="<?= esc($StudentRegistrationData['student_last_name']) ?>"readonly>
                                         </div>
                                         <div class="col-xl-4">
                                             <label for="student-rise-no" class="form-label"><?= lang('App.rise'); ?> <?= lang('App.number'); ?></label>
-                                            <input type="text" class="form-control" id="student-rise-no" name="student-last-name"placeholder="<?= lang('App.rise'); ?> <?= lang('App.number'); ?>" value="S202610100001"readonly>
+                                            <input type="text" class="form-control" id="student-rise-no" name="student-last-name"placeholder="<?= lang('App.rise'); ?> <?= lang('App.number'); ?>" value="<?= esc($StudentRegistrationData['student_rise_no']) ?>"readonly>
                                         </div>
                                         <div class="col-xl-4">
                                             <label for="student_aadhar" class="form-label"><?= lang('App.aadhar'); ?> <?= lang('App.no'); ?></label>
@@ -672,61 +673,61 @@
                                         <div><?= lang('App.payment'); ?>  <?= lang('App.details'); ?> :</div>
                                         <div class="mt-sm-0 mt-2">
                                             <div class="modal fade" id="modal-new-payment" tabindex="-1"aria-labelledby="modal-new-payment" data-bs-keyboard="false"aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content text-center">
-                                                    <div class="modal-header">
-                                                        <h6 class="modal-title" id="modal-new-payment">Scan to pay
-                                                        </h6>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body ">
-                                                        <h6>STATE BANK OF INDIA</h6>
-                                                                        <img src="<?php echo base_url('assets/images/ecommerce/png/qr_code.png'); ?>" height="20%" width="40%"alt="">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content text-center">
+                                                        <div class="modal-header">
+                                                            <h6 class="modal-title" id="modal-new-payment">Scan to pay
+                                                            </h6>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body ">
+                                                            <h6>STATE BANK OF INDIA</h6>
+                                                            <img src="<?php echo base_url('assets/images/ecommerce/png/qr_code.png'); ?>" height="20%" width="40%"alt="">
 
                                                             <p>Scan to Pay</p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-success">Save
-                                                            Changes</button>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-light"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-success">Save
+                                                                Changes</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                         </div>
-<!--                                            <div class="modal fade"  id="modal-new-payment" tabindex="-1" aria-labelledby="modal-new-payment" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h6 class="modal-title" id="staticBackdropLabel">Scan to pay    
-                                                            </h6>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body d-flex justify-content-center align-items-center" >
-                                                            <div class="row gy-3 justify-content-center text-center">
-                                                                <div class="mb-3">
-
-                                                                    <h6 class="fw-bold mb-1">STATE BANK OF INDIA</h6>
-
-                                                                    <img src="<?php echo base_url('assets/images/ecommerce/png/qr_code.png'); ?>" 
-                                                                         height="20%" width="40%" 
-                                                                         alt="" class="img-fluid my-2">
-
-                                                                    <p class="mb-0 fw-semibold">Scan to Pay</p>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-success">Proceed
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>-->
+                                            <!--                                            <div class="modal fade"  id="modal-new-payment" tabindex="-1" aria-labelledby="modal-new-payment" aria-hidden="true">
+                                                                                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                                                                <div class="modal-content">
+                                                                                                    <div class="modal-header">
+                                                                                                        <h6 class="modal-title" id="staticBackdropLabel">Scan to pay    
+                                                                                                        </h6>
+                                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                                    </div>
+                                                                                                    <div class="modal-body d-flex justify-content-center align-items-center" >
+                                                                                                        <div class="row gy-3 justify-content-center text-center">
+                                                                                                            <div class="mb-3">
+                                            
+                                                                                                                <h6 class="fw-bold mb-1">STATE BANK OF INDIA</h6>
+                                            
+                                                                                                                <img src="<?php echo base_url('assets/images/ecommerce/png/qr_code.png'); ?>" 
+                                                                                                                     height="20%" width="40%" 
+                                                                                                                     alt="" class="img-fluid my-2">
+                                            
+                                                                                                                <p class="mb-0 fw-semibold">Scan to Pay</p>
+                                                                                                            </div>
+                                            
+                                                                                                        </div>
+                                                                                                    </div>
+                                            
+                                                                                                    <div class="modal-footer">
+                                                                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                                                                                        <button type="button" class="btn btn-success">Proceed
+                                                                                                        </button>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>-->
                                         </div>
                                     </div>
                                     <div class="table-responsive">
@@ -811,21 +812,21 @@
                                         <tbody>
                                             <tr>
                                                 <th style="width: 25%;"><?= lang('App.first'); ?> <?= lang('App.name'); ?></th>
-                                                <td><?= 'NAGESH'; // replace with dynamic value   ?></td>
+                                                <td><?= 'NAGESH'; // replace with dynamic value               ?></td>
                                                 <th style="width: 25%;"><?= lang('App.middle'); ?> <?= lang('App.name'); ?></th>
-                                                <td><?= 'TUKARAM'; // replace   ?></td>
+                                                <td><?= 'TUKARAM'; // replace               ?></td>
                                             </tr>
                                             <tr>
                                                 <th><?= lang('App.last'); ?> <?= lang('App.name'); ?></th>
-                                                <td><?= 'SHINDE'; // replace   ?></td>
+                                                <td><?= 'SHINDE'; // replace               ?></td>
                                                 <th><?= lang('App.rise'); ?> <?= lang('App.number'); ?></th>
-                                                <td><?= 'S202610100001'; // replace   ?></td>
+                                                <td><?= 'S202610100001'; // replace               ?></td>
                                             </tr>
                                             <tr>
                                                 <th><?= lang('App.aadhar'); ?> <?= lang('App.no'); ?></th>
-                                                <td><?= '123456789112'; // replace   ?></td>
+                                                <td><?= '123456789112'; // replace               ?></td>
                                                 <th><?= lang('App.email'); ?></th>
-                                                <td><?= ''; // email   ?></td>
+                                                <td><?= ''; // email               ?></td>
                                             </tr>
                                             <tr>
                                                 <th><?= lang('App.gender'); ?></th>
@@ -934,7 +935,7 @@
                                         <tbody>
                                             <tr>
                                                 <th style="width: 25%;"><?= lang('App.father'); ?> <?= lang('App.name'); ?></th>
-                                                <td><?= 'TUKARAM'; // replace   ?></td>
+                                                <td><?= 'TUKARAM'; // replace               ?></td>
                                                 <th><?= lang('App.father'); ?> <?= lang('App.contact'); ?> <?= lang('App.no'); ?></th>
                                                 <td><!-- Father Contact --></td>
                                             </tr>

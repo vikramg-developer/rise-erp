@@ -36,6 +36,8 @@
 
 <!-- Apex Charts JS -->
 <script src="<?php echo base_url('assets/libs/apexcharts/apexcharts.min.js'); ?>"></script>
+  <!-- HRM Dashboard JS -->
+        <script src="<?php echo base_url('assets/js/courses-dashboard.js'); ?>"></script>
 
 <!-- Custom JS -->
 <script src="<?php echo base_url('assets/js/custom.js'); ?>"></script>
