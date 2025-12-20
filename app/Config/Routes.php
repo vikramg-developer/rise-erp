@@ -77,6 +77,7 @@ $routes->get('/studentDashboard', 'Login::studentDashboard');
 $routes->post('/studentProfile', 'Registration::studentProfile');
 $routes->post('/student-list', 'FeesManagement::student_list');
 $routes->post('/ticket', 'Ticket::index');
+
 $routes->group('leavingcertificate', function ($routes) {    
     $routes->get('/', 'LeavingCertificate::index', ['filter' => 'permission:createFeesManagement']);
     $routes->post('fetch_lc_student_list', 'LeavingCertificate::fetch_lc_student_list', ['filter' => 'permission:createFeesManagement']);
@@ -85,14 +86,21 @@ $routes->group('leavingcertificate', function ($routes) {
     $routes->get('leaving-certificate-report', 'LeavingCertificateReport::index', ['filter' => 'permission:createFeesManagement']);    
 });
 
+//---------- feedback ----------//
 $routes->group('feedback', function ($routes) {
     $routes->get('/', 'Feedback::index',['filter' => 'permission:createFeedback']);
     $routes->post('save-feedback-master', 'Feedback::save_feedback_master',['filter' => 'permission:createFeedback']);
+     $routes->post('delete-feedback-master', 'Feedback::delete_feedback_master', ['filter' => 'permission:deleteFeedback']);
+    $routes->post('revert-feedback-master', 'Feedback::revert_feedback_master', ['filter' => 'permission:updateFeedback']);
+    
+    
     $routes->post('fetch-feedback-master', 'Feedback::fetch_feedback_master',['filter' => 'permission:createFeedback']);
+    
+    
     $routes->get('manage-question', 'Feedback::manage_question' , ['filter' => 'permission:createFeedback']);
     $routes->get('sample-excel-file', 'Feedback::sample_excel_file' , ['filter' => 'permission:createFeedback']);
 });
-
+//---------- faculty ----------//
 $routes->group('faculty', function ($routes) {
 
     $routes->get('/', 'Faculty::index', ['filter' => 'permission:createfaculty']);

@@ -75,3 +75,67 @@ $("#feedback-master-form").on("submit", function (e) {
         }
     });
 });
+
+
+
+$(document).on("click", ".delete", function () {
+    let feedback_master_id = $(this).data("feedback_master_id");
+    let feedback_master_name = $(this).data("feedback_master_name");
+
+    confirmDelete(feedback_master_name).then(result => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "feedback/delete-feedback-master",
+                type: "POST",
+                data: {feedback_master_id: feedback_master_id, [csrfName]: csrfHash},
+                dataType: "json",
+
+                success: res => {
+                    csrfHash = res.csrfHash;
+                    successDelete(feedback_master_name);
+                    table.settings()[0].ajax.data = d => {
+                        d[csrfName] = csrfHash
+                    };
+                    table.ajax.reload(null, false);
+                },                
+                error: () =>{
+                    errorDelete();
+                }
+            });
+            
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            cancelDelete(feedback_master_name);
+        }
+    });
+});
+
+$(document).on("click", ".revert", function () {
+    let feedback_master_id = $(this).data("feedback_master_id");
+    let feedback_master_name = $(this).data("feedback_master_name");
+
+    confirmRevert(feedback_master_name).then(result => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "feedback/revert-feedback-master",
+                type: "POST",
+                data: {feedback_master_id: feedback_master_id, [csrfName]: csrfHash},
+                dataType: "json",
+
+                success: res => {
+                    csrfHash = res.csrfHash;
+                    successRevert(feedback_master_name);
+                    table.settings()[0].ajax.data = d => {
+                        d[csrfName] = csrfHash
+                    };
+                    table.ajax.reload(null, false);
+                },                
+                error: () =>{
+                    errorRevert();
+                }
+            });
+            
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            cancelRevert(feedback_master_name);
+        }
+    });
+});

@@ -46,6 +46,7 @@ class AddCasteCategoryTable extends Migration {
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('caste_category_id');
+        $this->forge->addUniqueKey('caste_category_name');
         $this->forge->createTable('caste_category');
     }
 
