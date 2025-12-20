@@ -102,6 +102,7 @@ return [
     'full' => 'Full',
     // G
     'general' => 'General',
+    'generate_lc' => 'Generate LC',
     'gender' => 'Gender',
     'google' => 'Google',
     'group' => 'Group',

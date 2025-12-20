@@ -124,10 +124,10 @@ CI_ENVIRONMENT = development
 
 # session.driver = 'CodeIgniter\Session\Handlers\FileHandler'
 # session.cookieName = 'ci_session'
-# session.expiration = 7200
+# session.expiration = 
 # session.savePath = null
-# session.matchIP = false
-# session.timeToUpdate = 300
+# session.matchIP = 
+# session.timeToUpdate = 
 # session.regenerateDestroy = false
 
 #--------------------------------------------------------------------

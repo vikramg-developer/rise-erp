@@ -92,8 +92,19 @@ class ModelYearwiseStudentData extends Model {
     }
 
     public function count_filter_results($filters,$search) {
-        return $this->baseQuery($filters, $search)
-                        ->countAllResults();
+        $builder= $this->baseQuery($filters);
+            if (!empty($search)) {
+                $builder->groupStart()
+                    ->like('sr.student_rise_no', $search)
+                    ->orLike('sr.student_first_name', $search)
+                    ->orLike('sr.student_middle_name', $search)
+                    ->orLike('sr.student_last_name', $search)
+                    ->orLike('dept.department_name', $search)
+                    ->orLike('yr.year_name', $search)
+                    ->orLike('aca.academic_year_name', $search)
+                    ->groupEnd();
+            }
+        return $builder->countAllResults();
     }
     /* ========================CERTIFICATE DATA (FULL DATA, ONE ROW)============================= */
     public function get_student_data_for_lc(int $yearwise_student_data_id): array

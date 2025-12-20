@@ -70,7 +70,7 @@ class LeavingCertificate extends BaseController {
 
             foreach ($students as $student) {
                 $buttons = '';
-                $buttons .= '<button class="btn btn-secondary lc_btn" data-bs-toggle="modal" data-bs-target="#lc_modal" data-yearwise_student_data_id="' . $student['yearwise_student_data_id'] . '">Leaving Certificate</button>';
+                $buttons .= '<button class="btn btn-secondary lc_btn" data-yearwise_student_data_id="' . $student['yearwise_student_data_id'] . '">' . lang('App.leaving') . ' ' . lang('App.certificate') . '</button>';
 
                 $data[] = [
                     $student['yearwise_student_data_id'],
@@ -102,6 +102,20 @@ class LeavingCertificate extends BaseController {
         }
     }
 
+    public function check_lc_exists() {
+        $ysd_id = $this->request->getVar('yearwise_student_data_id');
+
+        $lc_data = $this->modelleavingcertificate
+                ->where('yearwise_student_data_id', $ysd_id)
+                ->first();
+
+        return $this->response->setJSON([
+                    'exist_lc' => $lc_data ? true : false,
+                    'lc_data' => $lc_data,
+                    'csrfHash' => csrf_hash()
+        ]);
+    }
+
     public function add_leaving_certificate_data() {
 
         $data = [
@@ -126,28 +140,34 @@ class LeavingCertificate extends BaseController {
         }
     }
 
-    public function print_leaving_certificate($lc_id) {
+    public function print_leaving_certificate() {
+        $lc_id = $this->request->getGet('lc_id');        
+        $ysd_id = $this->request->getGet('ysd_id');        
         if ($lc_id) {
             $data['lc_data'] = $lc_data = $this->modelleavingcertificate->find($lc_id);
 
             $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_lc($lc_data['yearwise_student_data_id']);
+        }
+        elseif($ysd_id) {
+            $data['lc_data']=null;
+            $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_lc($ysd_id);
+        }
 //            print_r($data['yearwise_data']);
 //            die();
-            // Correct mPDF 8.2+ constructor
-            $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
-            $mpdf->shrink_tables_to_fit = 0;
-            $html = view('certificates/leaving-certificate-print',$data);
-            $mpdf->simpleTables = false;
-            $mpdf->WriteHTML($html);
-            $mpdf->use_kwt = true;
-            $mpdf->falseBoldWeight = 8;
-            $mpdf->fonttrans['freeserif'] = 'freeserif2';
-            $mpdf->useFixedNormalLineHeight = true;
-            $mpdf->useFixedTextBaseline = true;
-            $mpdf->adjustFontDescLineheight = 100;
-            // Output PDF
-            $mpdf->Output('Leaving-Certificate.pdf', 'I');
-            exit;
-        }
+        // Correct mPDF 8.2+ constructor
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $mpdf->shrink_tables_to_fit = 0;
+        $html = view('certificates/leaving-certificate-print', $data);
+        $mpdf->simpleTables = false;
+        $mpdf->WriteHTML($html);
+        $mpdf->use_kwt = true;
+        $mpdf->falseBoldWeight = 8;
+        $mpdf->fonttrans['freeserif'] = 'freeserif2';
+        $mpdf->useFixedNormalLineHeight = true;
+        $mpdf->useFixedTextBaseline = true;
+        $mpdf->adjustFontDescLineheight = 100;
+        // Output PDF
+        $mpdf->Output('Leaving-Certificate.pdf', 'I');
+        exit;
     }
 }
