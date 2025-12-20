@@ -111,17 +111,41 @@ class ModelFacultyRegistration extends Model {
     public function getFacultyById($facultyId) {
         return $this->where('faculty_registration_id', $facultyId)->first();
     }
+    
+    /**
+ * This map method is used to convert faculty_rise_no stored in added_by and updated_by
+ * columns into readable faculty names without using SQL JOINs. It fetches all faculty
+ * names once, creates a rise_no => "FirstName LastName" map, and allows fast lookup
+ * while building DataTable data, keeping the code clean and easy to maintain.
+ */
+   
+public function getRiseNoNameMap()
+{
+    $rows = $this->select('faculty_rise_no, faculty_first_name, faculty_last_name')
+                 ->findAll();
+
+    $map = [];
+
+    foreach ($rows as $row) {
+        $map[$row['faculty_rise_no']] =
+            $row['faculty_first_name'] . ' ' . $row['faculty_last_name'];
+    }
+
+    return $map;
+}
+
+
 
     public function rulesForUpdate($id) {
         return [
-            'faculty_role_id'        => 'required',
-            'faculty_first_name'     => 'required|min_length[2]|alpha_space',
-            'faculty_middle_name'    => 'required|min_length[2]|alpha_space',
-            'faculty_last_name'      => 'required|min_length[2]|alpha_space',
-            'faculty_mobile_number'  =>"required|numeric|exact_length[10]|is_unique[faculty_registration.faculty_mobile_number,faculty_registration_id,{$id}]",
-            'faculty_email_id'       =>"required|valid_email|is_unique[faculty_registration.faculty_email_id,faculty_registration_id,{$id}]",
-            'faculty_aadhar_number'  =>"required|numeric|exact_length[12]|is_unique[faculty_registration.faculty_aadhar_number,faculty_registration_id,{$id}]",
-            'faculty_pan_number'     =>"required|regex_match[/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/]|is_unique[faculty_registration.faculty_pan_number,faculty_registration_id,{$id}]",
+            'faculty_role_id' => 'required',
+            'faculty_first_name' => 'required|min_length[2]|alpha_space',
+            'faculty_middle_name' => 'required|min_length[2]|alpha_space',
+            'faculty_last_name' => 'required|min_length[2]|alpha_space',
+            'faculty_mobile_number' => "required|numeric|exact_length[10]|is_unique[faculty_registration.faculty_mobile_number,faculty_registration_id,{$id}]",
+            'faculty_email_id' => "required|valid_email|is_unique[faculty_registration.faculty_email_id,faculty_registration_id,{$id}]",
+            'faculty_aadhar_number' => "required|numeric|exact_length[12]|is_unique[faculty_registration.faculty_aadhar_number,faculty_registration_id,{$id}]",
+            'faculty_pan_number' => "required|regex_match[/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/]|is_unique[faculty_registration.faculty_pan_number,faculty_registration_id,{$id}]",
         ];
     }
 }
