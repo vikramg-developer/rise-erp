@@ -315,7 +315,7 @@ $monthName = ucwords($dateObj->format('F'));
         <tr>
         	<td>Rise No.:<?php echo $yearwise_data['student_rise_no']; ?></td>
         	<td>Gen. Reg No.:<?php echo $yearwise_data['student_general_register_no']; ?></td>
-        	<td style="text-align: right;">LC No.: <?php echo $lc_data['leaving_certificate_id']; ?></td>
+        	<td style="text-align: right;">LC No.: <?php echo esc($lc_data['leaving_certificate_id'] ?? ''); ?></td>
         </tr>
     </table>
 
@@ -376,8 +376,8 @@ $monthName = ucwords($dateObj->format('F'));
     		<th>Result-Passed or Failed (Mention Class in case of Pass and Exemptions with subjects if any, in case of Failure)</th>
     	</tr>
     	<tr>
-    		<td><?php echo esc($lc_data['examination']); ?></td>
-    		<td><?php echo $lc_data['exam_period']; ?></td>
+    		<td><?php echo esc($lc_data['examination'] ?? ''); ?></td>
+    		<td><?php echo esc($lc_data['exam_period'] ?? ''); ?></td>
     		<td>First Class<?php //echo $lc[0]['status']; ?></td>
     	</tr>
     </table>

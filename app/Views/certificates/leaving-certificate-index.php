@@ -69,8 +69,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
-                            <button class="btn btn-primary m-1"><?= lang('App.search'); ?></button>
+                        <div class="px-4 py-3 border-top border-block d-sm-flex justify-content-end">
+                            <button class="btn btn-primary m-1"><i class="bi bi-search ms-2"></i> <?= lang('App.search'); ?></button>
                         </div>
                     </div>
                 </form>
@@ -99,8 +99,8 @@
                             </div>
 
                             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                                <label for="exam_period" class="form-label"><?= lang('App.exam'); ?> <?= lang('App.period'); ?> <?= lang('App.in'); ?></label>
-                                <input type="text" class="form-control" name="exam_period" id="exam_period" value="" placeholder="<?= lang('App.exam'); ?> <?= lang('App.held'); ?> <?= lang('App.in'); ?>">
+                                <label for="exam_period" class="form-label"><?= lang('App.exam'); ?> <?= lang('App.period'); ?> </label>
+                                <input type="text" class="form-control" name="exam_period" id="exam_period" value="" placeholder="<?= lang('App.exam'); ?> <?= lang('App.period'); ?>">
                                 <small class="text-danger field-error" id="exam_period_error"></small>
                             </div>
 
@@ -117,6 +117,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= lang('App.close'); ?></button>
+                        <a href="javascript:void(0);" id="lc_preview_btn" type="button" class="btn btn-warning"><?= lang('App.preview'); ?></a>
                         <button type="submit" class="btn btn-success"><?= lang('App.submit'); ?></button>
                     </div>
                 </div>
@@ -144,7 +145,7 @@
                                     <th scope="col"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
                                     <th scope="col"><?= lang('App.department'); ?></th>
                                     <th scope="col"><?= lang('App.year'); ?></th>
-                                    <th scope="col"><?= lang('App.action'); ?></th>
+                                    <th scope="col"><?= lang('App.generate_lc'); ?></th>
                                 </tr>
                             </thead>
                         </table>                    
