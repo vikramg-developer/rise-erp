@@ -70,7 +70,7 @@ $routes->post('/check-user', 'Login::check_user');
 $routes->get('student-registration', 'StudentRegistration::index');
 $routes->post('save-registration', 'StudentRegistration::add_registration');
 //$routes->post('/studentProfile', 'Registration::studentProfile');
-$routes->post('/student-profile', 'Registration::studentProfile');
+$routes->get('/student-profile', 'StudentRegistration::student_profile',['filter' => 'permission:viewStudentProfile']);
 $routes->post('/savesignup', 'Registration::saveSignup');
 $routes->get('/student-dashboard', 'Login::studentDashboard');
 $routes->get('/studentDashboard', 'Login::studentDashboard');

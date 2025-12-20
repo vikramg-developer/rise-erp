@@ -234,6 +234,7 @@ return [
     'stream' => 'Stream',
     'student' => 'Student',
     'submit' => 'Submit',
+    'subject' => 'Subject',
     'submitted' => 'Submitted',
     'self' => 'Self',
     'show' => 'Show',
