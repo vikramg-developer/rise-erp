@@ -12,6 +12,17 @@ $(document).on(
             .toUpperCase();              // convert to uppercase
     }
 );
+
+$(document).on(
+    'input',
+    'input[name="faculty_mobile_number"]',
+    function () {
+        this.value = this.value
+            .replace(/[^0-9]/g, '')
+            .slice(0, 10);
+    }
+);
+
 $(document).on('input', 'input[name="faculty_password"]', function () {
     const password = this.value;
 
@@ -118,6 +129,87 @@ $(document).ready(function () {
         });
     }
 });
+
+
+// ================================
+// DELETE FACULTY (Manage Faculty)
+// ================================
+$(document).on("click", ".delete", function () {
+
+    let faculty_registration_id = $(this).data("id");
+
+    if (!faculty_registration_id) {
+        return;
+    }
+
+    confirmDelete(faculty_registration_id).then(result => {
+        if (result.isConfirmed) {
+
+            $.ajax({
+                url: BASE_URL + "faculty/delete-faculty",
+                type: "POST",
+                data: {
+                    faculty_registration_id: faculty_registration_id,
+                    [csrfName]: csrfHash
+                },
+                dataType: "json",
+
+                success: function (res) {
+                    csrfHash = res.csrfHash;
+
+                    successDelete(faculty_registration_id);
+
+                    table.ajax.reload(null, false);
+                },
+
+                error: function () {
+                    errorDelete();
+                }
+            });
+
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            cancelDelete(faculty_registration_id);
+        }
+    });
+});
+
+// ================================
+// REVERT FACULTY
+// ================================
+$(document).on("click", ".revert", function () {
+
+    let faculty_registration_id = $(this).data("id");
+
+    confirmRevert(faculty_registration_id).then(result => {
+        if (result.isConfirmed) {
+
+            $.ajax({
+                url: BASE_URL + "faculty/revert-faculty",
+                type: "POST",
+                data: {
+                    faculty_registration_id: faculty_registration_id,
+                    [csrfName]: csrfHash
+                },
+                dataType: "json",
+
+                success: function (res) {
+                    csrfHash = res.csrfHash;
+                    successRevert(faculty_registration_id);
+                    table.ajax.reload(null, false);
+                },
+
+                error: function () {
+                    errorRevert();
+                }
+            });
+
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            cancelRevert(faculty_registration_id);
+        }
+    });
+});
+
+
 
 
 
