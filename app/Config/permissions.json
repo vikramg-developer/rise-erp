@@ -9,7 +9,7 @@
         ]
     },
 
-    "studet_profile": {
+    "student_profile": {
         "label": "Student Profile",
         "actions": [
             "createStudentProfile",
