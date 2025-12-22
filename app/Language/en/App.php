@@ -365,4 +365,5 @@ return [
     'updated' => 'Updated',
     'by' => 'By',
     'department' => 'Department',
+    'edit' => 'Edit',
 ];
