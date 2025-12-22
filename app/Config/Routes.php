@@ -85,6 +85,7 @@ $routes->group('leavingcertificate', function ($routes) {
     $routes->post('add-leaving-certificate-data', 'LeavingCertificate::add_leaving_certificate_data', ['filter' => 'permission:createFeesManagement']);   
 //    $routes->get('print-leaving-certificate/(:num)', 'LeavingCertificate::print_leaving_certificate/$1', ['filter' => 'permission:createFeesManagement']);   
     $routes->get('print-leaving-certificate', 'LeavingCertificate::print_leaving_certificate', ['filter' => 'permission:createFeesManagement']);   
+    $routes->post('print-leaving-certificate', 'LeavingCertificate::print_leaving_certificate', ['filter' => 'permission:createFeesManagement']);   
     $routes->get('leaving-certificate-report', 'LeavingCertificateReport::index', ['filter' => 'permission:createFeesManagement']);    
 });
 

@@ -189,6 +189,7 @@ return [
     'photo' => 'Photo',
     'pincode' => 'Pincode',
     'print' => 'Print',
+    'preview' => 'Preview',
     'priority' => 'Priority',
     'prof' => 'Prof.',
     'professional' => 'Professional',
