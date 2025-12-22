@@ -22,6 +22,7 @@ class LeavingCertificate extends BaseController {
 
     public function index() {
         $data['jspath'] = 'certificates/leaving-certificate';
+        $data['title'] = lang('App.rise') . "-" . lang('App.leaving') . " " . lang('App.certifcate');
         $data['academic_year'] = $this->modelacademicyear->get_active_academic_years();
         $data['years'] = $this->modelyear->get_years();
         $data['departments'] = $this->modeldepartment->get_departments();
@@ -69,8 +70,14 @@ class LeavingCertificate extends BaseController {
             $data = [];
 
             foreach ($students as $student) {
+
+                //====To check Count of genrated LC for one student====
+                $lc_data = $this->modelleavingcertificate->get_lc_data($student['yearwise_student_data_id']);
+                $lc_count = is_array($lc_data) ? count($lc_data) : 0;
+                $disabled = ($lc_count > 1) ? 'disabled' : '';
+//                print_r(count($lc_data));die();
                 $buttons = '';
-                $buttons .= '<button class="btn btn-secondary lc_btn" data-yearwise_student_data_id="' . $student['yearwise_student_data_id'] . '">' . lang('App.leaving') . ' ' . lang('App.certificate') . '</button>';
+                $buttons .= '<button class="btn btn-secondary lc_btn" ' . $disabled . ' data-yearwise_student_data_id="' . $student['yearwise_student_data_id'] . '">' . lang('App.leaving') . ' ' . lang('App.certificate') . '</button>';
 
                 $data[] = [
                     $student['yearwise_student_data_id'],
@@ -141,19 +148,25 @@ class LeavingCertificate extends BaseController {
     }
 
     public function print_leaving_certificate() {
-        $lc_id = $this->request->getGet('lc_id');        
-        $ysd_id = $this->request->getGet('ysd_id');        
+        $lc_id = $this->request->getVar('lc_id');
+//        $ysd_id = $this->request->getGet('ysd_id');
         if ($lc_id) {
             $data['lc_data'] = $lc_data = $this->modelleavingcertificate->find($lc_id);
 
             $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_lc($lc_data['yearwise_student_data_id']);
-        }
-        elseif($ysd_id) {
-            $data['lc_data']=null;
+            //====To check Count of genrated LC for one student====
+            $data['lc_count'] = $this->modelleavingcertificate->get_lc_data($lc_data['yearwise_student_data_id']);
+        } elseif ($this->request->getMethod() === 'post') {
+            $ysd_id = $this->request->getVar('yearwise_student_data_id');
+            $data['lc_data'] = [
+                'examination' => $this->request->getVar('examination'),
+                'exam_period' => $this->request->getVar('exam_period'),
+                'date_of_leaving' => $this->request->getVar('date_of_leaving')
+            ];             
+            $data['lc_count'] = null;
             $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_lc($ysd_id);
         }
-//            print_r($data['yearwise_data']);
-//            die();
+
         // Correct mPDF 8.2+ constructor
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
         $mpdf->shrink_tables_to_fit = 0;

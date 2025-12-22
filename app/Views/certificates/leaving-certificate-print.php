@@ -267,18 +267,18 @@ $monthName = ucwords($dateObj->format('F'));
 	</style>
 </head>
 <body>
-    <div style="position: absolute; left: 500px; top: 195px;">
+    <div style="position: absolute; left: 500px; top: 150px;">
         <?php
-//        if(count($duplicate_lc) > 1)
-//        {
+        if(is_array($lc_count) && count($lc_count) > 1)
+        {
         ?>
-<!--            <img src="">-->
+            <img src="<?php echo base_url('assets/images/duplicate.jpg'); ?>" style="width:150px; height:40px;opacity:0.5">
         <?php
-//        }
+        }
         ?>
     </div>
     
-    <div style="position: absolute; left: 180px; top: 450px;">
+    <div style="position: absolute; left: 500px; top: 150px;">
         <?php
 //        if($lc[0]['cancelled'] == 1)
 //        {

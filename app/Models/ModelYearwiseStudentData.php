@@ -68,7 +68,7 @@ class ModelYearwiseStudentData extends Model {
     /* ====================================DATATABLE DATA (PAGINATED)============================= */
 
     public function get_lc_student_list($filters, $limit, $offset, $search) {
-        $builder = $this->baseQuery($filters)->orderBy('sr.student_rise_no', 'DESC');
+        $builder = $this->baseQuery($filters)->orderBy('sr.student_rise_no', 'ASC');
         if (!empty($search)) {
             $builder->groupStart()
                 ->like('sr.student_rise_no', $search)
