@@ -100,118 +100,126 @@
                                         <div><?= lang('App.personal'); ?> <?= lang('App.details'); ?> :</div>
                                     </div>
                                     <div class="row gy-4">
+                                        <!--Student First Name-->
                                         <div class="col-xl-4">
-                                            <label for="student-first-name" class="form-label"><?= lang('App.first'); ?> <?= lang('App.name'); ?></label>
-                                            <input type="text" class="form-control" id="student-first-name" placeholder="<?= lang('App.first'); ?> <?= lang('App.name'); ?>" name="student-first-name"onkeypress="return isAlphaKey(event)"value="<?= esc($StudentRegistrationData['student_first_name']) ?>"
+                                            <label for="student_first_name" class="form-label"><?= lang('App.first'); ?> <?= lang('App.name'); ?></label>
+                                            <input type="text" class="form-control" id="student_first_name" placeholder="<?= lang('App.first'); ?> <?= lang('App.name'); ?>" name="student_first_name"onkeypress="return isAlphaKey(event)"value="<?= esc($StudentRegistrationData['student_first_name']) ?>"
                                                    "readonly>
                                         </div>
+                                        <!--Student Middle Name-->
                                         <div class="col-xl-4">
-                                            <label for="student-middle-name" class="form-label"><?= lang('App.middle'); ?> <?= lang('App.name'); ?></label>
-                                            <input type="text" class="form-control" id="student-middle-name" name="student-middle-name"placeholder="<?= lang('App.middle'); ?> <?= lang('App.name'); ?>" onkeypress="return isAlphaKey(event)"value="<?= esc($StudentRegistrationData['student_middle_name']) ?>"readonly>
+                                            <label for="student_middle_name" class="form-label"><?= lang('App.middle'); ?> <?= lang('App.name'); ?></label>
+                                            <input type="text" class="form-control" id="student_middle_name" name="student_middle_name"placeholder="<?= lang('App.middle'); ?> <?= lang('App.name'); ?>" onkeypress="return isAlphaKey(event)"value="<?= esc($StudentRegistrationData['student_middle_name']) ?>"readonly>
                                         </div>
+                                        <!--Student Last Name-->
                                         <div class="col-xl-4">
-                                            <label for="student-last-name" class="form-label"><?= lang('App.last'); ?> <?= lang('App.name'); ?></label>
-                                            <input type="text" class="form-control" id="student-last-name" name="student-last-name"placeholder="<?= lang('App.last'); ?> <?= lang('App.name'); ?>"onkeypress="return isAlphaKey(event)" value="<?= esc($StudentRegistrationData['student_last_name']) ?>"readonly>
+                                            <label for="student_last_name" class="form-label"><?= lang('App.last'); ?> <?= lang('App.name'); ?></label>
+                                            <input type="text" class="form-control" id="student_last_name" name="student_last_name"placeholder="<?= lang('App.last'); ?> <?= lang('App.name'); ?>"onkeypress="return isAlphaKey(event)" value="<?= esc($StudentRegistrationData['student_last_name']) ?>"readonly>
                                         </div>
+                                        <!--Student Rise No-->
                                         <div class="col-xl-4">
-                                            <label for="student-rise-no" class="form-label"><?= lang('App.rise'); ?> <?= lang('App.number'); ?></label>
-                                            <input type="text" class="form-control" id="student-rise-no" name="student-last-name"placeholder="<?= lang('App.rise'); ?> <?= lang('App.number'); ?>" value="<?= esc($StudentRegistrationData['student_rise_no']) ?>"readonly>
+                                            <label for="student_rise_no" class="form-label"><?= lang('App.rise'); ?> <?= lang('App.number'); ?></label>
+                                            <input type="text" class="form-control" id="student_rise_no" name="student_rise_no"placeholder="<?= lang('App.rise'); ?> <?= lang('App.number'); ?>" value="<?= esc($StudentRegistrationData['student_rise_no']) ?>"readonly>
                                         </div>
+                                        <!--Student Aadhar No-->
                                         <div class="col-xl-4">
-                                            <label for="student_aadhar" class="form-label"><?= lang('App.aadhar'); ?> <?= lang('App.no'); ?></label>
-                                            <input type="text" class="form-control required-input" id="student_aadhar" name="student_aadhar"  maxlength="12" minlength="12" placeholder="<?= lang('App.aadhar'); ?> <?= lang('App.no'); ?>"onkeypress="return isNumber(event)"value="123456789112"readonly>
+                                            <label for="student_aadhar_no" class="form-label"><?= lang('App.aadhar'); ?> <?= lang('App.no'); ?></label>
+                                            <input type="text" class="form-control required-input" id="student_aadhar_no" name="student_aadhar"  maxlength="12" minlength="12" placeholder="<?= lang('App.aadhar'); ?> <?= lang('App.no'); ?>"onkeypress="return isNumber(event)"value="123456789112"readonly>
                                         </div>
+                                        <!--Student Email Id-->
                                         <div class="col-xl-4">
-                                            <label for="student-email" class="form-label"><?= lang('App.email'); ?></label>
-                                            <input type="email" class="form-control" id="student-email" name="student-email"placeholder="<?= lang('App.email'); ?> "value=""required>
+                                            <label for="student_email_id" class="form-label"><?= lang('App.email'); ?></label>
+                                            <input type="email" class="form-control" id="student_email_id" name="student_email_id"placeholder="<?= lang('App.email'); ?> "value=""required>
                                         </div>
+                                        <!--Student Gender Id-->
                                         <div class="col-xl-4">
-                                            <label for="student-gender" class="form-label"><?= lang('App.gender'); ?></label>
-                                            <select class="form-control" data-trigger name="choices-single-default" id="student-gender"name="student-gender"required>
+                                            <label for="student_gender" class="form-label"><?= lang('App.gender'); ?></label>
+                                            <select class="form-control" data-trigger name="choices-single-default" id="student_gender"name="student_gender"required>
                                                 <option value="1"><?= lang('App.male'); ?></option>
                                                 <option value="2"><?= lang('App.female'); ?></option>
                                                 <option value="3"><?= lang('App.transgender'); ?></option>
                                             </select>
                                         </div>
-                                        <!--                                        <div class="card-body ">
-                                                                                    <select class="js-example-basic-single" name="state">
-                                                                                        <option value="s-1">Selection-1</option>
-                                                                                        <option value="s-2">Selection-2</option>
-                                                                                        <option value="s-3">Selection-3</option>
-                                                                                        <option value="s-4">Selection-4</option>
-                                                                                        <option value="s-5">Selection-5</option>
-                                                                                    </select>
-                                                                                </div>-->
+                                        <!--Student Blood Group-->
                                         <div class="col-xl-4">
-                                            <label for="student-birthdate" class="form-label"><?= lang('App.blood'); ?> <?= lang('App.group'); ?></label>
-                                            <input type="text" class="form-control" id="student-birthdate" placeholder="<?= lang('App.blood'); ?> <?= lang('App.group'); ?>"name="student-bloodgroup" value=""required>
+                                            <label for="student_blood_group" class="form-label"><?= lang('App.blood'); ?> <?= lang('App.group'); ?></label>
+                                            <input type="text" class="form-control" id="student_blood_group" placeholder="<?= lang('App.blood'); ?> <?= lang('App.group'); ?>"name="student_blood_group" value=""required>
                                         </div>
+                                        <!--Student Birth Place-->
                                         <div class="col-xl-4">
-                                            <label for="student-birthplace" class="form-label"><?= lang('App.birth'); ?> <?= lang('App.place'); ?></label>
-                                            <input type="text" class="form-control" id="student-birthplace" placeholder="<?= lang('App.birth'); ?> <?= lang('App.place'); ?>"name="student-birthplace" value=""required>
+                                            <label for="student_birthplace" class="form-label"><?= lang('App.birth'); ?> <?= lang('App.place'); ?></label>
+                                            <input type="text" class="form-control" id="student_birthplace" placeholder="<?= lang('App.birth'); ?> <?= lang('App.place'); ?>"name="student_birthplace" value=""required>
                                         </div>
+                                        <!--Student Birth Date-->                     
                                         <div class="col-xl-4">
-                                            <label for="student-bloodgroup" class="form-label"><?= lang('App.birth'); ?> <?= lang('App.date'); ?></label>
-                                            <input type="date" class="form-control"  id="date"placeholder="<?= lang('App.birth'); ?> <?= lang('App.date'); ?>"name="student-bloodgroup" value=""required>
+                                            <label for="student_birthdate" class="form-label"><?= lang('App.birth'); ?> <?= lang('App.date'); ?></label>
+                                            <input type="date" class="form-control"  id="date"name="student_birthdate" value=""required>
                                         </div>
+                                        <!--Student Religion Id-->
                                         <div class="col-xl-4">
-                                            <label for="student-gender" class="form-label"><?= lang('App.religion'); ?></label>
-                                            <select class="form-control" data-trigger name="choices-single-default" id="student-gender"name="student-gender"required>
+                                            <label for="student_religion_id" class="form-label"><?= lang('App.religion'); ?></label>
+                                            <select class="form-control" data-trigger name="choices-single-default" id="student_religion_id"name="student_religion_id"required>
                                                 <option value="1">Hindu</option>
                                                 <option value="2">Muslim</option>
                                                 <option value="2">Christian</option>
                                             </select>
                                         </div>
+                                        <!--Student Caste ID-->
                                         <div class="col-xl-4">
-                                            <label for="student-gender" class="form-label"><?= lang('App.caste'); ?></label>
-                                            <select class="form-control" data-trigger name="choices-single-default" id="student-gender"name="student-gender"required>
+                                            <label for="student_caste_id" class="form-label"><?= lang('App.caste'); ?></label>
+                                            <select class="form-control" data-trigger name="choices-single-default" id="student_caste_id"name="student_caste_id"required>
                                                 <option value="1">Hindu</option>
                                                 <option value="2">Muslim</option>
                                                 <option value="2">Christian</option>
                                             </select>
                                         </div>
+                                        <!--Student Subcaste-->
                                         <div class="col-xl-4">
-                                            <label for="student-gender" class="form-label"><?= lang('App.subcaste'); ?></label>
-                                            <select class="form-control" data-trigger name="choices-single-default" id="student-gender"name="student-gender"required>
+                                            <label for="student_subcaste_id" class="form-label"><?= lang('App.subcaste'); ?></label>
+                                            <select class="form-control" data-trigger name="choices-single-default" id="student_subcaste_id"name="student_subcaste_id"required>
                                                 <option value="1">Maratha</option>
                                                 <option value="2">Muslim</option>
                                                 <option value="2">Parsi</option>
                                             </select>
                                         </div>
+                                        <!--Student Nationality -->
                                         <div class="col-xl-4">
-                                            <label for="student-gender" class="form-label"><?= lang('App.nationality'); ?> </label>
-                                            <select class="form-control" data-trigger name="choices-single-default" id="student-gender"name="student-gender"required>
+                                            <label for="student_nationality_id" class="form-label"><?= lang('App.nationality'); ?> </label>
+                                            <select class="form-control" data-trigger name="choices-single-default" id="student_nationality_id"name="student_nationality_id"required>
                                                 <option value="1">Indian</option>
 
                                             </select>
                                         </div>
+                                        <!--Student Marrital Status-->
                                         <div class="col-xl-4">
-                                            <label for="student-gender" class="form-label"><?= lang('App.marital'); ?> <?= lang('App.status'); ?></label>
-                                            <select class="form-control" data-trigger name="choices-single-default" id="student-gender"name="student-gender"required>
-                                                <option value="single">Unmarried</option>
-                                                <option value="married">Married</option>
-                                                <option value="divorced">Divorced</option>
-                                                <option value="widowed">Widowed</option>
+                                            <label for="student_marital_status" class="form-label"><?= lang('App.marital'); ?> <?= lang('App.status'); ?></label>
+                                            <select class="form-control" data-trigger name="choices-single-default" id="student_marital_status"name="student_marital_status"required>
+                                                <option value="1">Unmarried</option>
+                                                <option value="2">Married</option>
+                                                <option value="3">Divorced</option>
+                                                <option value="4">Widowed</option>
                                             </select>
                                         </div>
+                                        <!--Student Minority Id-->
                                         <div class="col-xl-4">
-                                            <label for="student-gender" class="form-label"><?= lang('App.minority'); ?></label>
-                                            <select class="form-control" data-trigger name="choices-single-default" id="student-gender"name="student-gender"required>
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
+                                            <label for="student_minority_id" class="form-label"><?= lang('App.minority'); ?></label>
+                                            <select class="form-control" data-trigger name="choices-single-default" id="student_minority_id"name="student_minority_id"required>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
                                             </select>
                                         </div>
+                                        <!--Student Physically Handicap Id-->
                                         <div class="col-xl-4">
-                                            <label for="student-gender" class="form-label"><?= lang('App.physical'); ?> <?= lang('App.handicap'); ?></label>
-                                            <select class="form-control" data-trigger name="choices-single-default" id="student-gender"name="student-gender"required>
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
+                                            <label for="student_physical_handicap_id" class="form-label"><?= lang('App.physical'); ?> <?= lang('App.handicap'); ?></label>
+                                            <select class="form-control" data-trigger name="choices-single-default" id="student_physical_handicap_id"name="student_physical_handicap_id"required>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
                                             </select>
                                         </div>
-
+                                        <!--Student Category Id-->
                                         <div class="col-xl-4">
-                                            <label for="student-gender" class="form-label"><?= lang('App.category'); ?></label>
-                                            <select class="form-control" data-trigger name="choices-single-default" id="student-gender"name="student-gender"required>
+                                            <label for="student-category_id" class="form-label"><?= lang('App.category'); ?></label>
+                                            <select class="form-control" data-trigger name="choices-single-default" id="student-category_id"name="student-category_id"required>
                                                 <option value="1">OPEN</option>
                                                 <option value="2">OBC</option>
                                                 <option value="3">SC</option>
@@ -334,7 +342,7 @@
                                     <div class="row gy-4">
                                         <div class="col-xl-4">
                                             <label for="student-father-name" class="form-label"><?= lang('App.father'); ?> <?= lang('App.name'); ?></label>
-                                            <input type="text" class="form-control" id="student-father-name" placeholder="<?= lang('App.father'); ?> <?= lang('App.name'); ?>" name="student-first-name"onkeypress="return isAlphaKey(event)"value="TUKARAM"readonly>
+                                            <input type="text" class="form-control" id="student-father-name" placeholder="<?= lang('App.father'); ?> <?= lang('App.name'); ?>" name="student_first_name"onkeypress="return isAlphaKey(event)"value="TUKARAM"readonly>
                                         </div>
                                         <div class="col-xl-4">
                                             <label for="student-mother-name" class="form-label"><?= lang('App.mother'); ?> <?= lang('App.name'); ?></label>
@@ -812,21 +820,21 @@
                                         <tbody>
                                             <tr>
                                                 <th style="width: 25%;"><?= lang('App.first'); ?> <?= lang('App.name'); ?></th>
-                                                <td><?= 'NAGESH'; // replace with dynamic value               ?></td>
+                                                <td><?= 'NAGESH'; // replace with dynamic value                ?></td>
                                                 <th style="width: 25%;"><?= lang('App.middle'); ?> <?= lang('App.name'); ?></th>
-                                                <td><?= 'TUKARAM'; // replace               ?></td>
+                                                <td><?= 'TUKARAM'; // replace                ?></td>
                                             </tr>
                                             <tr>
                                                 <th><?= lang('App.last'); ?> <?= lang('App.name'); ?></th>
-                                                <td><?= 'SHINDE'; // replace               ?></td>
+                                                <td><?= 'SHINDE'; // replace                ?></td>
                                                 <th><?= lang('App.rise'); ?> <?= lang('App.number'); ?></th>
-                                                <td><?= 'S202610100001'; // replace               ?></td>
+                                                <td><?= 'S202610100001'; // replace                ?></td>
                                             </tr>
                                             <tr>
                                                 <th><?= lang('App.aadhar'); ?> <?= lang('App.no'); ?></th>
-                                                <td><?= '123456789112'; // replace               ?></td>
+                                                <td><?= '123456789112'; // replace                ?></td>
                                                 <th><?= lang('App.email'); ?></th>
-                                                <td><?= ''; // email               ?></td>
+                                                <td><?= ''; // email                ?></td>
                                             </tr>
                                             <tr>
                                                 <th><?= lang('App.gender'); ?></th>
@@ -935,7 +943,7 @@
                                         <tbody>
                                             <tr>
                                                 <th style="width: 25%;"><?= lang('App.father'); ?> <?= lang('App.name'); ?></th>
-                                                <td><?= 'TUKARAM'; // replace               ?></td>
+                                                <td><?= 'TUKARAM'; // replace                ?></td>
                                                 <th><?= lang('App.father'); ?> <?= lang('App.contact'); ?> <?= lang('App.no'); ?></th>
                                                 <td><!-- Father Contact --></td>
                                             </tr>
