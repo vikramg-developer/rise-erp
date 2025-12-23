@@ -137,6 +137,7 @@ $(document).ready(function () {
 $(document).on("click", ".delete", function () {
 
     let faculty_registration_id = $(this).data("id");
+    
 
     if (!faculty_registration_id) {
         return;
