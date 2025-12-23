@@ -11,6 +11,7 @@ class LeavingCertificate extends BaseController {
     protected $modelacademicyear;
     protected $modelyear;
     protected $modeldepartment;
+    protected $modelleavingcertificatecounter;
 
     public function __construct() {
         $this->modelleavingcertificate = model('ModelLeavingCertificate');
@@ -18,6 +19,8 @@ class LeavingCertificate extends BaseController {
         $this->modelacademicyear = model('ModelAcademicYear');
         $this->modelyear = model('ModelYear');
         $this->modeldepartment = model('ModelDepartment');
+        $this->modelleavingcertificatecounter = model('ModelLeavingCertificateCounter');
+        $this->db = \Config\Database::connect();
     }
 
     public function index() {
@@ -124,25 +127,60 @@ class LeavingCertificate extends BaseController {
     }
 
     public function add_leaving_certificate_data() {
+        $lc_counter_data = $this->modelleavingcertificatecounter->find(1);
+        if ($lc_counter_data == null) {
+            $data = ['leaving_certificate_no' => 1];
 
-        $data = [
-            'yearwise_student_data_id' => $this->request->getVar('yearwise_student_data_id'),
-            'examination' => $this->request->getVar('examination'),
-            'exam_period' => $this->request->getVar('exam_period'),
-            'date_of_leaving' => $this->request->getVar('date_of_leaving')
-        ];
-        $lc_id = $this->modelleavingcertificate->insert($data, true);
-        if ($lc_id) {
-            return $this->response->setJSON([
-                        'status' => 'success',
-                        'lc_id' => $lc_id,
-                        'csrfHash' => csrf_hash()
-            ]);
-        } else {
+            $this->modelleavingcertificatecounter->insert($data);
+        }
+
+        $this->db->transBegin();
+        try {
+
+            // 🔒 1️⃣ LOCK LC COUNTER ROW
+            $lc_no_counter = $this->modelleavingcertificatecounter->get_leaving_certificate_no();
+            $lc_data = [
+                'yearwise_student_data_id' => $this->request->getVar('yearwise_student_data_id'),
+                'examination' => $this->request->getVar('examination'),
+                'exam_period' => $this->request->getVar('exam_period'),
+                'date_of_leaving' => $this->request->getVar('date_of_leaving'),
+                'leaving_certificate_no' => $lc_no_counter['leaving_certificate_no'],
+            ];
+
+            $lc_id = $this->modelleavingcertificate->insert($lc_data, true);
+            if ($lc_id) {
+                $update_data = ['leaving_certificate_no' => ($lc_no_counter['leaving_certificate_no'] + 1)];
+                $this->modelleavingcertificatecounter->update($lc_no_counter['leaving_certificate_no_counter_id'], $update_data);
+
+                // 5️⃣ Final transaction check
+                if ($this->db->transStatus() === false) {
+                    throw new \Exception('LC transaction failed');
+                }
+
+                // =========Commit=========
+                $this->db->transCommit();
+
+                return $this->response->setJSON([
+                            'status' => 'success',
+                            'lc_id' => $lc_id,
+                            'csrfHash' => csrf_hash()
+                ]);
+            }
+            // =========Validation failed============
+            $this->db->transRollback();
+
             return $this->response->setJSON([
                         'status' => 'error',
                         'errors' => $this->modelleavingcertificate->errors(),
-                        'csrfHash' => csrf_hash(),
+                        'csrfHash' => csrf_hash()
+            ]);
+        } catch (Exception $ex) {
+            $this->db->transRollback();
+
+            return $this->response->setJSON([
+                        'status' => 'error',
+                        'errors' => ['exception' => 'Something went wrong'],
+                        'csrfHash' => csrf_hash()
             ]);
         }
     }
@@ -162,7 +200,7 @@ class LeavingCertificate extends BaseController {
                 'examination' => $this->request->getVar('examination'),
                 'exam_period' => $this->request->getVar('exam_period'),
                 'date_of_leaving' => $this->request->getVar('date_of_leaving')
-            ];             
+            ];
             $data['lc_count'] = null;
             $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_lc($ysd_id);
         }
