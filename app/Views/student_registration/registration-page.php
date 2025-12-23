@@ -25,12 +25,12 @@ $errors = session()->getFlashdata('errors') ?? [];
 
             <div class="card custom-card">
                 <div class="card-body p-5">
-                    <?php if ($page_session->getTempdata('success')): ?>
+                    <?php if ($page_session->getFlashdata('success')): ?>
                         <div class="alert alert-primary rounded-pill alert-dismissible fade show"><?= $page_session->getTempdata('success'); ?></div>
                     <?php endif; ?>
-                    <?php if ($page_session->getTempdata('error')): ?>
+                    <?php if ($page_session->getFlashdata('error')): ?>
                         <div class="alert alert-danger rounded-pill alert-dismissible fade show">       
-                            <?= $page_session->getTempdata('error'); ?></div>
+                            <?= $page_session->getFlashdata('error'); ?></div>
                     <?php endif; ?>
                     <p class="h5 fw-semibold mb-2 text-center"><?= lang('App.register'); ?> </p>
                     <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome to Rise Portal! Sign up to access your learning tools and updates.</p>

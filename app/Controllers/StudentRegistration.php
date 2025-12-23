@@ -83,7 +83,7 @@ class StudentRegistration extends BaseController {
                 throw new\Exception('Registration Failed.');
             }
             $this->db->transCommit();
-            $session->setTempdata(
+            $session->getFlashdata(
             'success',
             'Registration successful! Your Rise No is <b>' . $finalRiseNo . '</b>',
             5
@@ -91,7 +91,7 @@ class StudentRegistration extends BaseController {
 //            return true;
         } catch (\Throwable $e) {
             $this->db->transRollback();
-             $session->setTempdata(
+             $session->getFlashdata(
             'error',
             'Registration failed: ' . $e->getMessage(),
             5
