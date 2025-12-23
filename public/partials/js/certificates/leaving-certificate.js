@@ -1,11 +1,13 @@
 let table;
+let reloadAfterLC = false;
 $("#fetch_lc_student").on("submit", function (e) {
 
     e.preventDefault();
+    if(!table){
     table = $('#lc-student-list').DataTable({
         processing: true,
         serverSide: true,
-        destroy: true,
+//        destroy: true,
 
         ajax: {
             url: BASE_URL + "leavingcertificate/fetch-lc-student-list",
@@ -44,6 +46,10 @@ $("#fetch_lc_student").on("submit", function (e) {
 //            }
         }
     });
+}else {
+    // 🔁 Subsequent searches → reload data only
+    table.ajax.reload();
+}
 
 });
 
@@ -61,14 +67,14 @@ $(document).on('click', '.lc_btn', function () {
 
     // set hidden field for modal submit
     $('#yearwise_student_data_id').val(ysd_id);
-    
+
     // ✅ ALWAYS set preview URL (no condition)
     let previewUrl = BASE_URL +
-        "leavingcertificate/print-leaving-certificate?ysd_id=" + ysd_id;
+            "leavingcertificate/print-leaving-certificate?ysd_id=" + ysd_id;
 
-    $('#lc_preview_btn').attr('href', previewUrl)
-        .attr('target', '_blank');
-
+//    $('#lc_preview_btn').attr('href', previewUrl)
+//            .attr('target', '_blank');
+    
     $.ajax({
         url: BASE_URL + "leavingcertificate/check-lc-exists",
         type: "POST",
@@ -88,8 +94,8 @@ $(document).on('click', '.lc_btn', function () {
             }
             // ⚠️ ALREADY GENERATED → SweetAlert
             Swal.fire({
-                title: "Already Generated",
-                text: "Leaving Certificate is already generated. Do you want Duplicate?",
+                title: "LC Already Generated !!",
+                text: "Leaving Certificate has already been generated. Do you want Duplicate?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonText: "Yes, Duplicate",
@@ -108,6 +114,43 @@ $(document).on('click', '.lc_btn', function () {
     });
 });
 
+/* ===================== PREVIEW (POST) ===================== */
+$('#lc_preview_btn').off('click').on('click', function (e) {
+    e.preventDefault();
+
+//    // safety
+//    if (!$('#yearwise_student_data_id').val()) {
+//        alert('Please select student first');
+//        return;
+//    }
+
+    let form = $('#lc_modal_form');
+
+    // create temp form
+    let previewForm = $('<form>', {
+        action: BASE_URL + 'leavingcertificate/print-leaving-certificate',
+        method: 'POST',
+        target: '_blank'
+    });
+
+    // copy modal inputs
+    form.serializeArray().forEach(function (item) {
+        previewForm.append(
+            $('<input>', {type: 'hidden',name: item.name,value: item.value})
+        );
+    });
+
+    // CSRF
+    previewForm.append(
+        $('<input>', {type: 'hidden',name: csrfName,value: csrfHash})
+    );
+
+    $('body').append(previewForm);
+    previewForm.submit();
+    previewForm.remove();
+});
+
+//=================== Submit LC ======================
 $("#lc_modal_form").on("submit", function (e) {
     e.preventDefault();
 
@@ -133,9 +176,10 @@ $("#lc_modal_form").on("submit", function (e) {
             }
 
             // success
+            reloadAfterLC = true;   // flag
             $("#lc_modal").modal('hide');
             window.open(
-                     BASE_URL + "leavingcertificate/print-leaving-certificate?lc_id=" + response.lc_id,
+                    BASE_URL + "leavingcertificate/print-leaving-certificate?lc_id=" + response.lc_id,
                     "_blank"
                     );
         }
@@ -148,10 +192,18 @@ $('#lc_modal').on('hidden.bs.modal', function () {
 
     // clear hidden id also (VERY IMPORTANT)
     $('#yearwise_student_data_id').val('');
-     // 🔴 REMOVE readonly
+    // 🔴 REMOVE readonly
     $('#examination, #exam_period, #date_of_leaving')
-        .prop('readonly', false);
+            .prop('readonly', false);
 
     // clear validation errors
     $('.field-error').text('').hide();
+
+    // 🔥 reload ONLY when LC was generated
+    if (reloadAfterLC) {
+        reloadAfterLC = false;
+        if (table) {
+            table.ajax.reload(null, false); // 🔥 THIS IS THE KEY
+        }
+    }
 });

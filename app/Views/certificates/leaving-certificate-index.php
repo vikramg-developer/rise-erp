@@ -93,19 +93,19 @@
                             <?= csrf_field(); ?>
                             <input type="hidden" id="yearwise_student_data_id" name="yearwise_student_data_id">
                             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                                <label for="examination" class="form-label"><?= lang('App.examination'); ?></label>
+                                <label for="examination" class="form-label"><?= lang('App.examination'); ?></label> <span class="text-danger">*</span>
                                 <input type="text" class="form-control" name="examination" id="examination" value="" placeholder="<?= lang('App.examination'); ?>">
                                 <small class="text-danger field-error" id="examination_error"></small>
                             </div>
 
                             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                                <label for="exam_period" class="form-label"><?= lang('App.exam'); ?> <?= lang('App.period'); ?> </label>
+                                <label for="exam_period" class="form-label"><?= lang('App.exam'); ?> <?= lang('App.period'); ?> </label> <span class="text-danger">*</span>
                                 <input type="text" class="form-control" name="exam_period" id="exam_period" value="" placeholder="<?= lang('App.exam'); ?> <?= lang('App.period'); ?>">
                                 <small class="text-danger field-error" id="exam_period_error"></small>
                             </div>
 
                             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                                <label for="date_of_leaving" class="form-label"><?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?></label>
+                                <label for="date_of_leaving" class="form-label"><?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?></label> <span class="text-danger">*</span>
                                 <div class="input-group">
                                     <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
                                     <input type="text" class="form-control" name="date_of_leaving" id="date_of_leaving" value="" placeholder="<?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?>">

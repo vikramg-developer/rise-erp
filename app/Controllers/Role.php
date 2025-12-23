@@ -20,6 +20,7 @@ class Role extends BaseController {
     public function index() {
         session()->set('back_url', current_url());
         $data['jspath'] = 'roles/index-role';
+        $data['title'] = lang('App.rise')." - ".lang('App.manage')." ".lang('App.role');
         return render_page('role/index-role', $data);
     }
 
@@ -65,12 +66,12 @@ class Role extends BaseController {
             endif;
 
             $data[] = [
+                (hasPermission('viewRole') || hasPermission('deleteRole')) ? $buttons : '',
                 $sr_no++,
                 $row['role_name'],
                 '',
                 '',
-                $remark,
-                (hasPermission('viewRole') || hasPermission('deleteRole')) ? $buttons : '',
+                $remark,                
             ];
         }
 
@@ -86,6 +87,7 @@ class Role extends BaseController {
     public function add_role() {
         $permissionsPath = APPPATH . 'Config/permissions.json';
         $data['permissions'] = json_decode(file_get_contents($permissionsPath), true);
+        $data['title'] = lang('App.rise')." - ".lang('App.add')." ".lang('App.role');
 
         $data['backUrl'] = previous_url() ?? base_url('roles');
         return render_page('role/add-role', $data);
@@ -122,6 +124,7 @@ class Role extends BaseController {
         $data['backUrl'] = previous_url() ?? base_url('roles');
         $data['role_data'] = $this->modelrole->find($role_id);
         $data['jspath'] = 'roles/edit-role';
+        $data['title'] = lang('App.rise')." - ".lang('App.edit')." ".lang('App.role');
 
         return render_page('role/edit-role', $data);
     }
