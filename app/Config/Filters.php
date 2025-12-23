@@ -10,6 +10,7 @@ use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
 use App\Filters\PermissionFilter;
 use App\Filters\AuthFilter;
+use App\Filters\SessionLogoutFilter;
 
 class Filters extends BaseConfig {
 
@@ -25,6 +26,7 @@ class Filters extends BaseConfig {
         'secureheaders' => SecureHeaders::class,
         'permission' => PermissionFilter::class,
         'auth' => AuthFilter::class,
+        'sessionlogout' => SessionLogoutFilter::class,
     ];
 
     /**
@@ -60,7 +62,19 @@ class Filters extends BaseConfig {
                     'student-registration', //skip student registration page
                     'save-registration', //skip student registration save page
                 ]
-            ]
+            ],
+            'sessionlogout' => [
+                'before' => [
+                    '*',
+                ],
+                'except' => [
+                    'login',
+                    'check-user',
+                    'logout',
+                    'student-registration',
+                    'save-registration',
+                ],
+            ],
         // 'invalidchars',
         ],
         'after' => [

@@ -55,10 +55,10 @@ $permissions = config('Permissions');
                                                 <!------------------------------------------------------- End::users-------------------------------------------------------------->
 
                                                 
-                                                           <!--========================= Dashboard START =========================-->
-                                                    <?php //if (hasAnyPermission($permissions->master_dashboard)): ?>
+                                                     <!--========================= Dashboard START =========================-->
+                                                    <?php if (hasAnyPermission($permissions->master_dashboard)): ?>
                                                     <li class="slide__category"><span class="category-name"><?= lang('App.dashboard'); ?></span></li>
-                                                    <?php// endif; ?>
+                                                    <?php endif; ?>
                                                     
                                                     <?php if (hasAnyPermission($permissions->dashboard)): ?>
                                                     <li id="dashboardNav" class="slide has-sub">
@@ -108,6 +108,24 @@ $permissions = config('Permissions');
                                                 <?php endif; ?>
 
                                                 <!--========================= Dashboard END =========================-->
+                                                <!-- Start::slide__category -->
+                                                <li class="slide__category"><span class="category-name">Student</span></li>
+                                                <!-- End::slide__category -->
+
+                                               
+                                                <!-- Start::StudentProfile -->
+                                                 <?php if (hasAnyPermission($permissions->studentProfile)): ?>
+                                                <li class="slide">
+                                                    <a href="<?php echo base_url('student-profile'); ?>" class="side-menu__item">
+                                                        <i class="bx bx-user side-menu__icon"></i>
+                                                        <span class="side-menu__label"><?= lang('App.student'); ?> <?= lang('App.profile'); ?></span>
+                                                    </a>
+                                                </li>
+                                                  <?php endif; ?>
+                                                <!-- End::StudentProfile --> 
+
+                                                
+                                                
                                                 <!--========================= Feedback Module START =========================-->
                                                 <?php if (hasAnyPermission($permissions->feedback_module_category)): ?>
                                                     <li class="slide__category"><span class="category-name"><?= lang('App.feedback'); ?> <?= lang('App.module'); ?></span></li>

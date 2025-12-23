@@ -82,6 +82,13 @@ class Permissions extends BaseConfig{
         'updateStudentDashboard',
         'deleteStudentDashboard',
     ];
+       /** Student Profile permissions */
+    public array $studentProfile = [
+        'createStudentProfile',
+        'viewStudentProfile',
+        'updateStudentProfile',
+        'deleteStudentProfile',
+    ];
     
     /** feedback permissions */
     public array $feedback = [
@@ -93,7 +100,7 @@ class Permissions extends BaseConfig{
     
     /** Master permissions (auto-merged) */
         public array $master;
-        public array $dashboard;
+        public array $master_dashboard;
         public array $feedback_module;
         public array $master_category;
         public array $feedback_module_category;
@@ -126,6 +133,9 @@ class Permissions extends BaseConfig{
         
         $this->feedback_module_category = array_merge(
                $this->feedback_module 
+        );
+         $this->master_dashboard = array_merge(
+               $this->dashboard 
         );
         
     }

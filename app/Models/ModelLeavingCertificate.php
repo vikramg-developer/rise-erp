@@ -39,4 +39,11 @@ class ModelLeavingCertificate extends Model {
                 'required' => 'Date of Leaving field is required'
             ]
     ];
+    
+//   ============ Resusable function======================
+    public function get_lc_data($ysd_id){
+        return $this->where('yearwise_student_data_id',$ysd_id)->findAll();
+    }
+        
+
 }
