@@ -1,5 +1,5 @@
 <?php
-$page_session = \Config\Services::session();
+$session = session();
 $errors = session()->getFlashdata('errors') ?? [];
 ?>
 
@@ -17,7 +17,7 @@ $errors = session()->getFlashdata('errors') ?? [];
     <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
             <div class="my-5 d-flex justify-content-center">
-                <a href="<?php //echo base_url('index');           ?>">
+                <a href="<?php //echo base_url('index');                             ?>">
                     <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-logo">
                     <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-dark">
                 </a>
@@ -25,13 +25,18 @@ $errors = session()->getFlashdata('errors') ?? [];
 
             <div class="card custom-card">
                 <div class="card-body p-5">
-                    <?php if ($page_session->getFlashdata('success')): ?>
-                        <div class="alert alert-primary rounded-pill alert-dismissible fade show"><?= $page_session->getTempdata('success'); ?></div>
+                    <?php if ($session->getFlashdata('success')): ?>
+                        <div class="alert alert-primary rounded-pill alert-dismissible fade show">
+                            <?= $session->getFlashdata('success'); ?>
+                        </div>
                     <?php endif; ?>
-                    <?php if ($page_session->getFlashdata('error')): ?>
-                        <div class="alert alert-danger rounded-pill alert-dismissible fade show">       
-                            <?= $page_session->getFlashdata('error'); ?></div>
+
+                    <?php if ($session->getFlashdata('error')): ?>
+                        <div class="alert alert-danger rounded-pill alert-dismissible fade show">
+                            <?= $session->getFlashdata('error'); ?>
+                        </div>
                     <?php endif; ?>
+
                     <p class="h5 fw-semibold mb-2 text-center"><?= lang('App.register'); ?> </p>
                     <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome to Rise Portal! Sign up to access your learning tools and updates.</p>
                     <?= form_open('save-registration'); ?>
@@ -69,37 +74,48 @@ $errors = session()->getFlashdata('errors') ?? [];
                                 <small class="text-danger"><?= esc($errors['student_aadhar_number']); ?></small>
                             <?php endif; ?>
                         </div>
-                        <!--Password-->
                         <!-- Password -->
                         <div class="col-xl-12">
                             <label for="student_password" class="form-label text-default">
                                 <?= lang('App.password'); ?>
                             </label>
                             <div class="input-group">
-                                <input type="password"class="form-control form-control-lg required-input <?= isset($errors['student_password']) ? 'is-invalid' : '' ?>" name="student_password" id="student_password"minlength="8"placeholder="  <?= lang('App.password'); ?>"onkeyup="check();">
-                                <button class="btn btn-light"
-                                        type="button"
+                                <input type="password"
+                                       class="form-control form-control-lg required-input <?= isset($errors['student_password']) ? 'is-invalid' : '' ?>"
+                                       name="student_password"
+                                       id="student_password"
+                                       minlength="8"
+                                       placeholder="<?= lang('App.password'); ?>"
+                                       onkeyup="check();">
+                                <button class="btn btn-light" type="button"
                                         onclick="createpassword('student_password', this)">
                                     <i class="ri-eye-off-line align-middle"></i>
                                 </button>
                             </div>
-
-                            <?php if (isset($errors['student_password'])): ?>
-                                <small class="text-danger">
-                                    <?= esc($errors['student_password']); ?>
-                                </small>
-                            <?php endif; ?>
                         </div>
 
-                        <!--Confirm Password-->
+                        <!-- Confirm Password -->
                         <div class="col-xl-12 mb-2">
-                            <label for="signup-confirmpassword" class="form-label text-default"><?= lang('App.confirm'); ?> <?= lang('App.password'); ?></label>
+                            <label for="signup-confirmpassword" class="form-label text-default">
+                                <?= lang('App.confirm'); ?> <?= lang('App.password'); ?>
+                            </label>
                             <div class="input-group">
-                                <input type="password" class="form-control form-control-lg required-input"name="confirm_password" id="signup-confirmpassword" placeholder="confirm password" minlength="8"onkeyup='check();'>
-                                <button class="btn btn-light" onclick="createpassword('signup-confirmpassword', this)" type="button" id="button-addon21"><i class="ri-eye-off-line align-middle"></i></button>
+                                <input type="password"
+                                       class="form-control form-control-lg required-input"
+                                       name="confirm_password"
+                                       id="signup-confirmpassword"
+                                       minlength="8"
+                                       placeholder="Confirm password"
+                                       onkeyup="check();">
+                                <button class="btn btn-light" type="button"
+                                        onclick="createpassword('signup-confirmpassword', this)">
+                                    <i class="ri-eye-off-line align-middle"></i>
+                                </button>
                             </div>
+
                             <small id="password-message"></small>
                         </div>
+
                         <div class="col-xl-12 d-grid mt-2">
                             <!--<button id="createBtn"class="btn btn-lg btn-primary"type="submit"disabled>Create Account</button>-->
                             <button class="btn btn-lg btn-primary"id="signup-submit" type="submit"><?= lang('App.register'); ?> </button>

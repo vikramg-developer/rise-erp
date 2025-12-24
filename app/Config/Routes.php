@@ -38,12 +38,12 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 $routes->get('/', 'Dashboard::index');
 $routes->get('dashboard', 'Dashboard::index');
-$routes->get('admin-dashboard', 'Dashboard::admin_dashboard',['filter' => 'permission:viewAdminDashboard']);
-$routes->get('faculty-dashboard', 'Dashboard::faculty_dashboard',['filter' => 'permission:viewFacultyDashboard']);
-$routes->get('librarian-dashboard', 'Dashboard::librarian_dashboard',['filter' => 'permission:viewLibrarianDashboard']);
-$routes->get('accountant-dashboard', 'Dashboard::accountant_dashboard',['filter' => 'permission:viewAccountantDashboard']);
-$routes->get('iqac-dashboard', 'Dashboard::iqac_dashboard',['filter' => 'permission:viewIqacDashboard']);
-$routes->get('student-dashboard', 'Dashboard::student_dashboard',['filter' => 'permission:viewStudentDashboard']);
+$routes->get('admin-dashboard', 'Dashboard::admin_dashboard', ['filter' => 'permission:viewAdminDashboard']);
+$routes->get('faculty-dashboard', 'Dashboard::faculty_dashboard', ['filter' => 'permission:viewFacultyDashboard']);
+$routes->get('librarian-dashboard', 'Dashboard::librarian_dashboard', ['filter' => 'permission:viewLibrarianDashboard']);
+$routes->get('accountant-dashboard', 'Dashboard::accountant_dashboard', ['filter' => 'permission:viewAccountantDashboard']);
+$routes->get('iqac-dashboard', 'Dashboard::iqac_dashboard', ['filter' => 'permission:viewIqacDashboard']);
+$routes->get('student-dashboard', 'Dashboard::student_dashboard', ['filter' => 'permission:viewStudentDashboard']);
 
 $routes->get('login', 'Login::login');
 $routes->get('forbidden', 'Error::forbidden');
@@ -69,39 +69,34 @@ $routes->post('/check-user', 'Login::check_user');
 
 $routes->get('student-registration', 'StudentRegistration::index');
 $routes->post('save-registration', 'StudentRegistration::add_registration');
-//$routes->post('/studentProfile', 'Registration::studentProfile');
-$routes->get('/student-profile', 'StudentRegistration::student_profile',['filter' => 'permission:viewStudentProfile']);
-$routes->post('/savesignup', 'Registration::saveSignup');
-$routes->get('/student-dashboard', 'Login::studentDashboard');
-$routes->get('/studentDashboard', 'Login::studentDashboard');
-$routes->post('/studentProfile', 'Registration::studentProfile');
+$routes->get('/student-profile', 'StudentProfile::index', ['filter' => 'permission:viewStudentProfile']);
+$routes->post('add-personal-details', 'StudentProfile::add_personal_information',['filter' => 'permission:viewStudentProfile']);
+
 $routes->post('/student-list', 'FeesManagement::student_list');
 $routes->post('/ticket', 'Ticket::index');
 
-$routes->group('leavingcertificate', function ($routes) {    
+$routes->group('leavingcertificate', function ($routes) {
     $routes->get('/', 'LeavingCertificate::index', ['filter' => 'permission:createFeesManagement']);
     $routes->post('fetch-lc-student-list', 'LeavingCertificate::fetch_lc_student_list', ['filter' => 'permission:createFeesManagement']);
     $routes->post('check-lc-exists', 'LeavingCertificate::check_lc_exists', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('add-leaving-certificate-data', 'LeavingCertificate::add_leaving_certificate_data', ['filter' => 'permission:createFeesManagement']);   
+    $routes->post('add-leaving-certificate-data', 'LeavingCertificate::add_leaving_certificate_data', ['filter' => 'permission:createFeesManagement']);
 //    $routes->get('print-leaving-certificate/(:num)', 'LeavingCertificate::print_leaving_certificate/$1', ['filter' => 'permission:createFeesManagement']);   
-    $routes->get('print-leaving-certificate', 'LeavingCertificate::print_leaving_certificate', ['filter' => 'permission:createFeesManagement']);   
-    $routes->post('print-leaving-certificate', 'LeavingCertificate::print_leaving_certificate', ['filter' => 'permission:createFeesManagement']);   
-    $routes->get('leaving-certificate-report', 'LeavingCertificateReport::index', ['filter' => 'permission:createFeesManagement']);    
+    $routes->get('print-leaving-certificate', 'LeavingCertificate::print_leaving_certificate', ['filter' => 'permission:createFeesManagement']);
+    $routes->post('print-leaving-certificate', 'LeavingCertificate::print_leaving_certificate', ['filter' => 'permission:createFeesManagement']);
+    $routes->get('leaving-certificate-report', 'LeavingCertificateReport::index', ['filter' => 'permission:createFeesManagement']);
 });
 
 //---------- feedback ----------//
 $routes->group('feedback', function ($routes) {
-    $routes->get('/', 'Feedback::index',['filter' => 'permission:createFeedback']);
-    $routes->post('save-feedback-master', 'Feedback::save_feedback_master',['filter' => 'permission:createFeedback']);
-     $routes->post('delete-feedback-master', 'Feedback::delete_feedback_master', ['filter' => 'permission:deleteFeedback']);
+    $routes->get('/', 'Feedback::index', ['filter' => 'permission:createFeedback']);
+    $routes->post('save-feedback-master', 'Feedback::save_feedback_master', ['filter' => 'permission:createFeedback']);
+    $routes->post('delete-feedback-master', 'Feedback::delete_feedback_master', ['filter' => 'permission:deleteFeedback']);
     $routes->post('revert-feedback-master', 'Feedback::revert_feedback_master', ['filter' => 'permission:updateFeedback']);
-    
-    
-    $routes->post('fetch-feedback-master', 'Feedback::fetch_feedback_master',['filter' => 'permission:createFeedback']);
-    
-    
-    $routes->get('manage-question', 'Feedback::manage_question' , ['filter' => 'permission:createFeedback']);
-    $routes->get('sample-excel-file', 'Feedback::sample_excel_file' , ['filter' => 'permission:createFeedback']);
+
+    $routes->post('fetch-feedback-master', 'Feedback::fetch_feedback_master', ['filter' => 'permission:createFeedback']);
+
+    $routes->get('manage-question', 'Feedback::manage_question', ['filter' => 'permission:createFeedback']);
+    $routes->get('sample-excel-file', 'Feedback::sample_excel_file', ['filter' => 'permission:createFeedback']);
 });
 //---------- faculty ----------//
 $routes->group('faculty', function ($routes) {
@@ -109,14 +104,13 @@ $routes->group('faculty', function ($routes) {
     $routes->get('/', 'Faculty::index', ['filter' => 'permission:createfaculty']);
     $routes->get('fetch-faculty', 'Faculty::faculty_data', ['filter' => 'permission:createfaculty']);
     $routes->get('edit-faculty/(:num)', 'Faculty::edit_faculty/$1', ['filter' => 'permission:updatefaculty']);
-    
+
     $routes->post('add-faculty', 'Faculty::add_faculty', ['filter' => 'permission:createfaculty']);
     $routes->post('fetch-faculty-data', 'Faculty::fetch_faculty', ['filter' => 'permission:createfaculty']);
-    
+
     $routes->post('update-faculty', 'Faculty::update_faculty', ['filter' => 'permission:updatefaculty']);
     $routes->post('delete-faculty', 'Faculty::delete_faculty', ['filter' => 'permission:deletefaculty']);
     $routes->post('revert-faculty', 'Faculty::revert_faculty', ['filter' => 'permission:deletefaculty']);
-
 });
 
 $routes->group('headgroup', function ($routes) {
@@ -145,7 +139,6 @@ $routes->group('department', function ($routes) {
     $routes->post('delete-department', 'Department::delete_department', ['filter' => 'permission:createDepartment']);
     $routes->post('revert-department', 'Department::revert_department', ['filter' => 'permission:createDepartment']);
 });
-
 
 $routes->group('roles', function ($routes) {
     $routes->get('/', 'Role::index', ['filter' => 'permission:viewRole']);
