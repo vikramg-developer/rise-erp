@@ -75,8 +75,8 @@ class AddFacultyRegistration extends Migration {
             ],
             'updated_at' => [
                 'type' => 'TIMESTAMP',
-                'null' => false,
-                'default' => new RawSql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+                'null' => true,
+                'default'=>new Rawsql('NULL ON UPDATE CURRENT_TIMESTAMP'),
             ],
             'is_deleted' => [
                 'type' => 'TINYINT',

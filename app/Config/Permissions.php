@@ -9,14 +9,13 @@ use CodeIgniter\Config\BaseConfig;
  *
  * @author Shoeb
  */
-class Permissions extends BaseConfig{
+class Permissions extends BaseConfig {
     //put your code here
-    
+
     /* ===============================
      * Sub-groups
      * =============================== */
-    
-    
+
     /** Head Group permissions */
     public array $headGroup = [
         'createHeadGroup',
@@ -32,7 +31,7 @@ class Permissions extends BaseConfig{
         'updateHead',
         'deleteHead',
     ];
-    
+
     /** Department permissions */
     public array $department = [
         'createDepartment',
@@ -40,56 +39,63 @@ class Permissions extends BaseConfig{
         'updateDepartment',
         'deleteDepartment',
     ];
-     /** Admin Dashboard permissions */
+
+    /** Admin Dashboard permissions */
     public array $adminDashboard = [
         'createAdminDashboard',
         'viewAdminDashboard',
         'updateAdminDashboard',
         'deleteAdminDashboard',
     ];
-      /** Faculty Dashboard permissions */
+
+    /** Faculty Dashboard permissions */
     public array $facultyDashboard = [
         'createFacultyDashboard',
         'viewFacultyDashboard',
         'updateFacultyDashboard',
         'deleteFacultyDashboard',
     ];
-      /** Librarian Dashboard permissions */
+
+    /** Librarian Dashboard permissions */
     public array $librarianDashboard = [
         'createLibrarianDashboard',
         'viewLibrarianDashboard',
         'updateLibrarianDashboard',
         'deleteLibrarianDashboard',
     ];
-      /** Accountant Dashboard permissions */
+
+    /** Accountant Dashboard permissions */
     public array $accountantDashboard = [
         'createAccountantDashboard',
         'viewAccountantDashboard',
         'updateAccountantDashboard',
         'deleteAccountantDashboard',
     ];
-      /** IQAC Dashboard permissions */
+
+    /** IQAC Dashboard permissions */
     public array $iqacDashboard = [
         'createIqacDashboard',
         'viewIqacDashboard',
         'updateIqacDashboard',
         'deleteIqacDashboard',
     ];
-      /** Student Dashboard permissions */
+
+    /** Student Dashboard permissions */
     public array $studentDashboard = [
         'createStudentDashboard',
         'viewStudentDashboard',
         'updateStudentDashboard',
         'deleteStudentDashboard',
     ];
-       /** Student Profile permissions */
+
+    /** Student Profile permissions */
     public array $studentProfile = [
         'createStudentProfile',
         'viewStudentProfile',
         'updateStudentProfile',
         'deleteStudentProfile',
     ];
-    
+
     /** feedback permissions */
     public array $feedback = [
         'createFeedback',
@@ -97,47 +103,101 @@ class Permissions extends BaseConfig{
         'updateFeedback',
         'deleteFeedback',
     ];
-    
-    /** Master permissions (auto-merged) */
-        public array $master;
-        public array $master_dashboard;
-        public array $feedback_module;
-        public array $master_category;
-        public array $feedback_module_category;
 
-    public function __construct()
-    {
+    /** Faculty permissions */
+    public array $faculty_registration = [
+        'createFaculty',
+        'viewFaculty',
+        'updateFaculty',
+        'deleteFaculty',
+    ];
+    
+     /** Faculty Profile */
+    public array $faculty_profile = [
+        'createFacultyProfile',
+        'viewFacultyProfile',
+        'updateFacultyProfile',
+        'deleteFacultyProfile',
+    ];
+
+    /** ticket permissions */
+    public array $Ticket = [
+        'createTicket',
+        'updateTicket',
+        'viewTicket',
+        'deleteTicket'
+    ];
+
+    /** Master permissions (auto-merged) */
+    public array $master;
+    public array $master_dashboard;
+    public array $master_category;
+    public array $feedback_module;
+    public array $feedback_module_category;
+    public array $faculty_module;
+    public array $faculty_module_category;
+    public array $faculty_profile_module;
+    public array $faculty_profile_module_category;
+    public array $ticket_module;
+    public array $ticket_module_category;
+
+    public function __construct() {
+        //-----------for submenu -------------------//
         $this->master = array_merge(
-            $this->headGroup,
-            $this->head,
-            $this->department,
-                
+                $this->headGroup,
+                $this->head,
+                $this->department,
         );
         $this->dashboard = array_merge(
-            $this->adminDashboard,
-            $this->facultyDashboard,
-            $this->librarianDashboard,
-            $this->accountantDashboard,
-            $this->iqacDashboard,
-            $this->studentDashboard
-        );
-        
-        $this->feedback_module = array_merge(
-            $this->feedback
+                $this->adminDashboard,
+                $this->facultyDashboard,
+                $this->librarianDashboard,
+                $this->accountantDashboard,
+                $this->iqacDashboard,
+                $this->studentDashboard
         );
 
-        //-------------------------------------------------------------//
+        $this->feedback_module = array_merge(
+                $this->feedback
+        );
+        
+        //Faculty Registation (user)
+        $this->faculty_module = array_merge(
+                $this->faculty_registration
+        );
+        
+        //faculty profile(API)
+        $this->faculty_profile_module = array_merge(
+                $this->faculty_profile
+        );
+        
+        $this->ticket_module = array_merge(
+                $this->Ticket
+        );
+
+        //---------------------------Main Menu Label---------------------------//
         $this->master_category = array_merge(
-               $this->master 
+                $this->master
         );
-        
+
         $this->feedback_module_category = array_merge(
-               $this->feedback_module 
+                $this->feedback_module
         );
-         $this->master_dashboard = array_merge(
-               $this->dashboard 
+        $this->master_dashboard = array_merge(
+                $this->dashboard
+        );
+        //Faculty Regiatration
+        $this->faculty_module_category = array_merge(
+                $this->faculty_module
         );
         
+        //Faculty Regiatration
+        $this->faculty_profile_module_category = array_merge(
+                $this->faculty_profile_module
+        );
+         //Ticket
+         $this->ticket_module_category = array_merge(
+                $this->ticket_module
+        );
     }
-    
 }
