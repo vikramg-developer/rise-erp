@@ -1,53 +1,30 @@
 <?php
 
 namespace App\Models;
+
 use CodeIgniter\Model;
+
 /**
  * Description of ModelHeadGroup
  *
  * @author Shoeb
  */
-class ModelHeadGroup extends Model{
-    protected $table      = 'head_group';
+class ModelHeadGroup extends Model {
+
+    protected $table = 'head_group';
     protected $primaryKey = 'head_group_id';
-
     protected $useAutoIncrement = true;
-
-    protected $returnType     = 'array';
-//    protected $useSoftDeletes = true;
-//
-    protected $allowedFields = ['head_group_name','is_deleted'];
-//
-//    protected bool $allowEmptyInserts = false;
-//    protected bool $updateOnlyChanged = true;
-//
-//    // Dates
-//    protected $useTimestamps = false;
-//    protected $dateFormat    = 'datetime';
-//    protected $createdField  = 'created_at';
-//    protected $updatedField  = 'updated_at';
-//    protected $deletedField  = 'deleted_at';
-//
+    protected $returnType = 'array';
+    protected $allowedFields = ['head_group_name', 'is_deleted'];
 //    // Validation
-    protected $validationRules      = [
+    protected $validationRules = [
         'head_group_name' => 'required|alpha_numeric_space'
     ];
-    protected $validationMessages   = [
+    protected $validationMessages = [
         'head_group_name' => [
             'required' => 'Head Group is required'
         ]
     ];
-//    protected $skipValidation       = false;
-//    protected $cleanValidationRules = true;
-//
 //    // Callbacks
-//    protected $allowCallbacks = true;
-//    protected $beforeInsert   = [];
-//    protected $afterInsert    = [];
-//    protected $beforeUpdate   = [];
-//    protected $afterUpdate    = [];
-//    protected $beforeFind     = [];
-//    protected $afterFind      = [];
-//    protected $beforeDelete   = [];
-//    protected $afterDelete    = [];
+    protected $beforeUpdate = ['setUpdateOrDeleteDate'];
 }

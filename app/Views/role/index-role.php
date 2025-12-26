@@ -18,7 +18,7 @@
             <div class="card custom-card">
                 <div class="card-header  justify-content-between">
                     <div class="card-title">
-                        <?= lang('App.manage'); ?> <?= lang('App.role'); ?>
+                        <?= lang('App.role')."s"; ?>
                     </div>
                     <?php if (hasPermission('createRole')): ?>
                     <div class="d-flex">
@@ -32,7 +32,7 @@
                         <table id="role-table" class="table table-bordered text-nowrap w-100">
                             <thead>
                                 <tr>
-                                    <?php if (hasPermission('viewRole') || hasPermission('deleteRole')): ?>
+                                    <?php if (hasPermission('updateRole') || hasPermission('deleteRole')): ?>
                                         <th><?= lang('App.action'); ?></th>
                                     <?php endif; ?>
                                     <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>

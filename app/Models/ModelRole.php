@@ -22,7 +22,7 @@ class ModelRole extends Model {
     protected $returnType = 'array';
 //    protected $useSoftDeletes = true;
 //
-    protected $allowedFields = ['role_id', 'role_name', 'permissions', 'added_by', 'updated_by', 'is_deleted'];
+    protected $allowedFields = ['role_id', 'role_name', 'permissions', 'added_by', 'updated_by','deleted_by', 'is_deleted'];
 //
 //    protected bool $allowEmptyInserts = false;
 //    protected bool $updateOnlyChanged = true;
@@ -43,7 +43,6 @@ class ModelRole extends Model {
             'required' => 'Role name is required'
         ]
     ];
-
 //    protected $skipValidation       = false;
 //    protected $cleanValidationRules = true;
 //
@@ -51,19 +50,13 @@ class ModelRole extends Model {
 //    protected $allowCallbacks = true;
 //    protected $beforeInsert   = [];
 //    protected $afterInsert    = [];
-//    protected $beforeUpdate   = [];
+    protected $beforeUpdate = ['setUpdateOrDeleteDate'];
+
 //    protected $afterUpdate    = [];
 //    protected $beforeFind     = [];
 //    protected $afterFind      = [];
 //    protected $beforeDelete   = [];
 //    protected $afterDelete    = [];
-//    public function findAllRecord($length, $start) {
-//        $result = $this->where('role_id!=', '1')->orderBy('role_id', 'DESC')->findAll($length, $start);
-//
-//        $this->resetQuery();
-//
-//        return $result;
-//    }
 
     public function countAllRoles() {
         return $this->builder()
@@ -93,12 +86,24 @@ class ModelRole extends Model {
 
         return $builder->get($length, $start)->getResultArray();
     }
-        
+
 //        for faculty registration dropdwon
-       public function getRoles() {
-        return $this->whereNotIn('role_id', [1,3])  
+    public function getRoles() {
+        return $this->whereNotIn('role_id', [1, 3])
                         ->where('is_deleted', 0)
                         ->orderBy('role_id')
                         ->findAll();
+    }
+
+    protected function setUpdateOrDeleteDate(array $data) {
+        // If `is_deleted` is being updated → set deleted_dt
+        if (array_key_exists('is_deleted', $data['data'])) {
+            $data['data']['deleted_at'] = date('Y-m-d H:i:s');
+            return $data;
+        }
+
+        // Otherwise → set updated_dt
+        $data['data']['updated_at'] = date('Y-m-d H:i:s');
+        return $data;
     }
 }
