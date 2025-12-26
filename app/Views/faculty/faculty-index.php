@@ -8,7 +8,7 @@
         <div class="ms-md-1 ms-0">
             <nav>
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="#"><?= lang('App.faculty'); ?></a></li>
+                    <li class="breadcrumb-item"><a href="<?= base_url('dashboard')?>"><?= lang('App.faculty'); ?></a></li>
                     <li class="breadcrumb-item active"><?= lang('App.add'); ?> <?= lang('App.faculty'); ?></li>
                 </ol>
             </nav>

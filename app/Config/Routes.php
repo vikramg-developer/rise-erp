@@ -53,9 +53,6 @@ $routes->post('/add-group', 'Group::add-group');
 $routes->post('/bonafide-certificate', 'BonafideCertificate::index');
 $routes->post('/bonafide-print', 'BonafideCertificate::bonafide_print');
 $routes->post('/collect-fees', 'FeesManagement::collect_fees');
-$routes->post('/create_ticket', 'Ticket::create_ticket');
-$routes->post('/faculty-profile', 'FacultyProfile::index');
-$routes->post('/faculty-personal-info', 'FacultyProfile::update_personal_info');
 
 $routes->post('/fetch-head', 'FeesManagement::fetch-head');
 $routes->post('/head', 'FeesManagement::head');
@@ -71,9 +68,12 @@ $routes->get('student-registration', 'StudentRegistration::index');
 $routes->post('save-registration', 'StudentRegistration::add_registration');
 $routes->get('/student-profile', 'StudentProfile::index', ['filter' => 'permission:viewStudentProfile']);
 $routes->post('add-personal-details', 'StudentProfile::add_personal_information',['filter' => 'permission:viewStudentProfile']);
-
+$routes->get('/student-profile', 'StudentRegistration::student_profile', ['filter' => 'permission:viewStudentProfile']);
+$routes->post('/savesignup', 'Registration::saveSignup');
+$routes->get('/student-dashboard', 'Login::studentDashboard');
+$routes->get('/studentDashboard', 'Login::studentDashboard');
+$routes->post('/studentProfile', 'Registration::studentProfile');
 $routes->post('/student-list', 'FeesManagement::student_list');
-$routes->post('/ticket', 'Ticket::index');
 
 $routes->group('leavingcertificate', function ($routes) {
     $routes->get('/', 'LeavingCertificate::index', ['filter' => 'permission:createFeesManagement']);
@@ -100,17 +100,14 @@ $routes->group('feedback', function ($routes) {
 });
 //---------- faculty ----------//
 $routes->group('faculty', function ($routes) {
-
-    $routes->get('/', 'Faculty::index', ['filter' => 'permission:createfaculty']);
-    $routes->get('fetch-faculty', 'Faculty::faculty_data', ['filter' => 'permission:createfaculty']);
-    $routes->get('edit-faculty/(:num)', 'Faculty::edit_faculty/$1', ['filter' => 'permission:updatefaculty']);
-
-    $routes->post('add-faculty', 'Faculty::add_faculty', ['filter' => 'permission:createfaculty']);
-    $routes->post('fetch-faculty-data', 'Faculty::fetch_faculty', ['filter' => 'permission:createfaculty']);
-
-    $routes->post('update-faculty', 'Faculty::update_faculty', ['filter' => 'permission:updatefaculty']);
-    $routes->post('delete-faculty', 'Faculty::delete_faculty', ['filter' => 'permission:deletefaculty']);
-    $routes->post('revert-faculty', 'Faculty::revert_faculty', ['filter' => 'permission:deletefaculty']);
+    $routes->get('/', 'Faculty::index', ['filter' => 'permission:createFaculty']);
+    $routes->get('fetch-faculty', 'Faculty::faculty_data', ['filter' => 'permission:createFaculty']);
+    $routes->get('edit-faculty/(:num)', 'Faculty::edit_faculty/$1', ['filter' => 'permission:updateFaculty']);
+    $routes->post('add-faculty', 'Faculty::add_faculty', ['filter' => 'permission:createFaculty']);
+    $routes->post('fetch-faculty-data', 'Faculty::fetch_faculty', ['filter' => 'permission:createFaculty']);
+    $routes->post('update-faculty', 'Faculty::update_faculty', ['filter' => 'permission:updateFaculty']);
+    $routes->post('delete-faculty', 'Faculty::delete_faculty', ['filter' => 'permission:deleteFaculty']);
+    $routes->post('revert-faculty', 'Faculty::revert_faculty', ['filter' => 'permission:deleteFaculty']);
 });
 
 $routes->group('headgroup', function ($routes) {
@@ -149,6 +146,16 @@ $routes->group('roles', function ($routes) {
     $routes->post('update-role/(:num)', 'Role::update_role/$1', ['filter' => 'permission:updateRole']);
     $routes->post('delete-role', 'Role::delete_role', ['filter' => 'permission:deleteRole']);
     $routes->post('revert-role', 'Role::revert_role', ['filter' => 'permission:deletteRole']);
+});
+
+$routes->group('ticket', function ($routes) {
+    $routes->get('/', 'ticket::index', ['filter' => 'permission:viewTicket']);
+    $routes->post('create_ticket', 'Ticket::create_ticket', ['filter' => 'permission:updateTicket']);
+});
+
+$routes->group('faculty-profile', function ($routes) {
+    $routes->get('/', 'FacultyProfile::index', ['filter' => 'permission:viewFacultyProfile']);
+    $routes->post('/faculty-personal-info', 'FacultyProfile::update_personal_info', ['filter' => 'permission:updateFacultyProfile']);
 });
 
 /*

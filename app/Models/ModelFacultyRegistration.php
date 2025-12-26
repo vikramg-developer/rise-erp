@@ -21,6 +21,7 @@ class ModelFacultyRegistration extends Model {
         'faculty_aadhar_number',
         'faculty_pan_number',
         'faculty_password',
+        'faculty_status',
         'added_by',
         'updated_by',
         'is_deleted',
@@ -34,7 +35,7 @@ class ModelFacultyRegistration extends Model {
         'faculty_email_id' => 'required|trim|valid_email|is_unique[faculty_registration.faculty_email_id]',
         'faculty_aadhar_number' => 'required|numeric|exact_length[12]|is_unique[faculty_registration.faculty_aadhar_number]',
         'faculty_pan_number' => 'required|regex_match[/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/]|is_unique[faculty_registration.faculty_pan_number]',
-        'faculty_password' => 'required|min_length[6]',
+        'faculty_password' => 'required|min_length[8]',
     ];
     protected $validationMessages = [
         'faculty_role_id' => [

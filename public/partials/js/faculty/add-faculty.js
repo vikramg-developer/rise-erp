@@ -75,7 +75,7 @@ $("#faculty-registration-form").on("submit", function (e) {
     formData.push({ name: csrfName, value: csrfHash });
 
     $.ajax({
-        url: "faculty/add-faculty",
+        url: BASE_URL + "faculty/add-faculty",
         type: "POST",
         data: formData,
         dataType: "json",
@@ -137,6 +137,7 @@ $(document).ready(function () {
 $(document).on("click", ".delete", function () {
 
     let faculty_registration_id = $(this).data("id");
+    
 
     if (!faculty_registration_id) {
         return;
