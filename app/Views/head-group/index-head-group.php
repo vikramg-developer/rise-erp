@@ -63,9 +63,13 @@
                         <table id="head-group-table" class="table table-bordered text-nowrap w-100">
                             <thead>
                                 <tr>
+                                    <?php if (hasPermission('updateDepartment') || hasPermission('deleteDepartment')): ?>
+                                        <th><?= lang('App.action'); ?></th>
+                                    <?php endif; ?>
                                     <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
                                     <th><?= lang('App.head'); ?> <?= lang('App.group'); ?> <?= lang('App.name'); ?></th>
-                                    <th><?= lang('App.action'); ?></th>
+                                    <th><?= lang('App.added'); ?> <?= lang('App.by'); ?></th>
+                                    <th><?= lang('App.updated'); ?> <?= lang('App.by'); ?></th>
                                     <th><?= lang('App.remark'); ?></th>
                                 </tr>
                             </thead>

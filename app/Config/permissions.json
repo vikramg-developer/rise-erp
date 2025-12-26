@@ -1,5 +1,5 @@
 {  
-    "$faculty_registration": {
+    "faculty_registration": {
         "label": "Faculty",
         "actions": [
             "createFaculty",
@@ -18,7 +18,7 @@
             "deleteStudentProfile"
         ]
     },
-    "Feedback": {
+    "feedback": {
         "label": "Feedback",
         "actions": [
             "createFeedback",
@@ -36,7 +36,7 @@
             "deleteLeavingCertificate"
         ]
     },
-    "Bonafide_Certificate": {
+    "bonafide_certificate": {
         "label": "Bonafide Certificate",
         "actions": [
             "createBonafideCertificate",
@@ -46,7 +46,7 @@
         ]
     },
 
-    "I_card": {
+    "i_card": {
         "label": "I-Card",
         "actions": [
             "createICard",
@@ -56,7 +56,7 @@
         ]
     },
 
-    "Faculty_profile": {
+    "faculty_profile": {
         "label": "Faculty Profile",
         "actions": [
             "createFacultyProfile",
@@ -66,8 +66,8 @@
         ]
     },
 
-    "Head_Group": {
-        "label": "Add Head Group",
+    "head_group": {
+        "label": "Head Group",
         "actions": [
             "createHeadGroup",
             "updateHeadGroup",
@@ -76,8 +76,8 @@
         ]
     },
 
-    "Head": {
-        "label": "Add Head",
+    "head": {
+        "label": "Head",
         "actions": [
             "createHead",
             "updateHead",
@@ -85,8 +85,8 @@
             "deleteHead"
         ]
     },
-    "Head_Group_Fees": {
-        "label": "Add Head Fees",
+    "head_group_fees": {
+        "label": "Head Fees",
         "actions": [
             "createHeadFees",
             "updateHeadFees",
@@ -94,7 +94,7 @@
             "deleteHeadFees"
         ]
     },
-    "Collect_Fees": {
+    "collect_fees": {
         "label": "Collect Fees",
         "actions": [
             "createCollectFees",
@@ -103,7 +103,7 @@
             "deleteCollectFees"
         ]
     },
-    "Ticket": {
+    "ticket": {
         "label": "Ticket",
         "actions": [
             "createTicket",
@@ -112,7 +112,7 @@
             "deleteTicket"
         ]
     }, 
-    "Role": {
+    "role": {
         "label": "Role",
         "actions": [
             "createRole",
@@ -122,8 +122,8 @@
         ]
     },
 
-    "Department": {
-        "label": "Add Department",
+    "department": {
+        "label": "Department",
         "actions": [
             "createDepartment",
             "updateDepartment",
@@ -132,7 +132,7 @@
         ]
     },
 
-    "Admin Dashboard": {
+    "admin_dashboard": {
         "label": "Admin Dashboard",
         "actions": [
             "createAdminDashboard",
@@ -141,7 +141,7 @@
             "deleteAdminDashboard"
         ]
     },
-    "Faculty Dashboard": {
+    "faculty_dashboard": {
         "label": "Faculty Dashboard",
         "actions": [
             "createFacultyDashboard",
@@ -150,7 +150,7 @@
             "deleteFacultyDashboard"
         ]
     },
-    "Librarian Dashboard": {
+    "librarian_dashboard": {
         "label": "Librarian Dashboard",
         "actions": [
             "createLibrarianDashboard",
@@ -159,7 +159,7 @@
             "deleteLibrarianDashboard"
         ]
     },
-    "Accontant Dashboard": {
+    "accontant_dashboard": {
         "label": "Accontant Dashboard",
         "actions": [
             "createAccontantDashboard",
@@ -168,7 +168,7 @@
             "deleteAccontantDashboard"
         ]
     },
-    "IQAC Dashboard": {
+    "iqac_dashboard": {
         "label": "IQAC Dashboard",
         "actions": [
             "createIqacDashboard",
@@ -177,7 +177,7 @@
             "deleteIqacDashboard"
         ]
     },
-    "Student Dashboard": {
+    "student_dashboard": {
         "label": "Student Dashboard",
         "actions": [
             "createStudentDashboard",

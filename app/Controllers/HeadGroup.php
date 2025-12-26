@@ -10,15 +10,18 @@ use App\Models\ModelFeesManagement;
  */
 class HeadGroup extends BaseController {
 
-    public $modelheadgroup;
+    protected $modelheadgroup;
+    protected $modelfacultyregistration;
 
     public function __construct() {
         $this->modelheadgroup = model('ModelHeadGroup');
+        $this->modelfacultyregistration = model('ModelFacultyRegistration');
     }
 
 //put your code here
     public function index() {
         $data['jspath'] = 'head-group/index-head-group';
+        $data['title'] = lang('App.rise') . " - " . lang('App.manage') . " " . lang('App.head');
         return render_page('head-group/index-head-group', $data);
     }
 
@@ -31,19 +34,16 @@ class HeadGroup extends BaseController {
 
         $model = $this->modelheadgroup;
 
-// TOTAL RECORDS
-        $recordsTotal = $model->countAll();
+        // TOTAL (without search, but with base filters)
+        $recordsTotal = $this->modelrole->countAllRoles();
 
-// SEARCH FILTER
-        if ($search !== '') {
-            $model->like('head_group_name', $search);
-        }
+        // FILTERED
+        $recordsFiltered = $this->modelrole->countFilteredRoles($search);
 
-// FILTERED RECORDS
-        $recordsFiltered = $model->countAllResults(false);
+        // DATA
+        $rows = $this->modelrole->getFilteredRoles($length, $start, $search);
 
-// PAGINATED DATA
-        $rows = $model->orderBy('head_group_id', 'DESC')->findAll($length, $start);
+        $facultyNameMap = $nameMap = $this->modelfacultyregistration->getRiseNoNameMap();
 
         $sr_no = 1;
 

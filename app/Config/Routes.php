@@ -129,12 +129,12 @@ $routes->group('head', function ($routes) {
 });
 
 $routes->group('department', function ($routes) {
-    $routes->get('/', 'Department::index', ['filter' => 'permission:createDepartment']);
-    $routes->post('fetch-department', 'Department::fetch_department', ['filter' => 'permission:createDepartment']);
+    $routes->get('/', 'Department::index', ['filter' => 'permission:viewDepartment']);
+    $routes->post('fetch-department', 'Department::fetch_department', ['filter' => 'permission:viewDepartment']);
     $routes->post('save-department', 'Department::save_department', ['filter' => 'permission:createDepartment']);
-    $routes->post('update-department', 'Department::update_department', ['filter' => 'permission:createDepartment']);
-    $routes->post('delete-department', 'Department::delete_department', ['filter' => 'permission:createDepartment']);
-    $routes->post('revert-department', 'Department::revert_department', ['filter' => 'permission:createDepartment']);
+    $routes->post('update-department', 'Department::update_department', ['filter' => 'permission:updateDepartment']);
+    $routes->post('delete-department', 'Department::delete_department', ['filter' => 'permission:deleteDepartment']);
+    $routes->post('revert-department', 'Department::revert_department', ['filter' => 'permission:deleteDepartment']);
 });
 
 $routes->group('roles', function ($routes) {
