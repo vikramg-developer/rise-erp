@@ -1,6 +1,6 @@
 <?php
 
-function current_rise_no(): ?int
+function current_user(): ?string
 {
     return session('rise_no');   // adjust based on your login system
 }

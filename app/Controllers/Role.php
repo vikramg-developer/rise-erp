@@ -42,7 +42,7 @@ class Role extends BaseController {
         // DATA
         $rows = $this->modelrole->getFilteredRoles($length, $start, $search);
 
-        $facultyNameMap = $nameMap = $this->modelfacultyregistration->getRiseNoNameMap();
+        $facultyNameMap = $this->modelfacultyregistration->getRiseNoNameMap();
 
         $sr_no = 1;
 
@@ -160,7 +160,7 @@ class Role extends BaseController {
         $insert_data = [
             'role_name' => clean_name($this->request->getVar('role_name')),
             'permissions' => $permission,
-            'added_by' => current_rise_no()
+            'added_by' => current_user()
         ];
 
         if ($this->modelrole->insert($insert_data)) {
@@ -198,7 +198,7 @@ class Role extends BaseController {
         $update_data = [
             'role_name' => clean_name($this->request->getVar('role_name')),
             'permissions' => $permission,
-            'updated_by' => current_rise_no()
+            'updated_by' => current_user()
         ];
 
         if ($this->modelrole->update($role_id, $update_data)) {
@@ -222,7 +222,7 @@ class Role extends BaseController {
 
         $delete_data = [
             'is_deleted' => 1,
-            'deleted_by' => current_rise_no()
+            'deleted_by' => current_user()
         ];
 
         if ($this->modelrole->update($role_id, $delete_data)) {
@@ -239,7 +239,7 @@ class Role extends BaseController {
 
         $revert_data = [
             'is_deleted' => 2,
-            'deleted_by' => current_rise_no()
+            'deleted_by' => current_user()
         ];
 
         if ($this->modelrole->update($role_id, $revert_data)) {

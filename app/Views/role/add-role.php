@@ -83,7 +83,7 @@
                         </table>
                     </div>
 
-                    <div class="px-4 py-3 border-top border-block-start d-sm-flex justify-content-end">
+                    <div class="px-4 py-3 border-top border-block-start d-sm-flex justify-content-start">
                         <a href="<?= esc($backUrl); ?>" class="btn btn-info m-1"><?= lang('App.back'); ?><i class="bi bi-skip-backward ms-2"></i></a>
                         <button class="btn btn-success m-1"><?= lang('App.save'); ?><i class="bi bi-save2 ms-2"></i></button>
                     </div>

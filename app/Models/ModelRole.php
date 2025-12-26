@@ -1,10 +1,5 @@
 <?php
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
- */
-
 namespace App\Models;
 
 use CodeIgniter\Model;
@@ -22,7 +17,7 @@ class ModelRole extends Model {
     protected $returnType = 'array';
 //    protected $useSoftDeletes = true;
 //
-    protected $allowedFields = ['role_id', 'role_name', 'permissions', 'added_by', 'updated_by','deleted_by', 'is_deleted'];
+    protected $allowedFields = ['role_id', 'role_name', 'permissions', 'added_by', 'updated_by', 'deleted_by', 'is_deleted'];
 //
 //    protected bool $allowEmptyInserts = false;
 //    protected bool $updateOnlyChanged = true;
@@ -78,7 +73,7 @@ class ModelRole extends Model {
     public function getFilteredRoles($length, $start, $search) {
         $builder = $this->builder()
                 ->where('role_id !=', 1)
-                ->orderBy('role_id', 'DESC');
+                ->orderBy('role_id', 'ASC');
 
         if (!empty($search)) {
             $builder->like('role_name', $search);
