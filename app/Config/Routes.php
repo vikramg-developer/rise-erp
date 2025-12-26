@@ -66,7 +66,8 @@ $routes->post('/check-user', 'Login::check_user');
 
 $routes->get('student-registration', 'StudentRegistration::index');
 $routes->post('save-registration', 'StudentRegistration::add_registration');
-//$routes->post('/studentProfile', 'Registration::studentProfile');
+$routes->get('/student-profile', 'StudentProfile::index', ['filter' => 'permission:viewStudentProfile']);
+$routes->post('add-personal-details', 'StudentProfile::add_personal_information',['filter' => 'permission:viewStudentProfile']);
 $routes->get('/student-profile', 'StudentRegistration::student_profile', ['filter' => 'permission:viewStudentProfile']);
 $routes->post('/savesignup', 'Registration::saveSignup');
 $routes->get('/student-dashboard', 'Login::studentDashboard');
@@ -99,14 +100,11 @@ $routes->group('feedback', function ($routes) {
 });
 //---------- faculty ----------//
 $routes->group('faculty', function ($routes) {
-
     $routes->get('/', 'Faculty::index', ['filter' => 'permission:createFaculty']);
     $routes->get('fetch-faculty', 'Faculty::faculty_data', ['filter' => 'permission:createFaculty']);
     $routes->get('edit-faculty/(:num)', 'Faculty::edit_faculty/$1', ['filter' => 'permission:updateFaculty']);
-
     $routes->post('add-faculty', 'Faculty::add_faculty', ['filter' => 'permission:createFaculty']);
     $routes->post('fetch-faculty-data', 'Faculty::fetch_faculty', ['filter' => 'permission:createFaculty']);
-
     $routes->post('update-faculty', 'Faculty::update_faculty', ['filter' => 'permission:updateFaculty']);
     $routes->post('delete-faculty', 'Faculty::delete_faculty', ['filter' => 'permission:deleteFaculty']);
     $routes->post('revert-faculty', 'Faculty::revert_faculty', ['filter' => 'permission:deleteFaculty']);

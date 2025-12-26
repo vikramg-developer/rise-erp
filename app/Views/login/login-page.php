@@ -16,7 +16,7 @@ $errors = $errors ?? [];
     <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
             <div class="my-5 d-flex justify-content-center">
-                <a href="<?php //echo base_url('registration');          ?>">
+                <a href="<?php //echo base_url('registration');                            ?>">
                     <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-logo">
                     <img src="<?php echo base_url('assets/images/brand-logos/rise.jpeg'); ?>" alt="logo" class="desktop-dark">
                 </a>
@@ -64,7 +64,7 @@ $errors = $errors ?? [];
                             <?php endif; ?>
                         </div>
                         <div class="col-xl-12">
-                            <label for="login_password" class="form-label text-default d-block"><?= lang('App.password') ?><a href="" class="float-end text-danger">Forget password ?</a></label>
+                            <label for="login_password" class="form-label text-default d-block"><?= lang('App.password') ?></label>
                             <div class="input-group">
                                 <input type="password" class="form-control form-control-lg" id="login_password" name="login_password" placeholder="<?= lang('App.password') ?>">
                                 <button class="btn btn-light"
@@ -78,23 +78,23 @@ $errors = $errors ?? [];
                         </div>
 
                         <div class="col-xl-12">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label text-muted fw-normal" for="defaultCheck1">
-                                    Remember password ?
-                                </label>
-                            </div>
+
+                            <label>
+                                <a href="" class="float-end text-danger">Forget password ?</a>
+                            </label>
+
                         </div>
                     </div>
                     <div class="col-xl-12 d-grid mt-2">
                         <button class="btn btn-lg btn-primary"id="signup-submit" type="submit"><?= lang('App.login'); ?> </button>
                     </div>
                     <?= form_close(); ?>
+                    <div class="text-center">
+                        <p class="fs-12 text-muted mt-3">Dont have an account? <a href="<?php echo base_url('student-registration'); ?>" class="text-primary"><?= lang('App.register') ?></a></p>
+                    </div>
                 </div>
 
-                <div class="text-center">
-                    <p class="fs-12 text-muted mt-3">Dont have an account? <a href="<?php echo base_url('student-registration'); ?>" class="text-primary"><?= lang('App.register') ?></a></p>
-                </div>
+
             </div>
         </div>
     </div>

@@ -25,7 +25,7 @@ class Login extends BaseController {
     }
 
     public function studentDashboard() {
-        return render_page('student_registration/studentDashboard');
+        return render_page('dashboard/student-dashboard');
     }
 
     public function check_user() {
@@ -70,7 +70,7 @@ class Login extends BaseController {
                             'role_name' => $role_data['role_name'],
                             'logged_in' => true,
                             'permissions' => json_decode($role_data['permissions'], true) ?? [],
-                            'last_activity'   => time(),
+                            'last_activity' => time(),
                         ]);
                         return redirect()->to('/dashboard');
                     } else {
