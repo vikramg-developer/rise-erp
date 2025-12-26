@@ -8,7 +8,8 @@
         <div class="ms-md-1 ms-0">
             <nav>
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="#"><?= lang('App.faculty'); ?></a></li>
+                    <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>"><?= lang('App.rise'); ?></a></li>
+                    <li class="breadcrumb-item"><a href="<?= base_url('faculty/fetch-faculty') ?>"> <?= lang('App.manage'); ?><?= lang('App.faculty'); ?></a></li>
                     <li class="breadcrumb-item active"><?= lang('App.update'); ?> <?= lang('App.faculty'); ?></li>
                 </ol>
             </nav>
@@ -42,8 +43,8 @@
                                     <option value="">  <?= lang('App.select'); ?>   <?= lang('App.role'); ?> </option>
                                     <?php foreach ($roles as $role): ?>
                                         <option value="<?= $role['role_id']; ?>"
-                                            <?= ($faculty['faculty_role_id'] == $role['role_id']) ? 'selected' : ''; ?>>
-                                            <?= esc($role['role_name']); ?>
+                                                <?= ($faculty['faculty_role_id'] == $role['role_id']) ? 'selected' : ''; ?>>
+                                                    <?= esc($role['role_name']); ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
@@ -148,12 +149,37 @@
                                 <small class="text-danger" id="edit_faculty_pan_number_error" style="display:none;"></small>
                             </div>
 
+                            <!-- PAN -->
+                            <div class="col-xl-4 col-md-6">
+                                <label class="form-label">
+                                    <?= lang('App.status'); ?> <span class="text-danger">*</span>
+                                </label>
+
+                                <select class="form-control js-example-basic-single"
+                                        name="edit_faculty_status_id"
+                                        id="edit_faculty_status_id">
+                                    <option value="1" <?= ($faculty['faculty_status'] == 1) ? 'selected' : ''; ?>>
+                                        Active
+                                    </option>
+                                    <option value="0"<?= ($faculty['faculty_status'] == 0) ? 'selected' : ''; ?>>
+                                        In-Active
+                                    </option>
+                                </select>
+                                <small class="text-danger" id="edit_faculty_status_id_error" style="display:none;"></small>
+                            </div>
+
 
                         </div>
 
-                        <div class="text-end mt-4">
+
+                        <!--<div class="text-end mt-4">-->
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <!-- BACK BUTTON (LEFT) -->
+                            <a href="<?= base_url('faculty/fetch-faculty'); ?>" class="btn btn-info m-1">
+                               <i class="bi bi-skip-backward ms-2"></i> <?= lang('App.back'); ?>
+                            </a>
                             <button type="submit" class="btn btn-success btn-lg">
-                                <i class="fe fe-save"></i> <?= lang('App.update'); ?>
+                                 <?= lang('App.update'); ?><i class="bi bi-save2 ms-2"></i>
                             </button>
                         </div>
 

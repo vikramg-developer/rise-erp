@@ -1,5 +1,5 @@
 {  
-    "faculty": {
+    "$faculty_registration": {
         "label": "Faculty",
         "actions": [
             "createFaculty",
@@ -57,7 +57,7 @@
     },
 
     "Faculty_profile": {
-        "label": "FacultyProfile",
+        "label": "Faculty Profile",
         "actions": [
             "createFacultyProfile",
             "updateFacultyProfile",
@@ -186,4 +186,5 @@
             "deleteStudentDashboard"
         ]
     }
+    
 }

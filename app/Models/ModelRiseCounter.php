@@ -27,4 +27,14 @@ class ModelRiseCounter extends Model {
 
         return $result;
     }
+
+    //rise no without academic year
+    public function get_Faculty_Counter_For_Update() {
+        return $this->db->query(
+                        "SELECT * FROM rise_number_counter 
+             WHERE user_type_id = 1 
+             LIMIT 1 
+             FOR UPDATE"
+                )->getRowArray();
+    }
 }
