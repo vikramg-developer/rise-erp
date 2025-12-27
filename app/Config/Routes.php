@@ -92,9 +92,8 @@ $routes->group('feedback', function ($routes) {
     $routes->post('save-feedback-master', 'Feedback::save_feedback_master', ['filter' => 'permission:createFeedback']);
     $routes->post('delete-feedback-master', 'Feedback::delete_feedback_master', ['filter' => 'permission:deleteFeedback']);
     $routes->post('revert-feedback-master', 'Feedback::revert_feedback_master', ['filter' => 'permission:updateFeedback']);
-
     $routes->post('fetch-feedback-master', 'Feedback::fetch_feedback_master', ['filter' => 'permission:createFeedback']);
-
+    $routes->post('get-feedback-master', 'Feedback::get_feedback_master', ['filter' => 'permission:createFeedback']);
     $routes->get('manage-question', 'Feedback::manage_question', ['filter' => 'permission:createFeedback']);
     $routes->get('sample-excel-file', 'Feedback::sample_excel_file', ['filter' => 'permission:createFeedback']);
 });
