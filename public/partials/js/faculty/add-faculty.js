@@ -134,16 +134,20 @@ $(document).ready(function () {
 // ================================
 // DELETE FACULTY (Manage Faculty)
 // ================================
+// ================================
+// DELETE FACULTY (Manage Faculty)
+// ================================
 $(document).on("click", ".delete", function () {
 
     let faculty_registration_id = $(this).data("id");
-    
+    let faculty_name = $(this).data("name");
 
     if (!faculty_registration_id) {
         return;
     }
 
-    confirmDelete(faculty_registration_id).then(result => {
+    // 👉 PASS NAME (not ID)
+    confirmDelete(faculty_name).then(result => {
         if (result.isConfirmed) {
 
             $.ajax({
@@ -158,7 +162,8 @@ $(document).on("click", ".delete", function () {
                 success: function (res) {
                     csrfHash = res.csrfHash;
 
-                    successDelete(faculty_registration_id);
+                    // 👉 SHOW NAME
+                    successDelete(faculty_name);
 
                     table.ajax.reload(null, false);
                 },
@@ -169,10 +174,12 @@ $(document).on("click", ".delete", function () {
             });
 
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            cancelDelete(faculty_registration_id);
+            // 👉 SHOW NAME
+            cancelDelete(faculty_name);
         }
     });
 });
+
 
 // ================================
 // REVERT FACULTY
@@ -180,8 +187,14 @@ $(document).on("click", ".delete", function () {
 $(document).on("click", ".revert", function () {
 
     let faculty_registration_id = $(this).data("id");
+    let faculty_name = $(this).data("name");
 
-    confirmRevert(faculty_registration_id).then(result => {
+    if (!faculty_registration_id) {
+        return;
+    }
+
+    // 👉 PASS NAME (not ID)
+    confirmRevert(faculty_name).then(result => {
         if (result.isConfirmed) {
 
             $.ajax({
@@ -195,7 +208,10 @@ $(document).on("click", ".revert", function () {
 
                 success: function (res) {
                     csrfHash = res.csrfHash;
-                    successRevert(faculty_registration_id);
+
+                    // 👉 SHOW NAME
+                    successRevert(faculty_name);
+
                     table.ajax.reload(null, false);
                 },
 
@@ -205,7 +221,8 @@ $(document).on("click", ".revert", function () {
             });
 
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            cancelRevert(faculty_registration_id);
+            // 👉 SHOW NAME
+            cancelRevert(faculty_name);
         }
     });
 });

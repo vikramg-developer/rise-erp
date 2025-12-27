@@ -28,7 +28,6 @@ class Faculty extends BaseController {
     }
 
     public function add_faculty() {
-        $db = \Config\Database::connect();
         $post = $this->request->getPost();
         $academic_year_data = $this->modelacademicYear->getCurrentAcademicYear();
         $academic_year_id = $academic_year_data['academic_year_id'];
@@ -109,13 +108,16 @@ class Faculty extends BaseController {
         $draw = $this->request->getPost('draw');
         $start = $this->request->getPost('start');
         $length = $this->request->getPost('length');
+        $search = $this->request->getPost('search')['value'] ?? '';
 
-        // TOTAL RECORDS
+        // TOTAL RECORDS (without search)
         $recordsTotal = $this->modelfaculty->countAll();
-        $recordsFiltered = $recordsTotal;
 
-        // MAIN FACULTY DATA
-        $rows = $this->modelfaculty->findAllRecord($length, $start);
+        // FILTERED RECORDS (with search)
+        $recordsFiltered = $this->modelfaculty->countFiltered($search);
+
+        // MAIN DATA
+        $rows = $this->modelfaculty->findAllRecord($length, $start, $search);
 
         // MAP: rise_no => full name
         $nameMap = $this->modelfaculty->getRiseNoNameMap();
@@ -125,72 +127,73 @@ class Faculty extends BaseController {
 
         foreach ($rows as $row) {
 
-//            $fullName = $row['faculty_first_name'] . ' ' . $row['faculty_last_name'];
             /* =====================
              * ADDED BY
              * ===================== */
-            $addedByName = '';
             if (!empty($row['added_by']) && !empty($row['added_at'])) {
-                $addedByName = '
-                <div class="text-center">
-                    <span class="badge bg-success-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
-                        <i class="ri-user-add-line me-1"></i>
-                        ' . ($nameMap[$row['added_by']] ?? '') . '
-                    </span>
-                    <div class="small text-muted mt-1">
-                        <i class="ri-time-line me-1"></i>
-                        ' . date('d M Y, h:i A', strtotime($row['added_at'])) . '
-                    </div>
-                </div>';
+                $addedBy = '
+            <div class="text-center">
+                <span class="badge bg-success-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
+                    <i class="ri-user-add-line me-1"></i>
+                    ' . ($nameMap[$row['added_by']] ?? '') . '
+                </span>
+                <div class="small text-muted mt-1">
+                    <i class="ri-time-line me-1"></i>
+                    ' . date('d M Y, h:i A', strtotime($row['added_at'])) . '
+                </div>
+            </div>';
+            } else {
+                $addedBy = '';
             }
 
             /* =====================
              * UPDATED BY
              * ===================== */
-            $updatedByName = '';
             if (!empty($row['updated_by']) && !empty($row['updated_at'])) {
-                $updatedByName = '
-                <div class="text-center">
-                    <span class="badge bg-primary-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
-                        <i class="ri-edit-2-line me-1"></i>
-                        ' . ($nameMap[$row['updated_by']] ?? '') . '
-                    </span>
-                    <div class="small text-muted mt-1">
-                        <i class="ri-time-line me-1"></i>
-                        ' . date('d M Y, h:i A', strtotime($row['updated_at'])) . '
-                    </div>
-                </div>';
+                $updatedBy = '
+            <div class="text-center">
+                <span class="badge bg-primary-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
+                    <i class="ri-edit-2-line me-1"></i>
+                    ' . ($nameMap[$row['updated_by']] ?? '') . '
+                </span>
+                <div class="small text-muted mt-1">
+                    <i class="ri-time-line me-1"></i>
+                    ' . date('d M Y, h:i A', strtotime($row['updated_at'])) . '
+                </div>
+            </div>';
+            } else {
+                $updatedBy = '';
             }
 
             /* =====================
              * DELETED / REVERTED
              * ===================== */
-            $deletedByName = '';
-
             if ($row['is_deleted'] == 1 && !empty($row['updated_by'])) {
-                $deletedByName = '
-                <div class="text-center">
-                    <span class="badge bg-danger-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
-                        <i class="ri-delete-bin-6-line me-1"></i>
-                        Deleted by ' . ($nameMap[$row['updated_by']] ?? '') . '
-                    </span>
-                    <div class="small text-muted mt-1">
-                        <i class="ri-time-line me-1"></i>
-                        ' . date('d M Y, h:i A', strtotime($row['updated_at'])) . '
-                    </div>
-                </div>';
+                $remark = '
+            <div class="text-center">
+                <span class="badge bg-danger-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
+                    <i class="ri-delete-bin-6-line me-1"></i>
+                    Deleted by ' . ($nameMap[$row['updated_by']] ?? '') . '
+                </span>
+                <div class="small text-muted mt-1">
+                    <i class="ri-time-line me-1"></i>
+                    ' . date('d M Y, h:i A', strtotime($row['updated_at'])) . '
+                </div>
+            </div>';
             } elseif ($row['is_deleted'] == 2 && !empty($row['updated_by'])) {
-                $deletedByName = '
-                <div class="text-center">
-                    <span class="badge bg-warning-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
-                        <i class="ri-arrow-go-back-line me-1"></i>
-                        Reverted by ' . ($nameMap[$row['updated_by']] ?? '') . '
-                    </span>
-                    <div class="small text-muted mt-1">
-                        <i class="ri-time-line me-1"></i>
-                        ' . date('d M Y, h:i A', strtotime($row['updated_at'])) . '
-                    </div>
-                </div>';
+                $remark = '
+            <div class="text-center">
+                <span class="badge bg-warning-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
+                    <i class="ri-arrow-go-back-line me-1"></i>
+                    Reverted by ' . ($nameMap[$row['updated_by']] ?? '') . '
+                </span>
+                <div class="small text-muted mt-1">
+                    <i class="ri-time-line me-1"></i>
+                    ' . date('d M Y, h:i A', strtotime($row['updated_at'])) . '
+                </div>
+            </div>';
+            } else {
+                $remark = '';
             }
 
             /* =====================
@@ -200,25 +203,24 @@ class Faculty extends BaseController {
 
             // EDIT
             if (hasPermission('updateFaculty')) {
-
                 if ($row['is_deleted'] == 1) {
                     $buttons .= '
-                    <a href="javascript:void(0)"
-                       class="btn btn-icon btn-sm btn-secondary rounded-pill disabled"
-                       data-bs-toggle="tooltip"
-                       data-bs-custom-class="tooltip-secondary"
-                       title="Faculty is deleted">
-                        <i class="ri-pencil-fill"></i>
-                    </a>';
+                <a href="javascript:void(0)"
+                   class="btn btn-icon btn-sm btn-secondary rounded-pill disabled"
+                   data-bs-toggle="tooltip"
+                   data-bs-custom-class="tooltip-secondary"
+                   title="Faculty is deleted">
+                    <i class="ri-pencil-fill"></i>
+                </a>';
                 } else {
                     $buttons .= '
-                    <a href="' . base_url('faculty/edit-faculty/' . $row['faculty_registration_id']) . '"
-                       class="btn btn-icon btn-sm btn-secondary rounded-pill"
-                       data-bs-toggle="tooltip"
-                       data-bs-custom-class="tooltip-secondary"
-                       title="Edit">
-                        <i class="ri-pencil-fill"></i>
-                    </a>';
+                <a href="' . base_url('faculty/edit-faculty/' . $row['faculty_registration_id']) . '"
+                   class="btn btn-icon btn-sm btn-secondary rounded-pill"
+                   data-bs-toggle="tooltip"
+                   data-bs-custom-class="tooltip-secondary"
+                   title="Edit">
+                    <i class="ri-pencil-fill"></i>
+                </a>';
                 }
             }
 
@@ -227,36 +229,41 @@ class Faculty extends BaseController {
 
                 if ($row['is_deleted'] == 0 || $row['is_deleted'] == 2) {
                     $buttons .= '
-                    <button class="btn btn-icon btn-sm btn-danger rounded-pill delete"
-                            data-id="' . $row['faculty_registration_id'] . '"
-                            data-bs-toggle="tooltip"
-                            data-bs-custom-class="tooltip-danger"
-                            title="Delete">
-                        <i class="ri-delete-bin-fill"></i>
-                    </button>';
+                <button class="btn btn-icon btn-sm btn-danger rounded-pill delete"
+                        data-id="' . $row['faculty_registration_id'] . '"
+                        data-name="' . ($nameMap[$row['faculty_rise_no']] ?? '') . '"
+                        data-bs-toggle="tooltip"
+                        data-bs-custom-class="tooltip-danger"
+                        title="Delete">
+                    <i class="ri-delete-bin-fill"></i>
+                </button>';
                 }
 
                 if ($row['is_deleted'] == 1) {
                     $buttons .= '
-                    <button class="btn btn-icon btn-sm btn-warning rounded-pill revert"
-                            data-id="' . $row['faculty_registration_id'] . '"
-                            data-bs-toggle="tooltip"
-                            data-bs-custom-class="tooltip-warning"
-                            title="Revert">
-                        <i class="ri-arrow-go-back-fill"></i>
-                    </button>';
+                <button class="btn btn-icon btn-sm btn-warning rounded-pill revert"
+                        data-id="' . $row['faculty_registration_id'] . '"
+                        data-name="' . ($nameMap[$row['faculty_rise_no']] ?? '') . '"
+                        data-bs-toggle="tooltip"
+                        data-bs-custom-class="tooltip-warning"
+                        title="Revert">
+                    <i class="ri-arrow-go-back-fill"></i>
+                </button>';
                 }
             }
 
+            /* =====================
+             * FINAL ROW
+             * ===================== */
             $data[] = [
                 $sr_no++,
                 $buttons,
                 $row['faculty_rise_no'],
-                $nameMap[$row['faculty_rise_no']],
+                $nameMap[$row['faculty_rise_no']] ?? '',
                 $row['faculty_mobile_number'],
-                $addedByName,
-                $updatedByName,
-                $deletedByName
+                $addedBy,
+                $updatedBy,
+                $remark
             ];
         }
 
