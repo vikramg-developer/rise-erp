@@ -49,12 +49,12 @@ class Role extends BaseController {
         $data = [];
         foreach ($rows as $row) {
             $buttons = '';
-            
+
             // Edit Button
             if (hasPermission('updateRole')):
                 $buttons .= '<a href="roles/edit-role/' . $row['role_id'] . '" class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill tooltips edit" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-secondary" data-bs-placement="top" title="Edit"><i class="ri-pencil-fill"></i></a>';
             endif;
-            
+
             // Delete Button
             if (hasPermission('deleteRole')):
                 if ($row['is_deleted'] != 1):
@@ -63,63 +63,27 @@ class Role extends BaseController {
                     $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-warning" data-bs-placement="top" title="Revert" data-role_id="' . $row['role_id'] . '" data-role_name="' . $row['role_name'] . '"><i class="ri-arrow-go-back-fill"></i></button>';
                 endif;
             endif;
-            
+
             // Added By
             if (!empty($row['added_by']) && !empty($row['added_at'])):
-                $addedBy =  '<div class="text-center">
-                                    <span class="badge bg-success-transparent px-3 py-2 fw-semibold" style="font-size:0.8rem">
-                                        <i class="ri-user-add-line me-1"></i>
-                                        ' . ($facultyNameMap[$row['added_by']] ?? '') . '
-                                    </span>
-                                    <div class="small text-muted mt-1">
-                                        <i class="ri-time-line me-1"></i>
-                                        ' . date('d M Y, h:i:s A', strtotime($row['added_at'])) . '
-                                    </div>
-                                </div>';
+                $addedBy = activityBadge('success', $facultyNameMap[$row['added_by']], $row['added_at']);
             else:
                 $addedBy = "";
             endif;
-            
+
             // Updated By
             if (!empty($row['updated_by']) && !empty($row['updated_at'])):
-                $updatedBy =    '<div class="text-center">
-                                    <span class="badge bg-primary-transparent px-3 py-2 fw-semibold" style="font-size:0.8rem">
-                                        <i class="ri-user-add-line me-1"></i>
-                                        ' . ($facultyNameMap[$row['updated_by']] ?? '') . '
-                                    </span>
-                                    <div class="small text-muted mt-1">
-                                        <i class="ri-time-line me-1"></i>
-                                        ' . date('d M Y, h:i:s A', strtotime($row['updated_at'])) . '
-                                    </div>
-                                </div>';
+                $updatedBy = activityBadge('primary', $facultyNameMap[$row['updated_by']], $row['updated_at']);
             else:
                 $updatedBy = "";
             endif;
-            
-            
+
             // Remark
-            if ($row['is_deleted'] == 1 && !empty($row['updated_by'])):
-                $remark =   '<div class="text-center">
-                                <span class="badge bg-danger-transparent px-3 py-2 fw-semibold" style="font-size:0.8rem">
-                                    <i class="ri-delete-bin-line me-1"></i>
-                                    Deleted by ' . ($facultyNameMap[$row['deleted_by']] ?? '') . '
-                                </span>
-                                <div class="small text-muted mt-1">
-                                    <i class="ri-time-line me-1"></i>
-                                    ' . date('d M Y, h:i:s A', strtotime($row['deleted_at'])) . '
-                                </div>
-                            </div>';
-            elseif ($row['is_deleted'] == 2 && !empty($row['updated_by'])):
-                $remark =   '<div class="text-center">
-                                <span class="badge bg-warning-transparent px-3 py-2 fw-semibold" style="font-size:0.8rem">
-                                    <i class="ri-arrow-go-back-line me-1"></i>
-                                    Reverted by ' . ($facultyNameMap[$row['deleted_by']] ?? '') . '
-                                </span>
-                                <div class="small text-muted mt-1">
-                                    <i class="ri-time-line me-1"></i>
-                                    ' . date('d M Y, h:i:s A', strtotime($row['deleted_at'])) . '
-                                </div>
-                            </div>';
+            if ($row['is_deleted'] == 1 && !empty($row['deleted_by']) && !empty($row['deleted_at'])):
+                $remark = activityBadge('danger', $facultyNameMap[$row['deleted_by']], $row['deleted_at']);
+            
+            elseif ($row['is_deleted'] == 2 && !empty($row['deleted_by']) && !empty($row['deleted_at'])):
+                $remark = activityBadge('warning', $facultyNameMap[$row['deleted_by']], $row['deleted_at']);
             else:
                 $remark = "";
             endif;
