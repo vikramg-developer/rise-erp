@@ -124,22 +124,27 @@
                 </div>
                 <!---------------------------End Add master-------------------------------------------------------------->
                 <div class="card-body">
-                    <table id="feedback-master-table" class="table table-bordered w-100">
+                    <div class="table-responsive">
+                    <!--<table id="feedback-master-table" class="table table-bordered w-100">-->
+                        <table id="feedback-master-table" class="table table-hover table-bordered text-nowrap w-100">
                         <thead>
                             <tr>
-                                <th scope="col"><?= lang('App.sr') ?> <?= lang('App.no') ?></th>
-                                <th scope="col"> <?= lang('App.feedback') ?> <?= lang('App.name') ?></th>
-                                <th scope="col"><?= lang('App.type') ?> </th>
-                                <th scope="col"><?= lang('App.semester') ?> </th>
-                                <th scope="col"><?= lang('App.part') ?> </th>
-                                <th scope="col"><?= lang('App.academic') ?> <?= lang('App.year') ?> </th>
-                                 <th scope="col"><?= lang('App.action') ?></th>
-                                 <th scope="col"><?= lang('App.remark') ?></th>
-                                <th scope="col"><?= lang('App.manage') ?> <?= lang('App.question') ?> </th>
+                                <th width="5%"><?= lang('App.sr') ?> <?= lang('App.no') ?></th>
+                                <th><?= lang('App.action') ?></th>
+                                <th> <?= lang('App.feedback') ?> <?= lang('App.name') ?></th>
+                                <th><?= lang('App.type') ?> </th>
+                                <th><?= lang('App.semester') ?> </th>
+                                <th><?= lang('App.part') ?> </th>
+                                <th><?= lang('App.academic') ?> <?= lang('App.year') ?> </th>
+                                <th><?= lang('App.added') ?> <?= lang('App.by') ?></th>
+                                <th><?= lang('App.updated') ?> <?= lang('App.by') ?></th>
+                                <th><?= lang('App.action') ?></th>
+                                <th><?= lang('App.manage') ?> <?= lang('App.question') ?> </th>
                                
                             </tr>
                         </thead>
-                    </table>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

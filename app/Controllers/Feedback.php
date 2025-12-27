@@ -3,11 +3,6 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\ModelFeedback;
-use App\Models\ModelAcademicYear;
-use App\Models\ModelSemester;
-use App\Models\ModelSemesterPart;
-use App\Models\ModelSubjectType;
 
 class Feedback extends BaseController {
 
@@ -16,6 +11,7 @@ class Feedback extends BaseController {
     protected $modelsemester;
     protected $modelsemesterpart;
     protected $modelsubjecttype;
+    protected $modelfaculty;
 
     public function __construct() {
         $this->modelfeedback = model('ModelFeedback');
@@ -23,8 +19,9 @@ class Feedback extends BaseController {
         $this->modelsemester = model('ModelSemester');
         $this->modelsemesterpart = model('ModelSemesterPart');
         $this->modelsubjecttype = model('ModelSubjectType');
+        $this->modelfaculty = model('ModelFacultyRegistration');
     }
-
+    
     public function index() {
         $data['jspath'] = 'feedback/feedback-master';
         $data['academic_year'] = $this->modelacademicyear->get_active_academic_years();
@@ -32,82 +29,6 @@ class Feedback extends BaseController {
         $data['semester_part'] = $this->modelsemesterpart->get_semester_part();
         $data['subject_type'] = $this->modelsubjecttype->get_subject_type();
         return render_page('feedback/feedback-master', $data);
-    }
-
-    public function fetch_feedback_master() {
-        $draw = $this->request->getPost('draw');
-        $start = $this->request->getPost('start');
-        $length = $this->request->getPost('length');
-//        $search = $this->request->getPost('search')['value'] ?? '';
-
-        $model = $this->modelfeedback;
-
-        // TOTAL RECORDS
-        $recordsTotal = $model->where('is_deleted', 0)->countAllResults();
-
-        // FILTERED RECORDS
-        $recordsFiltered = $model->countAllResults(false);
-//        $recordsFiltered = $model->countFiltered($search);
-        //SEARCH FILTERgit
-//        if ($search !== '') {
-//            $model->like('feedback_name', $search);
-//        }
-        // PAGINATED DATA
-//        $rows = $model->findAll($length, $start);
-        $rows = $model->getFeedbackMasterList($length, $start);
-//        print_r($rows);die();
-//        $buttons = '';
-
-
-        $sr_no = 1;
-
-        $data = [];
-        foreach ($rows as $row) {
-            $buttons = '';
-
-            $manage_button = '<a href="' . base_url('feedback/manage-question') . '"  class="btn btn-sm btn-success btn-wave">
-                       <i class="ri-upload-2-line align-middle me-2 d-inline-block"></i>' . lang('App.manage') . ' ' . lang('App.question') . '
-                     </a>';
-
-            $buttons .= '<a href="' . base_url() . 'feedback/manage-question/' . $row['feedback_master_id'] . '" 
-                        class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill">
-                        <i class="ri-pencil-fill"></i>
-                     </a>';
-
-            if ($row['is_deleted'] != 1):
-                $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete" data-feedback_master_id="' . $row['feedback_master_id'] . '" data-feedback_name="' . $row['feedback_name'] . '"><i class="ri-delete-bin-fill"></i></button>';
-            elseif ($row['is_deleted'] == 1):
-                $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-feedback_master_id="' . $row['feedback_master_id'] . '" data-feedback_name="' . $row['feedback_name'] . '"><i class="ri-arrow-go-back-fill"></i></button>';
-            endif;
-
-            if ($row['is_deleted'] == 1):
-                $remark = "Deleted By Admin";
-            elseif ($row['is_deleted'] == 2):
-                $remark = "Reverted By Admin";
-            else:
-                $remark = "";
-            endif;
-
-            $data[] = [
-                $sr_no++,
-                $row['feedback_name'],
-                $row['subject_type_name'],
-                $row['semester_name'],
-                $row['semester_part_name'],
-                $row['academic_year_name'],
-                $buttons,
-                $remark,
-                $manage_button,
-            ];
-        }
-
-        return $this->response->setJSON([
-                    'draw' => $draw,
-                    'recordsTotal' => $recordsTotal,
-                    'recordsFiltered' => $recordsFiltered,
-                    'data' => $data,
-                    'csrfHash' => csrf_hash()
-        ]);
     }
 
     public function save_feedback_master() {
@@ -134,6 +55,141 @@ class Feedback extends BaseController {
             ]);
         }
     }
+    
+    public function fetch_feedback_master() {
+        $draw = $this->request->getPost('draw');
+        $start = $this->request->getPost('start');
+        $length = $this->request->getPost('length');
+        
+        $model = $this->modelfeedback;
+
+        // TOTAL RECORDS
+        $recordsTotal = $model->where('is_deleted', 0)->countAllResults();
+
+        // FILTERED RECORDS
+        $recordsFiltered = $model->countAllResults(false);
+//      $recordsFiltered = $model->countFiltered($search);
+        
+        //SEARCH FILTERgit
+//        if ($search !== '') {
+//            $model->like('feedback_name', $search);
+//        }
+        // PAGINATED DATA
+        $rows = $model->getFeedbackMasterList($length, $start);
+        // MAP: rise_no => full name
+        $nameMap = $this->modelfaculty->getRiseNoNameMap();
+
+        $sr_no = 1;
+
+        $data = [];
+        foreach ($rows as $row) {
+            /* ===================== edit ===================== */
+            $buttons = '';
+            $buttons .= '<a href="' . base_url() . 'feedback/manage-question/' . $row['feedback_master_id'] . '" 
+                        class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill">
+                        <i class="ri-pencil-fill"></i>
+                     </a>';
+            /* ===================== delete Reverted ===================== */
+            if ($row['is_deleted'] == 0 || $row['is_deleted'] == 2):
+                $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete"  data-feedback_master_id="' . $row['feedback_master_id'] . '" data-feedback_name="' . $row['feedback_name'] . '" data-bs-toggle="tooltip"
+                            data-bs-custom-class="tooltip-danger"
+                            title="Delete">   <i class="ri-delete-bin-fill"></i> </button>';
+            elseif ($row['is_deleted'] == 1):
+                $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-feedback_master_id="' . $row['feedback_master_id'] . '" data-feedback_name="' . $row['feedback_name'] . '"  data-bs-toggle="tooltip"
+                            data-bs-custom-class="tooltip-warning"
+                            title="revert"> <i class="ri-delete-bin-fill"></i></i></button>';
+            endif;
+            /* ===================== manage-question ===================== */
+            $manage_button='';
+            $manage_button = '<a href="' . base_url('feedback/manage-question') . '"  class="btn btn-sm btn-success btn-wave">
+                       <i class="ri-upload-2-line align-middle me-2 d-inline-block"></i>' . lang('App.manage') . ' ' . lang('App.question') . '
+                     </a>';
+            /* ===================== addedByName ===================== */
+            $addedByName = '';
+            if (!empty($row['added_by']) && !empty($row['added_at'])) {
+                $addedByName = '
+                <div class="text-center">
+                    <span class="badge bg-success-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
+                        <i class="ri-user-add-line me-1"></i>
+                        ' . ($nameMap[$row['added_by']] ?? '') . '
+                    </span>
+                    <div class="small text-muted mt-1">
+                        <i class="ri-time-line me-1"></i>
+                        ' . date('d M Y, h:i A', strtotime($row['added_at'])) . '
+                    </div>
+                </div>';
+            }
+            /* ===================== addedByName ===================== */
+            $updatedByName = '';
+            if (!empty($row['updated_by']) && !empty($row['updated_at'])) {
+                $updatedByName = '
+                <div class="text-center">
+                    <span class="badge bg-primary-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
+                        <i class="ri-edit-2-line me-1"></i>
+                        ' . ($nameMap[$row['updated_by']] ?? '') . '
+                    </span>
+                    <div class="small text-muted mt-1">
+                        <i class="ri-time-line me-1"></i>
+                        ' . date('d M Y, h:i A', strtotime($row['updated_at'])) . '
+                    </div>
+                </div>';
+            }
+            /* ===================== addedByName ===================== */
+            $deletedByName = '';
+
+            if ($row['is_deleted'] == 1 && !empty($row['updated_by'])) {
+                $deletedByName = '
+                <div class="text-center">
+                    <span class="badge bg-danger-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
+                        <i class="ri-delete-bin-6-line me-1"></i>
+                        Deleted by ' . ($nameMap[$row['updated_by']] ?? '') . '
+                    </span>
+                    <div class="small text-muted mt-1">
+                        <i class="ri-time-line me-1"></i>
+                        ' . date('d M Y, h:i A', strtotime($row['updated_at'])) . '
+                    </div>
+                </div>';
+            } elseif ($row['is_deleted'] == 2 && !empty($row['updated_by'])) {
+                $deletedByName = '
+                <div class="text-center">
+                    <span class="badge bg-warning-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
+                        <i class="ri-arrow-go-back-line me-1"></i>
+                        Reverted by ' . ($nameMap[$row['updated_by']] ?? '') . '
+                    </span>
+                    <div class="small text-muted mt-1">
+                        <i class="ri-time-line me-1"></i>
+                        ' . date('d M Y, h:i A', strtotime($row['updated_at'])) . '
+                    </div>
+                </div>';
+            }
+
+            
+            /* ============================================================ */
+            $data[] = [
+                $sr_no++,
+                 $buttons,
+                $row['feedback_name'],
+                $row['subject_type_name'],
+                $row['semester_name'],
+                $row['semester_part_name'],
+                $row['academic_year_name'],
+                $manage_button,
+                $manage_button,
+                $manage_button,
+                $manage_button,
+            ];
+        }
+
+        return $this->response->setJSON([
+                    'draw' => $draw,
+                    'recordsTotal' => $recordsTotal,
+                    'recordsFiltered' => $recordsFiltered,
+                    'data' => $data,
+                    'csrfHash' => csrf_hash()
+        ]);
+    }
+
+    
 
     public function delete_feedback_master() {
         if ($this->request->getMethod() == 'post') {
