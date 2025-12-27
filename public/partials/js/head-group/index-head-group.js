@@ -8,7 +8,7 @@ $(document).ready(function () {
         destroy: true,
 
         ajax: {
-            url: "headgroup/fetch-head-group",
+            url: BASE_URL + "headgroup/fetch-head-group",
             type: "POST",
             data: function (d) {
                 d[csrfName] = csrfHash; // ALWAYS send current token
@@ -34,7 +34,7 @@ $("#head-group-form").on("submit", function (e) {
 
     let head_group_id = $('#head_group_id').val();
 
-    let url = (head_group_id === "") ? 'headgroup/save-head-group' : 'headgroup/update-head-group'
+    let url = (head_group_id === "") ? BASE_URL + 'headgroup/save-head-group' : BASE_URL + 'headgroup/update-head-group'
 
     $.ajax({
         url: url,
@@ -54,7 +54,7 @@ $("#head-group-form").on("submit", function (e) {
                 }
                 return;
             }
-            
+
             showToast('success', response.message);
 
             // 2️⃣ Update DataTable token handler
@@ -93,7 +93,7 @@ $(document).on("click", ".delete", function () {
     confirmDelete(head_group_name).then(result => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "headgroup/delete-head-group",
+                url: BASE_URL + "headgroup/delete-head-group",
                 type: "POST",
                 data: {head_group_id: head_group_id, [csrfName]: csrfHash},
                 dataType: "json",
@@ -105,12 +105,12 @@ $(document).on("click", ".delete", function () {
                         d[csrfName] = csrfHash
                     };
                     table.ajax.reload(null, false);
-                },                
-                error: () =>{
+                },
+                error: () => {
                     errorDelete();
                 }
             });
-            
+
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             cancelDelete(head_group_name);
         }
@@ -124,7 +124,7 @@ $(document).on("click", ".revert", function () {
     confirmRevert(head_group_name).then(result => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "headgroup/revert-head-group",
+                url: BASE_URL + "headgroup/revert-head-group",
                 type: "POST",
                 data: {head_group_id: head_group_id, [csrfName]: csrfHash},
                 dataType: "json",
@@ -136,12 +136,12 @@ $(document).on("click", ".revert", function () {
                         d[csrfName] = csrfHash
                     };
                     table.ajax.reload(null, false);
-                },                
-                error: () =>{
+                },
+                error: () => {
                     errorRevert();
                 }
             });
-            
+
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             cancelRevert(head_group_name);
         }

@@ -1,6 +1,34 @@
 let table;
 
 $(document).ready(function () {
+    $('#head_name').on('keyup', function () {
+        let query = $(this).val();
+
+        if (query.length < 1) {
+            $('#searchResult').empty();
+            return;
+        }
+
+        $.ajax({
+            url: BASE_URL + 'head/search',
+            method: "GET",
+            data: {q: query},
+            success: function (data) {
+                console.log(data);
+                let html = '';
+                data.forEach(row => {
+                    html += `<li class="list-group-item">${row.head_name}</li>`;
+                });
+                $('#searchResult').html(html);
+            }
+        });
+    });
+
+    // Select value
+    $(document).on('click', '#searchResult li', function () {
+        $('#head_name').val($(this).text());
+        $('#searchResult').empty();
+    });
 
     table = $('#head-table').DataTable({
         processing: true,
@@ -54,7 +82,7 @@ $("#head-form").on("submit", function (e) {
                 }
                 return;
             }
-            
+
             showToast('success', response.message);
 
             // 2️⃣ Update DataTable token handler
@@ -93,7 +121,7 @@ $(document).on("click", ".delete", function () {
     confirmDelete(head_name).then(result => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "head/delete-head",
+                url: BASE_URL + "head/delete-head",
                 type: "POST",
                 data: {head_id: head_id, [csrfName]: csrfHash},
                 dataType: "json",
@@ -105,12 +133,12 @@ $(document).on("click", ".delete", function () {
                         d[csrfName] = csrfHash
                     };
                     table.ajax.reload(null, false);
-                },                
-                error: () =>{
+                },
+                error: () => {
                     errorDelete();
                 }
             });
-            
+
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             cancelDelete(head_name);
         }
@@ -124,7 +152,7 @@ $(document).on("click", ".revert", function () {
     confirmRevert(head_name).then(result => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "head/revert-head",
+                url: BASE_URL + "head/revert-head",
                 type: "POST",
                 data: {head_id: head_id, [csrfName]: csrfHash},
                 dataType: "json",
@@ -136,12 +164,12 @@ $(document).on("click", ".revert", function () {
                         d[csrfName] = csrfHash
                     };
                     table.ajax.reload(null, false);
-                },                
-                error: () =>{
+                },
+                error: () => {
                     errorRevert();
                 }
             });
-            
+
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             cancelRevert(head_name);
         }
