@@ -24,6 +24,9 @@ class ModelFacultyRegistration extends Model {
         'faculty_status',
         'added_by',
         'updated_by',
+        'updated_at',
+        'deleted_by',
+        'deleted_at',
         'is_deleted',
     ];
     protected $validationRules = [
@@ -186,4 +189,21 @@ class ModelFacultyRegistration extends Model {
             'faculty_pan_number' => "required|regex_match[/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/]|is_unique[faculty_registration.faculty_pan_number,faculty_registration_id,{$id}]",
         ];
     }
+    
+    
+    protected $beforeUpdate = ['setUpdateOrDeleteDate'];
+
+    protected function setUpdateOrDeleteDate(array $data)
+    {
+        // DELETE or REVERT
+        if (array_key_exists('is_deleted', $data['data'])) {
+            $data['data']['deleted_at'] = date('Y-m-d H:i:s');
+            return $data;
+        }
+
+        // NORMAL UPDATE
+        $data['data']['updated_at'] = date('Y-m-d H:i:s');
+        return $data;
+    }
+
 }

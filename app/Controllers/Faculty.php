@@ -128,99 +128,30 @@ class Faculty extends BaseController {
         foreach ($rows as $row) {
 
             /* =====================
-             * ADDED BY
+             * ACTION BUTTONS (FIX: INITIALIZED)
              * ===================== */
-            if (!empty($row['added_by']) && !empty($row['added_at'])) {
-                $addedBy = '
-            <div class="text-center">
-                <span class="badge bg-success-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
-                    <i class="ri-user-add-line me-1"></i>
-                    ' . ($nameMap[$row['added_by']] ?? '') . '
-                </span>
-                <div class="small text-muted mt-1">
-                    <i class="ri-time-line me-1"></i>
-                    ' . date('d M Y, h:i A', strtotime($row['added_at'])) . '
-                </div>
-            </div>';
-            } else {
-                $addedBy = '';
-            }
-
-            /* =====================
-             * UPDATED BY
-             * ===================== */
-            if (!empty($row['updated_by']) && !empty($row['updated_at'])) {
-                $updatedBy = '
-            <div class="text-center">
-                <span class="badge bg-primary-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
-                    <i class="ri-edit-2-line me-1"></i>
-                    ' . ($nameMap[$row['updated_by']] ?? '') . '
-                </span>
-                <div class="small text-muted mt-1">
-                    <i class="ri-time-line me-1"></i>
-                    ' . date('d M Y, h:i A', strtotime($row['updated_at'])) . '
-                </div>
-            </div>';
-            } else {
-                $updatedBy = '';
-            }
-
-            /* =====================
-             * DELETED / REVERTED
-             * ===================== */
-            if ($row['is_deleted'] == 1 && !empty($row['updated_by'])) {
-                $remark = '
-            <div class="text-center">
-                <span class="badge bg-danger-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
-                    <i class="ri-delete-bin-6-line me-1"></i>
-                    Deleted by ' . ($nameMap[$row['updated_by']] ?? '') . '
-                </span>
-                <div class="small text-muted mt-1">
-                    <i class="ri-time-line me-1"></i>
-                    ' . date('d M Y, h:i A', strtotime($row['updated_at'])) . '
-                </div>
-            </div>';
-            } elseif ($row['is_deleted'] == 2 && !empty($row['updated_by'])) {
-                $remark = '
-            <div class="text-center">
-                <span class="badge bg-warning-transparent px-3 py-2 fw-semibold" style="font-size:0.75rem">
-                    <i class="ri-arrow-go-back-line me-1"></i>
-                    Reverted by ' . ($nameMap[$row['updated_by']] ?? '') . '
-                </span>
-                <div class="small text-muted mt-1">
-                    <i class="ri-time-line me-1"></i>
-                    ' . date('d M Y, h:i A', strtotime($row['updated_at'])) . '
-                </div>
-            </div>';
-            } else {
-                $remark = '';
-            }
-
-            /* =====================
-             * ACTION BUTTONS
-             * ===================== */
-            $buttons = '';
-
+            $buttons = ''; // <<< THIS WAS MISSING (CAUSE OF ERROR)
             // EDIT
             if (hasPermission('updateFaculty')) {
+
                 if ($row['is_deleted'] == 1) {
                     $buttons .= '
-                <a href="javascript:void(0)"
-                   class="btn btn-icon btn-sm btn-secondary rounded-pill disabled"
-                   data-bs-toggle="tooltip"
-                   data-bs-custom-class="tooltip-secondary"
-                   title="Faculty is deleted">
-                    <i class="ri-pencil-fill"></i>
-                </a>';
+            <a href="javascript:void(0)"
+               class="btn btn-icon btn-sm btn-secondary rounded-pill disabled"
+               data-bs-toggle="tooltip"
+               data-bs-custom-class="tooltip-secondary"
+               title="Faculty is deleted">
+                <i class="ri-pencil-fill"></i>
+            </a>';
                 } else {
                     $buttons .= '
-                <a href="' . base_url('faculty/edit-faculty/' . $row['faculty_registration_id']) . '"
-                   class="btn btn-icon btn-sm btn-secondary rounded-pill"
-                   data-bs-toggle="tooltip"
-                   data-bs-custom-class="tooltip-secondary"
-                   title="Edit">
-                    <i class="ri-pencil-fill"></i>
-                </a>';
+            <a href="' . base_url('faculty/edit-faculty/' . $row['faculty_registration_id']) . '"
+               class="btn btn-icon btn-sm btn-secondary rounded-pill"
+               data-bs-toggle="tooltip"
+               data-bs-custom-class="tooltip-secondary"
+               title="Edit">
+                <i class="ri-pencil-fill"></i>
+            </a>';
                 }
             }
 
@@ -229,31 +160,75 @@ class Faculty extends BaseController {
 
                 if ($row['is_deleted'] == 0 || $row['is_deleted'] == 2) {
                     $buttons .= '
-                <button class="btn btn-icon btn-sm btn-danger rounded-pill delete"
-                        data-id="' . $row['faculty_registration_id'] . '"
-                        data-name="' . ($nameMap[$row['faculty_rise_no']] ?? '') . '"
-                        data-bs-toggle="tooltip"
-                        data-bs-custom-class="tooltip-danger"
-                        title="Delete">
-                    <i class="ri-delete-bin-fill"></i>
-                </button>';
+            <button class="btn btn-icon btn-sm btn-danger rounded-pill delete"
+                    data-id="' . $row['faculty_registration_id'] . '"
+                    data-name="' . ($nameMap[$row['faculty_rise_no']] ?? '') . '"
+                    data-bs-toggle="tooltip"
+                    data-bs-custom-class="tooltip-danger"
+                    title="Delete">
+                <i class="ri-delete-bin-fill"></i>
+            </button>';
                 }
 
                 if ($row['is_deleted'] == 1) {
                     $buttons .= '
-                <button class="btn btn-icon btn-sm btn-warning rounded-pill revert"
-                        data-id="' . $row['faculty_registration_id'] . '"
-                        data-name="' . ($nameMap[$row['faculty_rise_no']] ?? '') . '"
-                        data-bs-toggle="tooltip"
-                        data-bs-custom-class="tooltip-warning"
-                        title="Revert">
-                    <i class="ri-arrow-go-back-fill"></i>
-                </button>';
+            <button class="btn btn-icon btn-sm btn-warning rounded-pill revert"
+                    data-id="' . $row['faculty_registration_id'] . '"
+                    data-name="' . ($nameMap[$row['faculty_rise_no']] ?? '') . '"
+                    data-bs-toggle="tooltip"
+                    data-bs-custom-class="tooltip-warning"
+                    title="Revert">
+                <i class="ri-arrow-go-back-fill"></i>
+            </button>';
                 }
             }
 
             /* =====================
-             * FINAL ROW
+             * ADDED BY
+             * ===================== */
+            $addedBy = '';
+            if (!empty($row['added_by']) && !empty($row['added_at'])) {
+                $addedBy = activityBadge(
+                        'success',
+                        $nameMap[$row['added_by']] ?? '',
+                        $row['added_at']
+                );
+            }
+
+            /* =====================
+             * UPDATED BY
+             * ===================== */
+            $updatedBy = '';
+            if (!empty($row['updated_by']) && !empty($row['updated_at'])) {
+                $updatedBy = activityBadge(
+                        'primary',
+                        $nameMap[$row['updated_by']] ?? '',
+                        $row['updated_at']
+                );
+            }
+
+            /* =====================
+             * DELETE / REVERT REMARK
+             * ===================== */
+            $remark = '';
+            if ($row['is_deleted'] == 1 && !empty($row['deleted_by']) && !empty($row['deleted_at'])) {
+
+                $remark = activityBadge(
+                        'danger',
+                        $nameMap[$row['deleted_by']] ?? '',
+                        $row['deleted_at']
+                );
+            } elseif ($row['is_deleted'] == 2 && !empty($row['deleted_by']) && !empty($row['deleted_at'])) {
+
+                $remark = activityBadge(
+                        'warning',
+                        $nameMap[$row['deleted_by']] ?? '',
+                        $row['deleted_at']
+                );
+            }
+
+            /* =====================
+             * FINAL ROW (UNCHANGED)
              * ===================== */
             $data[] = [
                 $sr_no++,
@@ -266,6 +241,8 @@ class Faculty extends BaseController {
                 $remark
             ];
         }
+
+
 
         return $this->response->setJSON([
                     'draw' => intval($draw),
@@ -363,35 +340,32 @@ class Faculty extends BaseController {
     }
 
     public function delete_faculty() {
-        if ($this->request->getMethod() == 'post') {
+        $faculty_id = $this->request->getPost('faculty_registration_id');
 
-            $facultyId = $this->request->getPost('faculty_registration_id');
+        $delete_data = [
+            'is_deleted' => 1,
+            'deleted_by' => current_user()
+        ];
 
-            if ($this->modelfaculty->update($facultyId, [
-                        'is_deleted' => 1,
-                        'updated_by' => session('rise_no')
-                    ])) {
-                return $this->response->setJSON([
-                            'csrfHash' => csrf_hash()
-                ]);
-            }
-        } else {
-            return render_page('error_page/error404');
+        if ($this->modelfaculty->update($faculty_id, $delete_data)) {
+            return $this->response->setJSON([
+                        'csrfHash' => csrf_hash()
+            ]);
         }
     }
 
     public function revert_faculty() {
-        if ($this->request->getMethod() == 'post') {
-            $facultyId = $this->request->getPost('faculty_registration_id');
+        $faculty_id = $this->request->getPost('faculty_registration_id');
 
-            if ($this->modelfaculty->update($facultyId, ['is_deleted' => 2])) {
+        $revert_data = [
+            'is_deleted' => 2,
+            'deleted_by' => current_user()
+        ];
 
-                return $this->response->setJSON([
-                            'csrfHash' => csrf_hash()
-                ]);
-            }
-        } else {
-            return render_page('error_page/error404');
+        if ($this->modelfaculty->update($faculty_id, $revert_data)) {
+            return $this->response->setJSON([
+                        'csrfHash' => csrf_hash()
+            ]);
         }
     }
 }

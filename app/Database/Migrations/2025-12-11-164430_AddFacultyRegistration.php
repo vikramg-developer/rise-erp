@@ -8,97 +8,106 @@ use CodeIgniter\Database\RawSql;
 class AddFacultyRegistration extends Migration {
 
     public function up() {
-        $fields = [
+        $this->forge->addField([
             'faculty_registration_id' => [
                 'type' => 'INT',
+                'constraint' => 11,
                 'auto_increment' => true,
             ],
             'faculty_rise_no' => [
                 'type' => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => 100,
             ],
             'faculty_role_id' => [
                 'type' => 'INT',
-                'constraint' => '11',
+                'constraint' => 11,
             ],
             'faculty_first_name' => [
                 'type' => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => 100,
             ],
             'faculty_middle_name' => [
                 'type' => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => 100,
             ],
             'faculty_last_name' => [
                 'type' => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => 100,
             ],
             'faculty_mobile_number' => [
                 'type' => 'VARCHAR',
-                'constraint' => '50',
+                'constraint' => 50,
             ],
             'faculty_email_id' => [
                 'type' => 'VARCHAR',
-                'constraint' => '150',
+                'constraint' => 150,
             ],
             'faculty_aadhar_number' => [
                 'type' => 'VARCHAR',
-                'constraint' => '50',
+                'constraint' => 50,
             ],
             'faculty_pan_number' => [
                 'type' => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => 100,
             ],
             'faculty_password' => [
                 'type' => 'VARCHAR',
-                'constraint' => '255',
+                'constraint' => 255,
             ],
             'is_first_login' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
                 'default' => 1,
             ],
+            'faculty_status' => [
+                'type' => 'TINYINT',
+                'constraint' => 1,
+                'default' => 1,
+            ],
             'added_by' => [
                 'type' => 'VARCHAR',
-                'constraint' => '50',
-                'null' => false,
+                'constraint' => 50,
+                'null' => false
             ],
             'added_at' => [
                 'type' => 'TIMESTAMP',
                 'null' => false,
-                'default' => new RawSql('CURRENT_TIMESTAMP'),
+                'default' => new RawSql('CURRENT_TIMESTAMP'),        
             ],
             'updated_by' => [
                 'type' => 'VARCHAR',
-                'constraint' => '50',
-                'null' => false,
+                'constraint' => 50,
             ],
             'updated_at' => [
                 'type' => 'TIMESTAMP',
                 'null' => true,
-                'default'=>new Rawsql('NULL ON UPDATE CURRENT_TIMESTAMP'),
+            ],
+            'deleted_by' => [
+                'type' => 'VARCHAR',
+                'constraint' => 50,
+            ],
+            'deleted_at' => [
+                'type' => 'TIMESTAMP',
+                'null' => true,
             ],
             'is_deleted' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
             ],
-        ];
+        ]);
 
-        $this->forge->addField($fields);
-
-        // Primary Key
         $this->forge->addKey('faculty_registration_id', true);
 
         $this->forge->addUniqueKey('faculty_rise_no');
-        $this->forge->addUniqueKey('faculty_email_id');
         $this->forge->addUniqueKey('faculty_mobile_number');
+        $this->forge->addUniqueKey('faculty_email_id');
         $this->forge->addUniqueKey('faculty_aadhar_number');
         $this->forge->addUniqueKey('faculty_pan_number');
 
-        $this->forge->createTable('faculty_registration');
+        $this->forge->createTable('faculty_registration', true);
     }
 
     public function down() {
-        $this->forge->dropTable('faculty_registration');
+        $this->forge->dropTable('faculty_registration', true);
     }
 }
