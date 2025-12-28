@@ -19,4 +19,5 @@ class ModelActivityLog extends Model {
         'added_by'
     ];
     public $timestamps = false;
+    protected $allowCallbacks = false;
 }

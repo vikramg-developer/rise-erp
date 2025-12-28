@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use CodeIgniter\Database\Exceptions\DatabaseException;
+use \App\Traits\ActivityLoggerTrait;
 
 /**
  * Description of ModelHead
@@ -11,6 +11,8 @@ use CodeIgniter\Database\Exceptions\DatabaseException;
  * @author Shoeb
  */
 class ModelHead extends Model {
+
+    use ActivityLoggerTrait;
 
     protected $table = 'head';
     protected $primaryKey = 'head_id';
@@ -31,7 +33,6 @@ class ModelHead extends Model {
     protected $beforeUpdate = ['setUpdateOrDeleteDate', 'captureOldData'];
     protected $afterInsert = ['logInsert'];
     protected $afterUpdate = ['logUpdate'];
-    protected $oldData = [];
 
     public function searchHead(string $term) {
         return $this->select('head_name')
@@ -83,57 +84,5 @@ class ModelHead extends Model {
             'head_id' => 'required|is_natural_no_zero',
             'head_name' => "required|alpha_numeric_space|is_unique[head.head_name,head_id,{$id}]",
         ];
-    }
-
-    protected function logInsert(array $data) {
-        log_activity([
-            'action' => 'insert',
-            'table' => $this->table,
-            'record_id' => $data['id'],
-            'new' => $data['data'],
-            'columns' => array_keys($data['data'])
-        ]);
-
-        return $data;
-    }
-
-    protected function captureOldData(array $data) {
-        log_message('debug', __METHOD__ . ' triggered');
-        if (!isset($data['id']))
-            return $data;
-
-        $id = is_array($data['id']) ? $data['id'][0] : $data['id'];
-        $this->oldData = $this->find($id);
-        return $data;
-    }
-
-    protected function logUpdate(array $data) {
-        $newData = $data['data'];
-        $oldData = $this->oldData;
-
-        $changedColumns = [];
-        $oldValues = [];
-        $newValues = [];
-
-        foreach ($newData as $key => $value) {
-            if (array_key_exists($key, $oldData) && $oldData[$key] != $value) {
-                $changedColumns[] = $key;
-                $oldValues[$key] = $oldData[$key];
-                $newValues[$key] = $value;
-            }
-        }
-
-        if (!empty($changedColumns)) {
-            log_activity([
-                'action' => 'update',
-                'table' => $this->table,
-                'record_id' => $data['id'],
-                'columns' => $changedColumns,
-                'old' => $oldValues,
-                'new' => $newValues
-            ]);
-        }
-
-        return $data;
     }
 }
