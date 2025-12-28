@@ -126,6 +126,7 @@ $routes->group('head', function ($routes) {
     $routes->post('update-head', 'Head::update_head', ['filter' => 'permission:createHead']);
     $routes->post('delete-head', 'Head::delete_head', ['filter' => 'permission:createHead']);
     $routes->post('revert-head', 'Head::revert_head', ['filter' => 'permission:createHead']);
+    $routes->get('search', 'Head::searchHead');
 });
 
 $routes->group('department', function ($routes) {
