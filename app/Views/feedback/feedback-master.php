@@ -30,6 +30,7 @@
                                 <div class="modal-dialog modal-dialog-centered">
 
                                     <div class="modal-content">
+                                        <input type="hidden" name="feedback_master_id" id="feedback_master_id">
                                         <div class="modal-header">
                                             <h6 class="modal-title"><?= lang('App.feedback') ?> <?= lang('App.master') ?></h6>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -124,22 +125,27 @@
                 </div>
                 <!---------------------------End Add master-------------------------------------------------------------->
                 <div class="card-body">
-                    <table id="feedback-master-table" class="table table-bordered w-100">
-                        <thead>
-                            <tr>
-                                <th scope="col"><?= lang('App.sr') ?> <?= lang('App.no') ?></th>
-                                <th scope="col"> <?= lang('App.feedback') ?> <?= lang('App.name') ?></th>
-                                <th scope="col"><?= lang('App.type') ?> </th>
-                                <th scope="col"><?= lang('App.semester') ?> </th>
-                                <th scope="col"><?= lang('App.part') ?> </th>
-                                <th scope="col"><?= lang('App.academic') ?> <?= lang('App.year') ?> </th>
-                                 <th scope="col"><?= lang('App.action') ?></th>
-                                 <th scope="col"><?= lang('App.remark') ?></th>
-                                <th scope="col"><?= lang('App.manage') ?> <?= lang('App.question') ?> </th>
-                               
-                            </tr>
-                        </thead>
-                    </table>
+                    <div class="table-responsive">
+                    <!--<table id="feedback-master-table" class="table table-bordered w-100">-->
+                        <table id="feedback-master-table" class="table table-hover table-bordered text-nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th width="5%"><?= lang('App.sr') ?> <?= lang('App.no') ?></th>
+                                    <th><?= lang('App.action') ?></th>
+                                    <th> <?= lang('App.feedback') ?> <?= lang('App.name') ?></th>
+                                    <th><?= lang('App.type') ?> </th>
+                                    <th><?= lang('App.semester') ?> </th>
+                                    <th><?= lang('App.part') ?> </th>
+                                    <th><?= lang('App.academic') ?> <?= lang('App.year') ?> </th>
+                                    <th><?= lang('App.added') ?> <?= lang('App.by') ?></th>
+                                    <th><?= lang('App.updated') ?> <?= lang('App.by') ?></th>
+                                    <th><?= lang('App.action') ?></th>
+                                    <th><?= lang('App.manage') ?> <?= lang('App.question') ?> </th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

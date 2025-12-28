@@ -18,6 +18,7 @@ class ModelFeedback extends Model {
         'academic_year_id',
         'is_deleted',
         'added_by',
+        'deleted_by',
         'updated_by',
     ];
     // Validation
@@ -46,17 +47,13 @@ class ModelFeedback extends Model {
             'required' => 'Academic Year is required'
         ],
     ];
+    protected $beforeUpdate = ['setUpdateOrDeleteDate'];
 
-    
-//    public function getFeedbackMasterList($length, $start ,$search='') {
     public function getFeedbackMasterList($length, $start) {
-//        print_r("ello"); die();
-        $builder = $this->db->table('feedback_master fm');
 
+        $builder = $this->db->table('feedback_master fm');
         $builder->select([
             'fm.*',
-//            'fm.feedback_master_id',
-//            'fm.feedback_name',
             'st.subject_type_name',
             's.semester_name',
             'sem_part.semester_part_name',
@@ -68,19 +65,18 @@ class ModelFeedback extends Model {
         $builder->join('semester s', 's.semester_id = fm.semester_id', 'left');
         $builder->join('semester_part sem_part', 'sem_part.semester_part_id = fm.part_id', 'left');
         $builder->join('academic_year aca_year', 'aca_year.academic_year_id = fm.academic_year_id', 'left');
-
-        // ❌ Soft delete filter
-//        $builder->where('fm.is_deleted', 0);
-
-        //🔍 Search
-//        if (!empty($search)) {
-//            $builder->groupStart()
-//                ->like('fm.feedback_name', $search)
-//                ->like('s.semester_name', $search)
-//                ->like('st.subject_type_name', $search)
-//                ->groupEnd();
-//        }
-
         return $builder->limit($length, $start)->get()->getResultArray();
+    }
+
+    protected function setUpdateOrDeleteDate(array $data) {
+        // If `is_deleted` is being updated → set deleted_dt
+        if (array_key_exists('is_deleted', $data['data'])) {
+            $data['data']['deleted_at'] = date('Y-m-d H:i:s');
+            return $data;
+        }
+
+        // Otherwise → set updated_dt
+        $data['data']['updated_at'] = date('Y-m-d H:i:s');
+        return $data;
     }
 }
