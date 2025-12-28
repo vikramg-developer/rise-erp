@@ -25,8 +25,12 @@ $(document).ready(function () {
     });
 
     // Select value
-    $(document).on('click', '#searchResult li', function () {
+    $(document).on('mousedown', '#searchResult li', function () {
         $('#head_name').val($(this).text());
+        $('#searchResult').empty();
+    });
+    
+    $(document).on('click', function () {
         $('#searchResult').empty();
     });
 
