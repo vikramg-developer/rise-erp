@@ -78,9 +78,8 @@ class LeavingCertificate extends BaseController {
                 $lc_data = $this->modelleavingcertificate->get_lc_data($student['yearwise_student_data_id']);
               
                 $lc_count = is_array($lc_data) ? count($lc_data) : 0;
-                  print_r($lc_count);die();
+
                 $disabled = ($lc_count > 1) ? 'disabled' : '';
-//                print_r(count($lc_data));die();
                 $buttons = '';
                 $buttons .= '<button class="btn btn-secondary lc_btn" ' . $disabled . ' data-yearwise_student_data_id="' . $student['yearwise_student_data_id'] . '">' . lang('App.leaving') . ' ' . lang('App.certificate') . '</button>';
 
