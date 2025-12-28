@@ -62,7 +62,7 @@ class LeavingCertificate extends BaseController {
 
             // Data rows (paginated + searched)
             $students = $this->modelyearwisestudentdata->get_lc_student_list($filters, $length, $start, $search);
-
+            
             // Single count (search-aware)
             $count_filter = $this->modelyearwisestudentdata->count_filter_results($filters, $search);
             $count_all = $this->modelyearwisestudentdata->count_all_results($filters);
@@ -70,10 +70,12 @@ class LeavingCertificate extends BaseController {
             $data = [];
 
             foreach ($students as $student) {
-
+                
                 //====To check Count of genrated LC for one student====
                 $lc_data = $this->modelleavingcertificate->get_lc_data($student['yearwise_student_data_id']);
+              
                 $lc_count = is_array($lc_data) ? count($lc_data) : 0;
+                  print_r($lc_count);die();
                 $disabled = ($lc_count > 1) ? 'disabled' : '';
 //                print_r(count($lc_data));die();
                 $buttons = '';
@@ -89,6 +91,7 @@ class LeavingCertificate extends BaseController {
                     $buttons,
                 ];
             }
+            
             return $this->response->setJSON([
                         'draw' => $draw,
                         'recordsTotal' => $count_all,
