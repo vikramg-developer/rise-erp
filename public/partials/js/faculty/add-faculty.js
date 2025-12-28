@@ -4,23 +4,23 @@ $(document).on('input', 'input[name="faculty_pan_number"]', function () {
 });
 
 $(document).on(
-    'input',
-    'input[name="faculty_first_name"], input[name="faculty_middle_name"], input[name="faculty_last_name"]',
-    function () {
-       this.value = this.value
-            .replace(/[^a-zA-Z\s]/g, '') // remove numbers & special chars
-            .toUpperCase();              // convert to uppercase
-    }
+        'input',
+        'input[name="faculty_first_name"], input[name="faculty_middle_name"], input[name="faculty_last_name"]',
+        function () {
+            this.value = this.value
+                    .replace(/[^a-zA-Z\s]/g, '') // remove numbers & special chars
+                    .toUpperCase();              // convert to uppercase
+        }
 );
 
 $(document).on(
-    'input',
-    'input[name="faculty_mobile_number"]',
-    function () {
-        this.value = this.value
-            .replace(/[^0-9]/g, '')
-            .slice(0, 10);
-    }
+        'input',
+        'input[name="faculty_mobile_number"]',
+        function () {
+            this.value = this.value
+                    .replace(/[^0-9]/g, '')
+                    .slice(0, 10);
+        }
 );
 
 $(document).on('input', 'input[name="faculty_password"]', function () {
@@ -30,8 +30,8 @@ $(document).on('input', 'input[name="faculty_password"]', function () {
 
     if (!regex.test(password)) {
         $('#faculty_password_error')
-            .text('Password must be at least 8 characters and include at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character')
-            .show();
+                .text('Password must be at least 8 characters and include at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character')
+                .show();
     } else {
         $('#faculty_password_error').text('').hide();
     }
@@ -67,12 +67,12 @@ $(document).on('input', '#faculty_password, #confirm_password', function () {
 $("#faculty-registration-form").on("submit", function (e) {
     e.preventDefault();
 
-  
+
     // Hide all validation errors
     $("small.text-danger").text('').hide();
 
     let formData = $(this).serializeArray();
-    formData.push({ name: csrfName, value: csrfHash });
+    formData.push({name: csrfName, value: csrfHash});
 
     $.ajax({
         url: BASE_URL + "faculty/add-faculty",
@@ -125,7 +125,7 @@ $(document).ready(function () {
                         csrfHash = res.responseJSON.csrfHash;
                     }
                 }
-            }
+            } 
         });
     }
 });
@@ -134,16 +134,20 @@ $(document).ready(function () {
 // ================================
 // DELETE FACULTY (Manage Faculty)
 // ================================
+// ================================
+// DELETE FACULTY (Manage Faculty)
+// ================================
 $(document).on("click", ".delete", function () {
 
     let faculty_registration_id = $(this).data("id");
-    
+    let faculty_name = $(this).data("name");
 
     if (!faculty_registration_id) {
         return;
     }
 
-    confirmDelete(faculty_registration_id).then(result => {
+    // 👉 PASS NAME (not ID)
+    confirmDelete(faculty_name).then(result => {
         if (result.isConfirmed) {
 
             $.ajax({
@@ -158,7 +162,8 @@ $(document).on("click", ".delete", function () {
                 success: function (res) {
                     csrfHash = res.csrfHash;
 
-                    successDelete(faculty_registration_id);
+                    // 👉 SHOW NAME
+                    successDelete(faculty_name);
 
                     table.ajax.reload(null, false);
                 },
@@ -169,10 +174,12 @@ $(document).on("click", ".delete", function () {
             });
 
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            cancelDelete(faculty_registration_id);
+            // 👉 SHOW NAME
+            cancelDelete(faculty_name);
         }
     });
 });
+
 
 // ================================
 // REVERT FACULTY
@@ -180,8 +187,14 @@ $(document).on("click", ".delete", function () {
 $(document).on("click", ".revert", function () {
 
     let faculty_registration_id = $(this).data("id");
+    let faculty_name = $(this).data("name");
 
-    confirmRevert(faculty_registration_id).then(result => {
+    if (!faculty_registration_id) {
+        return;
+    }
+
+    // 👉 PASS NAME (not ID)
+    confirmRevert(faculty_name).then(result => {
         if (result.isConfirmed) {
 
             $.ajax({
@@ -195,7 +208,10 @@ $(document).on("click", ".revert", function () {
 
                 success: function (res) {
                     csrfHash = res.csrfHash;
-                    successRevert(faculty_registration_id);
+
+                    // 👉 SHOW NAME
+                    successRevert(faculty_name);
+
                     table.ajax.reload(null, false);
                 },
 
@@ -205,7 +221,8 @@ $(document).on("click", ".revert", function () {
             });
 
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            cancelRevert(faculty_registration_id);
+            // 👉 SHOW NAME
+            cancelRevert(faculty_name);
         }
     });
 });
