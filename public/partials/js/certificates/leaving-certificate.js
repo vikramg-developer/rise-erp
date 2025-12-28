@@ -155,6 +155,7 @@ $("#lc_modal_form").on("submit", function (e) {
     e.preventDefault();
 
     $(".field-error").text("").hide();
+//    $('input[name="' + csrfName + '"]').val(csrfHash);
 
     let formData = $(this).serializeArray();
     formData.push({name: csrfName, value: csrfHash});

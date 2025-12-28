@@ -315,7 +315,7 @@ $monthName = ucwords($dateObj->format('F'));
         <tr>
         	<td>Rise No.:<?php echo $yearwise_data['student_rise_no']; ?></td>
         	<td>Gen. Reg No.:<?php echo $yearwise_data['student_general_register_no']; ?></td>
-        	<td style="text-align: right;">LC No.: <?php echo esc($lc_data['leaving_certificate_id'] ?? ''); ?></td>
+        	<td style="text-align: right;">LC No.: <?php echo esc($lc_data['leaving_certificate_no'] ?? ''); ?></td>
         </tr>
     </table>
 

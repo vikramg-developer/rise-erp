@@ -12,6 +12,7 @@ class ModelLeavingCertificate extends Model {
     protected $returnType = 'array'; // You can change to 'object' if needed
     protected $useSoftDeletes = false;   // You are using is_deleted instead of softDelete()
     protected $allowedFields = [
+        'leaving_certificate_no',
         'yearwise_student_data_id',
         'examination',
         'exam_period',
