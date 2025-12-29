@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\ModelFeesManagement;
-
 /**
  * Description of FeesManagement
  *
@@ -13,25 +11,16 @@ class Head extends BaseController {
 
     protected $modelhead;
     protected $modelfacultyregistration;
-    protected $modelrole;
 
     public function __construct() {
         $this->modelhead = model('ModelHead');
         $this->modelfacultyregistration = model('ModelFacultyRegistration');
-        $this->modelrole = model('ModelRole');
     }
 
-    public function searchHead() {
+    public function search_head() {
         $term = $this->request->getGet('q');
-        $this->db = db_connect();
-        $results = $this->db->table('head')
-                ->select('head_id, head_name')
-                ->like('head_name', $term)
-                ->limit(10)
-                ->get()
-                ->getResultArray();
 
-        return $this->response->setJSON($results);
+        return $this->response->setJSON($this->modelhead->search_head($term));
     }
 
 //put your code here
@@ -66,16 +55,16 @@ class Head extends BaseController {
             $buttons = '';
 
             // Edit Button
-            if (hasPermission('updateRole')):
-                $buttons .= '<button class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill edit" data-head_id="' . $row['head_id'] . '" data-head_name="' . $row['head_name'] . '"><i class="ri-pencil-fill"></i></button>';
+            if (hasPermission('updateHead')):
+                $buttons .= iconButton('Edit', ['head_id' => $row['head_id'], 'head_name' => $row['head_name']]);
             endif;
 
             // Delete Button
-            if (hasPermission('deleteRole')):
+            if (hasPermission('deleteHead')):
                 if ($row['is_deleted'] != 1):
-                    $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete" data-head_id="' . $row['head_id'] . '" data-head_name="' . $row['head_name'] . '"><i class="ri-delete-bin-fill"></i></button>';
+                    $buttons .= iconButton('Delete', ['head_id' => $row['head_id'], 'head_name' => $row['head_name']]);
                 elseif ($row['is_deleted'] == 1):
-                    $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-head_id="' . $row['head_id'] . '" data-head_name="' . $row['head_name'] . '"><i class="ri-arrow-go-back-fill"></i></button>';
+                    $buttons .= iconButton('Revert', ['head_id' => $row['head_id'], 'head_name' => $row['head_name']]);
                 endif;
             endif;
 
@@ -106,7 +95,7 @@ class Head extends BaseController {
             $data[] = [
                 $buttons,
                 $sr_no++,
-                $row['head_name'],
+                esc($row['head_name']),
                 $addedBy,
                 $updatedBy,
                 $remark,
@@ -150,7 +139,7 @@ class Head extends BaseController {
             'head_name' => clean_name($this->request->getVar('head_name')),
             'updated_by' => current_user(),
         ];
-        
+
         $this->modelhead->setValidationRules(
                 $this->modelhead->rulesForUpdate($id)
         );
@@ -171,42 +160,34 @@ class Head extends BaseController {
     }
 
     public function delete_head() {
-        if ($this->request->getMethod() == 'post') {
-            $head_id = $this->request->getPost('head_id');
+        $head_id = $this->request->getPost('head_id');
 
-            $delete_data = [
-                'is_deleted' => 1,
-                'deleted_by' => current_user(),
-            ];
+        $delete_data = [
+            'is_deleted' => 1,
+            'deleted_by' => current_user(),
+        ];
 
-            if ($this->modelhead->update($head_id, $delete_data)) {
+        if ($this->modelhead->update($head_id, $delete_data)) {
 
-                return $this->response->setJSON([
-                            'csrfHash' => csrf_hash()
-                ]);
-            }
-        } else {
-            return render_page('error_page/error404');
+            return $this->response->setJSON([
+                        'csrfHash' => csrf_hash()
+            ]);
         }
     }
 
     public function revert_head() {
-        if ($this->request->getMethod() == 'post') {
-            $head_id = $this->request->getPost('head_id');
+        $head_id = $this->request->getPost('head_id');
 
-            $revert_data = [
-                'is_deleted' => 2,
-                'deleted_by' => current_user(),
-            ];
+        $revert_data = [
+            'is_deleted' => 2,
+            'deleted_by' => current_user(),
+        ];
 
-            if ($this->modelhead->update($head_id, $revert_data)) {
+        if ($this->modelhead->update($head_id, $revert_data)) {
 
-                return $this->response->setJSON([
-                            'csrfHash' => csrf_hash()
-                ]);
-            }
-        } else {
-            return render_page('error_page/error404');
+            return $this->response->setJSON([
+                        'csrfHash' => csrf_hash()
+            ]);
         }
     }
 }

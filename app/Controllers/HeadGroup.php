@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\ModelFeesManagement;
-
 /**
  * Description of FeesManagement
  *
@@ -13,12 +11,16 @@ class HeadGroup extends BaseController {
 
     protected $modelheadgroup;
     protected $modelfacultyregistration;
-    protected $modelrole;
 
     public function __construct() {
         $this->modelheadgroup = model('ModelHeadGroup');
         $this->modelfacultyregistration = model('ModelFacultyRegistration');
-        $this->modelrole = model('ModelRole');
+    }
+
+    public function search_head_group() {
+        $term = $this->request->getGet('q');
+
+        return $this->response->setJSON($this->modelheadgroup->search_head_group($term));
     }
 
 //put your code here
@@ -54,15 +56,15 @@ class HeadGroup extends BaseController {
 
             // Edit Button
             if (hasPermission('updateRole')):
-                $buttons .= '<button class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill edit" data-head_group_id="' . $row['head_group_id'] . '" data-head_group_name="' . $row['head_group_name'] . '"><i class="ri-pencil-fill"></i></button>';
+                $buttons .= iconButton('Edit', ['head_group_id' => $row['head_group_id'], 'head_group_name' => $row['head_group_name']]);
             endif;
 
             // Delete Button
             if (hasPermission('deleteRole')):
                 if ($row['is_deleted'] != 1):
-                    $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete" data-head_group_id="' . $row['head_group_id'] . '" data-head_group_name="' . $row['head_group_name'] . '"><i class="ri-delete-bin-fill"></i></button>';
+                    $buttons .= iconButton('Delete', ['head_group_id' => $row['head_group_id'], 'head_group_name' => $row['head_group_name']]);
                 elseif ($row['is_deleted'] == 1):
-                    $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-head_group_id="' . $row['head_group_id'] . '" data-head_group_name="' . $row['head_group_name'] . '"><i class="ri-arrow-go-back-fill"></i></button>';
+                    $buttons .= iconButton('Revert', ['head_group_id' => $row['head_group_id'], 'head_group_name' => $row['head_group_name']]);
                 endif;
             endif;
 
@@ -82,10 +84,10 @@ class HeadGroup extends BaseController {
 
             // Remark
             if ($row['is_deleted'] == 1 && !empty($row['deleted_by']) && !empty($row['deleted_at'])):
-                $remark = activityBadge('danger', $facultyNameMap[$row['deleted_by']], $row['deleted_at'],"Deleted By");
+                $remark = activityBadge('danger', $facultyNameMap[$row['deleted_by']], $row['deleted_at'], "Deleted By");
 
             elseif ($row['is_deleted'] == 2 && !empty($row['deleted_by']) && !empty($row['deleted_at'])):
-                $remark = activityBadge('warning', $facultyNameMap[$row['deleted_by']], $row['deleted_at'],"Reverted By");
+                $remark = activityBadge('warning', $facultyNameMap[$row['deleted_by']], $row['deleted_at'], "Reverted By");
             else:
                 $remark = "";
             endif;
@@ -93,7 +95,7 @@ class HeadGroup extends BaseController {
             $data[] = [
                 $buttons,
                 $sr_no++,
-                $row['head_group_name'],
+                esc($row['head_group_name']),
                 $addedBy,
                 $updatedBy,
                 $remark,
@@ -137,6 +139,10 @@ class HeadGroup extends BaseController {
             'head_group_name' => clean_name($this->request->getVar('head_group_name')),
             'updated_by' => current_user(),
         ];
+
+        $this->modelheadgroup->setValidationRules(
+                $this->modelheadgroup->rulesForUpdate($id)
+        );
 
         if ($this->modelheadgroup->update($id, $update_data)) {
             return $this->response->setJSON([

@@ -16,6 +16,7 @@
 
 
     <!-- Start::row-1 -->
+    <?php if(hasPermission('createHead')): ?>
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
@@ -49,6 +50,7 @@
             </div>
         </div>
     </div>
+    <?php endif; ?>
     <!--End::row-1 -->
 
     <div class="row">
@@ -64,7 +66,7 @@
                         <table id="head-table" class="table table-bordered text-nowrap w-100">
                             <thead>
                                 <tr>
-                                    <?php if (hasPermission('updateDepartment') || hasPermission('deleteDepartment')): ?>
+                                    <?php if (hasPermission('updateHead') || hasPermission('deleteHead')): ?>
                                         <th><?= lang('App.action'); ?></th>
                                     <?php endif; ?>
                                     <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
