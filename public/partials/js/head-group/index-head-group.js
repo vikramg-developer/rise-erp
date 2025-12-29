@@ -1,8 +1,40 @@
 let table;
 
 $(document).ready(function () {
+    $('#head_group_name').on('keyup', function () {
+        let query = $(this).val();
 
-    table = $('#head-group-table').DataTable({
+        if (query.length < 1) {
+            $('#searchResult').empty();
+            return;
+        }
+
+        $.ajax({
+            url: BASE_URL + 'headgroup/search-head-group',
+            method: "GET",
+            data: {q: query},
+            success: function (data) {
+                console.log(data);
+                let html = '';
+                data.forEach(row => {
+                    html += `<li class="list-group-item">${row.head_group_name}</li>`;
+                });
+                $('#searchResult').html(html);
+            }
+        });
+    });
+
+    // Select value
+    $(document).on('mousedown', '#searchResult li', function () {
+        $('#head_group_name').val($(this).text());
+        $('#searchResult').empty();
+    });
+    
+    $(document).on('click', function () {
+        $('#searchResult').empty();
+    });
+
+    table = $('#head-table').DataTable({
         processing: true,
         serverSide: true,
         destroy: true,
@@ -23,7 +55,7 @@ $(document).ready(function () {
 });
 
 
-$("#head-group-form").on("submit", function (e) {
+$("#head-form").on("submit", function (e) {
     e.preventDefault();
 
     // clear errors
@@ -66,7 +98,7 @@ $("#head-group-form").on("submit", function (e) {
             table.ajax.reload(null, false);
 
             // Optional: Reset form
-            $("#head-group-form")[0].reset();
+            $("#head-form")[0].reset();
 
             $("#submit_btn").html('Save <i class="bi bi-save2 ms-2"></i>');
 

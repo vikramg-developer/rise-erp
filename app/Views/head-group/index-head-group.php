@@ -20,7 +20,7 @@
         <div class="col-xl-12">
             <div class="card custom-card">
                 
-                <form method="post" action="" id="head-group-form">
+                <form method="post" action="" id="head-form">
                     <div class="card-body head-group p-0">
                         <div class="p-4">
                             <div class="row gx-5">
@@ -32,6 +32,7 @@
                                                     <input type="hidden" id="head_group_id" name="head_group_id">
                                                     <label for="head_group_name" class="form-label"><?= lang('App.head'); ?> <?= lang('App.group'); ?></label>
                                                     <input type="text" class="form-control" id="head_group_name" name="head_group_name" placeholder="<?= lang('App.head'); ?> <?= lang('App.group'); ?>">
+                                                    <ul id="searchResult" class="list-group position-absolute w-100" style="z-index:1000"></ul>
                                                     <small class="text-danger" id="head_group_name_error" style="display:none;"></small>
                                                 </div>
                                             </div>
@@ -60,10 +61,10 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="head-group-table" class="table table-bordered text-nowrap w-100">
+                        <table id="head-table" class="table table-bordered text-nowrap w-100">
                             <thead>
                                 <tr>
-                                    <?php if (hasPermission('updateDepartment') || hasPermission('deleteDepartment')): ?>
+                                    <?php if (hasPermission('updateHeadGroup') || hasPermission('deleteHeadGroup')): ?>
                                         <th><?= lang('App.action'); ?></th>
                                     <?php endif; ?>
                                     <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>

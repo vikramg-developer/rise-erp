@@ -10,7 +10,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: BASE_URL + 'head/search',
+            url: BASE_URL + 'head/search-head',
             method: "GET",
             data: {q: query},
             success: function (data) {
