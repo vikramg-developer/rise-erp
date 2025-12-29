@@ -38,12 +38,7 @@ $("#fetch_lc_student").on("submit", function (e) {
 
                 return json.data;
             }
-//            complete: function (res) {
-////                console.log(res);
-//                if (res.responseJSON && res.responseJSON.csrfHash) {
-//                    csrfHash = res.responseJSON.csrfHash; // UPDATE for next request
-//                }
-//            }
+
         }
     });
 }else {

@@ -25,7 +25,7 @@ class LeavingCertificate extends BaseController {
 
     public function index() {
         $data['jspath'] = 'certificates/leaving-certificate';
-        $data['title'] = lang('App.rise') . "-" . lang('App.leaving') . " " . lang('App.certifcate');
+        $data['title'] = lang('App.rise') . "-" . lang('App.leaving') . " " . lang('App.certificate');
         $data['academic_year'] = $this->modelacademicyear->get_active_academic_years();
         $data['years'] = $this->modelyear->get_years();
         $data['departments'] = $this->modeldepartment->get_departments();
@@ -65,7 +65,7 @@ class LeavingCertificate extends BaseController {
 
             // Data rows (paginated + searched)
             $students = $this->modelyearwisestudentdata->get_lc_student_list($filters, $length, $start, $search);
-            
+
             // Single count (search-aware)
             $count_filter = $this->modelyearwisestudentdata->count_filter_results($filters, $search);
             $count_all = $this->modelyearwisestudentdata->count_all_results($filters);
@@ -73,10 +73,10 @@ class LeavingCertificate extends BaseController {
             $data = [];
 
             foreach ($students as $student) {
-                
+
                 //====To check Count of genrated LC for one student====
                 $lc_data = $this->modelleavingcertificate->get_lc_data($student['yearwise_student_data_id']);
-              
+
                 $lc_count = is_array($lc_data) ? count($lc_data) : 0;
 
                 $disabled = ($lc_count > 1) ? 'disabled' : '';
@@ -93,7 +93,7 @@ class LeavingCertificate extends BaseController {
                     $buttons,
                 ];
             }
-            
+
             return $this->response->setJSON([
                         'draw' => $draw,
                         'recordsTotal' => $count_all,
@@ -119,6 +119,7 @@ class LeavingCertificate extends BaseController {
 
         $lc_data = $this->modelleavingcertificate
                 ->where('yearwise_student_data_id', $ysd_id)
+                ->where('is_cancelled', 0)
                 ->first();
 
         return $this->response->setJSON([

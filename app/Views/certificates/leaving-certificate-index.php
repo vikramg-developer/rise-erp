@@ -52,7 +52,7 @@
                                                 </div>
                                                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
                                                     <label for="academic_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
-                                                    <select class="js-example-basic-single" name="academic_year_id" id="academic_year_id">
+                                                    <select class="form-control js-example-basic-single" name="academic_year_id" id="academic_year_id">
                                                         <option value="">Select Academic Year</option>
                                                         <?php
                                                         foreach ($academic_year as $aca_year) {
