@@ -52,15 +52,15 @@ class Role extends BaseController {
 
             // Edit Button
             if (hasPermission('updateRole')):
-                $buttons .= iconHrefButton('Edit', 'roles/edit-role/' . $row['role_id']);
+                $buttons .= actionHrefButton('Edit', 'roles/edit-role/' . $row['role_id']);
             endif;
 
             // Delete Button
             if (hasPermission('deleteRole')):
                 if ($row['is_deleted'] != 1):
-                    $buttons .= iconButton('Delete', ['role_id' => $row['role_id'], 'role_name' => $row['role_name']]);
+                    $buttons .= actionButton('Delete', ['role_id' => $row['role_id'], 'role_name' => $row['role_name']]);
                 elseif ($row['is_deleted'] == 1):
-                    $buttons .= iconButton('Revert', ['role_id' => $row['role_id'], 'role_name' => $row['role_name']]);
+                    $buttons .= actionButton('Revert', ['role_id' => $row['role_id'], 'role_name' => $row['role_name']]);
                 endif;
             endif;
 

@@ -17,9 +17,9 @@ if (!function_exists('activityBadge')) {
 
 }
 
-if (!function_exists('iconButton')) {
+if (!function_exists('actionButton')) {
 
-    function iconButton($title = '', $data = []): string {
+    function actionButton($title = '', $data = []): string {
 
         if ($title === 'Edit') {
             $func = 'edit';
@@ -52,9 +52,9 @@ if (!function_exists('iconButton')) {
 
 }
 
-if (!function_exists('iconHrefButton')) {
+if (!function_exists('actionHrefButton')) {
 
-    function iconHrefButton($title = '', $href = ''): string {
+    function actionHrefButton($title = '', $href = ''): string {
 
         if ($title === 'Edit') {
             $btn_class = 'btn-secondary';

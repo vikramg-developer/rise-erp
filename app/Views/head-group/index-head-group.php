@@ -16,11 +16,12 @@
 
 
     <!-- Start::row-1 -->
+    <?php if(hasPermission('createHeadGroup')): ?>
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
                 
-                <form method="post" action="" id="head-form">
+                <form method="post" action="" id="head-group-form">
                     <div class="card-body head-group p-0">
                         <div class="p-4">
                             <div class="row gx-5">
@@ -49,6 +50,7 @@
             </div>
         </div>
     </div>
+    <?php endif; ?>
     <!--End::row-1 -->
 
     <div class="row">
@@ -61,7 +63,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="head-table" class="table table-bordered text-nowrap w-100">
+                        <table id="head-group-table" class="table table-bordered text-nowrap w-100">
                             <thead>
                                 <tr>
                                     <?php if (hasPermission('updateHeadGroup') || hasPermission('deleteHeadGroup')): ?>

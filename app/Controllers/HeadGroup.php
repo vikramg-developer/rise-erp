@@ -56,15 +56,15 @@ class HeadGroup extends BaseController {
 
             // Edit Button
             if (hasPermission('updateRole')):
-                $buttons .= iconButton('Edit', ['head_group_id' => $row['head_group_id'], 'head_group_name' => $row['head_group_name']]);
+                $buttons .= actionButton('Edit', ['head_group_id' => $row['head_group_id'], 'head_group_name' => $row['head_group_name']]);
             endif;
 
             // Delete Button
             if (hasPermission('deleteRole')):
                 if ($row['is_deleted'] != 1):
-                    $buttons .= iconButton('Delete', ['head_group_id' => $row['head_group_id'], 'head_group_name' => $row['head_group_name']]);
+                    $buttons .= actionButton('Delete', ['head_group_id' => $row['head_group_id'], 'head_group_name' => $row['head_group_name']]);
                 elseif ($row['is_deleted'] == 1):
-                    $buttons .= iconButton('Revert', ['head_group_id' => $row['head_group_id'], 'head_group_name' => $row['head_group_name']]);
+                    $buttons .= actionButton('Revert', ['head_group_id' => $row['head_group_id'], 'head_group_name' => $row['head_group_name']]);
                 endif;
             endif;
 

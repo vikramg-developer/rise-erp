@@ -136,6 +136,7 @@ $routes->group('department', function ($routes) {
     $routes->post('update-department', 'Department::update_department', ['filter' => 'permission:updateDepartment']);
     $routes->post('delete-department', 'Department::delete_department', ['filter' => 'permission:deleteDepartment']);
     $routes->post('revert-department', 'Department::revert_department', ['filter' => 'permission:deleteDepartment']);
+    $routes->get('search-department', 'Department::search_department', ['filter' => 'permission:createDepartment']);
 });
 
 $routes->group('roles', function ($routes) {
