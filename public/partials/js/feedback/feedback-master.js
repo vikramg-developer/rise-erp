@@ -1,5 +1,5 @@
+//---------- Fetch Table  ----------//
 let table;
-
 $(document).ready(function () {
 
     table = $('#feedback-master-table').DataTable({
@@ -8,7 +8,7 @@ $(document).ready(function () {
         destroy: true,
 
         ajax: {
-            url: "feedback/fetch-feedback-master",
+            url: BASE_URL +"feedback/fetch-feedback-master",
             type: "POST",
             data: function (d) {
                 d[csrfName] = csrfHash; // ALWAYS send current token
@@ -22,8 +22,7 @@ $(document).ready(function () {
     });
 });
 
-
-
+//---------- Submit form ----------//
 $("#feedback-master-form").on("submit", function (e) {
     e.preventDefault();
     // clear errors
@@ -45,19 +44,22 @@ $("#feedback-master-form").on("submit", function (e) {
 
             // handle validation errors
             if (response.status === 'error' && response.errors) {
-//                $("#feedback_name_error").text(response.errors.feedback_name).show();
-//                $("#type_id_error").text(response.errors.type_id).show();
-//                $("#semester_id_error").text(response.errors.semester_id).show();
-//                $("#part_id_error").text(response.errors.part_id).show();
-//                $("#academic_year_id_error").text(response.errors.academic_year_id).show();
-
                 $.each(response.errors, function (field, message) {
                     $("#" + field + "_error").text(message).show();
                 });
                 return;
             }
 
-            showToast('success', response.message);
+            
+            
+             // ---------- SUCCESS TOAST ----------
+            if (response.action === 'UPDATE') {
+                showToast('success', 'Feedback Master updated successfully');
+            } else {
+//             showToast('success', response.message);
+                showToast('success', 'Feedback Master Added successfully');
+            }
+
             //  Close modal
             $("#add_feedback_master_modal").modal('hide');
             //Reset form
@@ -79,7 +81,7 @@ $("#feedback-master-form").on("submit", function (e) {
     });
 });
 
-
+//---------- Delete  ----------//
 
 $(document).on("click", ".delete", function () {
     let feedback_master_id = $(this).data("feedback_master_id");
@@ -88,7 +90,7 @@ $(document).on("click", ".delete", function () {
     confirmDelete(feedback_master_name).then(result => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "feedback/delete-feedback-master",
+                url: BASE_URL +"feedback/delete-feedback-master",
                 type: "POST",
                 data: {feedback_master_id: feedback_master_id, [csrfName]: csrfHash},
                 dataType: "json",
@@ -111,7 +113,7 @@ $(document).on("click", ".delete", function () {
         }
     });
 });
-
+//---------- Revert  ----------//
 $(document).on("click", ".revert", function () {
     let feedback_master_id = $(this).data("feedback_master_id");
     let feedback_master_name = $(this).data("feedback_name");
@@ -119,7 +121,7 @@ $(document).on("click", ".revert", function () {
     confirmRevert(feedback_master_name).then(result => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "feedback/revert-feedback-master",
+                url: BASE_URL +"feedback/revert-feedback-master",
                 type: "POST",
                 data: {feedback_master_id: feedback_master_id, [csrfName]: csrfHash},
                 dataType: "json",
@@ -143,11 +145,10 @@ $(document).on("click", ".revert", function () {
     });
 });
 
-// ================= EDIT =================
+//---------- Edit Modal  ----------//
 $(document).on('click', '.edit', function () {
 
     let id = $(this).data('id');
-
     console.log('Edit ID:', id); 
 
     $.ajax({
@@ -175,6 +176,7 @@ $(document).on('click', '.edit', function () {
                 $('#submit_btn').text('Update');
 
                 $('#add_feedback_master_modal').modal('show'); 
+                
             }
         }
     });

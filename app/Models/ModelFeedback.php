@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use \App\Traits\ActivityLoggerTrait;
 
 class ModelFeedback extends Model {
+
+    use ActivityLoggerTrait;
 
     protected $table = 'feedback_master';
     protected $primaryKey = 'feedback_master_id';
@@ -47,7 +50,9 @@ class ModelFeedback extends Model {
             'required' => 'Academic Year is required'
         ],
     ];
-    protected $beforeUpdate = ['setUpdateOrDeleteDate'];
+    protected $beforeUpdate = ['setUpdateOrDeleteDate', 'captureOldData'];
+    protected $afterInsert = ['logInsert'];
+    protected $afterUpdate = ['logUpdate'];
 
     public function getFeedbackMasterList($length, $start) {
 

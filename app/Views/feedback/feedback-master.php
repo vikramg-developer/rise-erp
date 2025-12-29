@@ -130,8 +130,8 @@
                         <table id="feedback-master-table" class="table table-hover table-bordered text-nowrap w-100">
                             <thead>
                                 <tr>
-                                    <th width="5%"><?= lang('App.sr') ?> <?= lang('App.no') ?></th>
                                     <th><?= lang('App.action') ?></th>
+                                    <th width="5%"><?= lang('App.sr') ?> <?= lang('App.no') ?></th>
                                     <th> <?= lang('App.feedback') ?> <?= lang('App.name') ?></th>
                                     <th><?= lang('App.type') ?> </th>
                                     <th><?= lang('App.semester') ?> </th>
@@ -139,7 +139,7 @@
                                     <th><?= lang('App.academic') ?> <?= lang('App.year') ?> </th>
                                     <th><?= lang('App.added') ?> <?= lang('App.by') ?></th>
                                     <th><?= lang('App.updated') ?> <?= lang('App.by') ?></th>
-                                    <th><?= lang('App.action') ?></th>
+                                    <th><?= lang('App.remark') ?></th>
                                     <th><?= lang('App.manage') ?> <?= lang('App.question') ?> </th>
 
                                 </tr>
