@@ -14,6 +14,7 @@ class Feedback extends BaseController {
     protected $modelfacultyregistration;
 
     public function __construct() {
+        $db = \Config\Database::connect();
         $this->modelfeedback = model('ModelFeedback');
         $this->modelacademicyear = model('ModelAcademicYear');
         $this->modelsemester = model('ModelSemester');
@@ -32,53 +33,51 @@ class Feedback extends BaseController {
     }
 
     public function save_feedback_master() {
-//        $id = $this->request->getPost('feedback_master_id'); // 👈 IMPORTANT
-        $insert_data = [
+        $id = $this->request->getPost('feedback_master_id'); // 👈 IMPORTANT
+        $data = [
             'feedback_name' => clean_name($this->request->getVar('feedback_name')),
             'type_id' => ($this->request->getVar('type_id')),
             'semester_id' => ($this->request->getVar('semester_id')),
             'part_id' => ($this->request->getVar('part_id')),
             'academic_year_id' => ($this->request->getVar('academic_year_id')),
-            'added_by' => current_user()
+//            'added_by' => current_user()
         ];
 
         if (!empty($id)) {
-            // UPDATE
-            $this->modelfeedback->update($id, $insert_data);
-            $message = 'Feedback updated successfully';
-        } else {
-            // INSERT
-            if ($this->modelfeedback->insert($insert_data)) {
+            $data['updated_by'] = current_user();
+
+            if (!$this->modelfeedback->update($id, $data)) {
                 return $this->response->setJSON([
-                            'status' => 'success',
-                            'message' => 'Feedback Master added successfully',
+                            'status' => 'error',
+                            'errors' => $this->modelfeedback->errors(),
                             'csrfHash' => csrf_hash()
                 ]);
-            } else {
+                
+            }
+
+            $action = 'UPDATE';
+        } else {
+            $data['added_by'] = current_user();
+
+            if (!$this->modelfeedback->insert($data)) {
                 return $this->response->setJSON([
                             'status' => 'error',
                             'errors' => $this->modelfeedback->errors(),
                             'csrfHash' => csrf_hash()
                 ]);
             }
+
+            $action = 'INSERT';
         }
 
-//        if ($this->modelfeedback->insert($insert_data)) 
-//        {
-//            return $this->response->setJSON([
-//                        'status' => 'success',
-//                        'message' => 'Feedback Master added successfully',
-//                        'csrfHash' => csrf_hash()
-//            ]);
-//        } 
-//        else 
-//        {
-//            return $this->response->setJSON([
-//                        'status' => 'error',
-//                        'errors' => $this->modelfeedback->errors(),
-//                        'csrfHash' => csrf_hash()
-//            ]);
-//        }
+//        $lastQuery = (string) $this->modelfeedback->db->getLastQuery();
+
+        return $this->response->setJSON([
+                    'status' => 'success',
+                    'action' => $action,
+//                    'query' => $lastQuery,
+                    'csrfHash' => csrf_hash()
+        ]);
     }
 
     public function get_feedback_master() {
@@ -161,18 +160,18 @@ class Feedback extends BaseController {
 
             /* ===================== Deleted By ===================== */
             if ($row['is_deleted'] == 1 && !empty($row['deleted_by']) && !empty($row['deleted_at'])):
-                $remark = activityBadge('danger', $facultyNameMap[$row['deleted_by']], $row['deleted_at']);
+                $remark = activityBadge('danger', $facultyNameMap[$row['deleted_by']], $row['deleted_at'], "Deleted By");
 
             elseif ($row['is_deleted'] == 2 && !empty($row['deleted_by']) && !empty($row['deleted_at'])):
-                $remark = activityBadge('warning', $facultyNameMap[$row['deleted_by']], $row['deleted_at']);
+                $remark = activityBadge('warning', $facultyNameMap[$row['deleted_by']], $row['deleted_at'], "Reverted By");
             else:
                 $remark = "";
             endif;
 
             /* ============================================================ */
             $data[] = [
-                $sr_no++,
                 $buttons,
+                $sr_no++,
                 $row['feedback_name'],
                 $row['subject_type_name'],
                 $row['semester_name'],
