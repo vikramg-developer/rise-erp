@@ -21,7 +21,7 @@ class ModelDepartment extends Model {
     protected $allowedFields = ['department_name', 'added_by', 'updated_by', 'deleted_by', 'is_deleted'];
 //    // Validation
     protected $validationRules = [
-        'department_name' => 'required|alpha_numeric_space|is_unique[department.department_name]'
+        'department_name' => 'required|alpha_numeric_punct|is_unique[department.department_name]'
     ];
     protected $validationMessages = [
         'department_name' => [
@@ -82,7 +82,7 @@ class ModelDepartment extends Model {
     public function rulesForUpdate($id) {
         return [
             'department_id' => 'required|is_natural_no_zero',
-            'department_name' => "required|alpha_numeric_space|is_unique[department.department_name,department_id,{$id}]",
+            'department_name' => "required|alpha_numeric_punct|is_unique[department.department_name,department_id,{$id}]",
         ];
     }
 }

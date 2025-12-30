@@ -113,7 +113,7 @@ class Department extends BaseController {
 
     public function save_department() {
         $insert_data = [
-            'department_name' => clean_name($this->request->getVar('department_name')),
+            'department_name' => clean_special_name($this->request->getVar('department_name')),
             'added_by' => current_user(),
         ];
 
@@ -136,7 +136,7 @@ class Department extends BaseController {
         $id = $this->request->getPost('department_id');
 
         $update_data = [
-            'department_name' => clean_name($this->request->getVar('department_name')),
+            'department_name' => clean_special_name($this->request->getVar('department_name')),
             'updated_by' => current_user(),
         ];
 
