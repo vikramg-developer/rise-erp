@@ -185,6 +185,14 @@
             "viewStudentDashboard",
             "deleteStudentDashboard"
         ]
+    },
+    "approve_registration": {
+        "label": "Approve Registration",
+        "actions": [
+            "createApproveRegistration",
+            "updateApproveRegistration",
+            "viewApproveRegistration",
+            "deleteApproveRegistration"
+        ]
     }
-    
 }

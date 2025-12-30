@@ -18,6 +18,7 @@ return [
     'agency' => 'Agency',
     'apply' => 'Apply',
     'appointment' => 'Appointment',
+    'approve' => 'Approve',
     'area' => 'Area',
     'attach' => 'Attach',
     'attended' => 'Attended',

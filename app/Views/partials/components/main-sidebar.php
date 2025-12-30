@@ -112,6 +112,16 @@ $permissions = config('Permissions');
                                                 <?php endif; ?>
 
                                                 <!--============================== Dashboard End ===================================-->
+                                                <!--============================== Registration Admin site Start ===================================-->
+                                               <?php if (hasAnyPermission($permissions->approveRegistration)): ?>
+                                                    <li class="slide">
+                                                        <a href="<?php echo base_url('approve-registration'); ?>" class="side-menu__item">
+                                                            <i class="bx bx-user side-menu__icon"></i>
+                                                            <span class="side-menu__label"><?= lang('App.approve'); ?> <?= lang('App.registration'); ?></span>
+                                                        </a>
+                                                    </li>
+                                                <?php  endif; ?>
+                                                <!--============================== Registration Admin site End ===================================-->
                                                 <!-- Start::slide__category -->
                                                 <li class="slide__category"><span class="category-name">Student</span></li>
                                                 <!-- End::slide__category -->
