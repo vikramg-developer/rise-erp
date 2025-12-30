@@ -269,7 +269,7 @@ $monthName = ucwords($dateObj->format('F'));
 <body>
     <div style="position: absolute; left: 500px; top: 150px;">
         <?php
-        if(is_array($lc_count) && count($lc_count) > 1)
+        if($lc_data['is_duplicate'] == 1)
         {
         ?>
             <img src="<?php echo base_url('assets/images/duplicate.jpg'); ?>" style="width:150px; height:40px;opacity:0.5">

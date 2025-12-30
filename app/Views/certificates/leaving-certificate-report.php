@@ -93,6 +93,8 @@
                                     <th scope="col"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
                                     <th scope="col"><?= lang('App.department'); ?></th>
                                     <th scope="col"><?= lang('App.year'); ?></th>
+                                    <th scope="col"><?= lang('App.status'); ?></th>
+                                    <th scope="col"><?= lang('App.cancel'); ?></th>
                                     <th scope="col"><?= lang('App.print'); ?></th>
                                 </tr>
                             </thead>

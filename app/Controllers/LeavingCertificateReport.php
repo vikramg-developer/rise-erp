@@ -7,9 +7,11 @@ use App\Models\ModelLeavingCertificate;
 class LeavingCertificateReport extends BaseController {
 
     protected $modelleavingcertificate;
+    protected $modelyearwisestudentdata;
 
     public function __construct() {
         $this->modelleavingcertificate = model('ModelLeavingCertificate');
+        $this->modelyearwisestudentdata = model('ModelYearwiseStudentData');
         $this->modeldepartment = model('ModelDepartment');
     }
 
@@ -52,7 +54,7 @@ class LeavingCertificateReport extends BaseController {
 //            print_r($filters);die();
             // Data rows (paginated + searched)
             $lc_report_data = $this->modelleavingcertificate->get_lc_report($filters, $length, $start, $search);
-
+//            print_r($lc_report_data);die;
             // Single count (search-aware)
             $count_filter = $this->modelleavingcertificate->count_filter_results($filters, $search);
             $count_all = $this->modelleavingcertificate->count_all_results($filters);
@@ -61,7 +63,7 @@ class LeavingCertificateReport extends BaseController {
 
             foreach ($lc_report_data as $lc) {
 
-
+//
                 $badges = '';
                 if ($lc['is_duplicate'] == 1) {
                     $badges = '<span class="badge bg-danger-transparent">Duplicate</span>';
@@ -69,9 +71,13 @@ class LeavingCertificateReport extends BaseController {
                     $badges = '<span class="badge bg-warning-transparent">Cancelled</span>';
                 }
 
-                $buttons = '';
-                $buttons .= '<button class="btn btn-secondary lc_btn" data-yearwise_student_data_id="' . $lc['yearwise_student_data_id'] . '">' . lang('App.print') . '</button>';
+                $print_btn = '';
+                $print_btn .= '<button class="btn btn-secondary lc_btn" data-leaving-certificate-id="' . $lc['leaving_certificate_id'] . '">' . lang('App.print') . '</button>';
 
+                $cancel_btn = '';
+                if ($lc['is_cancelled'] != 1) {
+                    $cancel_btn = '<button class="btn btn-danger cancel_lc_btn" data-leaving-certificate-id="' . $lc['leaving_certificate_id'] . '">' . lang('App.cancel') . '</button>';
+                }
                 $data[] = [
                     $lc['yearwise_student_data_id'],
                     $lc['student_rise_no'],
@@ -80,7 +86,8 @@ class LeavingCertificateReport extends BaseController {
                     $lc['department_name'],
                     $lc['year_name'],
                     $badges,
-                    $buttons,
+                    $cancel_btn,
+                    $print_btn
                 ];
             }
 
@@ -100,6 +107,55 @@ class LeavingCertificateReport extends BaseController {
                         'recordsFiltered' => 0,
                         'data' => [],
                         'csrfHash' => csrf_hash(),
+            ]);
+        }
+    }
+
+    public function print_lc() {
+        $lc_id = $this->request->getVar('lc_id');
+        if ($lc_id) {
+            $data['lc_data'] = $lc_data = $this->modelleavingcertificate->find($lc_id);
+
+            $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_lc($lc_data['yearwise_student_data_id']);
+            //====To check Count of genrated LC for one student====
+            $data['lc_count'] = $this->modelleavingcertificate->get_lc_data($lc_data['yearwise_student_data_id']);
+        }
+        // Correct mPDF 8.2+ constructor
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $mpdf->shrink_tables_to_fit = 0;
+        $html = view('certificates/leaving-certificate-print', $data);
+        $mpdf->simpleTables = false;
+        $mpdf->WriteHTML($html);
+        $mpdf->use_kwt = true;
+        $mpdf->falseBoldWeight = 8;
+        $mpdf->fonttrans['freeserif'] = 'freeserif2';
+        $mpdf->useFixedNormalLineHeight = true;
+        $mpdf->useFixedTextBaseline = true;
+        $mpdf->adjustFontDescLineheight = 100;
+        // Output PDF
+        $mpdf->Output('Leaving-Certificate.pdf', 'I');
+        exit;
+    }
+
+    public function cancel_lc() {
+
+        $lc_id = $this->request->getVar('lc_id');
+
+        if ($lc_id) {
+            $this->modelleavingcertificate->update($lc_id, [
+                'is_cancelled' => 1
+            ]);
+
+            return $this->response->setJSON([
+                        'status' => 'success',
+                        'message' => 'Leaving Certificate cancelled successfully',
+                        'csrfHash' => csrf_hash()
+            ]);
+        } else {
+            return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'Invalid LC ID',
+                        'csrfHash' => csrf_hash()
             ]);
         }
     }

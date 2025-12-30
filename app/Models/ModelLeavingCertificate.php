@@ -45,7 +45,7 @@ class ModelLeavingCertificate extends Model {
     /* ====================== Resusable function==================== */
 
     public function get_lc_data($ysd_id) {
-        return $this->where('yearwise_student_data_id', $ysd_id)->findAll();
+        return $this->where(['yearwise_student_data_id'=> $ysd_id,'is_cancelled'=>0])->findAll();
     }
 
 //    --------------------------------------end leaving certificate-----------------------------------
@@ -57,7 +57,10 @@ class ModelLeavingCertificate extends Model {
         $builder = $this->db->table('leaving_certificate AS lc');
 
         $builder->select('
+            lc.leaving_certificate_id,
             lc.yearwise_student_data_id,
+            lc.is_duplicate,
+            lc.is_cancelled,
             sr.student_rise_no,
             sr.student_first_name,
             sr.student_middle_name,
@@ -85,7 +88,7 @@ class ModelLeavingCertificate extends Model {
     /* ===================DATATABLE DATA (PAGINATED)================== */
 
     public function get_lc_report($filters, $length, $start, $search) {
-        $builder = $this->baseQuery($filters)->orderBy('sr.student_rise_no', 'ASC');
+        $builder = $this->baseQuery($filters)->orderBy('lc.leaving_certificate_id', 'DESC');
         if (!empty($search)) {
             $builder->groupStart()
                     ->like('sr.student_rise_no', $search)

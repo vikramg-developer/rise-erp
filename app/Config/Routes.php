@@ -67,7 +67,7 @@ $routes->post('/check-user', 'Login::check_user');
 $routes->get('student-registration', 'StudentRegistration::index');
 $routes->post('save-registration', 'StudentRegistration::add_registration');
 $routes->get('/student-profile', 'StudentProfile::index', ['filter' => 'permission:viewStudentProfile']);
-$routes->post('add-personal-details', 'StudentProfile::add_personal_information',['filter' => 'permission:viewStudentProfile']);
+$routes->post('add-personal-details', 'StudentProfile::add_personal_information', ['filter' => 'permission:viewStudentProfile']);
 $routes->get('/student-profile', 'StudentRegistration::student_profile', ['filter' => 'permission:viewStudentProfile']);
 $routes->post('/savesignup', 'Registration::saveSignup');
 $routes->get('/student-dashboard', 'Login::studentDashboard');
@@ -84,8 +84,8 @@ $routes->group('leavingcertificate', function ($routes) {
     $routes->post('print-leaving-certificate', 'LeavingCertificate::print_leaving_certificate', ['filter' => 'permission:createFeesManagement']);
     $routes->get('leaving-certificate-report', 'LeavingCertificateReport::index', ['filter' => 'permission:createFeesManagement']);
     $routes->post('fetch-lc-report', 'LeavingCertificateReport::fetch_lc_report', ['filter' => 'permission:createFeesManagement']);
-    
-    
+    $routes->get('print-lc', 'LeavingCertificateReport::print_lc', ['filter' => 'permission:createFeesManagement']);
+    $routes->post('cancel-lc', 'LeavingCertificateReport::cancel_lc', ['filter' => 'permission:createFeesManagement']);
 });
 
 //---------- feedback ----------//

@@ -3,53 +3,102 @@ let table;
 $("#lc_report").on("submit", function (e) {
 
     e.preventDefault();
-    if(!table){
-    table = $('#lc-student-list').DataTable({
-        processing: true,
-        serverSide: true,
+    if (!table) {
+        table = $('#lc-student-list').DataTable({
+            processing: true,
+            serverSide: true,
 //        destroy: true,
 
-        ajax: {
-            url: BASE_URL + "leavingcertificate/fetch-lc-report",
-            type: "POST",
-            data: function (d) {
-                d[csrfName] = csrfHash; // ALWAYS send current token
-                d.from_date = $('#from_date').val();
-                d.to_date = $('#to_date').val();
-                d.department_id = $('#department_id').val();
-                
-            },
-            dataSrc: function (json) {
-                csrfHash = json.csrfHash;
+            ajax: {
+                url: BASE_URL + "leavingcertificate/fetch-lc-report",
+                type: "POST",
+                data: function (d) {
+                    d[csrfName] = csrfHash; // ALWAYS send current token
+                    d.from_date = $('#from_date').val();
+                    d.to_date = $('#to_date').val();
+                    d.department_id = $('#department_id').val();
 
-                // clear old errors
-                $('.field-error').text('').hide();
+                },
+                dataSrc: function (json) {
+                    csrfHash = json.csrfHash;
 
-                // handle validation errors
-                if (json.status === 'error') {
+                    // clear old errors
+                    $('.field-error').text('').hide();
 
-                    for (let field in json.errors) {
-                        $('#' + field + '_error')
-                                .text(json.errors[field])
-                                .show();
+                    // handle validation errors
+                    if (json.status === 'error') {
+
+                        for (let field in json.errors) {
+                            $('#' + field + '_error')
+                                    .text(json.errors[field])
+                                    .show();
+                        }
+
+                        return [];
                     }
 
-                    return [];
+                    return json.data;
                 }
 
-                return json.data;
             }
-//            complete: function (res) {
-////                console.log(res);
-//                if (res.responseJSON && res.responseJSON.csrfHash) {
-//                    csrfHash = res.responseJSON.csrfHash; // UPDATE for next request
-//                }
-//            }
+        });
+    } else {
+        // 🔁 Subsequent searches → reload data only
+        table.ajax.reload();
+    }
+
+});
+
+$(document).on('click', '.lc_btn', function () {
+
+    let lcId = $(this).data('leaving-certificate-id');
+
+
+    let url = BASE_URL + "leavingcertificate/print-lc?lc_id=" + lcId;
+
+    window.open(url, '_blank'); // ✅ opens PDF in new tab
+});
+
+$(document).on('click', '.cancel_lc_btn', function () {
+
+    let lc_id = $(this).data('leaving-certificate-id');
+
+    Swal.fire({
+        title: "Cancel Leaving Certificate?",
+        text: "This action cannot be undone!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, Cancel",
+        cancelButtonText: "No"
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            $.ajax({
+                url: BASE_URL + "leavingcertificate/cancel-lc",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    lc_id: lc_id,
+                    [csrfName]: csrfHash
+                },
+                success: function (response) {
+
+                    csrfHash = response.csrfHash;
+
+                    if (response.status === 'success') {
+                        Swal.fire("Cancelled!", response.message, "success");
+
+                        // reload DataTable
+                        $('#lc-student-list').DataTable().ajax.reload(null, false);
+                    } else {
+                        Swal.fire("Error", response.message, "error");
+                    }
+                },
+                error: function () {
+                    Swal.fire("Error", "Something went wrong", "error");
+                }
+            });
         }
     });
-}else {
-    // 🔁 Subsequent searches → reload data only
-    table.ajax.reload();
-}
-
 });

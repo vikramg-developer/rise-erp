@@ -142,15 +142,19 @@ class LeavingCertificate extends BaseController {
 
             // 🔒 1️⃣ LOCK LC COUNTER ROW
             $lc_no_counter = $this->modelleavingcertificatecounter->get_leaving_certificate_no();
+            $ysd_id = $this->request->getVar('yearwise_student_data_id');
+            $isexist_lc = $this->modelleavingcertificate->get_lc_data($ysd_id);
             $lc_data = [
-                'yearwise_student_data_id' => $this->request->getVar('yearwise_student_data_id'),
+                'yearwise_student_data_id' => $ysd_id,
                 'examination' => $this->request->getVar('examination'),
                 'exam_period' => $this->request->getVar('exam_period'),
                 'date_of_leaving' => $this->request->getVar('date_of_leaving'),
                 'leaving_certificate_no' => $lc_no_counter['leaving_certificate_no'],
+                'is_duplicate' => $isexist_lc ? 1 : 0,
             ];
 
             $lc_id = $this->modelleavingcertificate->insert($lc_data, true);
+
             if ($lc_id) {
                 $update_data = ['leaving_certificate_no' => ($lc_no_counter['leaving_certificate_no'] + 1)];
                 $this->modelleavingcertificatecounter->update($lc_no_counter['leaving_certificate_no_counter_id'], $update_data);
