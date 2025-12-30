@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2025 at 11:47 AM
+-- Generation Time: Dec 30, 2025 at 05:25 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -192,7 +192,10 @@ INSERT INTO `activity_log` (`activity_log_id`, `table_name`, `column_names`, `re
 (42, 'feedback_master', '[\"feedback_name\",\"type_id\",\"semester_id\",\"part_id\",\"academic_year_id\",\"added_by\"]', 3, '[]', '{\"feedback_name\":\"Consolidated Practical\",\"type_id\":\"1\",\"semester_id\":\"1\",\"part_id\":\"1\",\"academic_year_id\":\"35\",\"added_by\":\"F20250010008\"}', 'insert', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', NULL, 'F20250010008', '2025-12-29 11:22:20'),
 (43, 'feedback_master', '[\"is_deleted\",\"deleted_by\",\"deleted_at\"]', 3, '{\"is_deleted\":\"0\",\"deleted_by\":\"\",\"deleted_at\":null}', '{\"is_deleted\":1,\"deleted_by\":\"F20250010008\",\"deleted_at\":\"2025-12-29 16:52:24\"}', 'update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', NULL, 'F20250010008', '2025-12-29 11:22:23'),
 (44, 'feedback_master', '[\"is_deleted\",\"deleted_at\"]', 3, '{\"is_deleted\":\"1\",\"deleted_at\":\"2025-12-29 16:52:24\"}', '{\"is_deleted\":2,\"deleted_at\":\"2025-12-29 16:52:28\"}', 'update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', NULL, 'F20250010008', '2025-12-29 11:22:27'),
-(45, 'feedback_master', '[\"is_deleted\",\"deleted_at\"]', 3, '{\"is_deleted\":\"2\",\"deleted_at\":\"2025-12-29 16:52:28\"}', '{\"is_deleted\":1,\"deleted_at\":\"2025-12-29 16:52:34\"}', 'update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', NULL, 'F20250010008', '2025-12-29 11:22:33');
+(45, 'feedback_master', '[\"is_deleted\",\"deleted_at\"]', 3, '{\"is_deleted\":\"2\",\"deleted_at\":\"2025-12-29 16:52:28\"}', '{\"is_deleted\":1,\"deleted_at\":\"2025-12-29 16:52:34\"}', 'update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', NULL, 'F20250010008', '2025-12-29 11:22:33'),
+(46, 'department', '[\"department_name\",\"added_by\"]', 1, '[]', '{\"department_name\":\"BCom\",\"added_by\":\"F20250010004\"}', 'insert', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', NULL, 'F20250010004', '2025-12-30 11:00:54'),
+(47, 'department', '[\"department_name\",\"updated_by\",\"updated_at\"]', 1, '{\"department_name\":\"BCom\",\"updated_by\":null,\"updated_at\":null}', '{\"department_name\":\"B.Com.\",\"updated_by\":\"F20250010004\",\"updated_at\":\"2025-12-30 16:38:39\"}', 'update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', NULL, 'F20250010004', '2025-12-30 11:08:39'),
+(48, 'department', '[\"department_name\",\"updated_at\"]', 1, '{\"department_name\":\"B.Com.\",\"updated_at\":\"2025-12-30 16:38:39\"}', '{\"department_name\":\"B.Com..\",\"updated_at\":\"2025-12-30 16:38:53\"}', 'update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', NULL, 'F20250010004', '2025-12-30 11:08:53');
 
 -- --------------------------------------------------------
 
@@ -297,8 +300,18 @@ CREATE TABLE `department` (
   `added_by` varchar(50) NOT NULL,
   `added_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_by` varchar(50) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_by` varchar(50) DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   `is_deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`department_id`, `department_name`, `department_abbreviation`, `added_by`, `added_at`, `updated_by`, `updated_at`, `deleted_by`, `deleted_at`, `is_deleted`) VALUES
+(1, 'B.Com..', '', 'F20250010004', '2025-12-30 11:00:54', 'F20250010004', '2025-12-30 11:08:53', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -749,7 +762,7 @@ CREATE TABLE `rise_number_counter` (
 
 INSERT INTO `rise_number_counter` (`rise_number_counter_id`, `user_type_id`, `academic_year_id`, `rise_no`, `added_by`, `added_at`, `updated_by`, `updated_at`, `is_deleted`) VALUES
 (3, 1, 37, '9', '', '2025-12-23 09:00:25', NULL, '2025-12-29 07:50:08', 0),
-(5, 3, 36, '2', '', '2025-12-29 10:38:08', NULL, '2025-12-29 10:38:08', 0);
+(5, 3, 36, '3', '', '2025-12-29 10:38:08', NULL, '2025-12-30 10:01:29', 0);
 
 -- --------------------------------------------------------
 
@@ -778,7 +791,7 @@ INSERT INTO `role` (`role_id`, `role_name`, `permissions`, `added_by`, `added_at
 (1, 'SuperAdmin', '[\"createFeedback\",\"viewFeedback\"]', '', '2025-12-17 09:18:25', '', '2025-12-17 10:23:02', '', NULL, 0),
 (2, 'Admin', '[\"createRole\",\"updateRole\",\"viewRole\",\"deleteRole\",\"createAdminDashboard\",\"updateAdminDashboard\",\"viewAdminDashboard\",\"deleteAdminDashboard\",\"createApproveRegistration\",\"updateApproveRegistration\",\"viewApproveRegistration\",\"deleteApproveRegistration\"]', '', '2025-12-17 09:27:04', 'F20250010001', '2025-12-29 11:19:17', '', NULL, 0),
 (3, 'Student', '[\"createFaculty\",\"updateFaculty\",\"viewFaculty\",\"deleteFaculty\",\"createStudentProfile\",\"updateStudentProfile\",\"viewStudentProfile\",\"deleteStudentProfile\",\"createFacultyProfile\",\"updateFacultyProfile\",\"viewFacultyProfile\",\"deleteFacultyProfile\",\"createHead\",\"updateHead\",\"viewHead\",\"deleteHead\",\"updateRole\",\"viewRole\",\"deleteRole\",\"createDepartment\",\"updateDepartment\",\"viewStudentDashboard\"]', '', '2025-12-17 09:27:04', '', '2025-12-22 07:25:47', '', NULL, 0),
-(4, 'Teacher', '[\"createFaculty\",\"updateFaculty\",\"viewFaculty\",\"deleteFaculty\",\"createHeadGroup\",\"updateHeadGroup\",\"viewHeadGroup\",\"deleteHeadGroup\",\"createHead\",\"updateHead\",\"viewHead\",\"deleteHead\",\"createTicket\",\"updateTicket\",\"viewTicket\",\"deleteTicket\",\"createRole\",\"updateRole\",\"viewRole\",\"deleteRole\",\"viewFacultyDashboard\"]', '', '2025-12-17 09:27:04', 'F20250010001', '2025-12-29 11:03:30', 'F20250010001', '2025-12-27 05:48:48', 1),
+(4, 'Teacher', '[\"createFaculty\",\"updateFaculty\",\"viewFaculty\",\"deleteFaculty\",\"createHeadGroup\",\"updateHeadGroup\",\"viewHeadGroup\",\"deleteHeadGroup\",\"createHead\",\"updateHead\",\"viewHead\",\"deleteHead\",\"createTicket\",\"updateTicket\",\"viewTicket\",\"deleteTicket\",\"createRole\",\"updateRole\",\"viewRole\",\"deleteRole\",\"createDepartment\",\"updateDepartment\",\"viewDepartment\",\"deleteDepartment\",\"viewFacultyDashboard\"]', '', '2025-12-17 09:27:04', 'F20250010001', '2025-12-30 10:58:39', 'F20250010001', '2025-12-27 05:48:48', 1),
 (5, 'Accountant', '[\"createRole\",\"updateRole\",\"viewRole\",\"deleteRole\",\"viewAccontantDashboard\"]', '', '2025-12-17 09:27:04', '', '2025-12-19 10:45:36', '', NULL, 0),
 (6, 'Cashier', '[\"createFeedback\",\"viewFeedback\"]', '', '2025-12-17 09:27:04', '', '2025-12-18 09:50:32', '', NULL, 0),
 (7, 'Iqac', '[\"createFeedback\",\"updateFeedback\",\"viewFeedback\",\"deleteFeedback\",\"viewIqacDashboard\"]', '', '2025-12-18 09:50:44', '', '2025-12-22 05:41:36', '', NULL, 0),
@@ -898,7 +911,8 @@ CREATE TABLE `student_registration` (
 --
 
 INSERT INTO `student_registration` (`student_registration_id`, `student_rise_no`, `student_role_id`, `student_first_name`, `student_middle_name`, `student_last_name`, `student_aadhar_number`, `student_password`, `approved`, `added_by`, `added_at`, `updated_by`, `updated_at`, `is_deleted`, `student_personal_info`, `student_address_details`, `student_parent_details`) VALUES
-(1, 'S20250010001', 3, 'SONAL', 'SURYAKANT', 'JADHAV', '868546546546', '$2y$10$eOeb.gJFefgDYE6KVUWwnOabwggOiopGI3aOiqnJRijHjkXZM4eSe', 0, '', '2025-12-29 10:38:08', '', '2025-12-29 10:38:08', 0, 0, 0, 0);
+(1, 'S20250010001', 3, 'SONAL', 'SURYAKANT', 'JADHAV', '868546546546', '$2y$10$eOeb.gJFefgDYE6KVUWwnOabwggOiopGI3aOiqnJRijHjkXZM4eSe', 0, '', '2025-12-29 10:38:08', '', '2025-12-29 10:38:08', 0, 0, 0, 0),
+(2, 'S20250010002', 3, 'MANASI', 'MARUTI', 'SUPEKAR', '646564565464', '$2y$10$YGPx1MeAHmBhF3s2KrJbwOhuNi5sVGY0feZt3Jg6b5zL9sW5aKiDG', 0, '', '2025-12-30 10:01:29', '', '2025-12-30 10:01:29', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1200,7 +1214,7 @@ ALTER TABLE `academic_year`
 -- AUTO_INCREMENT for table `activity_log`
 --
 ALTER TABLE `activity_log`
-  MODIFY `activity_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `activity_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `blood_group`
@@ -1224,7 +1238,7 @@ ALTER TABLE `caste_category`
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `faculty_registration`
@@ -1350,7 +1364,7 @@ ALTER TABLE `student_personal_info`
 -- AUTO_INCREMENT for table `student_registration`
 --
 ALTER TABLE `student_registration`
-  MODIFY `student_registration_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `student_registration_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `subject_type`
