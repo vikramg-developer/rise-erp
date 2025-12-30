@@ -42,7 +42,15 @@ class AddFinancialYearTable extends Migration
             'updated_at' => [
                 'type' => 'timestamp',
                 'null' => true,
-                'default' => new Rawsql('NULL ON UPDATE CURRENT_TIMESTAMP'),
+            ],
+            'deleted_by' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => true
+            ],
+            'deleted_at' => [
+                'type' => 'timestamp',
+                'null' => true,
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
@@ -51,7 +59,9 @@ class AddFinancialYearTable extends Migration
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('financial_year_id');
+        $this->forge->addUniqueKey('financial_year_name');
         $this->forge->createTable('financial_year');
+        
     }
 
     public function down()

@@ -36,30 +36,38 @@ class AddFeedbackMaster extends Migration
                 'constraint'=>11,
             ],
            
-            'is_deleted'=>[
-                'type'=>'TINYINT',
-                'constraint'=>1,
+             'added_by' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => false
             ],
-            'added_by'=>[
-                'type'=>'VARCHAR',
-                'constraint'=>200,
+            'added_at' => [
+                'type' => 'timestamp',
+                'null' => false,
+                'default' => new Rawsql('CURRENT_TIMESTAMP'),
             ],
-            'added_date'=>[
-                'type'=>'TIMESTAMP',
-                'null'=>false,
-                'default'=>new Rawsql('CURRENT_TIMESTAMP'),
-                
+            'updated_by' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => true
             ],
-            'updated_by'=>[
-                'type'=>'VARCHAR',
-                'constraint'=>200,
+            'updated_at' => [
+                'type' => 'timestamp',
+                'null' => true,
             ],
-            'updated_date'=>[
-                'type'=>'TIMESTAMP',
-                'null'       => false,
-                'default'=>new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
-                
+            'deleted_by' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => true
             ],
+            'deleted_at' => [
+                'type' => 'timestamp',
+                'null' => true,
+            ],
+            'is_deleted' => [
+                'type' => 'tinyint',
+                'constraint' => '1'
+            ]
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('master_id');
