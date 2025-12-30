@@ -28,7 +28,7 @@ class LeavingCertificate extends BaseController {
         $data['title'] = lang('App.rise') . "-" . lang('App.leaving') . " " . lang('App.certificate');
         $data['academic_year'] = $this->modelacademicyear->get_active_academic_years();
         $data['years'] = $this->modelyear->get_years();
-        $data['departments'] = $this->modeldepartment->get_departments();
+        $data['departments'] = $this->modeldepartment->findAll();
         return render_page('certificates/leaving-certificate-index', $data);
     }
 
