@@ -34,7 +34,7 @@ class ModelHead extends Model {
     protected $afterInsert = ['logInsert'];
     protected $afterUpdate = ['logUpdate'];
 
-    public function searchHead(string $term) {
+    public function search_head(string $term) {
         return $this->select('head_name')
                         ->like('head_name', $term)
                         ->limit(10)
@@ -58,7 +58,7 @@ class ModelHead extends Model {
 
     public function getFilteredHead($length, $start, $search) {
         $builder = $this->builder()
-                ->orderBy('head_id', 'ASC');
+                ->orderBy('head_id', 'DESC');
 
         if (!empty($search)) {
             $builder->like('head_name', $search);

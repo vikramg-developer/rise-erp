@@ -52,15 +52,15 @@ class Role extends BaseController {
 
             // Edit Button
             if (hasPermission('updateRole')):
-                $buttons .= '<a href="roles/edit-role/' . $row['role_id'] . '" class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill tooltips edit" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-secondary" data-bs-placement="top" title="Edit"><i class="ri-pencil-fill"></i></a>';
+                $buttons .= actionHrefButton('Edit', 'roles/edit-role/' . $row['role_id']);
             endif;
 
             // Delete Button
             if (hasPermission('deleteRole')):
                 if ($row['is_deleted'] != 1):
-                    $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-danger" data-bs-placement="top" title="Delete" data-role_id="' . $row['role_id'] . '" data-role_name="' . $row['role_name'] . '"><i class="ri-delete-bin-fill"></i></button>';
+                    $buttons .= actionButton('Delete', ['role_id' => $row['role_id'], 'role_name' => $row['role_name']]);
                 elseif ($row['is_deleted'] == 1):
-                    $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-warning" data-bs-placement="top" title="Revert" data-role_id="' . $row['role_id'] . '" data-role_name="' . $row['role_name'] . '"><i class="ri-arrow-go-back-fill"></i></button>';
+                    $buttons .= actionButton('Revert', ['role_id' => $row['role_id'], 'role_name' => $row['role_name']]);
                 endif;
             endif;
 
@@ -91,7 +91,7 @@ class Role extends BaseController {
             $data[] = [
                 (hasPermission('viewRole') || hasPermission('deleteRole')) ? $buttons : '',
                 $sr_no++,
-                $row['role_name'],
+                esc($row['role_name']),
                 $addedBy,
                 $updatedBy,
                 $remark,

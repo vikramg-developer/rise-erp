@@ -1,6 +1,38 @@
 let table;
 
 $(document).ready(function () {
+    $('#head_group_name').on('keyup', function () {
+        let query = $(this).val();
+
+        if (query.length < 1) {
+            $('#searchResult').empty();
+            return;
+        }
+
+        $.ajax({
+            url: BASE_URL + 'headgroup/search-head-group',
+            method: "GET",
+            data: {q: query},
+            success: function (data) {
+                console.log(data);
+                let html = '';
+                data.forEach(row => {
+                    html += `<li class="list-group-item">${row.head_group_name}</li>`;
+                });
+                $('#searchResult').html(html);
+            }
+        });
+    });
+
+    // Select value
+    $(document).on('mousedown', '#searchResult li', function () {
+        $('#head_group_name').val($(this).text());
+        $('#searchResult').empty();
+    });
+    
+    $(document).on('click', function () {
+        $('#searchResult').empty();
+    });
 
     table = $('#head-group-table').DataTable({
         processing: true,
