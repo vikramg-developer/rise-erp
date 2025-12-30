@@ -102,3 +102,19 @@ $(document).on('click', '.cancel_lc_btn', function () {
         }
     });
 });
+
+let fromPicker = flatpickr("#from_date", {
+    dateFormat: "Y-m-d",
+    maxDate: "today",
+    onChange: function(selectedDates, dateStr) {
+        if (dateStr) {
+            toPicker.set("minDate", dateStr);
+            toPicker.set("maxDate", new Date(new Date(dateStr).setMonth(new Date(dateStr).getMonth() + 1)));
+        }
+    }
+});
+
+let toPicker = flatpickr("#to_date", {
+    dateFormat: "Y-m-d",
+    maxDate: "today"
+});

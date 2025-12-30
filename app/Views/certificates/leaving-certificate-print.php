@@ -278,14 +278,14 @@ $monthName = ucwords($dateObj->format('F'));
         ?>
     </div>
     
-    <div style="position: absolute; left: 500px; top: 150px;">
+    <div style="position: absolute; left: 150px; top: 300px;">
         <?php
-//        if($lc[0]['cancelled'] == 1)
-//        {
+        if($lc_data['is_cancelled'] == 1)
+        {
         ?>
-<!--            <img src="<?php //echo base_url('assets/images/cancelled1.jpg'); ?>" style="opacity:0.5">-->
+            <img src="<?php echo base_url('assets/images/cancelled.png'); ?>" style="width:400px; height:240px;opacity:0.4">
         <?php
-//        }
+        }
         ?>
     </div>
     <table id="header">

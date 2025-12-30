@@ -66,17 +66,19 @@ class LeavingCertificateReport extends BaseController {
 //
                 $badges = '';
                 if ($lc['is_duplicate'] == 1) {
-                    $badges = '<span class="badge bg-danger-transparent">Duplicate</span>';
+                    $badges = '<span class="badge bg-warning-transparent">Duplicate</span>';
                 } elseif ($lc['is_cancelled'] == 1) {
-                    $badges = '<span class="badge bg-warning-transparent">Cancelled</span>';
+                    $badges = '<span class="badge bg-danger-transparent">Cancelled</span>';
                 }
 
                 $print_btn = '';
                 $print_btn .= '<button class="btn btn-secondary lc_btn" data-leaving-certificate-id="' . $lc['leaving_certificate_id'] . '">' . lang('App.print') . '</button>';
-
                 $cancel_btn = '';
-                if ($lc['is_cancelled'] != 1) {
-                    $cancel_btn = '<button class="btn btn-danger cancel_lc_btn" data-leaving-certificate-id="' . $lc['leaving_certificate_id'] . '">' . lang('App.cancel') . '</button>';
+                $today = date('Y-m-d');
+                $lc_date = date('Y-m-d', strtotime($lc['added_at']));
+                
+                if ($lc['is_cancelled'] != 1 && $lc_date === $today) {
+                    $cancel_btn = '<button class="btn btn-danger cancel_lc_btn" data-leaving-certificate-id="' . $lc['leaving_certificate_id'] . '">' . lang('App.cancel') . ' ' . lang('App.lc') . '</button>';
                 }
                 $data[] = [
                     $lc['yearwise_student_data_id'],
@@ -86,8 +88,8 @@ class LeavingCertificateReport extends BaseController {
                     $lc['department_name'],
                     $lc['year_name'],
                     $badges,
-                    $cancel_btn,
-                    $print_btn
+                    $print_btn,
+                    $cancel_btn                    
                 ];
             }
 

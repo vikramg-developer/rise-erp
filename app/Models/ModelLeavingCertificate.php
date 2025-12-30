@@ -21,6 +21,7 @@ class ModelLeavingCertificate extends Model {
         'is_cancelled',
         'added_by',
         'updated_by',
+        'added_at',
         'is_deleted'
     ];
 //    =====================================Generate Leaving Certificate===================================
@@ -61,6 +62,7 @@ class ModelLeavingCertificate extends Model {
             lc.yearwise_student_data_id,
             lc.is_duplicate,
             lc.is_cancelled,
+            lc.added_at,
             sr.student_rise_no,
             sr.student_first_name,
             sr.student_middle_name,
