@@ -110,22 +110,23 @@ $routes->group('faculty', function ($routes) {
 });
 
 $routes->group('headgroup', function ($routes) {
-    $routes->get('/', 'HeadGroup::index', ['filter' => 'permission:createHeadGroup']);
-    $routes->post('fetch-head-group', 'HeadGroup::fetch_head_group', ['filter' => 'permission:createHeadGroup']);
+    $routes->get('/', 'HeadGroup::index', ['filter' => 'permission:viewHeadGroup']);
+    $routes->post('fetch-head-group', 'HeadGroup::fetch_head_group', ['filter' => 'permission:viewHeadGroup']);
     $routes->post('save-head-group', 'HeadGroup::save_head_group', ['filter' => 'permission:createHeadGroup']);
-    $routes->post('update-head-group', 'HeadGroup::update_head_group', ['filter' => 'permission:createHeadGroup']);
-    $routes->post('delete-head-group', 'HeadGroup::delete_head_group', ['filter' => 'permission:createHeadGroup']);
-    $routes->post('revert-head-group', 'HeadGroup::revert_head_group', ['filter' => 'permission:createHeadGroup']);
+    $routes->post('update-head-group', 'HeadGroup::update_head_group', ['filter' => 'permission:updateHeadGroup']);
+    $routes->post('delete-head-group', 'HeadGroup::delete_head_group', ['filter' => 'permission:deleteHeadGroup']);
+    $routes->post('revert-head-group', 'HeadGroup::revert_head_group', ['filter' => 'permission:deleteHeadGroup']);
+    $routes->get('search-head-group', 'HeadGroup::search_head_group', ['filter' => 'permission:createHeadGroup']);
 });
 
 $routes->group('head', function ($routes) {
-    $routes->get('/', 'Head::index', ['filter' => 'permission:createHead']);
-    $routes->post('fetch-head', 'Head::fetch_head', ['filter' => 'permission:createHead']);
+    $routes->get('/', 'Head::index', ['filter' => 'permission:viewHead']);
+    $routes->post('fetch-head', 'Head::fetch_head', ['filter' => 'permission:viewHead']);
     $routes->post('save-head', 'Head::save_head', ['filter' => 'permission:createHead']);
-    $routes->post('update-head', 'Head::update_head', ['filter' => 'permission:createHead']);
-    $routes->post('delete-head', 'Head::delete_head', ['filter' => 'permission:createHead']);
-    $routes->post('revert-head', 'Head::revert_head', ['filter' => 'permission:createHead']);
-    $routes->get('search', 'Head::searchHead');
+    $routes->post('update-head', 'Head::update_head', ['filter' => 'permission:updateHead']);
+    $routes->post('delete-head', 'Head::delete_head', ['filter' => 'permission:deleteHead']);
+    $routes->post('revert-head', 'Head::revert_head', ['filter' => 'permission:deleteHead']);
+    $routes->get('search-head', 'Head::search_head', ['filter' => 'permission:createHead']);
 });
 
 $routes->group('department', function ($routes) {
@@ -135,6 +136,7 @@ $routes->group('department', function ($routes) {
     $routes->post('update-department', 'Department::update_department', ['filter' => 'permission:updateDepartment']);
     $routes->post('delete-department', 'Department::delete_department', ['filter' => 'permission:deleteDepartment']);
     $routes->post('revert-department', 'Department::revert_department', ['filter' => 'permission:deleteDepartment']);
+    $routes->get('search-department', 'Department::search_department', ['filter' => 'permission:createDepartment']);
 });
 
 $routes->group('roles', function ($routes) {

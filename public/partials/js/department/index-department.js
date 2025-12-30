@@ -1,7 +1,7 @@
 let table;
 
 $(document).ready(function () {
-    $('#head_name').on('keyup', function () {
+    $('#department_name').on('keyup', function () {
         let query = $(this).val();
 
         if (query.length < 1) {
@@ -10,14 +10,14 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: BASE_URL + 'head/search-head',
+            url: BASE_URL + 'department/search-department',
             method: "GET",
             data: {q: query},
             success: function (data) {
                 console.log(data);
                 let html = '';
                 data.forEach(row => {
-                    html += `<li class="list-group-item">${row.head_name}</li>`;
+                    html += `<li class="list-group-item">${row.department_name}</li>`;
                 });
                 $('#searchResult').html(html);
             }
@@ -26,7 +26,7 @@ $(document).ready(function () {
 
     // Select value
     $(document).on('mousedown', '#searchResult li', function () {
-        $('#head_name').val($(this).text());
+        $('#department_name').val($(this).text());
         $('#searchResult').empty();
     });
     
@@ -34,13 +34,13 @@ $(document).ready(function () {
         $('#searchResult').empty();
     });
 
-    table = $('#head-table').DataTable({
+    table = $('#department-table').DataTable({
         processing: true,
         serverSide: true,
         destroy: true,
 
         ajax: {
-            url: BASE_URL + "head/fetch-head",
+            url: BASE_URL + "department/fetch-department",
             type: "POST",
             data: function (d) {
                 d[csrfName] = csrfHash; // ALWAYS send current token
@@ -55,18 +55,18 @@ $(document).ready(function () {
 });
 
 
-$("#head-form").on("submit", function (e) {
+$("#department-form").on("submit", function (e) {
     e.preventDefault();
 
     // clear errors
-    $("#head_name_error").text('').hide();
+    $("#department_name_error").text('').hide();
 
     let formData = $(this).serializeArray();
     formData.push({name: csrfName, value: csrfHash});
 
-    let head_id = $('#head_id').val();
+    let department_id = $('#department_id').val();
 
-    let url = (head_id === "") ? BASE_URL + 'head/save-head' : BASE_URL + 'head/update-head'
+    let url = (department_id === "") ? BASE_URL + 'department/save-department' : BASE_URL + 'department/update-department'
 
     $.ajax({
         url: url,
@@ -81,8 +81,8 @@ $("#head-form").on("submit", function (e) {
 
             // handle validation errors
             if (response.status === 'error' && response.errors) {
-                if (response.errors.head_name) {
-                    $("#head_name_error").text(response.errors.head_name).show();
+                if (response.errors.department_name) {
+                    $("#department_name_error").text(response.errors.department_name).show();
                 }
                 return;
             }
@@ -98,41 +98,41 @@ $("#head-form").on("submit", function (e) {
             table.ajax.reload(null, false);
 
             // Optional: Reset form
-            $("#head-form")[0].reset();
+            $("#department-form")[0].reset();
 
             $("#submit_btn").html('Save <i class="bi bi-save2 ms-2"></i>');
 
             // OPTIONAL: Clear hidden ID so next submit becomes 'add'
-            $("#head_id").val("");
+            $("#department_id").val("");
         }
     });
 });
 
 $(document).on("click", ".edit", function () {
-    let head_id = $(this).data("head_id");
-    let head_name = $(this).data("head_name");
+    let department_id = $(this).data("department_id");
+    let department_name = $(this).data("department_name");
 
-    $("#head_id").val(head_id);
-    $("#head_name").val(head_name);
+    $("#department_id").val(department_id);
+    $("#department_name").val(department_name);
 
     $("#submit_btn").html('Update <i class="bi bi-save2 ms-2"></i>'); // change button text
 });
 
 $(document).on("click", ".delete", function () {
-    let head_id = $(this).data("head_id");
-    let head_name = $(this).data("head_name");
+    let department_id = $(this).data("department_id");
+    let department_name = $(this).data("department_name");
 
-    confirmDelete(head_name).then(result => {
+    confirmDelete(department_name).then(result => {
         if (result.isConfirmed) {
             $.ajax({
-                url: BASE_URL + "head/delete-head",
+                url: BASE_URL + "department/delete-department",
                 type: "POST",
-                data: {head_id: head_id, [csrfName]: csrfHash},
+                data: {department_id: department_id, [csrfName]: csrfHash},
                 dataType: "json",
 
                 success: res => {
                     csrfHash = res.csrfHash;
-                    successDelete(head_name);
+                    successDelete(department_name);
                     table.settings()[0].ajax.data = d => {
                         d[csrfName] = csrfHash
                     };
@@ -144,26 +144,26 @@ $(document).on("click", ".delete", function () {
             });
 
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            cancelDelete(head_name);
+            cancelDelete(department_name);
         }
     });
 });
 
 $(document).on("click", ".revert", function () {
-    let head_id = $(this).data("head_id");
-    let head_name = $(this).data("head_name");
+    let department_id = $(this).data("department_id");
+    let department_name = $(this).data("department_name");
 
-    confirmRevert(head_name).then(result => {
+    confirmRevert(department_name).then(result => {
         if (result.isConfirmed) {
             $.ajax({
-                url: BASE_URL + "head/revert-head",
+                url: BASE_URL + "department/revert-department",
                 type: "POST",
-                data: {head_id: head_id, [csrfName]: csrfHash},
+                data: {department_id: department_id, [csrfName]: csrfHash},
                 dataType: "json",
 
                 success: res => {
                     csrfHash = res.csrfHash;
-                    successRevert(head_name);
+                    successRevert(department_name);
                     table.settings()[0].ajax.data = d => {
                         d[csrfName] = csrfHash
                     };
@@ -175,7 +175,7 @@ $(document).on("click", ".revert", function () {
             });
 
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            cancelRevert(head_name);
+            cancelRevert(department_name);
         }
     });
 });

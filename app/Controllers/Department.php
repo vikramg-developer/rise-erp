@@ -7,30 +7,30 @@ namespace App\Controllers;
  *
  * @author Shoeb
  */
-class Head extends BaseController {
+class Department extends BaseController {
 
-    protected $modelhead;
+    protected $modeldepartment;
     protected $modelfacultyregistration;
 
     public function __construct() {
-        $this->modelhead = model('ModelHead');
+        $this->modeldepartment = model('modeldepartment');
         $this->modelfacultyregistration = model('ModelFacultyRegistration');
     }
 
-    public function search_head() {
+    public function search_department() {
         $term = $this->request->getGet('q');
 
-        return $this->response->setJSON($this->modelhead->search_head($term));
+        return $this->response->setJSON($this->modeldepartment->search_department($term));
     }
 
 //put your code here
     public function index() {
-        $data['jspath'] = 'head/index-head';
-        $data['title'] = lang('App.rise') . " - " . lang('App.manage') . " " . lang('App.head');
-        return render_page('head/index-head', $data);
+        $data['jspath'] = 'department/index-department';
+        $data['title'] = lang('App.rise') . " - " . lang('App.manage') . " " . lang('App.department');
+        return render_page('department/index-department', $data);
     }
 
-    public function fetch_head() {
+    public function fetch_department() {
 
         $draw = $this->request->getPost('draw');
         $start = $this->request->getPost('start');
@@ -38,13 +38,13 @@ class Head extends BaseController {
         $search = $this->request->getPost('search')['value'] ?? '';
 
         // TOTAL (without search, but with base filters)
-        $recordsTotal = $this->modelhead->countAllHead();
+        $recordsTotal = $this->modeldepartment->countAllDepartment();
 
         // FILTERED
-        $recordsFiltered = $this->modelhead->countFilteredHead($search);
+        $recordsFiltered = $this->modeldepartment->countFilteredDepartment($search);
 
         // DATA
-        $rows = $this->modelhead->getFilteredHead($length, $start, $search);
+        $rows = $this->modeldepartment->getFilteredDepartment($length, $start, $search);
 
         $facultyNameMap = $nameMap = $this->modelfacultyregistration->getRiseNoNameMap();
 
@@ -55,16 +55,16 @@ class Head extends BaseController {
             $buttons = '';
 
             // Edit Button
-            if (hasPermission('updateHead')):
-                $buttons .= actionButton('Edit', ['head_id' => $row['head_id'], 'head_name' => $row['head_name']]);
+            if (hasPermission('updateDepartment')):
+                $buttons .= actionButton('Edit', ['department_id' => $row['department_id'], 'department_name' => $row['department_name']]);
             endif;
 
             // Delete Button
-            if (hasPermission('deleteHead')):
+            if (hasPermission('deleteDepartment')):
                 if ($row['is_deleted'] != 1):
-                    $buttons .= actionButton('Delete', ['head_id' => $row['head_id'], 'head_name' => $row['head_name']]);
+                    $buttons .= actionButton('Delete', ['department_id' => $row['department_id'], 'department_name' => $row['department_name']]);
                 elseif ($row['is_deleted'] == 1):
-                    $buttons .= actionButton('Revert', ['head_id' => $row['head_id'], 'head_name' => $row['head_name']]);
+                    $buttons .= actionButton('Revert', ['department_id' => $row['department_id'], 'department_name' => $row['department_name']]);
                 endif;
             endif;
 
@@ -95,7 +95,7 @@ class Head extends BaseController {
             $data[] = [
                 $buttons,
                 $sr_no++,
-                esc($row['head_name']),
+                esc($row['department_name']),
                 $addedBy,
                 $updatedBy,
                 $remark,
@@ -111,63 +111,63 @@ class Head extends BaseController {
         ]);
     }
 
-    public function save_head() {
+    public function save_department() {
         $insert_data = [
-            'head_name' => clean_name($this->request->getVar('head_name')),
+            'department_name' => clean_name($this->request->getVar('department_name')),
             'added_by' => current_user(),
         ];
 
-        if ($this->modelhead->insert($insert_data)) {
+        if ($this->modeldepartment->insert($insert_data)) {
             return $this->response->setJSON([
                         'status' => 'success',
-                        'message' => 'Head added successfully',
+                        'message' => 'Department added successfully',
                         'csrfHash' => csrf_hash()
             ]);
         } else {
             return $this->response->setJSON([
                         'status' => 'error',
-                        'errors' => $this->modelhead->errors(),
+                        'errors' => $this->modeldepartment->errors(),
                         'csrfHash' => csrf_hash()
             ]);
         }
     }
 
-    public function update_head() {
-        $id = $this->request->getPost('head_id');
+    public function update_department() {
+        $id = $this->request->getPost('department_id');
 
         $update_data = [
-            'head_name' => clean_name($this->request->getVar('head_name')),
+            'department_name' => clean_name($this->request->getVar('department_name')),
             'updated_by' => current_user(),
         ];
 
-        $this->modelhead->setValidationRules(
-                $this->modelhead->rulesForUpdate($id)
+        $this->modeldepartment->setValidationRules(
+                $this->modeldepartment->rulesForUpdate($id)
         );
 
-        if ($this->modelhead->update($id, $update_data)) {
+        if ($this->modeldepartment->update($id, $update_data)) {
             return $this->response->setJSON([
                         'status' => 'success',
-                        'message' => 'Head updated successfully',
+                        'message' => 'Department updated successfully',
                         'csrfHash' => csrf_hash()
             ]);
         } else {
             return $this->response->setJSON([
                         'status' => 'error',
-                        'errors' => $this->modelhead->errors(),
+                        'errors' => $this->modeldepartment->errors(),
                         'csrfHash' => csrf_hash()
             ]);
         }
     }
 
-    public function delete_head() {
-        $head_id = $this->request->getPost('head_id');
+    public function delete_department() {
+        $department_id = $this->request->getPost('department_id');
 
         $delete_data = [
             'is_deleted' => 1,
             'deleted_by' => current_user(),
         ];
 
-        if ($this->modelhead->update($head_id, $delete_data)) {
+        if ($this->modeldepartment->update($department_id, $delete_data)) {
 
             return $this->response->setJSON([
                         'csrfHash' => csrf_hash()
@@ -175,15 +175,15 @@ class Head extends BaseController {
         }
     }
 
-    public function revert_head() {
-        $head_id = $this->request->getPost('head_id');
+    public function revert_department() {
+        $department_id = $this->request->getPost('department_id');
 
         $revert_data = [
             'is_deleted' => 2,
             'deleted_by' => current_user(),
         ];
 
-        if ($this->modelhead->update($head_id, $revert_data)) {
+        if ($this->modeldepartment->update($department_id, $revert_data)) {
 
             return $this->response->setJSON([
                         'csrfHash' => csrf_hash()
