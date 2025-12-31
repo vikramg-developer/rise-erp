@@ -1,7 +1,7 @@
-/* Earnings Report Chart */
+/* Attendance Report Chart */
 var options = {
     series: [{
-        name: "Earnings",
+        name: "Attendance",
         data: [30, 25, 36, 30, 45, 35, 64, 51, 59, 36, 39, 51]
     }, {
         name: "Students",

@@ -13,6 +13,11 @@ function validateInputs() {
 
     createBtn.disabled = !allFilled;
 }
+function isValidPassword(password) {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+    return passwordRegex.test(password);
+}
+
 
 // Run validation whenever the user types
 inputs.forEach(input => {
@@ -27,6 +32,7 @@ function isNumber(evt)
     }
     return true;
 }
+
 //function checkPasswordMatch() {
 //        var signup-password = $("signup-password").val();
 //        var signup-confirmpassword = $("#signup-confirmpassword").val();
@@ -52,29 +58,33 @@ function check() {
     const msg = document.getElementById('password-message');
     const submitBtn = document.getElementById('signup-submit');
 
-    // If both fields are empty
-    if (password === "" && confirmPassword === "") {
+    // Empty fields
+    if (password === "" || confirmPassword === "") {
         msg.innerHTML = "";
-        document.getElementById('signup-confirmpassword').style.borderColor = "";
         submitBtn.disabled = true;
         return;
     }
 
-    // If passwords match
+    // Password format validation
+    if (!isValidPassword(password)) {
+        msg.style.color = "red";
+        msg.innerHTML = "Password must be at least 8 characters, include uppercase, lowercase, number & special character.";
+        submitBtn.disabled = true;
+        return;
+    }
+
+    // Match check
     if (password === confirmPassword) {
         msg.style.color = "green";
         msg.innerHTML = "✓ Passwords match";
-        document.getElementById('signup-confirmpassword').style.borderColor = "green";
         submitBtn.disabled = false;
-    }
-    // If passwords do not match
-    else {
+    } else {
         msg.style.color = "red";
         msg.innerHTML = "✗ Passwords do not match";
-        document.getElementById('signup-confirmpassword').style.borderColor = "red";
         submitBtn.disabled = true;
     }
 }
+
 
 function forceUppercase(el) {
     el.value = el.value.toUpperCase();

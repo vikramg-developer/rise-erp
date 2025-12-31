@@ -36,15 +36,17 @@
 
 <!-- Apex Charts JS -->
 <script src="<?php echo base_url('assets/libs/apexcharts/apexcharts.min.js'); ?>"></script>
+  <!-- HRM Dashboard JS -->
+        <script src="<?php echo base_url('assets/js/courses-dashboard.js'); ?>"></script>
 
 <!-- Custom JS -->
 <script src="<?php echo base_url('assets/js/custom.js'); ?>"></script>
 
+<!-- Flat Picker JS -->
+<script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
+
 <!-- Date & Time Picker JS -->
 <script src="<?php echo base_url('assets/js/date&time_pickers.js'); ?>"></script>
-
-<!-- FlatPickr CSS -->
-<link rel="stylesheet" href="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.css'); ?>">
 
 <!-- Chartjs Chart JS -->
 <script src="<?php echo base_url('assets/libs/chart.js/chart.min.js'); ?>"></script>
@@ -84,9 +86,6 @@
 
 <!-- Modal JS -->
 <script src="<?php echo base_url('assets/js/modal.js'); ?>"></script>
-
-<!-- Flat Picker JS -->
-<script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
 
 <!-- CRM Contacts JS -->
 <script src="<?php echo base_url('assets/js/crm-contacts.js'); ?>"></script>

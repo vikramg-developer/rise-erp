@@ -36,7 +36,15 @@ class AddHeadGroupTable extends Migration {
             'updated_at' => [
                 'type' => 'timestamp',
                 'null' => true,
-                'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+            ],
+            'deleted_by' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => true
+            ],
+            'deleted_at' => [
+                'type' => 'timestamp',
+                'null' => true,
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
@@ -46,6 +54,7 @@ class AddHeadGroupTable extends Migration {
         
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('head_group_id');
+         $this->forge->addUniqueKey('head_group_name');
         $this->forge->createTable('head_group');
     }
 

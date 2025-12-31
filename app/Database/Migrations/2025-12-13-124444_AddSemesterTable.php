@@ -3,7 +3,6 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-
 use CodeIgniter\Database\RawSql;
 
 class AddSemesterTable extends Migration {
@@ -41,7 +40,15 @@ class AddSemesterTable extends Migration {
             'updated_at' => [
                 'type' => 'timestamp',
                 'null' => true,
-                'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+            ],
+            'deleted_by' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => true
+            ],
+            'deleted_at' => [
+                'type' => 'timestamp',
+                'null' => true,
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
@@ -50,6 +57,7 @@ class AddSemesterTable extends Migration {
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('semester_id');
+        $this->forge->addUniqueKey('semester_name');
         $this->forge->createTable('semester');
     }
 

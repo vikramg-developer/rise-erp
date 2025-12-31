@@ -30,6 +30,7 @@
                                 <div class="modal-dialog modal-dialog-centered">
 
                                     <div class="modal-content">
+                                        <input type="hidden" name="feedback_master_id" id="feedback_master_id">
                                         <div class="modal-header">
                                             <h6 class="modal-title"><?= lang('App.feedback') ?> <?= lang('App.master') ?></h6>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -44,60 +45,78 @@
                                                     <small class="text-danger" id="feedback_name_error" style="display:none;"></small>
                                                 </div>
 
-                                                <!---------------------feedback_type----------------------------------->
+                                                <!---------------------subject_type----------------------------------->
                                                 <div class="col-xl-6">
                                                     <label class="form-label"><?= lang('App.feedback') ?> <?= lang('App.type') ?></label>  <span class="text-danger">*</span>
                                                     <select class="form-select" id="type_id" name="type_id" >
-                                                    <!--<select class="js-example-basic-single" id="type_id" name="type_id" required>-->
                                                         <option value="" >Select Type</option>
-                                                        <option value="1">Theory</option>
-                                                        <option value="2">Practical</option>
-                                                        <option value="3">Project</option>
-                                                        <option value="4">Seminar</option>
-                                                        <option value="5">Tutorial</option>
+                                                        <?php
+                                                        foreach ($subject_type as $sub_type) {
+                                                            ?>
+                                                            <option value="<?= esc($sub_type['subject_type_id']) ?>">
+                                                                <?= esc($sub_type['subject_type_name']) ?>
+                                                            </option>
+                                                        <?php }
+                                                        ?>   
                                                     </select>
                                                     <small class="text-danger" id="type_id_error" style="display:none;"></small>
                                                 </div>
-                                                <!---------------------semester_id----------------------------------->
+                                                <!---------------------semester----------------------------------->
                                                 <div class="col-xl-6">
                                                     <label class="form-label"><?= lang('App.semester') ?></label> <span class="text-danger">*</span>
                                                     <select class="form-select" id="semester_id" name="semester_id" >
                                                         <option value="" >Select Semester</option>
-                                                        <option value="1">Odd</option>
-                                                        <option value="2">Even</option>
+                                                        <?php
+                                                        foreach ($semester as $sem) {
+                                                            ?>
+                                                            <option value="<?= esc($sem['semester_id']) ?>">
+                                                                <?= esc($sem['semester_name']) ?>
+                                                            </option>
+                                                        <?php }
+                                                        ?>    
                                                     </select>
                                                     <small class="text-danger" id="semester_id_error" style="display:none;"></small>
                                                 </div>
-
+                                                <!---------------------semester_part---------------------------------->
                                                 <div class="col-xl-6">
-                                                    <label class="form-label"><?= lang('App.part') ?></label> <span class="text-danger">*</span>
+                                                    <label class="form-label"><?= lang('App.semester') ?> <?= lang('App.part') ?></label> <span class="text-danger">*</span>
                                                     <select class="form-select" id="part_id" name="part_id" >
                                                         <option value="" >Select Part</option>
-                                                        <option value="1">Pre</option>
-                                                        <option value="2">Post</option>
+                                                        <?php
+                                                        foreach ($semester_part as $part) {
+                                                            ?>
+                                                            <option value="<?= esc($part['semester_part_id']) ?>">
+                                                                <?= esc($part['semester_part_name']) ?>
+                                                            </option>
+                                                        <?php }
+                                                        ?>    
                                                     </select>
                                                     <small class="text-danger" id="part_id_error" style="display:none;"></small>
                                                 </div>
-
+                                                <!---------------------academic_year---------------------------------->
                                                 <div class="col-xl-6">
                                                     <label class="form-label"><?= lang('App.academic') ?> <?= lang('App.year') ?></label> <span class="text-danger">*</span>
                                                     <select class="form-select"  id="academic_year_id" name="academic_year_id" >
                                                         <option value="">Select Academic Year</option>
-                                                        <option value="2">2025-2026</option>
-                                                        <option value="1">2024-2025</option>
+                                                        <?php
+                                                        foreach ($academic_year as $year) {
+                                                            ?>
+                                                            <option value="<?= esc($year['academic_year_id']) ?>">
+                                                                <?= esc($year['academic_year_name']) ?>
+                                                            </option>
+                                                        <?php }
+                                                        ?>             
                                                     </select>
                                                     <small class="text-danger" id="academic_year_id_error" style="display:none;"></small>
                                                 </div>
+                                                <!--------------------------------------------------------------------------->
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                                            <!--<button type="submit" class="btn btn-success m-1"> <?= lang('App.save') ?>  <i class="bi bi-save2 ms-2"></i></button>-->
                                             <button class="btn btn-success m-1" id="submit_btn"><?= lang('App.save') ?>  <i class="bi bi-save2 ms-2"></i></button>
-
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </form>
@@ -106,20 +125,27 @@
                 </div>
                 <!---------------------------End Add master-------------------------------------------------------------->
                 <div class="card-body">
-                    <table id="feedback-master-table" class="table table-bordered w-100">
-                        
-                        <thead>
-                            <tr>
-                                <th scope="col"><?= lang('App.sr') ?> <?= lang('App.no') ?></th>
-                                <th scope="col"> <?= lang('App.feedback') ?> <?= lang('App.name') ?></th>
-                                <th scope="col"><?= lang('App.type') ?> </th>
-                                <th scope="col"><?= lang('App.semester') ?> </th>
-                                <th scope="col"><?= lang('App.part') ?> </th>
-                                <th scope="col"><?= lang('App.academic') ?> <?= lang('App.year') ?> </th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                    </table>
+                    <div class="table-responsive">
+                    <!--<table id="feedback-master-table" class="table table-bordered w-100">-->
+                        <table id="feedback-master-table" class="table table-hover table-bordered text-nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th><?= lang('App.action') ?></th>
+                                    <th width="5%"><?= lang('App.sr') ?> <?= lang('App.no') ?></th>
+                                    <th> <?= lang('App.feedback') ?> <?= lang('App.name') ?></th>
+                                    <th><?= lang('App.type') ?> </th>
+                                    <th><?= lang('App.semester') ?> </th>
+                                    <th><?= lang('App.part') ?> </th>
+                                    <th><?= lang('App.academic') ?> <?= lang('App.year') ?> </th>
+                                    <th><?= lang('App.added') ?> <?= lang('App.by') ?></th>
+                                    <th><?= lang('App.updated') ?> <?= lang('App.by') ?></th>
+                                    <th><?= lang('App.remark') ?></th>
+                                    <th><?= lang('App.manage') ?> <?= lang('App.question') ?> </th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

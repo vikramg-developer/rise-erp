@@ -37,7 +37,15 @@ class AddHeadTable extends Migration
             'updated_at' => [
                 'type' => 'timestamp',
                 'null' => true,
-                'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+            ],
+            'deleted_by' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => true
+            ],
+            'deleted_at' => [
+                'type' => 'timestamp',
+                'null' => true,
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
@@ -47,6 +55,7 @@ class AddHeadTable extends Migration
         
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('head_id');
+        $this->forge->addUniqueKey('head_name');
         $this->forge->createTable('head');
     }
 

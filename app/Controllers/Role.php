@@ -12,14 +12,17 @@ use CodeIgniter\Controller;
 class Role extends BaseController {
 
     protected $modelrole;
+    protected $modelfacultyregistration;
 
     public function __construct() {
         $this->modelrole = model('ModelRole');
+        $this->modelfacultyregistration = model('ModelFacultyRegistration');
     }
 
     public function index() {
         session()->set('back_url', current_url());
         $data['jspath'] = 'roles/index-role';
+        $data['title'] = lang('App.rise') . " - " . lang('App.manage') . " " . lang('App.role');
         return render_page('role/index-role', $data);
     }
 
@@ -39,38 +42,59 @@ class Role extends BaseController {
         // DATA
         $rows = $this->modelrole->getFilteredRoles($length, $start, $search);
 
+        $facultyNameMap = $this->modelfacultyregistration->getRiseNoNameMap();
+
         $sr_no = 1;
 
         $data = [];
         foreach ($rows as $row) {
             $buttons = '';
+
+            // Edit Button
             if (hasPermission('updateRole')):
-                $buttons .= '<a href="roles/edit-role/' . $row['role_id'] . '" class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill tooltips edit" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-secondary" data-bs-placement="top" title="Edit"><i class="ri-pencil-fill"></i></a>';
+                $buttons .= actionHrefButton('Edit', 'roles/edit-role/' . $row['role_id']);
             endif;
 
+            // Delete Button
             if (hasPermission('deleteRole')):
                 if ($row['is_deleted'] != 1):
-                    $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-danger" data-bs-placement="top" title="Delete" data-role_id="' . $row['role_id'] . '" data-role_name="' . $row['role_name'] . '"><i class="ri-delete-bin-fill"></i></button>';
+                    $buttons .= actionButton('Delete', ['role_id' => $row['role_id'], 'role_name' => $row['role_name']]);
                 elseif ($row['is_deleted'] == 1):
-                    $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-warning" data-bs-placement="top" title="Revert" data-role_id="' . $row['role_id'] . '" data-role_name="' . $row['role_name'] . '"><i class="ri-arrow-go-back-fill"></i></button>';
+                    $buttons .= actionButton('Revert', ['role_id' => $row['role_id'], 'role_name' => $row['role_name']]);
                 endif;
             endif;
 
-            if ($row['is_deleted'] == 1):
-                $remark = "Deleted By Admin";
-            elseif ($row['is_deleted'] == 2):
-                $remark = "Reverted By Admin";
+            // Added By
+            if (!empty($row['added_by']) && !empty($row['added_at'])):
+                $addedBy = activityBadge('success', $facultyNameMap[$row['added_by']], $row['added_at']);
+            else:
+                $addedBy = "";
+            endif;
+
+            // Updated By
+            if (!empty($row['updated_by']) && !empty($row['updated_at'])):
+                $updatedBy = activityBadge('primary', $facultyNameMap[$row['updated_by']], $row['updated_at']);
+            else:
+                $updatedBy = "";
+            endif;
+
+            // Remark
+            if ($row['is_deleted'] == 1 && !empty($row['deleted_by']) && !empty($row['deleted_at'])):
+                $remark = activityBadge('danger', $facultyNameMap[$row['deleted_by']], $row['deleted_at']);
+            
+            elseif ($row['is_deleted'] == 2 && !empty($row['deleted_by']) && !empty($row['deleted_at'])):
+                $remark = activityBadge('warning', $facultyNameMap[$row['deleted_by']], $row['deleted_at']);
             else:
                 $remark = "";
             endif;
 
             $data[] = [
-                $sr_no++,
-                $row['role_name'],
-                '',
-                '',
-                $remark,
                 (hasPermission('viewRole') || hasPermission('deleteRole')) ? $buttons : '',
+                $sr_no++,
+                esc($row['role_name']),
+                $addedBy,
+                $updatedBy,
+                $remark,
             ];
         }
 
@@ -86,6 +110,7 @@ class Role extends BaseController {
     public function add_role() {
         $permissionsPath = APPPATH . 'Config/permissions.json';
         $data['permissions'] = json_decode(file_get_contents($permissionsPath), true);
+        $data['title'] = lang('App.rise') . " - " . lang('App.add') . " " . lang('App.role');
 
         $data['backUrl'] = previous_url() ?? base_url('roles');
         return render_page('role/add-role', $data);
@@ -98,7 +123,8 @@ class Role extends BaseController {
 
         $insert_data = [
             'role_name' => clean_name($this->request->getVar('role_name')),
-            'permissions' => $permission
+            'permissions' => $permission,
+            'added_by' => current_user()
         ];
 
         if ($this->modelrole->insert($insert_data)) {
@@ -122,6 +148,7 @@ class Role extends BaseController {
         $data['backUrl'] = previous_url() ?? base_url('roles');
         $data['role_data'] = $this->modelrole->find($role_id);
         $data['jspath'] = 'roles/edit-role';
+        $data['title'] = lang('App.rise') . " - " . lang('App.edit') . " " . lang('App.role');
 
         return render_page('role/edit-role', $data);
     }
@@ -134,7 +161,8 @@ class Role extends BaseController {
 
         $update_data = [
             'role_name' => clean_name($this->request->getVar('role_name')),
-            'permissions' => $permission
+            'permissions' => $permission,
+            'updated_by' => current_user()
         ];
 
         if ($this->modelrole->update($role_id, $update_data)) {
@@ -156,7 +184,12 @@ class Role extends BaseController {
 
         $role_id = $this->request->getPost('role_id');
 
-        if ($this->modelrole->update($role_id, ['is_deleted' => 1])) {
+        $delete_data = [
+            'is_deleted' => 1,
+            'deleted_by' => current_user()
+        ];
+
+        if ($this->modelrole->update($role_id, $delete_data)) {
 
             return $this->response->setJSON([
                         'csrfHash' => csrf_hash()
@@ -168,7 +201,12 @@ class Role extends BaseController {
 
         $role_id = $this->request->getPost('role_id');
 
-        if ($this->modelrole->update($role_id, ['is_deleted' => 2])) {
+        $revert_data = [
+            'is_deleted' => 2,
+            'deleted_by' => current_user()
+        ];
+
+        if ($this->modelrole->update($role_id, $revert_data)) {
 
             return $this->response->setJSON([
                         'csrfHash' => csrf_hash()

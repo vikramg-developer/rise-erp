@@ -21,8 +21,12 @@ class ModelFacultyRegistration extends Model {
         'faculty_aadhar_number',
         'faculty_pan_number',
         'faculty_password',
+        'faculty_status',
         'added_by',
         'updated_by',
+        'updated_at',
+        'deleted_by',
+        'deleted_at',
         'is_deleted',
     ];
     protected $validationRules = [
@@ -34,7 +38,7 @@ class ModelFacultyRegistration extends Model {
         'faculty_email_id' => 'required|trim|valid_email|is_unique[faculty_registration.faculty_email_id]',
         'faculty_aadhar_number' => 'required|numeric|exact_length[12]|is_unique[faculty_registration.faculty_aadhar_number]',
         'faculty_pan_number' => 'required|regex_match[/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/]|is_unique[faculty_registration.faculty_pan_number]',
-        'faculty_password' => 'required|min_length[6]',
+        'faculty_password' => 'required|min_length[8]',
     ];
     protected $validationMessages = [
         'faculty_role_id' => [
@@ -102,26 +106,104 @@ class ModelFacultyRegistration extends Model {
         return $this->where('faculty_rise_no', $rise_no)->first();
     }
 
-    public function findAllRecord($length, $start) {
-        return $this->where('faculty_registration_id !=', 1)
-                        ->orderBy('faculty_registration_id', 'DESC')
-                        ->findAll($length, $start);
+//    public function findAllRecord($length, $start) {
+//        return $this->where('faculty_registration_id !=', 1)
+//                        ->orderBy('faculty_registration_id', 'DESC')
+//                        ->findAll($length, $start);
+//    }
+
+    public function findAllRecord($length, $start, $search = null) {
+        $builder = $this->builder();
+
+        $builder->where('faculty_registration_id !=', 1);
+
+        // 🔍 SEARCH (DataTables)
+        if (!empty($search)) {
+            $builder->groupStart()
+                    ->like('faculty_rise_no', $search)
+                    ->orLike('faculty_first_name', $search)
+                    ->orLike('faculty_middle_name', $search)
+                    ->orLike('faculty_last_name', $search)
+                    ->orLike('faculty_mobile_number', $search)
+                    ->orLike('faculty_email_id', $search)
+                    ->groupEnd();
+        }
+
+        $builder->orderBy('faculty_registration_id', 'DESC');
+        $builder->limit($length, $start);
+
+        return $builder->get()->getResultArray();
+    }
+
+    public function countFiltered($search = null) {
+        $builder = $this->builder();
+
+        $builder->where('faculty_registration_id !=', 1);
+
+        if (!empty($search)) {
+            $builder->groupStart()
+                    ->like('faculty_rise_no', $search)
+                    ->orLike('faculty_first_name', $search)
+                    ->orLike('faculty_middle_name', $search)
+                    ->orLike('faculty_last_name', $search)
+                    ->orLike('faculty_mobile_number', $search)
+                    ->orLike('faculty_email_id', $search)
+                    ->groupEnd();
+        }
+
+        return $builder->countAllResults();
     }
 
     public function getFacultyById($facultyId) {
         return $this->where('faculty_registration_id', $facultyId)->first();
     }
 
+    /**
+     * This map method is used to convert faculty_rise_no stored in added_by and updated_by
+     * columns into readable faculty names without using SQL JOINs. It fetches all faculty
+     * names once, creates a rise_no => "FirstName LastName" map, and allows fast lookup
+     * while building DataTable data, keeping the code clean and easy to maintain.
+     */
+    public function getRiseNoNameMap() {
+        $rows = $this->select('faculty_rise_no, faculty_first_name, faculty_last_name')
+                ->findAll();
+
+        $map = [];
+
+        foreach ($rows as $row) {
+            $map[$row['faculty_rise_no']] = $row['faculty_first_name'] . ' ' . $row['faculty_last_name'];
+        }
+
+        return $map;
+    }
+
     public function rulesForUpdate($id) {
         return [
-            'faculty_role_id'        => 'required',
-            'faculty_first_name'     => 'required|min_length[2]|alpha_space',
-            'faculty_middle_name'    => 'required|min_length[2]|alpha_space',
-            'faculty_last_name'      => 'required|min_length[2]|alpha_space',
-            'faculty_mobile_number'  =>"required|numeric|exact_length[10]|is_unique[faculty_registration.faculty_mobile_number,faculty_registration_id,{$id}]",
-            'faculty_email_id'       =>"required|valid_email|is_unique[faculty_registration.faculty_email_id,faculty_registration_id,{$id}]",
-            'faculty_aadhar_number'  =>"required|numeric|exact_length[12]|is_unique[faculty_registration.faculty_aadhar_number,faculty_registration_id,{$id}]",
-            'faculty_pan_number'     =>"required|regex_match[/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/]|is_unique[faculty_registration.faculty_pan_number,faculty_registration_id,{$id}]",
+            'faculty_role_id' => 'required',
+            'faculty_first_name' => 'required|min_length[2]|alpha_space',
+            'faculty_middle_name' => 'required|min_length[2]|alpha_space',
+            'faculty_last_name' => 'required|min_length[2]|alpha_space',
+            'faculty_mobile_number' => "required|numeric|exact_length[10]|is_unique[faculty_registration.faculty_mobile_number,faculty_registration_id,{$id}]",
+            'faculty_email_id' => "required|valid_email|is_unique[faculty_registration.faculty_email_id,faculty_registration_id,{$id}]",
+            'faculty_aadhar_number' => "required|numeric|exact_length[12]|is_unique[faculty_registration.faculty_aadhar_number,faculty_registration_id,{$id}]",
+            'faculty_pan_number' => "required|regex_match[/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/]|is_unique[faculty_registration.faculty_pan_number,faculty_registration_id,{$id}]",
         ];
     }
+    
+    
+    protected $beforeUpdate = ['setUpdateOrDeleteDate'];
+
+    protected function setUpdateOrDeleteDate(array $data)
+    {
+        // DELETE or REVERT
+        if (array_key_exists('is_deleted', $data['data'])) {
+            $data['data']['deleted_at'] = date('Y-m-d H:i:s');
+            return $data;
+        }
+
+        // NORMAL UPDATE
+        $data['data']['updated_at'] = date('Y-m-d H:i:s');
+        return $data;
+    }
+
 }

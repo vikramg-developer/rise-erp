@@ -6,7 +6,7 @@
         <div class="ms-md-1 ms-0">
             <nav>
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="#"><?= lang('App.dashboard'); ?></a></li>
+                    <li class="breadcrumb-item"><a href="<?= base_url('dashboard')?>"><?= lang('App.rise'); ?></a></li>
                     <li class="breadcrumb-item active" aria-current="page"><?= lang('App.head'); ?></li>
                 </ol>
             </nav>
@@ -16,6 +16,7 @@
 
 
     <!-- Start::row-1 -->
+    <?php if(hasPermission('createHead')): ?>
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
@@ -32,6 +33,7 @@
                                                     <input type="hidden" id="head_id" name="head_id">
                                                     <label for="head_name" class="form-label"><?= lang('App.head'); ?></label>
                                                     <input type="text" class="form-control" id="head_name" name="head_name" placeholder="<?= lang('App.head'); ?>">
+                                                    <ul id="searchResult" class="list-group position-absolute w-100" style="z-index:1000"></ul>
                                                     <small class="text-danger" id="head_name_error" style="display:none;"></small>
                                                 </div>
                                             </div>
@@ -48,6 +50,7 @@
             </div>
         </div>
     </div>
+    <?php endif; ?>
     <!--End::row-1 -->
 
     <div class="row">
@@ -63,12 +66,14 @@
                         <table id="head-table" class="table table-bordered text-nowrap w-100">
                             <thead>
                                 <tr>
+                                    <?php if (hasPermission('updateHead') || hasPermission('deleteHead')): ?>
+                                        <th><?= lang('App.action'); ?></th>
+                                    <?php endif; ?>
                                     <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
                                     <th><?= lang('App.head'); ?> <?= lang('App.name'); ?></th>
                                     <th><?= lang('App.added'); ?> <?= lang('App.by'); ?></th>
                                     <th><?= lang('App.updated'); ?> <?= lang('App.by'); ?></th>
                                     <th><?= lang('App.remark'); ?></th>
-                                    <th><?= lang('App.action'); ?></th>
                                 </tr>
                             </thead>
                         </table>

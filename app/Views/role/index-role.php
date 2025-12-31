@@ -6,34 +6,25 @@
         <div class="ms-md-1 ms-0">
             <nav>
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="#"><?= lang('App.dashboard'); ?></a></li>
+                    <li class="breadcrumb-item"><a href="<?= base_url('dashboard')?>"><?= lang('App.rise'); ?></a></li>
                     <li class="breadcrumb-item active" aria-current="page"><?= lang('App.manage'); ?> <?= lang('App.role'); ?></li>
                 </ol>
             </nav>
         </div>
     </div>
     <!-- Page Header Close -->
-
-
-    <!-- Start::row-1 -->
-    <?php if (hasPermission('createRole')): ?>
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="px-4 py-3 d-sm-flex justify-content-start">
-                    <a href="<?= base_url('roles/add-role'); ?>" class="btn btn-success m-1"><?= lang('App.add'); ?> <?= lang('App.role'); ?><i class="bi bi-plus ms-2"></i></a>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
-    <!--End::row-1 -->
-
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
-                <div class="card-header">
+                <div class="card-header  justify-content-between">
                     <div class="card-title">
-                        <?= lang('App.manage'); ?> <?= lang('App.role'); ?>
+                        <?= lang('App.role')."s"; ?>
                     </div>
+                    <?php if (hasPermission('createRole')): ?>
+                    <div class="d-flex">
+                        <a href="<?= base_url('roles/add-role'); ?>" class="btn btn-success m-1"><?= lang('App.add'); ?> <?= lang('App.role'); ?><i class="bi bi-plus ms-2"></i></a>
+                    </div>
+                    <?php endif; ?>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -41,14 +32,14 @@
                         <table id="role-table" class="table table-bordered text-nowrap w-100">
                             <thead>
                                 <tr>
+                                    <?php if (hasPermission('updateRole') || hasPermission('deleteRole')): ?>
+                                        <th><?= lang('App.action'); ?></th>
+                                    <?php endif; ?>
                                     <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
                                     <th><?= lang('App.role'); ?> <?= lang('App.name'); ?></th>
                                     <th><?= lang('App.added'); ?> <?= lang('App.by'); ?></th>
                                     <th><?= lang('App.updated'); ?> <?= lang('App.by'); ?></th>
-                                    <th><?= lang('App.remark'); ?></th>
-                                    <?php if (hasPermission('viewRole') || hasPermission('deleteRole')): ?>
-                                        <th><?= lang('App.action'); ?></th>
-                                    <?php endif; ?>
+                                    <th><?= lang('App.remark'); ?></th>                                    
                                 </tr>
                             </thead>
                         </table>

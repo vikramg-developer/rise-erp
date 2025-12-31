@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\ModelFeesManagement;
 /**
  * Description of FeesManagement
  *
@@ -10,15 +9,24 @@ use App\Models\ModelFeesManagement;
  */
 class Head extends BaseController {
 
-    public $modelhead;
+    protected $modelhead;
+    protected $modelfacultyregistration;
 
     public function __construct() {
-        $this->modelhead = model('Modelhead');
+        $this->modelhead = model('ModelHead');
+        $this->modelfacultyregistration = model('ModelFacultyRegistration');
+    }
+
+    public function search_head() {
+        $term = $this->request->getGet('q');
+
+        return $this->response->setJSON($this->modelhead->search_head($term));
     }
 
 //put your code here
     public function index() {
         $data['jspath'] = 'head/index-head';
+        $data['title'] = lang('App.rise') . " - " . lang('App.manage') . " " . lang('App.head');
         return render_page('head/index-head', $data);
     }
 
@@ -29,21 +37,16 @@ class Head extends BaseController {
         $length = $this->request->getPost('length');
         $search = $this->request->getPost('search')['value'] ?? '';
 
-        $model = $this->modelhead;
+        // TOTAL (without search, but with base filters)
+        $recordsTotal = $this->modelhead->countAllHead();
 
-// TOTAL RECORDS
-        $recordsTotal = $model->countAll();
+        // FILTERED
+        $recordsFiltered = $this->modelhead->countFilteredHead($search);
 
-// SEARCH FILTER
-        if ($search !== '') {
-            $model->like('head_name', $search);
-        }
+        // DATA
+        $rows = $this->modelhead->getFilteredHead($length, $start, $search);
 
-// FILTERED RECORDS
-        $recordsFiltered = $model->countAllResults(false);
-
-// PAGINATED DATA
-        $rows = $model->orderBy('head_id', 'DESC')->findAll($length, $start);
+        $facultyNameMap = $nameMap = $this->modelfacultyregistration->getRiseNoNameMap();
 
         $sr_no = 1;
 
@@ -51,29 +54,51 @@ class Head extends BaseController {
         foreach ($rows as $row) {
             $buttons = '';
 
-            $buttons .= '<button class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill edit" data-head_id="' . $row['head_id'] . '" data-head_name="' . $row['head_name'] . '"><i class="ri-pencil-fill"></i></button>';
-
-            if ($row['is_deleted'] != 1):
-                $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete" data-head_id="' . $row['head_id'] . '" data-head_name="' . $row['head_name'] . '"><i class="ri-delete-bin-fill"></i></button>';
-            elseif ($row['is_deleted'] == 1):
-                $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-head_id="' . $row['head_id'] . '" data-head_name="' . $row['head_name'] . '"><i class="ri-arrow-go-back-fill"></i></button>';
+            // Edit Button
+            if (hasPermission('updateHead')):
+                $buttons .= actionButton('Edit', ['head_id' => $row['head_id'], 'head_name' => $row['head_name']]);
             endif;
 
-            if ($row['is_deleted'] == 1):
-                $remark = "Deleted By Admin";
-            elseif ($row['is_deleted'] == 2):
-                $remark = "Reverted By Admin";
+            // Delete Button
+            if (hasPermission('deleteHead')):
+                if ($row['is_deleted'] != 1):
+                    $buttons .= actionButton('Delete', ['head_id' => $row['head_id'], 'head_name' => $row['head_name']]);
+                elseif ($row['is_deleted'] == 1):
+                    $buttons .= actionButton('Revert', ['head_id' => $row['head_id'], 'head_name' => $row['head_name']]);
+                endif;
+            endif;
+
+            // Added By
+            if (!empty($row['added_by']) && !empty($row['added_at'])):
+                $addedBy = activityBadge('success', $facultyNameMap[$row['added_by']], $row['added_at']);
+            else:
+                $addedBy = "";
+            endif;
+
+            // Updated By
+            if (!empty($row['updated_by']) && !empty($row['updated_at'])):
+                $updatedBy = activityBadge('primary', $facultyNameMap[$row['updated_by']], $row['updated_at']);
+            else:
+                $updatedBy = "";
+            endif;
+
+            // Remark
+            if ($row['is_deleted'] == 1 && !empty($row['deleted_by']) && !empty($row['deleted_at'])):
+                $remark = activityBadge('danger', $facultyNameMap[$row['deleted_by']], $row['deleted_at'], "Deleted By");
+
+            elseif ($row['is_deleted'] == 2 && !empty($row['deleted_by']) && !empty($row['deleted_at'])):
+                $remark = activityBadge('warning', $facultyNameMap[$row['deleted_by']], $row['deleted_at'], "Reverted By");
             else:
                 $remark = "";
             endif;
 
             $data[] = [
+                $buttons,
                 $sr_no++,
-                $row['head_name'],
-                $row['added_by'],
-                $row['updated_by'],
+                esc($row['head_name']),
+                $addedBy,
+                $updatedBy,
                 $remark,
-                $buttons                
             ];
         }
 
@@ -87,80 +112,82 @@ class Head extends BaseController {
     }
 
     public function save_head() {
-            $insert_data = [
-                'head_name' => clean_name($this->request->getVar('head_name')),
-                'added_by' => session('rise_no'),
-            ];
+        $insert_data = [
+            'head_name' => clean_name($this->request->getVar('head_name')),
+            'added_by' => current_user(),
+        ];
 
-            if ($this->modelhead->insert($insert_data)) {
-                return $this->response->setJSON([
-                            'status' => 'success',
-                            'message' => 'Head added successfully',
-                            'csrfHash' => csrf_hash()
-                ]);
-            } else {
-                return $this->response->setJSON([
-                            'status' => 'error',
-                            'errors' => $this->modelhead->errors(),
-                            'csrfHash' => csrf_hash()
-                ]);
-            }
+        if ($this->modelhead->insert($insert_data)) {
+            return $this->response->setJSON([
+                        'status' => 'success',
+                        'message' => 'Head added successfully',
+                        'csrfHash' => csrf_hash()
+            ]);
+        } else {
+            return $this->response->setJSON([
+                        'status' => 'error',
+                        'errors' => $this->modelhead->errors(),
+                        'csrfHash' => csrf_hash()
+            ]);
+        }
     }
 
     public function update_head() {
-        if ($this->request->getMethod() == 'post') {
-            $id = $this->request->getPost('head_id');
+        $id = $this->request->getPost('head_id');
 
-            $update_data = [
-                'head_name' => clean_name($this->request->getVar('head_name')),
-                'updated_by' => session('rise_no'),
-            ];
+        $update_data = [
+            'head_name' => clean_name($this->request->getVar('head_name')),
+            'updated_by' => current_user(),
+        ];
 
-            if ($this->modelhead->update($id, $update_data)) {
-                return $this->response->setJSON([
-                            'status' => 'success',
-                            'message' => 'Head updated successfully',
-                            'csrfHash' => csrf_hash()
-                ]);
-            } else {
-                return $this->response->setJSON([
-                            'status' => 'error',
-                            'errors' => $this->modelhead->errors(),
-                            'csrfHash' => csrf_hash()
-                ]);
-            }
+        $this->modelhead->setValidationRules(
+                $this->modelhead->rulesForUpdate($id)
+        );
+
+        if ($this->modelhead->update($id, $update_data)) {
+            return $this->response->setJSON([
+                        'status' => 'success',
+                        'message' => 'Head updated successfully',
+                        'csrfHash' => csrf_hash()
+            ]);
         } else {
-            return render_page('error_page/error404');
+            return $this->response->setJSON([
+                        'status' => 'error',
+                        'errors' => $this->modelhead->errors(),
+                        'csrfHash' => csrf_hash()
+            ]);
         }
     }
 
     public function delete_head() {
-        if ($this->request->getMethod() == 'post') {
-            $head_id = $this->request->getPost('head_id');
+        $head_id = $this->request->getPost('head_id');
 
-            if ($this->modelhead->update($head_id, ['is_deleted' => 1])) {
+        $delete_data = [
+            'is_deleted' => 1,
+            'deleted_by' => current_user(),
+        ];
 
-                return $this->response->setJSON([
-                            'csrfHash' => csrf_hash()
-                ]);
-            }
-        } else {
-            return render_page('error_page/error404');
+        if ($this->modelhead->update($head_id, $delete_data)) {
+
+            return $this->response->setJSON([
+                        'csrfHash' => csrf_hash()
+            ]);
         }
     }
 
     public function revert_head() {
-        if ($this->request->getMethod() == 'post') {
-            $head_id = $this->request->getPost('head_id');
+        $head_id = $this->request->getPost('head_id');
 
-            if ($this->modelhead->update($head_id, ['is_deleted' => 2])) {
+        $revert_data = [
+            'is_deleted' => 2,
+            'deleted_by' => current_user(),
+        ];
 
-                return $this->response->setJSON([
-                            'csrfHash' => csrf_hash()
-                ]);
-            }
-        } else {
-            return render_page('error_page/error404');
+        if ($this->modelhead->update($head_id, $revert_data)) {
+
+            return $this->response->setJSON([
+                        'csrfHash' => csrf_hash()
+            ]);
         }
     }
 }

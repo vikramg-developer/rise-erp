@@ -29,19 +29,27 @@ class AddRoleTable extends Migration
                 'null' => false
             ],
             'added_at' => [
-                'type'=>'TIMESTAMP',
-                'null'=>false,
-                'default'=>new Rawsql('CURRENT_TIMESTAMP'),
+                'type' => 'timestamp',
+                'null' => false,
+                'default' => new Rawsql('CURRENT_TIMESTAMP'),
             ],
-            'updated_by'=> [
+            'updated_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
-                'null' => false
+                'null' => true
             ],
-            'updated_at' =>[
-                'type'=>'TIMESTAMP',
-                'null'       => true,
-                'default'=>new Rawsql('NULL ON UPDATE CURRENT_TIMESTAMP'),
+            'updated_at' => [
+                'type' => 'timestamp',
+                'null' => true,
+            ],
+            'deleted_by' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => true
+            ],
+            'deleted_at' => [
+                'type' => 'timestamp',
+                'null' => true,
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
@@ -51,6 +59,7 @@ class AddRoleTable extends Migration
         
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('role_id');
+        $this->forge->addUniqueKey('role_name');
         $this->forge->createTable('role');
     }
 

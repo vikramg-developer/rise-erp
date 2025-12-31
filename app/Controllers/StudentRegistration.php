@@ -2,18 +2,21 @@
 
 namespace App\Controllers;
 
-use App\Models\ModelStudentRegistration;
-use App\Models\ModelBranch;
-
 class StudentRegistration extends BaseController {
 
     protected $modelstudentregistration;
-    protected $branchModel;
+    protected $modelbranch;
+    protected $modelacademicyear;
+    protected $modelstudentpersonalinfo;
+    protected $modelrisecounter;
     protected $db;
 
     public function __construct() {
-        $this->modelstudentregistration = new ModelStudentRegistration();
-        $this->branchModel = new ModelBranch();
+        $this->modelstudentregistration = model('ModelStudentRegistration');
+        $this->modelbranch = model('ModelBranch');
+        $this->modelacademicyear = model('ModelAcademicYear');
+        $this->modelstudentpersonalinfo = model('ModelStudentPersonalInformation');
+        $this->modelrisecounter = model('ModelRiseCounter');
         $this->db = \Config\Database::connect();
     }
 
@@ -21,163 +24,77 @@ class StudentRegistration extends BaseController {
         return view('student_registration/registration-page');
     }
 
+//===============================Add Student Registration===============================
     public function add_registration() {
-        $session = \Config\Services::session();
-
+        $session = session();
         if ($this->request->getMethod() !== 'post') {
             return redirect()->to('student-registration');
         }
+        // Get academic year
+        $academic_year_data = $this->modelacademicyear->getCurrentAcademicYear();
+        $academic_year_id = $academic_year_data['academic_year_id'];
 
+        $rise_counter_data = $this->modelrisecounter->where(['user_type_id' => 3, 'academic_year_id' => $academic_year_id])->first();
 
-        $studentData = [
-            'student_first_name' => clean_name($this->request->getPost('student_first_name')),
-            'student_middle_name' => clean_name($this->request->getPost('student_middle_name')),
-            'student_last_name' => clean_name($this->request->getPost('student_last_name')),
-            'student_aadhar_number' => $this->request->getPost('student_aadhar_number'),
-            'student_password' => $this->request->getPost('student_password'),
-            'student_role_id' => 4,
-        ];
-
-        if (!$this->modelstudentregistration->validate($studentData)) {
-            return redirect()->back()
-                            ->withInput()
-                            ->with('errors', $this->modelstudentregistration->errors());
+        if ($rise_counter_data == null) {
+            $data = ['user_type_id' => 3,
+                'academic_year_id' => $academic_year_id,
+                'rise_no' => 1
+            ];
+            $this->modelrisecounter->insert($data);
         }
-
-
         $this->db->transBegin();
-
         try {
-
-
-            if (!$this->modelstudentregistration->insert($studentData)) {
-                throw new \Exception(json_encode($this->modelstudentregistration->errors()));
-            }
-
-            $insertId = $this->modelstudentregistration->getInsertID();
-
-            $this->db->query(
-                    "INSERT IGNORE INTO rise_number_counter
-                 (user_type_id, academic_year_id, rise_no)
-                 VALUES (?, ?, ?)",
-                    [4, 36, 1]
-            );
-
-            $counter = $this->db->query(
-                            "SELECT rise_no
-                 FROM rise_number_counter
-                 WHERE user_type_id = ? AND academic_year_id = ?
-                 FOR UPDATE",
-                            [4, 36]
-                    )->getRowArray();
-
-            if (!$counter) {
-                throw new \Exception('Rise counter missing');
-            }
-
-            $currentRise = (int) $counter['rise_no'];
-            $nextRise = $currentRise + 1;
-            $branch = $this->branchModel->getSingleBranch();
-
+            // Lock counter row
+            $rise_no_counter = $this->modelrisecounter->get_rise_no($academic_year_id);
+            // Branch & year
+            $branch = $this->modelbranch->getSingleBranch();
             $branchCode = $branch['branch_code'] ?? '000';
-
-            $year = date('Y');
-
-            $finalRiseNo = 'S' . $year . $branchCode . str_pad($currentRise, 4, '0', STR_PAD_LEFT);
-
-            if ($insert) {
-                $page_session->setTempdata(
-                        'success',
-                        'Account created successfully! Please Login. Your Rise No is: <b>' . $newRiseNo . '</b>', 4);
-            } else {
-                $this->modelstudentregistration
-                        ->skipValidation(true)
-                        ->update($insertId, [
-                            'student_rise_no' => $finalRiseNo
-                ]);
-
-                $this->db->table('rise_number_counter')
-                        ->where('user_type_id', 4)
-                        ->where('academic_year_id', 36)
-                        ->update(['rise_no' => $nextRise]);
-
-                $this->db->transCommit();
-
-                $session->setTempdata(
-                        'success',
-                        'Registration successful! Your Rise No is <b>' . $finalRiseNo . '</b>',
-                        4
-                );
+            $yearPrefix = substr($academic_year_data['academic_year_name'], 0, 4);
+            // Generate RISE NO
+            $finalRiseNo = 'S' . $yearPrefix . $branchCode . str_pad($rise_no_counter['rise_no'], 4, '0', STR_PAD_LEFT);
+            $studentData = [
+                'student_first_name' => clean_name($this->request->getPost('student_first_name')),
+                'student_middle_name' => clean_name($this->request->getPost('student_middle_name')),
+                'student_last_name' => clean_name($this->request->getPost('student_last_name')),
+                'student_aadhar_number' => $this->request->getPost('student_aadhar_number'),
+                'student_password' => $this->request->getPost('student_password'),
+                'student_role_id' => 3,
+                'student_rise_no' => $finalRiseNo
+            ];
+//        // Validate
+            if (!$this->modelstudentregistration->insert($studentData)) {
+                return redirect()->back()
+                                ->withInput()
+                                ->with('errors', $this->modelstudentregistration->errors());
             }
-        } catch (Throwable $e) {
 
-
+            $insert_id = $this->modelstudentregistration->getInsertId();
+            if ($insert_id) {
+                $update_data = ['rise_no' => ($rise_no_counter['rise_no'] + 1)];
+                $this->modelrisecounter->update($rise_no_counter['rise_number_counter_id'], $update_data);
+            }
+            if ($this->db->transStatus() === false) {
+                throw new\Exception('Registration Failed.');
+            }
+            $this->db->transCommit();
+            $session->setFlashdata(
+                    'success',
+                    'Registration successful! Your Rise No is <b>' . $finalRiseNo . '</b>',
+                    5
+            );
+//            return true;
+        } catch (\Throwable $e) {
             $this->db->transRollback();
-
-            $session->setTempdata(
+            $session->setFlashdata(
                     'error',
                     'Registration failed: ' . $e->getMessage(),
-                    4
+                    5
             );
+//            return false;
         }
+
 
         return redirect()->to('student-registration');
     }
 }
-
-//    public function add_registration() {
-//        $page_session = \Config\Services::session();
-//
-//        if ($this->request->getMethod() !== 'post') {
-//            return redirect()->to('student-registration');
-//        }
-//        if ($this->request->getMethod() === 'post') {
-//
-//            $aadhar = clean_name($this->request->getVar('student_aadhar_number'));
-//            $allAadhar = $this->modelstudentregistration->findColumn('student_aadhar_number');
-//
-//            if ($allAadhar && in_array($aadhar, $allAadhar)) {
-//                $page_session->setTempdata('error', 'This Aadhar Number is already registered!', 4);
-//                return redirect()->back();
-//            }
-//
-//            $insert_data = [
-//                'student_first_name' => clean_name($this->request->getVar('student_first_name')),
-//                'student_middle_name' => clean_name($this->request->getVar('student_middle_name')),
-//                'student_last_name' => clean_name($this->request->getVar('student_last_name')),
-//                'student_aadhar_number' => $aadhar,
-//                'student_password' => password_hash($this->request->getVar('student_password'),PASSWORD_DEFAULT),
-//            ];
-//
-//            $insert = $this->modelstudentregistration->save($insert_data);
-//            if (!$insert) {
-//                return view('student_registration/registration-page', ['errors' => $this->modelstudentregistration->errors()]);
-//            }
-//            $insertId = $this->modelstudentregistration->getInsertID();
-//            $branch = $this->branchModel->getSingleBranch();
-//
-//            $branchCode = $branch['branch_code'] ?? '000';
-//
-//            $year = date('Y');
-//            $serial = str_pad($insertId, 4, '0', STR_PAD_LEFT);
-//
-//            $newRiseNo = 'S' . $year . $branchCode . $serial;
-////                $newRiseNo = 'S20261010000' . $insertId;
-//            $this->modelstudentregistration->update($insertId, ['student_rise_no' => $newRiseNo]);
-//
-//            if ($insert) {
-//                $page_session->setTempdata(
-//                        'success',
-//                        'Account created successfully! Please Login. Your Rise No is: <b>' . $newRiseNo . '</b>',
-//                        4
-//                );
-//            } else {
-//
-//
-//                return view('student_registration/registration-page', ['errors' => $this->modelstudentregistration->errors()]);
-//            }
-//
-//            return redirect()->to('student-registration');
-//        }
-//    }
-//}

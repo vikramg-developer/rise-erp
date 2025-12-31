@@ -7,10 +7,9 @@
     flatpickr("#dob", {});
     flatpickr("#joining", {});
 
-    flatpickr("#date-of-admission", {});
-    flatpickr("#date-of-leaving", {});
-    flatpickr("#from-date", {});
-    flatpickr("#to-date", {});
+    flatpickr("#date_of_leaving", {});
+    flatpickr("#from_date", {});
+    flatpickr("#to_date", {});
 
 
     /* To choose date and time */

@@ -69,9 +69,9 @@ class ModelStudentRegistration extends Model {
     
     protected function hashPassword(array $data)
 {
-    if (! empty($data['data']['faculty_password'])) {
-        $data['data']['faculty_password'] =
-            password_hash($data['data']['faculty_password'], PASSWORD_DEFAULT);
+    if (! empty($data['data']['student_password'])) {
+        $data['data']['student_password'] =
+            password_hash($data['data']['student_password'], PASSWORD_DEFAULT);
     }
     return $data;
 }
@@ -81,5 +81,28 @@ class ModelStudentRegistration extends Model {
 
     public function verify_rise_no($rise_no) {
         return $this->where('student_rise_no', $rise_no)->first();
+    }
+     public function countAllStudent() {
+        return $this->builder()
+                        ->countAllResults();
+    }
+    public function countFilteredData($search) {
+        $builder = $this->builder();
+
+        if (!empty($search)) {
+            $builder->like('student_rise_no', $search);
+        }
+
+        return $builder->countAllResults();
+    }
+    public function getFilteredData($length, $start, $search) {
+        $builder = $this->builder()
+                ->orderBy('student_registration_id', 'ASC');
+
+        if (!empty($search)) {
+            $builder->like('student_rise_no', $search);
+        }
+
+        return $builder->get($length, $start)->getResultArray();
     }
 }

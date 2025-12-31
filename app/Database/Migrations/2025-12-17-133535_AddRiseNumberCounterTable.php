@@ -28,7 +28,7 @@ class AddRiseNumberCounterTable extends Migration
                 'constraint' => '50',
                 'null' => false
             ],
-            'added_by' => [
+             'added_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
@@ -46,7 +46,15 @@ class AddRiseNumberCounterTable extends Migration
             'updated_at' => [
                 'type' => 'timestamp',
                 'null' => true,
-                'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+            ],
+            'deleted_by' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => true
+            ],
+            'deleted_at' => [
+                'type' => 'timestamp',
+                'null' => true,
             ],
             'is_deleted' => [
                 'type' => 'tinyint',

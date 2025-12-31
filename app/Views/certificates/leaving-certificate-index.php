@@ -15,20 +15,7 @@
     <!-- Start::row-1 -->
     <div class="row">
         <div class="col-xl-12">
-            <div class="card custom-card">
-                <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
-                    <div id="successToast" class="toast colored-toast bg-success-transparent" role="alert" aria-live="assertive"
-                         aria-atomic="true">
-                        <div class="toast-header bg-success text-fixed-white">
-                            <img class="bd-placeholder-img rounded me-2" src="<?php echo base_url('assets/images/brand-logos/toggle-rise.jpg'); ?>" alt="...">
-                            <strong class="me-auto"><?= lang('App.rise') ?></strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
-                        <div class="toast-body">
-                            Your,toast message here.
-                        </div>
-                    </div>
-                </div>
+            <div class="card custom-card">                
                 <form method="post" action="" id="fetch_lc_student">
                     <div class="card-body add-products p-0">
                         <div class="p-4">
@@ -39,7 +26,7 @@
                                             <div class="row gy-3">
                                                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
                                                     <label for="department_id" class="form-label"><?= lang('App.department'); ?></label>
-                                                    <select class="form-control js-example-basic-single" name="department_id" id="department_id" required>
+                                                    <select class="form-control js-example-basic-single" name="department_id" id="department_id">
                                                         <option value="">Select Department</option>
                                                         <?php
                                                         foreach ($departments as $department) {
@@ -48,11 +35,11 @@
                                                         <?php }
                                                         ?> 
                                                     </select>
-                                                    <small class="text-danger" id="fetch_student_error" style="display:none;"></small>
+                                                    <small class="text-danger field-error" id="department_id_error" style="display:none;"></small>
                                                 </div>                                            
                                                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
                                                     <label for="year_id" class="form-label"><?= lang('App.year'); ?></label>
-                                                    <select class="form-control js-example-basic-single" name="year_id" id="year_id" required>
+                                                    <select class="form-control js-example-basic-single" name="year_id" id="year_id">
                                                         <option value="">Select Year</option>
                                                         <?php
                                                         foreach ($years as $year) {
@@ -61,11 +48,11 @@
                                                         <?php }
                                                         ?> 
                                                     </select>
-                                                    <small class="text-danger" id="fetch_student_error" style="display:none;"></small>
+                                                    <small class="text-danger field-error" id="year_id_error" style="display:none;"></small>
                                                 </div>
                                                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
                                                     <label for="academic_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
-                                                    <select class="js-example-basic-single" name="academic_year_id" id="academic_year_id" required>
+                                                    <select class="form-control js-example-basic-single" name="academic_year_id" id="academic_year_id">
                                                         <option value="">Select Academic Year</option>
                                                         <?php
                                                         foreach ($academic_year as $aca_year) {
@@ -74,7 +61,7 @@
                                                         <?php }
                                                         ?>   
                                                     </select>
-                                                    <small class="text-danger" id="fetch_student_error" style="display:none;"></small>
+                                                    <small class="text-danger field-error" id="academic_year_id_error" style="display:none;"></small>
                                                 </div>
                                             </div>                                        
                                         </div>
@@ -82,8 +69,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
-                            <button class="btn btn-primary m-1"><?= lang('App.search'); ?></button>
+                        <div class="px-4 py-3 border-top border-block d-sm-flex justify-content-end">
+                            <button class="btn btn-primary m-1"><i class="bi bi-search ms-2"></i> <?= lang('App.search'); ?></button>
                         </div>
                     </div>
                 </form>
@@ -92,46 +79,49 @@
     </div>
     <!--End::row-1 
     <!--modal to add leaving certificate info-->
-    <div class="modal fade" id="exampleModalLg" tabindex="-1" aria-labelledby="exampleModalLgLabel" aria-hidden="true">
+    <div class="modal fade" id="lc_modal" tabindex="-1" aria-labelledby="lcModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <?= form_open('leavingcertificate/add-lc-info', ['target' => '_blank']); ?>
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="exampleModalLgLabel"><?= lang('App.add'); ?> <?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?> <?= lang('App.information'); ?></h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+            <form method="post" action="" id ="lc_modal_form">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="lcModalLabel"><?= lang('App.add'); ?> <?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?> <?= lang('App.information'); ?></h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
 
-                    <div class="row gy-3">
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                            <label for="examination" class="form-label"><?= lang('App.examination'); ?></label>
-                            <input type="text" class="form-control" name="examination" id="examination" value="S.Y. Civil Engineering" placeholder="<?= lang('App.examination'); ?>" required>
-                            <span class="text-danger"><?= displayError($validation, 'examination') ?></span>
-                        </div>
-
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                            <label for="exam_held_in" class="form-label"><?= lang('App.exam'); ?> <?= lang('App.held'); ?> <?= lang('App.in'); ?></label>
-                            <input type="text" class="form-control" name="exam_held_in" id="exam_held_in" value="Summer Sem Exam 2025" placeholder="<?= lang('App.exam'); ?> <?= lang('App.held'); ?> <?= lang('App.in'); ?>" required>
-                            <span class="text-danger"><?= displayError($validation, 'exam-held-in') ?></span>
-                        </div>
-
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                            <label for="date_of_leaving" class="form-label"><?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?></label>
-                            <div class="input-group">
-                                <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
-                                <input type="text" class="form-control" name="date_of_leaving" id="date_of_leaving" value="2025-06-30" placeholder="<?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?>" required>
-                                <span class="text-danger"><?= displayError($validation, 'date-of-leaving') ?></span>
-
+                        <div class="row gy-3">
+                            <?= csrf_field(); ?>
+                            <input type="hidden" id="yearwise_student_data_id" name="yearwise_student_data_id">
+                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                <label for="examination" class="form-label"><?= lang('App.examination'); ?></label> <span class="text-danger">*</span>
+                                <input type="text" class="form-control" name="examination" id="examination" value="" placeholder="<?= lang('App.examination'); ?>">
+                                <small class="text-danger field-error" id="examination_error"></small>
                             </div>
-                        </div>
-                    </div> 
+
+                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                <label for="exam_period" class="form-label"><?= lang('App.exam'); ?> <?= lang('App.period'); ?> </label> <span class="text-danger">*</span>
+                                <input type="text" class="form-control" name="exam_period" id="exam_period" value="" placeholder="<?= lang('App.exam'); ?> <?= lang('App.period'); ?>">
+                                <small class="text-danger field-error" id="exam_period_error"></small>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                <label for="date_of_leaving" class="form-label"><?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?></label> <span class="text-danger">*</span>
+                                <div class="input-group">
+                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                    <input type="text" class="form-control" name="date_of_leaving" id="date_of_leaving" value="" placeholder="<?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.leaving'); ?>">
+
+                                </div>
+                                <small class="text-danger field-error" id="date_of_leaving_error"></small>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= lang('App.close'); ?></button>
+                        <a href="javascript:void(0);" id="lc_preview_btn" type="button" class="btn btn-warning"><?= lang('App.preview'); ?></a>
+                        <button type="submit" class="btn btn-success"><?= lang('App.submit'); ?></button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= lang('App.close'); ?></button>
-                    <button type="submit" class="btn btn-success"><?= lang('App.submit'); ?></button>
-                </div>
-            </div>
-            <?= form_close(); ?>
+            </form>
         </div>
     </div>
     <!--End::modal-->
@@ -145,72 +135,21 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="lc-student-list" class="table table-bordered text-nowrap w-100">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col"><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
-                                <th scope="col"><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>
-                                <th scope="col"><?= lang('App.mobile'); ?> <?= lang('App.no'); ?></th>
-                                <th scope="col"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
-                                <th scope="col"><?= lang('App.course'); ?></th>
-                                <th scope="col"><?= lang('App.year'); ?></th>
-                                <th scope="col"><?= lang('App.action'); ?></th>
-                            </tr>
-                        </thead>
-                    </table>
-                    <table id="responsiveDataTable" class="table table-bordered text-nowrap w-100">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col"><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
-                                <th scope="col"><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>
-                                <th scope="col"><?= lang('App.mobile'); ?> <?= lang('App.no'); ?></th>
-                                <th scope="col"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
-                                <th scope="col"><?= lang('App.course'); ?></th>
-                                <th scope="col"><?= lang('App.year'); ?></th>
-                                <th scope="col"><?= lang('App.action'); ?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>202610100001</td>
-                                <td>SHINDE NAGESH TUKARAM</td>
-                                <td>9876543210</td>
-                                <td>2025-2026</td>
-                                <td>Civil Engineering</td>
-                                <td>Third Year</td>
-                                <td>
-                                    <button type="button" class="btn btn-warning mb-1" data-bs-toggle="modal" data-bs-target="#exampleModalLg">Add Lc Info</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>202610100002</td>
-                                <td>KALE RAJ AJAY</td>
-                                <td>9876656560</td>
-                                <td>2025-2026</td>
-                                <td>Civil Engineering</td>
-                                <td>Third Year</td>
-                                <td>
-                                    <button type="button" class="btn btn-warning mb-1" data-bs-toggle="modal" data-bs-target="#exampleModalLg">Add Lc Info</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>202610100003</td>
-                                <td>PATIL ANIL SHANKAR</td>
-                                <td>9876543210</td>
-                                <td>2025-2026</td>
-                                <td>Civil Engineering</td>
-                                <td>Third Year</td>
-                                <td>
-                                    <button type="button" class="btn btn-warning mb-1" data-bs-toggle="modal" data-bs-target="#exampleModalLg">Add Lc Info</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table id="lc-student-list" class="table table-bordered text-nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col"><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
+                                    <th scope="col"><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>                               
+                                    <th scope="col"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
+                                    <th scope="col"><?= lang('App.department'); ?></th>
+                                    <th scope="col"><?= lang('App.year'); ?></th>
+                                    <th scope="col"><?= lang('App.generate_lc'); ?></th>
+                                </tr>
+                            </thead>
+                        </table>                    
+                    </div>
                 </div>
             </div>
         </div>

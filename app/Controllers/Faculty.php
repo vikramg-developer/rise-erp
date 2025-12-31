@@ -3,22 +3,22 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\ModelFacultyRegistration;
-use App\Models\ModelBranch;
-use App\Models\ModelRole;
-use App\Models\ModelAcademicYear;
 
 class Faculty extends BaseController {
 
-    public $facultyModel;
-    public $branchModel;
-    public $modelrole;
+    protected $modelfaculty;
+    protected $modelbranch;
+    protected $modelrole;
+    protected $modelrisecounter;
+    protected $db;
 
     public function __construct() {
-        $this->facultyModel = new ModelFacultyRegistration();
-        $this->branchModel = new ModelBranch();
-        $this->modelrole = new ModelRole();
-        $this->modelacademicYear = new ModelAcademicYear();
+        $this->modelfaculty = model('ModelFacultyRegistration');
+        $this->modelbranch = model('ModelBranch');
+        $this->modelrole = model('ModelRole');
+        $this->modelacademicYear = model('ModelAcademicYear');
+        $this->modelrisecounter = model('ModelRiseCounter');
+        $this->db = \Config\Database::connect();
     }
 
     public function index() {
@@ -29,50 +29,72 @@ class Faculty extends BaseController {
 
     public function add_faculty() {
         $post = $this->request->getPost();
+        $academic_year_data = $this->modelacademicYear->getCurrentAcademicYear();
+        $academic_year_id = $academic_year_data['academic_year_id'];
+        $rise_counter_data = $this->modelrisecounter->where(['user_type_id' => 1])->first();
 
-        $insertData = [
-            'faculty_role_id' => clean_number($this->request->getVar('faculty_role_id')),
-            'faculty_first_name' => clean_name($this->request->getVar('faculty_first_name')),
-            'faculty_middle_name' => clean_name($this->request->getVar('faculty_middle_name')),
-            'faculty_last_name' => clean_name($this->request->getVar('faculty_last_name')),
-            'faculty_mobile_number' => $this->request->getVar('faculty_mobile_number'),
-            'faculty_email_id' => clean_email($this->request->getVar('faculty_email_id')),
-            'faculty_aadhar_number' => $this->request->getVar('faculty_aadhar_number'),
-            'faculty_pan_number' => clean_name($this->request->getVar('faculty_pan_number')),
-            'faculty_password' => clean_name($this->request->getVar('faculty_password')),
-            'added_by' => session('rise_no'),
-        ];
+        if ($rise_counter_data == null) {
+            $data = ['user_type_id' => 1,
+                'academic_year_id' => $academic_year_id,
+                'rise_no' => 2
+            ];
+            $this->modelrisecounter->insert($data);
+        }
+        $this->db->transBegin();
 
-        // 2️⃣ MODEL VALIDATION RUNS HERE
-        if (!$this->facultyModel->insert($insertData)) {
+        try {
+            $rise_no_counter = $this->modelrisecounter->get_Faculty_Counter_For_Update();
+
+            $branch = $this->modelbranch->getSingleBranch();
+            $branchCode = $branch['branch_code'] ?? '000';
+            $yearPrefix = substr($academic_year_data['academic_year_name'], 0, 4);
+            $faculty_rise_no = 'F' . $yearPrefix . $branchCode . str_pad($rise_no_counter['rise_no'], 4, '0', STR_PAD_LEFT);
+
+            $insertData = [
+                'faculty_role_id' => clean_number($this->request->getVar('faculty_role_id')),
+                'faculty_first_name' => clean_name($this->request->getVar('faculty_first_name')),
+                'faculty_middle_name' => clean_name($this->request->getVar('faculty_middle_name')),
+                'faculty_last_name' => clean_name($this->request->getVar('faculty_last_name')),
+                'faculty_mobile_number' => clean_number($this->request->getVar('faculty_mobile_number')),
+                'faculty_email_id' => clean_email($this->request->getVar('faculty_email_id')),
+                'faculty_aadhar_number' => clean_number($this->request->getVar('faculty_aadhar_number')),
+                'faculty_pan_number' => clean_name($this->request->getVar('faculty_pan_number')),
+                'faculty_password' => clean_name($this->request->getVar('faculty_password')),
+                'faculty_rise_no' => $faculty_rise_no,
+                'added_by' => session('rise_no'),
+            ];
+
+            if (!$this->modelfaculty->insert($insertData)) {
+                return $this->response->setJSON([
+                            'status' => 'error',
+                            'errors' => $this->modelfaculty->errors(),
+                            'csrfHash' => csrf_hash(),
+                ]);
+            }
+
+            $facultyId = $this->modelfaculty->getInsertID();
+            if ($facultyId) {
+                $update_data = ['rise_no' => ($rise_no_counter['rise_no'] + 1)];
+                $this->modelrisecounter->update($rise_no_counter['rise_number_counter_id'], $update_data);
+            }
+            if ($this->db->transStatus() === false) {
+                throw new\Exception('Registration Failed.');
+            }
+            $this->db->transCommit();
+            return $this->response->setJSON([
+                        'status' => 'success',
+                        'message' => 'Faculty added successfully. ID: ' . $faculty_rise_no,
+                        'csrfHash' => csrf_hash(),
+            ]);
+        } catch (Exception $ex) {
+            $this->db->transRollback();
+
             return $this->response->setJSON([
                         'status' => 'error',
-                        'errors' => $this->facultyModel->errors(),
+                        'message' => 'Registration failed: ',
                         'csrfHash' => csrf_hash(),
             ]);
         }
-        $facultyId = $this->facultyModel->getInsertID();
-
-        // 4️⃣ Generate Rise No
-        $branch = $this->branchModel->getSingleBranch();
-        $branchCode = $branch['branch_code'] ?? '000';
-        $academicYear = $this->modelacademicYear->getCurrentAcademicYear();
-
-        $year = !empty($academicYear['academic_year_name']) ? explode('-', $academicYear['academic_year_name'])[0] : date('Y');
-
-//        $year = explode('-', $this->modelacademicYear->getCurrentYear()['academic_year_name'])[0];
-
-        $riseNo = 'F' . $year . $branchCode . str_pad($facultyId, 4, '0', STR_PAD_LEFT);
-
-        $this->facultyModel->update($facultyId, [
-            'faculty_rise_no' => $riseNo
-        ]);
-
-        return $this->response->setJSON([
-                    'status' => 'success',
-                    'message' => 'Faculty added successfully. ID: ' . $riseNo,
-                    'csrfHash' => csrf_hash(),
-        ]);
     }
 
     public function faculty_data() {
@@ -88,48 +110,139 @@ class Faculty extends BaseController {
         $length = $this->request->getPost('length');
         $search = $this->request->getPost('search')['value'] ?? '';
 
-        // TOTAL RECORDS
-        $recordsTotal = $this->facultyModel->countAll();
+        // TOTAL RECORDS (without search)
+        $recordsTotal = $this->modelfaculty->countAll();
 
-        // FILTERED RECORDS
-        $recordsFiltered = $this->facultyModel->countAllResults(false);
+        // FILTERED RECORDS (with search)
+        $recordsFiltered = $this->modelfaculty->countFiltered($search);
 
-        // PAGINATED DATA
-        $rows = $this->facultyModel
-                ->orderBy('faculty_registration_id', 'DESC')
-                ->findAllRecord($length, $start);
+        // MAIN DATA
+        $rows = $this->modelfaculty->findAllRecord($length, $start, $search);
+
+        // MAP: rise_no => full name
+        $nameMap = $this->modelfaculty->getRiseNoNameMap();
 
         $sr_no = $start + 1;
         $data = [];
 
         foreach ($rows as $row) {
 
-            $buttons = '';
+            /* =====================
+             * ACTION BUTTONS (FIX: INITIALIZED)
+             * ===================== */
+            $buttons = ''; // <<< THIS WAS MISSING (CAUSE OF ERROR)
+            // EDIT
+            if (hasPermission('updateFaculty')) {
 
-            $buttons .= '<a href="' . base_url() . 'faculty/edit-faculty/' . $row['faculty_registration_id'] . '" 
-                        class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill">
-                        <i class="ri-pencil-fill"></i>
-                     </a>';
+                if ($row['is_deleted'] == 1) {
+                    $buttons .= '
+            <a href="javascript:void(0)"
+               class="btn btn-icon btn-sm btn-secondary rounded-pill disabled"
+               data-bs-toggle="tooltip"
+               data-bs-custom-class="tooltip-secondary"
+               title="Faculty is deleted">
+                <i class="ri-pencil-fill"></i>
+            </a>';
+                } else {
+                    $buttons .= '
+            <a href="' . base_url('faculty/edit-faculty/' . $row['faculty_registration_id']) . '"
+               class="btn btn-icon btn-sm btn-secondary rounded-pill"
+               data-bs-toggle="tooltip"
+               data-bs-custom-class="tooltip-secondary"
+               title="Edit">
+                <i class="ri-pencil-fill"></i>
+            </a>';
+                }
+            }
 
-            $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete"
-                        data-id="' . $row['faculty_registration_id'] . '"
-                        data-name="' . $row['faculty_first_name'] . '">
-                        <i class="ri-delete-bin-fill"></i>
-                      </button>';
+            // DELETE / REVERT
+            if (hasPermission('deleteFaculty')) {
 
-            $fullName = $row['faculty_first_name'] . ' ' .
-                    $row['faculty_middle_name'] . ' ' .
-                    $row['faculty_last_name'];
+                if ($row['is_deleted'] == 0 || $row['is_deleted'] == 2) {
+                    $buttons .= '
+            <button class="btn btn-icon btn-sm btn-danger rounded-pill delete"
+                    data-id="' . $row['faculty_registration_id'] . '"
+                    data-name="' . ($nameMap[$row['faculty_rise_no']] ?? '') . '"
+                    data-bs-toggle="tooltip"
+                    data-bs-custom-class="tooltip-danger"
+                    title="Delete">
+                <i class="ri-delete-bin-fill"></i>
+            </button>';
+                }
 
+                if ($row['is_deleted'] == 1) {
+                    $buttons .= '
+            <button class="btn btn-icon btn-sm btn-warning rounded-pill revert"
+                    data-id="' . $row['faculty_registration_id'] . '"
+                    data-name="' . ($nameMap[$row['faculty_rise_no']] ?? '') . '"
+                    data-bs-toggle="tooltip"
+                    data-bs-custom-class="tooltip-warning"
+                    title="Revert">
+                <i class="ri-arrow-go-back-fill"></i>
+            </button>';
+                }
+            }
+
+            /* =====================
+             * ADDED BY
+             * ===================== */
+            $addedBy = '';
+            if (!empty($row['added_by']) && !empty($row['added_at'])) {
+                $addedBy = activityBadge(
+                        'success',
+                        $nameMap[$row['added_by']] ?? '',
+                        $row['added_at']
+                );
+            }
+
+            /* =====================
+             * UPDATED BY
+             * ===================== */
+            $updatedBy = '';
+            if (!empty($row['updated_by']) && !empty($row['updated_at'])) {
+                $updatedBy = activityBadge(
+                        'primary',
+                        $nameMap[$row['updated_by']] ?? '',
+                        $row['updated_at']
+                );
+            }
+
+            /* =====================
+             * DELETE / REVERT REMARK
+             * ===================== */
+            $remark = '';
+            if ($row['is_deleted'] == 1 && !empty($row['deleted_by']) && !empty($row['deleted_at'])) {
+
+                $remark = activityBadge(
+                        'danger',
+                        $nameMap[$row['deleted_by']] ?? '',
+                        $row['deleted_at']
+                );
+            } elseif ($row['is_deleted'] == 2 && !empty($row['deleted_by']) && !empty($row['deleted_at'])) {
+
+                $remark = activityBadge(
+                        'warning',
+                        $nameMap[$row['deleted_by']] ?? '',
+                        $row['deleted_at']
+                );
+            }
+
+            /* =====================
+             * FINAL ROW (UNCHANGED)
+             * ===================== */
             $data[] = [
                 $sr_no++,
+                $buttons,
                 $row['faculty_rise_no'],
-                $fullName,
+                $nameMap[$row['faculty_rise_no']] ?? '',
                 $row['faculty_mobile_number'],
-                $row['faculty_email_id'],
-                $buttons
+                $addedBy,
+                $updatedBy,
+                $remark
             ];
         }
+
+
 
         return $this->response->setJSON([
                     'draw' => intval($draw),
@@ -140,12 +253,13 @@ class Faculty extends BaseController {
         ]);
     }
 
+    //form view(table)  open  
     public function edit_faculty($faculty_id) {
         if ($faculty_id == 1) {
             return redirect()->to('faculty/fetch-faculty');
         }
 
-        $faculty = $this->facultyModel->getFacultyById($faculty_id);
+        $faculty = $this->modelfaculty->getFacultyById($faculty_id);
 
         if (!$faculty) {
             return redirect()->to('faculty/fetch-faculty');
@@ -157,11 +271,12 @@ class Faculty extends BaseController {
         return render_page('faculty/edit-faculty', $data);
     }
 
+    //when save button click on edit faculty
     public function update_faculty() {
         if ($this->request->getMethod() !== 'post') {
             return;
         }
-        
+
         $facultyId = $this->request->getPost('faculty_id');
 
         if (!$facultyId) {
@@ -171,7 +286,7 @@ class Faculty extends BaseController {
                         'csrfHash' => csrf_hash()
             ]);
         }
-        
+
         // Block super admin
         if ($facultyId == 1) {
             return $this->response->setJSON([
@@ -181,7 +296,7 @@ class Faculty extends BaseController {
             ]);
         }
         //Existence check
-        $faculty = $this->facultyModel->getFacultyById($facultyId);
+        $faculty = $this->modelfaculty->getFacultyById($facultyId);
         if (!$faculty) {
             return $this->response->setJSON([
                         'status' => 'invalid',
@@ -190,25 +305,26 @@ class Faculty extends BaseController {
         }
 
         $updateData = [
-            'faculty_role_id'       => clean_number($this->request->getPost('edit_faculty_role_id')),
-            'faculty_first_name'    => clean_name($this->request->getPost('edit_faculty_first_name')),
-            'faculty_middle_name'   => clean_name($this->request->getPost('edit_faculty_middle_name')),
-            'faculty_last_name'     => clean_name($this->request->getPost('edit_faculty_last_name')),
+            'faculty_role_id' => clean_number($this->request->getPost('edit_faculty_role_id')),
+            'faculty_first_name' => clean_name($this->request->getPost('edit_faculty_first_name')),
+            'faculty_middle_name' => clean_name($this->request->getPost('edit_faculty_middle_name')),
+            'faculty_last_name' => clean_name($this->request->getPost('edit_faculty_last_name')),
             'faculty_mobile_number' => clean_number($this->request->getPost('edit_faculty_mobile_number')),
-            'faculty_email_id'      => clean_email($this->request->getPost('edit_faculty_email_id')),
+            'faculty_email_id' => clean_email($this->request->getPost('edit_faculty_email_id')),
             'faculty_aadhar_number' => clean_number($this->request->getPost('edit_faculty_aadhar_number')),
-            'faculty_pan_number'    => clean_name($this->request->getPost('edit_faculty_pan_number')),
-            'updated_by'            => session('rise_no'),
+            'faculty_pan_number' => clean_name($this->request->getPost('edit_faculty_pan_number')),
+            'faculty_status' => clean_number($this->request->getPost('edit_faculty_status_id')),
+            'updated_by' => session('rise_no'),
         ];
 
-        $this->facultyModel->setValidationRules(
-                $this->facultyModel->rulesForUpdate($facultyId)
+        $this->modelfaculty->setValidationRules(
+                $this->modelfaculty->rulesForUpdate($facultyId)
         );
 
-        if (!$this->facultyModel->update($facultyId, $updateData)) {
+        if (!$this->modelfaculty->update($facultyId, $updateData)) {
             return $this->response->setJSON([
                         'status' => 'error',
-                        'errors' => $this->facultyModel->errors(),
+                        'errors' => $this->modelfaculty->errors(),
                         'csrfHash' => csrf_hash()
             ]);
         }
@@ -221,5 +337,35 @@ class Faculty extends BaseController {
                     'message' => 'Faculty ' . $fullName . ' updated successfully',
                     'csrfHash' => csrf_hash()
         ]);
+    }
+
+    public function delete_faculty() {
+        $faculty_id = $this->request->getPost('faculty_registration_id');
+
+        $delete_data = [
+            'is_deleted' => 1,
+            'deleted_by' => current_user()
+        ];
+
+        if ($this->modelfaculty->update($faculty_id, $delete_data)) {
+            return $this->response->setJSON([
+                        'csrfHash' => csrf_hash()
+            ]);
+        }
+    }
+
+    public function revert_faculty() {
+        $faculty_id = $this->request->getPost('faculty_registration_id');
+
+        $revert_data = [
+            'is_deleted' => 2,
+            'deleted_by' => current_user()
+        ];
+
+        if ($this->modelfaculty->update($faculty_id, $revert_data)) {
+            return $this->response->setJSON([
+                        'csrfHash' => csrf_hash()
+            ]);
+        }
     }
 }

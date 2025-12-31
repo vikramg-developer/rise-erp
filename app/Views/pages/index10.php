@@ -1,13 +1,5 @@
 
-<?= $this->extend('layouts/main'); ?>
 
-<?= $this->section('styles'); ?>
-
-
-
-<?= $this->endSection('styles'); ?>
-
-<?= $this->section('content'); ?>
 
                     <div class="container-fluid">
 

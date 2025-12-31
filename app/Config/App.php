@@ -216,7 +216,7 @@ class App extends BaseConfig
      *
      * @deprecated use Config\Session::$timeToUpdate instead.
      */
-    public int $sessionTimeToUpdate = 300;
+    public int $sessionTimeToUpdate = 1800;
 
     /**
      * --------------------------------------------------------------------------
