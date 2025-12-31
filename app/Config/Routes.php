@@ -74,6 +74,8 @@ $routes->get('/student-dashboard', 'Login::studentDashboard');
 $routes->get('/studentDashboard', 'Login::studentDashboard');
 $routes->post('/studentProfile', 'Registration::studentProfile');
 $routes->post('/student-list', 'FeesManagement::student_list');
+$routes->get('approve-registration', 'ApproveRegistration::index',['filter' => 'permission:viewApproveRegistration']);
+ $routes->post('fetch-registrationstudent', 'ApproveRegistration::fetch_registrationstudent', ['filter' => 'permission:createApproveRegistration']);
 
 $routes->group('leavingcertificate', function ($routes) {
     $routes->get('/', 'LeavingCertificate::index', ['filter' => 'permission:createFeesManagement']);

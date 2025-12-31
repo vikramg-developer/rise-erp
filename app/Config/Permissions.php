@@ -119,6 +119,13 @@ class Permissions extends BaseConfig {
         'updateFacultyProfile',
         'deleteFacultyProfile',
     ];
+     /** Student Approve permissions */
+    public array $approveRegistration = [
+        'createApproveRegistration',
+        'viewApproveRegistration',
+        'updateApproveRegistration',
+        'deleteApproveRegistration',
+    ];
 
     /** ticket permissions */
     public array $Ticket = [
