@@ -113,14 +113,14 @@ $permissions = config('Permissions');
 
                                                 <!--============================== Dashboard End ===================================-->
                                                 <!--============================== Registration Admin site Start ===================================-->
-                                               <?php if (hasAnyPermission($permissions->approveRegistration)): ?>
+                                                <?php if (hasAnyPermission($permissions->approveRegistration)): ?>
                                                     <li class="slide">
                                                         <a href="<?php echo base_url('approve-registration'); ?>" class="side-menu__item">
                                                             <i class="bx bx-user side-menu__icon"></i>
                                                             <span class="side-menu__label"><?= lang('App.approve'); ?> <?= lang('App.registration'); ?></span>
                                                         </a>
                                                     </li>
-                                                <?php  endif; ?>
+                                                <?php endif; ?>
                                                 <!--============================== Registration Admin site End ===================================-->
                                                 <!-- Start::slide__category -->
                                                 <li class="slide__category"><span class="category-name">Student</span></li>
@@ -169,29 +169,42 @@ $permissions = config('Permissions');
                                                 <li class="slide__category"><span class="category-name">Pages</span></li>
                                                 <!-- End::slide__category -->
 
+                                                <!--========================= Certificates Module Start =========================-->
+
+                                                <?php if (hasAnyPermission($permissions->certificates_category)): ?>
+                                                    <li class="slide__category"><span class="category-name"><?= lang('App.certificate'); ?>s</span></li>
+                                                <?php endif; ?>
                                                 <!-- Start::slide -->
-                                                <li class="slide has-sub">
-                                                    <a href="javascript:void(0);" class="side-menu__item">
-                                                        <i class="bx bx-medal side-menu__icon"></i>
-                                                        <span class="side-menu__label"><?= lang('App.certificate'); ?>s</span>
-                                                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                                                    </a>
-                                                    <ul class="slide-menu child1">
-                                                        <li class="slide side-menu__label1">
-                                                            <a href="javascript:void(0)"><?= lang('App.certificate'); ?></a>
-                                                        </li>
-                                                        <li class="slide">
-                                                            <a href="<?php echo base_url('leavingcertificate'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?></a>
-                                                        </li>
-                                                        <li class="slide">
-                                                            <a href="<?php echo base_url('leavingcertificate/leaving-certificate-report'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?> <?= lang('App.report'); ?></a>
-                                                        </li>
-                                                        <li class="slide">
-                                                            <a href="<?php echo base_url('bonafidecertificate'); ?>" class="side-menu__item"><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <!-- End::slide -->
+
+                                                <?php if (hasAnyPermission($permissions->certificates)): ?>
+                                                    <li class="slide has-sub">
+                                                        <a href="javascript:void(0);" class="side-menu__item">
+                                                            <i class="bx bx-medal side-menu__icon"></i>
+                                                            <span class="side-menu__label"><?= lang('App.certificate'); ?>s</span>
+                                                            <i class="fe fe-chevron-right side-menu__angle"></i>
+                                                        </a>
+                                                        <ul class="slide-menu child1">
+                                                            <li class="slide side-menu__label1">
+                                                                <a href="javascript:void(0)"><?= lang('App.certificate'); ?></a>
+                                                            </li>
+                                                            <?php if (hasAnyPermission($permissions->leaving_certificate)): ?>
+                                                                <li class="slide">
+                                                                    <a href="<?php echo base_url('leavingcertificate'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?></a>
+                                                                </li>
+
+                                                                <li class="slide">
+                                                                    <a href="<?php echo base_url('leavingcertificate/leaving-certificate-report'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?> <?= lang('App.report'); ?></a>
+                                                                </li>
+                                                            <?php endif; ?>
+                                                            <?php if (hasAnyPermission($permissions->bonafide_certificate)): ?>
+                                                                <li class="slide">
+                                                                    <a href="<?php echo base_url('bonafidecertificate'); ?>" class="side-menu__item"><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
+                                                                </li>
+                                                            <?php endif; ?>
+                                                        </ul>
+                                                    </li>
+                                                <?php endif; ?>
+                                                <!--===========================================Certificates Module End ================================== -->
 
 
                                                 <!--=============================================Faculty Profile Start==============================================-->

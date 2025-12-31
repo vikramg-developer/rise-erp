@@ -27,10 +27,14 @@ class Database extends Config
     
     public array $default = [
         'DSN'      => '',
-        'hostname' => 'localhost',
-        'username' => 'root',
-        'password' => '',
-        'database' => 'rise',
+//        'hostname' => 'localhost',
+//        'username' => 'root',
+//        'password' => '',
+//        'database' => 'rise',
+       'hostname' => '103.133.214.177',
+        'username' => 'rayatedu_rise',
+        'password' => 'Rise@2025',
+        'database' => 'rayatedu_rise',
 //        'hostname' => '192.168.1.247',
 //        'username' => 'riseuser',
 //        'password' => 'Rise@2025',

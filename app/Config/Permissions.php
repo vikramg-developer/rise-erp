@@ -111,15 +111,16 @@ class Permissions extends BaseConfig {
         'updateFaculty',
         'deleteFaculty',
     ];
-    
-     /** Faculty Profile */
+
+    /** Faculty Profile */
     public array $faculty_profile = [
         'createFacultyProfile',
         'viewFacultyProfile',
         'updateFacultyProfile',
         'deleteFacultyProfile',
     ];
-     /** Student Approve permissions */
+
+    /** Student Approve permissions */
     public array $approveRegistration = [
         'createApproveRegistration',
         'viewApproveRegistration',
@@ -135,6 +136,22 @@ class Permissions extends BaseConfig {
         'deleteTicket'
     ];
 
+    /** leaving certificate permissions */
+    public array $leaving_certificate = [
+        'createLeavingCertificate',
+        'updateLeavingCertificate',
+        'viewLeavingCertificate',
+        'deleteLeavingCertificate'
+    ];
+
+    /** bonafide certificate permissions */
+    public array $bonafide_certificate = [
+        'createBonafideCertificate',
+        'updateBonafideCertificate',
+        'viewBonafideCertificate',
+        'deleteBonafideCertificate'
+    ];
+
     /** Master permissions (auto-merged) */
     public array $master;
     public array $master_dashboard;
@@ -147,6 +164,8 @@ class Permissions extends BaseConfig {
     public array $faculty_profile_module_category;
     public array $ticket_module;
     public array $ticket_module_category;
+    public array $certificates;
+    public array $certificates_category;
 
     public function __construct() {
         //-----------for submenu -------------------//
@@ -167,19 +186,23 @@ class Permissions extends BaseConfig {
         $this->feedback_module = array_merge(
                 $this->feedback
         );
-        
+
         //Faculty Registation (user)
         $this->faculty_module = array_merge(
                 $this->faculty_registration
         );
-        
+
         //faculty profile(API)
         $this->faculty_profile_module = array_merge(
                 $this->faculty_profile
         );
-        
+
         $this->ticket_module = array_merge(
                 $this->Ticket
+        );
+        $this->certificates = array_merge(
+                $this->leaving_certificate,
+                $this->bonafide_certificate,
         );
 
         //---------------------------Main Menu Label---------------------------//
@@ -197,14 +220,18 @@ class Permissions extends BaseConfig {
         $this->faculty_module_category = array_merge(
                 $this->faculty_module
         );
-        
+
         //Faculty Regiatration
         $this->faculty_profile_module_category = array_merge(
                 $this->faculty_profile_module
         );
-         //Ticket
-         $this->ticket_module_category = array_merge(
+        //Ticket
+        $this->ticket_module_category = array_merge(
                 $this->ticket_module
+        );
+
+        $this->certificates_category = array_merge(
+                $this->certificates
         );
     }
 }
