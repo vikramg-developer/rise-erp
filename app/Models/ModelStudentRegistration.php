@@ -19,7 +19,7 @@ class ModelStudentRegistration extends Model {
     protected $returnType = 'array';
 //    protected $useSoftDeletes = true;
 //
-    protected $allowedFields = ['student_rise_no', 'student_role_id', 'student_first_name', 'student_middle_name', 'student_last_name', 'student_aadhar_number', 'student_password',];
+    protected $allowedFields = ['student_rise_no', 'student_role_id', 'student_first_name', 'student_middle_name', 'student_last_name', 'student_aadhar_number', 'student_password','approval_status',];
 //
     protected bool $allowEmptyInserts = false;
 //    protected bool $updateOnlyChanged = true;
@@ -99,8 +99,16 @@ class ModelStudentRegistration extends Model {
         $builder = $this->builder()
                 ->orderBy('student_registration_id', 'ASC');
 
-        if (!empty($search)) {
-            $builder->like('student_rise_no', $search);
+//        if (!empty($search)) {
+//            $builder->like('student_rise_no', $search);
+//        }
+          if (!empty($search)) {
+            $builder->groupStart()
+                    ->like('student_rise_no', $search)
+                    ->orLike('student_first_name', $search)
+                    ->orLike('student_middle_name', $search)
+                    ->orLike('student_last_name', $search)
+                    ->groupEnd();
         }
 
         return $builder->get($length, $start)->getResultArray();

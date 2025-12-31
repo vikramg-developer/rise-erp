@@ -77,3 +77,42 @@ function errorRevert() {
             'error'
             );
 }
+
+function confirmApprove(message) {
+    return swalWithBootstrapButtons.fire({
+        title: 'Are you sure you want to Approve '+message+" ?",
+        text: "You will be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Approve it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+    });
+}
+function successApprove(message) {
+    swalWithBootstrapButtons.fire(
+            message+' Approved!',
+            'Your record has been Approved.',
+            'success'
+            );
+}
+
+function confirmReject(message) {
+    return swalWithBootstrapButtons.fire({
+        title: 'Are you sure you want to Reject '+message+" ?",
+        text: "You will be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Reject it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+    });
+    
+}
+function successReject(message) {
+    swalWithBootstrapButtons.fire(
+            message+' Rejected!',
+            'Your record has been Rejected.',
+            'success'
+            );
+}

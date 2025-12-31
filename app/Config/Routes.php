@@ -52,7 +52,7 @@ $routes->post('/add-group', 'Group::add-group');
 
 $routes->post('/bonafide-certificate', 'BonafideCertificate::index');
 $routes->post('/bonafide-print', 'BonafideCertificate::bonafide_print');
-$routes->post('/collect-fees', 'FeesManagement::collect_fees');
+$routes->get('/collect-fees', 'FeesManagement::collect_fees');
 
 $routes->post('/fetch-head', 'FeesManagement::fetch-head');
 $routes->post('/head', 'FeesManagement::head');
@@ -73,9 +73,11 @@ $routes->post('/savesignup', 'Registration::saveSignup');
 $routes->get('/student-dashboard', 'Login::studentDashboard');
 $routes->get('/studentDashboard', 'Login::studentDashboard');
 $routes->post('/studentProfile', 'Registration::studentProfile');
-$routes->post('/student-list', 'FeesManagement::student_list');
+$routes->get('/student-list', 'FeesManagement::student_list');
 $routes->get('approve-registration', 'ApproveRegistration::index',['filter' => 'permission:viewApproveRegistration']);
  $routes->post('fetch-registrationstudent', 'ApproveRegistration::fetch_registrationstudent', ['filter' => 'permission:createApproveRegistration']);
+    $routes->post('approve-student', 'ApproveRegistration::approve_student', ['filter' => 'permission:updateApproveRegistration']);
+    $routes->post('reject-student', 'ApproveRegistration::reject_student', ['filter' => 'permission:updateApproveRegistration']);
 
 $routes->group('leavingcertificate', function ($routes) {
     $routes->get('/', 'LeavingCertificate::index', ['filter' => 'permission:createFeesManagement']);
@@ -88,6 +90,14 @@ $routes->group('leavingcertificate', function ($routes) {
     $routes->post('fetch-lc-report', 'LeavingCertificateReport::fetch_lc_report', ['filter' => 'permission:createFeesManagement']);
     $routes->get('print-lc', 'LeavingCertificateReport::print_lc', ['filter' => 'permission:createFeesManagement']);
     $routes->post('cancel-lc', 'LeavingCertificateReport::cancel_lc', ['filter' => 'permission:createFeesManagement']);
+});
+
+$routes->group('bonafidecertificate', function ($routes) {
+    $routes->get('/', 'BonafideCertificate::index', ['filter' => 'permission:createFeesManagement']);
+    $routes->post('fetch-bonafide-student-list', 'BonafideCertificate::fetch_bonafide_student_list', ['filter' => 'permission:createFeesManagement']);
+    $routes->post('add-bonafide-certificate', 'BonafideCertificate::add_bonafide_certificate', ['filter' => 'permission:createFeesManagement']);
+    $routes->get('print-bonafide-certificate', 'BonafideCertificate::print_bonafide_certificate', ['filter' => 'permission:createFeesManagement']);
+    
 });
 
 //---------- feedback ----------//
