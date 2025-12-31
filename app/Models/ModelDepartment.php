@@ -85,4 +85,8 @@ class ModelDepartment extends Model {
             'department_name' => "required|alpha_numeric_punct|is_unique[department.department_name,department_id,{$id}]",
         ];
     }
+    
+    public function get_departments(){
+        return $this->where('is_deleted', 0)->findAll();
+    }
 }

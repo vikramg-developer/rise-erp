@@ -92,6 +92,14 @@ $routes->group('leavingcertificate', function ($routes) {
     $routes->post('cancel-lc', 'LeavingCertificateReport::cancel_lc', ['filter' => 'permission:createFeesManagement']);
 });
 
+$routes->group('bonafidecertificate', function ($routes) {
+    $routes->get('/', 'BonafideCertificate::index', ['filter' => 'permission:createFeesManagement']);
+    $routes->post('fetch-bonafide-student-list', 'BonafideCertificate::fetch_bonafide_student_list', ['filter' => 'permission:createFeesManagement']);
+    $routes->post('add-bonafide-certificate', 'BonafideCertificate::add_bonafide_certificate', ['filter' => 'permission:createFeesManagement']);
+    $routes->get('print-bonafide-certificate', 'BonafideCertificate::print_bonafide_certificate', ['filter' => 'permission:createFeesManagement']);
+    
+});
+
 //---------- feedback ----------//
 $routes->group('feedback', function ($routes) {
     $routes->get('/', 'Feedback::index', ['filter' => 'permission:createFeedback']);

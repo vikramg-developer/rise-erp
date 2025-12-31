@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use \App\Traits\ActivityLoggerTrait;
 
 class ModelLeavingCertificate extends Model {
 
+    use ActivityLoggerTrait;
+    
     protected $table = 'leaving_certificate';
     protected $primaryKey = 'leaving_certificate_id';
     protected $useAutoIncrement = true;
@@ -24,7 +27,7 @@ class ModelLeavingCertificate extends Model {
         'added_at',
         'is_deleted'
     ];
-//    =====================================Generate Leaving Certificate===================================
+/* ===================================Leaving Certificate Start=================================*/
     // Validation Rules (Optional - add later if required)
     protected $validationRules = [
         'examination' => 'required',
@@ -42,6 +45,11 @@ class ModelLeavingCertificate extends Model {
             'required' => 'Date of Leaving field is required'
         ]
     ];
+    
+    // Callbacks
+    protected $beforeUpdate = ['setUpdateOrDeleteDate', 'captureOldData'];
+    protected $afterInsert = ['logInsert'];
+    protected $afterUpdate = ['logUpdate'];
 
     /* ====================== Resusable function==================== */
 
@@ -49,8 +57,9 @@ class ModelLeavingCertificate extends Model {
         return $this->where(['yearwise_student_data_id'=> $ysd_id,'is_cancelled'=>0])->findAll();
     }
 
-//    --------------------------------------end leaving certificate-----------------------------------
-//    =======================================Leaving Certificate Report================================
+/* =======================================Leaving Certificate End==================================*/
+    
+/* =======================================Leaving Certificate Report================================*/
 
     /* ==================BASE QUERY (LIST + COUNT)==================== */
 

@@ -67,7 +67,7 @@ class ModelYearwiseStudentData extends Model {
 
     /* ====================================DATATABLE DATA (PAGINATED)============================= */
 
-    public function get_lc_student_list($filters, $limit, $offset, $search) {
+    public function get_yearwise_student_list($filters, $limit, $offset, $search) {
         $builder = $this->baseQuery($filters)->orderBy('sr.student_rise_no', 'ASC');
         if (!empty($search)) {
             $builder->groupStart()
@@ -114,7 +114,27 @@ class ModelYearwiseStudentData extends Model {
                 sr.student_rise_no,sr.student_first_name,
                 sr.student_middle_name,sr.student_last_name,
                 dept.department_name,yr.year_name,aca.academic_year_name,spi.student_general_register_no,
-                student_birthdate
+                spi.student_birthdate
+            ')
+            ->join('student_registration sr', 'sr.student_registration_id = ysd.student_registration_id AND sr.is_deleted=0', 'left')
+            ->join('student_personal_info spi', 'spi.student_registration_id = ysd.student_registration_id AND spi.is_deleted=0', 'left')
+            ->join('department dept', 'dept.department_id = ysd.department_id AND dept.is_deleted=0', 'left')
+            ->join('year yr', 'yr.year_id = ysd.year_id AND yr.is_deleted=0', 'left')
+            ->join('academic_year aca', 'aca.academic_year_id = ysd.academic_year_id AND aca.is_deleted=0', 'left')
+            ->where('ysd.yearwise_student_data_id', $yearwise_student_data_id)
+            ->where('ysd.is_deleted', 0)
+            ->get()
+            ->getRowArray();
+    }
+    
+    public function get_student_data_for_bonafide(int $yearwise_student_data_id): array
+    {
+        return $this->db->table('yearwise_student_data AS ysd')
+            ->select('
+                sr.student_rise_no,sr.student_first_name,
+                sr.student_middle_name,sr.student_last_name,
+                dept.department_name,yr.year_name,aca.academic_year_name,spi.student_general_register_no,
+                spi.student_birthdate
             ')
             ->join('student_registration sr', 'sr.student_registration_id = ysd.student_registration_id AND sr.is_deleted=0', 'left')
             ->join('student_personal_info spi', 'spi.student_registration_id = ysd.student_registration_id AND spi.is_deleted=0', 'left')

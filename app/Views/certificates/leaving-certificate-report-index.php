@@ -36,7 +36,7 @@
                                                 </div> 
 
                                                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                                                    <label for="to_date" class="form-label"><?= lang('App.to'); ?> <?= lang('App.date'); ?></label>
+                                                    <label for="to_date" class="form-label"><?= lang('App.to_date'); ?></label>
                                                     <div class="input-group">
                                                         <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
                                                         <input type="text" class="form-control" name="to_date" id="to_date" placeholder="<?= lang('App.to'); ?> <?= lang('App.date'); ?>">

@@ -20,7 +20,7 @@ class LeavingCertificate extends BaseController {
         $this->modelyear = model('ModelYear');
         $this->modeldepartment = model('ModelDepartment');
         $this->modelleavingcertificatecounter = model('ModelLeavingCertificateCounter');
-        $this->db = \Config\Database::connect();
+//        $this->db = \Config\Database::connect();
     }
 
     public function index() {
@@ -28,7 +28,7 @@ class LeavingCertificate extends BaseController {
         $data['title'] = lang('App.rise') . "-" . lang('App.leaving') . " " . lang('App.certificate');
         $data['academic_year'] = $this->modelacademicyear->get_active_academic_years();
         $data['years'] = $this->modelyear->get_years();
-        $data['departments'] = $this->modeldepartment->findAll();
+        $data['departments'] = $this->modeldepartment->get_departments();
         return render_page('certificates/leaving-certificate-index', $data);
     }
 
@@ -64,7 +64,7 @@ class LeavingCertificate extends BaseController {
             ];
 
             // Data rows (paginated + searched)
-            $students = $this->modelyearwisestudentdata->get_lc_student_list($filters, $length, $start, $search);
+            $students = $this->modelyearwisestudentdata->get_yearwise_student_list($filters, $length, $start, $search);
 
             // Single count (search-aware)
             $count_filter = $this->modelyearwisestudentdata->count_filter_results($filters, $search);
