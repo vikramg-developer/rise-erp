@@ -24,6 +24,93 @@ $(document).ready(function () {
 
 
 
+
+
+$(document).on("click", ".approve", function () {
+
+    let student_rise_no = $(this).data("student_rise_no");
+    let student_name    = $(this).data("student_name");
+
+    // SAME confirm function (reuse)
+    confirmApprove(student_name, 'reject').then(result => {
+
+        if (result.isConfirmed) {
+
+            $.ajax({
+                url: BASE_URL + "approve-student",   // 🔁 changed URL
+                type: "POST",
+                data: {
+                    student_rise_no: student_rise_no, // 🔁 changed param
+                    [csrfName]: csrfHash
+                },
+                dataType: "json",
+
+                success: res => {
+                    csrfHash = res.csrfHash;
+
+                    // SAME success function
+                    successApprove(student_name, 'approve');
+
+                    table.settings()[0].ajax.data = d => {
+                        d[csrfName] = csrfHash;
+                    };
+                    table.ajax.reload(null, false);
+                },
+
+                error: () => {
+                    errorDelete();
+                }
+            });
+
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            cancelDelete(student_name);
+        }
+    });
+});
+
+$(document).on("click", ".reject", function () {
+
+    let student_rise_no = $(this).data("student_rise_no");
+    let student_name    = $(this).data("student_name");
+
+    // SAME confirm function (reuse)
+    confirmReject(student_name, 'reject').then(result => {
+
+        if (result.isConfirmed) {
+
+            $.ajax({
+                url: BASE_URL + "reject-student",   // 🔁 changed URL
+                type: "POST",
+                data: {
+                    student_rise_no: student_rise_no, // 🔁 changed param
+                    [csrfName]: csrfHash
+                },
+                dataType: "json",
+
+                success: res => {
+                    csrfHash = res.csrfHash;
+
+                    // SAME success function
+                    successReject(student_name, 'rejected');
+
+                    table.settings()[0].ajax.data = d => {
+                        d[csrfName] = csrfHash;
+                    };
+                    table.ajax.reload(null, false);
+                },
+
+                error: () => {
+                    errorDelete();
+                }
+            });
+
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            cancelDelete(student_name);
+        }
+    });
+});
+
+
 //$(document).on("click", ".revert", function () {
 //    let head_id = $(this).data("head_id");
 //    let head_name = $(this).data("head_name");

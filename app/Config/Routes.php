@@ -52,7 +52,7 @@ $routes->post('/add-group', 'Group::add-group');
 
 $routes->post('/bonafide-certificate', 'BonafideCertificate::index');
 $routes->post('/bonafide-print', 'BonafideCertificate::bonafide_print');
-$routes->post('/collect-fees', 'FeesManagement::collect_fees');
+$routes->get('/collect-fees', 'FeesManagement::collect_fees');
 
 $routes->post('/fetch-head', 'FeesManagement::fetch-head');
 $routes->post('/head', 'FeesManagement::head');
@@ -73,9 +73,11 @@ $routes->post('/savesignup', 'Registration::saveSignup');
 $routes->get('/student-dashboard', 'Login::studentDashboard');
 $routes->get('/studentDashboard', 'Login::studentDashboard');
 $routes->post('/studentProfile', 'Registration::studentProfile');
-$routes->post('/student-list', 'FeesManagement::student_list');
+$routes->get('/student-list', 'FeesManagement::student_list');
 $routes->get('approve-registration', 'ApproveRegistration::index',['filter' => 'permission:viewApproveRegistration']);
  $routes->post('fetch-registrationstudent', 'ApproveRegistration::fetch_registrationstudent', ['filter' => 'permission:createApproveRegistration']);
+    $routes->post('approve-student', 'ApproveRegistration::approve_student', ['filter' => 'permission:updateApproveRegistration']);
+    $routes->post('reject-student', 'ApproveRegistration::reject_student', ['filter' => 'permission:updateApproveRegistration']);
 
 $routes->group('leavingcertificate', function ($routes) {
     $routes->get('/', 'LeavingCertificate::index', ['filter' => 'permission:createFeesManagement']);
