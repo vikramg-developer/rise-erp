@@ -20,7 +20,7 @@ class AddAcademicYearTable extends Migration
                 'constraint' => '50',
                 'null' => false
             ],
-             'is_current' => [
+            'is_current' => [
                 'type' => 'tinyint',
                 'constraint' => '1'
             ],
@@ -41,12 +41,20 @@ class AddAcademicYearTable extends Migration
             'updated_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
-                'null' => false
+                'null' => true
             ],
             'updated_at' => [
                 'type' => 'timestamp',
                 'null' => true,
-                'default' => new Rawsql('NULL ON UPDATE CURRENT_TIMESTAMP'),
+            ],
+            'deleted_by' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => true
+            ],
+            'deleted_at' => [
+                'type' => 'timestamp',
+                'null' => true,
             ],
             'is_deleted' => [
                 'type' => 'tinyint',

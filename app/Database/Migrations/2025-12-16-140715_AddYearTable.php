@@ -33,12 +33,20 @@ class AddYearTable extends Migration
             'updated_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
-                'null' => false
+                'null' => true
             ],
             'updated_at' => [
                 'type' => 'timestamp',
-                'null' => false,
-                'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+                'null' => true,
+            ],
+            'deleted_by' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => true
+            ],
+            'deleted_at' => [
+                'type' => 'timestamp',
+                'null' => true,
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
@@ -47,6 +55,7 @@ class AddYearTable extends Migration
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('year_id');
+        $this->forge->addUniqueKey('year_name');
         $this->forge->createTable('year');
     }
 
