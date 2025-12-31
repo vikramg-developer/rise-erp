@@ -37,6 +37,19 @@ if (!function_exists('actionButton')) {
             $tooltip_class = 'tooltip-warning';
             $icon = '<i class="ri-arrow-go-back-fill"></i>';
         }
+        else if ($title === 'Approve') {
+            $func = 'approve';
+            $btn_class = 'btn-success';
+            $tooltip_class = 'tooltip-success';
+            $icon = '<i class="ri-check-line"></i>';
+        }
+        else if ($title === 'Reject') {
+            $func = 'reject';
+            $btn_class = 'btn-danger';
+            $tooltip_class = 'tooltip-danger';
+            $icon = '<i class="ri-close-fill"></i>';
+        }
+        
 
         $attributes = '';
 
@@ -68,6 +81,16 @@ if (!function_exists('actionHrefButton')) {
             $btn_class = 'btn-warning';
             $tooltip_class = 'tooltip-warning';
             $icon = '<i class="ri-arrow-go-back-fill"></i>';
+        }
+        else if ($title === 'Approve') {
+            $btn_class = 'btn-success';
+            $tooltip_class = 'tooltip-success';
+            $icon = '<i class="ri-check-line"></i>';
+        }
+        else if ($title === 'Reject') {
+            $btn_class = 'btn-danger';
+            $tooltip_class = 'tooltip-danger';
+            $icon = '<i class="ri-close-fill"></i>';
         }
 
         return '<a href="' . $href . '" class="btn btn-icon btn-sm ' . $btn_class . ' btn-wave rounded-pill" '

@@ -5,7 +5,7 @@ namespace App\Controllers;
 /**
  * Description of ApproveRegistration
  *
- * @author SDC01
+ * @author Sonal
  */
 class ApproveRegistration extends BaseController {
 
@@ -16,13 +16,12 @@ class ApproveRegistration extends BaseController {
     }
 
     public function index() {
-                $data['jspath'] = 'registration/approve-registration';
+        $data['jspath'] = 'registration/approve-registration';
         $data['title'] = lang('App.rise') . "-" . lang('App.approve') . " " . lang('App.registration');
-                return render_page('registration/approve-registration',$data);
-
-        
+        return render_page('registration/approve-registration', $data);
     }
-      public function fetch_registrationstudent() {
+
+    public function fetch_registrationstudent() {
 
         $draw = $this->request->getPost('draw');
         $start = $this->request->getPost('start');
@@ -38,27 +37,27 @@ class ApproveRegistration extends BaseController {
         // DATA
         $rows = $this->modelstudentregistration->getFilteredData($length, $start, $search);
 
-//        $facultyNameMap = $nameMap = $this->modelfacultyregistration->getRiseNoNameMap();
-
         $sr_no = 1;
 
         $data = [];
         foreach ($rows as $row) {
             $buttons = '';
-
-            // Edit Button
             
-   
-
+            $student_name = $row['student_first_name'] . " " . $row['student_middle_name'] . " " . $row['student_last_name'];
+            // Approve Button
+            $buttons .= actionButton('Approve', ['student_rise_no' => $row['student_rise_no'], 'student_name' => $student_name]);
+            // Reject Button
+            $buttons .= actionButton('Reject', ['student_rise_no' => $row['student_rise_no'], 'student_name' => $student_name]);
+            $student_name_link = '<a data-bs-toggle="offcanvas"href="#offcanvasExample"data-student-rise="' . $row['student_rise_no'] . '""data-student-name="' . $student_name . '"class="text-primary fw-semibold studentDetails"role="button">'. $student_name .'</a>';
             $data[] = [
                 $sr_no++,
                 $row['student_rise_no'],
-                $row['student_last_name']." ".$row['student_first_name']." ".$row['student_middle_name'],
+                $student_name_link,
                 'BA',
                 'FirstYear',
                 '2025-2026',
-                '2025-2026',
-                '2025-2026',
+                '',
+                $buttons,
             ];
         }
 
@@ -71,5 +70,25 @@ class ApproveRegistration extends BaseController {
         ]);
     }
 
-    
+    // Approve Student
+    public function approve_student() {
+        $student_rise_no = $this->request->getPost('student_rise_no');
+
+        if ($this->modelstudentregistration->where('student_rise_no', $student_rise_no)->set('approval_status', "approved")->update()) {
+            return $this->response->setJSON([
+                        'csrfHash' => csrf_hash()
+            ]);
+        }
+    }
+
+    // Reject Student
+    public function reject_student() {
+        $student_rise_no = $this->request->getPost('student_rise_no');
+
+        if ($this->modelstudentregistration->where('student_rise_no', $student_rise_no)->set('approval_status', "rejected")->update()) {
+            return $this->response->setJSON([
+                        'csrfHash' => csrf_hash()
+            ]);
+        }
+    }
 }
