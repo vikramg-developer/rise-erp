@@ -3,53 +3,48 @@ let reloadAfterLC = false;
 $("#fetch_lc_student").on("submit", function (e) {
 
     e.preventDefault();
-    if(!table){
-    table = $('#lc-student-list').DataTable({
-        processing: true,
-        serverSide: true,
+    if (!table) {
+        table = $('#lc-student-list').DataTable({
+            processing: true,
+            serverSide: true,
 //        destroy: true,
 
-        ajax: {
-            url: BASE_URL + "leavingcertificate/fetch-lc-student-list",
-            type: "POST",
-            data: function (d) {
-                d[csrfName] = csrfHash; // ALWAYS send current token
-                d.department_id = $('#department_id').val();
-                d.year_id = $('#year_id').val();
-                d.academic_year_id = $('#academic_year_id').val();
-            },
-            dataSrc: function (json) {
-                csrfHash = json.csrfHash;
+            ajax: {
+                url: BASE_URL + "leavingcertificate/fetch-lc-student-list",
+                type: "POST",
+                data: function (d) {
+                    d[csrfName] = csrfHash; // ALWAYS send current token
+                    d.department_id = $('#department_id').val();
+                    d.year_id = $('#year_id').val();
+                    d.academic_year_id = $('#academic_year_id').val();
+                },
+                dataSrc: function (json) {
+                    csrfHash = json.csrfHash;
 
-                // clear old errors
-                $('.field-error').text('').hide();
+                    // clear old errors
+                    $('.field-error').text('').hide();
 
-                // handle validation errors
-                if (json.status === 'error') {
+                    // handle validation errors
+                    if (json.status === 'error') {
 
-                    for (let field in json.errors) {
-                        $('#' + field + '_error')
-                                .text(json.errors[field])
-                                .show();
+                        for (let field in json.errors) {
+                            $('#' + field + '_error')
+                                    .text(json.errors[field])
+                                    .show();
+                        }
+
+                        return [];
                     }
 
-                    return [];
+                    return json.data;
                 }
 
-                return json.data;
             }
-//            complete: function (res) {
-////                console.log(res);
-//                if (res.responseJSON && res.responseJSON.csrfHash) {
-//                    csrfHash = res.responseJSON.csrfHash; // UPDATE for next request
-//                }
-//            }
-        }
-    });
-}else {
-    // 🔁 Subsequent searches → reload data only
-    table.ajax.reload();
-}
+        });
+    } else {
+        // 🔁 Subsequent searches → reload data only
+        table.ajax.reload();
+    }
 
 });
 
@@ -74,7 +69,7 @@ $(document).on('click', '.lc_btn', function () {
 
 //    $('#lc_preview_btn').attr('href', previewUrl)
 //            .attr('target', '_blank');
-    
+
     $.ajax({
         url: BASE_URL + "leavingcertificate/check-lc-exists",
         type: "POST",
@@ -136,14 +131,14 @@ $('#lc_preview_btn').off('click').on('click', function (e) {
     // copy modal inputs
     form.serializeArray().forEach(function (item) {
         previewForm.append(
-            $('<input>', {type: 'hidden',name: item.name,value: item.value})
-        );
+                $('<input>', {type: 'hidden', name: item.name, value: item.value})
+                );
     });
 
     // CSRF
     previewForm.append(
-        $('<input>', {type: 'hidden',name: csrfName,value: csrfHash})
-    );
+            $('<input>', {type: 'hidden', name: csrfName, value: csrfHash})
+            );
 
     $('body').append(previewForm);
     previewForm.submit();
@@ -155,6 +150,7 @@ $("#lc_modal_form").on("submit", function (e) {
     e.preventDefault();
 
     $(".field-error").text("").hide();
+//    $('input[name="' + csrfName + '"]').val(csrfHash);
 
     let formData = $(this).serializeArray();
     formData.push({name: csrfName, value: csrfHash});
@@ -206,4 +202,19 @@ $('#lc_modal').on('hidden.bs.modal', function () {
             table.ajax.reload(null, false); // 🔥 THIS IS THE KEY
         }
     }
+});
+//cant select date greater than today
+let leavingDatePicker;
+
+$('#lc_modal').on('shown.bs.modal', function () {
+
+    leavingDatePicker?.destroy();
+
+    leavingDatePicker = flatpickr("#date_of_leaving", {
+        dateFormat: "Y-m-d",
+        maxDate: new Date(),
+        allowInput: false,
+        disableMobile: true,
+        onChange: (_, __, fp) => fp.selectedDates[0] > new Date().setHours(0, 0, 0, 0) && fp.clear()
+    });
 });

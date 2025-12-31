@@ -36,6 +36,7 @@ return [
     'btech' => 'B.Tech',
     // C
     'calendar' => 'Calendar',
+    'cancel' => 'Cancel',
     'caste' => 'Caste',
     'category' => 'Category',
     'certificate' => 'Certificate',

@@ -14,6 +14,9 @@ class AddLeavingCertificateTable extends Migration {
                 'constraint' => 11,
                 'auto_increment' => true
             ],
+            'leaving_certificate_no' => [
+                'type' => 'int',
+            ],
             'yearwise_student_data_id' => [
                 'type' => 'int',
             ],

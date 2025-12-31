@@ -173,9 +173,9 @@ $permissions = config('Permissions');
                                                         <li class="slide">
                                                             <a href="<?php echo base_url('leavingcertificate'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?></a>
                                                         </li>
-                                                        <!--                                                        <li class="slide">
-                                                                                                                    <a href="<?php echo base_url('leaving-certificate-report'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?> <?= lang('App.report'); ?></a>
-                                                                                                                </li>-->
+                                                        <li class="slide">
+                                                            <a href="<?php echo base_url('leavingcertificate/leaving-certificate-report'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?> <?= lang('App.report'); ?></a>
+                                                        </li>
                                                         <li class="slide">
                                                             <a href="<?php echo base_url('bonafidecertificate'); ?>" class="side-menu__item"><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
                                                         </li>
