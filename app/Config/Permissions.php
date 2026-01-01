@@ -151,6 +151,14 @@ class Permissions extends BaseConfig {
         'viewBonafideCertificate',
         'deleteBonafideCertificate'
     ];
+    
+    /** Activity Log permissions */
+    public array $activity_log = [
+        'createActivityLog',
+        'updateActivityLog',
+        'viewActivityLog',
+        'deleteActivityLog'
+    ];
 
     /** Master permissions (auto-merged) */
     public array $master;
@@ -173,6 +181,7 @@ class Permissions extends BaseConfig {
                 $this->headGroup,
                 $this->head,
                 $this->department,
+                $this->activity_log,                
         );
         $this->dashboard = array_merge(
                 $this->adminDashboard,
