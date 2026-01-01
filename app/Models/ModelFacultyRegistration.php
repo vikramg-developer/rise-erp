@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use \App\Traits\ActivityLoggerTrait;
 
 class ModelFacultyRegistration extends Model {
 
+       use ActivityLoggerTrait;
     protected $table = 'faculty_registration';
     protected $primaryKey = 'faculty_registration_id';
     protected $useAutoIncrement = true;
@@ -191,7 +193,9 @@ class ModelFacultyRegistration extends Model {
     }
     
     
-    protected $beforeUpdate = ['setUpdateOrDeleteDate'];
+    protected $beforeUpdate = ['setUpdateOrDeleteDate', 'captureOldData'];
+    protected $afterInsert = ['logInsert'];
+    protected $afterUpdate = ['logUpdate'];
 
     protected function setUpdateOrDeleteDate(array $data)
     {

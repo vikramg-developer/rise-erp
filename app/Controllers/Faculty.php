@@ -128,58 +128,39 @@ class Faculty extends BaseController {
         foreach ($rows as $row) {
 
             /* =====================
-             * ACTION BUTTONS (FIX: INITIALIZED)
+             * ACTION BUTTONS (USING HELPER)
              * ===================== */
-            $buttons = ''; // <<< THIS WAS MISSING (CAUSE OF ERROR)
+            $buttons = '';
+
             // EDIT
             if (hasPermission('updateFaculty')) {
 
                 if ($row['is_deleted'] == 1) {
-                    $buttons .= '
-            <a href="javascript:void(0)"
-               class="btn btn-icon btn-sm btn-secondary rounded-pill disabled"
-               data-bs-toggle="tooltip"
-               data-bs-custom-class="tooltip-secondary"
-               title="Faculty is deleted">
-                <i class="ri-pencil-fill"></i>
-            </a>';
+
+                    // Disabled Edit button
+                    $buttons .= '<button class="btn btn-icon btn-sm btn-secondary rounded-pill disabled"
+                            data-bs-toggle="tooltip"
+                            data-bs-custom-class="tooltip-secondary"
+                            title="Faculty is deleted">
+                            <i class="ri-pencil-fill"></i>
+                         </button> ';
                 } else {
-                    $buttons .= '
-            <a href="' . base_url('faculty/edit-faculty/' . $row['faculty_registration_id']) . '"
-               class="btn btn-icon btn-sm btn-secondary rounded-pill"
-               data-bs-toggle="tooltip"
-               data-bs-custom-class="tooltip-secondary"
-               title="Edit">
-                <i class="ri-pencil-fill"></i>
-            </a>';
+
+                    $buttons .= actionHrefButton('Edit',base_url('faculty/edit-faculty/' . $row['faculty_registration_id']));
                 }
             }
 
             // DELETE / REVERT
             if (hasPermission('deleteFaculty')) {
 
+                // DELETE
                 if ($row['is_deleted'] == 0 || $row['is_deleted'] == 2) {
-                    $buttons .= '
-            <button class="btn btn-icon btn-sm btn-danger rounded-pill delete"
-                    data-id="' . $row['faculty_registration_id'] . '"
-                    data-name="' . ($nameMap[$row['faculty_rise_no']] ?? '') . '"
-                    data-bs-toggle="tooltip"
-                    data-bs-custom-class="tooltip-danger"
-                    title="Delete">
-                <i class="ri-delete-bin-fill"></i>
-            </button>';
+                    $buttons .= actionButton('Delete', ['id' => $row['faculty_registration_id'],'name' => $nameMap[$row['faculty_rise_no']] ?? '']);
                 }
 
+                // REVERT
                 if ($row['is_deleted'] == 1) {
-                    $buttons .= '
-            <button class="btn btn-icon btn-sm btn-warning rounded-pill revert"
-                    data-id="' . $row['faculty_registration_id'] . '"
-                    data-name="' . ($nameMap[$row['faculty_rise_no']] ?? '') . '"
-                    data-bs-toggle="tooltip"
-                    data-bs-custom-class="tooltip-warning"
-                    title="Revert">
-                <i class="ri-arrow-go-back-fill"></i>
-            </button>';
+                    $buttons .= actionButton('Revert', ['id' => $row['faculty_registration_id'],'name' => $nameMap[$row['faculty_rise_no']] ?? '']);
                 }
             }
 
@@ -228,19 +209,20 @@ class Faculty extends BaseController {
             }
 
             /* =====================
-             * FINAL ROW (UNCHANGED)
+             * FINAL ROW
              * ===================== */
             $data[] = [
                 $sr_no++,
                 $buttons,
                 $row['faculty_rise_no'],
-                $nameMap[$row['faculty_rise_no']] ?? '',
-                $row['faculty_mobile_number'],
+                esc($nameMap[$row['faculty_rise_no']] ?? ''),
+                esc($row['faculty_mobile_number']),
                 $addedBy,
                 $updatedBy,
                 $remark
             ];
         }
+
 
 
 

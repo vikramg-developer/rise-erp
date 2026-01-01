@@ -164,6 +164,25 @@ $permissions = config('Permissions');
                                                     </li>
                                                 <?php endif; ?>
                                                 <!--========================= Feedback Module END =========================-->
+                                                
+                                                <!--=============================================Faculty Profile Start==============================================-->
+                                                <?php if (hasAnyPermission($permissions->faculty_profile_module)): ?>
+                                                    <li class="slide has-sub">
+                                                        <a href="javascript:void(0);" class="side-menu__item">
+                                                            <i class=" bx bx-user-circle side-menu__icon"></i>
+                                                            <span class="side-menu__label"><?= lang('App.faculty'); ?> <?= lang('App.profile'); ?></span>
+                                                            <i class="fe fe-chevron-right side-menu__angle"></i>
+                                                        </a>
+                                                     <?php if (hasAnyPermission($permissions->faculty_profile)): ?>
+                                                        <ul class="slide-menu child1">
+                                                            <li class="slide">
+                                                                <a href="<?php echo base_url('faculty-profile'); ?>" class="side-menu__item"><?= lang('App.update'); ?>  <?= lang('App.profile'); ?></a>
+                                                        </ul>
+                                                     <?php endif; ?>   
+                                                    </li>
+                                                <?php endif; ?>
+                                               
+                                                <!--=============================================Faculty Profile End==============================================-->
 
                                                 <!-- Start::slide__category -->
                                                 <li class="slide__category"><span class="category-name">Pages</span></li>
@@ -206,31 +225,13 @@ $permissions = config('Permissions');
                                                 <?php endif; ?>
                                                 <!--===========================================Certificates Module End ================================== -->
 
-
-                                                <!--=============================================Faculty Profile Start==============================================-->
-                                                <li class="slide">
-                                                    <a href="<?php echo base_url('icard'); ?>" class="side-menu__item">
+                                                    <li class="slide">
+                                                        <a href="<?php echo base_url('icard'); ?>" class="side-menu__item">
                                                         <i class="bx bx-id-card side-menu__icon"></i>
                                                         <span class="side-menu__label"><?= lang('App.icard'); ?></span>
                                                     </a>
-
-                                                    <li class="slide has-sub">
-                                                        <a href="javascript:void(0);" class="side-menu__item">
-
-                                                            <i class=" bx bx-user-circle side-menu__icon"></i>
-                                                            <span class="side-menu__label"><?= lang('App.faculty'); ?> <?= lang('App.profile'); ?></span>
-                                                            <i class="fe fe-chevron-right side-menu__angle"></i>
-                                                        </a>
-                                                        <ul class="slide-menu child1">
-                                                            <li class="slide side-menu__label1">
-                                                                <a href="javascript:void(0)">Error</a>
-                                                            </li>
-                                                            <li class="slide">
-                                                                <a href="<?php echo base_url('faculty-profile'); ?>" class="side-menu__item"><?= lang('App.update'); ?>  <?= lang('App.profile'); ?></a>
-                                                        </ul>
-                                                    </li>
                                                 </li>
-                                                <!--=============================================Faculty Profile End==============================================-->
+                                                     
 
                                                 <!--=============================================Fee Management Start==============================================-->
 
