@@ -307,7 +307,7 @@ if (!empty($registration[0]['dob'])) {
                                 <td align="center" ></td>
                                 <td align="center" ></td>
                                 <td align="center" ></td>
-                                <td colspan='3' align="right">No: 1<?php //echo $bonafide[0]['bonafide_id']; ?></td>
+                                <td colspan='3' align="right">No: <?php echo $bonafide_data['bonafide_certificate_no']; ?></td>
                             </tr>
                             <tr>
                                 <td colspan='1' rowspan="1"><img src="assets/images/kbp_logo.png" style="width:70px; height:70px;"></td>
@@ -330,8 +330,8 @@ if (!empty($registration[0]['dob'])) {
 //                                        } else {
 //                                            echo 'Mrs.';
 //                                        }
-                                        ?><u>Mr. SHINDE NAGESH TUKARAM<?php //echo $registration[0]['last_name'] . " " . $registration[0]['first_name'] . " " . $registration[0]['middle_name']; ?></u></b>&nbsp;is a &nbsp;bonafide student of this College, studying in the
-                                    <b class="">&nbsp;<u>Civil Engineering-<?php //echo $course . "-" . $year_name; ?></u></b>&nbsp;Class during academic &nbsp;year&nbsp;<b class="f-16 font-weight-semibold">&nbsp;<u>2025-2026<?php //echo $ysd['academic_year']; ?></u></b><br>&nbsp;To the best of my knowledge and belief. <?php
+                                        ?><u><?php echo $yearwise_data['student_last_name'] . " " . $yearwise_data['student_first_name'] . " " . $yearwise_data['student_middle_name']; ?></u></b>&nbsp;is a &nbsp;bonafide student of this College, studying in the
+                                    <b class="">&nbsp;<u><?php echo $yearwise_data['department_name'] . "-" . $yearwise_data['year_name']; ?> </u></b> Class during academic year<b class="f-16 font-weight-semibold"><u> <?php echo $yearwise_data['academic_year_name']; ?> </u></b><br> To the best of my knowledge and belief. <?php
 //                                    if ($registration[0]['gender'] == "Male") {
 //                                        echo He;
 //                                    } else {

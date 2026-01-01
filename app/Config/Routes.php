@@ -50,8 +50,8 @@ $routes->get('forbidden', 'Error::forbidden');
 $routes->get('logout', 'Login::logout');
 $routes->post('/add-group', 'Group::add-group');
 
-$routes->post('/bonafide-certificate', 'BonafideCertificate::index');
-$routes->post('/bonafide-print', 'BonafideCertificate::bonafide_print');
+
+
 $routes->get('/collect-fees', 'FeesManagement::collect_fees');
 
 $routes->post('/fetch-head', 'FeesManagement::fetch-head');
@@ -59,8 +59,7 @@ $routes->post('/head', 'FeesManagement::head');
 $routes->post('/head-fees', 'FeesManagement::head_fees');
 
 $routes->post('/home', 'Home::index');
-$routes->post('/i-card', 'ICard::index');
-$routes->post('/i-card-print', 'ICard::i_card_print');
+
 
 $routes->post('/check-user', 'Login::check_user');
 
@@ -80,23 +79,29 @@ $routes->get('approve-registration', 'ApproveRegistration::index',['filter' => '
     $routes->post('reject-student', 'ApproveRegistration::reject_student', ['filter' => 'permission:updateApproveRegistration']);
 
 $routes->group('leavingcertificate', function ($routes) {
-    $routes->get('/', 'LeavingCertificate::index', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('fetch-lc-student-list', 'LeavingCertificate::fetch_lc_student_list', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('check-lc-exists', 'LeavingCertificate::check_lc_exists', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('add-leaving-certificate-data', 'LeavingCertificate::add_leaving_certificate_data', ['filter' => 'permission:createFeesManagement']);
-    $routes->get('print-leaving-certificate', 'LeavingCertificate::print_leaving_certificate', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('print-leaving-certificate', 'LeavingCertificate::print_leaving_certificate', ['filter' => 'permission:createFeesManagement']);
-    $routes->get('leaving-certificate-report', 'LeavingCertificateReport::index', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('fetch-lc-report', 'LeavingCertificateReport::fetch_lc_report', ['filter' => 'permission:createFeesManagement']);
-    $routes->get('print-lc', 'LeavingCertificateReport::print_lc', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('cancel-lc', 'LeavingCertificateReport::cancel_lc', ['filter' => 'permission:createFeesManagement']);
+    $routes->get('/', 'LeavingCertificate::index', ['filter' => 'permission:createLeavingCertificate']);
+    $routes->post('fetch-lc-student-list', 'LeavingCertificate::fetch_lc_student_list', ['filter' => 'permission:createLeavingCertificate']);
+    $routes->post('check-lc-exists', 'LeavingCertificate::check_lc_exists', ['filter' => 'permission:createLeavingCertificate']);
+    $routes->post('add-leaving-certificate-data', 'LeavingCertificate::add_leaving_certificate_data', ['filter' => 'permission:createLeavingCertificate']);
+    $routes->get('print-leaving-certificate', 'LeavingCertificate::print_leaving_certificate', ['filter' => 'permission:createLeavingCertificate']);
+    $routes->post('print-leaving-certificate', 'LeavingCertificate::print_leaving_certificate', ['filter' => 'permission:createLeavingCertificate']);
+    $routes->get('leaving-certificate-report', 'LeavingCertificateReport::index', ['filter' => 'permission:createLeavingCertificate']);
+    $routes->post('fetch-lc-report', 'LeavingCertificateReport::fetch_lc_report', ['filter' => 'permission:createLeavingCertificate']);
+    $routes->get('print-lc', 'LeavingCertificateReport::print_lc', ['filter' => 'permission:createLeavingCertificate']);
+    $routes->post('cancel-lc', 'LeavingCertificateReport::cancel_lc', ['filter' => 'permission:createLeavingCertificate']);
 });
 
 $routes->group('bonafidecertificate', function ($routes) {
-    $routes->get('/', 'BonafideCertificate::index', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('fetch-bonafide-student-list', 'BonafideCertificate::fetch_bonafide_student_list', ['filter' => 'permission:createFeesManagement']);
-    $routes->post('add-bonafide-certificate', 'BonafideCertificate::add_bonafide_certificate', ['filter' => 'permission:createFeesManagement']);
-    $routes->get('print-bonafide-certificate', 'BonafideCertificate::print_bonafide_certificate', ['filter' => 'permission:createFeesManagement']);
+    $routes->get('/', 'BonafideCertificate::index', ['filter' => 'permission:createBonafideCertificate']);
+    $routes->post('fetch-bonafide-student-list', 'BonafideCertificate::fetch_bonafide_student_list', ['filter' => 'permission:createBonafideCertificate']);
+    $routes->post('add-bonafide-certificate', 'BonafideCertificate::add_bonafide_certificate', ['filter' => 'permission:createBonafideCertificate']);
+    $routes->get('print-bonafide-certificate', 'BonafideCertificate::print_bonafide_certificate', ['filter' => 'permission:createBonafideCertificate']);
+    
+});
+
+$routes->group('icard', function ($routes) {
+    $routes->get('/', 'ICard::index', ['filter' => 'permission:createFeesManagement']);
+    $routes->get('i-card-print', 'ICard::i_card_print', ['filter' => 'permission:createFeesManagement']);
     
 });
 
