@@ -25,6 +25,7 @@ class Feedback extends BaseController {
 
     public function index() {
         $data['jspath'] = 'feedback/feedback-master';
+        $data['title'] = lang('App.rise') . " - " . lang('App.feedback') . " " . lang('App.master');
         $data['academic_year'] = $this->modelacademicyear->get_active_academic_years();
         $data['semester'] = $this->modelsemester->get_active_semester();
         $data['semester_part'] = $this->modelsemesterpart->get_semester_part();
@@ -33,14 +34,14 @@ class Feedback extends BaseController {
     }
 
     public function save_feedback_master() {
-        $id = $this->request->getPost('feedback_master_id'); // 👈 IMPORTANT
+        $id = $this->request->getPost('feedback_master_id');
+
         $data = [
             'feedback_name' => clean_name($this->request->getVar('feedback_name')),
             'type_id' => ($this->request->getVar('type_id')),
             'semester_id' => ($this->request->getVar('semester_id')),
             'part_id' => ($this->request->getVar('part_id')),
             'academic_year_id' => ($this->request->getVar('academic_year_id')),
-//            'added_by' => current_user()
         ];
 
         if (!empty($id)) {
@@ -52,7 +53,6 @@ class Feedback extends BaseController {
                             'errors' => $this->modelfeedback->errors(),
                             'csrfHash' => csrf_hash()
                 ]);
-                
             }
 
             $action = 'UPDATE';
@@ -106,13 +106,10 @@ class Feedback extends BaseController {
 
         // FILTERED RECORDS
         $recordsFiltered = $model->countAllResults(false);
-//      $recordsFiltered = $model->countFiltered($search);
-        //SEARCH FILTERgit
-//        if ($search !== '') {
-//            $model->like('feedback_name', $search);
-//        }
-        // PAGINATED DATA
+
+        // Main Table DATA
         $rows = $model->getFeedbackMasterList($length, $start);
+
         // MAP: rise_no => full name
         $facultyNameMap = $this->modelfacultyregistration->getRiseNoNameMap();
 
@@ -120,24 +117,17 @@ class Feedback extends BaseController {
 
         $data = [];
         foreach ($rows as $row) {
-            /* ===================== Edit Button===================== */
             $buttons = '';
-            $buttons .= '<button type="button"
-                class="btn btn-icon btn-sm btn-secondary rounded-pill edit"
-                data-id="' . $row['feedback_master_id'] . '"
-                title="Edit">
-                <i class="ri-pencil-fill"></i>
-                </button>';
+            /* ===================== Edit Button===================== */
+            if (hasPermission('updateFeedback')):
+                $buttons .= actionButton('Edit', ['id' => $row['feedback_master_id']]);
+            endif;
             /* ===================== Delete Button ===================== */
             if (hasPermission('deleteFeedback')):
-                if ($row['is_deleted'] == 0 || $row['is_deleted'] == 2):
-                    $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill delete"  data-feedback_master_id="' . $row['feedback_master_id'] . '" data-feedback_name="' . $row['feedback_name'] . '" data-bs-toggle="tooltip"
-                            data-bs-custom-class="tooltip-danger"
-                            title="Delete">   <i class="ri-delete-bin-fill"></i> </button>';
+                if ($row['is_deleted'] != 1):
+                    $buttons .= actionButton('Delete', ['id' => $row['feedback_master_id'], 'feedback_master_name' => $row['feedback_name']]);
                 elseif ($row['is_deleted'] == 1):
-                    $buttons .= ' <button class="btn btn-icon btn-sm btn-warning btn-wave rounded-pill revert" data-feedback_master_id="' . $row['feedback_master_id'] . '" data-feedback_name="' . $row['feedback_name'] . '"  data-bs-toggle="tooltip"
-                            data-bs-custom-class="tooltip-warning"
-                            title="revert"> <i class="ri-arrow-go-back-fill"></i></button>';
+                    $buttons .= actionButton('Revert', ['id' => $row['feedback_master_id'], 'feedback_master_name' => $row['feedback_name']]);
                 endif;
             endif;
             /* ===================== manage-question ===================== */
@@ -194,35 +184,29 @@ class Feedback extends BaseController {
     }
 
     public function delete_feedback_master() {
-        if ($this->request->getMethod() == 'post') {
-            $feedback_master_id = $this->request->getPost('feedback_master_id');
 
-            if ($this->modelfeedback->update($feedback_master_id, [
-                        'is_deleted' => 1,
-                        'deleted_by' => current_user()
-                    ])) {
+        $feedback_master_id = $this->request->getPost('feedback_master_id');
 
-                return $this->response->setJSON([
-                            'csrfHash' => csrf_hash()
-                ]);
-            }
-        } else {
-            return render_page('error_page/error404');
+        if ($this->modelfeedback->update($feedback_master_id, [
+                    'is_deleted' => 1,
+                    'deleted_by' => current_user()
+                ])) {
+
+            return $this->response->setJSON([
+                        'csrfHash' => csrf_hash()
+            ]);
         }
     }
 
     public function revert_feedback_master() {
-        if ($this->request->getMethod() == 'post') {
-            $feedback_master_id = $this->request->getPost('feedback_master_id');
+        
+        $feedback_master_id = $this->request->getPost('feedback_master_id');
 
-            if ($this->modelfeedback->update($feedback_master_id, ['is_deleted' => 2])) {
+        if ($this->modelfeedback->update($feedback_master_id, ['is_deleted' => 2])) {
 
-                return $this->response->setJSON([
-                            'csrfHash' => csrf_hash()
-                ]);
-            }
-        } else {
-            return render_page('error_page/error404');
+            return $this->response->setJSON([
+                        'csrfHash' => csrf_hash()
+            ]);
         }
     }
 
@@ -239,6 +223,7 @@ class Feedback extends BaseController {
 
     public function manage_question($id = null) {
         // $data['feedback'] = $this->modelFeedback->find($id);
+        $data['title'] = lang('App.rise') . " - " . lang('App.manage') . " " . lang('App.question');
         return render_page('feedback/manage-question'); // view path
     }
 }
