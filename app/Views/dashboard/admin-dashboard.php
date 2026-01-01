@@ -23,7 +23,7 @@
     <!-- Start::row-1 -->
     <div class="row">
 
-        <div class="col-xxl-4 col-xl-3 col-lg-3 col-md-3 col-sm-12">
+        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12">
             <div class="card custom-card hrm-main-card primary">
                 <a href="<?= base_url('student-list') ?>">
                     <div class="card-body">
@@ -134,9 +134,9 @@
     </div>
 
 
-    <div class="col-xxl-6 col-xl-12">
+    <div class="col-xxl-12 col-xl-12">
         <div class="row">
-            <div class="col-xxl-6 col-xl-6">
+            <div class="col-md-6">
                 <div class="card custom-card overflow-hidden">
                     <div class="card-header justify-content-between">
                         <div class="card-title">
@@ -248,7 +248,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xxl-6 col-xl-6">
+            <div class="col-md-6">
                 <div class="card custom-card">
                     <div class="card-header justify-content-between">
                         <div class="card-title">Fee Report</div>
@@ -269,7 +269,7 @@
     </div>
     <div class="col-xxl-6 col-xl-12">
         <div class="row">
-            <div class="col-xxl-4 col-xl-3 col-lg-3 col-md-3 col-sm-12">
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12">
                 <div class="card custom-card hrm-main-card primary">
                         <div class="card-body">
                             <div class="d-flex align-items-top">
@@ -295,7 +295,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-xxl-4 col-xl-3 col-lg-3 col-md-3 col-sm-12">
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12">
                 <div class="card custom-card hrm-main-card primary">
 
                     <div class="card-body">
