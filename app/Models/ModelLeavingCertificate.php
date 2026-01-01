@@ -47,7 +47,7 @@ class ModelLeavingCertificate extends Model {
     ];
     
     // Callbacks
-    protected $beforeUpdate = ['setUpdateOrDeleteDate', 'captureOldData'];
+//    protected $beforeUpdate = ['setUpdateOrDeleteDate', 'captureOldData'];
     protected $afterInsert = ['logInsert'];
     protected $afterUpdate = ['logUpdate'];
 
@@ -55,6 +55,9 @@ class ModelLeavingCertificate extends Model {
 
     public function get_lc_data($ysd_id) {
         return $this->where(['yearwise_student_data_id'=> $ysd_id,'is_cancelled'=>0])->findAll();
+    }
+    public function get_previous_lc_date($ysd_id) {
+        return $this->where(['yearwise_student_data_id'=> $ysd_id,'is_cancelled'=>0,'is_duplicate'=>0])->findAll();
     }
 
 /* =======================================Leaving Certificate End==================================*/

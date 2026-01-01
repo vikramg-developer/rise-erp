@@ -18,6 +18,7 @@ class BonafideCertificate extends BaseController {
         $this->modelyear = model('ModelYear');
         $this->modeldepartment = model('ModelDepartment');
         $this->modelbonafidecertificatecounter = model('ModelBonafideCertificateCounter');
+        $this->db = \Config\Database::connect();
     }
 
     public function index() {
@@ -116,19 +117,19 @@ class BonafideCertificate extends BaseController {
 
             // 🔒 1️⃣ LOCK LC COUNTER ROW
             $bonafide_no_counter = $this->modelbonafidecertificatecounter->get_bonafide_certificate_no();
-            $ysd_id = $this->request->getVar('yearwise_student_data_id');
-           
+            $ysd_id = $this->request->getVar('ysd_id');
+//            print_r($ysd_id);die();
             $bonafide_data = [
                 'yearwise_student_data_id' => $ysd_id,
-                'bonafide_certificate_no' => $bonafide_id['bonafide_certificate_no'],
+                'bonafide_certificate_no' => $bonafide_no_counter['bonafide_certificate_no'],
                 
             ];
-
-            $bonafide_id = $this->modelbonafidecertificate->insert($bonafide_id, true);
+//            print_r($bonafide_data);die();
+            $bonafide_id = $this->modelbonafidecertificate->insert($bonafide_data, true);
 
             if ($bonafide_id) {
-                $update_data = ['bonafide_certificate_no' => ($bonafide_id['bonafide_certificate_no'] + 1)];
-                $this->modelbonafidecertificatecounter->update($bonafide_id['bonafide_certificate_no_counter_id'], $update_data);
+                $update_data = ['bonafide_certificate_no' => ($bonafide_no_counter['bonafide_certificate_no'] + 1)];
+                $this->modelbonafidecertificatecounter->update($bonafide_no_counter['bonafide_certificate_no_counter_id'], $update_data);
 
                 // 5️⃣ Final transaction check
                 if ($this->db->transStatus() === false) {
@@ -144,14 +145,7 @@ class BonafideCertificate extends BaseController {
                             'csrfHash' => csrf_hash()
                 ]);
             }
-            // =========Validation failed============
-            $this->db->transRollback();
-
-            return $this->response->setJSON([
-                        'status' => 'error',
-                        'errors' => $this->modelbonafidecertificate->errors(),
-                        'csrfHash' => csrf_hash()
-            ]);
+           
         } catch (Exception $ex) {
             $this->db->transRollback();
 
@@ -163,12 +157,12 @@ class BonafideCertificate extends BaseController {
         }
     }
 
-    public function bonafide_print() {
+    public function print_bonafide_certificate() {
         $bonafide_id = $this->request->getVar('bonafide_id');
         if ($bonafide_id) {
             $data['bonafide_data'] = $bonafide_data = $this->modelbonafidecertificate->find($bonafide_id);
 
-            $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_certificate($bonafide_data['yearwise_student_data_id']);
+            $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_bonafide($bonafide_data['yearwise_student_data_id']);
           
         } 
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L']);
@@ -180,7 +174,7 @@ class BonafideCertificate extends BaseController {
         $mpdf->useFixedNormalLineHeight = true;
         $mpdf->useFixedTextBaseline = true;
         $mpdf->adjustFontDescLineheight = 100;
-        $html = view('certificates/bonafide-certificate-print');
+        $html = view('certificates/bonafide-certificate-print',$data);
         $mpdf->WriteHTML($html);
 
         // Output PDF
