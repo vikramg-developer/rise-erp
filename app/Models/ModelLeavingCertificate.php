@@ -47,7 +47,7 @@ class ModelLeavingCertificate extends Model {
     ];
     
     // Callbacks
-//    protected $beforeUpdate = ['setUpdateOrDeleteDate', 'captureOldData'];
+    protected $beforeUpdate = ['captureOldData'];
     protected $afterInsert = ['logInsert'];
     protected $afterUpdate = ['logUpdate'];
 
