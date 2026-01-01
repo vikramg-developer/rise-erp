@@ -96,6 +96,13 @@ function successApprove(message) {
             'success'
             );
 }
+function cancelApprove(message) {
+    swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your record is safe :)',
+            'error'
+            );
+}
 
 function confirmReject(message) {
     return swalWithBootstrapButtons.fire({
@@ -114,5 +121,19 @@ function successReject(message) {
             message+' Rejected!',
             'Your record has been Rejected.',
             'success'
+            );
+}
+function errorReject() {
+    swalWithBootstrapButtons.fire(
+            'Error',
+            'Reject failed',
+            'error'
+            );
+}
+function cancelReject(message) {
+    swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your record is safe :)',
+            'error'
             );
 }

@@ -23,56 +23,33 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <?php //if (!empty($head_group_datas)): ?>
-                    <table id="approveRegistrationList" class="table table-bordered text-nowrap table-primary table-striped w-100">
-                        <thead>
-                            <tr>
-                                <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
-                                <th><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
-                                <th><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>
-                                <th><?= lang('App.course'); ?> <?= lang('App.name'); ?></th>
-                                <th><?= lang('App.year'); ?></th>
-                                <th><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
-                                <th><?= lang('App.form'); ?> <?= lang('App.print'); ?></th>
-                                <th><?= lang('App.action'); ?></th>
-                            </tr>
-                        </thead>
-<!--                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>202610100001</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="me-2">
-                                            <span class="avatar avatar-md avatar-rounded">
-                                                <img src="<?php //echo base_url('assets/images/student-photo/boy1.jpg'); ?>" alt="">
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                                                Amar Jadhav
-                                            </a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>B.A.</td>
-                                <td>First Year</td>
-                                <td>2025-2026</td>
-                                <td></td>
-                                <td><button class="btn btn-purple shadow-purple btn-wave"><?= lang('App.approve'); ?></button></td>
-                            </tr>
-                            
-                        </tbody>-->
-                    </table>
+                    <div class="table-responsive">
 
-                    <div class="modal fade"  id="modaldemo8">
-                        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-                            <div class="modal-content modal-content-demo">
-                                <div class="modal-header">
-                                    <h6 class="modal-title">Amar Jadhav</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <img src="<?php echo base_url('assets/images/student-photo/boy1.jpg'); ?>" alt="">
+                        <?php //if (!empty($head_group_datas)): ?>
+                        <table id="approveRegistrationList" class="table table-bordered text-nowrap table-primary table-striped w-100">
+                            <thead>
+                                <tr>
+                                    <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
+                                    <th><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
+                                    <th><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>
+                                    <th><?= lang('App.course'); ?> <?= lang('App.name'); ?></th>
+                                    <th><?= lang('App.year'); ?></th>
+                                    <th><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
+                                    <th><?= lang('App.form'); ?> <?= lang('App.print'); ?></th>
+                                    <th><?= lang('App.action'); ?></th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                        <div class="modal fade"  id="modaldemo8">
+                            <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                                <div class="modal-content modal-content-demo">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title">Amar Jadhav</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="<?php echo base_url('assets/images/student-photo/boy1.jpg'); ?>" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>
