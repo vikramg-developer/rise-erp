@@ -250,7 +250,7 @@ return [
     'transgender' => 'Transgender',
     'ticket' => 'Ticket',
     'title' => 'Title',
-    'to_date' => 'To Date',
+    'to' => 'To',
     'type' => 'Type',
     // U    
     'university' => 'University',
