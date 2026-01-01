@@ -194,5 +194,15 @@
             "viewApproveRegistration",
             "deleteApproveRegistration"
         ]
+    },
+    
+    "activity_log": {
+        "label": "Activity Log",
+        "actions": [
+            "createActivityLog",
+            "updateActivityLog",
+            "viewActivityLog",
+            "deleteActivityLog"
+        ]
     }
 }

@@ -2,26 +2,23 @@
 
 namespace App\Traits;
 
-trait ActivityLoggerTrait
-{
+trait ActivityLoggerTrait {
+
     protected array $oldData = [];
 
-    protected function logInsert(array $data)
-    {
+    protected function logInsert(array $data) {
         log_activity([
-            'action'    => 'insert',
-            'table'     => $this->table,
+            'action' => 'insert',
+            'table' => $this->table,
             'record_id' => $data['id'] ?? null,
-            'new'       => $data['data'],
-            'columns'   => array_keys($data['data']),
+            'new' => $data['data'],
+            'columns' => array_keys($data['data']),
         ]);
 
         return $data;
     }
 
-    protected function captureOldData(array $data)
-    {
-        log_message('debug', __METHOD__ . ' triggered');
+    protected function captureOldData(array $data) {
 
         if (!isset($data['id'])) {
             return $data;
@@ -33,8 +30,7 @@ trait ActivityLoggerTrait
         return $data;
     }
 
-    protected function logUpdate(array $data)
-    {
+    protected function logUpdate(array $data) {
         if (empty($this->oldData)) {
             return $data;
         }
@@ -56,12 +52,12 @@ trait ActivityLoggerTrait
 
         if (!empty($changedColumns)) {
             log_activity([
-                'action'    => 'update',
-                'table'     => $this->table,
+                'action' => 'update',
+                'table' => $this->table,
                 'record_id' => $data['id'],
-                'columns'   => $changedColumns,
-                'old'       => $oldValues,
-                'new'       => $newValues,
+                'columns' => $changedColumns,
+                'old' => $oldValues,
+                'new' => $newValues,
             ]);
         }
 

@@ -179,6 +179,16 @@ $routes->group('faculty-profile', function ($routes) {
     $routes->post('/faculty-personal-info', 'FacultyProfile::update_personal_info', ['filter' => 'permission:updateFacultyProfile']);
 });
 
+$routes->group('activity-log', function ($routes) {
+    $routes->get('/', 'ActivityLog::index', ['filter' => 'permission:viewActivityLog']);
+    $routes->post('fetch-activity-log', 'ActivityLog::fetch_activity_log', ['filter' => 'permission:viewActivityLog']);
+//    $routes->post('save-department', 'Department::save_department', ['filter' => 'permission:createDepartment']);
+//    $routes->post('update-department', 'Department::update_department', ['filter' => 'permission:updateDepartment']);
+//    $routes->post('delete-department', 'Department::delete_department', ['filter' => 'permission:deleteDepartment']);
+//    $routes->post('revert-department', 'Department::revert_department', ['filter' => 'permission:deleteDepartment']);
+//    $routes->get('search-department', 'Department::search_department', ['filter' => 'permission:createDepartment']);
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
