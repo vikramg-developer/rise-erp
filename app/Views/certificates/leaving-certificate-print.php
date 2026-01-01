@@ -297,7 +297,7 @@ if (!empty($yearwise_data[0]['dob'])) {
         </div>
         <table id="header">
             <tr>
-                <td rowspan="1"><img src="assets/images/kbp_logo.png" style="width:70px; height:70px;"></td>
+                <td rowspan="1"><img src="<?php echo base_url('assets/images/kbp_logo.png'); ?>" style="width:70px; height:70px;"></td>
                 <td style="text-align: center;"><h5>Rayat Shikshan Sanstha's<br><span style="font-family: times;font-size: 14pt;">Karmaveer Bhaurao Patil College of Engineering, Satara</span><br>Sadar Bazar, Camp Satara - 415001</h5></td>
             </tr>
     <!--    <tr>
