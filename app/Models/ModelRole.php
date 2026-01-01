@@ -85,7 +85,7 @@ class ModelRole extends Model {
 //        for faculty registration dropdwon
     public function getRoles() {
         return $this->whereNotIn('role_id', [1, 3])
-                        ->where('is_deleted', 0)
+                        ->where('is_deleted !=', 1)
                         ->orderBy('role_id')
                         ->findAll();
     }
@@ -100,5 +100,19 @@ class ModelRole extends Model {
         // Otherwise → set updated_dt
         $data['data']['updated_at'] = date('Y-m-d H:i:s');
         return $data;
+    }
+
+    //role_id => role_name 
+    public function getRoleIdNameMap() {
+        $rows = $this->select('role_id, role_name')
+                ->where('is_deleted !=', 1)
+                ->findAll();
+
+        $map = [];
+        foreach ($rows as $row) {
+            $map[$row['role_id']] = $row['role_name'];
+        }
+
+        return $map;
     }
 }

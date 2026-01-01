@@ -125,6 +125,9 @@ class Faculty extends BaseController {
         $sr_no = $start + 1;
         $data = [];
 
+        $nameMap = $this->modelfaculty->getRiseNoNameMap();
+        $roleMap = $this->modelrole->getRoleIdNameMap();
+
         foreach ($rows as $row) {
 
             /* =====================
@@ -146,7 +149,7 @@ class Faculty extends BaseController {
                          </button> ';
                 } else {
 
-                    $buttons .= actionHrefButton('Edit',base_url('faculty/edit-faculty/' . $row['faculty_registration_id']));
+                    $buttons .= actionHrefButton('Edit', base_url('faculty/edit-faculty/' . $row['faculty_registration_id']));
                 }
             }
 
@@ -155,14 +158,27 @@ class Faculty extends BaseController {
 
                 // DELETE
                 if ($row['is_deleted'] == 0 || $row['is_deleted'] == 2) {
-                    $buttons .= actionButton('Delete', ['id' => $row['faculty_registration_id'],'name' => $nameMap[$row['faculty_rise_no']] ?? '']);
+                    $buttons .= actionButton('Delete', ['id' => $row['faculty_registration_id'], 'name' => $nameMap[$row['faculty_rise_no']] ?? '']);
                 }
 
                 // REVERT
                 if ($row['is_deleted'] == 1) {
-                    $buttons .= actionButton('Revert', ['id' => $row['faculty_registration_id'],'name' => $nameMap[$row['faculty_rise_no']] ?? '']);
+                    $buttons .= actionButton('Revert', ['id' => $row['faculty_registration_id'], 'name' => $nameMap[$row['faculty_rise_no']] ?? '']);
                 }
             }
+
+            /* =====================
+             * FACULTY NAME + ROLE
+             * ===================== */
+            $facultyName = esc($nameMap[$row['faculty_rise_no']] ?? '');
+            $facultyRole = esc($roleMap[$row['faculty_role_id']] ?? '');
+
+            $nameWithRole = '<div class="text-center">' . $facultyName .
+                    '<div class="small text-muted mt-1">
+                        <span class="badge bg-info-transparent px-3 py-2 fw-semibold" style="font-size:0.8rem">
+                            ' . $facultyRole . '
+                    </div>
+                </div>';
 
             /* =====================
              * ADDED BY
@@ -215,7 +231,8 @@ class Faculty extends BaseController {
                 $sr_no++,
                 $buttons,
                 $row['faculty_rise_no'],
-                esc($nameMap[$row['faculty_rise_no']] ?? ''),
+//              esc($nameMap[$row['faculty_rise_no']] ?? ''),
+                $nameWithRole,
                 esc($row['faculty_mobile_number']),
                 $addedBy,
                 $updatedBy,
