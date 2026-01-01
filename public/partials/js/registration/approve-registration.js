@@ -32,7 +32,7 @@ $(document).on("click", ".approve", function () {
     let student_name    = $(this).data("student_name");
 
     // SAME confirm function (reuse)
-    confirmApprove(student_name, 'reject').then(result => {
+    confirmApprove(student_name).then(result => {
 
         if (result.isConfirmed) {
 
@@ -49,7 +49,7 @@ $(document).on("click", ".approve", function () {
                     csrfHash = res.csrfHash;
 
                     // SAME success function
-                    successApprove(student_name, 'approve');
+                    successApprove(student_name);
 
                     table.settings()[0].ajax.data = d => {
                         d[csrfName] = csrfHash;
@@ -63,7 +63,7 @@ $(document).on("click", ".approve", function () {
             });
 
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            cancelDelete(student_name);
+            cancelApprove(student_name);
         }
     });
 });
@@ -100,12 +100,12 @@ $(document).on("click", ".reject", function () {
                 },
 
                 error: () => {
-                    errorDelete();
+                    errorReject();
                 }
             });
 
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            cancelDelete(student_name);
+            cancelReject(student_name);
         }
     });
 });
