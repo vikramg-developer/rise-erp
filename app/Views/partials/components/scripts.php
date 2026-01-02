@@ -108,9 +108,12 @@
 
 <script src="<?php echo base_url('partials/js/alert.js'); ?>"></script>
 <script src="<?php echo base_url('partials/js/toast.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/show-password.js'); ?>"></script>
+
+<script src="<?= base_url('partials/js/common_inputs/common-inputs.js'); ?>"></script>
+
 
 <?php if (isset($jspath)): ?>
     <script src="<?php echo base_url('partials/js/') . $jspath . '.js'; ?>"></script>
 <?php endif; ?>
 
-<script src="<?php echo base_url('assets/js/show-password.js'); ?>"></script>

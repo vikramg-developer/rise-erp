@@ -51,17 +51,18 @@ class Faculty extends BaseController {
             $faculty_rise_no = 'F' . $yearPrefix . $branchCode . str_pad($rise_no_counter['rise_no'], 4, '0', STR_PAD_LEFT);
 
             $insertData = [
-                'faculty_role_id' => clean_number($this->request->getVar('faculty_role_id')),
-                'faculty_first_name' => clean_name($this->request->getVar('faculty_first_name')),
-                'faculty_middle_name' => clean_name($this->request->getVar('faculty_middle_name')),
-                'faculty_last_name' => clean_name($this->request->getVar('faculty_last_name')),
+                'faculty_role_id'       => clean_number($this->request->getVar('faculty_role_id')),
+                'faculty_gender'        => clean_name($this->request->getVar('faculty_gender')),
+                'faculty_first_name'    => clean_name($this->request->getVar('faculty_first_name')),
+                'faculty_middle_name'   => clean_name($this->request->getVar('faculty_middle_name')),
+                'faculty_last_name'     => clean_name($this->request->getVar('faculty_last_name')),
                 'faculty_mobile_number' => clean_number($this->request->getVar('faculty_mobile_number')),
-                'faculty_email_id' => clean_email($this->request->getVar('faculty_email_id')),
+                'faculty_email_id'      => clean_email($this->request->getVar('faculty_email_id')),
                 'faculty_aadhar_number' => clean_number($this->request->getVar('faculty_aadhar_number')),
-                'faculty_pan_number' => clean_name($this->request->getVar('faculty_pan_number')),
-                'faculty_password' => clean_name($this->request->getVar('faculty_password')),
-                'faculty_rise_no' => $faculty_rise_no,
-                'added_by' => session('rise_no'),
+                'faculty_pan_number'    => clean_name($this->request->getVar('faculty_pan_number')),
+                'faculty_password'      => clean_name($this->request->getVar('faculty_password')),
+                'faculty_rise_no'       => $faculty_rise_no,
+                'added_by'              => session('rise_no'),
             ];
 
             if (!$this->modelfaculty->insert($insertData)) {
@@ -240,9 +241,6 @@ class Faculty extends BaseController {
             ];
         }
 
-
-
-
         return $this->response->setJSON([
                     'draw' => intval($draw),
                     'recordsTotal' => $recordsTotal,
@@ -266,7 +264,6 @@ class Faculty extends BaseController {
         $data['roles'] = $this->modelrole->getRoles();
         $data['faculty'] = $faculty;
         $data['jspath'] = 'faculty/edit-faculty';
-
         return render_page('faculty/edit-faculty', $data);
     }
 
@@ -305,6 +302,7 @@ class Faculty extends BaseController {
 
         $updateData = [
             'faculty_role_id' => clean_number($this->request->getPost('edit_faculty_role_id')),
+            'edit_faculty_gender' => clean_name($this->request->getPost('edit_faculty_gender')),
             'faculty_first_name' => clean_name($this->request->getPost('edit_faculty_first_name')),
             'faculty_middle_name' => clean_name($this->request->getPost('edit_faculty_middle_name')),
             'faculty_last_name' => clean_name($this->request->getPost('edit_faculty_last_name')),

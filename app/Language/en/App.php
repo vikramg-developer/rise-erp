@@ -81,6 +81,8 @@ return [
     'email' => 'Email',
     'enter' => 'Enter',
     'enter_pincode' => 'Enter 6-digit pincode',
+    'employee' => 'Employee',
+    'employees ' => 'Employees',
     'excel' => 'Excel',
     'exam' => 'Exam',
     'examination' => 'Examination',
@@ -252,6 +254,8 @@ return [
     'title' => 'Title',
     'to' => 'To',
     'type' => 'Type',
+    'transgender' => 'Transgender',
+    
     // U    
     'university' => 'University',
     'update' => 'Update',
