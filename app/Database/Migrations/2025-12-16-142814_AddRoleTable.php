@@ -3,13 +3,11 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-
 use CodeIgniter\Database\RawSql;
 
-class AddRoleTable extends Migration
-{
-    public function up()
-    {
+class AddRoleTable extends Migration {
+
+    public function up() {
         $fields = [
             'role_id' => [
                 'type' => 'int',
@@ -56,15 +54,14 @@ class AddRoleTable extends Migration
                 'constraint' => '1'
             ]
         ];
-        
+
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('role_id');
         $this->forge->addUniqueKey('role_name');
         $this->forge->createTable('role');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->forge->dropTable('role');
     }
 }

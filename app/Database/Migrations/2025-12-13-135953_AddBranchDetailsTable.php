@@ -3,7 +3,6 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-
 use CodeIgniter\Database\RawSql;
 
 class AddBranchDetailsTable extends Migration {
@@ -15,94 +14,94 @@ class AddBranchDetailsTable extends Migration {
                 'auto_increment' => true,
             ],
             'branch_code' => [
-                'type'       => 'VARCHAR',
+                'type' => 'VARCHAR',
                 'constraint' => 500,
-                'null'       => false,
+                'null' => false,
             ],
             'branch_name' => [
-                'type'       => 'VARCHAR',
+                'type' => 'VARCHAR',
                 'constraint' => 500,
-                'null'       => false,
+                'null' => false,
             ],
             'signature_name' => [
-                'type'       => 'VARCHAR',
+                'type' => 'VARCHAR',
                 'constraint' => 100,
-                'null'       => false,
+                'null' => false,
             ],
             'branch_email' => [
-                'type'       => 'VARCHAR',
+                'type' => 'VARCHAR',
                 'constraint' => 100,
-                'null'       => false,
+                'null' => false,
             ],
-            'branch_contact_no' => [
-                'type'       => 'VARCHAR',
+            'branch_contact_number' => [
+                'type' => 'VARCHAR',
                 'constraint' => 10,
-                'null'       => false,
+                'null' => false,
             ],
             'branch_website' => [
-                'type'       => 'VARCHAR',
+                'type' => 'VARCHAR',
                 'constraint' => 250,
-                'null'       => false,
-            ],
-            'branch_type_id' => [
-                'type'       => 'INT',
-                'null'       => false,
+                'null' => false,
             ],
             'branch_address' => [
-                'type'       => 'VARCHAR',
+                'type' => 'VARCHAR',
                 'constraint' => 500,
-                'null'       => false,
+                'null' => false,
             ],
-             'branch_region_id' => [
-                'type'       => 'INT',
-                'null'       => false,
-                'comment'    => 'central/western etc from branch_region table',
+            'branch_region_id' => [
+                'type' => 'INT',
+                'null' => false,
+                'comment' => 'central/western etc from branch_region table',
             ],
             'branch_location_id' => [
-                'type'       => 'INT',
-                'null'       => false,
-                'comment'    => 'urban/rural/hilly etc from region table',
+                'type' => 'INT',
+                'null' => false,
+                'comment' => 'urban/rural/Ati-Durgam/Durgam etc from branch_location table',
             ],
             'branch_district_id' => [
-                'type'       => 'INT',
-                'null'       => false,
+                'type' => 'INT',
+                'null' => false,
             ],
             'branch_taluka_id' => [
-                'type'       => 'INT',
-                'null'       => false,
+                'type' => 'INT',
+                'null' => false,
             ],
             'branch_pincode_id' => [
-                'type'       => 'INT',
-                'null'       => false,
+                'type' => 'INT',
+                'null' => false,
+            ],
+            'branch_type_id' => [
+                'type' => 'INT',
+                'null' => false,
             ],
             'branch_principal_name' => [
-                'type'       => 'VARCHAR',
+                'type' => 'VARCHAR',
                 'constraint' => 500,
-                'null'       => false,
+                'null' => false,
             ],
-            'branch_principal_mobile_no' => [
-                'type'       => 'VARCHAR',
+            'branch_principal_contact_number' => [
+                'type' => 'VARCHAR',
                 'constraint' => 10,
-                'null'       => false,
+                'null' => false,
             ],
             'branch_logo' => [
-                'type'       => 'VARCHAR',
+                'type' => 'VARCHAR',
                 'constraint' => 10,
-                'null'       => false,
+                'null' => false,
             ],
             'branch_header' => [
-                'type'       => 'VARCHAR',
+                'type' => 'VARCHAR',
                 'constraint' => 10,
-                'null'       => false,
+                'null' => false,
             ],
-            'branch_udise_no' => [
-                'type'       => 'VARCHAR',
+            'branch_udise_number' => [
+                'type' => 'VARCHAR',
                 'constraint' => 10,
-                'null'       => false,
+                'null' => false,
             ],
             'branch_otp' => [
-                'type'       => 'INT',
-                'null'       => false,
+                'type' => 'INT',
+                'null' => false,
             ],
             'added_by' => [
                 'type' => 'varchar',
@@ -139,6 +138,42 @@ class AddBranchDetailsTable extends Migration {
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('branch_id');
+         /* branch_region */
+        $this->forge->addForeignKey(
+                'branch_region_id',
+                'branch_region',
+                'branch_region_id',
+                'on_delete',
+                'on_update'
+        );
+
+        /* branch_location (urban/rural/Ati-Durgam/Durgam) */
+        $this->forge->addForeignKey(
+                'branch_location_id',
+                'branch_location',
+                'branch_location_id',
+                'CASCADE',
+                'CASCADE'
+        );
+
+        /* branch_district */
+        $this->forge->addForeignKey(
+                'branch_district_id',
+                'branch_district',
+                'branch_district_id',
+                'CASCADE',
+                'CASCADE'
+        );
+
+        /* branch_taluka */
+        $this->forge->addForeignKey(
+                'branch_taluka_id',
+                'branch_taluka',
+                'branch_taluka_id',
+                'CASCADE',
+                'CASCADE'
+        );
+
         $this->forge->createTable('branch_details');
     }
 

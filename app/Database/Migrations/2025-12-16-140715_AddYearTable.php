@@ -3,14 +3,12 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-
 use CodeIgniter\Database\RawSql;
 
-class AddYearTable extends Migration
-{
-    public function up()
-    {
-         $fields = [
+class AddYearTable extends Migration {
+
+    public function up() {
+        $fields = [
             'year_id' => [
                 'type' => 'int',
                 'auto_increment' => true,
@@ -59,8 +57,7 @@ class AddYearTable extends Migration
         $this->forge->createTable('year');
     }
 
-    public function down()
-    {
-         $this->forge->dropTable('year');
+    public function down() {
+        $this->forge->dropTable('year');
     }
 }
