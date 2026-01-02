@@ -3,13 +3,13 @@
     <!-- Page Header -->
     <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
         <h1 class="page-title fw-semibold fs-18 mb-0">
-            <?= lang('App.add'); ?> <?= lang('App.faculty'); ?>
+            <?= lang('App.add'); ?> <?= lang('App.employee'); ?>
         </h1>
         <div class="ms-md-1 ms-0">
             <nav>
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="<?= base_url('dashboard')?>"><?= lang('App.faculty'); ?></a></li>
-                    <li class="breadcrumb-item active"><?= lang('App.add'); ?> <?= lang('App.faculty'); ?></li>
+                    <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>"><?= lang('App.employee'); ?></a></li>
+                    <li class="breadcrumb-item active"><?= lang('App.add'); ?> <?= lang('App.employee'); ?></li>
                 </ol>
             </nav>
         </div>
@@ -29,7 +29,7 @@
                         <div class="row gy-4">
 
                             <!-- FACULTY ROLE -->
-                            <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="col-xl-4 col-lg-4 col-md-6">
                                 <label class="form-label">
                                     <?= lang('App.faculty'); ?> <?= lang('App.role'); ?> <span class="text-danger">*</span>
                                 </label>
@@ -45,7 +45,23 @@
                                 <small class="text-danger" id="faculty_role_id_error" style="display:none;"></small>
                             </div>
 
-                            <div class="col-xl-9 d-none d-lg-block"></div>
+                            <!-- GENDER -->
+                            <div class="col-xl-4 col-lg-4 col-md-6">
+                                <label class="form-label">
+                                    <?= lang('App.gender'); ?> <span class="text-danger">*</span>
+                                </label>
+                                <select class="from-control js-example-basic-single" name="faculty_gender" id="faculty_gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="Male"><?= lang('App.male'); ?></option>
+                                    <option value="Female"><?= lang('App.female'); ?></option>
+                                    <option value="Other"><?= lang('App.transgender'); ?></option>
+                                </select>
+                                <small class="text-danger" id="faculty_gender_error" style="display:none;"></small>
+                            </div>
+
+
+                         <div class="col-xl-4 d-none d-lg-block"></div>
+
 
                             <!-- FIRST NAME -->
                             <div class="col-xl-4 col-md-6">
@@ -201,4 +217,4 @@
     </div>
 </div>
 
-    
+
