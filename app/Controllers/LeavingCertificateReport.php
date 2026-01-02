@@ -65,10 +65,10 @@ class LeavingCertificateReport extends BaseController {
 
 //
                 $badges = '';
-                if ($lc['is_duplicate'] == 1) {
-                    $badges = '<span class="badge bg-warning-transparent">Duplicate</span>';
-                } elseif ($lc['is_cancelled'] == 1) {
+                if ($lc['is_cancelled'] == 1) {
                     $badges = '<span class="badge bg-danger-transparent">Cancelled</span>';
+                }elseif ($lc['is_duplicate'] == 1) {
+                    $badges = '<span class="badge bg-warning-transparent">Duplicate</span>';
                 }
 
                 $print_btn = '';

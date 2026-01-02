@@ -151,6 +151,14 @@ class Permissions extends BaseConfig {
         'viewBonafideCertificate',
         'deleteBonafideCertificate'
     ];
+    
+    /** Activity Log permissions */
+    public array $activity_log = [
+        'createActivityLog',
+        'updateActivityLog',
+        'viewActivityLog',
+        'deleteActivityLog'
+    ];
 
     /** Master permissions (auto-merged) */
     public array $master;
@@ -161,7 +169,7 @@ class Permissions extends BaseConfig {
     public array $faculty_module;
     public array $faculty_module_category;
     public array $faculty_profile_module;
-    public array $faculty_profile_module_category;
+//    public array $faculty_profile_module_category;
     public array $ticket_module;
     public array $ticket_module_category;
     public array $certificates;
@@ -173,6 +181,7 @@ class Permissions extends BaseConfig {
                 $this->headGroup,
                 $this->head,
                 $this->department,
+                $this->activity_log,                
         );
         $this->dashboard = array_merge(
                 $this->adminDashboard,
@@ -191,7 +200,7 @@ class Permissions extends BaseConfig {
         $this->faculty_module = array_merge(
                 $this->faculty_registration
         );
-
+        
         //faculty profile(API)
         $this->faculty_profile_module = array_merge(
                 $this->faculty_profile
@@ -221,10 +230,11 @@ class Permissions extends BaseConfig {
                 $this->faculty_module
         );
 
-        //Faculty Regiatration
-        $this->faculty_profile_module_category = array_merge(
-                $this->faculty_profile_module
-        );
+//        //Faculty Profile
+//        $this->faculty_profile_module_category = array_merge(
+//                $this->faculty_profile_module
+//        );
+//        
         //Ticket
         $this->ticket_module_category = array_merge(
                 $this->ticket_module

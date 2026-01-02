@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use \App\Traits\ActivityLoggerTrait;
 
 class ModelFacultyRegistration extends Model {
+
+    use ActivityLoggerTrait;
 
     protected $table = 'faculty_registration';
     protected $primaryKey = 'faculty_registration_id';
@@ -16,6 +19,7 @@ class ModelFacultyRegistration extends Model {
         'faculty_first_name',
         'faculty_middle_name',
         'faculty_last_name',
+        'faculty_gender',
         'faculty_mobile_number',
         'faculty_email_id',
         'faculty_aadhar_number',
@@ -34,6 +38,7 @@ class ModelFacultyRegistration extends Model {
         'faculty_first_name' => 'required|min_length[2]|alpha_space',
         'faculty_middle_name' => 'required|min_length[2]|alpha_space',
         'faculty_last_name' => 'required|min_length[2]|alpha_space',
+        'faculty_gender'  => 'required|in_list[Male,Female,Transgender]',
         'faculty_mobile_number' => 'required|numeric|exact_length[10]|is_unique[faculty_registration.faculty_mobile_number]',
         'faculty_email_id' => 'required|trim|valid_email|is_unique[faculty_registration.faculty_email_id]',
         'faculty_aadhar_number' => 'required|numeric|exact_length[12]|is_unique[faculty_registration.faculty_aadhar_number]',
@@ -43,6 +48,9 @@ class ModelFacultyRegistration extends Model {
     protected $validationMessages = [
         'faculty_role_id' => [
             'required' => 'Faculty Role is required.',
+        ],
+        'faculty_gender' => [
+            'required' => 'Faculty Gender is required.',
         ],
         'faculty_first_name' => [
             'required' => 'First Name is required.',
@@ -189,12 +197,12 @@ class ModelFacultyRegistration extends Model {
             'faculty_pan_number' => "required|regex_match[/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/]|is_unique[faculty_registration.faculty_pan_number,faculty_registration_id,{$id}]",
         ];
     }
-    
-    
-    protected $beforeUpdate = ['setUpdateOrDeleteDate'];
 
-    protected function setUpdateOrDeleteDate(array $data)
-    {
+    protected $beforeUpdate = ['setUpdateOrDeleteDate', 'captureOldData'];
+    protected $afterInsert = ['logInsert'];
+    protected $afterUpdate = ['logUpdate'];
+
+    protected function setUpdateOrDeleteDate(array $data) {
         // DELETE or REVERT
         if (array_key_exists('is_deleted', $data['data'])) {
             $data['data']['deleted_at'] = date('Y-m-d H:i:s');
@@ -205,5 +213,4 @@ class ModelFacultyRegistration extends Model {
         $data['data']['updated_at'] = date('Y-m-d H:i:s');
         return $data;
     }
-
 }

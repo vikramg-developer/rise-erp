@@ -159,13 +159,13 @@
             "deleteLibrarianDashboard"
         ]
     },
-    "accontant_dashboard": {
-        "label": "Accontant Dashboard",
+    "accountant_dashboard": {
+        "label": "Accountant Dashboard",
         "actions": [
-            "createAccontantDashboard",
-            "updateAccontantDashboard",
-            "viewAccontantDashboard",
-            "deleteAccontantDashboard"
+            "createAccountantDashboard",
+            "updateAccountantDashboard",
+            "viewAccountantDashboard",
+            "deleteAccountantDashboard"
         ]
     },
     "iqac_dashboard": {
@@ -193,6 +193,16 @@
             "updateApproveRegistration",
             "viewApproveRegistration",
             "deleteApproveRegistration"
+        ]
+    },
+    
+    "activity_log": {
+        "label": "Activity Log",
+        "actions": [
+            "createActivityLog",
+            "updateActivityLog",
+            "viewActivityLog",
+            "deleteActivityLog"
         ]
     }
 }

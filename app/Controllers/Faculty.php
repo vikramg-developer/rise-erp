@@ -51,17 +51,18 @@ class Faculty extends BaseController {
             $faculty_rise_no = 'F' . $yearPrefix . $branchCode . str_pad($rise_no_counter['rise_no'], 4, '0', STR_PAD_LEFT);
 
             $insertData = [
-                'faculty_role_id' => clean_number($this->request->getVar('faculty_role_id')),
-                'faculty_first_name' => clean_name($this->request->getVar('faculty_first_name')),
-                'faculty_middle_name' => clean_name($this->request->getVar('faculty_middle_name')),
-                'faculty_last_name' => clean_name($this->request->getVar('faculty_last_name')),
+                'faculty_role_id'       => clean_number($this->request->getVar('faculty_role_id')),
+                'faculty_gender'        => clean_name($this->request->getVar('faculty_gender')),
+                'faculty_first_name'    => clean_name($this->request->getVar('faculty_first_name')),
+                'faculty_middle_name'   => clean_name($this->request->getVar('faculty_middle_name')),
+                'faculty_last_name'     => clean_name($this->request->getVar('faculty_last_name')),
                 'faculty_mobile_number' => clean_number($this->request->getVar('faculty_mobile_number')),
-                'faculty_email_id' => clean_email($this->request->getVar('faculty_email_id')),
+                'faculty_email_id'      => clean_email($this->request->getVar('faculty_email_id')),
                 'faculty_aadhar_number' => clean_number($this->request->getVar('faculty_aadhar_number')),
-                'faculty_pan_number' => clean_name($this->request->getVar('faculty_pan_number')),
-                'faculty_password' => clean_name($this->request->getVar('faculty_password')),
-                'faculty_rise_no' => $faculty_rise_no,
-                'added_by' => session('rise_no'),
+                'faculty_pan_number'    => clean_name($this->request->getVar('faculty_pan_number')),
+                'faculty_password'      => clean_name($this->request->getVar('faculty_password')),
+                'faculty_rise_no'       => $faculty_rise_no,
+                'added_by'              => session('rise_no'),
             ];
 
             if (!$this->modelfaculty->insert($insertData)) {
@@ -125,63 +126,60 @@ class Faculty extends BaseController {
         $sr_no = $start + 1;
         $data = [];
 
+        $nameMap = $this->modelfaculty->getRiseNoNameMap();
+        $roleMap = $this->modelrole->getRoleIdNameMap();
+
         foreach ($rows as $row) {
 
             /* =====================
-             * ACTION BUTTONS (FIX: INITIALIZED)
+             * ACTION BUTTONS (USING HELPER)
              * ===================== */
-            $buttons = ''; // <<< THIS WAS MISSING (CAUSE OF ERROR)
+            $buttons = '';
+
             // EDIT
             if (hasPermission('updateFaculty')) {
 
                 if ($row['is_deleted'] == 1) {
-                    $buttons .= '
-            <a href="javascript:void(0)"
-               class="btn btn-icon btn-sm btn-secondary rounded-pill disabled"
-               data-bs-toggle="tooltip"
-               data-bs-custom-class="tooltip-secondary"
-               title="Faculty is deleted">
-                <i class="ri-pencil-fill"></i>
-            </a>';
+
+                    // Disabled Edit button
+                    $buttons .= '<button class="btn btn-icon btn-sm btn-secondary rounded-pill disabled"
+                            data-bs-toggle="tooltip"
+                            data-bs-custom-class="tooltip-secondary"
+                            title="Faculty is deleted">
+                            <i class="ri-pencil-fill"></i>
+                         </button> ';
                 } else {
-                    $buttons .= '
-            <a href="' . base_url('faculty/edit-faculty/' . $row['faculty_registration_id']) . '"
-               class="btn btn-icon btn-sm btn-secondary rounded-pill"
-               data-bs-toggle="tooltip"
-               data-bs-custom-class="tooltip-secondary"
-               title="Edit">
-                <i class="ri-pencil-fill"></i>
-            </a>';
+
+                    $buttons .= actionHrefButton('Edit', base_url('faculty/edit-faculty/' . $row['faculty_registration_id']));
                 }
             }
 
             // DELETE / REVERT
             if (hasPermission('deleteFaculty')) {
 
+                // DELETE
                 if ($row['is_deleted'] == 0 || $row['is_deleted'] == 2) {
-                    $buttons .= '
-            <button class="btn btn-icon btn-sm btn-danger rounded-pill delete"
-                    data-id="' . $row['faculty_registration_id'] . '"
-                    data-name="' . ($nameMap[$row['faculty_rise_no']] ?? '') . '"
-                    data-bs-toggle="tooltip"
-                    data-bs-custom-class="tooltip-danger"
-                    title="Delete">
-                <i class="ri-delete-bin-fill"></i>
-            </button>';
+                    $buttons .= actionButton('Delete', ['id' => $row['faculty_registration_id'], 'name' => $nameMap[$row['faculty_rise_no']] ?? '']);
                 }
 
+                // REVERT
                 if ($row['is_deleted'] == 1) {
-                    $buttons .= '
-            <button class="btn btn-icon btn-sm btn-warning rounded-pill revert"
-                    data-id="' . $row['faculty_registration_id'] . '"
-                    data-name="' . ($nameMap[$row['faculty_rise_no']] ?? '') . '"
-                    data-bs-toggle="tooltip"
-                    data-bs-custom-class="tooltip-warning"
-                    title="Revert">
-                <i class="ri-arrow-go-back-fill"></i>
-            </button>';
+                    $buttons .= actionButton('Revert', ['id' => $row['faculty_registration_id'], 'name' => $nameMap[$row['faculty_rise_no']] ?? '']);
                 }
             }
+
+            /* =====================
+             * FACULTY NAME + ROLE
+             * ===================== */
+            $facultyName = esc($nameMap[$row['faculty_rise_no']] ?? '');
+            $facultyRole = esc($roleMap[$row['faculty_role_id']] ?? '');
+
+            $nameWithRole = '<div class="text-center">' . $facultyName .
+                    '<div class="small text-muted mt-1">
+                        <span class="badge bg-info-transparent px-3 py-2 fw-semibold" style="font-size:0.8rem">
+                            ' . $facultyRole . '
+                    </div>
+                </div>';
 
             /* =====================
              * ADDED BY
@@ -228,21 +226,20 @@ class Faculty extends BaseController {
             }
 
             /* =====================
-             * FINAL ROW (UNCHANGED)
+             * FINAL ROW
              * ===================== */
             $data[] = [
                 $sr_no++,
                 $buttons,
                 $row['faculty_rise_no'],
-                $nameMap[$row['faculty_rise_no']] ?? '',
-                $row['faculty_mobile_number'],
+//              esc($nameMap[$row['faculty_rise_no']] ?? ''),
+                $nameWithRole,
+                esc($row['faculty_mobile_number']),
                 $addedBy,
                 $updatedBy,
                 $remark
             ];
         }
-
-
 
         return $this->response->setJSON([
                     'draw' => intval($draw),
@@ -267,7 +264,6 @@ class Faculty extends BaseController {
         $data['roles'] = $this->modelrole->getRoles();
         $data['faculty'] = $faculty;
         $data['jspath'] = 'faculty/edit-faculty';
-
         return render_page('faculty/edit-faculty', $data);
     }
 
@@ -306,6 +302,7 @@ class Faculty extends BaseController {
 
         $updateData = [
             'faculty_role_id' => clean_number($this->request->getPost('edit_faculty_role_id')),
+            'edit_faculty_gender' => clean_name($this->request->getPost('edit_faculty_gender')),
             'faculty_first_name' => clean_name($this->request->getPost('edit_faculty_first_name')),
             'faculty_middle_name' => clean_name($this->request->getPost('edit_faculty_middle_name')),
             'faculty_last_name' => clean_name($this->request->getPost('edit_faculty_last_name')),

@@ -1,29 +1,15 @@
+// PAN Number
+panUppercase('input[name="edit_faculty_pan_number"]');
 
-$(document).on('input', 'input[name="edit_faculty_pan_number"]', function () {
-    this.value = this.value.toUpperCase();
-});
+// First, Middle, Last Name (NO SPACE)
+nameUppercaseOnly(
+        'input[name="edit_faculty_first_name"], ' +
+        'input[name="edit_faculty_middle_name"], ' +
+        'input[name="edit_faculty_last_name"]'
+        );
 
-$(document).on(
-    'input',
-    'input[name="edit_faculty_first_name"], input[name="edit_faculty_middle_name"], input[name="edit_faculty_last_name"]',
-    function () {
-       this.value = this.value
-            .replace(/[^a-zA-Z\s]/g, '') // remove numbers & special chars
-            .toUpperCase();              // convert to uppercase
-    }
-);
-
-$(document).on(
-    'input',
-    'input[name="edit_faculty_mobile_number"]',
-    function () {
-        this.value = this.value
-            .replace(/[^0-9]/g, '')
-            .slice(0, 10);
-    }
-);
-
-
+// Mobile Number
+mobileNumberOnly('input[name="edit_faculty_mobile_number"]');
 
 /**
  * ================================

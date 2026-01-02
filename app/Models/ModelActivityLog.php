@@ -20,4 +20,30 @@ class ModelActivityLog extends Model {
     ];
     public $timestamps = false;
     protected $allowCallbacks = false;
+    
+    public function countAllActivityLog() {
+        return $this->builder()
+                        ->countAllResults();
+    }
+
+    public function countFilteredActivityLog($search) {
+        $builder = $this->builder();
+
+        if (!empty($search)) {
+            $builder->like('table_name', $search);
+        }
+
+        return $builder->countAllResults();
+    }
+
+    public function getFilteredActivityLog($length, $start, $search) {
+        $builder = $this->builder()
+                ->orderBy('activity_log_id', 'DESC');
+
+        if (!empty($search)) {
+            $builder->like('table_name', $search);
+        }
+
+        return $builder->get($length, $start)->getResultArray();
+    }
 }

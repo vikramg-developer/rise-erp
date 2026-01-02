@@ -29,6 +29,9 @@
                         <table id="approveRegistrationList" class="table table-bordered text-nowrap table-primary table-striped w-100">
                             <thead>
                                 <tr>
+                                    <th><?= lang('App.action'); ?></th>
+                                    <th><?= lang('App.approve'); ?> <?= lang('App.status'); ?></th>
+
                                     <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
                                     <th><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
                                     <th><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>
@@ -36,7 +39,7 @@
                                     <th><?= lang('App.year'); ?></th>
                                     <th><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
                                     <th><?= lang('App.form'); ?> <?= lang('App.print'); ?></th>
-                                    <th><?= lang('App.action'); ?></th>
+
                                 </tr>
                             </thead>
                         </table>
@@ -66,15 +69,15 @@
             <div class="d-sm-flex align-items-top p-4 border-bottom border-block-end-dashed main-profile-cover">
                 <div>
                     <span class="avatar avatar-xxl avatar-rounded me-3">
-                        <img src="<?php echo base_url('assets/images/student-photo/boy1.jpg'); ?>" alt="">
+                        <img src="<?php echo base_url('assets/images/student-photo/girl1.jpg'); ?>" alt="">
                     </span>
                 </div>
                 <div class="flex-fill main-profile-info">
                     <div class="d-flex align-items-center justify-content-between">
-                        <h6 class="fw-semibold mb-1 text-fixed-white">Amar Jadhav</h6>
+                        <h6 class="fw-semibold mb-1 text-fixed-white">Sonal Jadhav</h6>
                         <button type="button" class="btn-close crm-contact-close-btn" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
-                    <p class="mb-1 text-muted text-fixed-white op-7">202610100001</p>
+                    <p class="mb-1 text-muted text-fixed-white op-7">202510100001</p>
                     <p class="fs-12 text-fixed-white mb-4 op-5">  
                         <span class="me-3"><i class="ri-bank-line me-1 align-middle"></i>B.A.</span> 
                         <span><i class="ri-calendar-line me-1 align-middle"></i>First Year</span> 
@@ -97,7 +100,7 @@
                             </span>
                         </div>
                         <div>
-                            amarjadhav@gmail.com
+                           sonaljadhav@gmail.com
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-2">
@@ -107,7 +110,7 @@
                             </span>
                         </div>
                         <div>
-                            +(555) 555-1234
+                            +914578651258
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-0">
