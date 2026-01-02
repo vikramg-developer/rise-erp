@@ -8,7 +8,7 @@ $(document).ready(function () {
         destroy: true,
 
         ajax: {
-            url: BASE_URL +"feedback/fetch-feedback-master",
+            url: BASE_URL + "feedback/fetch-feedback-master",
             type: "POST",
             data: function (d) {
                 d[csrfName] = csrfHash; // ALWAYS send current token
@@ -49,10 +49,7 @@ $("#feedback-master-form").on("submit", function (e) {
                 });
                 return;
             }
-
-            
-            
-             // ---------- SUCCESS TOAST ----------
+            // ---------- SUCCESS TOAST ----------
             if (response.action === 'UPDATE') {
                 showToast('success', 'Feedback Master updated successfully');
             } else {
@@ -84,13 +81,13 @@ $("#feedback-master-form").on("submit", function (e) {
 //---------- Delete  ----------//
 
 $(document).on("click", ".delete", function () {
-    let feedback_master_id = $(this).data("feedback_master_id");
-    let feedback_master_name = $(this).data("feedback_name");
+    let feedback_master_id = $(this).data("id");
+    let feedback_master_name = $(this).data("feedback_master_name");
 
     confirmDelete(feedback_master_name).then(result => {
         if (result.isConfirmed) {
             $.ajax({
-                url: BASE_URL +"feedback/delete-feedback-master",
+                url: BASE_URL + "feedback/delete-feedback-master",
                 type: "POST",
                 data: {feedback_master_id: feedback_master_id, [csrfName]: csrfHash},
                 dataType: "json",
@@ -115,13 +112,14 @@ $(document).on("click", ".delete", function () {
 });
 //---------- Revert  ----------//
 $(document).on("click", ".revert", function () {
-    let feedback_master_id = $(this).data("feedback_master_id");
-    let feedback_master_name = $(this).data("feedback_name");
+    let feedback_master_id = $(this).data("id");
+    let feedback_master_name = $(this).data("feedback_master_name");
+
 
     confirmRevert(feedback_master_name).then(result => {
         if (result.isConfirmed) {
             $.ajax({
-                url: BASE_URL +"feedback/revert-feedback-master",
+                url: BASE_URL + "feedback/revert-feedback-master",
                 type: "POST",
                 data: {feedback_master_id: feedback_master_id, [csrfName]: csrfHash},
                 dataType: "json",
@@ -149,7 +147,7 @@ $(document).on("click", ".revert", function () {
 $(document).on('click', '.edit', function () {
 
     let id = $(this).data('id');
-    console.log('Edit ID:', id); 
+    console.log('Edit ID:', id);
 
     $.ajax({
         url: BASE_URL + "feedback/get-feedback-master",
@@ -175,8 +173,8 @@ $(document).on('click', '.edit', function () {
                 $('.modal-title').text('Edit Feedback Master');
                 $('#submit_btn').text('Update');
 
-                $('#add_feedback_master_modal').modal('show'); 
-                
+                $('#add_feedback_master_modal').modal('show');
+
             }
         }
     });

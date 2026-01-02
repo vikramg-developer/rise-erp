@@ -252,7 +252,7 @@ return [
     'transgender' => 'Transgender',
     'ticket' => 'Ticket',
     'title' => 'Title',
-    'to_date' => 'To Date',
+    'to' => 'To',
     'type' => 'Type',
     'transgender' => 'Transgender',
     
@@ -373,4 +373,14 @@ return [
     'by' => 'By',
     'department' => 'Department',
     'edit' => 'Edit',
+    'activity' => 'Activity',
+    'log' => 'Log',
+    'table' => 'Table',
+    'column' => 'Column',
+    'record' => 'Record',
+    'old' => 'Old',
+    'new' => 'New',
+    'values' => 'Values',
+    'ip_address' => 'IP Address',
+    'agent' => 'Agent',
 ];

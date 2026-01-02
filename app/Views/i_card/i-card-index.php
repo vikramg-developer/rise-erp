@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
-                <?= form_open('i-card'); ?>
+               
                 <div class="card-body add-products p-0">
                     <div class="p-4">
                         <div class="row gx-5">
@@ -64,10 +64,10 @@
                         </div>
                     </div>
                     <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary m-1"><?= lang('App.search'); ?></button>
+                        <button type="" class="btn btn-primary m-1"><?= lang('App.search'); ?></button>
                     </div>
                 </div>
-                <?= form_close(); ?>
+                
             </div>
         </div>
     </div>
@@ -106,7 +106,7 @@
                                 <td>Civil Engineering</td>
                                 <td>Third Year</td>
                                 <td>
-                                    <a href="<?php echo base_url('i-card-print'); ?>" target="_blank" class="btn btn-warning mb-1" ><?= lang('App.icard'); ?></a>
+                                    <a href="<?php echo base_url('icard/i-card-print'); ?>" target="_blank" class="btn btn-warning mb-1" ><?= lang('App.icard'); ?></a>
                                 </td>
                             </tr>
                             <tr>

@@ -317,6 +317,12 @@ $permissions = config('Permissions');
                                                                     <a href="<?php echo base_url('department'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.department'); ?></a>
                                                                 </li>
                                                             <?php endif; ?>
+                                                            
+                                                            <?php if (hasAnyPermission($permissions->activity_log)): ?>
+                                                                <li class="slide">
+                                                                    <a href="<?php echo base_url('activity-log'); ?>" class="side-menu__item"><?= lang('App.activity'); ?> <?= lang('App.log'); ?></a>
+                                                                </li>
+                                                            <?php endif; ?>
                                                         </ul>
                                                     </li>
                                                 <?php endif; ?>
