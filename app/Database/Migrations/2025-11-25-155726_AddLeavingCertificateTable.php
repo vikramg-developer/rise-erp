@@ -67,6 +67,7 @@ class AddLeavingCertificateTable extends Migration {
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('leaving_certificate_id');
+        $this->forge->addUniqueKey('leaving_certificate_no');
         $this->forge->addForeignKey(
                 'yearwise_student_data_id',
                 'yearwise_student_data',
