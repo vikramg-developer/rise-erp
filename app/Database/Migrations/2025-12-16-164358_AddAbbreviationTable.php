@@ -55,7 +55,6 @@ class AddAbbreviationTable extends Migration {
                 'constraint' => '1'
             ]
         ];
-
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('abbreviation_id');
         $this->forge->addUniqueKey('abbreviation_name');

@@ -3,7 +3,6 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-
 use CodeIgniter\Database\RawSql;
 
 class AddBloodGroupTable extends Migration {
@@ -54,7 +53,7 @@ class AddBloodGroupTable extends Migration {
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('blood_group_id');
-         $this->forge->addUniqueKey('blood_group_name');
+        $this->forge->addUniqueKey('blood_group_name');
         $this->forge->createTable('blood_group');
     }
 

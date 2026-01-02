@@ -5,38 +5,36 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class AddFeedbackMaster extends Migration
-{
-    public function up()
-    {
-        $fields=[
-            'master_id'=>[
-                'type'=>'INT',
-                'constraint'=>11,
-                'auto_increment'=>true
+class AddFeedbackMaster extends Migration {
+
+    public function up() {
+        $fields = [
+            'feedback_master_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'auto_increment' => true
             ],
-            'feedback_name'=>[
-                'type'=>'VARCHAR',
-                'constraint'=>500,
-            ],  
-            'subject_type_id'=>[
-                'type'=>'INT',
-                'constraint'=>11,
+            'feedback_name' => [
+                'type' => 'VARCHAR',
+                'constraint' => 500,
             ],
-            'semester_id'=>[
-                'type'=>'INT',
-                'constraint'=>11,
+            'subject_type_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
             ],
-            'semester_part_id'=>[
-                'type'=>'INT',
-                'constraint'=>11,
+            'semester_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
             ],
-            'academic_year_id'=>[
-                'type'=>'INT',
-                'constraint'=>11,
+            'semester_part_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
             ],
-           
-             'added_by' => [
+            'academic_year_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
+            ],
+            'added_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
@@ -70,13 +68,44 @@ class AddFeedbackMaster extends Migration
             ]
         ];
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('master_id');
-         
+        $this->forge->addPrimaryKey('feedback_master_id');
+        /* Subject Type */
+        $this->forge->addForeignKey(
+                'subject_type_id',
+                'subject_type',
+                'subject_type_id',
+                'CASCADE',
+                'CASCADE'
+        );
+        /* semester */
+        $this->forge->addForeignKey(
+                'semester_id',
+                'semester',
+                'semester_id',
+                'CASCADE',
+                'CASCADE'
+        );
+        /* semester_part */
+        $this->forge->addForeignKey(
+                'semester_part_id',
+                'semester_part',
+                'semester_part_id',
+                'CASCADE',
+                'CASCADE'
+        );
+        /* academic_year */
+        $this->forge->addForeignKey(
+                'academic_year_id',
+                'academic_year',
+                'academic_year_id',
+                'CASCADE',
+                'CASCADE'
+        );
+
         $this->forge->createTable('feedback_master');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->forge->dropTable('feedback_master');
     }
 }

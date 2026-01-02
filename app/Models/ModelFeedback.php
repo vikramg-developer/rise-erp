@@ -15,9 +15,9 @@ class ModelFeedback extends Model {
     protected $returnType = 'array';
     protected $allowedFields = [
         'feedback_name',
-        'type_id',
+        'subject_type_id',
         'semester_id',
-        'part_id',
+        'semester_part_id',
         'academic_year_id',
         'is_deleted',
         'added_by',
@@ -66,9 +66,9 @@ class ModelFeedback extends Model {
         ]);
 
         // 🔗 JOINS
-        $builder->join('subject_type st', 'st.subject_type_id  = fm.type_id', 'left');
+        $builder->join('subject_type st', 'st.subject_type_id  = fm.subject_type_id', 'left');
         $builder->join('semester s', 's.semester_id = fm.semester_id', 'left');
-        $builder->join('semester_part sem_part', 'sem_part.semester_part_id = fm.part_id', 'left');
+        $builder->join('semester_part sem_part', 'sem_part.semester_part_id = fm.semester_part_id', 'left');
         $builder->join('academic_year aca_year', 'aca_year.academic_year_id = fm.academic_year_id', 'left');
         return $builder->limit($length, $start)->get()->getResultArray();
     }
