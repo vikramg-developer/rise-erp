@@ -22,7 +22,7 @@ class StudentProfile extends BaseController {
         $data['title'] = lang('App.rise') . "-" . lang('App.student') . " " . lang('App.profile');
         $data['student_registration_data'] = $this->modelstudentregistration->find($student_registration_id);
         $data['student_personalinfo_data'] = $this->modelstudentpersonalinformation->find($student_registration_id);
-        return render_page('student_profile/student-profile-dashboard', $data);
+        return render_page('student_profile/student-profile-dashboard',$data);
     }
 
     public function add_personal_information() {

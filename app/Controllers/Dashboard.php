@@ -6,30 +6,37 @@ use App\Controllers\BaseController;
 
 class Dashboard extends BaseController {
 
-    public function index() {
-        // Login check
-        if (!session('logged_in')) {
-            return redirect()->to('/login');
-        }
-
-        $dashboards = [
-//             'permission' =>'views'
-            'viewAdminDashboard' => 'dashboard/admin-dashboard',
-            'viewFacultyDashboard' => 'dashboard/faculty-dashboard',
-            'viewLibrarianDashboard' => 'dashboard/librarian-dashboard',
-            'viewAccountantDashboard' => 'dashboard/accountant-dashboard',
-            'viewIqacDashboard' => 'dashboard/iqac-dashboard',
-            'viewStudentDashboard' => 'dashboard/student-dashboard',
-        ];
-
-        foreach ($dashboards as $permission => $view) {
-            if (hasPermission($permission)) {
-                return render_page($view);
-            }
-        }
-
-        return redirect()->to('forbidden');
+   public function index()
+{
+    //  Login check
+    if (!session()->get('logged_in')) {
+        return redirect()->to('/login');
     }
+
+    // Common data for all dashboards
+    $data = [
+        'jspath' => 'dashboard/dashboard-common',
+    ];
+
+    // Permission → Dashboard view mapping
+    $dashboards = [
+        'viewAdminDashboard'      => 'dashboard/admin-dashboard',
+        'viewFacultyDashboard'    => 'dashboard/faculty-dashboard',
+        'viewLibrarianDashboard'  => 'dashboard/librarian-dashboard',
+        'viewAccountantDashboard' => 'dashboard/accountant-dashboard',
+        'viewIqacDashboard'       => 'dashboard/iqac-dashboard',
+        'viewStudentDashboard'    => 'dashboard/student-dashboard',
+    ];
+
+    foreach ($dashboards as $permission => $view) {
+        if (hasPermission($permission)) {
+            return render_page($view, $data); 
+        }
+    }
+
+    return redirect()->to('/forbidden');
+}
+
 
     public function admin_dashboard() {
         $this->authorize('viewAdminDashboard');
