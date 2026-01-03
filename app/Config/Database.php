@@ -33,7 +33,7 @@ class Database extends Config
 //        'username' => 'root',
 //        'password' => '',
 //        'database' => 'rise',
-//     
+     
 //        Local Server Database
 //        'hostname' => '192.168.1.247',
 //        'username' => 'riseuser',

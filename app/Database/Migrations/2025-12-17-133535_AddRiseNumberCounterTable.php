@@ -3,13 +3,11 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-
 use CodeIgniter\Database\RawSql;
 
-class AddRiseNumberCounterTable extends Migration
-{
-    public function up()
-    {
+class AddRiseNumberCounterTable extends Migration {
+
+    public function up() {
         $fields = [
             'rise_number_counter_id' => [
                 'type' => 'int',
@@ -28,7 +26,7 @@ class AddRiseNumberCounterTable extends Migration
                 'constraint' => '50',
                 'null' => false
             ],
-             'added_by' => [
+            'added_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
@@ -61,14 +59,21 @@ class AddRiseNumberCounterTable extends Migration
                 'constraint' => '1'
             ]
         ];
-        
+
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('rise_number_counter_id');
+        /* academic_year_id  */
+        $this->forge->addForeignKey(
+                'academic_year_id',
+                'academic_year',
+                'academic_year_id',
+                'CASCADE',
+                'CASCADE'
+        );
         $this->forge->createTable('rise_number_counter');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->forge->dropTable('rise_number_counter');
     }
 }

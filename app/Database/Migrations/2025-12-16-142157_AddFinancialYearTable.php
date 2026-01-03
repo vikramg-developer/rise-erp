@@ -3,13 +3,11 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-
 use CodeIgniter\Database\RawSql;
 
-class AddFinancialYearTable extends Migration
-{
-    public function up()
-    {
+class AddFinancialYearTable extends Migration {
+
+    public function up() {
         $fields = [
             'financial_year_id' => [
                 'type' => 'int',
@@ -61,11 +59,9 @@ class AddFinancialYearTable extends Migration
         $this->forge->addPrimaryKey('financial_year_id');
         $this->forge->addUniqueKey('financial_year_name');
         $this->forge->createTable('financial_year');
-        
     }
 
-    public function down()
-    {
-         $this->forge->dropTable('financial_year');
+    public function down() {
+        $this->forge->dropTable('financial_year');
     }
 }

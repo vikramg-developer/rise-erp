@@ -3,7 +3,6 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-
 use CodeIgniter\Database\RawSql;
 
 class AddSemesterPartTable extends Migration {
@@ -19,7 +18,7 @@ class AddSemesterPartTable extends Migration {
                 'constraint' => '50',
                 'null' => false
             ],
-             'added_by' => [
+            'added_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false

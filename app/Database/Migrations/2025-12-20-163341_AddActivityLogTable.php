@@ -18,7 +18,7 @@ class AddActivityLogTable extends Migration {
                 'constraint' => 100,
                 'null' => false,
             ],
-            'coumn_names' => [
+            'column_names' => [
                 'type' => 'LONGTEXT',
             ],
             'record_id' => [
@@ -61,7 +61,7 @@ class AddActivityLogTable extends Migration {
             'added_at' => [
                 'type' => 'TIMESTAMP',
                 'null' => true,
-                'default' => 'CURRENT_TIMESTAMP',
+                'default' => new Rawsql('CURRENT_TIMESTAMP'),
             ],
         ];
 

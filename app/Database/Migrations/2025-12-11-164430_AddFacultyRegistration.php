@@ -22,6 +22,10 @@ class AddFacultyRegistration extends Migration {
                 'type' => 'INT',
                 'constraint' => 11,
             ],
+            'faculty_password' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'faculty_first_name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 100,
@@ -34,7 +38,7 @@ class AddFacultyRegistration extends Migration {
                 'type' => 'VARCHAR',
                 'constraint' => 100,
             ],
-            'faculty_mobile_number' => [
+            'faculty_contact_number' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
             ],
@@ -50,19 +54,14 @@ class AddFacultyRegistration extends Migration {
                 'type' => 'VARCHAR',
                 'constraint' => 100,
             ],
-            'faculty_password' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
-            ],
             'is_first_login' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
                 'default' => 1,
             ],
             'faculty_status' => [
-                'type' => 'TINYINT',
-                'constraint' => 1,
-                'default' => 1,
+                'type' => new RawSql("ENUM('active','inactive')"),
+                'default' => 'active',
             ],
             'added_by' => [
                 'type' => 'VARCHAR',
@@ -72,7 +71,7 @@ class AddFacultyRegistration extends Migration {
             'added_at' => [
                 'type' => 'TIMESTAMP',
                 'null' => false,
-                'default' => new RawSql('CURRENT_TIMESTAMP'),        
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
             ],
             'updated_by' => [
                 'type' => 'VARCHAR',
@@ -97,9 +96,8 @@ class AddFacultyRegistration extends Migration {
         ]);
 
         $this->forge->addKey('faculty_registration_id', true);
-
         $this->forge->addUniqueKey('faculty_rise_no');
-        $this->forge->addUniqueKey('faculty_mobile_number');
+        $this->forge->addUniqueKey('faculty_contact_number');
         $this->forge->addUniqueKey('faculty_email_id');
         $this->forge->addUniqueKey('faculty_aadhar_number');
         $this->forge->addUniqueKey('faculty_pan_number');

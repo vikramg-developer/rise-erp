@@ -5,11 +5,9 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class AddTicketTable extends Migration
+class AddTicketTable extends Migration {
 
-{
-    public function up()
-    {
+    public function up() {
         $fields = [
             'ticket_id' => [
                 'type' => 'int',
@@ -25,37 +23,37 @@ class AddTicketTable extends Migration
                 'type' => 'int',
                 'constraint' => '11',
             ],
-             'issue_title' => [
+            'issue_title' => [
                 'type' => 'varchar',
                 'constraint' => '100',
                 'null' => false,
             ],
-             'description' => [
+            'description' => [
                 'type' => 'varchar',
                 'constraint' => '500',
                 'null' => false,
             ],
-             'priority' => [
+            'priority' => [
                 'type' => 'int',
                 'constraint' => '11',
                 'null' => false,
             ],
-             'email' => [
+            'email' => [
                 'type' => 'varchar',
                 'constraint' => '11',
                 'null' => false,
             ],
-             'mobile' => [
+            'mobile' => [
                 'type' => 'int',
                 'constraint' => '10',
                 'null' => false,
             ],
-             'file' => [
+            'file' => [
                 'type' => 'varchar',
                 'constraint' => '11',
                 'null' => false,
             ],
-             'status' => [
+            'status' => [
                 'type' => 'varchar',
                 'constraint' => '100',
                 'null' => false,
@@ -93,15 +91,14 @@ class AddTicketTable extends Migration
                 'constraint' => '1'
             ]
         ];
-        
+
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('ticket_id');
-        
+
         $this->forge->createTable('ticket');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->forge->dropTable('ticket');
     }
 }
