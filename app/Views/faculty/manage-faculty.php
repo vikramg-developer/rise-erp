@@ -41,6 +41,7 @@
                             <th><?= lang('App.action'); ?></th>
                             <th> <?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
                             <th><?= lang('App.faculty'); ?> <?= lang('App.name'); ?></th>
+                            <th><?= lang('App.gender'); ?> </th>
                             <th><?= lang('App.contact'); ?> <?= lang('App.no'); ?></th>
                             <th>Added By</th>
                             <th>Updated By</th>
