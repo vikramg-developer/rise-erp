@@ -54,10 +54,10 @@ class AddBonafideCertificateCounterTable extends Migration {
 
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('bonafide_certificate_no_counter_id');
-        $this->forge->createTable('bonafide_certificate_no_counter');
+        $this->forge->createTable('bonafide_certificate_number_counter');
     }
 
     public function down() {
-        $this->forge->dropTable('bonafide_certificate_no_counter');
+        $this->forge->dropTable('bonafide_certificate_number_counter');
     }
 }

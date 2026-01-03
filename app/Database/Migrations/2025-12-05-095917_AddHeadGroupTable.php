@@ -51,10 +51,10 @@ class AddHeadGroupTable extends Migration {
                 'constraint' => '1'
             ]
         ];
-        
+
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('head_group_id');
-         $this->forge->addUniqueKey('head_group_name');
+        $this->forge->addUniqueKey('head_group_name');
         $this->forge->createTable('head_group');
     }
 

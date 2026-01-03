@@ -57,7 +57,7 @@ class AddPaymentCategoryTable extends Migration {
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('payment_category_id');
-         $this->forge->addUniqueKey('payment_category_name');
+        $this->forge->addUniqueKey('payment_category_name');
         $this->forge->createTable('payment_category');
     }
 

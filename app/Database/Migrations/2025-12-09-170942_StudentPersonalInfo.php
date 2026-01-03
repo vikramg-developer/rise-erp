@@ -1,14 +1,13 @@
-<?php
+<?php //
 
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class StudentPersonalInfo extends Migration
-{
-    public function up()
-    {
+class StudentPersonalInfo extends Migration {
+
+    public function up() {
         $fields = [
             'student_personal_info_id' => [
                 'type' => 'INT',
@@ -16,9 +15,9 @@ class StudentPersonalInfo extends Migration
                 'auto_increment' => true,
             ],
             'student_registration_id' => [
-                'type'       => 'INT',
+                'type' => 'INT',
                 'constraint' => 11,
-                'null'       => false,
+                'null' => false,
             ],
             'student_prn_no' => [
                 'type' => 'VARCHAR',
@@ -35,7 +34,7 @@ class StudentPersonalInfo extends Migration
                 'constraint' => 50,
                 'null' => false,
             ],
-            'student_mobile_no' => [
+            'student_contact_no' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
                 'null' => false,
@@ -46,10 +45,8 @@ class StudentPersonalInfo extends Migration
                 'null' => false,
             ],
             'student_gender' => [
-                'type' => 'TINYINT',
-                'constraint' => 1,
-                'null' => false,
-                'comment' => '1=Male, 2=Female, 3=Transgender'
+                'type' => new RawSql("ENUM('male','female','transgender')"),
+                'null' => true,
             ],
             'student_birthdate' => [
                 'type' => 'DATE',
@@ -60,19 +57,16 @@ class StudentPersonalInfo extends Migration
                 'constraint' => 200,
                 'null' => false,
             ],
-            'student_bloodgroup' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'null' => false,
+            'student_bloodgroup_id' => [
+                'type' => 'INT',
+                'null' => true,
             ],
             'student_religion_id' => [
                 'type' => 'INT',
-                'constraint' => 11,
-                'null' => false,
+                'null' => true,
             ],
             'student_category_id' => [
-                'type' => 'TINYINT',
-                'constraint' => 1,
+                'type' => 'INT',
                 'null' => false,
             ],
             'student_caste_id' => [
@@ -147,24 +141,23 @@ class StudentPersonalInfo extends Migration
 
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('student_personal_info_id');
-        $this->forge->addUniqueKey('student_mobile_no');
+        $this->forge->addUniqueKey('student_contact_no');
         $this->forge->addUniqueKey('student_registration_id');
         $this->forge->addUniqueKey('student_prn_no');
         $this->forge->addUniqueKey('student_abc_id');
 
+        /* student_registration */
         $this->forge->addForeignKey(
-            'student_registration_id',
-            'student_registration',
-            'student_registration_id',
-            'CASCADE',
-            'CASCADE'
+                'student_registration_id',
+                'student_registration',
+                'student_registration_id',
+                'CASCADE',
+                'CASCADE'
         );
-
         $this->forge->createTable('student_personal_info');
     }
 
-    public function down()
-    {
+    public function down() {
         $this->forge->dropTable('student_personal_info');
     }
 }

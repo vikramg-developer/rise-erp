@@ -84,6 +84,6 @@ class StudentRegistration extends Migration {
     }
 
     public function down() {
-        //
+//      $this->forge->dropTable('student_registration', true);
     }
 }
