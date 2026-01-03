@@ -5,8 +5,8 @@ namespace Config;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Session\Handlers\FileHandler;
 
-class App extends BaseConfig
-{
+class App extends BaseConfig {
+
     /**
      * --------------------------------------------------------------------------
      * Base Site URL
@@ -17,7 +17,31 @@ class App extends BaseConfig
      *
      *    http://example.com/
      */
-    public string $baseURL = 'http://localhost:8080/rise';
+    public string $baseURL = '';
+
+    public function __construct() {
+        parent::__construct();
+
+        if ($this->baseURL === '') {
+
+            // CLI mode fallback (spark, crons, queues, etc.)
+            if (is_cli()) {
+                $this->baseURL = 'http://localhost/';
+                return;
+            }
+
+            $https = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+            $scheme = $https ? 'https' : 'http';
+
+            $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+            $script = $_SERVER['SCRIPT_NAME'] ?? '';
+
+            // remove index.php if hidden
+            $folder = rtrim(str_replace('/index.php', '', $script), '/');
+
+            $this->baseURL = rtrim($scheme . '://' . $host . $folder, '/') . '/';
+        }
+    }
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
