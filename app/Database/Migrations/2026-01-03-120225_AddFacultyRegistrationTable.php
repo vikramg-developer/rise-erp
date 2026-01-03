@@ -38,6 +38,10 @@ class AddFacultyRegistration extends Migration {
                 'type' => 'VARCHAR',
                 'constraint' => 100,
             ],
+            'faculty_gender' => [
+                'type' => new RawSql("ENUM('male','female','transgender')"),
+                'null' => true,
+            ],
             'faculty_contact_number' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
@@ -101,8 +105,7 @@ class AddFacultyRegistration extends Migration {
         $this->forge->addUniqueKey('faculty_email_id');
         $this->forge->addUniqueKey('faculty_aadhar_number');
         $this->forge->addUniqueKey('faculty_pan_number');
-
-        $this->forge->createTable('faculty_registration', true);
+        $this->forge->createTable('faculty_registration');
     }
 
     public function down() {

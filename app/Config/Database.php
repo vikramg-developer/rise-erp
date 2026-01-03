@@ -57,6 +57,9 @@ class Database extends Config
         'strictOn' => false,
         'failover' => [],
         'port'     => 3306,
+        // ✅ ADD THIS
+//        'foreignKeys' => true,
+        'DBEngine' => 'InnoDB',
     ];
 
     /**
@@ -83,6 +86,7 @@ class Database extends Config
         'port'        => 3306,
         'foreignKeys' => true,
         'busyTimeout' => 1000,
+        'DBEngine' => 'InnoDB',
     ];
 
     public function __construct()

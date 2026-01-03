@@ -5,15 +5,15 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class AddSubjectTypeTable extends Migration {
+class AddReligionTable extends Migration {
 
     public function up() {
         $fields = [
-            'subject_type_id' => [
+            'religion_id' => [
                 'type' => 'int',
                 'auto_increment' => true,
             ],
-            'subject_type_name' => [
+            'religion_name' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
@@ -52,12 +52,12 @@ class AddSubjectTypeTable extends Migration {
             ]
         ];
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('subject_type_id');
-        $this->forge->addUniqueKey('subject_type_name');
-        $this->forge->createTable('subject_type');
+        $this->forge->addPrimaryKey('religion_id');
+        $this->forge->addUniqueKey('religion_name');    
+        $this->forge->createTable('religion');
     }
 
     public function down() {
-        $this->forge->dropTable('subject_type');
+        $this->forge->dropTable('religion');
     }
 }
