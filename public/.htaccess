@@ -1,3 +1,4 @@
+
 # Disable directory browsing
 Options -Indexes
 
@@ -16,6 +17,9 @@ RewriteBase /rise
 	# change the following line to match the subfolder you need.
 	# http://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewritebase
 	# RewriteBase /
+	# Allow deploy.php to run directly (bypass CI routing)
+    RewriteCond %{REQUEST_URI} ^/deploy\.php$ [NC]
+    RewriteRule ^ - [L]
 
 	# Redirect Trailing Slashes...
 	RewriteCond %{REQUEST_FILENAME} !-d
@@ -48,3 +52,10 @@ RewriteBase /rise
 # Disable server signature start
 	ServerSignature Off
 # Disable server signature end
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php82” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php82 .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

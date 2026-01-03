@@ -1,10 +1,9 @@
 <?php
 
-
-
 namespace App\Models;
 
 use CodeIgniter\Model;
+use \App\Traits\ActivityLoggerTrait;
 
 /**
  * Description of ModelStudentRegistration
@@ -12,7 +11,7 @@ use CodeIgniter\Model;
  * @author Sonal
  */
 class ModelStudentRegistration extends Model {
-
+ use ActivityLoggerTrait;
     protected $table = 'student_registration';
     protected $primaryKey = 'student_registration_id';
     protected $useAutoIncrement = true;
@@ -63,6 +62,10 @@ class ModelStudentRegistration extends Model {
     ],
    
     ];
+    //    // Callbacks
+    protected $beforeUpdate = ['setUpdateOrDeleteDate', 'captureOldData'];
+    protected $afterInsert = ['logInsert'];
+    protected $afterUpdate = ['logUpdate'];
      protected $skipValidation = false;
     
     protected $beforeInsert   = ['hashPassword'];
@@ -112,5 +115,16 @@ class ModelStudentRegistration extends Model {
         }
 
         return $builder->get($length, $start)->getResultArray();
+    }
+     protected function setUpdateOrDeleteDate(array $data) {
+        // If `is_deleted` is being updated → set deleted_dt
+        if (array_key_exists('is_deleted', $data['data'])) {
+            $data['data']['deleted_at'] = date('Y-m-d H:i:s');
+            return $data;
+        }
+
+        // Otherwise → set updated_dt
+        $data['data']['updated_at'] = date('Y-m-d H:i:s');
+        return $data;
     }
 }
