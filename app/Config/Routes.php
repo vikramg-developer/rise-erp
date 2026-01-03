@@ -126,6 +126,7 @@ $routes->group('faculty', function ($routes) {
     $routes->post('update-faculty', 'Faculty::update_faculty', ['filter' => 'permission:updateFaculty']);
     $routes->post('delete-faculty', 'Faculty::delete_faculty', ['filter' => 'permission:deleteFaculty']);
     $routes->post('revert-faculty', 'Faculty::revert_faculty', ['filter' => 'permission:deleteFaculty']);
+//    $routes->post('faculty/update-password', 'Faculty::updatePassword');
 });
 
 $routes->group('headgroup', function ($routes) {

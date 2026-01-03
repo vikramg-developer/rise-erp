@@ -69,6 +69,7 @@ class Login extends BaseController {
                             'role_id' => $faculty_data['faculty_role_id'],
                             'role_name' => $role_data['role_name'],
                             'logged_in' => true,
+                            'is_first_login'  => $faculty_data['is_first_login'],
                             'permissions' => json_decode($role_data['permissions'], true) ?? [],
                             'last_activity' => time(),
                         ]);

@@ -63,18 +63,18 @@
 
                                     <option value="">Select Gender</option>
 
-                                    <option value="Male"
-                                            <?= ($faculty['faculty_gender'] === 'Male') ? 'selected' : ''; ?>>
+                                    <option value="male"
+                                            <?= ($faculty['faculty_gender'] === 'male') ? 'selected' : ''; ?>>
                                         Male
                                     </option>
 
-                                    <option value="Female"
-                                            <?= ($faculty['faculty_gender'] === 'Female') ? 'selected' : ''; ?>>
+                                    <option value="female"
+                                            <?= ($faculty['faculty_gender'] === 'female') ? 'selected' : ''; ?>>
                                         Female
                                     </option>
 
-                                    <option value="Transgender"
-                                            <?= ($faculty['faculty_gender'] === 'Transgender') ? 'selected' : ''; ?>>
+                                    <option value="transgender"
+                                            <?= ($faculty['faculty_gender'] === 'transgender') ? 'selected' : ''; ?>>
                                         Transgender
                                     </option>
 
@@ -132,12 +132,12 @@
                                     <?= lang('App.mobile'); ?> <?= lang('App.number'); ?> <span class="text-danger">*</span>
                                 </label>
                                 <input type="text"
-                                       name="edit_faculty_mobile_number"
-                                       id="edit_faculty_mobile_number"
+                                       name="edit_faculty_contact_number"
+                                       id="edit_faculty_contact_number"
                                        maxlength="10"
                                        class="form-control"
-                                       value="<?= esc($faculty['faculty_mobile_number']); ?>">
-                                <small class="text-danger" id="edit_faculty_mobile_number_error" style="display:none;"></small>
+                                       value="<?= esc($faculty['faculty_contact_number']); ?>">
+                                <small class="text-danger" id="edit_faculty_contact_number_error" style="display:none;"></small>
                             </div>
 
                             <!-- EMAIL -->
