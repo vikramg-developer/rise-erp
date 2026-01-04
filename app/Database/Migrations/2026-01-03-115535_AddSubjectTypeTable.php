@@ -5,15 +5,15 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class AddBonafideCertificateCounterTable extends Migration {
+class AddSubjectTypeTable extends Migration {
 
     public function up() {
         $fields = [
-            'bonafide_certificate_no_counter_id' => [
+            'subject_type_id' => [
                 'type' => 'int',
                 'auto_increment' => true,
             ],
-            'bonafide_certificate_no' => [
+            'subject_type_name' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
@@ -51,13 +51,13 @@ class AddBonafideCertificateCounterTable extends Migration {
                 'constraint' => '1'
             ]
         ];
-
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('bonafide_certificate_no_counter_id');
-        $this->forge->createTable('bonafide_certificate_number_counter');
+        $this->forge->addPrimaryKey('subject_type_id');
+        $this->forge->addUniqueKey('subject_type_name');
+        $this->forge->createTable('subject_type');
     }
 
     public function down() {
-        $this->forge->dropTable('bonafide_certificate_number_counter');
+        $this->forge->dropTable('subject_type');
     }
 }
