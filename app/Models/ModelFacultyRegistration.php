@@ -20,11 +20,12 @@ class ModelFacultyRegistration extends Model {
         'faculty_middle_name',
         'faculty_last_name',
         'faculty_gender',
-        'faculty_mobile_number',
+        'faculty_contact_number',
         'faculty_email_id',
         'faculty_aadhar_number',
         'faculty_pan_number',
         'faculty_password',
+        'is_first_login',
         'faculty_status',
         'added_by',
         'updated_by',
@@ -38,8 +39,8 @@ class ModelFacultyRegistration extends Model {
         'faculty_first_name' => 'required|min_length[2]|alpha_space',
         'faculty_middle_name' => 'required|min_length[2]|alpha_space',
         'faculty_last_name' => 'required|min_length[2]|alpha_space',
-        'faculty_gender'  => 'required|in_list[Male,Female,Transgender]',
-        'faculty_mobile_number' => 'required|numeric|exact_length[10]|is_unique[faculty_registration.faculty_mobile_number]',
+        'faculty_gender'  => 'required|in_list[male,female,transgender]',
+        'faculty_contact_number' => 'required|numeric|exact_length[10]|is_unique[faculty_registration.faculty_contact_number]',
         'faculty_email_id' => 'required|trim|valid_email|is_unique[faculty_registration.faculty_email_id]',
         'faculty_aadhar_number' => 'required|numeric|exact_length[12]|is_unique[faculty_registration.faculty_aadhar_number]',
         'faculty_pan_number' => 'required|regex_match[/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/]|is_unique[faculty_registration.faculty_pan_number]',
@@ -67,11 +68,11 @@ class ModelFacultyRegistration extends Model {
             'min_length' => 'Last Name must be at least 2 characters.',
             'alpha_space' => 'Last Name must contain only letters.',
         ],
-        'faculty_mobile_number' => [
-            'required' => 'Mobile Number is required.',
-            'numeric' => 'Mobile Number must contain only digits.',
-            'exact_length' => 'Mobile Number must be exactly 10 digits.',
-            'is_unique' => 'This Mobile Number is already registered.',
+        'faculty_contact_number' => [
+            'required' => 'Contact Number is required.',
+            'numeric' => 'Contact Number must contain only digits.',
+            'exact_length' => 'Contact Number must be exactly 10 digits.',
+            'is_unique' => 'This Contact Number is already registered.',
         ],
         'faculty_email_id' => [
             'required' => 'Email ID is required.',
@@ -132,7 +133,7 @@ class ModelFacultyRegistration extends Model {
                     ->orLike('faculty_first_name', $search)
                     ->orLike('faculty_middle_name', $search)
                     ->orLike('faculty_last_name', $search)
-                    ->orLike('faculty_mobile_number', $search)
+                    ->orLike('faculty_contact_number', $search)
                     ->orLike('faculty_email_id', $search)
                     ->groupEnd();
         }
@@ -154,7 +155,7 @@ class ModelFacultyRegistration extends Model {
                     ->orLike('faculty_first_name', $search)
                     ->orLike('faculty_middle_name', $search)
                     ->orLike('faculty_last_name', $search)
-                    ->orLike('faculty_mobile_number', $search)
+                    ->orLike('faculty_contact_number', $search)
                     ->orLike('faculty_email_id', $search)
                     ->groupEnd();
         }
@@ -188,10 +189,11 @@ class ModelFacultyRegistration extends Model {
     public function rulesForUpdate($id) {
         return [
             'faculty_role_id' => 'required',
+            'faculty_gender'  => 'required|in_list[male,female,transgender]',
             'faculty_first_name' => 'required|min_length[2]|alpha_space',
             'faculty_middle_name' => 'required|min_length[2]|alpha_space',
             'faculty_last_name' => 'required|min_length[2]|alpha_space',
-            'faculty_mobile_number' => "required|numeric|exact_length[10]|is_unique[faculty_registration.faculty_mobile_number,faculty_registration_id,{$id}]",
+            'faculty_contact_number' => "required|numeric|exact_length[10]|is_unique[faculty_registration.faculty_contact_number,faculty_registration_id,{$id}]",
             'faculty_email_id' => "required|valid_email|is_unique[faculty_registration.faculty_email_id,faculty_registration_id,{$id}]",
             'faculty_aadhar_number' => "required|numeric|exact_length[12]|is_unique[faculty_registration.faculty_aadhar_number,faculty_registration_id,{$id}]",
             'faculty_pan_number' => "required|regex_match[/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/]|is_unique[faculty_registration.faculty_pan_number,faculty_registration_id,{$id}]",

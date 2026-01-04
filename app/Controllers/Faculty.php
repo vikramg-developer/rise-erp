@@ -51,18 +51,18 @@ class Faculty extends BaseController {
             $faculty_rise_no = 'F' . $yearPrefix . $branchCode . str_pad($rise_no_counter['rise_no'], 4, '0', STR_PAD_LEFT);
 
             $insertData = [
-                'faculty_role_id'       => clean_number($this->request->getVar('faculty_role_id')),
-                'faculty_gender'        => clean_name($this->request->getVar('faculty_gender')),
-                'faculty_first_name'    => clean_name($this->request->getVar('faculty_first_name')),
-                'faculty_middle_name'   => clean_name($this->request->getVar('faculty_middle_name')),
-                'faculty_last_name'     => clean_name($this->request->getVar('faculty_last_name')),
-                'faculty_mobile_number' => clean_number($this->request->getVar('faculty_mobile_number')),
-                'faculty_email_id'      => clean_email($this->request->getVar('faculty_email_id')),
+                'faculty_role_id' => clean_number($this->request->getVar('faculty_role_id')),
+                'faculty_gender' => clean_name($this->request->getVar('faculty_gender')),
+                'faculty_first_name' => clean_name($this->request->getVar('faculty_first_name')),
+                'faculty_middle_name' => clean_name($this->request->getVar('faculty_middle_name')),
+                'faculty_last_name' => clean_name($this->request->getVar('faculty_last_name')),
+                'faculty_contact_number' => clean_number($this->request->getVar('faculty_contact_number')),
+                'faculty_email_id' => clean_email($this->request->getVar('faculty_email_id')),
                 'faculty_aadhar_number' => clean_number($this->request->getVar('faculty_aadhar_number')),
-                'faculty_pan_number'    => clean_name($this->request->getVar('faculty_pan_number')),
-                'faculty_password'      => clean_name($this->request->getVar('faculty_password')),
-                'faculty_rise_no'       => $faculty_rise_no,
-                'added_by'              => session('rise_no'),
+                'faculty_pan_number' => clean_name($this->request->getVar('faculty_pan_number')),
+                'faculty_password' => clean_name($this->request->getVar('faculty_password')),
+                'faculty_rise_no' => $faculty_rise_no,
+                'added_by' => session('rise_no'),
             ];
 
             if (!$this->modelfaculty->insert($insertData)) {
@@ -206,6 +206,28 @@ class Faculty extends BaseController {
             }
 
             /* =====================
+             * GENDER ICON
+             * ===================== */
+            $genderIcon = '';
+
+            if (!empty($row['faculty_gender'])) {
+
+                $gender = strtolower($row['faculty_gender']);
+
+                if ($gender === 'male') {
+                    $genderIcon = '<img src="https://img.icons8.com/color/52/user-male-circle--v1.png" title="Male">';
+                
+                } elseif ($gender === 'female') {
+                    $genderIcon = '<img src="https://img.icons8.com/color/52/user-female-circle--v1.png" title="Female">';
+                    
+                } elseif ($gender === 'transgender') {
+
+                    $genderIcon = '<img src="https://img.icons8.com/color/52/gender-neutral-user.png" title="Transgender">';
+                }
+            }
+
+
+            /* =====================
              * DELETE / REVERT REMARK
              * ===================== */
             $remark = '';
@@ -234,7 +256,8 @@ class Faculty extends BaseController {
                 $row['faculty_rise_no'],
 //              esc($nameMap[$row['faculty_rise_no']] ?? ''),
                 $nameWithRole,
-                esc($row['faculty_mobile_number']),
+                '<div class="text-center">' . $genderIcon . '</div>',
+                esc($row['faculty_contact_number']),
                 $addedBy,
                 $updatedBy,
                 $remark
@@ -302,11 +325,11 @@ class Faculty extends BaseController {
 
         $updateData = [
             'faculty_role_id' => clean_number($this->request->getPost('edit_faculty_role_id')),
-            'edit_faculty_gender' => clean_name($this->request->getPost('edit_faculty_gender')),
+            'faculty_gender' => clean_name($this->request->getPost('edit_faculty_gender')),
             'faculty_first_name' => clean_name($this->request->getPost('edit_faculty_first_name')),
             'faculty_middle_name' => clean_name($this->request->getPost('edit_faculty_middle_name')),
             'faculty_last_name' => clean_name($this->request->getPost('edit_faculty_last_name')),
-            'faculty_mobile_number' => clean_number($this->request->getPost('edit_faculty_mobile_number')),
+            'faculty_contact_number' => clean_number($this->request->getPost('edit_faculty_contact_number')),
             'faculty_email_id' => clean_email($this->request->getPost('edit_faculty_email_id')),
             'faculty_aadhar_number' => clean_number($this->request->getPost('edit_faculty_aadhar_number')),
             'faculty_pan_number' => clean_name($this->request->getPost('edit_faculty_pan_number')),
@@ -365,4 +388,37 @@ class Faculty extends BaseController {
             ]);
         }
     }
+    
+    public function updatePassword()
+{
+    // must be logged in
+    if (!session()->get('logged_in')) {
+        return redirect()->to('/login');
+    }
+
+    // only for first login
+    if (session()->get('is_first_login') != 1) {
+        return redirect()->to('/dashboard');
+    }
+
+    $newPassword     = $this->request->getPost('new_password');
+    $confirmPassword = $this->request->getPost('confirm_password');
+
+    if ($newPassword !== $confirmPassword) {
+        return redirect()->back()->with('error', 'Passwords do not match!');
+    }
+
+    $facultyId = session()->get('registration_id');
+
+    $this->modelfacultyregistration->update($facultyId, [
+        'faculty_password' => password_hash($newPassword, PASSWORD_DEFAULT),
+        'is_first_login'   => 0
+    ]);
+
+    // unlock dashboard
+    session()->set('is_first_login', 0);
+
+    return redirect()->to('/dashboard')->with('success', 'Password updated successfully');
+}
+
 }

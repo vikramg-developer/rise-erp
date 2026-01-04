@@ -67,7 +67,6 @@ $routes->get('student-registration', 'StudentRegistration::index');
 $routes->post('save-registration', 'StudentRegistration::add_registration');
 $routes->get('/student-profile', 'StudentProfile::index', ['filter' => 'permission:viewStudentProfile']);
 $routes->post('add-personal-details', 'StudentProfile::add_personal_information', ['filter' => 'permission:viewStudentProfile']);
-$routes->get('/student-profile', 'StudentRegistration::student_profile', ['filter' => 'permission:viewStudentProfile']);
 $routes->post('/savesignup', 'Registration::saveSignup');
 $routes->get('/student-dashboard', 'Login::studentDashboard');
 $routes->get('/studentDashboard', 'Login::studentDashboard');
@@ -126,6 +125,7 @@ $routes->group('faculty', function ($routes) {
     $routes->post('update-faculty', 'Faculty::update_faculty', ['filter' => 'permission:updateFaculty']);
     $routes->post('delete-faculty', 'Faculty::delete_faculty', ['filter' => 'permission:deleteFaculty']);
     $routes->post('revert-faculty', 'Faculty::revert_faculty', ['filter' => 'permission:deleteFaculty']);
+//    $routes->post('faculty/update-password', 'Faculty::updatePassword');
 });
 
 $routes->group('headgroup', function ($routes) {
