@@ -5,15 +5,15 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class AddLeavingCertificateCounterTable extends Migration {
+class AddHeadTable extends Migration {
 
     public function up() {
         $fields = [
-            'leaving_certificate_no_counter_id' => [
+            'head_id' => [
                 'type' => 'int',
                 'auto_increment' => true,
             ],
-            'leaving_certificate_no' => [
+            'head_name' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
@@ -53,11 +53,12 @@ class AddLeavingCertificateCounterTable extends Migration {
         ];
 
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('leaving_certificate_no_counter_id');
-        $this->forge->createTable('leaving_certificate_number_counter');
+        $this->forge->addPrimaryKey('head_id');
+        $this->forge->addUniqueKey('head_name');
+        $this->forge->createTable('head');
     }
 
     public function down() {
-        $this->forge->dropTable('leaving_certificate_number_counter');
+        $this->forge->dropTable('head');
     }
 }
