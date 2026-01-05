@@ -58,7 +58,7 @@ $(document).on("click", ".approve", function () {
                 },
 
                 error: () => {
-                    errorDelete();
+                        errorApprove();
                 }
             });
 
