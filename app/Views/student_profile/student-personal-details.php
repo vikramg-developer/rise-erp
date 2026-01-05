@@ -75,9 +75,9 @@
                     <label class="form-label"><?= lang('App.gender'); ?></label>
                     <select class="form-control" name="student_gender"id="student_gender" >
                         <option value="">Select</option>
-                        <option value="1">Male</option>
-                        <option value="2">Female</option>
-                        <option value="3">Transgender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="transgender">Transgender</option>
                     </select>
                     <small class="text-danger" id="student_gender_error" style="display:none;"></small>
                 </div>
@@ -86,9 +86,12 @@
                     <label class="form-label"><?= lang('App.blood'); ?> <?= lang('App.group'); ?></label>
                     <select class="form-control" name="student_bloodgroup"id="student_bloodgroup" >
                         <option value="">Select</option>
-                        <option value="1">A+</option>
-                        <option value="2">B+</option>
-                        <option value="3">Transgender</option>
+                        <?php
+                        foreach ($blood_group as $blood_group) {
+                            ?>
+                            <option value="<?php echo $blood_group['blood_group_id']; ?>"><?php echo $blood_group['blood_group_name']; ?></option>
+                        <?php }
+                        ?> 
                     </select>
                     <small class="text-danger" id="student_bloodgroup_error" style="display:none;"></small>
                 </div>
@@ -111,9 +114,12 @@
                     <label class="form-label"><?= lang('App.religion'); ?></label>
                     <select class="form-control" name="student_religion_id" id="student_religion_id">
                         <option value="">Select</option>
-                        <option value="1">Hindu</option>
-                        <option value="2">Muslim</option>
-                        <option value="3">Christian</option>
+                       <?php
+                        foreach ($religion as $religion) {
+                            ?>
+                            <option value="<?php echo $religion['religion_id']; ?>"><?php echo $religion['religion_name']; ?></option>
+                        <?php }
+                        ?> 
                     </select>
                     <small class="text-danger" id="student_religion_id_error" style="display:none;"></small>
                 </div>

@@ -43,13 +43,13 @@ class ApproveRegistration extends BaseController {
         foreach ($rows as $row) {
             $buttons = '';
 //$approval_status = '<span class="badge bg-outline-danger">' . $row['approval_status'] . '</span>';
-            if ($row['approval_status'] == 'approved' && !empty($row['approval_status']) && !empty($row['approved_status_dt'])):
-                $remark = activityBadge('success', $row['approval_status'], $row['approved_status_dt']);
+            if ($row['approval_status'] == 'approved' && !empty($row['approval_status']) && !empty($row['approval_status_date'])):
+                $remark = activityBadge('success', $row['approval_status'], $row['approval_status_date']);
 
-            elseif ($row['approval_status'] == 'rejected' && !empty($row['approval_status']) && !empty($row['approved_status_dt'])):
-                $remark = activityBadge('danger', $row['approval_status'], $row['approved_status_dt']);
+            elseif ($row['approval_status'] == 'rejected' && !empty($row['approval_status']) && !empty($row['approval_status_date'])):
+                $remark = activityBadge('danger', $row['approval_status'], $row['approval_status_date']);
             else:
-                $remark = activityBadge('warning', $row['approval_status'], $row['approved_status_dt']);
+                $remark = activityBadge('warning', $row['approval_status'], $row['approval_status_date']);
             endif;
             $student_name = $row['student_first_name'] . " " . $row['student_middle_name'] . " " . $row['student_last_name'];
             // Approve Button
@@ -83,18 +83,18 @@ class ApproveRegistration extends BaseController {
     public function approve_student() {
         $student_rise_no = $this->request->getPost('student_rise_no');
 
-        if ($this->modelstudentregistration->where('student_rise_no', $student_rise_no)->set('approval_status', "approved",'approved_status_dt', date('Y-m-d H:i:s') )->update()) {
+        if ($this->modelstudentregistration->where('student_rise_no', $student_rise_no)->set('approval_status', "approved",'approval_status_date', date('Y-m-d H:i:s') )->update()) {
             return $this->response->setJSON([
                         'csrfHash' => csrf_hash()
             ]);
-        }
+        }   
     }
 
     // Reject Student
     public function reject_student() {
         $student_rise_no = $this->request->getPost('student_rise_no');
 
-        if ($this->modelstudentregistration->where('student_rise_no', $student_rise_no)->set('approval_status', "rejected",'approved_status_dt', date('Y-m-d H:i:s'))->update()) {
+        if ($this->modelstudentregistration->where('student_rise_no', $student_rise_no)->set('approval_status', "rejected",'approval_status_date', date('Y-m-d H:i:s'))->update()) {
             return $this->response->setJSON([
                         'csrfHash' => csrf_hash()
             ]);

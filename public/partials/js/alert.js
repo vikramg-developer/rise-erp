@@ -89,6 +89,13 @@ function confirmApprove(message) {
         reverseButtons: true
     });
 }
+function errorApprove() {
+    swalWithBootstrapButtons.fire(
+            'Error',
+            'Approve failed',
+            'error'
+            );
+}
 function successApprove(message) {
     swalWithBootstrapButtons.fire(
             message+' Approved!',
