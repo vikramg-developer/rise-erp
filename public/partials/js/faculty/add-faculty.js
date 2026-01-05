@@ -76,6 +76,14 @@ $("#faculty-registration-form").on("submit", function (e) {
 
             // Validation errors
             if (res.status === 'error') {
+
+                // GENERAL ERROR (not field validation)
+                if (res.message) {
+                    showToast('error', res.message);
+                    return;
+                }
+
+                // FIELD VALIDATION ERRORS
                 $.each(res.errors, function (field, message) {
                     $("#" + field + "_error").text(message).show();
                 });
