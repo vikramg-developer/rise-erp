@@ -39,3 +39,60 @@ function mobileNumberOnly(selector) {
                 .slice(0, 10);
     });
 }
+
+/**
+ * ==========================================
+ * PASSWORD RULES (COMMON)
+ * ==========================================
+ */
+function passwordValidation(
+    passwordSelector,
+    confirmSelector,
+    strengthErrorSelector, // faculty_password_error
+    matchMessageSelector,  // password-message
+    submitBtnSelector
+) {
+    const regex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    // PASSWORD STRENGTH
+    $(document).on('input', passwordSelector, function () {
+        const password = $(this).val();
+
+        if (!regex.test(password)) {
+            $(strengthErrorSelector)
+                .text('Password must be 8+ chars with uppercase, lowercase, number & special character')
+                .show();
+
+            $(submitBtnSelector).prop('disabled', true);
+        } else {
+            $(strengthErrorSelector).text('').hide();
+        }
+    });
+
+    // PASSWORD MATCH
+    $(document).on('input', passwordSelector + ', ' + confirmSelector, function () {
+
+        const password = $(passwordSelector).val();
+        const confirmPassword = $(confirmSelector).val();
+
+        if (!password || !confirmPassword) {
+            $(matchMessageSelector).text('');
+            return;
+        }
+
+        if (password === confirmPassword) {
+            $(matchMessageSelector)
+                .text('✓ Passwords match')
+                .css('color', 'green');
+
+            $(submitBtnSelector).prop('disabled', false);
+        } else {
+            $(matchMessageSelector)
+                .text('✗ Passwords do not match')
+                .css('color', 'red');
+
+            $(submitBtnSelector).prop('disabled', true);
+        }
+    });
+}
