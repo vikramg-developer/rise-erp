@@ -18,7 +18,7 @@ class ModelStudentRegistration extends Model {
     protected $returnType = 'array';
 //    protected $useSoftDeletes = true;
 //
-    protected $allowedFields = ['student_rise_no', 'student_role_id', 'student_first_name', 'student_middle_name', 'student_last_name', 'student_aadhar_number', 'student_password','approval_status',];
+    protected $allowedFields = ['student_rise_no', 'student_role_id', 'student_first_name', 'student_middle_name', 'student_last_name', 'student_aadhar_number', 'student_password','approval_status','approval_status_date',];
 //
     protected bool $allowEmptyInserts = false;
 //    protected bool $updateOnlyChanged = true;

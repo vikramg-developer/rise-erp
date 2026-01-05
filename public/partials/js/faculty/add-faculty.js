@@ -53,6 +53,14 @@ $(document).on('input', '#faculty_password, #confirm_password', function () {
         saveBtn.prop('disabled', true);
     }
 });
+passwordValidation(
+        '#faculty_password',
+        '#confirm_password',
+        '#faculty_password_error', //  strength error
+        '#password-message', // match message
+        '#faculty-registration-form button[type="submit"]'
+        );
+
 
 $("#faculty-registration-form").on("submit", function (e) {
     e.preventDefault();
@@ -76,6 +84,13 @@ $("#faculty-registration-form").on("submit", function (e) {
 
             // Validation errors
             if (res.status === 'error') {
+
+                if (res.status === 'error' && res.message) {
+                    showErrorMessage(res.message);
+                    return;
+                }
+
+                // FIELD VALIDATION ERRORS
                 $.each(res.errors, function (field, message) {
                     $("#" + field + "_error").text(message).show();
                 });
@@ -120,10 +135,6 @@ $(document).ready(function () {
     }
 });
 
-
-// ================================
-// DELETE FACULTY (Manage Faculty)
-// ================================
 // ================================
 // DELETE FACULTY (Manage Faculty)
 // ================================

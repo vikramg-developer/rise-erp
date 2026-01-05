@@ -7,11 +7,15 @@ class StudentProfile extends BaseController {
     protected $modelstudentregistration;
     protected $modelacademicyear;
     protected $modelstudentpersonalinformation;
+    protected $modelbloodgroup;
+    protected $modelreligion;
 
     public function __construct() {
         $this->modelstudentregistration = model('ModelStudentRegistration');
         $this->modelacademicyear = model('ModelAcademicYear');
         $this->modelstudentpersonalinformation = model('ModelStudentPersonalInformation');
+        $this->modelbloodgroup = model('ModelBloodGroup');
+        $this->modelreligion = model('ModelReligion');
     }
 
     //=============================== Student Profile===============================
@@ -22,6 +26,8 @@ class StudentProfile extends BaseController {
         $data['title'] = lang('App.rise') . "-" . lang('App.student') . " " . lang('App.profile');
         $data['student_registration_data'] = $this->modelstudentregistration->find($student_registration_id);
         $data['student_personalinfo_data'] = $this->modelstudentpersonalinformation->find($student_registration_id);
+        $data['blood_group'] = $this->modelbloodgroup->findAll();
+        $data['religion'] = $this->modelreligion->findAll();
         return render_page('student_profile/student-profile-dashboard',$data);
     }
 
