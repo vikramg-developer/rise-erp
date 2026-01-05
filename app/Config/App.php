@@ -43,29 +43,6 @@ class App extends BaseConfig {
         }
     }
 
-    public function __construct() {
-        parent::__construct();
-
-        if ($this->baseURL === '') {
-
-            // CLI mode fallback (spark, crons, queues, etc.)
-            if (is_cli()) {
-                $this->baseURL = 'http://localhost/';
-                return;
-            }
-
-            $https = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
-            $scheme = $https ? 'https' : 'http';
-
-            $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-            $script = $_SERVER['SCRIPT_NAME'] ?? '';
-
-            // remove index.php if hidden
-            $folder = rtrim(str_replace('/index.php', '', $script), '/');
-
-            $this->baseURL = rtrim($scheme . '://' . $host . $folder, '/') . '/';
-        }
-    }
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
      * If you want to accept multiple Hostnames, set this.

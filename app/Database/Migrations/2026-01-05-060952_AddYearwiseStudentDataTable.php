@@ -5,56 +5,50 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class StudentRegistration extends Migration {
+class AddYearwiseStudentDataTable extends Migration {
 
     public function up() {
         $fields = [
-            'student_registration_id' => [
+            'yearwise_student_data_id' => [
                 'type' => 'int',
-                'constraint' => '11',
                 'auto_increment' => true,
             ],
             'student_rise_no' => [
                 'type' => 'varchar',
                 'constraint' => '50',
-                'null' => false,
+                'null' => true
             ],
-            'student_first_name' => [
-                'type' => 'varchar',
-                'constraint' => '100',
-                'null' => false,
-            ],
-            'student_middle_name' => [
-                'type' => 'varchar',
-                'constraint' => '100',
-                'null' => false,
-            ],
-            'student_last_name' => [
-                'type' => 'varchar',
-                'constraint' => '100',
-                'null' => false,
-            ],
-            'student_role_id' => [
+            'department_id' => [
                 'type' => 'int',
                 'null' => true,
             ],
-            'approval_status' => [
-                'type' => new RawSql("ENUM('pemnding','aprroved','rejected')"),
-                'default' => 'pending',
-            ],
-            'approval_status_date' => [
-                'type' => 'timestamp',
+            'year_id' => [
+                'type' => 'int',
                 'null' => true,
             ],
-            'student_aadhar_number' => [
-                'type' => 'varchar',
-                'constraint' => '50',
+            'academic_year_id' => [
+                'type' => 'int',
+                'null' => true,
+            ],
+            'semester_id' => [
+                'type' => 'int',
+                'null' => true,
+            ],
+            'roll_nunber' => [
+                'type' => 'int',
                 'null' => false,
             ],
-            'student_password' => [
-                'type' => 'varchar',
-                'constraint' => '50',
+            'division_id' => [
+                'type' => 'int',
                 'null' => false,
+            ],
+            'batch_id' => [
+                'type' => 'int',
+                'null' => false,
+            ],
+            'admission_date' => [
+                'type' => 'timestamp',
+                'null' => true,
             ],
             'added_by' => [
                 'type' => 'varchar',
@@ -89,13 +83,13 @@ class StudentRegistration extends Migration {
                 'constraint' => '1'
             ]
         ];
+
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('student_registration_id');
-        $this->forge->addUniqueKey('student_rise_no');
-        $this->forge->createTable('student_registration');
+        $this->forge->addPrimaryKey('yearwise_student_data_id');
+        $this->forge->createTable('yearwise_student_data');
     }
 
     public function down() {
-        $this->forge->dropTable('student_registration', true);
+        $this->forge->dropTable('yearwise_student_data');
     }
 }
