@@ -23,15 +23,15 @@
                     <div class="card-body p-4">
 
                         <h5 class="mb-3">
-                            <b><?= lang('App.faculty'); ?> <?= lang('App.information'); ?></b>
+                            <b><?= lang('App.employee'); ?> <?= lang('App.information'); ?></b>
                         </h5>
-
+                        <hr>
                         <div class="row gy-4">
 
                             <!-- FACULTY ROLE -->
                             <div class="col-xl-4 col-lg-4 col-md-6">
                                 <label class="form-label">
-                                    <?= lang('App.faculty'); ?> <?= lang('App.role'); ?> <span class="text-danger">*</span>
+                                    <?= lang('App.employee'); ?> <?= lang('App.role'); ?> <span class="text-danger">*</span>
                                 </label>
                                 <select class="from-control js-example-basic-single" name="faculty_role_id" id="faculty_role_id">
                                     <option value="">Select Role</option>

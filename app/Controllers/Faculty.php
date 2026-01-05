@@ -30,6 +30,12 @@ class Faculty extends BaseController {
     public function add_faculty() {
         $post = $this->request->getPost();
         $academic_year_data = $this->modelacademicYear->getCurrentAcademicYear();
+        if (empty($academic_year_data)) {
+            return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'Academic Year is not configured. Please contact admin.'
+            ]);
+        }
         $academic_year_id = $academic_year_data['academic_year_id'];
         $rise_counter_data = $this->modelrisecounter->where(['user_type_id' => 1])->first();
 
@@ -46,7 +52,17 @@ class Faculty extends BaseController {
             $rise_no_counter = $this->modelrisecounter->get_Faculty_Counter_For_Update();
 
             $branch = $this->modelbranch->getSingleBranch();
-            $branchCode = $branch['branch_code'] ?? '000';
+            // Branch not configured
+            if (empty($branch) || empty($branch['branch_code'])) {
+                return $this->response->setJSON([
+                            'status' => 'error',
+                            'message' => 'Branch  Code is not configured. Please contact admin.',
+                            'csrfHash' => csrf_hash()
+                ]);
+            }
+
+// ✅ SAFE TO USE
+            $branchCode = $branch['branch_code'];
             $yearPrefix = substr($academic_year_data['academic_year_name'], 0, 4);
             $faculty_rise_no = 'F' . $yearPrefix . $branchCode . str_pad($rise_no_counter['rise_no'], 4, '0', STR_PAD_LEFT);
 
@@ -216,10 +232,8 @@ class Faculty extends BaseController {
 
                 if ($gender === 'male') {
                     $genderIcon = '<img src="https://img.icons8.com/color/52/user-male-circle--v1.png" title="Male">';
-                
                 } elseif ($gender === 'female') {
                     $genderIcon = '<img src="https://img.icons8.com/color/52/user-female-circle--v1.png" title="Female">';
-                    
                 } elseif ($gender === 'transgender') {
 
                     $genderIcon = '<img src="https://img.icons8.com/color/52/gender-neutral-user.png" title="Transgender">';
@@ -388,37 +402,48 @@ class Faculty extends BaseController {
             ]);
         }
     }
-    
-    public function updatePassword()
+
+public function change_password_first_login()
 {
-    // must be logged in
     if (!session()->get('logged_in')) {
-        return redirect()->to('/login');
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Unauthorized access'
+        ]);
     }
 
-    // only for first login
-    if (session()->get('is_first_login') != 1) {
-        return redirect()->to('/dashboard');
+    // Faculty check (NOT permission-based)
+    if (empty(session()->get('registration_id'))) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Invalid faculty session'
+        ]);
     }
 
-    $newPassword     = $this->request->getPost('new_password');
-    $confirmPassword = $this->request->getPost('confirm_password');
+    $newPassword = trim($this->request->getPost('new_password'));
 
-    if ($newPassword !== $confirmPassword) {
-        return redirect()->back()->with('error', 'Passwords do not match!');
+    if (strlen($newPassword) < 8) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Password must be at least 8 characters'
+        ]);
     }
 
-    $facultyId = session()->get('registration_id');
+    $this->modelfacultyregistration->update(
+        session()->get('registration_id'),
+        [
+            'faculty_password' => password_hash($newPassword, PASSWORD_DEFAULT),
+            'is_first_login'   => 0
+        ]
+    );
 
-    $this->modelfacultyregistration->update($facultyId, [
-        'faculty_password' => password_hash($newPassword, PASSWORD_DEFAULT),
-        'is_first_login'   => 0
-    ]);
-
-    // unlock dashboard
+    // 🔑 THIS IS REQUIRED
     session()->set('is_first_login', 0);
 
-    return redirect()->to('/dashboard')->with('success', 'Password updated successfully');
+    return $this->response->setJSON([
+        'status' => 'success'
+    ]);
 }
+
 
 }

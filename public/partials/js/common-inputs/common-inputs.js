@@ -44,49 +44,54 @@ function mobileNumberOnly(selector) {
  * ==========================================
  * PASSWORD RULES (COMMON)
  * ==========================================
- * - Min 8 characters
- * - 1 uppercase
- * - 1 lowercase
- * - 1 number
- * - 1 special character
- * - Match confirm password
  */
-function passwordValidation(passwordSelector, confirmSelector, messageSelector, submitBtnSelector) {
+function passwordValidation(
+    passwordSelector,
+    confirmSelector,
+    strengthErrorSelector, // faculty_password_error
+    matchMessageSelector,  // password-message
+    submitBtnSelector
+) {
+    const regex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-    // Password strength check
+    // PASSWORD STRENGTH
     $(document).on('input', passwordSelector, function () {
         const password = $(this).val();
 
         if (!regex.test(password)) {
-            $(messageSelector)
+            $(strengthErrorSelector)
                 .text('Password must be 8+ chars with uppercase, lowercase, number & special character')
-                .css('color', 'red')
                 .show();
 
             $(submitBtnSelector).prop('disabled', true);
         } else {
-            $(messageSelector).text('').hide();
+            $(strengthErrorSelector).text('').hide();
         }
     });
 
-    // Match password & confirm password
+    // PASSWORD MATCH
     $(document).on('input', passwordSelector + ', ' + confirmSelector, function () {
 
         const password = $(passwordSelector).val();
         const confirmPassword = $(confirmSelector).val();
 
-        if (password === '' && confirmPassword === '') {
-            $(messageSelector).text('');
+        if (!password || !confirmPassword) {
+            $(matchMessageSelector).text('');
             return;
         }
 
         if (password === confirmPassword) {
-            $(messageSelector).text('✓ Passwords match').css('color', 'green');
+            $(matchMessageSelector)
+                .text('✓ Passwords match')
+                .css('color', 'green');
+
             $(submitBtnSelector).prop('disabled', false);
         } else {
-            $(messageSelector).text('✗ Passwords do not match').css('color', 'red');
+            $(matchMessageSelector)
+                .text('✗ Passwords do not match')
+                .css('color', 'red');
+
             $(submitBtnSelector).prop('disabled', true);
         }
     });

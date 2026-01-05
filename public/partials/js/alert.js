@@ -8,7 +8,7 @@ const swalWithBootstrapButtons = Swal.mixin({
 
 function confirmDelete(message) {
     return swalWithBootstrapButtons.fire({
-        title: 'Are you sure you want to delete '+message+" ?",
+        title: 'Are you sure you want to delete ' + message + " ?",
         text: "You will be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
@@ -20,7 +20,7 @@ function confirmDelete(message) {
 
 function successDelete(message) {
     swalWithBootstrapButtons.fire(
-            message+' Deleted!',
+            message + ' Deleted!',
             'Your record has been deleted.',
             'success'
             );
@@ -44,7 +44,7 @@ function errorDelete() {
 
 function confirmRevert(message) {
     return swalWithBootstrapButtons.fire({
-        title: 'Are you sure you want to Revert '+message+" ?",
+        title: 'Are you sure you want to Revert ' + message + " ?",
         text: "You will be able to delete this again!",
         icon: 'warning',
         showCancelButton: true,
@@ -56,7 +56,7 @@ function confirmRevert(message) {
 
 function successRevert(message) {
     swalWithBootstrapButtons.fire(
-            message+' Reverted!',
+            message + ' Reverted!',
             'Your record has been Reverted.',
             'success'
             );
@@ -80,7 +80,7 @@ function errorRevert() {
 
 function confirmApprove(message) {
     return swalWithBootstrapButtons.fire({
-        title: 'Are you sure you want to Approve '+message+" ?",
+        title: 'Are you sure you want to Approve ' + message + " ?",
         text: "You will be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
@@ -91,7 +91,7 @@ function confirmApprove(message) {
 }
 function successApprove(message) {
     swalWithBootstrapButtons.fire(
-            message+' Approved!',
+            message + ' Approved!',
             'Your record has been Approved.',
             'success'
             );
@@ -106,7 +106,7 @@ function cancelApprove(message) {
 
 function confirmReject(message) {
     return swalWithBootstrapButtons.fire({
-        title: 'Are you sure you want to Reject '+message+" ?",
+        title: 'Are you sure you want to Reject ' + message + " ?",
         text: "You will be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
@@ -114,11 +114,11 @@ function confirmReject(message) {
         cancelButtonText: 'No, cancel!',
         reverseButtons: true
     });
-    
+
 }
 function successReject(message) {
     swalWithBootstrapButtons.fire(
-            message+' Rejected!',
+            message + ' Rejected!',
             'Your record has been Rejected.',
             'success'
             );
@@ -137,3 +137,33 @@ function cancelReject(message) {
             'error'
             );
 }
+
+
+// ================================
+// GENERIC MESSAGE HELPERS          Tejas
+// ================================
+
+function showErrorMessage(message, title = 'Error') {
+    swalWithBootstrapButtons.fire({
+        icon: 'error',
+        title: title,
+        text: message
+    });
+}
+
+function showSuccessMessage(message, title = 'Success') {
+    swalWithBootstrapButtons.fire({
+        icon: 'success',
+        title: title,
+        text: message
+    });
+}
+
+function showWarningMessage(message, title = 'Warning') {
+    swalWithBootstrapButtons.fire({
+        icon: 'warning',
+        title: title,
+        text: message
+    });
+}
+
