@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class ModelBonafideCertificateCounter extends Model {
 
-    protected $table = 'bonafide_certificate_no_counter';
+    protected $table = 'bonafide_certificate_number_counter';
     protected $primaryKey = 'bonafide_certificate_no_counter_id';
     protected $allowedFields = [
         'bonafide_certificate_no',
@@ -17,7 +17,7 @@ class ModelBonafideCertificateCounter extends Model {
 
     public function get_bonafide_certificate_no() {
         $result = $this->db->query(
-                        "SELECT * FROM bonafide_certificate_no_counter
+                        "SELECT * FROM bonafide_certificate_number_counter
              WHERE bonafide_certificate_no_counter_id = ?
              FOR UPDATE",
                         [1]

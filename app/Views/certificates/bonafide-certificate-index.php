@@ -79,6 +79,47 @@
         </div>
     </div>
     <!--End::row-1 
+    
+    <!--modal to add leaving certificate info-->
+    <div class="modal fade" id="bonafide_modal" tabindex="-1" aria-labelledby="bonafideModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <form method="post" action="" id ="bonafide_modal_form">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="bonafideModalLabel"><?= lang('App.add'); ?> <?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?> <?= lang('App.information'); ?></h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row gy-3">
+                            <?= csrf_field(); ?>
+                            <input type="hidden" id="yearwise_student_data_id" name="yearwise_student_data_id">
+                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                <label for="authorized_person" class="form-label"><?= lang('App.authorized'); ?> <?= lang('App.person'); ?></label> <span class="text-danger">*</span>
+                                <input type="text" class="form-control" name="authorized_person" id="authorized_person" value="" placeholder="<?= lang('App.authorized'); ?> <?= lang('App.person'); ?>">
+                                <small class="text-danger field-error" id="authorized_person_error"></small>
+                            </div>                           
+
+                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                <label for="bonafide_valid_upto" class="form-label"><?= lang('App.bonafide'); ?> <?= lang('App.valid'); ?> <?= lang('App.upto'); ?></label> <span class="text-danger">*</span>
+                                <div class="input-group">
+                                    <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i> </div>
+                                    <input type="text" class="form-control" name="bonafide_valid_upto" id="bonafide_valid_upto" value="" placeholder="<?= lang('App.bonafide'); ?> <?= lang('App.valid'); ?> <?= lang('App.upto'); ?>">
+                                </div>
+                                <small class="text-danger field-error" id="bonafide_valid_upto_error"></small>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= lang('App.close'); ?></button>
+                        <a href="javascript:void(0);" id="bonafide_preview_btn" type="button" class="btn btn-warning"><?= lang('App.preview'); ?></a>
+                        <button type="submit" class="btn btn-success"><?= lang('App.submit'); ?></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--End::modal-->
 
     <!-- Start:: row-2 -->
     <div class="row">

@@ -69,7 +69,7 @@ class BonafideCertificate extends BaseController {
             $data = [];
 
             foreach ($students as $student) {
-                
+
                 $buttons = '';
                 $buttons .= '<button class="btn btn-secondary bonafide_btn" data-yearwise-student-data-id="' . $student['yearwise_student_data_id'] . '">' . lang('App.bonafide') . ' ' . lang('App.certificate') . '</button>';
 
@@ -103,8 +103,8 @@ class BonafideCertificate extends BaseController {
             ]);
         }
     }
-    
-    public function add_bonafide_certificate(){
+
+    public function add_bonafide_certificate_data() {
         $bonafide_counter_data = $this->modelbonafidecertificatecounter->find(1);
         if ($bonafide_counter_data == null) {
             $data = ['bonafide_certificate_no' => 1];
@@ -117,12 +117,14 @@ class BonafideCertificate extends BaseController {
 
             // 🔒 1️⃣ LOCK LC COUNTER ROW
             $bonafide_no_counter = $this->modelbonafidecertificatecounter->get_bonafide_certificate_no();
-            $ysd_id = $this->request->getVar('ysd_id');
+            $ysd_id = $this->request->getVar('yearwise_student_data_id');
 //            print_r($ysd_id);die();
             $bonafide_data = [
                 'yearwise_student_data_id' => $ysd_id,
                 'bonafide_certificate_no' => $bonafide_no_counter['bonafide_certificate_no'],
-                
+                'authorized_person' => $this->request->getVar('authorized_person'),
+                'bonafide_valid_upto' => $this->request->getVar('bonafide_valid_upto'),
+                'added_by' => session('rise_no'),
             ];
 //            print_r($bonafide_data);die();
             $bonafide_id = $this->modelbonafidecertificate->insert($bonafide_data, true);
@@ -135,17 +137,23 @@ class BonafideCertificate extends BaseController {
                 if ($this->db->transStatus() === false) {
                     throw new \Exception('bonafide_id transaction failed');
                 }
-
-                // =========Commit=========
-                $this->db->transCommit();
+            } else {
+                // =========Validation failed============
 
                 return $this->response->setJSON([
-                            'status' => 'success',
-                            'bonafide_id' => $bonafide_id,
+                            'status' => 'error',
+                            'errors' => $this->modelbonafidecertificate->errors(),
                             'csrfHash' => csrf_hash()
                 ]);
             }
-           
+            // =========Commit=========
+            $this->db->transCommit();
+
+            return $this->response->setJSON([
+                        'status' => 'success',
+                        'bonafide_id' => $bonafide_id,
+                        'csrfHash' => csrf_hash()
+            ]);
         } catch (Exception $ex) {
             $this->db->transRollback();
 
@@ -163,8 +171,16 @@ class BonafideCertificate extends BaseController {
             $data['bonafide_data'] = $bonafide_data = $this->modelbonafidecertificate->find($bonafide_id);
 
             $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_bonafide($bonafide_data['yearwise_student_data_id']);
-          
-        } 
+        } elseif ($this->request->getMethod() === 'post') {
+            $ysd_id = $this->request->getVar('yearwise_student_data_id');
+//            print_r($ysd_id);die();
+            $data['bonafide_data'] = [
+                'authorized_person' => $this->request->getVar('authorized_person'),
+                'bonafide_valid_upto' => $this->request->getVar('bonafide_valid_upto'),
+            ];
+
+            $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_bonafide($ysd_id);
+        }
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L']);
         $mpdf->shrink_tables_to_fit = 0;
         $mpdf->simpleTables = false;
@@ -174,7 +190,7 @@ class BonafideCertificate extends BaseController {
         $mpdf->useFixedNormalLineHeight = true;
         $mpdf->useFixedTextBaseline = true;
         $mpdf->adjustFontDescLineheight = 100;
-        $html = view('certificates/bonafide-certificate-print',$data);
+        $html = view('certificates/bonafide-certificate-print', $data);
         $mpdf->WriteHTML($html);
 
         // Output PDF

@@ -24,6 +24,7 @@ return [
     'attended' => 'Attended',
     'author' => 'Author',
     'authors' => 'Authors',
+    'authorized' => 'Authorized',
     'already' => 'Already',
     'award' => 'Award',
     'awarded' => 'Awarded',
@@ -261,9 +262,11 @@ return [
     'update' => 'Update',
     'upload' => 'Upload',
     'up' => 'UP',
+    'upto' => 'Upto',
     'user' => 'User',
     'users' => 'Users',
     // V
+    'valid' => 'Valid',
     'volume' => 'Volume',
     // W
     'weightage' => 'Weightage',
