@@ -16,6 +16,7 @@ return [
     'admission' => 'Admission',
     'affiliation' => 'Affiliation',
     'agency' => 'Agency',
+    'age' => 'Age',
     'apply' => 'Apply',
     'appointment' => 'Appointment',
     'approve' => 'Approve',
