@@ -127,7 +127,8 @@ $routes->group('faculty', function ($routes) {
     $routes->post('delete-faculty', 'Faculty::delete_faculty', ['filter' => 'permission:deleteFaculty']);
     $routes->post('revert-faculty', 'Faculty::revert_faculty', ['filter' => 'permission:deleteFaculty']);
 
-       // ✅ FIRST LOGIN PASSWORD CHANGE (ADD THIS)
+       // ✅ FIRST LOGIN 
+       // PASSWORD CHANGE (ADD THIS)
     $routes->post('change-password-first-login','Faculty::change_password_first_login');
 });
 
