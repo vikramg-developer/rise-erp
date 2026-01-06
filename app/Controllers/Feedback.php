@@ -38,9 +38,9 @@ class Feedback extends BaseController {
 
         $data = [
             'feedback_name' => clean_name($this->request->getVar('feedback_name')),
-            'subject_type_id' => ($this->request->getVar('type_id')),
+            'subject_type_id' => ($this->request->getVar('subject_type_id')),
             'semester_id' => ($this->request->getVar('semester_id')),
-            'semester_part_id' => ($this->request->getVar('part_id')),
+            'semester_part_id' => ($this->request->getVar('semester_part_id')),
             'academic_year_id' => ($this->request->getVar('academic_year_id')),
         ];
 

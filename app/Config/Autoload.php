@@ -45,6 +45,10 @@ class Autoload extends AutoloadConfig
     public $psr4 = [
         APP_NAMESPACE => APPPATH, // For custom app namespace
         'Config'      => APPPATH . 'Config',
+        
+        
+//       'App\Database\Migrations'
+//        => APPPATH . 'Database/Migrations',
     ];
 
     /**
@@ -96,5 +100,5 @@ class Autoload extends AutoloadConfig
      * @var string[]
      * @phpstan-var list<string>
      */
-    public $helpers = ['view','form','sanitize','permission','greeting','auth','ui','activity','foreign_key'];
+    public $helpers = ['view','form','sanitize','permission','greeting','auth','ui','activity','cascading'];
 }

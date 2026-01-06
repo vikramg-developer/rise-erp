@@ -57,13 +57,18 @@ class StudentPersonalInfo extends Migration {
                 'constraint' => 200,
                 'null' => false,
             ],
+            'student_birthplace' => [
+                'type' => 'VARCHAR',
+                'constraint' => 200,
+                'null' => false,
+            ],
             'student_bloodgroup_id' => [
                 'type' => 'INT',
                 'null' => true,
             ],
-            'student_religion_id' => [
+            'student_age' => [
                 'type' => 'INT',
-                'null' => true,
+                'null' => false,
             ],
             'student_category_id' => [
                 'type' => 'INT',
