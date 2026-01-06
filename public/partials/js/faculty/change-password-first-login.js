@@ -15,10 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
     );
 
     // 🔒 Force modal open
-    const modalEl = document.getElementById('firstLoginModal');
-    if (!modalEl) return;
+    const modal = document.getElementById('firstLoginModal');
+    if (!modal) return;
 
-    new bootstrap.Modal(modalEl, {
+    new bootstrap.Modal(modal, { 
         backdrop: 'static',
         keyboard: false
     }).show();

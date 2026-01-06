@@ -440,24 +440,47 @@ class Faculty extends BaseController {
         return redirect()->to('/dashboard');
     }
     
-    public function check_old_password(){
-        $old_password = $this->request->getPost('old_password');
-        $faculty_data = $this->modelfacultyregistration->verify_rise_no(session('rise_no'));
-        
-        if(password_verify($old_password, $faculty_data['faculty_password']))
-        {
-            return $this->response->setJSON([
-                            'status' => 'error',
-                            'message' => 'Password Matched',
-                            'csrfHash' => csrf_hash()
-                ]);
-        }
-        return $this->response->setJSON([
-                            'status' => 'success',
-                            'message' => 'Incorrect Password',
-                            'csrfHash' => csrf_hash()
-                ]);
+//    public function check_old_password(){
+//        $old_password = $this->request->getPost('old_password');
+//        $faculty_data = $this->modelfacultyregistration->verify_rise_no(session('rise_no'));
+//        
+//        if(password_verify($old_password, $faculty_data['faculty_password']))
+//        {
+//            return $this->response->setJSON([
+//                            'status' => 'error',
+//                            'message' => 'Password Matched',
+//                            'csrfHash' => csrf_hash()
+//                ]);
+//        }
+//        return $this->response->setJSON([
+//                            'status' => 'success',
+//                            'message' => 'Incorrect Password',
+//                            'csrfHash' => csrf_hash()
+//                ]);
 //        echo $old_password;
 //        die();
+//    }
+    
+    
+    public function check_old_password()
+{
+    $old_password = $this->request->getPost('old_password');
+    $faculty_data = $this->modelfacultyregistration
+                         ->verify_rise_no(session('rise_no'));
+
+    if (password_verify($old_password, $faculty_data['faculty_password'])) {
+        return $this->response->setJSON([
+            'status'   => true,
+            'message'  => 'Password Matched',
+            'csrfHash' => csrf_hash()
+        ]);
     }
+
+    return $this->response->setJSON([
+        'status'   => false,
+        'message'  => 'Incorrect Password',
+        'csrfHash' => csrf_hash()
+    ]);
+}
+
 }

@@ -124,6 +124,7 @@ $routes->group('faculty', function ($routes) {
     $routes->post('check-old-password', 'Faculty::check_old_password', ['filter' => 'permission:createFaculty']);
 });
 // ✅ FIRST LOGIN PASSWORD CHANGE (NO PERMISSION FILTER)
+//  $routes->post('check-old-password', 'Faculty::check_old_password');
 $routes->get('change-password-first-login','Faculty::firstLoginChangePassword');
 $routes->post('change-password-first-login','Faculty::updateFirstLoginPassword');
 
