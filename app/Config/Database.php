@@ -57,7 +57,30 @@ class Database extends Config
         'strictOn' => false,
         'failover' => [],
         'port'     => 3306,
+//        'DBEngine' => 'InnoDB',
     ];
+    
+    //----------centralized database ------------//
+     public array $centralized= [
+//        Cpanel Database
+        'hostname' => '103.133.214.177',
+        'username' => 'rayatedu_rise',
+        'password' => 'Rise@2025',
+        'database' => 'rayatedu_rise_centralized',
+        'DBDriver' => 'MySQLi',
+        'DBPrefix' => '',
+        'pConnect' => false,
+        'DBDebug'  => true,
+        'charset'  => 'utf8mb4',
+        'DBCollat' => 'utf8mb4_general_ci',
+        'swapPre'  => '',
+        'encrypt'  => false,
+        'compress' => false,
+        'strictOn' => false,
+        'failover' => [],
+        'port'     => 3306,
+    ];
+
 
     /**
      * This database connection is used when
@@ -83,6 +106,7 @@ class Database extends Config
         'port'        => 3306,
         'foreignKeys' => true,
         'busyTimeout' => 1000,
+        'DBEngine' => 'InnoDB',
     ];
 
     public function __construct()

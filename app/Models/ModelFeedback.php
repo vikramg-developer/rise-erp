@@ -27,9 +27,9 @@ class ModelFeedback extends Model {
     // Validation
     protected $validationRules = [
         'feedback_name' => 'required|min_length[3]',
-        'type_id' => 'required',
+        'subject_type_id' => 'required',
         'semester_id' => 'required',
-        'part_id' => 'required',
+        'semester_part_id' => 'required',
         'academic_year_id' => 'required',
     ];
     protected $validationMessages = [
@@ -37,13 +37,13 @@ class ModelFeedback extends Model {
             'required' => 'Feedback Name is required',
 //            'min_length' => 'Feedback Name must be at least 3 characters'
         ],
-        'type_id' => [
+        'subject_type_id' => [
             'required' => 'Feedback Subject Type is required'
         ],
         'semester_id' => [
             'required' => 'Semester is required'
         ],
-        'part_id' => [
+        'semester_part_id' => [
             'required' => 'Semester Part is required'
         ],
         'academic_year_id' => [

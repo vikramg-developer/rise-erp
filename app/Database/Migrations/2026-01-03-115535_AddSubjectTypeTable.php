@@ -5,24 +5,18 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class AddBonafideCertificateTable extends Migration {
+class AddSubjectTypeTable extends Migration {
 
     public function up() {
         $fields = [
-            'bonafide_certificate_id' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'auto_increment' => true
-            ],
-            'bonafide_certificate_no' => [
+            'subject_type_id' => [
                 'type' => 'int',
+                'auto_increment' => true,
             ],
-            'yearwise_student_data_id' => [
-                'type' => 'int',
-            ],
-            'is_cancelled' => [
-                'type' => 'tinyint',
-                'constraint' => '1'
+            'subject_type_name' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => false
             ],
             'added_by' => [
                 'type' => 'varchar',
@@ -58,19 +52,12 @@ class AddBonafideCertificateTable extends Migration {
             ]
         ];
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('bonafide_certificate_id');
-        $this->forge->addUniqueKey('bonafide_certificate_no');
-        $this->forge->addForeignKey(
-                'yearwise_student_data_id',
-                'yearwise_student_data',
-                'yearwise_student_data_id',
-                'CASCADE',
-                'CASCADE'
-        );
-        $this->forge->createTable('bonafide_certificate');
+        $this->forge->addPrimaryKey('subject_type_id');
+        $this->forge->addUniqueKey('subject_type_name');
+        $this->forge->createTable('subject_type');
     }
 
     public function down() {
-        $this->forge->dropTable('bonafide_certificate');
+        $this->forge->dropTable('subject_type');
     }
 }

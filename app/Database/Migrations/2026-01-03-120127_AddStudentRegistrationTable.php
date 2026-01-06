@@ -5,57 +5,55 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class AddTicketTable extends Migration {
+class StudentRegistration extends Migration {
 
     public function up() {
         $fields = [
-            'ticket_id' => [
+            'student_registration_id' => [
                 'type' => 'int',
                 'constraint' => '11',
                 'auto_increment' => true,
             ],
-            'college_name' => [
+            'student_rise_no' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => false,
+            ],
+            'student_first_name' => [
                 'type' => 'varchar',
                 'constraint' => '100',
                 'null' => false,
             ],
-            'category_id' => [
-                'type' => 'int',
-                'constraint' => '11',
-            ],
-            'issue_title' => [
+            'student_middle_name' => [
                 'type' => 'varchar',
                 'constraint' => '100',
                 'null' => false,
             ],
-            'description' => [
-                'type' => 'varchar',
-                'constraint' => '500',
-                'null' => false,
-            ],
-            'priority' => [
-                'type' => 'int',
-                'constraint' => '11',
-                'null' => false,
-            ],
-            'email' => [
-                'type' => 'varchar',
-                'constraint' => '11',
-                'null' => false,
-            ],
-            'mobile' => [
-                'type' => 'int',
-                'constraint' => '10',
-                'null' => false,
-            ],
-            'file' => [
-                'type' => 'varchar',
-                'constraint' => '11',
-                'null' => false,
-            ],
-            'status' => [
+            'student_last_name' => [
                 'type' => 'varchar',
                 'constraint' => '100',
+                'null' => false,
+            ],
+            'student_role_id' => [
+                'type' => 'int',
+                'null' => true,
+            ],
+            'approval_status' => [
+                'type' => new RawSql("ENUM('pemnding','aprroved','rejected')"),
+                'default' => 'pending',
+            ],
+            'approval_status_date' => [
+                'type' => 'timestamp',
+                'null' => true,
+            ],
+            'student_aadhar_number' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => false,
+            ],
+            'student_password' => [
+                'type' => 'varchar',
+                'constraint' => '50',
                 'null' => false,
             ],
             'added_by' => [
@@ -91,14 +89,13 @@ class AddTicketTable extends Migration {
                 'constraint' => '1'
             ]
         ];
-
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('ticket_id');
-
-        $this->forge->createTable('ticket');
+        $this->forge->addPrimaryKey('student_registration_id');
+        $this->forge->addUniqueKey('student_rise_no');
+        $this->forge->createTable('student_registration');
     }
 
     public function down() {
-        $this->forge->dropTable('ticket');
+        $this->forge->dropTable('student_registration', true);
     }
 }

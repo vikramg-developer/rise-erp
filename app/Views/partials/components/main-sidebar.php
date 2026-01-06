@@ -41,11 +41,11 @@ $permissions = config('Permissions');
                                                             <li class="slide side-menu__label1">
                                                                 <a href="javascript:void(0)">Error</a>
                                                             </li>
-                                                            <?php if (hasAnyPermission($permissions->faculty_registration)): ?>
-                                                                <li class="slide">
-                                                                    <a href="<?php echo base_url('faculty'); ?>" class="side-menu__item"> <?= lang('App.add'); ?> <?= lang('App.employee'); ?></a>
-                                                                </li>
-                                                            <?php endif; ?>
+                                                            <?php //if (hasAnyPermission($permissions->faculty_registration)): ?>
+                                                                <!--<li class="slide">-->
+                                                                    <!--<a href="<?php echo base_url('faculty'); ?>" class="side-menu__item"> <?= lang('App.add'); ?> <?= lang('App.employee'); ?></a>-->
+                                                                <!--</li>-->
+                                                            <?php //endif; ?>
                                                             <?php if (hasAnyPermission($permissions->faculty_registration)): ?>
                                                                 <li class="slide">
                                                                     <a href="<?php echo base_url('faculty/fetch-faculty'); ?>" class="side-menu__item"> <?= lang('App.manage'); ?> <?= lang('App.employee'); ?></a>

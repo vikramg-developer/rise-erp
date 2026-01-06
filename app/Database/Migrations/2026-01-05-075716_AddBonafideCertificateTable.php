@@ -5,36 +5,20 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class AddLeavingCertificateTable extends Migration {
+class AddBonafideCertificateTable extends Migration {
 
     public function up() {
         $fields = [
-            'leaving_certificate_id' => [
+            'bonafide_certificate_id' => [
                 'type' => 'INT',
                 'constraint' => 11,
                 'auto_increment' => true
             ],
-            'leaving_certificate_no' => [
+            'bonafide_certificate_no' => [
                 'type' => 'int',
             ],
             'yearwise_student_data_id' => [
                 'type' => 'int',
-            ],
-            'examination' => [
-                'type' => 'varchar',
-                'constraint' => 150,
-            ],
-            'exam_period' => [
-                'type' => 'varchar',
-                'constraint' => 100,
-            ],
-            'date_of_leaving' => [
-                'type' => 'date',
-                'null' => false
-            ],
-            'is_duplicate' => [
-                'type' => 'tinyint',
-                'constraint' => '1'
             ],
             'is_cancelled' => [
                 'type' => 'tinyint',
@@ -58,7 +42,15 @@ class AddLeavingCertificateTable extends Migration {
             'updated_at' => [
                 'type' => 'timestamp',
                 'null' => true,
-                'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+            ],
+            'deleted_by' => [
+                'type' => 'varchar',
+                'constraint' => '50',
+                'null' => true
+            ],
+            'deleted_at' => [
+                'type' => 'timestamp',
+                'null' => true,
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
@@ -66,19 +58,12 @@ class AddLeavingCertificateTable extends Migration {
             ]
         ];
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('leaving_certificate_id');
-        $this->forge->addUniqueKey('leaving_certificate_no');
-        $this->forge->addForeignKey(
-                'yearwise_student_data_id',
-                'yearwise_student_data',
-                'yearwise_student_data_id',
-                'CASCADE',
-                'CASCADE'
-        );
-        $this->forge->createTable('leaving_certificate');
+        $this->forge->addPrimaryKey('bonafide_certificate_id');
+        $this->forge->addUniqueKey('bonafide_certificate_no');
+        $this->forge->createTable('bonafide_certificate');
     }
 
     public function down() {
-        $this->forge->dropTable('leaving_certificate');
+        $this->forge->dropTable('bonafide_certificate');
     }
 }

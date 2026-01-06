@@ -23,15 +23,15 @@
                     <div class="card-body p-4">
 
                         <h5 class="mb-3">
-                            <b><?= lang('App.faculty'); ?> <?= lang('App.information'); ?></b>
+                            <b><?= lang('App.employee'); ?> <?= lang('App.information'); ?></b>
                         </h5>
-
+                        <hr>
                         <div class="row gy-4">
 
                             <!-- FACULTY ROLE -->
                             <div class="col-xl-4 col-lg-4 col-md-6">
                                 <label class="form-label">
-                                    <?= lang('App.faculty'); ?> <?= lang('App.role'); ?> <span class="text-danger">*</span>
+                                    <?= lang('App.employee'); ?> <?= lang('App.role'); ?> <span class="text-danger">*</span>
                                 </label>
                                 <select class="from-control js-example-basic-single" name="faculty_role_id" id="faculty_role_id">
                                     <option value="">Select Role</option>
@@ -52,9 +52,9 @@
                                 </label>
                                 <select class="from-control js-example-basic-single" name="faculty_gender" id="faculty_gender">
                                     <option value="">Select Gender</option>
-                                    <option value="Male"><?= lang('App.male'); ?></option>
-                                    <option value="Female"><?= lang('App.female'); ?></option>
-                                    <option value="Other"><?= lang('App.transgender'); ?></option>
+                                    <option value="male"><?= lang('App.male'); ?></option>
+                                    <option value="female"><?= lang('App.female'); ?></option>
+                                    <option value="transgender"><?= lang('App.transgender'); ?></option>
                                 </select>
                                 <small class="text-danger" id="faculty_gender_error" style="display:none;"></small>
                             </div>
@@ -102,13 +102,13 @@
                                 <small class="text-danger" id="faculty_last_name_error" style="display:none;"></small>
                             </div>
 
-                            <!-- MOBILE -->
+                            <!-- Contact -->
                             <div class="col-xl-4 col-md-6">
                                 <label class="form-label">
-                                    <?= lang('App.mobile'); ?> <?= lang('App.number'); ?> <span class="text-danger">*</span>
+                                    <?= lang('App.contact'); ?> <?= lang('App.number'); ?> <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="faculty_mobile_number" id="faculty_mobile_number"  maxlength="10" class="form-control" placeholder="9999999999">
-                                <small class="text-danger" id="faculty_mobile_number_error" style="display:none;"></small>
+                                <input type="text" name="faculty_contact_number" id="faculty_contact_number"  maxlength="10" class="form-control" placeholder="9999999999">
+                                <small class="text-danger" id="faculty_contact_number_error" style="display:none;"></small>
                             </div>
 
                             <!-- EMAIL -->

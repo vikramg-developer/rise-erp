@@ -64,7 +64,6 @@ $routes->get('student-registration', 'StudentRegistration::index');
 $routes->post('save-registration', 'StudentRegistration::add_registration');
 $routes->get('/student-profile', 'StudentProfile::index', ['filter' => 'permission:viewStudentProfile']);
 $routes->post('add-personal-details', 'StudentProfile::add_personal_information', ['filter' => 'permission:viewStudentProfile']);
-$routes->get('/student-profile', 'StudentRegistration::student_profile', ['filter' => 'permission:viewStudentProfile']);
 $routes->post('/savesignup', 'Registration::saveSignup');
 $routes->get('/student-dashboard', 'Login::studentDashboard');
 $routes->get('/studentDashboard', 'Login::studentDashboard');
@@ -116,16 +115,20 @@ $routes->group('feedback', function ($routes) {
     $routes->get('manage-question', 'Feedback::manage_question', ['filter' => 'permission:createFeedback']);
     $routes->get('sample-excel-file', 'Feedback::sample_excel_file', ['filter' => 'permission:createFeedback']);
 });
+
 //---------- faculty ----------//
 $routes->group('faculty', function ($routes) {
     $routes->get('/', 'Faculty::index', ['filter' => 'permission:createFaculty']);
-    $routes->get('fetch-faculty', 'Faculty::faculty_data', ['filter' => 'permission:createFaculty']);
+    $routes->get('fetch-faculty', 'Faculty::faculty_data', ['filter' => 'permission:viewFaculty']);
     $routes->get('edit-faculty/(:num)', 'Faculty::edit_faculty/$1', ['filter' => 'permission:updateFaculty']);
     $routes->post('add-faculty', 'Faculty::add_faculty', ['filter' => 'permission:createFaculty']);
-    $routes->post('fetch-faculty-data', 'Faculty::fetch_faculty', ['filter' => 'permission:createFaculty']);
+    $routes->post('fetch-faculty-data', 'Faculty::fetch_faculty', ['filter' => 'permission:viewFaculty']);
     $routes->post('update-faculty', 'Faculty::update_faculty', ['filter' => 'permission:updateFaculty']);
     $routes->post('delete-faculty', 'Faculty::delete_faculty', ['filter' => 'permission:deleteFaculty']);
     $routes->post('revert-faculty', 'Faculty::revert_faculty', ['filter' => 'permission:deleteFaculty']);
+
+       // ✅ FIRST LOGIN PASSWORD CHANGE (ADD THIS)
+    $routes->post('change-password-first-login','Faculty::change_password_first_login');
 });
 
 $routes->group('headgroup', function ($routes) {

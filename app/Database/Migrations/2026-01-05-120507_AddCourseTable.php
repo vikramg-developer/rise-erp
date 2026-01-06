@@ -5,15 +5,16 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class AddSubjectTypeTable extends Migration {
+class AddCourseTable extends Migration {
+    protected $DBGroup = 'centralized'; // 🔥 FORCE centralized DB
 
     public function up() {
         $fields = [
-            'subject_type_id' => [
+            'course_id' => [
                 'type' => 'int',
                 'auto_increment' => true,
             ],
-            'subject_type_name' => [
+            'course_name' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
@@ -52,12 +53,12 @@ class AddSubjectTypeTable extends Migration {
             ]
         ];
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('subject_type_id');
-        $this->forge->addUniqueKey('subject_type_name');
-        $this->forge->createTable('subject_type');
+        $this->forge->addPrimaryKey('course_id');
+        $this->forge->addUniqueKey('course_name');
+        $this->forge->createTable('course');
     }
 
     public function down() {
-        $this->forge->dropTable('subject_type');
+        $this->forge->dropTable('course');
     }
 }

@@ -5,14 +5,13 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class AddFeedbackMaster extends Migration {
+class AddFeedbackMasterTable extends Migration {
 
     public function up() {
         $fields = [
             'feedback_master_id' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'auto_increment' => true
+                'type' => 'int',
+                'auto_increment' => true,
             ],
             'feedback_name' => [
                 'type' => 'VARCHAR',
@@ -67,41 +66,9 @@ class AddFeedbackMaster extends Migration {
                 'constraint' => '1'
             ]
         ];
+
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('feedback_master_id');
-        /* Subject Type */
-        $this->forge->addForeignKey(
-                'subject_type_id',
-                'subject_type',
-                'subject_type_id',
-                'CASCADE',
-                'CASCADE'
-        );
-        /* semester */
-        $this->forge->addForeignKey(
-                'semester_id',
-                'semester',
-                'semester_id',
-                'CASCADE',
-                'CASCADE'
-        );
-        /* semester_part */
-        $this->forge->addForeignKey(
-                'semester_part_id',
-                'semester_part',
-                'semester_part_id',
-                'CASCADE',
-                'CASCADE'
-        );
-        /* academic_year */
-        $this->forge->addForeignKey(
-                'academic_year_id',
-                'academic_year',
-                'academic_year_id',
-                'CASCADE',
-                'CASCADE'
-        );
-
         $this->forge->createTable('feedback_master');
     }
 

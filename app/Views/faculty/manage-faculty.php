@@ -22,7 +22,7 @@
         <div class="row mt-1">
             <div class="col-xl-12">
                 <div class="px-1 py-1 d-sm-flex justify-content-start">
-                    <a href="<?= base_url('faculty/'); ?>" class="btn btn-success m-1"><?= lang('App.add'); ?> <?= lang('App.faculty'); ?><i class="bi bi-plus ms-2"></i></a>
+                    <a href="<?= base_url('faculty/'); ?>" class="btn btn-success m-1"><?= lang('App.add'); ?> <?= lang('App.employee'); ?><i class="bi bi-plus ms-2"></i></a>
                 </div>
             </div>
         </div>
@@ -40,7 +40,8 @@
                             <th  width="5%">#</th>
                             <th><?= lang('App.action'); ?></th>
                             <th> <?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
-                            <th><?= lang('App.faculty'); ?> <?= lang('App.name'); ?></th>
+                            <th><?= lang('App.employee'); ?> <?= lang('App.name'); ?></th>
+                            <th><?= lang('App.gender'); ?> </th>
                             <th><?= lang('App.contact'); ?> <?= lang('App.no'); ?></th>
                             <th>Added By</th>
                             <th>Updated By</th>

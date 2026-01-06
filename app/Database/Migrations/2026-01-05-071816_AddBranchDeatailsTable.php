@@ -1,108 +1,106 @@
-<?php //
+<?php
 
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class StudentPersonalInfo extends Migration {
+class AddBranchDetailsTable extends Migration {
 
     public function up() {
         $fields = [
-            'student_personal_info_id' => [
-                'type' => 'INT',
-                'constraint' => 11,
+            'branch_id' => [
+                'type' => 'int',
                 'auto_increment' => true,
             ],
-            'student_registration_id' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'null' => false,
-            ],
-            'student_prn_no' => [
+            'branch_code' => [
                 'type' => 'VARCHAR',
-                'constraint' => 50,
+                'constraint' => 500,
                 'null' => false,
             ],
-            'student_abc_id' => [
+            'branch_name' => [
                 'type' => 'VARCHAR',
-                'constraint' => 50,
+                'constraint' => 500,
                 'null' => false,
             ],
-            'student_general_register_no' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'null' => false,
-            ],
-            'student_contact_no' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'null' => false,
-            ],
-            'student_email' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'null' => false,
-            ],
-            'student_gender' => [
-                'type' => new RawSql("ENUM('male','female','transgender')"),
-                'null' => true,
-            ],
-            'student_birthdate' => [
-                'type' => 'DATE',
-                'null' => false,
-            ],
-            'student_birthplace' => [
-                'type' => 'VARCHAR',
-                'constraint' => 200,
-                'null' => false,
-            ],
-            'student_bloodgroup_id' => [
-                'type' => 'INT',
-                'null' => true,
-            ],
-            'student_religion_id' => [
-                'type' => 'INT',
-                'null' => true,
-            ],
-            'student_category_id' => [
-                'type' => 'INT',
-                'null' => false,
-            ],
-            'student_caste_id' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'null' => false,
-            ],
-            'student_subcaste' => [
+            'signature_name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 100,
                 'null' => false,
             ],
-            'student_marital_status' => [
+            'branch_email' => [
                 'type' => 'VARCHAR',
                 'constraint' => 100,
                 'null' => false,
             ],
-            'student_nationality' => [
+            'branch_contact_number' => [
                 'type' => 'VARCHAR',
-                'constraint' => 100,
+                'constraint' => 10,
                 'null' => false,
             ],
-            'student_minority' => [
-                'type' => 'TINYINT',
-                'constraint' => 1,
+            'branch_website' => [
+                'type' => 'VARCHAR',
+                'constraint' => 250,
                 'null' => false,
             ],
-            'student_physically_handicap' => [
+            'branch_address' => [
                 'type' => 'VARCHAR',
-                'constraint' => 50,
+                'constraint' => 500,
                 'null' => false,
-                'comment' => '1=Yes, 2=No'
             ],
-            'student_physically_handicap_type' => [
+            'branch_region_id' => [
+                'type' => 'INT',
+                'null' => false,
+                'comment' => 'central/western etc from branch_region table',
+            ],
+            'branch_location_id' => [
+                'type' => 'INT',
+                'null' => false,
+                'comment' => 'urban/rural/Ati-Durgam/Durgam etc from branch_location table',
+            ],
+            'branch_district_id' => [
+                'type' => 'INT',
+                'null' => false,
+            ],
+            'branch_taluka_id' => [
+                'type' => 'INT',
+                'null' => false,
+            ],
+            'branch_pincode_id' => [
+                'type' => 'INT',
+                'null' => false,
+            ],
+            'branch_type_id' => [
+                'type' => 'INT',
+                'null' => false,
+            ],
+            'branch_principal_name' => [
                 'type' => 'VARCHAR',
-                'constraint' => 50,
+                'constraint' => 500,
+                'null' => false,
+            ],
+            'branch_principal_contact_number' => [
+                'type' => 'VARCHAR',
+                'constraint' => 10,
+                'null' => false,
+            ],
+            'branch_logo' => [
+                'type' => 'VARCHAR',
+                'constraint' => 10,
+                'null' => false,
+            ],
+            'branch_header' => [
+                'type' => 'VARCHAR',
+                'constraint' => 10,
+                'null' => false,
+            ],
+            'branch_udise_number' => [
+                'type' => 'VARCHAR',
+                'constraint' => 10,
+                'null' => false,
+            ],
+            'branch_otp' => [
+                'type' => 'INT',
                 'null' => false,
             ],
             'added_by' => [
@@ -138,26 +136,12 @@ class StudentPersonalInfo extends Migration {
                 'constraint' => '1'
             ]
         ];
-
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('student_personal_info_id');
-        $this->forge->addUniqueKey('student_contact_no');
-        $this->forge->addUniqueKey('student_registration_id');
-        $this->forge->addUniqueKey('student_prn_no');
-        $this->forge->addUniqueKey('student_abc_id');
-
-        /* student_registration */
-        $this->forge->addForeignKey(
-                'student_registration_id',
-                'student_registration',
-                'student_registration_id',
-                'CASCADE',
-                'CASCADE'
-        );
-        $this->forge->createTable('student_personal_info');
+        $this->forge->addPrimaryKey('branch_id');
+        $this->forge->createTable('branch_details');
     }
 
     public function down() {
-        $this->forge->dropTable('student_personal_info');
+        $this->forge->dropTable('branch_details');
     }
 }

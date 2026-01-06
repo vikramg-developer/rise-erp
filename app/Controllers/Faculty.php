@@ -30,6 +30,12 @@ class Faculty extends BaseController {
     public function add_faculty() {
         $post = $this->request->getPost();
         $academic_year_data = $this->modelacademicYear->getCurrentAcademicYear();
+        if (empty($academic_year_data)) {
+            return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'Academic Year is not configured. Please contact admin.'
+            ]);
+        }
         $academic_year_id = $academic_year_data['academic_year_id'];
         $rise_counter_data = $this->modelrisecounter->where(['user_type_id' => 1])->first();
 
@@ -46,23 +52,33 @@ class Faculty extends BaseController {
             $rise_no_counter = $this->modelrisecounter->get_Faculty_Counter_For_Update();
 
             $branch = $this->modelbranch->getSingleBranch();
-            $branchCode = $branch['branch_code'] ?? '000';
+            // Branch not configured
+            if (empty($branch) || empty($branch['branch_code'])) {
+                return $this->response->setJSON([
+                            'status' => 'error',
+                            'message' => 'Branch  Code is not configured. Please contact admin.',
+                            'csrfHash' => csrf_hash()
+                ]);
+            }
+
+// ✅ SAFE TO USE
+            $branchCode = $branch['branch_code'];
             $yearPrefix = substr($academic_year_data['academic_year_name'], 0, 4);
             $faculty_rise_no = 'F' . $yearPrefix . $branchCode . str_pad($rise_no_counter['rise_no'], 4, '0', STR_PAD_LEFT);
 
             $insertData = [
-                'faculty_role_id'       => clean_number($this->request->getVar('faculty_role_id')),
-                'faculty_gender'        => clean_name($this->request->getVar('faculty_gender')),
-                'faculty_first_name'    => clean_name($this->request->getVar('faculty_first_name')),
-                'faculty_middle_name'   => clean_name($this->request->getVar('faculty_middle_name')),
-                'faculty_last_name'     => clean_name($this->request->getVar('faculty_last_name')),
-                'faculty_mobile_number' => clean_number($this->request->getVar('faculty_mobile_number')),
-                'faculty_email_id'      => clean_email($this->request->getVar('faculty_email_id')),
+                'faculty_role_id' => clean_number($this->request->getVar('faculty_role_id')),
+                'faculty_gender' => clean_name($this->request->getVar('faculty_gender')),
+                'faculty_first_name' => clean_name($this->request->getVar('faculty_first_name')),
+                'faculty_middle_name' => clean_name($this->request->getVar('faculty_middle_name')),
+                'faculty_last_name' => clean_name($this->request->getVar('faculty_last_name')),
+                'faculty_contact_number' => clean_number($this->request->getVar('faculty_contact_number')),
+                'faculty_email_id' => clean_email($this->request->getVar('faculty_email_id')),
                 'faculty_aadhar_number' => clean_number($this->request->getVar('faculty_aadhar_number')),
-                'faculty_pan_number'    => clean_name($this->request->getVar('faculty_pan_number')),
-                'faculty_password'      => clean_name($this->request->getVar('faculty_password')),
-                'faculty_rise_no'       => $faculty_rise_no,
-                'added_by'              => session('rise_no'),
+                'faculty_pan_number' => clean_name($this->request->getVar('faculty_pan_number')),
+                'faculty_password' => clean_name($this->request->getVar('faculty_password')),
+                'faculty_rise_no' => $faculty_rise_no,
+                'added_by' => session('rise_no'),
             ];
 
             if (!$this->modelfaculty->insert($insertData)) {
@@ -206,6 +222,26 @@ class Faculty extends BaseController {
             }
 
             /* =====================
+             * GENDER ICON
+             * ===================== */
+            $genderIcon = '';
+
+            if (!empty($row['faculty_gender'])) {
+
+                $gender = strtolower($row['faculty_gender']);
+
+                if ($gender === 'male') {
+                    $genderIcon = '<img src="https://img.icons8.com/color/52/user-male-circle--v1.png" title="Male">';
+                } elseif ($gender === 'female') {
+                    $genderIcon = '<img src="https://img.icons8.com/color/52/user-female-circle--v1.png" title="Female">';
+                } elseif ($gender === 'transgender') {
+
+                    $genderIcon = '<img src="https://img.icons8.com/color/52/gender-neutral-user.png" title="Transgender">';
+                }
+            }
+
+
+            /* =====================
              * DELETE / REVERT REMARK
              * ===================== */
             $remark = '';
@@ -234,7 +270,8 @@ class Faculty extends BaseController {
                 $row['faculty_rise_no'],
 //              esc($nameMap[$row['faculty_rise_no']] ?? ''),
                 $nameWithRole,
-                esc($row['faculty_mobile_number']),
+                '<div class="text-center">' . $genderIcon . '</div>',
+                esc($row['faculty_contact_number']),
                 $addedBy,
                 $updatedBy,
                 $remark
@@ -302,11 +339,11 @@ class Faculty extends BaseController {
 
         $updateData = [
             'faculty_role_id' => clean_number($this->request->getPost('edit_faculty_role_id')),
-            'edit_faculty_gender' => clean_name($this->request->getPost('edit_faculty_gender')),
+            'faculty_gender' => clean_name($this->request->getPost('edit_faculty_gender')),
             'faculty_first_name' => clean_name($this->request->getPost('edit_faculty_first_name')),
             'faculty_middle_name' => clean_name($this->request->getPost('edit_faculty_middle_name')),
             'faculty_last_name' => clean_name($this->request->getPost('edit_faculty_last_name')),
-            'faculty_mobile_number' => clean_number($this->request->getPost('edit_faculty_mobile_number')),
+            'faculty_contact_number' => clean_number($this->request->getPost('edit_faculty_contact_number')),
             'faculty_email_id' => clean_email($this->request->getPost('edit_faculty_email_id')),
             'faculty_aadhar_number' => clean_number($this->request->getPost('edit_faculty_aadhar_number')),
             'faculty_pan_number' => clean_name($this->request->getPost('edit_faculty_pan_number')),
@@ -365,4 +402,48 @@ class Faculty extends BaseController {
             ]);
         }
     }
+
+public function change_password_first_login()
+{
+    if (!session()->get('logged_in')) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Unauthorized access'
+        ]);
+    }
+
+    // Faculty check (NOT permission-based)
+    if (empty(session()->get('registration_id'))) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Invalid faculty session'
+        ]);
+    }
+
+    $newPassword = trim($this->request->getPost('new_password'));
+
+    if (strlen($newPassword) < 8) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Password must be at least 8 characters'
+        ]);
+    }
+
+    $this->modelfacultyregistration->update(
+        session()->get('registration_id'),
+        [
+            'faculty_password' => password_hash($newPassword, PASSWORD_DEFAULT),
+            'is_first_login'   => 0
+        ]
+    );
+
+    // 🔑 THIS IS REQUIRED
+    session()->set('is_first_login', 0);
+
+    return $this->response->setJSON([
+        'status' => 'success'
+    ]);
+}
+
+
 }

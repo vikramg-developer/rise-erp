@@ -20,8 +20,19 @@ class Login extends BaseController {
 //        $this->ModelParentsRegistration = model('ModelParentsRegistration');
     }
 
+//    public function login() {
+//        return view('login/login-page');
+//    }
     public function login() {
-        return view('login/login-page');
+        if (session()->get('logged_in')) {
+            return redirect()->to('/dashboard');
+        }
+
+        return response()
+                        ->setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+                        ->setHeader('Pragma', 'no-cache')
+                        ->setHeader('Expires', '0')
+                        ->setBody(view('login/login-page'));
     }
 
     public function studentDashboard() {
@@ -69,6 +80,7 @@ class Login extends BaseController {
                             'role_id' => $faculty_data['faculty_role_id'],
                             'role_name' => $role_data['role_name'],
                             'logged_in' => true,
+                            'is_first_login'  => $faculty_data['is_first_login'],
                             'permissions' => json_decode($role_data['permissions'], true) ?? [],
                             'last_activity' => time(),
                         ]);
@@ -127,7 +139,7 @@ class Login extends BaseController {
         }
     }
 
-    public function logout() {
+      public function logout() {
         // Destroy all session data
         session()->destroy();
 

@@ -5,26 +5,40 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class AddRiseNumberCounterTable extends Migration {
+class AddLeavingCertificateTable extends Migration {
 
     public function up() {
         $fields = [
-            'rise_number_counter_id' => [
-                'type' => 'int',
-                'auto_increment' => true,
+            'leaving_certificate_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'auto_increment' => true
             ],
-            'user_type_id' => [
+            'leaving_certificate_no' => [
                 'type' => 'int',
-                'null' => false
             ],
-            'academic_year_id' => [
+            'yearwise_student_data_id' => [
                 'type' => 'int',
-                'null' => false
             ],
-            'rise_no' => [
+            'examination' => [
                 'type' => 'varchar',
-                'constraint' => '50',
+                'constraint' => 150,
+            ],
+            'exam_period' => [
+                'type' => 'varchar',
+                'constraint' => 100,
+            ],
+            'date_of_leaving' => [
+                'type' => 'date',
                 'null' => false
+            ],
+            'is_duplicate' => [
+                'type' => 'tinyint',
+                'constraint' => '1'
+            ],
+            'is_cancelled' => [
+                'type' => 'tinyint',
+                'constraint' => '1'
             ],
             'added_by' => [
                 'type' => 'varchar',
@@ -44,36 +58,20 @@ class AddRiseNumberCounterTable extends Migration {
             'updated_at' => [
                 'type' => 'timestamp',
                 'null' => true,
-            ],
-            'deleted_by' => [
-                'type' => 'varchar',
-                'constraint' => '50',
-                'null' => true
-            ],
-            'deleted_at' => [
-                'type' => 'timestamp',
-                'null' => true,
+                'default' => new Rawsql('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
             ],
             'is_deleted' => [
                 'type' => 'tinyint',
                 'constraint' => '1'
             ]
         ];
-
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('rise_number_counter_id');
-        /* academic_year_id  */
-        $this->forge->addForeignKey(
-                'academic_year_id',
-                'academic_year',
-                'academic_year_id',
-                'CASCADE',
-                'CASCADE'
-        );
-        $this->forge->createTable('rise_number_counter');
+        $this->forge->addPrimaryKey('leaving_certificate_id');
+        $this->forge->addUniqueKey('leaving_certificate_no');
+        $this->forge->createTable('leaving_certificate');
     }
 
     public function down() {
-        $this->forge->dropTable('rise_number_counter');
+        $this->forge->dropTable('leaving_certificate');
     }
 }

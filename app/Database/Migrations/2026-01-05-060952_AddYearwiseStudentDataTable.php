@@ -3,21 +3,52 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-
 use CodeIgniter\Database\RawSql;
 
-class AddHeadTable extends Migration
-{
+class AddYearwiseStudentDataTable extends Migration {
+
     public function up() {
         $fields = [
-            'head_id' => [
+            'yearwise_student_data_id' => [
                 'type' => 'int',
                 'auto_increment' => true,
             ],
-            'head_name' => [
+            'student_rise_no' => [
                 'type' => 'varchar',
                 'constraint' => '50',
-                'null' => false
+                'null' => true
+            ],
+            'department_id' => [
+                'type' => 'int',
+                'null' => true,
+            ],
+            'year_id' => [
+                'type' => 'int',
+                'null' => true,
+            ],
+            'academic_year_id' => [
+                'type' => 'int',
+                'null' => true,
+            ],
+            'semester_id' => [
+                'type' => 'int',
+                'null' => true,
+            ],
+            'roll_nunber' => [
+                'type' => 'int',
+                'null' => false,
+            ],
+            'division_id' => [
+                'type' => 'int',
+                'null' => false,
+            ],
+            'batch_id' => [
+                'type' => 'int',
+                'null' => false,
+            ],
+            'admission_date' => [
+                'type' => 'timestamp',
+                'null' => true,
             ],
             'added_by' => [
                 'type' => 'varchar',
@@ -52,15 +83,13 @@ class AddHeadTable extends Migration
                 'constraint' => '1'
             ]
         ];
-        
+
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('head_id');
-        $this->forge->addUniqueKey('head_name');
-        $this->forge->createTable('head');
+        $this->forge->addPrimaryKey('yearwise_student_data_id');
+        $this->forge->createTable('yearwise_student_data');
     }
 
-    public function down() 
-    {
-        $this->forge->dropTable('head');
+    public function down() {
+        $this->forge->dropTable('yearwise_student_data');
     }
 }

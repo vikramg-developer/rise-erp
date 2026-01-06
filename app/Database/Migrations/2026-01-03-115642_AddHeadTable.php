@@ -5,15 +5,15 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class AddReligionTable extends Migration {
+class AddHeadTable extends Migration {
 
     public function up() {
         $fields = [
-            'religion_id' => [
+            'head_id' => [
                 'type' => 'int',
                 'auto_increment' => true,
             ],
-            'religion_name' => [
+            'head_name' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
@@ -51,13 +51,14 @@ class AddReligionTable extends Migration {
                 'constraint' => '1'
             ]
         ];
+
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('religion_id');
-        $this->forge->addUniqueKey('religion_name');    //
-        $this->forge->createTable('religion');
+        $this->forge->addPrimaryKey('head_id');
+        $this->forge->addUniqueKey('head_name');
+        $this->forge->createTable('head');
     }
 
     public function down() {
-        $this->forge->dropTable('religion');
+        $this->forge->dropTable('head');
     }
 }
