@@ -48,7 +48,7 @@
                                                 <!---------------------subject_type----------------------------------->
                                                 <div class="col-xl-6">
                                                     <label class="form-label"><?= lang('App.feedback') ?> <?= lang('App.type') ?></label>  <span class="text-danger">*</span>
-                                                    <select class="form-select" id="type_id" name="type_id" >
+                                                    <select class="form-select" id="subject_type_id" name="subject_type_id" >
                                                         <option value="" >Select Type</option>
                                                         <?php
                                                         foreach ($subject_type as $sub_type) {
@@ -59,7 +59,7 @@
                                                         <?php }
                                                         ?>   
                                                     </select>
-                                                    <small class="text-danger" id="type_id_error" style="display:none;"></small>
+                                                    <small class="text-danger" id="subject_type_id_error" style="display:none;"></small>
                                                 </div>
                                                 <!---------------------semester----------------------------------->
                                                 <div class="col-xl-6">
@@ -80,7 +80,7 @@
                                                 <!---------------------semester_part---------------------------------->
                                                 <div class="col-xl-6">
                                                     <label class="form-label"><?= lang('App.semester') ?> <?= lang('App.part') ?></label> <span class="text-danger">*</span>
-                                                    <select class="form-select" id="part_id" name="part_id" >
+                                                    <select class="form-select" id="semester_part_id" name="semester_part_id" >
                                                         <option value="" >Select Part</option>
                                                         <?php
                                                         foreach ($semester_part as $part) {
@@ -91,7 +91,7 @@
                                                         <?php }
                                                         ?>    
                                                     </select>
-                                                    <small class="text-danger" id="part_id_error" style="display:none;"></small>
+                                                    <small class="text-danger" id="semester_part_id_error" style="display:none;"></small>
                                                 </div>
                                                 <!---------------------academic_year---------------------------------->
                                                 <div class="col-xl-6">
