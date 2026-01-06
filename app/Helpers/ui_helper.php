@@ -59,6 +59,16 @@ if (!function_exists('actionButton')) {
             $btn_class = 'btn-danger';
             $tooltip_class = 'tooltip-danger';
             $icon = '<i class="ri-close-fill"></i>';
+        } else if ($title === 'Print') {
+            $func = 'print';
+            $btn_class = 'btn-primary';
+            $tooltip_class = 'tooltip-primary';
+            $icon = '<i class="ri-printer-fill"></i>';
+        } else if ($title === 'Cancel') {
+            $func = 'cancel';
+            $btn_class = 'btn-danger';
+            $tooltip_class = 'tooltip-danger';
+            $icon = '<i class="ri-close-circle-fill"></i>';
         }
 
 

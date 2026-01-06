@@ -113,12 +113,6 @@ $(document).on('click', '.lc_btn', function () {
 $('#lc_preview_btn').off('click').on('click', function (e) {
     e.preventDefault();
 
-//    // safety
-//    if (!$('#yearwise_student_data_id').val()) {
-//        alert('Please select student first');
-//        return;
-//    }
-
     let form = $('#lc_modal_form');
 
     // create temp form

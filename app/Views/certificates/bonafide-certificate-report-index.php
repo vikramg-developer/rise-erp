@@ -1,12 +1,12 @@
 <div class="container-fluid">
     <!-- Page Header -->
     <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-        <h1 class="page-title fw-semibold fs-18 mb-0"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?></h1>
+        <h1 class="page-title fw-semibold fs-18 mb-0"><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></h1>
         <div class="ms-md-1 ms-0">
             <nav>
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="#"><?= lang('App.dashboard'); ?></a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></li>
                 </ol>
             </nav>
         </div>
@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
-                <form method="post" action="" id="lc_report">
+                <form method="post" action="" id="bonafide_report">
                     <div class="card-body add-products p-0">
                         <div class="p-4">
                             <div class="row gx-5">
@@ -79,12 +79,12 @@
             <div class="card custom-card">
                 <div class="card-header">
                     <div class="card-title">
-                        <?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?> <?= lang('App.report'); ?>
+                        <?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?> <?= lang('App.report'); ?>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="lc-student-list" class="table table-bordered text-nowrap w-100">
+                        <table id="bonafide-student-list" class="table table-bordered text-nowrap w-100">
                             <thead>
                                 <tr>
                                     <th scope="col"><?= lang('App.action'); ?></th>

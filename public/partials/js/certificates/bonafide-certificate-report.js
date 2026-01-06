@@ -1,16 +1,16 @@
 let table;
-//let reloadAfterLC = false;
-$("#lc_report").on("submit", function (e) {
+//let reloadAfterbonafide = false;
+$("#bonafide_report").on("submit", function (e) {
 
     e.preventDefault();
     if (!table) {
-        table = $('#lc-student-list').DataTable({
+        table = $('#bonafide-student-list').DataTable({
             processing: true,
             serverSide: true,
 //        destroy: true,
 
             ajax: {
-                url: BASE_URL + "leavingcertificate/fetch-lc-report",
+                url: BASE_URL + "bonafidecertificate/fetch-bonafide-report",
                 type: "POST",
                 data: function (d) {
                     d[csrfName] = csrfHash; // ALWAYS send current token
@@ -51,22 +51,23 @@ $("#lc_report").on("submit", function (e) {
 
 $(document).on('click', '.print', function () {
 
-    let lcId = $(this).data('leaving-certificate-id');
+    let bonafideId = $(this).data('bonafide-certificate-id');
 
 
-    let url = BASE_URL + "leavingcertificate/print-lc?lc_id=" + lcId;
+    let url = BASE_URL + "bonafidecertificate/print-bonafide?bonafide_id=" + bonafideId;
 
-    window.open(url, '_blank'); 
-    // reload DataTable
-    $('#lc-student-list').DataTable().ajax.reload(null, false);
+    window.open(url, '_blank'); // ✅ opens PDF in new tab
+    
+//    refresh table
+    $('#bonafide-student-list').DataTable().ajax.reload(null, false);
 });
 
 $(document).on('click', '.cancel', function () {
 
-    let lc_id = $(this).data('leaving-certificate-id');
+    let bonafide_id = $(this).data('bonafide-certificate-id');
 
     Swal.fire({
-        title: "Cancel Leaving Certificate?",
+        title: "Cancel Bonafide Certificate?",
         text: "This action cannot be undone!",
         icon: "warning",
         showCancelButton: true,
@@ -77,11 +78,11 @@ $(document).on('click', '.cancel', function () {
         if (result.isConfirmed) {
 
             $.ajax({
-                url: BASE_URL + "leavingcertificate/cancel-lc",
+                url: BASE_URL + "bonafidecertificate/cancel-bonafide",
                 type: "POST",
                 dataType: "json",
                 data: {
-                    lc_id: lc_id,
+                    bonafide_id: bonafide_id,
                     [csrfName]: csrfHash
                 },
                 success: function (response) {
@@ -92,7 +93,7 @@ $(document).on('click', '.cancel', function () {
                         Swal.fire("Cancelled!", response.message, "success");
 
                         // reload DataTable
-                        $('#lc-student-list').DataTable().ajax.reload(null, false);
+                        $('#bonafide-student-list').DataTable().ajax.reload(null, false);
                     } else {
                         Swal.fire("Error", response.message, "error");
                     }
@@ -108,7 +109,7 @@ $(document).on('click', '.cancel', function () {
 let fromPicker = flatpickr("#from_date", {
     dateFormat: "Y-m-d",
     maxDate: "today",
-    onChange: function (selectedDates, dateStr) {
+    onChange: function(selectedDates, dateStr) {
         if (dateStr) {
             toPicker.set("minDate", dateStr);
             toPicker.set("maxDate", new Date(new Date(dateStr).setMonth(new Date(dateStr).getMonth() + 1)));
