@@ -6,14 +6,14 @@ use App\Controllers\BaseController;
 
 class Faculty extends BaseController {
 
-    protected $modelfaculty;
+    protected $modelfacultyregistration;
     protected $modelbranch;
     protected $modelrole;
     protected $modelrisecounter;
     protected $db;
 
     public function __construct() {
-        $this->modelfaculty = model('ModelFacultyRegistration');
+        $this->modelfacultyregistration = model('ModelFacultyRegistration');
         $this->modelbranch = model('ModelBranch');
         $this->modelrole = model('ModelRole');
         $this->modelacademicYear = model('ModelAcademicYear');
@@ -81,15 +81,15 @@ class Faculty extends BaseController {
                 'added_by' => session('rise_no'),
             ];
 
-            if (!$this->modelfaculty->insert($insertData)) {
+            if (!$this->modelfacultyregistration->insert($insertData)) {
                 return $this->response->setJSON([
                             'status' => 'error',
-                            'errors' => $this->modelfaculty->errors(),
+                            'errors' => $this->modelfacultyregistration->errors(),
                             'csrfHash' => csrf_hash(),
                 ]);
             }
 
-            $facultyId = $this->modelfaculty->getInsertID();
+            $facultyId = $this->modelfacultyregistration->getInsertID();
             if ($facultyId) {
                 $update_data = ['rise_no' => ($rise_no_counter['rise_no'] + 1)];
                 $this->modelrisecounter->update($rise_no_counter['rise_number_counter_id'], $update_data);
@@ -128,21 +128,21 @@ class Faculty extends BaseController {
         $search = $this->request->getPost('search')['value'] ?? '';
 
         // TOTAL RECORDS (without search)
-        $recordsTotal = $this->modelfaculty->countAll();
+        $recordsTotal = $this->modelfacultyregistration->countAll();
 
         // FILTERED RECORDS (with search)
-        $recordsFiltered = $this->modelfaculty->countFiltered($search);
+        $recordsFiltered = $this->modelfacultyregistration->countFiltered($search);
 
         // MAIN DATA
-        $rows = $this->modelfaculty->findAllRecord($length, $start, $search);
+        $rows = $this->modelfacultyregistration->findAllRecord($length, $start, $search);
 
         // MAP: rise_no => full name
-        $nameMap = $this->modelfaculty->getRiseNoNameMap();
+        $nameMap = $this->modelfacultyregistration->getRiseNoNameMap();
 
         $sr_no = $start + 1;
         $data = [];
 
-        $nameMap = $this->modelfaculty->getRiseNoNameMap();
+        $nameMap = $this->modelfacultyregistration->getRiseNoNameMap();
         $roleMap = $this->modelrole->getRoleIdNameMap();
 
         foreach ($rows as $row) {
@@ -293,7 +293,7 @@ class Faculty extends BaseController {
             return redirect()->to('faculty/fetch-faculty');
         }
 
-        $faculty = $this->modelfaculty->getFacultyById($faculty_id);
+        $faculty = $this->modelfacultyregistration->getFacultyById($faculty_id);
 
         if (!$faculty) {
             return redirect()->to('faculty/fetch-faculty');
@@ -329,7 +329,7 @@ class Faculty extends BaseController {
             ]);
         }
         //Existence check
-        $faculty = $this->modelfaculty->getFacultyById($facultyId);
+        $faculty = $this->modelfacultyregistration->getFacultyById($facultyId);
         if (!$faculty) {
             return $this->response->setJSON([
                         'status' => 'invalid',
@@ -351,14 +351,14 @@ class Faculty extends BaseController {
             'updated_by' => session('rise_no'),
         ];
 
-        $this->modelfaculty->setValidationRules(
-                $this->modelfaculty->rulesForUpdate($facultyId)
+        $this->modelfacultyregistration->setValidationRules(
+                $this->modelfacultyregistration->rulesForUpdate($facultyId)
         );
 
-        if (!$this->modelfaculty->update($facultyId, $updateData)) {
+        if (!$this->modelfacultyregistration->update($facultyId, $updateData)) {
             return $this->response->setJSON([
                         'status' => 'error',
-                        'errors' => $this->modelfaculty->errors(),
+                        'errors' => $this->modelfacultyregistration->errors(),
                         'csrfHash' => csrf_hash()
             ]);
         }
@@ -381,7 +381,7 @@ class Faculty extends BaseController {
             'deleted_by' => current_user()
         ];
 
-        if ($this->modelfaculty->update($faculty_id, $delete_data)) {
+        if ($this->modelfacultyregistration->update($faculty_id, $delete_data)) {
             return $this->response->setJSON([
                         'csrfHash' => csrf_hash()
             ]);
@@ -396,54 +396,68 @@ class Faculty extends BaseController {
             'deleted_by' => current_user()
         ];
 
-        if ($this->modelfaculty->update($faculty_id, $revert_data)) {
+        if ($this->modelfacultyregistration->update($faculty_id, $revert_data)) {
             return $this->response->setJSON([
                         'csrfHash' => csrf_hash()
             ]);
         }
     }
 
-public function change_password_first_login()
-{
-    if (!session()->get('logged_in')) {
-        return $this->response->setJSON([
-            'status' => 'error',
-            'message' => 'Unauthorized access'
-        ]);
+    public function firstLoginChangePassword() {
+        if (!session('logged_in')) {
+            return redirect()->to('/login');
+        }
+
+        if (session('is_first_login') != 1) {
+            return redirect()->to('/dashboard');
+        }
+
+        return view('faculty/first-login-change-password');
     }
 
-    // Faculty check (NOT permission-based)
-    if (empty(session()->get('registration_id'))) {
-        return $this->response->setJSON([
-            'status' => 'error',
-            'message' => 'Invalid faculty session'
-        ]);
+    public function updateFirstLoginPassword() {
+        if (!session('logged_in')) {
+            return redirect()->to('/login');
+        }
+
+        $password = $this->request->getPost('password');
+        $confirm = $this->request->getPost('confirm_password');
+
+        if ($password !== $confirm) {
+            return redirect()->back()->with('error', 'Passwords do not match');
+        }
+
+        $this->modelfacultyregistration->update(
+                session('registration_id'),
+                [
+                    'faculty_password' => password_hash($password, PASSWORD_DEFAULT),
+                    'is_first_login' => 0
+                ]
+        );
+
+        session()->set('is_first_login', 0);
+
+        return redirect()->to('/dashboard');
     }
-
-    $newPassword = trim($this->request->getPost('new_password'));
-
-    if (strlen($newPassword) < 8) {
+    
+    public function check_old_password(){
+        $old_password = $this->request->getPost('old_password');
+        $faculty_data = $this->modelfacultyregistration->verify_rise_no(session('rise_no'));
+        
+        if(password_verify($old_password, $faculty_data['faculty_password']))
+        {
+            return $this->response->setJSON([
+                            'status' => 'error',
+                            'message' => 'Password Matched',
+                            'csrfHash' => csrf_hash()
+                ]);
+        }
         return $this->response->setJSON([
-            'status' => 'error',
-            'message' => 'Password must be at least 8 characters'
-        ]);
+                            'status' => 'success',
+                            'message' => 'Incorrect Password',
+                            'csrfHash' => csrf_hash()
+                ]);
+//        echo $old_password;
+//        die();
     }
-
-    $this->modelfacultyregistration->update(
-        session()->get('registration_id'),
-        [
-            'faculty_password' => password_hash($newPassword, PASSWORD_DEFAULT),
-            'is_first_login'   => 0
-        ]
-    );
-
-    // 🔑 THIS IS REQUIRED
-    session()->set('is_first_login', 0);
-
-    return $this->response->setJSON([
-        'status' => 'success'
-    ]);
-}
-
-
 }

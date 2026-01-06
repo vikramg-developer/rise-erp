@@ -167,8 +167,7 @@
                                            placeholder="Enter Password">
 
                                     <span class="input-group-text bg-white"
-                                          role="button"
-                                          onclick="createpassword('faculty_password', this)">
+                                          role="button"                                          
                                         <i class="ri-eye-off-line align-middle"></i>
                                     </span>
                                 </div>
@@ -191,7 +190,6 @@
 
                                     <span class="input-group-text bg-white"
                                           role="button"
-                                          onclick="createpassword('confirm_password', this)">
                                         <i class="ri-eye-off-line"></i>
                                     </span>
                                 </div>

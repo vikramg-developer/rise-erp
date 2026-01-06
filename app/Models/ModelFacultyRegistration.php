@@ -173,6 +173,7 @@ class ModelFacultyRegistration extends Model {
      * names once, creates a rise_no => "FirstName LastName" map, and allows fast lookup
      * while building DataTable data, keeping the code clean and easy to maintain.
      */
+    //get faculty
     public function getRiseNoNameMap() {
         $rows = $this->select('faculty_rise_no, faculty_first_name, faculty_last_name')
                 ->findAll();
