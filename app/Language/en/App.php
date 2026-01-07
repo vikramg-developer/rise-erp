@@ -16,6 +16,7 @@ return [
     'admission' => 'Admission',
     'affiliation' => 'Affiliation',
     'agency' => 'Agency',
+    'age' => 'Age',
     'apply' => 'Apply',
     'appointment' => 'Appointment',
     'approve' => 'Approve',
@@ -24,6 +25,7 @@ return [
     'attended' => 'Attended',
     'author' => 'Author',
     'authors' => 'Authors',
+    'authorized' => 'Authorized',
     'already' => 'Already',
     'award' => 'Award',
     'awarded' => 'Awarded',
@@ -261,9 +263,11 @@ return [
     'update' => 'Update',
     'upload' => 'Upload',
     'up' => 'UP',
+    'upto' => 'Upto',
     'user' => 'User',
     'users' => 'Users',
     // V
+    'valid' => 'Valid',
     'volume' => 'Volume',
     // W
     'weightage' => 'Weightage',

@@ -2,27 +2,27 @@
 
 namespace App\Controllers;
 
-use App\Models\ModelLeavingCertificate;
+use App\Models\ModelBonafideCertificate;
 
-class LeavingCertificateReport extends BaseController {
 
-    protected $modelleavingcertificate;
+class BonafideCertificateReport extends BaseController{
+    protected $modelbonafidecertificate;
     protected $modelyearwisestudentdata;
 
     public function __construct() {
-        $this->modelleavingcertificate = model('ModelLeavingCertificate');
+        $this->modelbonafidecertificate = model('ModelBonafideCertificate');
         $this->modelyearwisestudentdata = model('ModelYearwiseStudentData');
         $this->modeldepartment = model('ModelDepartment');
     }
 
     public function index() {
-        $data['jspath'] = 'certificates/leaving-certificate-report';
-        $data['title'] = lang('App.rise') . "-" . lang('App.leaving') . " " . lang('App.certificate') . " " . lang('App.report');
+        $data['jspath'] = 'certificates/bonafide-certificate-report';
+        $data['title'] = lang('App.rise') . "-" . lang('App.bonafide') . " " . lang('App.certificate') . " " . lang('App.report');
         $data['departments'] = $this->modeldepartment->get_departments();
-        return render_page('certificates/leaving-certificate-report-index', $data);
+        return render_page('certificates/bonafide-certificate-report-index', $data);
     }
-
-    public function fetch_lc_report() {
+    
+    public function fetch_bonafide_report() {
         $rules = [
             'from_date' => 'required',
             'to_date' => 'required',
@@ -53,43 +53,42 @@ class LeavingCertificateReport extends BaseController {
             ];
 
             // Data rows (paginated + searched)
-            $lc_report_data = $this->modelleavingcertificate->get_lc_report($filters, $length, $start, $search);
+            $bonafide_report_data = $this->modelbonafidecertificate->get_bonafide_report($filters, $length, $start, $search);
             // Single count (search-aware)
-            $count_filter = $this->modelleavingcertificate->count_filter_results($filters, $search);
-            $count_all = $this->modelleavingcertificate->count_all_results($filters);
+            $count_filter = $this->modelbonafidecertificate->count_filter_results($filters, $search);
+            $count_all = $this->modelbonafidecertificate->count_all_results($filters);
 
             $sr_no = 1;
             $data = [];
 
-            foreach ($lc_report_data as $lc) {
+            foreach ($bonafide_report_data as $bonafide) {
 
-//
+
                 $badges = '';
-                if ($lc['is_cancelled'] == 1) {
+                if ($bonafide['is_cancelled'] == 1) {
                     $badges = '<span class="badge bg-danger-transparent">Cancelled</span>';
-                } elseif ($lc['is_duplicate'] == 1) {
-                    $badges = '<span class="badge bg-warning-transparent">Duplicate</span>';
-                }
+                } 
                 $buttons = '';
                 // Print Button
-//                if (hasPermission('printLeavingCertificate') || $lc['is_print'] == 0):
-                    $buttons .= actionButton('Print', ['leaving-certificate-id' => $lc['leaving_certificate_id']]);
-//                endif;
+//                if (hasPermission('printBonafideCertificate') || $bonafide['is_print'] == 0):
+                if ($bonafide['is_print'] == 0):
+                    $buttons .= actionButton('Print', ['bonafide-certificate-id' => $bonafide['bonafide_certificate_id']]);
+                endif;
                 $today = date('Y-m-d');
-                $lc_date = date('Y-m-d', strtotime($lc['added_at']));
-//                if (hasPermission('updateLeavingCertificate') && $lc['is_cancelled'] != 1 && $lc_date === $today):
-                if ($lc['is_cancelled'] != 1 && $lc_date === $today):
-                    $buttons .= actionButton('Cancel', ['leaving-certificate-id' => $lc['leaving_certificate_id']]);
+                $bonafide_date = date('Y-m-d', strtotime($bonafide['added_at']));
+//                if (hasPermission('updateBonafideCertificate') && $bonafide['is_cancelled'] != 1 && $bonafide_date === $today):
+                if ($bonafide['is_cancelled'] != 1 && $bonafide_date === $today):
+                    $buttons .= actionButton('Cancel', ['bonafide-certificate-id' => $bonafide['bonafide_certificate_id']]);
                 endif;
 
                 $data[] = [
                     $buttons,
                     $sr_no++,
-                    $lc['student_rise_no'],
-                    $lc['student_first_name'] . ' ' . $lc['student_middle_name'] . ' ' . $lc['student_last_name'],
-                    $lc['academic_year_name'],
-                    $lc['department_name'],
-                    $lc['year_name'],
+                    $bonafide['student_rise_no'],
+                    $bonafide['student_first_name'] . ' ' . $bonafide['student_middle_name'] . ' ' . $bonafide['student_last_name'],
+                    $bonafide['academic_year_name'],
+                    $bonafide['department_name'],
+                    $bonafide['year_name'],
                     $badges,
                     
                 ];
@@ -115,20 +114,20 @@ class LeavingCertificateReport extends BaseController {
         }
     }
 
-    public function print_lc() {
-        $lc_id = $this->request->getVar('lc_id');
-        if ($lc_id) {
-            $data['lc_data'] = $lc_data = $this->modelleavingcertificate->find($lc_id);
+    public function print_bonafide() {
+        $bonafide_id = $this->request->getVar('bonafide_id');
+        if ($bonafide_id) {
+            $data['bonafide_data'] = $bonafide_data = $this->modelbonafidecertificate->find($bonafide_id);
 
-            $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_lc($lc_data['yearwise_student_data_id']);
-            //====To check Count of genrated LC for one student====
-            $data['lc_count'] = $this->modelleavingcertificate->get_lc_data($lc_data['yearwise_student_data_id']);
+            $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_bonafide($bonafide_data['yearwise_student_data_id']);
+
         }
-        $this->modelleavingcertificate->update($lc_id, ['is_print' => 1]);
+       
+        $this->modelbonafidecertificate->update($bonafide_id, ['is_print' => 1]);
         // Correct mPDF 8.2+ constructor
-        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L']);
         $mpdf->shrink_tables_to_fit = 0;
-        $html = view('certificates/leaving-certificate-print', $data);
+        $html = view('certificates/bonafide-certificate-print', $data);
         $mpdf->simpleTables = false;
         $mpdf->WriteHTML($html);
         $mpdf->use_kwt = true;
@@ -138,29 +137,29 @@ class LeavingCertificateReport extends BaseController {
         $mpdf->useFixedTextBaseline = true;
         $mpdf->adjustFontDescLineheight = 100;
         // Output PDF
-        $mpdf->Output('Leaving-Certificate.pdf', 'I');
+        $mpdf->Output('Bonafide-Certificate.pdf', 'I');
         exit;
     }
 
-    public function cancel_lc() {
+    public function cancel_bonafide() {
 
-        $lc_id = $this->request->getVar('lc_id');
+        $bonafide_id = $this->request->getVar('bonafide_id');
 
-        if ($lc_id) {
-            $this->modelleavingcertificate->update($lc_id, [
+        if ($bonafide_id) {
+            $this->modelbonafidecertificate->update($bonafide_id, [
                 'is_cancelled' => 1,
                 'updated_by' => session('rise_no'),
             ]);
 
             return $this->response->setJSON([
                         'status' => 'success',
-                        'message' => 'Leaving Certificate cancelled successfully',
+                        'message' => 'Bonafide Certificate cancelled successfully',
                         'csrfHash' => csrf_hash()
             ]);
         } else {
             return $this->response->setJSON([
                         'status' => 'error',
-                        'message' => 'Invalid LC ID',
+                        'message' => 'Invalid Bonafide ID',
                         'csrfHash' => csrf_hash()
             ]);
         }

@@ -52,44 +52,96 @@ $(document).on('click', '.bonafide_btn', function () {
 
     let ysd_id = $(this).data('yearwise-student-data-id');
 
-    Swal.fire({
-        title: "Generate Bonafide Certificate?",
-        text: "Do you want Bonafide Certificate?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes",
-        cancelButtonText: "No"
-    }).then((result) => {
+    // set hidden field for modal submit
+    $('#yearwise_student_data_id').val(ysd_id);
 
-        if (result.isConfirmed) {
+    $('#bonafide_modal').modal('show');
 
-            $.ajax({
-                url: BASE_URL + "bonafidecertificate/add-bonafide-certificate",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    ysd_id: ysd_id,
-                    [csrfName]: csrfHash
-                },
-                success: function (response) {
+});
 
-                    csrfHash = response.csrfHash;
+/* ===================== PREVIEW (POST) ===================== */
+$('#bonafide_preview_btn').off('click').on('click', function (e) {
+    e.preventDefault();
 
-                    if (response.status === 'success') {
-                        // success
-//                      
-                        window.open(
-                                BASE_URL + "bonafidecertificate/print-bonafide-certificate?bonafide_id=" + response.bonafide_id,
-                                "_blank"
-                                );
-                        // reload DataTable
-                        $('#bonafide-student-list').DataTable().ajax.reload(null, false);
-                    } 
-                },
-                error: function () {
-                    Swal.fire("Error", "Something went wrong", "error");
-                }
-            });
+    let form = $('#bonafide_modal_form');
+
+    // create temp form
+    let previewForm = $('<form>', {
+        action: BASE_URL + 'bonafidecertificate/print-bonafide-certificate',
+        method: 'POST',
+        target: '_blank'
+    });
+
+    // copy modal inputs
+    form.serializeArray().forEach(function (item) {
+        previewForm.append(
+                $('<input>', {type: 'hidden', name: item.name, value: item.value})
+                );
+    });
+
+    // CSRF
+    previewForm.append(
+            $('<input>', {type: 'hidden', name: csrfName, value: csrfHash})
+            );
+
+    $('body').append(previewForm);
+    previewForm.submit();
+    previewForm.remove();
+});
+
+//=================== Submit Bonafide ======================
+$("#bonafide_modal_form").on("submit", function (e) {
+    e.preventDefault();
+
+    $(".field-error").text("").hide();
+//    $('input[name="' + csrfName + '"]').val(csrfHash);
+
+    let formData = $(this).serializeArray();
+    formData.push({name: csrfName, value: csrfHash});
+
+    $.ajax({
+        url: BASE_URL + "bonafidecertificate/add-bonafide-certificate-data",
+        type: "POST",
+        data: formData,
+        dataType: "json",
+        success: function (response) {
+
+            csrfHash = response.csrfHash;
+
+            if (response.status === "error") {
+                $.each(response.errors, function (field, message) {
+                    $("#" + field + "_error").text(message).show();
+                });
+                return;
+            }
+
+            // success
+            reloadAfterbonafide = true;   // flag
+            $("#bonafide_modal").modal('hide');
+            window.open(
+                    BASE_URL + "bonafidecertificate/print-bonafide-certificate?bonafide_id=" + response.bonafide_id,
+                    "_blank"
+                    );
         }
     });
+});
+
+$('#bonafide_modal').on('hidden.bs.modal', function () {
+
+    // reset the form
+    $('#bonafide_modal_form')[0].reset();
+
+    // clear hidden id also (VERY IMPORTANT)
+    $('#yearwise_student_data_id').val('');
+
+    // clear validation errors
+    $('.field-error').text('').hide();
+
+    // 🔥 reload ONLY when LC was generated
+    if (reloadAfterLC) {
+        reloadAfterLC = false;
+        if (table) {
+            table.ajax.reload(null, false); // 🔥 THIS IS THE KEY
+        }
+    }
 });

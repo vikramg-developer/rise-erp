@@ -307,7 +307,7 @@ if (!empty($registration[0]['dob'])) {
                                 <td align="center" ></td>
                                 <td align="center" ></td>
                                 <td align="center" ></td>
-                                <td colspan='3' align="right">No: <?php echo $bonafide_data['bonafide_certificate_no']; ?></td>
+                                <td colspan='3' align="right">No: <?php echo esc($bonafide_data['bonafide_certificate_no'] ?? ''); ?></td>
                             </tr>
                             <tr>
                                 <td colspan='1' rowspan="1"><img src="<?php echo base_url('assets/images/kbp_logo.png'); ?>" style="width:70px; height:70px;"></td>

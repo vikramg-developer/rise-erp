@@ -147,7 +147,7 @@ $(document).on("click", ".revert", function () {
 $(document).on('click', '.edit', function () {
 
     let id = $(this).data('id');
-    console.log('Edit ID:', id);
+    console.log(id);
 
     $.ajax({
         url: BASE_URL + "feedback/get-feedback-master",
@@ -165,9 +165,9 @@ $(document).on('click', '.edit', function () {
 
                 $('#feedback_master_id').val(res.data.feedback_master_id);
                 $('#feedback_name').val(res.data.feedback_name);
-                $('#type_id').val(res.data.type_id);
+                $('#subject_type_id').val(res.data.subject_type_id);
                 $('#semester_id').val(res.data.semester_id);
-                $('#part_id').val(res.data.part_id);
+                $('#semester_part_id').val(res.data.semester_part_id);
                 $('#academic_year_id').val(res.data.academic_year_id);
 
                 $('.modal-title').text('Edit Feedback Master');

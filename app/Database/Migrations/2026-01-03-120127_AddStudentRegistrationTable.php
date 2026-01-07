@@ -1,4 +1,4 @@
-<?php
+<?php //
 
 namespace App\Database\Migrations;
 
@@ -39,7 +39,7 @@ class StudentRegistration extends Migration {
                 'null' => true,
             ],
             'approval_status' => [
-                'type' => new RawSql("ENUM('pemnding','aprroved','rejected')"),
+                'type' => new RawSql("ENUM('pending','aprroved','rejected')"),
                 'default' => 'pending',
             ],
             'approval_status_date' => [
@@ -53,7 +53,7 @@ class StudentRegistration extends Migration {
             ],
             'student_password' => [
                 'type' => 'varchar',
-                'constraint' => '50',
+                'constraint' => '100',
                 'null' => false,
             ],
             'added_by' => [

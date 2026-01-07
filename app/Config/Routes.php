@@ -90,8 +90,13 @@ $routes->group('leavingcertificate', function ($routes) {
 $routes->group('bonafidecertificate', function ($routes) {
     $routes->get('/', 'BonafideCertificate::index', ['filter' => 'permission:createBonafideCertificate']);
     $routes->post('fetch-bonafide-student-list', 'BonafideCertificate::fetch_bonafide_student_list', ['filter' => 'permission:createBonafideCertificate']);
-    $routes->post('add-bonafide-certificate', 'BonafideCertificate::add_bonafide_certificate', ['filter' => 'permission:createBonafideCertificate']);
+    $routes->post('add-bonafide-certificate-data', 'BonafideCertificate::add_bonafide_certificate_data', ['filter' => 'permission:createBonafideCertificate']);
     $routes->get('print-bonafide-certificate', 'BonafideCertificate::print_bonafide_certificate', ['filter' => 'permission:createBonafideCertificate']);
+    $routes->post('print-bonafide-certificate', 'BonafideCertificate::print_bonafide_certificate', ['filter' => 'permission:createBonafideCertificate']);
+    $routes->get('bonafide-certificate-report', 'BonafideCertificateReport::index', ['filter' => 'permission:createBonafideCertificate']);
+    $routes->post('fetch-bonafide-report', 'BonafideCertificateReport::fetch_bonafide_report', ['filter' => 'permission:createBonafideCertificate']);
+    $routes->get('print-bonafide', 'BonafideCertificateReport::print_bonafide', ['filter' => 'permission:createBonafideCertificate']);
+    $routes->post('cancel-bonafide', 'BonafideCertificateReport::cancel_bonafide', ['filter' => 'permission:createBonafideCertificate']);
 });
 
 $routes->group('icard', function ($routes) {
@@ -121,6 +126,10 @@ $routes->group('faculty', function ($routes) {
     $routes->post('update-faculty', 'Faculty::update_faculty', ['filter' => 'permission:updateFaculty']);
     $routes->post('delete-faculty', 'Faculty::delete_faculty', ['filter' => 'permission:deleteFaculty']);
     $routes->post('revert-faculty', 'Faculty::revert_faculty', ['filter' => 'permission:deleteFaculty']);
+
+       // ✅ FIRST LOGIN 
+       // PASSWORD CHANGE (ADD THIS)
+    $routes->post('change-password-first-login','Faculty::change_password_first_login');
 });
     // ✅ FIRST LOGIN PASSWORD CHANGE (NO PERMISSION FILTER)
     $routes->post('check-old-password', 'Faculty::check_old_password');

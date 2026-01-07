@@ -17,6 +17,12 @@ class Migrations extends BaseConfig
      * and disable it back when you're done.
      */
     public bool $enabled = true;
+    
+      public array $paths = [
+        'App\Database\Migrations',
+        'App\Database\Migrations\CentralizedMigrations',
+    ];
+
 
     /**
      * --------------------------------------------------------------------------

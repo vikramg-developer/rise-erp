@@ -10,6 +10,7 @@
     flatpickr("#date_of_leaving", {});
     flatpickr("#from_date", {});
     flatpickr("#to_date", {});
+    flatpickr("#bonafide_valid_upto", {});
 
 
     /* To choose date and time */

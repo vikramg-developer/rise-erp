@@ -5,49 +5,26 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class AddYearwiseStudentDataTable extends Migration {
+class AddExpenseReceiptCounterTable extends Migration {
 
     public function up() {
         $fields = [
-            'yearwise_student_data_id' => [
-                'type' => 'int',
+            'expense_reciept_counter_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
                 'auto_increment' => true,
             ],
-            'student_registration_id' => [
+            'financial_year_id' => [
                 'type' => 'int',
-                'null' => true
+                'null' => false
             ],
-            'department_id' => [
+            'expense_id' => [
                 'type' => 'int',
-                'null' => true,
+                'null' => false
             ],
-            'year_id' => [
-                'type' => 'int',
-                'null' => true,
-            ],
-            'academic_year_id' => [
-                'type' => 'int',
-                'null' => true,
-            ],
-            'semester_id' => [
-                'type' => 'int',
-                'null' => true,
-            ],
-            'roll_nunber' => [
-                'type' => 'int',
-                'null' => false,
-            ],
-            'division_id' => [
-                'type' => 'int',
-                'null' => false,
-            ],
-            'batch_id' => [
-                'type' => 'int',
-                'null' => false,
-            ],
-            'admission_date' => [
-                'type' => 'timestamp',
-                'null' => true,
+            'receipt_no' => [
+                'type' => 'INT',
+                'null' => false
             ],
             'added_by' => [
                 'type' => 'varchar',
@@ -82,13 +59,12 @@ class AddYearwiseStudentDataTable extends Migration {
                 'constraint' => '1'
             ]
         ];
-
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('yearwise_student_data_id');
-        $this->forge->createTable('yearwise_student_data');
+        $this->forge->addPrimaryKey('expense_reciept_counter_id');
+        $this->forge->createTable('expense_reciept_counter');
     }
 
     public function down() {
-        $this->forge->dropTable('yearwise_student_data');
+        $this->forge->dropTable('expense_reciept_counter');
     }
 }

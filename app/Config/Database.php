@@ -29,10 +29,10 @@ class Database extends Config
 //        'DSN'      => '',
 
 //        Local Database
-//        'hostname' => 'localhost',
-//        'username' => 'root',
-//        'password' => '',
-//        'database' => 'rise',
+        'hostname' => 'localhost',
+        'username' => 'root',
+        'password' => '',
+        'database' => 'rise',
      
 //        Local Server Database
         'hostname' => '192.168.1.247',
