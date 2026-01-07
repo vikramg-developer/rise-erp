@@ -7,7 +7,7 @@ function add_fk(
     string $column,
     string $refTable,
     string $refColumn = 'id',
-    string $onDelete = 'CASCADE',
+    string $onDelete = 'RESTRICT',
     string $onUpdate = 'CASCADE'
 ) {
     $fkName = "fk_{$table}_{$column}";
