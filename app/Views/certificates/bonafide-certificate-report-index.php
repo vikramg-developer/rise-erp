@@ -21,7 +21,7 @@
                     <div class="card-body add-products p-0">
                         <div class="p-4">
                             <div class="row gx-5">
-                                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-6">
+                                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                                     <div class="card custom-card shadow-none mb-0 border-0">
                                         <div class="card-body p-0">                                        
                                             <div class="row gy-3">
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                         <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
-                            <button type="submit" class="btn btn-success m-1"><?= lang('App.search'); ?></button>
+                            <button type="submit" class="btn btn-primary m-1"><i class="bi bi-search ms-2"></i> <?= lang('App.search'); ?></button>
                         </div>
                     </div>
                 </form>

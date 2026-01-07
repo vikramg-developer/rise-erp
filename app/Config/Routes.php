@@ -193,6 +193,26 @@ $routes->group('activity-log', function ($routes) {
 //    $routes->get('search-department', 'Department::search_department', ['filter' => 'permission:createDepartment']);
 });
 
+$routes->group('subjectgroup', function ($routes) {
+    $routes->get('/', 'SubjectGroup::index', ['filter' => 'permission:viewSubjectGroup']);
+    $routes->post('fetch-subject-group', 'SubjectGroup::fetch_subject_group', ['filter' => 'permission:viewSubjectGroup']);
+    $routes->post('save-subject-group', 'SubjectGroup::save_subject_group', ['filter' => 'permission:createSubjectGroup']);
+    $routes->post('update-subject-group', 'SubjectGroup::update_subject_group', ['filter' => 'permission:updateSubjectGroup']);
+    $routes->post('delete-subject-group', 'SubjectGroup::delete_subject_group', ['filter' => 'permission:deleteSubjectGroup']);
+    $routes->post('revert-subject-group', 'SubjectGroup::revert_subject_group', ['filter' => 'permission:deleteSubjectGroup']);
+    $routes->get('search-subject-group', 'SubjectGroup::search_subject_group', ['filter' => 'permission:createSubjectGroup']);
+});
+
+$routes->group('subject', function ($routes) {
+    $routes->get('/', 'Subject::index', ['filter' => 'permission:viewSubject']);
+    $routes->post('fetch-subject', 'Subject::fetch_subject', ['filter' => 'permission:viewSubject']);
+    $routes->post('save-subject', 'Subject::save_subject', ['filter' => 'permission:createSubject']);
+    $routes->post('update-subject', 'Subject::update_subject', ['filter' => 'permission:updateSubject']);
+    $routes->post('delete-subject', 'Subject::delete_subject', ['filter' => 'permission:deleteSubject']);
+    $routes->post('revert-subject', 'Subject::revert_subject', ['filter' => 'permission:deleteSubject']);
+    $routes->get('search-subject', 'Subject::search_subject', ['filter' => 'permission:createSubject']);
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

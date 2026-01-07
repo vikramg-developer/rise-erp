@@ -68,7 +68,7 @@ if (!function_exists('actionButton')) {
             $func = 'cancel';
             $btn_class = 'btn-danger';
             $tooltip_class = 'tooltip-danger';
-            $icon = '<i class="ri-close-circle-fill"></i>';
+            $icon = '<i class="ri-file-forbid-fill"></i>';
         }
 
 

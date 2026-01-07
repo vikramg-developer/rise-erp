@@ -72,13 +72,13 @@ class LeavingCertificateReport extends BaseController {
                 }
                 $buttons = '';
                 // Print Button
-//                if (hasPermission('printLeavingCertificate') || $lc['is_print'] == 0):
+//                if(hasPermission('printLeavingCertificate') || $lc['is_print'] == 0):
+                if ($lc['is_print'] == 0):
                     $buttons .= actionButton('Print', ['leaving-certificate-id' => $lc['leaving_certificate_id']]);
-//                endif;
+                endif;
                 $today = date('Y-m-d');
                 $lc_date = date('Y-m-d', strtotime($lc['added_at']));
-//                if (hasPermission('updateLeavingCertificate') && $lc['is_cancelled'] != 1 && $lc_date === $today):
-                if ($lc['is_cancelled'] != 1 && $lc_date === $today):
+                if (hasPermission('updateLeavingCertificate') && $lc['is_cancelled'] != 1 && $lc_date === $today):
                     $buttons .= actionButton('Cancel', ['leaving-certificate-id' => $lc['leaving_certificate_id']]);
                 endif;
 
@@ -91,7 +91,6 @@ class LeavingCertificateReport extends BaseController {
                     $lc['department_name'],
                     $lc['year_name'],
                     $badges,
-                    
                 ];
             }
 
