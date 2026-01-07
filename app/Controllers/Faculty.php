@@ -61,10 +61,13 @@ class Faculty extends BaseController {
                 ]);
             }
 
-// ✅ SAFE TO USE
             $branchCode = $branch['branch_code'];
             $yearPrefix = substr($academic_year_data['academic_year_name'], 0, 4);
             $faculty_rise_no = 'F' . $yearPrefix . $branchCode . str_pad($rise_no_counter['rise_no'], 4, '0', STR_PAD_LEFT);
+
+            // Generate random password for first login
+            $plainPassword = $this->generateRandomPassword();
+            $hashedPassword = password_hash($plainPassword, PASSWORD_DEFAULT);
 
             $insertData = [
                 'faculty_role_id' => clean_number($this->request->getVar('faculty_role_id')),
@@ -76,7 +79,8 @@ class Faculty extends BaseController {
                 'faculty_email_id' => clean_email($this->request->getVar('faculty_email_id')),
                 'faculty_aadhar_number' => clean_number($this->request->getVar('faculty_aadhar_number')),
                 'faculty_pan_number' => clean_name($this->request->getVar('faculty_pan_number')),
-                'faculty_password' => clean_name($this->request->getVar('faculty_password')),
+//                'faculty_password' => clean_name($this->request->getVar('faculty_password')),
+                'faculty_password' => $hashedPassword,
                 'faculty_rise_no' => $faculty_rise_no,
                 'added_by' => session('rise_no'),
             ];
@@ -98,6 +102,29 @@ class Faculty extends BaseController {
                 throw new\Exception('Registration Failed.');
             }
             $this->db->transCommit();
+
+            $name = $insertData['faculty_first_name'] . ' ' . $insertData['faculty_last_name'];
+            $phone = $insertData['faculty_contact_number'];
+
+            $message = urlencode("Dear $name, your application form for recruitment has been successfully submitted. Login using Username: $faculty_rise_no and Password: $plainPassword. Thank You RAYAT SHIKSHAN SANSTHA");
+            $url = "http://bulksms.saakshisoftware.in/api/mt/SendSMS?user=Karmaveercollege&password=9527062230&senderid=RSSSAT&channel=trans&DCS=0&flashsms=0&number=$phone&text=$message&route=04&DLTTemplateId=1707175048814071997&PEID=1701174228788975868";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_exec($ch);
+//            
+            if (curl_errno($ch)) {
+                print "Error: " . curl_error($ch);
+            } else {
+
+                // Show me the result
+//                $transaction = json_decode($insertData, TRUE);
+                curl_close($ch);
+            }
+
+
             return $this->response->setJSON([
                         'status' => 'success',
                         'message' => 'Faculty added successfully. ID: ' . $faculty_rise_no,
@@ -137,12 +164,12 @@ class Faculty extends BaseController {
         $rows = $this->modelfacultyregistration->findAllRecord($length, $start, $search);
 
         // MAP: rise_no => full name
-        $nameMap = $this->modelfacultyregistration->getRiseNoNameMap();
+        $nameMap = $this->modelfacultyregistration->getFacultyRiseNumberNameMap();
 
         $sr_no = $start + 1;
         $data = [];
 
-        $nameMap = $this->modelfacultyregistration->getRiseNoNameMap();
+        $nameMap = $this->modelfacultyregistration->getFacultyRiseNumberNameMap();
         $roleMap = $this->modelrole->getRoleIdNameMap();
 
         foreach ($rows as $row) {
@@ -423,10 +450,6 @@ class Faculty extends BaseController {
         $password = $this->request->getPost('password');
         $confirm = $this->request->getPost('confirm_password');
 
-        if ($password !== $confirm) {
-            return redirect()->back()->with('error', 'Passwords do not match');
-        }
-
         $this->modelfacultyregistration->update(
                 session('registration_id'),
                 [
@@ -439,48 +462,49 @@ class Faculty extends BaseController {
 
         return redirect()->to('/dashboard');
     }
-    
-//    public function check_old_password(){
-//        $old_password = $this->request->getPost('old_password');
-//        $faculty_data = $this->modelfacultyregistration->verify_rise_no(session('rise_no'));
-//        
-//        if(password_verify($old_password, $faculty_data['faculty_password']))
-//        {
-//            return $this->response->setJSON([
-//                            'status' => 'error',
-//                            'message' => 'Password Matched',
-//                            'csrfHash' => csrf_hash()
-//                ]);
-//        }
-//        return $this->response->setJSON([
-//                            'status' => 'success',
-//                            'message' => 'Incorrect Password',
-//                            'csrfHash' => csrf_hash()
-//                ]);
-//        echo $old_password;
-//        die();
-//    }
-    
-    
-    public function check_old_password()
-{
-    $old_password = $this->request->getPost('old_password');
-    $faculty_data = $this->modelfacultyregistration
-                         ->verify_rise_no(session('rise_no'));
 
-    if (password_verify($old_password, $faculty_data['faculty_password'])) {
+    public function check_old_password() {
+        $old_password = $this->request->getPost('old_password');
+        $faculty_data = $this->modelfacultyregistration->verify_rise_no(session('rise_no'));
+
+        if (password_verify($old_password, $faculty_data['faculty_password'])) {
+            return $this->response->setJSON([
+                        'status' => true,
+                        'message' => 'Password Matched',
+                        'csrfHash' => csrf_hash()
+            ]);
+        }
+
         return $this->response->setJSON([
-            'status'   => true,
-            'message'  => 'Password Matched',
-            'csrfHash' => csrf_hash()
+                    'status' => false,
+                    'message' => 'Incorrect Password',
+                    'csrfHash' => csrf_hash()
         ]);
     }
 
-    return $this->response->setJSON([
-        'status'   => false,
-        'message'  => 'Incorrect Password',
-        'csrfHash' => csrf_hash()
-    ]);
-}
+    /**
+     * Generate secure random password
+     */
+    private function generateRandomPassword(int $length = 8): string {
+        $upper = 'ABCDEFGHIJKLMNPQRSTUVWXYZ';
+        $lower = 'abcdefghijklmnopqrstuvwxyz';
+        $numbers = '123456789';
 
+
+        $password = [
+            $upper[random_int(0, strlen($upper) - 1)],
+            $lower[random_int(0, strlen($lower) - 1)],
+            $numbers[random_int(0, strlen($numbers) - 1)],
+        ];
+
+        $all = $upper . $lower . $numbers ;
+
+        for ($i = 3; $i < $length; $i++) {
+            $password[] = $all[random_int(0, strlen($all) - 1)];
+        }
+
+        shuffle($password);
+
+        return implode('', $password);
+    }
 }

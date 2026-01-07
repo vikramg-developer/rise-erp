@@ -44,7 +44,7 @@ class ModelFacultyRegistration extends Model {
         'faculty_email_id' => 'required|trim|valid_email|is_unique[faculty_registration.faculty_email_id]',
         'faculty_aadhar_number' => 'required|numeric|exact_length[12]|is_unique[faculty_registration.faculty_aadhar_number]',
         'faculty_pan_number' => 'required|regex_match[/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/]|is_unique[faculty_registration.faculty_pan_number]',
-        'faculty_password' => 'required|min_length[8]',
+//        'faculty_password' => 'required|min_length[8]',
     ];
     protected $validationMessages = [
         'faculty_role_id' => [
@@ -90,14 +90,14 @@ class ModelFacultyRegistration extends Model {
             'regex_match' => 'Enter a valid PAN Number (Format: ABCDE1234F).',
             'is_unique' => 'This PAN Number is already registered.',
         ],
-        'faculty_password' => [
-            'required' => 'Password is required.',
-            'min_length' => 'Password must be at least 6 characters.',
-        ],
-        'confirm_password' => [
-            'required' => 'Confirm Password is required.',
-            'matches' => 'Password and Confirm Password must match.',
-        ],
+//        'faculty_password' => [
+//            'required' => 'Password is required.',
+//            'min_length' => 'Password must be at least 8 characters.',
+//        ], 
+//        'confirm_password' => [
+//            'required' => 'Confirm Password is required.',
+//            'matches' => 'Password and Confirm Password must match.',
+//        ],
     ];
     protected $skipValidation = false;
     protected $beforeInsert = ['hashPassword'];
@@ -174,9 +174,8 @@ class ModelFacultyRegistration extends Model {
      * while building DataTable data, keeping the code clean and easy to maintain.
      */
     //get faculty
-    public function getRiseNoNameMap() {
-        $rows = $this->select('faculty_rise_no, faculty_first_name, faculty_last_name')
-                ->findAll();
+    public function getFacultyRiseNumberNameMap() {
+        $rows = $this->select('faculty_rise_no, faculty_first_name, faculty_last_name')->findAll();
 
         $map = [];
 

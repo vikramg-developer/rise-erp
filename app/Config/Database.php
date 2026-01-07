@@ -29,16 +29,16 @@ class Database extends Config
 //        'DSN'      => '',
 
 //        Local Database
-        'hostname' => 'localhost',
-        'username' => 'root',
-        'password' => '',
-        'database' => 'rise',
+//        'hostname' => 'localhost',
+//        'username' => 'root',
+//        'password' => '',
+//        'database' => 'rise',
      
 //        Local Server Database
-//        'hostname' => '192.168.1.247',
-//        'username' => 'riseuser',
-//        'password' => 'Rise@2025',
-//        'database' => 'rise',
+        'hostname' => '192.168.1.247',
+        'username' => 'riseuser',
+        'password' => 'Rise@2025',
+        'database' => 'rise',
         
 //        Cpanel Database
 //        'hostname' => '103.133.214.177',
