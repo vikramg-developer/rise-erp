@@ -9,8 +9,8 @@ class AddCategory extends Seeder
     public function run()
     {
        $data=[
-           ['categoty_name'=>'Maratha'],
+           ['category_name'=>'Maratha'],
        ];
-       $this->db->table('category')->ignore->insertBatch($data);
+       $this->db->table('category')->ignore()->insertBatch($data);
     }
 }
