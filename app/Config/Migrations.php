@@ -4,8 +4,8 @@ namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 
-class Migrations extends BaseConfig
-{
+class Migrations extends BaseConfig {
+
     /**
      * --------------------------------------------------------------------------
      * Enable/Disable Migrations
@@ -17,6 +17,9 @@ class Migrations extends BaseConfig
      * and disable it back when you're done.
      */
     public bool $enabled = true;
+    public array $migrationPaths = [
+//        APPPATH . 'Database/Migrations',
+    ];
 
     /**
      * --------------------------------------------------------------------------

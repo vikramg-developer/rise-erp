@@ -49,17 +49,19 @@ $("#lc_report").on("submit", function (e) {
 
 });
 
-$(document).on('click', '.lc_btn', function () {
+$(document).on('click', '.print', function () {
 
     let lcId = $(this).data('leaving-certificate-id');
 
 
     let url = BASE_URL + "leavingcertificate/print-lc?lc_id=" + lcId;
 
-    window.open(url, '_blank'); // ✅ opens PDF in new tab
+    window.open(url, '_blank'); 
+    // reload DataTable
+    $('#lc-student-list').DataTable().ajax.reload(null, false);
 });
 
-$(document).on('click', '.cancel_lc_btn', function () {
+$(document).on('click', '.cancel', function () {
 
     let lc_id = $(this).data('leaving-certificate-id');
 
@@ -106,7 +108,7 @@ $(document).on('click', '.cancel_lc_btn', function () {
 let fromPicker = flatpickr("#from_date", {
     dateFormat: "Y-m-d",
     maxDate: "today",
-    onChange: function(selectedDates, dateStr) {
+    onChange: function (selectedDates, dateStr) {
         if (dateStr) {
             toPicker.set("minDate", dateStr);
             toPicker.set("maxDate", new Date(new Date(dateStr).setMonth(new Date(dateStr).getMonth() + 1)));

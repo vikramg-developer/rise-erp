@@ -51,14 +51,14 @@ class LeavingCertificateReport extends BaseController {
                 'to_date' => $this->request->getVar('to_date') . ' 23:59:59',
                 'department_id' => $this->request->getVar('department_id')
             ];
-//            print_r($filters);die();
+
             // Data rows (paginated + searched)
             $lc_report_data = $this->modelleavingcertificate->get_lc_report($filters, $length, $start, $search);
-//            print_r($lc_report_data);die;
             // Single count (search-aware)
             $count_filter = $this->modelleavingcertificate->count_filter_results($filters, $search);
             $count_all = $this->modelleavingcertificate->count_all_results($filters);
 
+            $sr_no = 1;
             $data = [];
 
             foreach ($lc_report_data as $lc) {
@@ -67,29 +67,30 @@ class LeavingCertificateReport extends BaseController {
                 $badges = '';
                 if ($lc['is_cancelled'] == 1) {
                     $badges = '<span class="badge bg-danger-transparent">Cancelled</span>';
-                }elseif ($lc['is_duplicate'] == 1) {
+                } elseif ($lc['is_duplicate'] == 1) {
                     $badges = '<span class="badge bg-warning-transparent">Duplicate</span>';
                 }
-
-                $print_btn = '';
-                $print_btn .= '<button class="btn btn-secondary lc_btn" data-leaving-certificate-id="' . $lc['leaving_certificate_id'] . '">' . lang('App.print') . '</button>';
-                $cancel_btn = '';
+                $buttons = '';
+                // Print Button
+//                if(hasPermission('printLeavingCertificate') || $lc['is_print'] == 0):
+                if ($lc['is_print'] == 0):
+                    $buttons .= actionButton('Print', ['leaving-certificate-id' => $lc['leaving_certificate_id']]);
+                endif;
                 $today = date('Y-m-d');
                 $lc_date = date('Y-m-d', strtotime($lc['added_at']));
-                
-                if ($lc['is_cancelled'] != 1 && $lc_date === $today) {
-                    $cancel_btn = '<button class="btn btn-danger cancel_lc_btn" data-leaving-certificate-id="' . $lc['leaving_certificate_id'] . '">' . lang('App.cancel') . ' ' . lang('App.lc') . '</button>';
-                }
+                if (hasPermission('updateLeavingCertificate') && $lc['is_cancelled'] != 1 && $lc_date === $today):
+                    $buttons .= actionButton('Cancel', ['leaving-certificate-id' => $lc['leaving_certificate_id']]);
+                endif;
+
                 $data[] = [
-                    $lc['yearwise_student_data_id'],
+                    $buttons,
+                    $sr_no++,
                     $lc['student_rise_no'],
                     $lc['student_first_name'] . ' ' . $lc['student_middle_name'] . ' ' . $lc['student_last_name'],
                     $lc['academic_year_name'],
                     $lc['department_name'],
                     $lc['year_name'],
                     $badges,
-                    $print_btn,
-                    $cancel_btn                    
                 ];
             }
 
@@ -122,6 +123,7 @@ class LeavingCertificateReport extends BaseController {
             //====To check Count of genrated LC for one student====
             $data['lc_count'] = $this->modelleavingcertificate->get_lc_data($lc_data['yearwise_student_data_id']);
         }
+        $this->modelleavingcertificate->update($lc_id, ['is_print' => 1]);
         // Correct mPDF 8.2+ constructor
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
         $mpdf->shrink_tables_to_fit = 0;
@@ -145,7 +147,8 @@ class LeavingCertificateReport extends BaseController {
 
         if ($lc_id) {
             $this->modelleavingcertificate->update($lc_id, [
-                'is_cancelled' => 1
+                'is_cancelled' => 1,
+                'updated_by' => session('rise_no'),
             ]);
 
             return $this->response->setJSON([

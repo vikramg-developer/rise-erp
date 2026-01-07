@@ -21,7 +21,7 @@
                     <div class="card-body add-products p-0">
                         <div class="p-4">
                             <div class="row gx-5">
-                                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-6">
+                                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                                     <div class="card custom-card shadow-none mb-0 border-0">
                                         <div class="card-body p-0">                                        
                                             <div class="row gy-3">
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                         <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
-                            <button type="submit" class="btn btn-success m-1"><?= lang('App.search'); ?></button>
+                            <button type="submit" class="btn btn-primary m-1"><i class="bi bi-search ms-2"></i> <?= lang('App.search'); ?></button>
                         </div>
                     </div>
                 </form>
@@ -87,6 +87,7 @@
                         <table id="lc-student-list" class="table table-bordered text-nowrap w-100">
                             <thead>
                                 <tr>
+                                    <th scope="col"><?= lang('App.action'); ?></th>
                                     <th scope="col">#</th>
                                     <th scope="col"><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
                                     <th scope="col"><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>                               
@@ -94,8 +95,7 @@
                                     <th scope="col"><?= lang('App.department'); ?></th>
                                     <th scope="col"><?= lang('App.year'); ?></th>
                                     <th scope="col"><?= lang('App.status'); ?></th>
-                                    <th scope="col"><?= lang('App.print'); ?></th>
-                                    <th scope="col"><?= lang('App.cancel'); ?></th>
+                                    
                                 </tr>
                             </thead>
                         </table>                    

@@ -50,8 +50,6 @@ $routes->get('forbidden', 'Error::forbidden');
 $routes->get('logout', 'Login::logout');
 $routes->post('/add-group', 'Group::add-group');
 
-
-
 $routes->get('/collect-fees', 'FeesManagement::collect_fees');
 
 $routes->post('/fetch-head', 'FeesManagement::fetch-head');
@@ -60,22 +58,22 @@ $routes->post('/head-fees', 'FeesManagement::head_fees');
 
 $routes->post('/home', 'Home::index');
 
-
 $routes->post('/check-user', 'Login::check_user');
 
 $routes->get('student-registration', 'StudentRegistration::index');
 $routes->post('save-registration', 'StudentRegistration::add_registration');
 $routes->get('/student-profile', 'StudentProfile::index', ['filter' => 'permission:viewStudentProfile']);
 $routes->post('add-personal-details', 'StudentProfile::add_personal_information', ['filter' => 'permission:viewStudentProfile']);
+$routes->post('add-address-details', 'StudentProfile::add_address_details', ['filter' => 'permission:viewStudentProfile']);
 $routes->post('/savesignup', 'Registration::saveSignup');
 $routes->get('/student-dashboard', 'Login::studentDashboard');
 $routes->get('/studentDashboard', 'Login::studentDashboard');
 $routes->post('/studentProfile', 'Registration::studentProfile');
 $routes->get('/student-list', 'FeesManagement::student_list');
-$routes->get('approve-registration', 'ApproveRegistration::index',['filter' => 'permission:viewApproveRegistration']);
- $routes->post('fetch-registrationstudent', 'ApproveRegistration::fetch_registrationstudent', ['filter' => 'permission:createApproveRegistration']);
-    $routes->post('approve-student', 'ApproveRegistration::approve_student', ['filter' => 'permission:updateApproveRegistration']);
-    $routes->post('reject-student', 'ApproveRegistration::reject_student', ['filter' => 'permission:updateApproveRegistration']);
+$routes->get('approve-registration', 'ApproveRegistration::index', ['filter' => 'permission:viewApproveRegistration']);
+$routes->post('fetch-registrationstudent', 'ApproveRegistration::fetch_registrationstudent', ['filter' => 'permission:createApproveRegistration']);
+$routes->post('approve-student', 'ApproveRegistration::approve_student', ['filter' => 'permission:updateApproveRegistration']);
+$routes->post('reject-student', 'ApproveRegistration::reject_student', ['filter' => 'permission:updateApproveRegistration']);
 
 $routes->group('leavingcertificate', function ($routes) {
     $routes->get('/', 'LeavingCertificate::index', ['filter' => 'permission:createLeavingCertificate']);
@@ -93,15 +91,18 @@ $routes->group('leavingcertificate', function ($routes) {
 $routes->group('bonafidecertificate', function ($routes) {
     $routes->get('/', 'BonafideCertificate::index', ['filter' => 'permission:createBonafideCertificate']);
     $routes->post('fetch-bonafide-student-list', 'BonafideCertificate::fetch_bonafide_student_list', ['filter' => 'permission:createBonafideCertificate']);
-    $routes->post('add-bonafide-certificate', 'BonafideCertificate::add_bonafide_certificate', ['filter' => 'permission:createBonafideCertificate']);
+    $routes->post('add-bonafide-certificate-data', 'BonafideCertificate::add_bonafide_certificate_data', ['filter' => 'permission:createBonafideCertificate']);
     $routes->get('print-bonafide-certificate', 'BonafideCertificate::print_bonafide_certificate', ['filter' => 'permission:createBonafideCertificate']);
-    
+    $routes->post('print-bonafide-certificate', 'BonafideCertificate::print_bonafide_certificate', ['filter' => 'permission:createBonafideCertificate']);
+    $routes->get('bonafide-certificate-report', 'BonafideCertificateReport::index', ['filter' => 'permission:createBonafideCertificate']);
+    $routes->post('fetch-bonafide-report', 'BonafideCertificateReport::fetch_bonafide_report', ['filter' => 'permission:createBonafideCertificate']);
+    $routes->get('print-bonafide', 'BonafideCertificateReport::print_bonafide', ['filter' => 'permission:createBonafideCertificate']);
+    $routes->post('cancel-bonafide', 'BonafideCertificateReport::cancel_bonafide', ['filter' => 'permission:createBonafideCertificate']);
 });
 
 $routes->group('icard', function ($routes) {
     $routes->get('/', 'ICard::index', ['filter' => 'permission:createFeesManagement']);
     $routes->get('i-card-print', 'ICard::i_card_print', ['filter' => 'permission:createFeesManagement']);
-    
 });
 
 //---------- feedback ----------//
@@ -127,9 +128,14 @@ $routes->group('faculty', function ($routes) {
     $routes->post('delete-faculty', 'Faculty::delete_faculty', ['filter' => 'permission:deleteFaculty']);
     $routes->post('revert-faculty', 'Faculty::revert_faculty', ['filter' => 'permission:deleteFaculty']);
 
-       // ✅ FIRST LOGIN PASSWORD CHANGE (ADD THIS)
+       // ✅ FIRST LOGIN 
+       // PASSWORD CHANGE (ADD THIS)
     $routes->post('change-password-first-login','Faculty::change_password_first_login');
 });
+    // ✅ FIRST LOGIN PASSWORD CHANGE (NO PERMISSION FILTER)
+    $routes->post('check-old-password', 'Faculty::check_old_password');
+    $routes->get('change-password-first-login','Faculty::firstLoginChangePassword');
+    $routes->post('change-password-first-login','Faculty::updateFirstLoginPassword');
 
 $routes->group('headgroup', function ($routes) {
     $routes->get('/', 'HeadGroup::index', ['filter' => 'permission:viewHeadGroup']);
@@ -190,6 +196,26 @@ $routes->group('activity-log', function ($routes) {
 //    $routes->post('delete-department', 'Department::delete_department', ['filter' => 'permission:deleteDepartment']);
 //    $routes->post('revert-department', 'Department::revert_department', ['filter' => 'permission:deleteDepartment']);
 //    $routes->get('search-department', 'Department::search_department', ['filter' => 'permission:createDepartment']);
+});
+
+$routes->group('subjectgroup', function ($routes) {
+    $routes->get('/', 'SubjectGroup::index', ['filter' => 'permission:viewSubjectGroup']);
+    $routes->post('fetch-subject-group', 'SubjectGroup::fetch_subject_group', ['filter' => 'permission:viewSubjectGroup']);
+    $routes->post('save-subject-group', 'SubjectGroup::save_subject_group', ['filter' => 'permission:createSubjectGroup']);
+    $routes->post('update-subject-group', 'SubjectGroup::update_subject_group', ['filter' => 'permission:updateSubjectGroup']);
+    $routes->post('delete-subject-group', 'SubjectGroup::delete_subject_group', ['filter' => 'permission:deleteSubjectGroup']);
+    $routes->post('revert-subject-group', 'SubjectGroup::revert_subject_group', ['filter' => 'permission:deleteSubjectGroup']);
+    $routes->get('search-subject-group', 'SubjectGroup::search_subject_group', ['filter' => 'permission:createSubjectGroup']);
+});
+
+$routes->group('subject', function ($routes) {
+    $routes->get('/', 'Subject::index', ['filter' => 'permission:viewSubject']);
+    $routes->post('fetch-subject', 'Subject::fetch_subject', ['filter' => 'permission:viewSubject']);
+    $routes->post('save-subject', 'Subject::save_subject', ['filter' => 'permission:createSubject']);
+    $routes->post('update-subject', 'Subject::update_subject', ['filter' => 'permission:updateSubject']);
+    $routes->post('delete-subject', 'Subject::delete_subject', ['filter' => 'permission:deleteSubject']);
+    $routes->post('revert-subject', 'Subject::revert_subject', ['filter' => 'permission:deleteSubject']);
+    $routes->get('search-subject', 'Subject::search_subject', ['filter' => 'permission:createSubject']);
 });
 
 /*

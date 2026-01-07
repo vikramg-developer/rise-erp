@@ -69,7 +69,7 @@ class LeavingCertificate extends BaseController {
             // Single count (search-aware)
             $count_filter = $this->modelyearwisestudentdata->count_filter_results($filters, $search);
             $count_all = $this->modelyearwisestudentdata->count_all_results($filters);
-
+            $sr_no = 1;
             $data = [];
 
             foreach ($students as $student) {
@@ -153,6 +153,7 @@ class LeavingCertificate extends BaseController {
                 'date_of_leaving' => $this->request->getVar('date_of_leaving'),
                 'leaving_certificate_no' => $lc_no_counter['leaving_certificate_no'],
                 'is_duplicate' => $isexist_lc ? 1 : 0,
+                'added_by' => session('rise_no'),
             ];
 
             $lc_id = $this->modelleavingcertificate->insert($lc_data, true);
@@ -213,7 +214,7 @@ class LeavingCertificate extends BaseController {
                 'is_duplicate' => 0,
                 'is_cancelled' => 0
             ];
-            $data['previous_lc_date']=null;
+            $data['previous_lc_date'] = null;
             $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_lc($ysd_id);
         }
 

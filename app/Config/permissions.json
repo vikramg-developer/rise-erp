@@ -204,5 +204,25 @@
             "viewActivityLog",
             "deleteActivityLog"
         ]
+    },
+    
+    "subject_group": {
+        "label": "Subject Group",
+        "actions": [
+            "createSubjectGroup",
+            "updateSubjectGroup",
+            "viewSubjectGroup",
+            "deleteSubjectGroup"
+        ]
+    },
+
+    "subject": {
+        "label": "Subject",
+        "actions": [
+            "createSubject",
+            "updateSubject",
+            "viewSubject",
+            "deleteSubject"
+        ]
     }
 }

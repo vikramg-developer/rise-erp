@@ -159,6 +159,22 @@ class Permissions extends BaseConfig {
         'viewActivityLog',
         'deleteActivityLog'
     ];
+    
+    /** Subject Group permissions */
+    public array $subjectGroup = [
+        'createSubjectGroup',
+        'viewSubjectGroup',
+        'updateSubjectGroup',
+        'deleteSubjectGroup',
+    ];
+
+    /** Subject permissions */
+    public array $subject = [
+        'createSubject',
+        'viewSubject',
+        'updateSubject',
+        'deleteSubject',
+    ];
 
     /** Master permissions (auto-merged) */
     public array $master;
@@ -181,7 +197,9 @@ class Permissions extends BaseConfig {
                 $this->headGroup,
                 $this->head,
                 $this->department,
-                $this->activity_log,                
+                $this->activity_log,
+                $this->subjectGroup,
+                $this->subject,
         );
         $this->dashboard = array_merge(
                 $this->adminDashboard,

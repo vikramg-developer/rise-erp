@@ -26,50 +26,44 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="personalInformatiom-tab" data-bs-toggle="tab"
                                         data-bs-target="#personalinfo-tab-pane" type="button" role="tab"
-                                        aria-controls="personalInformatiom-tab" aria-selected="false"><i
-                                        class="ri-user-3-line me-2 align-middle"></i><?= lang('App.personal'); ?> <?= lang('App.details'); ?></button>
+                                        aria-controls="personalInformatiom-tab" aria-selected="false">👨‍🎓<?= lang('App.personal'); ?> <?= lang('App.details'); ?></button>
                             </li>
                             <!--Address Details TAB-->
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link " id="order-tab" data-bs-toggle="tab"
-                                        data-bs-target="#order-tab-pane" type="button" role="tab"
-                                        aria-controls="order-tab" aria-selected="true"><i
-                                        class="ri-map-pin-line me-2 align-middle"></i><?= lang('App.address'); ?> <?= lang('App.details'); ?></button>
+                                <button class="nav-link " id="addresss-tab" data-bs-toggle="tab"
+                                        data-bs-target="#addresss-tab-pane" type="button" role="tab"
+                                        aria-controls="addresss-tab" aria-selected="true">🏠<?= lang('App.address'); ?> <?= lang('App.details'); ?></button>
                             </li>
                             <!--Parent Details TAB-->
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="shipped-tab" data-bs-toggle="tab"
                                         data-bs-target="#shipped-tab-pane" type="button" role="tab"
-                                        aria-controls="shipped-tab" aria-selected="false"><i
-                                        class="ri-parent-line me-2 align-middle"></i><?= lang('App.parent'); ?> <?= lang('App.details'); ?></button>
+                                        aria-controls="shipped-tab" aria-selected="false">👨‍👩‍👧<?= lang('App.parent'); ?> <?= lang('App.details'); ?></button>
                             </li>
                             <!--Educational Details TAB-->
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="delivered-tab" data-bs-toggle="tab"
                                         data-bs-target="#delivery-tab-pane" type="button" role="tab"
-                                        aria-controls="delivered-tab" aria-selected="false"><i
-                                        class="ri-book-open-line me-2 align-middle"></i><?= lang('App.educational'); ?> <?= lang('App.details'); ?></button>
+                                        aria-controls="delivered-tab" aria-selected="false">🎓<?= lang('App.educational'); ?> <?= lang('App.details'); ?></button>
                             </li>
                             <!--Document Details TAB-->
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="document-tab" data-bs-toggle="tab"
                                         data-bs-target="#document-tab-pane" type="button" role="tab"
-                                        aria-controls="delivered-tab" aria-selected="false"><i
-                                        class="ri-upload-2-line me-2 align-middle"></i><?= lang('App.document'); ?> <?= lang('App.details'); ?></button>
+                                        aria-controls="delivered-tab" aria-selected="false">📂<?= lang('App.document'); ?> <?= lang('App.details'); ?></button>
                             </li>
                             <!--Course Details TAB-->
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="delivered-tab" data-bs-toggle="tab"
                                         data-bs-target="#applycourse-tab-pane" type="button" role="tab"
-                                        aria-controls="delivered-tab" aria-selected="false"><i
-                                        class="ri-file-edit-line me-2 align-middle"></i><?= lang('App.apply'); ?> for <?= lang('App.course'); ?></button>
+                                        aria-controls="delivered-tab" aria-selected="false">    📝<?= lang('App.apply'); ?> for <?= lang('App.course'); ?></button>
                             </li>
                             <!--Payment Details TAB-->
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="payment-tab" data-bs-toggle="tab"
                                         data-bs-target="#payment-tab-pane" type="button" role="tab"
                                         aria-controls="delivered-tab" aria-selected="false">
-                                    <i class="ri-money-pound-circle-line me-2 align-middle"></i><?= lang('App.payment'); ?>  <?= lang('App.details'); ?></button>
+                                    💳<?= lang('App.payment'); ?>  <?= lang('App.details'); ?></button>
                             </li>
 
                             <!--Declaration Details TAB-->
@@ -77,17 +71,32 @@
                                 <button class="nav-link" id="declaration-tab" data-bs-toggle="tab"
                                         data-bs-target="#declaration-tab-pane" type="button" role="tab"
                                         aria-controls="declaration-tab" aria-selected="false">
-                                    <i class="ri-checkbox-line me-2 align-middle"></i><?= lang('App.declaration'); ?></button>
+                                    ✅<?= lang('App.declaration'); ?></button>
                             </li>
 
                             <!--Print  form TAB-->
-                            <!--                            <li class="nav-item" role="presentation">
-                                                            <button class="nav-link" id="formprint-tab" data-bs-toggle="tab"
-                                                                    data-bs-target="#formprint-tab-pane" type="button" role="tab"
-                                                                    aria-controls="formprint-tab" aria-selected="false">
-                                                                <i class="ri-printer-line me-2 align-middle"></i><?= lang('App.form'); ?>  <?= lang('App.print'); ?></button>
-                                                        </li>-->
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="formprint-tab" data-bs-toggle="tab"
+                                        data-bs-target="#formprint-tab-pane" type="button" role="tab"
+                                        aria-controls="formprint-tab" aria-selected="false">
+                                    🖨️<?= lang('App.form'); ?>  <?= lang('App.print'); ?></button>
+                            </li>
+<!--                            Print  form TAB
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="formprint-tab" data-bs-toggle="tab"
+                                        data-bs-target="#formprint-tab-pane" type="button" role="tab"
+                                        aria-controls="formprint-tab" aria-selected="false">
+                                    📚️<?= lang('App.form'); ?>  <?= lang('App.print'); ?></button>
+                            </li>
+                            Print  form TAB
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="formprint-tab" data-bs-toggle="tab"
+                                        data-bs-target="#formprint-tab-pane" type="button" role="tab"
+                                        aria-controls="formprint-tab" aria-selected="false">
+                                    🏛️️<?= lang('App.form'); ?>  <?= lang('App.print'); ?></button>
+                            </li>-->
                         </ul>
+                        <hr class="border-warning border-3 opacity-75">
 
                         <div class="tab-content" id="myTabContent">
                             <!--Personal Details START-->
