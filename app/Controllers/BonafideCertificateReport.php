@@ -76,8 +76,7 @@ class BonafideCertificateReport extends BaseController{
                 endif;
                 $today = date('Y-m-d');
                 $bonafide_date = date('Y-m-d', strtotime($bonafide['added_at']));
-//                if (hasPermission('updateBonafideCertificate') && $bonafide['is_cancelled'] != 1 && $bonafide_date === $today):
-                if ($bonafide['is_cancelled'] != 1 && $bonafide_date === $today):
+                if (hasPermission('updateBonafideCertificate') && $bonafide['is_cancelled'] != 1 && $bonafide_date === $today):               
                     $buttons .= actionButton('Cancel', ['bonafide-certificate-id' => $bonafide['bonafide_certificate_id']]);
                 endif;
 

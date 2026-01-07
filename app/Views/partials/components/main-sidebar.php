@@ -42,9 +42,9 @@ $permissions = config('Permissions');
                                                                 <a href="javascript:void(0)">Error</a>
                                                             </li>
                                                             <?php //if (hasAnyPermission($permissions->faculty_registration)): ?>
-                                                                <!--<li class="slide">-->
-                                                                    <!--<a href="<?php echo base_url('faculty'); ?>" class="side-menu__item"> <?= lang('App.add'); ?> <?= lang('App.employee'); ?></a>-->
-                                                                <!--</li>-->
+                                                            <!--<li class="slide">-->
+                                                                <!--<a href="<?php echo base_url('faculty'); ?>" class="side-menu__item"> <?= lang('App.add'); ?> <?= lang('App.employee'); ?></a>-->
+                                                            <!--</li>-->
                                                             <?php //endif; ?>
                                                             <?php if (hasAnyPermission($permissions->faculty_registration)): ?>
                                                                 <li class="slide">
@@ -164,7 +164,7 @@ $permissions = config('Permissions');
                                                     </li>
                                                 <?php endif; ?>
                                                 <!--========================= Feedback Module END =========================-->
-                                                
+
                                                 <!--=============================================Faculty Profile Start==============================================-->
                                                 <?php if (hasAnyPermission($permissions->faculty_profile_module)): ?>
                                                     <li class="slide has-sub">
@@ -173,15 +173,15 @@ $permissions = config('Permissions');
                                                             <span class="side-menu__label"><?= lang('App.faculty'); ?> <?= lang('App.profile'); ?></span>
                                                             <i class="fe fe-chevron-right side-menu__angle"></i>
                                                         </a>
-                                                     <?php if (hasAnyPermission($permissions->faculty_profile)): ?>
-                                                        <ul class="slide-menu child1">
-                                                            <li class="slide">
-                                                                <a href="<?php echo base_url('faculty-profile'); ?>" class="side-menu__item"><?= lang('App.update'); ?>  <?= lang('App.profile'); ?></a>
-                                                        </ul>
-                                                     <?php endif; ?>   
+                                                        <?php if (hasAnyPermission($permissions->faculty_profile)): ?>
+                                                            <ul class="slide-menu child1">
+                                                                <li class="slide">
+                                                                    <a href="<?php echo base_url('faculty-profile'); ?>" class="side-menu__item"><?= lang('App.update'); ?>  <?= lang('App.profile'); ?></a>
+                                                            </ul>
+                                                        <?php endif; ?>   
                                                     </li>
                                                 <?php endif; ?>
-                                               
+
                                                 <!--=============================================Faculty Profile End==============================================-->
 
                                                 <!-- Start::slide__category -->
@@ -219,7 +219,7 @@ $permissions = config('Permissions');
                                                                 <li class="slide">
                                                                     <a href="<?php echo base_url('bonafidecertificate'); ?>" class="side-menu__item"><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
                                                                 </li>
-                                                            
+
                                                                 <li class="slide">
                                                                     <a href="<?php echo base_url('bonafidecertificate/bonafide-certificate-report'); ?>" class="side-menu__item"><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?> <?= lang('App.report'); ?></a>
                                                                 </li>
@@ -229,13 +229,13 @@ $permissions = config('Permissions');
                                                 <?php endif; ?>
                                                 <!--===========================================Certificates Module End ================================== -->
 
-                                                    <li class="slide">
-                                                        <a href="<?php echo base_url('icard'); ?>" class="side-menu__item">
-                                                            <i class="bx bx-id-card side-menu__icon"></i>
-                                                            <span class="side-menu__label"><?= lang('App.icard'); ?></span>
-                                                        </a>
-                                                    </li>
-                                                     
+                                                <li class="slide">
+                                                    <a href="<?php echo base_url('icard'); ?>" class="side-menu__item">
+                                                        <i class="bx bx-id-card side-menu__icon"></i>
+                                                        <span class="side-menu__label"><?= lang('App.icard'); ?></span>
+                                                    </a>
+                                                </li>
+
 
                                                 <!--=============================================Fee Management Start==============================================-->
 
@@ -321,10 +321,22 @@ $permissions = config('Permissions');
                                                                     <a href="<?php echo base_url('department'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.department'); ?></a>
                                                                 </li>
                                                             <?php endif; ?>
-                                                            
+
                                                             <?php if (hasAnyPermission($permissions->activity_log)): ?>
                                                                 <li class="slide">
                                                                     <a href="<?php echo base_url('activity-log'); ?>" class="side-menu__item"><?= lang('App.activity'); ?> <?= lang('App.log'); ?></a>
+                                                                </li>
+                                                            <?php endif; ?>
+
+                                                            <?php if (hasAnyPermission($permissions->subjectGroup)): ?>
+                                                                <li class="slide">
+                                                                    <a href="<?php echo base_url('subjectgroup'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.subject'); ?> <?= lang('App.group'); ?></a>
+                                                                </li>                                                            
+                                                            <?php endif; ?>
+
+                                                            <?php if (hasAnyPermission($permissions->subject)): ?>
+                                                                <li class="slide">
+                                                                    <a href="<?php echo base_url('subject'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.subject'); ?></a>
                                                                 </li>
                                                             <?php endif; ?>
                                                         </ul>
@@ -357,36 +369,36 @@ $permissions = config('Permissions');
                                                 <!--===========================================End Ticket==============================================-->
                                             </ul>
                                             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path> </svg></div>
-                                        
-                                               <!--=================================================Admin Section ===================================================-->
-                                                <li class="slide__category"><span class="category-name">Admin Section</span></li>
-                                               <!--==============================================Admin Section  End==================================================-->
-                                               
-                                               <!--=================================================Establishment  Section ===================================================-->
-                                                <li class="slide__category"><span class="category-name">Establishment Section</span></li>
-                                               <!--==============================================Establishment Section  End==================================================-->
-                                               
-                                               <!--=================================================Student Section ===================================================-->
-                                                <li class="slide__category"><span class="category-name">Student Section</span></li>
-                                               <!--==============================================Student Section  End==================================================-->
-                                               
-                                               <!--===============================================Accounts Section===================================================-->
-                                                <li class="slide__category"><span class="category-name">Accounts Section</span></li>
-                                               <!--==============================================Accounts Section End==================================================-->
-                                               
-                                               <!--===============================================Examination Section===================================================-->
-                                                <li class="slide__category"><span class="category-name">Examination Section</span></li>
-                                               <!--==============================================Examination Section End==================================================-->
-                                            
-                                               
-                                               <!--===============================================IQAC Section===================================================-->
-                                                <li class="slide__category"><span class="category-name">IQAC Section</span></li>
-                                               <!--==============================================IQAC Section End==================================================-->
-                                               
-                                               <!--===============================================Master Section===================================================-->
-                                                <li class="slide__category"><span class="category-name">Master Section</span></li>
-                                               <!--==============================================Master Section End==================================================-->
-                                            
+
+                                            <!--=================================================Admin Section ===================================================-->
+                                            <li class="slide__category"><span class="category-name">Admin Section</span></li>
+                                            <!--==============================================Admin Section  End==================================================-->
+
+                                            <!--=================================================Establishment  Section ===================================================-->
+                                            <li class="slide__category"><span class="category-name">Establishment Section</span></li>
+                                            <!--==============================================Establishment Section  End==================================================-->
+
+                                            <!--=================================================Student Section ===================================================-->
+                                            <li class="slide__category"><span class="category-name">Student Section</span></li>
+                                            <!--==============================================Student Section  End==================================================-->
+
+                                            <!--===============================================Accounts Section===================================================-->
+                                            <li class="slide__category"><span class="category-name">Accounts Section</span></li>
+                                            <!--==============================================Accounts Section End==================================================-->
+
+                                            <!--===============================================Examination Section===================================================-->
+                                            <li class="slide__category"><span class="category-name">Examination Section</span></li>
+                                            <!--==============================================Examination Section End==================================================-->
+
+
+                                            <!--===============================================IQAC Section===================================================-->
+                                            <li class="slide__category"><span class="category-name">IQAC Section</span></li>
+                                            <!--==============================================IQAC Section End==================================================-->
+
+                                            <!--===============================================Master Section===================================================-->
+                                            <li class="slide__category"><span class="category-name">Master Section</span></li>
+                                            <!--==============================================Master Section End==================================================-->
+
                                         </nav>
                                         <!-- End::nav -->
 
