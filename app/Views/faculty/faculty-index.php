@@ -154,57 +154,40 @@
                             </div>
 
                             <!-- PASSWORD -->
-                            <div class="col-xl-4 col-md-6">
+<!--                            <div class="col-xl-4 col-md-6">
                                 <label class="form-label">
                                     <?= lang('App.password'); ?> <span class="text-danger">*</span>
                                 </label>
 
                                 <div class="input-group">
-                                    <input type="password"
-                                           id="faculty_password"
-                                           name="faculty_password"
-                                           class="form-control"
-                                           placeholder="Enter Password">
+                                    <input type="password"id="faculty_password"name="faculty_password"class="form-control"placeholder="Enter Password">
 
-                                    <span class="input-group-text bg-white"
-                                          role="button"
-                                          onclick="createpassword('faculty_password', this)">
-                                        <i class="ri-eye-off-line align-middle"></i>
-                                    </span>
+                                    <span class="input-group-text bg-white" role="button"onclick="createpassword('faculty_password', this)"><i class="ri-eye-off-line align-middle"></i></span>
                                 </div>
 
                                 <small class="text-danger" id="faculty_password_error" style="display:none;"></small>
-                            </div>
+                            </div>-->
 
-                            <!-- CONFIRM PASSWORD -->
+<!--                             CONFIRM PASSWORD 
                             <div class="col-xl-4 col-md-6">
                                 <label class="form-label">
                                     <?= lang('App.confirm'); ?> <?= lang('App.password'); ?> <span class="text-danger">*</span>
                                 </label>
 
                                 <div class="input-group">
-                                    <input type="password"
-                                           id="confirm_password"
-                                           name="confirm_password"
-                                           class="form-control"
-                                           placeholder="Confirm Password">
-
-                                    <span class="input-group-text bg-white"
-                                          role="button"
-                                          onclick="createpassword('confirm_password', this)">
-                                        <i class="ri-eye-off-line"></i>
-                                    </span>
+                                    <input type="password" id="confirm_password" name="confirm_password"class="form-control"placeholder="Confirm Password">
+                                    <span class="input-group-text bg-white" role="button" onclick="createpassword('confirm_password', this)"><i class="ri-eye-off-line"></i></span>
                                 </div>
 
                                 <small id="password-message" class="fw-semibold"></small>
                                 <small class="text-danger" id="confirm_password_error" style="display:none;"></small>
-                            </div>
+                            </div>-->
 
 
                         </div>
 
                         <div class="text-end mt-4">
-                            <button type="submit" class="btn btn-success btn-lg" disabled>
+                            <button type="submit" class="btn btn-success btn-lg" >
                                 <i class="fe fe-save"></i> <?= lang('App.save'); ?>
                             </button>
                         </div>
@@ -216,5 +199,3 @@
         </div>
     </div>
 </div>
-
-

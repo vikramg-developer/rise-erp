@@ -132,6 +132,10 @@ $routes->group('faculty', function ($routes) {
        // PASSWORD CHANGE (ADD THIS)
     $routes->post('change-password-first-login','Faculty::change_password_first_login');
 });
+    // ✅ FIRST LOGIN PASSWORD CHANGE (NO PERMISSION FILTER)
+    $routes->post('check-old-password', 'Faculty::check_old_password');
+    $routes->get('change-password-first-login','Faculty::firstLoginChangePassword');
+    $routes->post('change-password-first-login','Faculty::updateFirstLoginPassword');
 
 $routes->group('headgroup', function ($routes) {
     $routes->get('/', 'HeadGroup::index', ['filter' => 'permission:viewHeadGroup']);

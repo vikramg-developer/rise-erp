@@ -51,7 +51,8 @@ function passwordValidation(
     strengthErrorSelector, // faculty_password_error
     matchMessageSelector,  // password-message
     submitBtnSelector
-) {
+) 
+{
     const regex =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
