@@ -18,7 +18,7 @@ class ModelStudentPersonalInformation extends Model {
     protected $primaryKey = 'student_personal_info_id';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['student_registration_id', 'student_contact_no', 'student_email', 'student_gender', 'student_birthdate', 'student_birthplace', 'student_bloodgroup_id', 'student_religion_id', 'student_category_id', 'student_caste_id', 'student_subcaste', 'student_marital_status', 'student_nationality', 'student_minority', 'student_physically_handicap', 'student_physically_handicap_type', 'student_age', 'added_by', 'updated_by', 'is_deleted',
+    protected $allowedFields = ['student_registration_id', 'student_contact_no', 'student_email', 'student_gender', 'student_birthdate', 'student_birthplace', 'student_bloodgroup_id', 'student_religion_id', 'student_category_id', 'student_caste_id', 'student_subcaste', 'student_marital_status', 'student_nationality', 'student_minority', 'student_physically_handicap', 'student_physically_handicap_type', 'student_sport_reserved', 'student_sport_level', 'student_age', 'added_by', 'updated_by', 'is_deleted',
     ];
     protected $validationRules = [
         'student_contact_no' => 'required|numeric|exact_length[10]',
@@ -36,6 +36,8 @@ class ModelStudentPersonalInformation extends Model {
         'student_marital_status' => 'required',
         'student_minority' => 'required',
         'student_physically_handicap' => 'required',
+        'student_sport_reserved' => 'required',
+//        'student_sport_level' => 'required',
     ];
     protected $validationMessages = [
         'student_contact_no' => [
@@ -87,6 +89,9 @@ class ModelStudentPersonalInformation extends Model {
         ],
         'student_physically_handicap' => [
             'required' => 'Physically Handicap field is required',
+        ],
+        'student_sport_reserved' => [
+            'required' => 'Sport Reserved field is required',
         ],
     ];
 //    // Callbacks

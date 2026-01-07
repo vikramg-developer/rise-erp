@@ -67,11 +67,9 @@ $errors = $errors ?? [];
                             <label for="login_password" class="form-label text-default d-block"><?= lang('App.password') ?></label>
                             <div class="input-group">
                                 <input type="password" class="form-control form-control-lg" id="login_password" name="login_password" placeholder="<?= lang('App.password') ?>">
-                                <button class="btn btn-light"
-                                        type="button"
-                                        onclick="createpassword('login_password', this)">
-                                    <i class="ri-eye-off-line align-middle"></i>
-                                </button>                            </div>
+                                <button class="btn btn-light"type="button"onclick="createpassword('login_password', this)"><i class="ri-eye-off-line align-middle"></i>
+                                </button>
+                            </div>
                             <?php if (isset($validation) && $validation->getError('login_password')): ?>
                                 <small class="text-danger"><?= $validation->getError('login_password') ?></small>
                             <?php endif; ?>
