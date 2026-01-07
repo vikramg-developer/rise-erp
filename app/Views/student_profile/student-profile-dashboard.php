@@ -30,9 +30,9 @@
                             </li>
                             <!--Address Details TAB-->
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link " id="order-tab" data-bs-toggle="tab"
-                                        data-bs-target="#order-tab-pane" type="button" role="tab"
-                                        aria-controls="order-tab" aria-selected="true">🏠<?= lang('App.address'); ?> <?= lang('App.details'); ?></button>
+                                <button class="nav-link " id="addresss-tab" data-bs-toggle="tab"
+                                        data-bs-target="#addresss-tab-pane" type="button" role="tab"
+                                        aria-controls="addresss-tab" aria-selected="true">🏠<?= lang('App.address'); ?> <?= lang('App.details'); ?></button>
                             </li>
                             <!--Parent Details TAB-->
                             <li class="nav-item" role="presentation">
