@@ -130,10 +130,9 @@ $routes->group('faculty', function ($routes) {
     $routes->post('update-faculty', 'Faculty::update_faculty', ['filter' => 'permission:updateFaculty']);
     $routes->post('delete-faculty', 'Faculty::delete_faculty', ['filter' => 'permission:deleteFaculty']);
     $routes->post('revert-faculty', 'Faculty::revert_faculty', ['filter' => 'permission:deleteFaculty']);
+    $routes->post('getFacultyDetails','Faculty::getFacultyDetails',['filter' => 'permission:viewFaculty']);
 
-    // ✅ FIRST LOGIN 
-    // PASSWORD CHANGE (ADD THIS)
-    $routes->post('change-password-first-login', 'Faculty::change_password_first_login');
+//    $routes->post('change-password-first-login','Faculty::change_password_first_login');
 });
 // ✅ FIRST LOGIN PASSWORD CHANGE (NO PERMISSION FILTER)
 $routes->post('check-old-password', 'Faculty::check_old_password');

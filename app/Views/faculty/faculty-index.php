@@ -58,10 +58,22 @@
                                 </select>
                                 <small class="text-danger" id="faculty_gender_error" style="display:none;"></small>
                             </div>
-
-
-                         <div class="col-xl-4 d-none d-lg-block"></div>
-
+                            <!-- Facuty Type -->
+                            <div class="col-xl-4 col-lg-4 col-md-6">
+                                <label class="form-label">
+                                    <?= lang('App.employee'); ?>   <?= lang('App.type'); ?><span class="text-danger">*</span>
+                                </label>
+                                <select class="from-control js-example-basic-single" name="faculty_type_id" id="faculty_type_id">
+                                      <option value="">Select Type</option>
+                                    <?php
+                                    foreach ($faculty_type as $type) {
+                                        ?>
+                                        <option value="<?php echo $type['faculty_type_id']; ?>"><?php echo $type['faculty_type']; ?></option>
+                                    <?php }
+                                    ?> 
+                                </select>
+                                <small class="text-danger" id="faculty_type_id_error" style="display:none;"></small>
+                            </div>
 
                             <!-- FIRST NAME -->
                             <div class="col-xl-4 col-md-6">
@@ -154,39 +166,43 @@
                             </div>
 
                             <!-- PASSWORD -->
-<!--                            <div class="col-xl-4 col-md-6">
-                                <label class="form-label">
-                                    <?= lang('App.password'); ?> <span class="text-danger">*</span>
-                                </label>
+                            <!--                            <div class="col-xl-4 col-md-6">
+                                                            <label class="form-label">
+                            <?= lang('App.password'); ?> <span class="text-danger">*</span>
+                                                            </label>
+                            
+                                                            <div class="input-group">
+                                                                <input type="password"id="faculty_password"name="faculty_password"class="form-control"placeholder="Enter Password">
+                            
+                                                                <span class="input-group-text bg-white" role="button"onclick="createpassword('faculty_password', this)"><i class="ri-eye-off-line align-middle"></i></span>
+                                                            </div>
+                            
+                                                            <small class="text-danger" id="faculty_password_error" style="display:none;"></small>
+                                                        </div>-->
 
-                                <div class="input-group">
-                                    <input type="password"id="faculty_password"name="faculty_password"class="form-control"placeholder="Enter Password">
-
-                                    <span class="input-group-text bg-white" role="button"onclick="createpassword('faculty_password', this)"><i class="ri-eye-off-line align-middle"></i></span>
-                                </div>
-
-                                <small class="text-danger" id="faculty_password_error" style="display:none;"></small>
-                            </div>-->
-
-<!--                             CONFIRM PASSWORD 
-                            <div class="col-xl-4 col-md-6">
-                                <label class="form-label">
-                                    <?= lang('App.confirm'); ?> <?= lang('App.password'); ?> <span class="text-danger">*</span>
-                                </label>
-
-                                <div class="input-group">
-                                    <input type="password" id="confirm_password" name="confirm_password"class="form-control"placeholder="Confirm Password">
-                                    <span class="input-group-text bg-white" role="button" onclick="createpassword('confirm_password', this)"><i class="ri-eye-off-line"></i></span>
-                                </div>
-
-                                <small id="password-message" class="fw-semibold"></small>
-                                <small class="text-danger" id="confirm_password_error" style="display:none;"></small>
-                            </div>-->
+                            <!--                             CONFIRM PASSWORD 
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <label class="form-label">
+                            <?= lang('App.confirm'); ?> <?= lang('App.password'); ?> <span class="text-danger">*</span>
+                                                            </label>
+                            
+                                                            <div class="input-group">
+                                                                <input type="password" id="confirm_password" name="confirm_password"class="form-control"placeholder="Confirm Password">
+                                                                <span class="input-group-text bg-white" role="button" onclick="createpassword('confirm_password', this)"><i class="ri-eye-off-line"></i></span>
+                                                            </div>
+                            
+                                                            <small id="password-message" class="fw-semibold"></small>
+                                                            <small class="text-danger" id="confirm_password_error" style="display:none;"></small>
+                                                        </div>-->
 
 
                         </div>
 
-                        <div class="text-end mt-4">
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            
+                             <a href="<?= base_url('faculty/fetch-faculty'); ?>" class="btn btn-info m-1">
+                                <i class="bi bi-skip-backward ms-2"></i> <?= lang('App.back'); ?>
+                            </a>
                             <button type="submit" class="btn btn-success btn-lg" >
                                 <i class="fe fe-save"></i> <?= lang('App.save'); ?>
                             </button>

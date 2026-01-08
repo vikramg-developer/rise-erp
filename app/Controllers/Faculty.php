@@ -10,6 +10,7 @@ class Faculty extends BaseController {
     protected $modelbranch;
     protected $modelrole;
     protected $modelrisecounter;
+    protected $modelfacultytype;
     protected $db;
 
     public function __construct() {
@@ -18,12 +19,14 @@ class Faculty extends BaseController {
         $this->modelrole = model('ModelRole');
         $this->modelacademicYear = model('ModelAcademicYear');
         $this->modelrisecounter = model('ModelRiseCounter');
+        $this->modelfacultytype = model('ModelFacultyType');
         $this->db = \Config\Database::connect();
     }
 
     public function index() {
         $data['jspath'] = 'faculty/add-faculty';
         $data['roles'] = $this->modelrole->getRoles();
+        $data['faculty_type'] = $this->modelfacultytype->getFacultyTypeData();
         return render_page('faculty/faculty-index', $data);
     }
 
@@ -71,6 +74,7 @@ class Faculty extends BaseController {
 
             $insertData = [
                 'faculty_role_id' => clean_number($this->request->getVar('faculty_role_id')),
+                'faculty_type_id' => clean_number($this->request->getVar('faculty_type_id')),
                 'faculty_gender' => clean_name($this->request->getVar('faculty_gender')),
                 'faculty_first_name' => clean_name($this->request->getVar('faculty_first_name')),
                 'faculty_middle_name' => clean_name($this->request->getVar('faculty_middle_name')),
@@ -80,7 +84,8 @@ class Faculty extends BaseController {
                 'faculty_aadhar_number' => clean_number($this->request->getVar('faculty_aadhar_number')),
                 'faculty_pan_number' => clean_name($this->request->getVar('faculty_pan_number')),
 //                'faculty_password' => clean_name($this->request->getVar('faculty_password')),
-                'faculty_password' => $hashedPassword,
+                'faculty_password' => clean_name($plainPassword),
+//                'faculty_password' => $hashedPassword,
                 'faculty_rise_no' => $faculty_rise_no,
                 'added_by' => session('rise_no'),
             ];
@@ -145,6 +150,7 @@ class Faculty extends BaseController {
 
         $data['jspath'] = 'faculty/add-faculty';
         $data['roles'] = $this->modelrole->getRoles();
+        $data['faculty_type'] = $this->modelfacultytype->getFacultyTypeData();
         return render_page('faculty/manage-faculty', $data);
     }
 
@@ -214,15 +220,35 @@ class Faculty extends BaseController {
             /* =====================
              * FACULTY NAME + ROLE
              * ===================== */
-            $facultyName = esc($nameMap[$row['faculty_rise_no']] ?? '');
+//            $facultyName = esc($nameMap[$row['faculty_rise_no']] ?? '');
+//            $facultyRole = esc($roleMap[$row['faculty_role_id']] ?? '');
+//
+//            $nameWithRole = '<div class="text-center">' . $facultyName .
+//                    '<div class="small text-muted mt-1">
+//                        <span class="badge bg-info-transparent px-3 py-2 fw-semibold" style="font-size:0.8rem">
+//                            ' . $facultyRole . '
+//                    </div>
+//                </div>';
+
+            $facultyName = '
+                        <a data-bs-toggle="offcanvas"
+                           href="#offcanvasExample"
+                           data-faculty-rise="' . $row['faculty_rise_no'] . '"
+                           data-faculty-name="' . esc($nameMap[$row['faculty_rise_no']] ?? '') . '"
+                           class="text-primary fw-semibold facultyDetails"
+                           role="button">
+                           ' . esc($nameMap[$row['faculty_rise_no']] ?? '') . '
+                        </a>';
+
             $facultyRole = esc($roleMap[$row['faculty_role_id']] ?? '');
 
-            $nameWithRole = '<div class="text-center">' . $facultyName .
-                    '<div class="small text-muted mt-1">
-                        <span class="badge bg-info-transparent px-3 py-2 fw-semibold" style="font-size:0.8rem">
-                            ' . $facultyRole . '
-                    </div>
-                </div>';
+            $nameWithRole = '<div class="text-center">' . $facultyName . '
+                            <div class="small text-muted mt-1">
+                                <span class="badge bg-info-transparent px-3 py-2 fw-semibold" style="font-size:0.8rem">
+                                    ' . $facultyRole . '
+                                </span>
+                            </div>
+                        </div>';
 
             /* =====================
              * ADDED BY
@@ -321,6 +347,7 @@ class Faculty extends BaseController {
         }
 
         $faculty = $this->modelfacultyregistration->getFacultyById($faculty_id);
+        $data['faculty_type'] = $this->modelfacultytype->getFacultyTypeData();
 
         if (!$faculty) {
             return redirect()->to('faculty/fetch-faculty');
@@ -366,6 +393,7 @@ class Faculty extends BaseController {
 
         $updateData = [
             'faculty_role_id' => clean_number($this->request->getPost('edit_faculty_role_id')),
+            'faculty_type_id' => clean_number($this->request->getPost('edit_faculty_type_id')),
             'faculty_gender' => clean_name($this->request->getPost('edit_faculty_gender')),
             'faculty_first_name' => clean_name($this->request->getPost('edit_faculty_first_name')),
             'faculty_middle_name' => clean_name($this->request->getPost('edit_faculty_middle_name')),
@@ -490,14 +518,13 @@ class Faculty extends BaseController {
         $lower = 'abcdefghijklmnopqrstuvwxyz';
         $numbers = '123456789';
 
-
         $password = [
             $upper[random_int(0, strlen($upper) - 1)],
             $lower[random_int(0, strlen($lower) - 1)],
             $numbers[random_int(0, strlen($numbers) - 1)],
         ];
 
-        $all = $upper . $lower . $numbers ;
+        $all = $upper . $lower . $numbers;
 
         for ($i = 3; $i < $length; $i++) {
             $password[] = $all[random_int(0, strlen($all) - 1)];
@@ -507,4 +534,47 @@ class Faculty extends BaseController {
 
         return implode('', $password);
     }
+
+public function getFacultyDetails()
+{
+    $riseNo = $this->request->getPost('faculty_rise_no');
+
+    if (!$riseNo) {
+        return $this->response->setJSON([
+            'data' => null,
+            'csrfHash' => csrf_hash()
+        ]);
+    }
+
+    // 1️⃣ Get faculty basic details
+    $faculty = $this->modelfacultyregistration
+                    ->getFacultyDetailsByRiseNo($riseNo);
+
+    if (!$faculty) {
+        return $this->response->setJSON([
+            'data' => null,
+            'csrfHash' => csrf_hash()
+        ]);
+    }
+
+    // 2️⃣ Get ID → Name maps
+    $roleMap = $this->modelrole->getRoleIdNameMap();
+    $typeMap = $this->modelfacultyregistration->getFacultyRiseNumberNameMap();
+
+    // 3️⃣ Prepare response
+    return $this->response->setJSON([
+        'data' => [
+            'name'    => $faculty['faculty_first_name'] . ' ' . $faculty['faculty_last_name'],
+            'rise_no' => $faculty['faculty_rise_no'],
+            'gender'  => ucfirst($faculty['faculty_gender']),
+            'role'    => $roleMap[$faculty['faculty_role_id']] ?? '-',
+            'type'    => $typeMap[$faculty['faculty_type_id']] ?? '-',
+            'mobile'  => $faculty['faculty_contact_number'],
+            'email'   => $faculty['faculty_email_id'],
+            'status'  => $faculty['faculty_status'],
+        ],
+        'csrfHash' => csrf_hash()
+    ]);
+}
+
 }

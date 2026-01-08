@@ -1,4 +1,9 @@
-
+$(document).ready(function () {
+    $("#mainFacultyNav").addClass('open');
+    $("#mainFacultyNav > a").addClass('active');
+    $("#mainFacultyNav > ul").css('display', 'block');
+    $("#manageFacultyNav > a").addClass('active');
+});
 // PAN Number
 panUppercase('input[name="faculty_pan_number"]');
 
@@ -55,16 +60,23 @@ $("#faculty-registration-form").on("submit", function (e) {
                 });
                 return;
             }
-
-            // Success toast
+             // ✅ Success toast
             showToast('success', res.message);
 
+            // Redirect after short delay 
+            setTimeout(function () {
+                window.location.href = BASE_URL + "faculty/fetch-faculty";
+            }, 1000);
+
+            // Success toast
+//            showToast('success', res.message);
+
             // Reset form
-            $("#faculty-registration-form")[0].reset();
+//            $("#faculty-registration-form")[0].reset();
 
             // Reset button + message
-            $('#faculty-registration-form button[type="submit"]').prop('disabled', true);
-            $('#password-message').text('');
+//            $('#faculty-registration-form button[type="submit"]').prop('disabled', true);
+//            $('#password-message').text('');
         }
     });
 });
@@ -183,6 +195,46 @@ $(document).on("click", ".revert", function () {
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             // 👉 SHOW NAME
             cancelRevert(faculty_name);
+        }
+    });
+});
+
+$(document).on('click', '.facultyDetails', function () {
+
+    let riseNo = $(this).data('faculty-rise');
+
+    // Reset canvas values
+    $('#faculty_name').text('Loading...');
+    $('#faculty_rise_no').text('');
+    $('#faculty_gender').text('');
+    $('#faculty_role').text('');
+    $('#faculty_type').text('');
+    $('#faculty_mobile').text('');
+    $('#faculty_email').text('');
+    $('#faculty_status').text('');
+
+    $.ajax({
+        url: BASE_URL + 'faculty/getFacultyDetails',
+        type: 'POST',
+        data: {
+            faculty_rise_no: riseNo,
+            [csrfName]: csrfHash
+        },
+        dataType: 'json',
+        success: function (res) {
+
+            csrfHash = res.csrfHash;
+
+            if (!res.data) return;
+
+            $('#faculty_name').text(res.data.name);
+            $('#faculty_rise_no').text(res.data.rise_no);
+            $('#faculty_gender').text(res.data.gender);
+            $('#faculty_role').text(res.data.role);
+            $('#faculty_type').text(res.data.type);
+            $('#faculty_mobile').text(res.data.mobile);
+            $('#faculty_email').text(res.data.email);
+            $('#faculty_status').text(res.data.status);
         }
     });
 });
