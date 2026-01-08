@@ -65,6 +65,8 @@ $routes->post('save-registration', 'StudentRegistration::add_registration');
 $routes->get('/student-profile', 'StudentProfile::index', ['filter' => 'permission:viewStudentProfile']);
 $routes->post('add-personal-details', 'StudentProfile::add_personal_information', ['filter' => 'permission:viewStudentProfile']);
 $routes->post('add-address-details', 'StudentProfile::add_address_details', ['filter' => 'permission:viewStudentProfile']);
+$routes->get('get-pincode/(:num)', 'PincodeData::getPincode/$1', ['filter' => 'permission:viewStudentProfile']);
+
 $routes->post('/savesignup', 'Registration::saveSignup');
 $routes->get('/student-dashboard', 'Login::studentDashboard');
 $routes->get('/studentDashboard', 'Login::studentDashboard');
@@ -128,14 +130,14 @@ $routes->group('faculty', function ($routes) {
     $routes->post('delete-faculty', 'Faculty::delete_faculty', ['filter' => 'permission:deleteFaculty']);
     $routes->post('revert-faculty', 'Faculty::revert_faculty', ['filter' => 'permission:deleteFaculty']);
 
-       // ✅ FIRST LOGIN 
-       // PASSWORD CHANGE (ADD THIS)
-    $routes->post('change-password-first-login','Faculty::change_password_first_login');
+    // ✅ FIRST LOGIN 
+    // PASSWORD CHANGE (ADD THIS)
+    $routes->post('change-password-first-login', 'Faculty::change_password_first_login');
 });
-    // ✅ FIRST LOGIN PASSWORD CHANGE (NO PERMISSION FILTER)
-    $routes->post('check-old-password', 'Faculty::check_old_password');
-    $routes->get('change-password-first-login','Faculty::firstLoginChangePassword');
-    $routes->post('change-password-first-login','Faculty::updateFirstLoginPassword');
+// ✅ FIRST LOGIN PASSWORD CHANGE (NO PERMISSION FILTER)
+$routes->post('check-old-password', 'Faculty::check_old_password');
+$routes->get('change-password-first-login', 'Faculty::firstLoginChangePassword');
+$routes->post('change-password-first-login', 'Faculty::updateFirstLoginPassword');
 
 $routes->group('headgroup', function ($routes) {
     $routes->get('/', 'HeadGroup::index', ['filter' => 'permission:viewHeadGroup']);

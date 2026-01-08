@@ -12,6 +12,11 @@ class StudentProfile extends BaseController {
     protected $modelcaste;
     protected $modelcastecategory;
     protected $modelstudentaddressdetails;
+    protected $modelpincodedata;
+    protected $modelcountriesdata;
+    protected $modelstatedata;
+    protected $modeltalukadata;
+    protected $modeldistrictdata;
 
     public function __construct() {
         $this->modelstudentregistration = model('ModelStudentRegistration');
@@ -22,6 +27,11 @@ class StudentProfile extends BaseController {
         $this->modelcaste = model('ModelCaste');
         $this->modelcastecategory = model('ModelCasteCategory');
         $this->modelstudentaddressdetails = model('ModelStudentAddressDetails');
+        $this->modelpincodedata = model('ModelPincodeData');
+        $this->modelcountriesdata = model('ModelCountriesData');
+        $this->modelstatedata = model('ModelStateData');
+        $this->modeltalukadata = model('ModelTalukaData');
+        $this->modeldistrictdata = model('ModelDistrictData');
     }
 
     //=============================== Student Profile -Personal Information START===============================
@@ -33,11 +43,15 @@ class StudentProfile extends BaseController {
         $data['title'] = lang('App.rise') . "-" . lang('App.student') . " " . lang('App.profile');
         $data['student_registration_data'] = $this->modelstudentregistration->find($student_registration_id);
         $data['student_personalinfo_data'] = $this->modelstudentpersonalinformation->where('student_registration_id', $student_registration_id)->first();
+        $data['student_address_data'] = $this->modelstudentaddressdetails->where('student_registration_id', $student_registration_id)->first();
         $data['blood_group'] = $this->modelbloodgroup->findAll();
         $data['religion'] = $this->modelreligion->findAll();
         $data['caste'] = $this->modelcaste->findAll();
         $data['caste_category'] = $this->modelcastecategory->findAll();
-
+        $data['countriesdata'] = $this->modelcountriesdata->findAll();
+        $data['statedata'] = $this->modelstatedata->findAll();
+        $data['talukadata'] = $this->modeltalukadata->findAll();
+        $data['districtdata'] = $this->modeldistrictdata->findAll();
         return render_page('student_profile/student-profile-dashboard', $data);
     }
 
@@ -143,24 +157,25 @@ class StudentProfile extends BaseController {
             'student_permanent_address' => $post['student_permanent_address'],
             'student_permanent_pincode' => $post['student_permanent_pincode'],
             'student_permanent_country' => $post['student_permanent_country'],
-            'student_permanent_state' => $post['student_permanent_state'],
-            'student_permanent_taluka' => $post['student_permanent_taluka'],
-            'student_permanent_district' => $post['student_permanent_district'],
+            'student_permanent_state_id' => $post['student_permanent_state_id'],
+            'student_permanent_taluka_id' => $post['student_permanent_taluka_id'],
+            'student_permanent_district_id' => $post['student_permanent_district_id'],
             'student_correspondence_address' => $post['student_correspondence_address'],
             'student_correspondence_pincode' => $post['student_correspondence_pincode'],
             'student_correspondence_country' => $post['student_correspondence_country'],
-            'student_correspondence_state' => $post['student_correspondence_state'],
-            'student_correspondence_taluka' => $post['student_correspondence_taluka'],
-            'student_correspondence_district' => $post['student_correspondence_district'],
+            'student_correspondence_state_id' => $post['student_correspondence_state_id'],
+            'student_correspondence_taluka_id' => $post['student_correspondence_taluka_id'],
+            'student_correspondence_district_id' => $post['student_correspondence_district_id'],
         ];
 //
         if ($existing) {
             $data['updated_by'] = session('rise_no');
-            $result = $this->modelstudentaddressdetails->update($existing['student_address_id'], $data);
+            $result = $this->modelstudentaddressdetails->update($existing['student_address_details_id'], $data);
         } else {
             $data['student_registration_id'] = $studentRegistrationId;
             $data['added_by'] = session('rise_no');
             $result = $this->modelstudentaddressdetails->insert($data);
+            
         }
         log_message('debug', (string) $this->modelstudentaddressdetails->db->getLastQuery());
 //
