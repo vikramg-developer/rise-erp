@@ -24,77 +24,46 @@
                         <ul class="nav nav-tabs tab-style-2 d-sm-flex d-block border-bottom border-block-end-dashed" id="myTab1" role="tablist">
                             <!--Personal Details TAB-->
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="personalInformatiom-tab" data-bs-toggle="tab"
-                                        data-bs-target="#personalinfo-tab-pane" type="button" role="tab"
-                                        aria-controls="personalInformatiom-tab" aria-selected="false">👨‍🎓<?= lang('App.personal'); ?> <?= lang('App.details'); ?></button>
+                                <button class="nav-link active" id="personalInformatiom-tab" data-bs-toggle="tab"data-bs-target="#personalinfo-tab-pane" type="button" role="tab"aria-controls="personalInformatiom-tab" aria-selected="false">👨‍🎓<?= lang('App.personal'); ?> <?= lang('App.details'); ?></button>
                             </li>
                             <!--Address Details TAB-->
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link " id="addresss-tab" data-bs-toggle="tab"
-                                        data-bs-target="#addresss-tab-pane" type="button" role="tab"
-                                        aria-controls="addresss-tab" aria-selected="true">🏠<?= lang('App.address'); ?> <?= lang('App.details'); ?></button>
+                                <button class="nav-link " id="addresssdetails-tab" data-bs-toggle="tab"data-bs-target="#addresssdetails-tab-pane" type="button" role="tab"aria-controls="addresssdetails-tab" aria-selected="true">🏠<?= lang('App.address'); ?> <?= lang('App.details'); ?></button>
                             </li>
                             <!--Parent Details TAB-->
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="shipped-tab" data-bs-toggle="tab"
-                                        data-bs-target="#shipped-tab-pane" type="button" role="tab"
-                                        aria-controls="shipped-tab" aria-selected="false">👨‍👩‍👧<?= lang('App.parent'); ?> <?= lang('App.details'); ?></button>
+                                <button class="nav-link" id="parentdetails-tab" data-bs-toggle="tab"data-bs-target="#parentdetails-tab-pane" type="button" role="tab"aria-controls="parentdetails-tab" aria-selected="false">👨‍👩‍👧<?= lang('App.parent'); ?> <?= lang('App.details'); ?></button>
                             </li>
                             <!--Educational Details TAB-->
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="delivered-tab" data-bs-toggle="tab"
-                                        data-bs-target="#delivery-tab-pane" type="button" role="tab"
-                                        aria-controls="delivered-tab" aria-selected="false">🎓<?= lang('App.educational'); ?> <?= lang('App.details'); ?></button>
+                                <button class="nav-link" id="delivered-tab" data-bs-toggle="tab"data-bs-target="#delivery-tab-pane" type="button" role="tab"aria-controls="delivered-tab" aria-selected="false">🎓<?= lang('App.educational'); ?> <?= lang('App.details'); ?></button>
                             </li>
                             <!--Document Details TAB-->
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="document-tab" data-bs-toggle="tab"
-                                        data-bs-target="#document-tab-pane" type="button" role="tab"
-                                        aria-controls="delivered-tab" aria-selected="false">📂<?= lang('App.document'); ?> <?= lang('App.details'); ?></button>
+                                <button class="nav-link" id="document-tab" data-bs-toggle="tab"data-bs-target="#document-tab-pane" type="button" role="tab"aria-controls="delivered-tab" aria-selected="false">📂<?= lang('App.document'); ?> <?= lang('App.details'); ?></button>
                             </li>
                             <!--Course Details TAB-->
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="delivered-tab" data-bs-toggle="tab"
-                                        data-bs-target="#applycourse-tab-pane" type="button" role="tab"
-                                        aria-controls="delivered-tab" aria-selected="false">    📝<?= lang('App.apply'); ?> for <?= lang('App.course'); ?></button>
+                                <button class="nav-link" id="delivered-tab" data-bs-toggle="tab"data-bs-target="#applycourse-tab-pane" type="button" role="tab"aria-controls="delivered-tab" aria-selected="false">    📝<?= lang('App.apply'); ?> for <?= lang('App.course'); ?></button>
                             </li>
                             <!--Payment Details TAB-->
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="payment-tab" data-bs-toggle="tab"
-                                        data-bs-target="#payment-tab-pane" type="button" role="tab"
-                                        aria-controls="delivered-tab" aria-selected="false">
+                                <button class="nav-link" id="payment-tab" data-bs-toggle="tab"data-bs-target="#payment-tab-pane" type="button" role="tab"aria-controls="delivered-tab" aria-selected="false">
                                     💳<?= lang('App.payment'); ?>  <?= lang('App.details'); ?></button>
                             </li>
 
                             <!--Declaration Details TAB-->
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="declaration-tab" data-bs-toggle="tab"
-                                        data-bs-target="#declaration-tab-pane" type="button" role="tab"
-                                        aria-controls="declaration-tab" aria-selected="false">
+                                <button class="nav-link" id="declaration-tab" data-bs-toggle="tab"data-bs-target="#declaration-tab-pane" type="button" role="tab"aria-controls="declaration-tab" aria-selected="false">
                                     ✅<?= lang('App.declaration'); ?></button>
                             </li>
 
                             <!--Print  form TAB-->
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="formprint-tab" data-bs-toggle="tab"
-                                        data-bs-target="#formprint-tab-pane" type="button" role="tab"
-                                        aria-controls="formprint-tab" aria-selected="false">
+                                <button class="nav-link" id="formprint-tab" data-bs-toggle="tab"data-bs-target="#formprint-tab-pane" type="button" role="tab"aria-controls="formprint-tab" aria-selected="false">
                                     🖨️<?= lang('App.form'); ?>  <?= lang('App.print'); ?></button>
                             </li>
-<!--                            Print  form TAB
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="formprint-tab" data-bs-toggle="tab"
-                                        data-bs-target="#formprint-tab-pane" type="button" role="tab"
-                                        aria-controls="formprint-tab" aria-selected="false">
-                                    📚️<?= lang('App.form'); ?>  <?= lang('App.print'); ?></button>
-                            </li>
-                            Print  form TAB
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="formprint-tab" data-bs-toggle="tab"
-                                        data-bs-target="#formprint-tab-pane" type="button" role="tab"
-                                        aria-controls="formprint-tab" aria-selected="false">
-                                    🏛️️<?= lang('App.form'); ?>  <?= lang('App.print'); ?></button>
-                            </li>-->
+                            <!--                            Print  form TAB                <li class="nav-item" role="presentation">                    <button class="nav-link" id="formprint-tab" data-bs-toggle="tab"                            data-bs-target="#formprint-tab-pane" type="button" role="tab"                            aria-controls="formprint-tab" aria-selected="false">                        📚️<?= lang('App.form'); ?>  <?= lang('App.print'); ?></button>                </li>                Print  form TAB                <li class="nav-item" role="presentation">                    <button class="nav-link" id="formprint-tab" data-bs-toggle="tab"                            data-bs-target="#formprint-tab-pane" type="button" role="tab"                            aria-controls="formprint-tab" aria-selected="false">                        🏛️️<?= lang('App.form'); ?>  <?= lang('App.print'); ?></button>                </li>-->
                         </ul>
                         <hr class="border-warning border-3 opacity-75">
 
@@ -148,70 +117,48 @@
                             </div>
                             <div class="card-body p-0">
                                 <div class="d-flex align-items-center border-bottom border-block-end-dashed p-3 flex-wrap">
-                                    <div class="me-2">
-                                        <span class="avatar avatar-lg avatar-rounded">
-                                            <img src="<?php echo base_url('assets/images/faces/images.png'); ?>" alt="">
-                                        </span>
+                                    <div class="me-2"><span class="avatar avatar-lg avatar-rounded">    <img src="<?php echo base_url('assets/images/faces/images.png'); ?>" alt=""></span>
                                     </div>
-                                    <div class="flex-fill">
-                                        <p class="mb-0"><?= session('username'); ?></p>
-                                        <p class="mb-0 text-muted fs-12"></p>
+                                    <div class="flex-fill"><p class="mb-0"><?= session('username'); ?></p><p class="mb-0 text-muted fs-12"></p>
                                     </div>
-                                    <div>
-                                        <span class="badge bg-primary-transparent"><?= session('role'); ?></span>
+                                    <div><span class="badge bg-primary-transparent"><?= session('role'); ?></span>
                                     </div>
                                 </div>
                                 <div class="p-3 border-bottom border-block-end-dashed">
-                                    <div class="d-flex align-items-center justify-content-between mb-3">
-                                        <span class="fs-14 fw-semibold">Student Address :</span>
-                                        <button class="btn btn-icon btn-wave btn-primary btn-sm"><i class="ri-pencil-line"></i></button>
+                                    <div class="d-flex align-items-center justify-content-between mb-3"><span class="fs-14 fw-semibold">Student Address :</span><button class="btn btn-icon btn-wave btn-primary btn-sm"><i class="ri-pencil-line"></i></button>
                                     </div>
                                     <p class="mb-2 text-muted"><span class="fw-semibold text-default">City : </span>SATARA</p>
                                     <p class="mb-2 text-muted"><span class="fw-semibold text-default">State : </span>MAHARASHTRA</p>
                                     <p class="mb-2 text-muted"><span class="fw-semibold text-default">Country : </span>INDIA</p>
-                                    <p class="mb-0 text-muted"><span class="fw-semibold text-default">Pincode    : </span>415001</p>
+                                    <p class="mb-0 text-muted"><span class="fw-semibold text-default">Pincode    : </span><?= esc($student_address_data['student_permenent_pincode'] ?? '') ?></p>
                                 </div>
                                 <div class="p-3 border-bottom border-block-end-dashed">
-                                    <div class="mb-3">
-                                        <span class="fs-14 fw-semibold">Contact Details :</span>
+                                    <div class="mb-3"><span class="fs-14 fw-semibold">Contact Details :</span>
                                     </div>    
-                                    <p class="mb-2 text-muted">
-                                        <span class="fw-semibold text-default">Phone : </span>
-                                        9748124632
+                                    <p class="mb-2 text-muted"><span class="fw-semibold text-default">Phone : </span><?= esc($student_personalinfo_data['student_contact_no'] ?? '') ?>
                                     </p>
 
                                 </div>
                                 <div class="p-3 border-bottom border-block-end-dashed">
-                                    <div class="mb-3">
-                                        <span class="fs-14 fw-semibold">Academic  Details : </span>
+                                    <div class="mb-3"><span class="fs-14 fw-semibold">Academic  Details : </span>
                                     </div>    
-                                    <p class="mb-2 text-muted">
-                                        <span class="fw-semibold text-default"> Course -</span>
-                                        B.COM
+                                    <p class="mb-2 text-muted"><span class="fw-semibold text-default"> Course -</span>B.COM
                                     </p>
-                                    <p class="mb-2 text-muted">
-                                        <span class="fw-semibold text-default"> Year -</span>
-                                        FIRST YEAR
+                                    <p class="mb-2 text-muted"><span class="fw-semibold text-default"> Year -</span>FIRST YEAR
                                     </p>
-                                    <p class="mb-0 text-muted">
-                                        <span class="fw-semibold text-default">Academic Year :</span>
-                                        2025-2026
+                                    <p class="mb-0 text-muted"><span class="fw-semibold text-default">Academic Year :</span>2025-2026
                                     </p>
                                 </div>
                                 <div class="p-3 border-bottom border-block-end-dashed">
-                                    <div class="mb-3">
-                                        <span class="fs-14 fw-semibold">Fees  Details : </span>
+                                    <div class="mb-3"><span class="fs-14 fw-semibold">Fees  Details : </span>
                                     </div>    
-                                    <p class="mb-2 text-muted">
-                                        <span class="fw-semibold text-default">  </span>
+                                    <p class="mb-2 text-muted"><span class="fw-semibold text-default">  </span>
 
                                     </p>
-                                    <p class="mb-2 text-muted">
-                                        <span class="fw-semibold text-default">  </span>
+                                    <p class="mb-2 text-muted"><span class="fw-semibold text-default">  </span>
 
                                     </p>
-                                    <p class="mb-0 text-muted">
-                                        <span class="fw-semibold text-default"></span>
+                                    <p class="mb-0 text-muted"><span class="fw-semibold text-default"></span>
 
                                     </p>
                                 </div>

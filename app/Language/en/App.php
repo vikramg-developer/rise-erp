@@ -232,6 +232,7 @@ return [
     'role' => 'Role',
     // S
     'save' => 'Save',
+    'same_as_permanent_address' => 'Same As Permanent Address',
     'screenshot' => 'Screenshot',
     'search' => 'Search',
     'select' => 'Select',

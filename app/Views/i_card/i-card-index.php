@@ -106,7 +106,7 @@
                                 <td>Civil Engineering</td>
                                 <td>Third Year</td>
                                 <td>
-                                    <a href="<?php echo base_url('icard/i-card-print'); ?>" target="_blank" class="btn btn-warning mb-1" ><?= lang('App.icard'); ?></a>
+                                    <a href="<?php echo base_url('icard/i-card-print1'); ?>" target="_blank" class="btn btn-warning mb-1" ><?= lang('App.icard'); ?></a>
                                 </td>
                             </tr>
                             <tr>
@@ -118,7 +118,7 @@
                                 <td>Civil Engineering</td>
                                 <td>Third Year</td>
                                 <td>
-                                    <a target="_blank" class="btn btn-warning mb-1" ><?= lang('App.icard'); ?></a>
+                                    <a href="<?php echo base_url('icard/i-card-print'); ?>" target="_blank" class="btn btn-warning mb-1" ><?= lang('App.icard'); ?></a>
                                 </td>
                             </tr>
                             <tr>
