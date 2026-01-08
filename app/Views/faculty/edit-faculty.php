@@ -51,7 +51,6 @@
                             </div>
 
                             <!-- GENDER -->
-                            <!-- GENDER -->
                             <div class="col-xl-4 col-lg-4 col-md-6">
                                 <label class="form-label">
                                     <?= lang('App.gender'); ?> <span class="text-danger">*</span>
@@ -82,10 +81,29 @@
 
                                 <small class="text-danger" id="edit_faculty_gender_error" style="display:none;"></small>
                             </div>
+                            
+                              <!-- FACULTY Type -->
+                            <div class="col-xl-4 col-lg-4 col-md-6">
+                                <label class="form-label">
+                                    <?= lang('App.faculty'); ?> <?= lang('App.type'); ?> <span class="text-danger">*</span>
+                                </label>
+
+                                <select class="from-control js-example-basic-single" name="edit_faculty_type_id" id="edit_faculty_type_id">
+                                    <option value="">  <?= lang('App.select'); ?>   <?= lang('App.type'); ?> </option>
+                                    <?php foreach ($faculty_type as $type): ?>
+                                        <option value="<?= $type['faculty_type_id']; ?>"
+                                                <?= ($faculty['faculty_type_id'] == $type['faculty_type_id']) ? 'selected' : ''; ?>>
+                                                    <?= esc($type['faculty_type']); ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+
+                                <small class="text-danger" id="edit_faculty_type_id_error" style="display:none;"></small>
+                            </div>
 
 
 
-                            <div class="col-xl-4 d-none d-lg-block"></div>
+                            <!--<div class="col-xl-4 d-none d-lg-block"></div>-->
 
                             <!-- FIRST NAME -->
                             <div class="col-xl-4 col-md-6">
@@ -222,5 +240,6 @@
             </div>
         </div>
     </div>
+    
 </div>
 
