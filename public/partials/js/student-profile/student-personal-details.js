@@ -20,6 +20,20 @@ function calculateAge() {
 
     ageField.value = age >= 0 ? age : '';
 }
+//Sport Reserved div
+document.getElementById('sport_reserv').addEventListener('change', function () {
+    const sportLevelDiv = document.getElementById('Display_sport_level');
+    const sportLevel = document.getElementById('sport_level');
+
+    if (this.value === 'yes') {
+        sportLevelDiv.style.display = 'block';
+        sportLevel.required = true;
+    } else {
+        sportLevelDiv.style.display = 'none';
+        sportLevel.value = '';
+        sportLevel.required = false;
+    }
+});
 //handicap type div
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -30,9 +44,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function toggleHandicapType() {
         if (handicapSelect.value === 'yes') {
             handicapTypeDiv.style.display = 'block';
+            handicapTypeSelect.required = true; // set required on the select
         } else {
             handicapTypeDiv.style.display = 'none';
             handicapTypeSelect.value = ''; // reset value
+            handicapTypeSelect.required = false; // remove required
         }
     }
 
@@ -42,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // On change
     handicapSelect.addEventListener('change', toggleHandicapType);
 });
+
 
 //submit
 $("#student-personalinfo-form").on("submit", function (e) {

@@ -80,17 +80,8 @@ $errors = session()->getFlashdata('errors') ?? [];
                                 <?= lang('App.password'); ?>
                             </label>
                             <div class="input-group">
-                                <input type="password"
-                                       class="form-control form-control-lg required-input <?= isset($errors['student_password']) ? 'is-invalid' : '' ?>"
-                                       name="student_password"
-                                       id="student_password"
-                                       minlength="8"
-                                       placeholder="<?= lang('App.password'); ?>"
-                                       onkeyup="check();">
-                                <button class="btn btn-light" type="button"
-                                        onclick="createpassword('student_password', this)">
-                                    <i class="ri-eye-off-line align-middle"></i>
-                                </button>
+                                <input type="password"class="form-control form-control-lg required-input <?= isset($errors['student_password']) ? 'is-invalid' : '' ?>"name="student_password"id="student_password"minlength="8"placeholder="<?= lang('App.password'); ?>"onkeyup="check();">
+                                <button class="btn btn-light" type="button"onclick="createpassword('student_password', this)"><i class="ri-eye-off-line align-middle"></i></button>
                             </div>
                         </div>
 
@@ -100,20 +91,9 @@ $errors = session()->getFlashdata('errors') ?? [];
                                 <?= lang('App.confirm'); ?> <?= lang('App.password'); ?>
                             </label>
                             <div class="input-group">
-                                <input type="password"
-                                       class="form-control form-control-lg required-input"
-                                       name="confirm_password"
-                                       id="signup-confirmpassword"
-                                       minlength="8"
-                                       placeholder="Confirm password"
-                                       onkeyup="check();">
-                                <button class="btn btn-light" type="button"
-                                        onclick="createpassword('signup-confirmpassword', this)">
-                                    <i class="ri-eye-off-line align-middle"></i>
-                                </button>
-                            </div>
-
-                            <small id="password-message"></small>
+                                <input type="password"class="form-control form-control-lg required-input"name="confirm_password"id="signup-confirmpassword"minlength="8"placeholder="Confirm password"onkeyup="check();">
+                                <button class="btn btn-light" type="button"onclick="createpassword('signup-confirmpassword', this)"><i class="ri-eye-off-line align-middle"></i></button>
+                            </div><small id="password-message"></small>
                         </div>
 
                         <div class="col-xl-12 d-grid mt-2">

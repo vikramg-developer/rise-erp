@@ -13,6 +13,6 @@ class AddCaste extends Seeder
             ['caste_name'=>'OBC'],
             ['caste_name'=>'VJ-A'],
         ];
-        $this->db->table('Caste')->ignore->insertBatch($data);
+        $this->db->table('Caste')->ignore()->insertBatch($data);
     }
 }

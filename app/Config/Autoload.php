@@ -45,10 +45,11 @@ class Autoload extends AutoloadConfig
     public $psr4 = [
         APP_NAMESPACE => APPPATH, // For custom app namespace
         'Config'      => APPPATH . 'Config',
+//        'Centralized' => APPPATH . 'Centralized',
         
         
-//       'App\Database\Migrations'
-//        => APPPATH . 'Database/Migrations',
+       'App\Database\Migrations'
+        => APPPATH . 'Centralized',
     ];
 
     /**

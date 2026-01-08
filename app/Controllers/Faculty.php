@@ -6,14 +6,14 @@ use App\Controllers\BaseController;
 
 class Faculty extends BaseController {
 
-    protected $modelfaculty;
+    protected $modelfacultyregistration;
     protected $modelbranch;
     protected $modelrole;
     protected $modelrisecounter;
     protected $db;
 
     public function __construct() {
-        $this->modelfaculty = model('ModelFacultyRegistration');
+        $this->modelfacultyregistration = model('ModelFacultyRegistration');
         $this->modelbranch = model('ModelBranch');
         $this->modelrole = model('ModelRole');
         $this->modelacademicYear = model('ModelAcademicYear');
@@ -61,10 +61,13 @@ class Faculty extends BaseController {
                 ]);
             }
 
-// ✅ SAFE TO USE
             $branchCode = $branch['branch_code'];
             $yearPrefix = substr($academic_year_data['academic_year_name'], 0, 4);
             $faculty_rise_no = 'F' . $yearPrefix . $branchCode . str_pad($rise_no_counter['rise_no'], 4, '0', STR_PAD_LEFT);
+
+            // Generate random password for first login
+            $plainPassword = $this->generateRandomPassword();
+            $hashedPassword = password_hash($plainPassword, PASSWORD_DEFAULT);
 
             $insertData = [
                 'faculty_role_id' => clean_number($this->request->getVar('faculty_role_id')),
@@ -76,20 +79,21 @@ class Faculty extends BaseController {
                 'faculty_email_id' => clean_email($this->request->getVar('faculty_email_id')),
                 'faculty_aadhar_number' => clean_number($this->request->getVar('faculty_aadhar_number')),
                 'faculty_pan_number' => clean_name($this->request->getVar('faculty_pan_number')),
-                'faculty_password' => clean_name($this->request->getVar('faculty_password')),
+//                'faculty_password' => clean_name($this->request->getVar('faculty_password')),
+                'faculty_password' => $hashedPassword,
                 'faculty_rise_no' => $faculty_rise_no,
                 'added_by' => session('rise_no'),
             ];
 
-            if (!$this->modelfaculty->insert($insertData)) {
+            if (!$this->modelfacultyregistration->insert($insertData)) {
                 return $this->response->setJSON([
                             'status' => 'error',
-                            'errors' => $this->modelfaculty->errors(),
+                            'errors' => $this->modelfacultyregistration->errors(),
                             'csrfHash' => csrf_hash(),
                 ]);
             }
 
-            $facultyId = $this->modelfaculty->getInsertID();
+            $facultyId = $this->modelfacultyregistration->getInsertID();
             if ($facultyId) {
                 $update_data = ['rise_no' => ($rise_no_counter['rise_no'] + 1)];
                 $this->modelrisecounter->update($rise_no_counter['rise_number_counter_id'], $update_data);
@@ -98,6 +102,29 @@ class Faculty extends BaseController {
                 throw new\Exception('Registration Failed.');
             }
             $this->db->transCommit();
+
+            $name = $insertData['faculty_first_name'] . ' ' . $insertData['faculty_last_name'];
+            $phone = $insertData['faculty_contact_number'];
+
+            $message = urlencode("Dear $name, your application form for recruitment has been successfully submitted. Login using Username: $faculty_rise_no and Password: $plainPassword. Thank You RAYAT SHIKSHAN SANSTHA");
+            $url = "http://bulksms.saakshisoftware.in/api/mt/SendSMS?user=Karmaveercollege&password=9527062230&senderid=RSSSAT&channel=trans&DCS=0&flashsms=0&number=$phone&text=$message&route=04&DLTTemplateId=1707175048814071997&PEID=1701174228788975868";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_exec($ch);
+//            
+            if (curl_errno($ch)) {
+                print "Error: " . curl_error($ch);
+            } else {
+
+                // Show me the result
+//                $transaction = json_decode($insertData, TRUE);
+                curl_close($ch);
+            }
+
+
             return $this->response->setJSON([
                         'status' => 'success',
                         'message' => 'Faculty added successfully. ID: ' . $faculty_rise_no,
@@ -128,21 +155,21 @@ class Faculty extends BaseController {
         $search = $this->request->getPost('search')['value'] ?? '';
 
         // TOTAL RECORDS (without search)
-        $recordsTotal = $this->modelfaculty->countAll();
+        $recordsTotal = $this->modelfacultyregistration->countAll();
 
         // FILTERED RECORDS (with search)
-        $recordsFiltered = $this->modelfaculty->countFiltered($search);
+        $recordsFiltered = $this->modelfacultyregistration->countFiltered($search);
 
         // MAIN DATA
-        $rows = $this->modelfaculty->findAllRecord($length, $start, $search);
+        $rows = $this->modelfacultyregistration->findAllRecord($length, $start, $search);
 
         // MAP: rise_no => full name
-        $nameMap = $this->modelfaculty->getRiseNoNameMap();
+        $nameMap = $this->modelfacultyregistration->getFacultyRiseNumberNameMap();
 
         $sr_no = $start + 1;
         $data = [];
 
-        $nameMap = $this->modelfaculty->getRiseNoNameMap();
+        $nameMap = $this->modelfacultyregistration->getFacultyRiseNumberNameMap();
         $roleMap = $this->modelrole->getRoleIdNameMap();
 
         foreach ($rows as $row) {
@@ -293,7 +320,7 @@ class Faculty extends BaseController {
             return redirect()->to('faculty/fetch-faculty');
         }
 
-        $faculty = $this->modelfaculty->getFacultyById($faculty_id);
+        $faculty = $this->modelfacultyregistration->getFacultyById($faculty_id);
 
         if (!$faculty) {
             return redirect()->to('faculty/fetch-faculty');
@@ -329,7 +356,7 @@ class Faculty extends BaseController {
             ]);
         }
         //Existence check
-        $faculty = $this->modelfaculty->getFacultyById($facultyId);
+        $faculty = $this->modelfacultyregistration->getFacultyById($facultyId);
         if (!$faculty) {
             return $this->response->setJSON([
                         'status' => 'invalid',
@@ -351,14 +378,14 @@ class Faculty extends BaseController {
             'updated_by' => session('rise_no'),
         ];
 
-        $this->modelfaculty->setValidationRules(
-                $this->modelfaculty->rulesForUpdate($facultyId)
+        $this->modelfacultyregistration->setValidationRules(
+                $this->modelfacultyregistration->rulesForUpdate($facultyId)
         );
 
-        if (!$this->modelfaculty->update($facultyId, $updateData)) {
+        if (!$this->modelfacultyregistration->update($facultyId, $updateData)) {
             return $this->response->setJSON([
                         'status' => 'error',
-                        'errors' => $this->modelfaculty->errors(),
+                        'errors' => $this->modelfacultyregistration->errors(),
                         'csrfHash' => csrf_hash()
             ]);
         }
@@ -381,7 +408,7 @@ class Faculty extends BaseController {
             'deleted_by' => current_user()
         ];
 
-        if ($this->modelfaculty->update($faculty_id, $delete_data)) {
+        if ($this->modelfacultyregistration->update($faculty_id, $delete_data)) {
             return $this->response->setJSON([
                         'csrfHash' => csrf_hash()
             ]);
@@ -396,54 +423,88 @@ class Faculty extends BaseController {
             'deleted_by' => current_user()
         ];
 
-        if ($this->modelfaculty->update($faculty_id, $revert_data)) {
+        if ($this->modelfacultyregistration->update($faculty_id, $revert_data)) {
             return $this->response->setJSON([
                         'csrfHash' => csrf_hash()
             ]);
         }
     }
 
-public function change_password_first_login()
-{
-    if (!session()->get('logged_in')) {
+    public function firstLoginChangePassword() {
+        if (!session('logged_in')) {
+            return redirect()->to('/login');
+        }
+
+        if (session('is_first_login') != 1) {
+            return redirect()->to('/dashboard');
+        }
+
+        return view('faculty/first-login-change-password');
+    }
+
+    public function updateFirstLoginPassword() {
+        if (!session('logged_in')) {
+            return redirect()->to('/login');
+        }
+
+        $password = $this->request->getPost('password');
+        $confirm = $this->request->getPost('confirm_password');
+
+        $this->modelfacultyregistration->update(
+                session('registration_id'),
+                [
+                    'faculty_password' => password_hash($password, PASSWORD_DEFAULT),
+                    'is_first_login' => 0
+                ]
+        );
+
+        session()->set('is_first_login', 0);
+
+        return redirect()->to('/dashboard');
+    }
+
+    public function check_old_password() {
+        $old_password = $this->request->getPost('old_password');
+        $faculty_data = $this->modelfacultyregistration->verify_rise_no(session('rise_no'));
+
+        if (password_verify($old_password, $faculty_data['faculty_password'])) {
+            return $this->response->setJSON([
+                        'status' => true,
+                        'message' => 'Password Matched',
+                        'csrfHash' => csrf_hash()
+            ]);
+        }
+
         return $this->response->setJSON([
-            'status' => 'error',
-            'message' => 'Unauthorized access'
+                    'status' => false,
+                    'message' => 'Incorrect Password',
+                    'csrfHash' => csrf_hash()
         ]);
     }
 
-    // Faculty check (NOT permission-based)
-    if (empty(session()->get('registration_id'))) {
-        return $this->response->setJSON([
-            'status' => 'error',
-            'message' => 'Invalid faculty session'
-        ]);
+    /**
+     * Generate secure random password
+     */
+    private function generateRandomPassword(int $length = 8): string {
+        $upper = 'ABCDEFGHIJKLMNPQRSTUVWXYZ';
+        $lower = 'abcdefghijklmnopqrstuvwxyz';
+        $numbers = '123456789';
+
+
+        $password = [
+            $upper[random_int(0, strlen($upper) - 1)],
+            $lower[random_int(0, strlen($lower) - 1)],
+            $numbers[random_int(0, strlen($numbers) - 1)],
+        ];
+
+        $all = $upper . $lower . $numbers ;
+
+        for ($i = 3; $i < $length; $i++) {
+            $password[] = $all[random_int(0, strlen($all) - 1)];
+        }
+
+        shuffle($password);
+
+        return implode('', $password);
     }
-
-    $newPassword = trim($this->request->getPost('new_password'));
-
-    if (strlen($newPassword) < 8) {
-        return $this->response->setJSON([
-            'status' => 'error',
-            'message' => 'Password must be at least 8 characters'
-        ]);
-    }
-
-    $this->modelfacultyregistration->update(
-        session()->get('registration_id'),
-        [
-            'faculty_password' => password_hash($newPassword, PASSWORD_DEFAULT),
-            'is_first_login'   => 0
-        ]
-    );
-
-    // 🔑 THIS IS REQUIRED
-    session()->set('is_first_login', 0);
-
-    return $this->response->setJSON([
-        'status' => 'success'
-    ]);
-}
-
-
 }

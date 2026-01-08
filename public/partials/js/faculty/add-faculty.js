@@ -12,54 +12,13 @@ nameUppercaseOnly(
 // Mobile Number
 mobileNumberOnly('input[name="faculty_mobile_number"]');
 
-
-$(document).on('input', 'input[name="faculty_password"]', function () {
-    const password = this.value;
-
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-    if (!regex.test(password)) {
-        $('#faculty_password_error')
-                .text('Password must be at least 8 characters and include at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character')
-                .show();
-    } else {
-        $('#faculty_password_error').text('').hide();
-    }
-});
-
-
-$(document).on('input', '#faculty_password, #confirm_password', function () {
-
-    const password = $('#faculty_password').val();
-    const confirmPassword = $('#confirm_password').val();
-    const msg = $('#password-message');
-    const saveBtn = $('#faculty-registration-form button[type="submit"]');
-
-
-    // Both empty → no message
-    if (password === '' && confirmPassword === '') {
-        msg.text('');
-        return;
-    }
-
-    // Passwords match
-    if (password === confirmPassword) {
-        msg.text('✓ Passwords match').css('color', 'green');
-        saveBtn.prop('disabled', false);
-    }
-    // Passwords do not match
-    else {
-        msg.text('✗ Passwords do not match').css('color', 'red');
-        saveBtn.prop('disabled', true);
-    }
-});
-passwordValidation(
-        '#faculty_password',
-        '#confirm_password',
-        '#faculty_password_error', //  strength error
-        '#password-message', // match message
-        '#faculty-registration-form button[type="submit"]'
-        );
+//passwordValidation(
+//        '#faculty_password',
+//        '#confirm_password',
+//        '#faculty_password_error', //  strength error
+////        '#password-message', // match message
+//        '#faculty-registration-form button[type="submit"]'
+//        );
 
 
 $("#faculty-registration-form").on("submit", function (e) {
