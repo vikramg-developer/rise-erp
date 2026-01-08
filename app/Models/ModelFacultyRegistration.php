@@ -20,6 +20,7 @@ class ModelFacultyRegistration extends Model {
         'faculty_middle_name',
         'faculty_last_name',
         'faculty_gender',
+        'faculty_type_id',
         'faculty_contact_number',
         'faculty_email_id',
         'faculty_aadhar_number',
@@ -36,10 +37,11 @@ class ModelFacultyRegistration extends Model {
     ];
     protected $validationRules = [
         'faculty_role_id' => 'required',
+        'faculty_type_id' => 'required',
         'faculty_first_name' => 'required|min_length[2]|alpha_space',
         'faculty_middle_name' => 'required|min_length[2]|alpha_space',
         'faculty_last_name' => 'required|min_length[2]|alpha_space',
-        'faculty_gender'  => 'required|in_list[male,female,transgender]',
+        'faculty_gender' => 'required|in_list[male,female,transgender]',
         'faculty_contact_number' => 'required|numeric|exact_length[10]|is_unique[faculty_registration.faculty_contact_number]',
         'faculty_email_id' => 'required|trim|valid_email|is_unique[faculty_registration.faculty_email_id]',
         'faculty_aadhar_number' => 'required|numeric|exact_length[12]|is_unique[faculty_registration.faculty_aadhar_number]',
@@ -49,6 +51,9 @@ class ModelFacultyRegistration extends Model {
     protected $validationMessages = [
         'faculty_role_id' => [
             'required' => 'Faculty Role is required.',
+        ],
+        'faculty_type_id' => [
+            'required' => 'Faculty Type is required.',
         ],
         'faculty_gender' => [
             'required' => 'Faculty Gender is required.',
@@ -167,6 +172,10 @@ class ModelFacultyRegistration extends Model {
         return $this->where('faculty_registration_id', $facultyId)->first();
     }
 
+    public function getFacultyDetailsByRiseNo($riseNo) {
+        return $this->where('faculty_rise_no', $riseNo)->first();
+    }
+
     /**
      * This map method is used to convert faculty_rise_no stored in added_by and updated_by
      * columns into readable faculty names without using SQL JOINs. It fetches all faculty
@@ -189,7 +198,8 @@ class ModelFacultyRegistration extends Model {
     public function rulesForUpdate($id) {
         return [
             'faculty_role_id' => 'required',
-            'faculty_gender'  => 'required|in_list[male,female,transgender]',
+            'faculty_type_id' => 'required',
+            'faculty_gender' => 'required|in_list[male,female,transgender]',
             'faculty_first_name' => 'required|min_length[2]|alpha_space',
             'faculty_middle_name' => 'required|min_length[2]|alpha_space',
             'faculty_last_name' => 'required|min_length[2]|alpha_space',

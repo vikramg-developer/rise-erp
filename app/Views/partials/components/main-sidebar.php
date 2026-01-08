@@ -31,23 +31,15 @@ $permissions = config('Permissions');
                                                     <!-- End::slide__category -->
                                                 <?php endif; ?>
                                                 <?php if (hasAnyPermission($permissions->faculty_module)): ?>
-                                                    <li class="slide has-sub">
+                                                    <li id="mainFacultyNav" class="slide has-sub">
                                                         <a href="javascript:void(0);" class="side-menu__item">
                                                             <i class="bx bx-user-pin side-menu__icon"></i>
                                                             <span class="side-menu__label"><?= lang('App.employee'); ?></span>
                                                             <i class="fe fe-chevron-right side-menu__angle"></i>
                                                         </a>
                                                         <ul class="slide-menu child1">
-                                                            <li class="slide side-menu__label1">
-                                                                <a href="javascript:void(0)">Error</a>
-                                                            </li>
-                                                            <?php //if (hasAnyPermission($permissions->faculty_registration)): ?>
-                                                            <!--<li class="slide">-->
-                                                                <!--<a href="<?php echo base_url('faculty'); ?>" class="side-menu__item"> <?= lang('App.add'); ?> <?= lang('App.employee'); ?></a>-->
-                                                            <!--</li>-->
-                                                            <?php //endif; ?>
                                                             <?php if (hasAnyPermission($permissions->faculty_registration)): ?>
-                                                                <li class="slide">
+                                                                <li id="manageFacultyNav" class="slide">
                                                                     <a href="<?php echo base_url('faculty/fetch-faculty'); ?>" class="side-menu__item"> <?= lang('App.manage'); ?> <?= lang('App.employee'); ?></a>
                                                                 </li>
                                                             <?php endif; ?>

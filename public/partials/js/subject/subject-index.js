@@ -1,7 +1,7 @@
 let table;
 
 $(document).ready(function () {
-    $('#subject_name').on('keyup', function () {
+    $('#subject_name,#subject_code').on('keyup', function () {
         let query = $(this).val();
 
         if (query.length < 1) {
@@ -17,7 +17,11 @@ $(document).ready(function () {
                 console.log(data);
                 let html = '';
                 data.forEach(row => {
-                    html += `<li class="list-group-item">${row.subject_name}</li>`;
+                    html += `<li class="list-group-item"
+                            data-name="${row.subject_name}"
+                            data-code="${row.subject_code}">
+                            ${row.subject_name} - ${row.subject_code}
+                            </li>`;
                 });
                 $('#searchResult').html(html);
             }
@@ -26,12 +30,16 @@ $(document).ready(function () {
 
     // Select value
     $(document).on('mousedown', '#searchResult li', function () {
-        $('#subject_name').val($(this).text());
+        $('#subject_id').val($(this).data('id'));
+        $('#subject_name').val($(this).data('name'));
+        $('#subject_code').val($(this).data('code'));
         $('#searchResult').empty();
     });
-    
-    $(document).on('click', function () {
+
+    $(document).on('click', function (e) {
+
         $('#searchResult').empty();
+
     });
 
     table = $('#subject-table').DataTable({
@@ -60,6 +68,7 @@ $("#subject-form").on("submit", function (e) {
 
     // clear errors
     $("#subject_name_error").text('').hide();
+    $("#subject_code_error").text('').hide();
 
     let formData = $(this).serializeArray();
     formData.push({name: csrfName, value: csrfHash});
@@ -84,6 +93,13 @@ $("#subject-form").on("submit", function (e) {
                 if (response.errors.subject_name) {
                     $("#subject_name_error").text(response.errors.subject_name).show();
                 }
+
+                if (response.errors.subject_code) {
+                    $("#subject_code_error")
+                            .text(response.errors.subject_code)
+                            .show();
+                }
+
                 return;
             }
 
@@ -111,9 +127,11 @@ $("#subject-form").on("submit", function (e) {
 $(document).on("click", ".edit", function () {
     let subject_id = $(this).data("subject_id");
     let subject_name = $(this).data("subject_name");
+    let subject_code = $(this).data("subject_code");
 
     $("#subject_id").val(subject_id);
     $("#subject_name").val(subject_name);
+    $("#subject_code").val(subject_code);
 
     $("#submit_btn").html('Update <i class="bi bi-save2 ms-2"></i>'); // change button text
 });
@@ -121,8 +139,12 @@ $(document).on("click", ".edit", function () {
 $(document).on("click", ".delete", function () {
     let subject_id = $(this).data("subject_id");
     let subject_name = $(this).data("subject_name");
+    let subject_code = $(this).data("subject_code");
+    let label = subject_code
+            ? `${subject_name} - ${subject_code}`
+            : subject_name;
 
-    confirmDelete(subject_name).then(result => {
+    confirmDelete(label).then(result => {
         if (result.isConfirmed) {
             $.ajax({
                 url: BASE_URL + "subject/delete-subject",
@@ -132,7 +154,7 @@ $(document).on("click", ".delete", function () {
 
                 success: res => {
                     csrfHash = res.csrfHash;
-                    successDelete(subject_name);
+                    successDelete(label);
                     table.settings()[0].ajax.data = d => {
                         d[csrfName] = csrfHash
                     };
@@ -144,7 +166,7 @@ $(document).on("click", ".delete", function () {
             });
 
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            cancelDelete(subject_name);
+            cancelDelete(label);
         }
     });
 });
@@ -152,8 +174,12 @@ $(document).on("click", ".delete", function () {
 $(document).on("click", ".revert", function () {
     let subject_id = $(this).data("subject_id");
     let subject_name = $(this).data("subject_name");
+    let subject_code = $(this).data("subject_code");
+    let label = subject_code
+            ? `${subject_name} - ${subject_code}`
+            : subject_name;
 
-    confirmRevert(subject_name).then(result => {
+    confirmRevert(label).then(result => {
         if (result.isConfirmed) {
             $.ajax({
                 url: BASE_URL + "subject/revert-subject",
@@ -163,7 +189,7 @@ $(document).on("click", ".revert", function () {
 
                 success: res => {
                     csrfHash = res.csrfHash;
-                    successRevert(subject_name);
+                    successRevert(label);
                     table.settings()[0].ajax.data = d => {
                         d[csrfName] = csrfHash
                     };
@@ -175,7 +201,7 @@ $(document).on("click", ".revert", function () {
             });
 
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            cancelRevert(subject_name);
+            cancelRevert(label);
         }
     });
 });

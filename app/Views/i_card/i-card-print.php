@@ -1,83 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
 <style>
-.icard {
+body { margin: 0; font-family: sans-serif; font-size: 7px; }
+
+/* CARD */
+.card {
     width: 54mm;
     height: 86mm;
-    font-family: Arial, sans-serif;
     position: relative;
-    overflow: hidden;
+    border: 0.3mm solid #000;
 }
 
-.icard .bg-img {
+/* HEADER */
+.header {
     position: absolute;
     top: 0;
     left: 0;
-    width: 54mm;
-    height: 86mm;
-    z-index: -1;
-}
-
-.icard .photo-box {
-    width: 18mm;
-    height: 22mm;
-    border: 1px solid #000;
-    position: absolute;
-    top: 22mm;
-    left: 18mm;
-}
-
-.details {
+    width: 100%;
+    height: 18mm;
+    background: #5a2a82;
+    color: #fff;
     text-align: center;
-    font-size: 7px;
-    color: #000;
+    padding-top: 2mm;
+}
+
+.header img {
     position: absolute;
-    width: 50mm;
+    top: 2mm;
     left: 2mm;
+    width: 8mm;
+    height: 8mm;
 }
 
-.name {
-    top: 48mm;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.line {
-    text-align: left;
-    left: 4mm;
+.header .title {
     font-size: 7px;
+    font-weight: bold;
 }
 
-.class { top: 53mm; }
-.dob { top: 57mm; }
-.mobile { top: 61mm; }
-.uid { top: 65mm; }
-.address { top: 69mm; }
+.header .college {
+    font-size: 8px;
+}
 
+.header .year {
+    font-size: 7px;
+    font-weight: bold;
+}
+
+/* PHOTO */
+.photo {
+    position: absolute;
+    top: 20mm;
+    left: 19mm;
+}
+.photo img {
+    width: 16mm;
+    height: 16mm;
+    border-radius: 50%;
+    border: 0.5mm solid #000;
+}
+
+/* NAME */
+.name {
+    position: absolute;
+    top: 38mm;
+    width: 100%;
+    text-align: center;
+    font-size: 8px;
+    font-weight: bold;
+}
+
+/* INFO */
+.info {
+    position: absolute;
+    top: 44mm;
+    left: 4mm;
+    right: 4mm;
+}
+.info div { margin-bottom: 1mm; }
+
+/* BARCODE */
 .barcode {
     position: absolute;
-    width: 50mm;
-    left: 1mm;
-    top: 73mm;
+    bottom: 8mm;
+    left: 4mm;
+    right: 4mm;
+    text-align: center;
+}
+
+/* SIGN */
+.sign {
+    position: absolute;
+    bottom: 3mm;
+    right: 3mm;
+    font-size: 6px;
+}
+
+/* BACK */
+.page-break { page-break-after: always; }
+.rules {
+    padding: 6mm 4mm;
+}
+.rules h3 {
+    text-align: center;
+    margin-bottom: 3mm;
 }
 </style>
+</head>
 
-<div class="icard">
-    <img src="assets/images/icard_front_side.jpg" class="bg-img">
+<body>
 
-    <!-- Student Photo -->
-    <img src="assets/images/student.jpg" class="photo-box">
+<!-- FRONT -->
+<div class="card">
 
-    <!-- Name -->
-    <div class="details name">KAMBLE HARSHAD MITTHU</div>
+    <div class="header">
+        <img src="<?= $logo ?>">
+        <div class="title">Rayat Shikshan Sanstha's</div>
+        <div class="college"><?= esc($college_name) ?></div>
+        <div class="year"><?= esc($academic_year) ?></div>
+    </div>
 
-    <!-- Details -->
-    <div class="details line class"><b>Class :</b> F.Y. B.Sc (Computer Science)</div>
-    <div class="details line dob"><b>DOB :</b> 21-06-2004</div>
-    <div class="details line mobile"><b>Mo.No :</b> 9402768566</div>
-    <div class="details line uid"><b>U.ID :</b> 20250004</div>
-    <div class="details line address"><b>Add :</b> SHRIGONDA</div>
+    <div class="photo">
+        <img src="<?= $photo ?>">
+    </div>
 
-    <!-- Barcode image -->
-    <img src="assets/images/barcode.png" class="barcode">
+    <div class="name"><?= esc($full_name) ?></div>
+
+    <div class="info">
+        <div><b>Class:</b> <?= esc($class) ?></div>
+        <div><b>DOB:</b> <?= esc($dob) ?></div>
+        <div><b>Mob:</b> <?= esc($mobile) ?></div>
+        <div><b>Rise No:</b> <?= esc($rise_no) ?></div>
+        <div><b>Add:</b> <?= esc($address) ?></div>
+    </div>
+
+    <div class="barcode">
+        <barcode code="<?= esc($rise_no) ?>" type="C128" size="0.8" height="6" />
+    </div>
+
+    <div class="sign">Principal’s Signature</div>
+
 </div>
 
-<pagebreak />
+<div class="page-break"></div>
+
+<!-- BACK -->
+<div class="card rules">
+    <h3>RULES</h3>
+    <ul>
+        <li>ID card is compulsory in college.</li>
+        <li>This card is not transferable.</li>
+        <li>If lost, inform librarian.</li>
+    </ul>
+</div>
+
+</body>
+</html>

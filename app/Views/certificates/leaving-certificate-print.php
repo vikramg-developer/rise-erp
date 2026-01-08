@@ -199,7 +199,7 @@ if (!empty($yearwise_data[0]['dob'])) {
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--<link rel="stylesheet" href="<?php //echo base_url();     ?>assets/external/bootstrap.min.css">-->
+        <!--<link rel="stylesheet" href="<?php //echo base_url();      ?>assets/external/bootstrap.min.css">-->
     <!--<script src="<?php echo base_url(); ?>assets/external/jquery.min.js"></script>-->
     <!--<script src="<?php echo base_url(); ?>assets/external/bootstrap.min.js"></script>-->
 
@@ -270,7 +270,7 @@ if (!empty($yearwise_data[0]['dob'])) {
             {
                 padding: 10px 30px;
                 text-align: center;
-            }
+            }         
 
 
         </style>
@@ -335,46 +335,46 @@ if (!empty($yearwise_data[0]['dob'])) {
             </tr>
             <tr>
                 <td rowspan="1" style="vertical-align: top;">Mother's Name</td>
-                <td>SUNITA<?php //echo mb_convert_case($student_details[0]['mother_name'],MB_CASE_TITLE,"UTF-8");      ?></td>
+                <td>SUNITA<?php //echo mb_convert_case($student_details[0]['mother_name'],MB_CASE_TITLE,"UTF-8");       ?></td>
             </tr>
             <tr>
                 <td>2)</td>
                 <td>Religion and Caste</td>
-                <td>Hindu Maratha<?php //echo mb_convert_case($religion[0]['religion'],MB_CASE_TITLE,"UTF-8");      ?>&emsp;&emsp;<?php //echo mb_convert_case($caste[0]['caste_name'],MB_CASE_TITLE,"UTF-8");      ?></td>
+                <td>Hindu Maratha<?php //echo mb_convert_case($religion[0]['religion'],MB_CASE_TITLE,"UTF-8");       ?>&emsp;&emsp;<?php //echo mb_convert_case($caste[0]['caste_name'],MB_CASE_TITLE,"UTF-8");       ?></td>
             </tr>
             <tr>
                 <td>3)</td>
                 <td>Nationality</td>
-                <td>Indian<?php //echo mb_convert_case($student_details[0]['nationality'],MB_CASE_TITLE,"UTF-8");      ?></td>
+                <td>Indian<?php //echo mb_convert_case($student_details[0]['nationality'],MB_CASE_TITLE,"UTF-8");       ?></td>
             </tr>
             <tr>
                 <td>4)</td>
                 <td>Date of Birth (Both in figures & words)</td>
-                <td>15/10/2002<?php //echo date('d/m/Y',strtotime($yearwise_data[0]['dob']));      ?><br>Fifteenth October Two Thousand Two<?php //echo $birth_day." ".$monthName." ".$birth_year;     ?></td>
+                <td>15/10/2002<?php //echo date('d/m/Y',strtotime($yearwise_data[0]['dob']));       ?><br>Fifteenth October Two Thousand Two<?php //echo $birth_day." ".$monthName." ".$birth_year;      ?></td>
             </tr>
             <tr>
                 <td>5)</td>
                 <td>Place of Birth</td>
-                <td>Satara<?php //echo mb_convert_case($student_details[0]['place_of_birth'],MB_CASE_TITLE,"UTF-8");      ?></td>
+                <td>Satara<?php //echo mb_convert_case($student_details[0]['place_of_birth'],MB_CASE_TITLE,"UTF-8");       ?></td>
             </tr>
             <tr>
                 <td>6)</td>
                 <td>Previous Qualification</td>
-                <td>HSC<?php //echo $student_details[0]['pre_qualification'];      ?></td>
+                <td>HSC<?php //echo $student_details[0]['pre_qualification'];       ?></td>
             </tr>
             <tr>
                 <td>7)</td>
                 <td>Date of Admission</td>
-                <td>01/06/2021<?php //echo date('d/m/Y',strtotime($lc[0]['date_of_admission']));      ?></td>
+                <td>01/06/2021<?php //echo date('d/m/Y',strtotime($lc[0]['date_of_admission']));       ?></td>
             </tr>
             <tr>
                 <td>8)</td>
                 <td>Date of Leaving</td>
-                <td>30/06/2025<?php //echo date('d/m/Y',strtotime($lc[0]['date_of_leaving']));      ?></td>
+                <td>30/06/2025<?php //echo date('d/m/Y',strtotime($lc[0]['date_of_leaving']));       ?></td>
             </tr>
         </table>
 
-        <p style="margin-top:1%; text-indent: -18px;">b) <?php //echo ($yearwise_data[0]['gender']=='Male')?"He":"She";      ?> Appeared for the following examination in this college, since <?php //echo ($yearwise_data[0]['gender']=='Male')?"his":"her";      ?> last University Board examination, with the result shown against them-</p>
+        <p style="margin-top:1%; text-indent: -18px;">b) <?php //echo ($yearwise_data[0]['gender']=='Male')?"He":"She";       ?> Appeared for the following examination in this college, since <?php //echo ($yearwise_data[0]['gender']=='Male')?"his":"her";       ?> last University Board examination, with the result shown against them-</p>
 
         <table id="exam" border="1">
             <tr>
@@ -385,12 +385,12 @@ if (!empty($yearwise_data[0]['dob'])) {
             <tr>
                 <td><?php echo esc($lc_data['examination'] ?? ''); ?></td>
                 <td><?php echo esc($lc_data['exam_period'] ?? ''); ?></td>
-                <td>First Class<?php //echo $lc[0]['status'];      ?></td>
+                <td>First Class<?php //echo $lc[0]['status'];       ?></td>
             </tr>
         </table>
 
-        <p >c) <?php //echo ($yearwise_data[0]['gender']=='Male')?"He":"She";      ?> Bears a good moral character.&nbsp;&nbsp;<?php //echo (count($duplicate_lc) > 1) ? "This Certificate is issued for Migration.": "";     ?></p>
-        <p style="text-indent: -18px;">d) <?php //echo ($yearwise_data[0]['gender']=='Male')?"His":"Her";      ?> Voluntary subject or Group of subjects in which <?php //echo ($yearwise_data[0]['gender']=='Male')?"he":"she";      ?> attended the course of instructions in this college was <?php //echo $course[0]['course_name'];      ?>.</p>
+        <p >c) <?php //echo ($yearwise_data[0]['gender']=='Male')?"He":"She";       ?> Bears a good moral character.&nbsp;&nbsp;<?php //echo (count($duplicate_lc) > 1) ? "This Certificate is issued for Migration.": "";      ?></p>
+        <p style="text-indent: -18px;">d) <?php //echo ($yearwise_data[0]['gender']=='Male')?"His":"Her";       ?> Voluntary subject or Group of subjects in which <?php //echo ($yearwise_data[0]['gender']=='Male')?"he":"she";       ?> attended the course of instructions in this college was <?php //echo $course[0]['course_name'];       ?>.</p>
         <br>
 
         <table>

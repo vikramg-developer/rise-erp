@@ -55,15 +55,15 @@ class Subject extends BaseController {
 
             // Edit Button
             if (hasPermission('updateSubject')):
-                $buttons .= actionButton('Edit', ['subject_id' => $row['subject_id'], 'subject_name' => $row['subject_name']]);
+                $buttons .= actionButton('Edit', ['subject_id' => $row['subject_id'], 'subject_name' => $row['subject_name'], 'subject_code' => $row['subject_code']]);
             endif;
 
             // Delete Button
             if (hasPermission('deleteSubject')):
                 if ($row['is_deleted'] != 1):
-                    $buttons .= actionButton('Delete', ['subject_id' => $row['subject_id'], 'subject_name' => $row['subject_name']]);
+                    $buttons .= actionButton('Delete', ['subject_id' => $row['subject_id'], 'subject_name' => $row['subject_name'], 'subject_code' => $row['subject_code']]);
                 elseif ($row['is_deleted'] == 1):
-                    $buttons .= actionButton('Revert', ['subject_id' => $row['subject_id'], 'subject_name' => $row['subject_name']]);
+                    $buttons .= actionButton('Revert', ['subject_id' => $row['subject_id'], 'subject_name' => $row['subject_name'], 'subject_code' => $row['subject_code']]);
                 endif;
             endif;
 
@@ -95,6 +95,7 @@ class Subject extends BaseController {
                 $buttons,
                 $sr_no++,
                 esc($row['subject_name']),
+                esc($row['subject_code']),
                 $addedBy,
                 $updatedBy,
                 $remark,
@@ -113,6 +114,7 @@ class Subject extends BaseController {
     public function save_subject() {
         $insert_data = [
             'subject_name' => clean_name($this->request->getVar('subject_name')),
+            'subject_code' => clean_name($this->request->getVar('subject_code')),
             'added_by' => current_user(),
         ];
 
@@ -136,6 +138,7 @@ class Subject extends BaseController {
 
         $update_data = [
             'subject_name' => clean_name($this->request->getVar('subject_name')),
+            'subject_code' => clean_name($this->request->getVar('subject_code')),
             'updated_by' => current_user(),
         ];
 
