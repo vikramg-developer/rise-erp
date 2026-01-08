@@ -11,21 +11,27 @@ use \App\Traits\ActivityLoggerTrait;
  * @author VG
  */
 class ModelSubject extends Model {
+
     use ActivityLoggerTrait;
 
     protected $table = 'subject';
     protected $primaryKey = 'subject_id';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['subject_name', 'added_by', 'updated_by', 'deleted_by', 'is_deleted'];
+    protected $allowedFields = ['subject_name', 'subject_code', 'added_by', 'updated_by', 'deleted_by', 'is_deleted'];
 //    // Validation
     protected $validationRules = [
-        'subject_name' => 'required|alpha_numeric_space|is_unique[subject.subject_name]'
+        'subject_name' => 'required|alpha_numeric_space|is_unique[subject.subject_name]',
+        'subject_code' => 'required|alpha_numeric_space|is_unique[subject.subject_code]'
     ];
     protected $validationMessages = [
         'subject_name' => [
             'required' => 'Subject is required',
             'is_unique' => 'Subject already exist',
+        ],
+        'subject_code' => [
+            'required' => 'Subject Code is required',
+            'is_unique' => 'Subject Code already exist',
         ]
     ];
 //    // Callbacks
@@ -34,8 +40,11 @@ class ModelSubject extends Model {
     protected $afterUpdate = ['logUpdate'];
 
     public function search_subject(string $term) {
-        return $this->select('subject_name')
+        return $this->select('subject_name, subject_code')
+                        ->groupStart()
                         ->like('subject_name', $term)
+                        ->orLike('subject_code', $term)
+                        ->groupEnd()
                         ->limit(10)
                         ->findAll();
     }
@@ -49,7 +58,10 @@ class ModelSubject extends Model {
         $builder = $this->builder();
 
         if (!empty($search)) {
-            $builder->like('subject_name', $search);
+            $builder->groupStart()
+                    ->like('subject_name', $search)
+                    ->orLike('subject_code', $search)
+                    ->groupEnd();
         }
 
         return $builder->countAllResults();
@@ -60,7 +72,10 @@ class ModelSubject extends Model {
                 ->orderBy('subject_id', 'DESC');
 
         if (!empty($search)) {
-            $builder->like('subject_name', $search);
+            $builder->groupStart()
+                    ->like('subject_name', $search)
+                    ->orLike('subject_code', $search)
+                    ->groupEnd();
         }
 
         return $builder->get($length, $start)->getResultArray();
@@ -82,6 +97,7 @@ class ModelSubject extends Model {
         return [
             'subject_id' => 'required|is_natural_no_zero',
             'subject_name' => "required|alpha_numeric_space|is_unique[subject.subject_name,subject_id,{$id}]",
+            'subject_code' => "required|alpha_numeric|is_unique[subject.subject_code,subject_id,{$id}]",
         ];
     }
 }

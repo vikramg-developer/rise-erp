@@ -29,12 +29,17 @@
                                     <div class="card custom-card shadow-none mb-0 border-0">
                                         <div class="card-body p-0">
                                             <div class="row gy-3">
-                                                <div class="col-xl-12">
+                                                <div class="col-xl-6">
                                                     <input type="hidden" id="subject_id" name="subject_id">
                                                     <label for="subject_name" class="form-label"><?= lang('App.subject'); ?></label>
                                                     <input type="text" class="form-control" id="subject_name" name="subject_name" placeholder="<?= lang('App.subject'); ?>">
                                                     <ul id="searchResult" class="list-group position-absolute w-100" style="z-index:1000"></ul>
                                                     <small class="text-danger" id="subject_name_error" style="display:none;"></small>
+                                                </div>
+                                                <div class="col-xl-6">                                                  
+                                                    <label for="subject_code" class="form-label"><?= lang('App.subject'); ?> <?= lang('App.code'); ?></label>
+                                                    <input type="text" class="form-control" id="subject_code" name="subject_code" placeholder="<?= lang('App.subject'); ?> <?= lang('App.code'); ?>">
+                                                    <small class="text-danger" id="subject_code_error" style="display:none;"></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -71,6 +76,7 @@
                                     <?php endif; ?>
                                     <th><?= lang('App.sr'); ?> <?= lang('App.no'); ?></th>
                                     <th><?= lang('App.subject'); ?> <?= lang('App.name'); ?></th>
+                                    <th><?= lang('App.subject'); ?> <?= lang('App.code'); ?></th>
                                     <th><?= lang('App.added'); ?> <?= lang('App.by'); ?></th>
                                     <th><?= lang('App.updated'); ?> <?= lang('App.by'); ?></th>
                                     <th><?= lang('App.remark'); ?></th>
