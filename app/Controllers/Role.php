@@ -42,7 +42,7 @@ class Role extends BaseController {
         // DATA
         $rows = $this->modelrole->getFilteredRoles($length, $start, $search);
 
-        $facultyNameMap = $this->modelfacultyregistration->getRiseNoNameMap();
+        $facultyNameMap = $this->modelfacultyregistration->getFacultyRiseNumberNameMap();
 
         $sr_no = 1;
 
