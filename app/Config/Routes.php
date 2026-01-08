@@ -103,6 +103,7 @@ $routes->group('bonafidecertificate', function ($routes) {
 $routes->group('icard', function ($routes) {
     $routes->get('/', 'ICard::index', ['filter' => 'permission:createFeesManagement']);
     $routes->get('i-card-print', 'ICard::i_card_print', ['filter' => 'permission:createFeesManagement']);
+    $routes->get('i-card-print1', 'ICard::i_card_print1', ['filter' => 'permission:createFeesManagement']);
 });
 
 //---------- feedback ----------//
