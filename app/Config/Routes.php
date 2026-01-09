@@ -53,9 +53,6 @@ $routes->post('/add-group', 'Group::add-group');
 
 $routes->get('/collect-fees', 'FeesManagement::collect_fees');
 
-$routes->post('/fetch-head', 'FeesManagement::fetch-head');
-$routes->post('/head', 'FeesManagement::head');
-$routes->post('/head-fees', 'FeesManagement::head_fees');
 
 $routes->post('/home', 'Home::index');
 
@@ -165,6 +162,11 @@ $routes->group('head', function ($routes) {
     $routes->get('search-head', 'Head::search_head', ['filter' => 'permission:createHead']);
 });
 
+$routes->group('fees-management', function ($routes) {
+    $routes->get('/', 'FeesManagement::index', ['filter' => 'permission:viewHead']);
+    $routes->post('import', 'FeesManagement::import', ['filter' => 'permission:viewHead']);
+});
+
 $routes->group('department', function ($routes) {
     $routes->get('/', 'Department::index', ['filter' => 'permission:viewDepartment']);
     $routes->post('fetch-department', 'Department::fetch_department', ['filter' => 'permission:viewDepartment']);
@@ -199,11 +201,6 @@ $routes->group('faculty-profile', function ($routes) {
 $routes->group('activity-log', function ($routes) {
     $routes->get('/', 'ActivityLog::index', ['filter' => 'permission:viewActivityLog']);
     $routes->post('fetch-activity-log', 'ActivityLog::fetch_activity_log', ['filter' => 'permission:viewActivityLog']);
-//    $routes->post('save-department', 'Department::save_department', ['filter' => 'permission:createDepartment']);
-//    $routes->post('update-department', 'Department::update_department', ['filter' => 'permission:updateDepartment']);
-//    $routes->post('delete-department', 'Department::delete_department', ['filter' => 'permission:deleteDepartment']);
-//    $routes->post('revert-department', 'Department::revert_department', ['filter' => 'permission:deleteDepartment']);
-//    $routes->get('search-department', 'Department::search_department', ['filter' => 'permission:createDepartment']);
 });
 
 $routes->group('subjectgroup', function ($routes) {

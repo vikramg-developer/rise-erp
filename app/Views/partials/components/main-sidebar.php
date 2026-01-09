@@ -242,7 +242,7 @@ $permissions = config('Permissions');
                                                             <a href="javascript:void(0)"><?= lang('App.fees'); ?> <?= lang('App.management'); ?></a>
                                                         </li>                                          
                                                         <li class="slide">
-                                                            <a href="<?php echo base_url('head-fees'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?> <?= lang('App.fees'); ?></a>
+                                                            <a href="<?php echo base_url('fees-management'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.fees'); ?></a>
                                                         </li>
                                                         <li class="slide">
                                                             <a href="<?php echo base_url('collect-fees'); ?>" class="side-menu__item"><?= lang('App.collect'); ?> <?= lang('App.fees'); ?></a>
