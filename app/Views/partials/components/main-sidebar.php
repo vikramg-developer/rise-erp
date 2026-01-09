@@ -122,7 +122,7 @@ $permissions = config('Permissions');
                                                 <!-- Start::StudentProfile -->
                                                 <?php if (hasAnyPermission($permissions->studentProfile)): ?>
                                                     <li class="slide">
-                                                        <a href="<?php echo base_url('student-profile'); ?>" class="side-menu__item">
+                                                        <a href="<?php echo base_url('studentprofile'); ?>" class="side-menu__item">
                                                             <i class="bx bx-user side-menu__icon"></i>
                                                             <span class="side-menu__label"><?= lang('App.student'); ?> <?= lang('App.profile'); ?></span>
                                                         </a>

@@ -146,6 +146,7 @@ return [
     'list' => 'List',
     'listed' => 'Listed',
     'login' => 'Login',
+    'locality' => 'Locality',
     // M
     'manage' => 'Manage',
     'management' => 'Management',
