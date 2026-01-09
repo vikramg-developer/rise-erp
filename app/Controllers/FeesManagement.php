@@ -9,6 +9,7 @@ namespace App\Controllers;
 
 use App\Models\ModelFeesManagement;
 use App\Models\ModelHead;
+//use PhpOffice\PhpSpreadsheet\IOFactory;
 
 /**
  * Description of FeesManagement
@@ -17,78 +18,59 @@ use App\Models\ModelHead;
  */
 class FeesManagement extends BaseController {
 
-    public $modelheadgroup;
-    public $modelhead;
+    public $modelfees;
 
     public function __construct() {
-        $this->modelhead = model('ModelHead');
+        $this->modelfees = model('ModelFees');
     }
 
-
-    public function head() {
-        $data['jspath'] = 'fees_management/head';
-        return render_page('fees_management/head', $data);
+    public function index() {
+        $data['jspath'] = 'fees-management/index-fees-management';
+        return render_page('fees-management/index-fees-management', $data);
     }
+    
+    public function import()
+    {
+        $file = $this->request->getFile('excel_file');
 
-    public function fetch_head() {
-
-        $draw = $this->request->getPost('draw');
-        $start = $this->request->getPost('start');
-        $length = $this->request->getPost('length');
-        $search = $this->request->getPost('search')['value'] ?? '';
-
-        $model = $this->modelhead;
-
-// TOTAL RECORDS
-        $recordsTotal = $model->countAll();
-
-// SEARCH FILTER
-        if ($search !== '') {
-            $model->like('head_name', $search);
+        if (!$file->isValid()) {
+            return redirect()->back()->with('error', 'Invalid file');
         }
 
-// FILTERED RECORDS
-        $recordsFiltered = $model->countAllResults(false);
+        $spreadsheet = IOFactory::load($file->getTempName());
+        $sheetData   = $spreadsheet->getActiveSheet()->toArray();
 
-// PAGINATED DATA
-        $rows = $model->findAll($length, $start);
+//        $model = new UserModel();
 
-        $buttons = '';
+        // Skip header row
+        foreach ($sheetData as $key => $row) {
+            if ($key === 0) continue;
 
-        $buttons .= '<button class="btn btn-icon btn-sm btn-secondary btn-wave rounded-pill"><i class="ri-pencil-fill"></i></button>';
-        $buttons .= ' <button class="btn btn-icon btn-sm btn-danger btn-wave rounded-pill"><i class="ri-delete-bin-fill"></i></button>';
-
-        $sr_no = 1;
-
-        $data = [];
-        foreach ($rows as $row) {
-            $data[] = [
-                $sr_no++,
-                $row['head_name'],
-                $buttons,
-                ''
+            $data = [
+                'fees_id'  => trim($row[0]),
+                'fees_name' => trim($row[1]),
             ];
+
+            // Avoid empty rows
+//            if (!empty($data['email'])) {
+                $this->modelfees->insert($data);
+//            }
         }
 
-        return $this->response->setJSON([
-                    'draw' => $draw,
-                    'recordsTotal' => $recordsTotal,
-                    'recordsFiltered' => $recordsFiltered,
-                    'data' => $data
-        ]);
+        return redirect()->back()->with('success', 'Excel data imported successfully');
     }
 
-    public function head_fees() {
-        $data['jspath'] = 'fees_management/head-fees';
-        return render_page('fees_management/head-fees', $data);
-    }
-
-    public function collect_fees() {
-        $data['jspath'] = 'fees_management/collect-fees';
-        return render_page('fees_management/collect-fees', $data);
-    }
-
-    public function student_list() {
-        return render_page('fees_management/student-list');
-    }
+//    public function head_fees() {
+//        $data['jspath'] = 'fees_management/head-fees';
+//        return render_page('fees_management/head-fees', $data);
+//    }
+//
+//    public function collect_fees() {
+//        $data['jspath'] = 'fees_management/collect-fees';
+//        return render_page('fees_management/collect-fees', $data);
+//    }
+//
+//    public function student_list() {
+//        return render_page('fees_management/student-list');
+//    }
 }
