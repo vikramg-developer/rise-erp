@@ -11,7 +11,7 @@ $("#student-parentdetails-form").on("submit", function (e) {
     formData.push({name: csrfName, value: csrfHash});
 
     $.ajax({
-        url: "add-parent-details",
+       url: BASE_URL + "studentprofile/add-parent-details",
         type: "POST",
         data: formData,
         dataType: "json",

@@ -23,36 +23,36 @@
                 </div>
                 <!--Student Mother Contact-->
                 <div class="col-xl-4">
-                    <label for="student_mother_contact_no" class="form-label"><?= lang('App.mother'); ?> <?= lang('App.contact'); ?> <?= lang('App.no'); ?></label>
-                    <input type="text" class="form-control" id="student_mother_contact_no" name="student_mother_contact_no"placeholder="<?= lang('App.contact'); ?> <?= lang('App.number'); ?>" value=""required>
-                    <small class="text-danger" id="student_mother_contact_no_error" style="display:none;"></small>
+                    <label for="student_mother_contact" class="form-label"><?= lang('App.mother'); ?> <?= lang('App.contact'); ?> <?= lang('App.no'); ?></label>
+                    <input type="text" class="form-control" id="student_mother_contact" name="student_mother_contact"placeholder="<?= lang('App.contact'); ?> <?= lang('App.number'); ?>" value="">
+                    <small class="text-danger" id="student_mother_contact_error" style="display:none;"></small>
 
                 </div>
                 <!--Student Father Contact-->
                 <div class="col-xl-4">
-                    <label for="student_father_contact_no" class="form-label"><?= lang('App.father'); ?> <?= lang('App.contact'); ?> <?= lang('App.no'); ?></label>
-                    <input type="text" class="form-control" id="student_father_contact_no" name="student_father_contact_no"placeholder="<?= lang('App.contact'); ?> <?= lang('App.number'); ?>" value=""required>
-                    <small class="text-danger" id="student_father_contact_no_error" style="display:none;"></small>
+                    <label for="student_father_contact" class="form-label"><?= lang('App.father'); ?> <?= lang('App.contact'); ?> <?= lang('App.no'); ?></label>
+                    <input type="text" class="form-control" id="student_father_contact" name="student_father_contact"placeholder="<?= lang('App.contact'); ?> <?= lang('App.number'); ?>" value="">
+                    <small class="text-danger" id="student_father_contact_error" style="display:none;"></small>
 
                 </div>
                 <!--Student Father Occupation-->
                 <div class="col-xl-4">
                     <label for="student_father_occupation" class="form-label"><?= lang('App.father'); ?> <?= lang('App.occupation'); ?> </label>
-                    <input type="text" class="form-control" id="student_father_occupation" name="student_father_occupation"placeholder="<?= lang('App.father'); ?> <?= lang('App.occupation'); ?>" value=""required>
+                    <input type="text" class="form-control" id="student_father_occupation" name="student_father_occupation"placeholder="<?= lang('App.father'); ?> <?= lang('App.occupation'); ?>" value="">
                     <small class="text-danger" id="student_father_occupation_error" style="display:none;"></small>
 
                 </div>
                 <!--Student Mother Occupation-->
                 <div class="col-xl-4">
                     <label for="student_mother_occupation" class="form-label"><?= lang('App.mother'); ?> <?= lang('App.occupation'); ?> </label>
-                    <input type="text" class="form-control" id="student_mother_occupation" name="student_mother_occupation"placeholder="<?= lang('App.mother'); ?> <?= lang('App.occupation'); ?>" value=""required>
+                    <input type="text" class="form-control" id="student_mother_occupation" name="student_mother_occupation"placeholder="<?= lang('App.mother'); ?> <?= lang('App.occupation'); ?>" value="">
                     <small class="text-danger" id="student_mother_occupation_error" style="display:none;"></small>
 
                 </div>
                 <!--Student Family Income-->
                 <div class="col-xl-4">
                     <label for="student_family_income" class="form-label"><?= lang('App.family'); ?> <?= lang('App.income'); ?> </label>
-                    <input type="text" class="form-control" id="student_family_income" name="student_family_income"placeholder="<?= lang('App.family'); ?> <?= lang('App.income'); ?>" value=""required>
+                    <input type="text" class="form-control" id="student_family_income" name="student_family_income"placeholder="<?= lang('App.family'); ?> <?= lang('App.income'); ?>" value="">
                     <small class="text-danger" id="student_family_income_error" style="display:none;"></small>
 
                 </div>
@@ -61,7 +61,7 @@
 
     </div>
     <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
-        <button type="button" class="btn btn-success" id="personal-details-trigger">Submit</button>
+        <button type="submit" class="btn btn-success" id="personal-details-trigger">Submit</button>
     </div>
 </form>
 
