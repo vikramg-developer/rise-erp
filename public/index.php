@@ -16,7 +16,7 @@ $paths = new Config\Paths();
 require rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'Boot.php';
 
 // Define environment
-define('ENVIRONMENT', getenv('CI_ENVIRONMENT') ?: 'production');
+define('ENVIRONMENT', $_SERVER['CI_ENVIRONMENT'] ?? 'production');
 
 // Boot the application
 exit(CodeIgniter\Boot::bootWeb($paths));
