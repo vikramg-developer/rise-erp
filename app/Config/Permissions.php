@@ -175,6 +175,15 @@ class Permissions extends BaseConfig {
         'updateSubject',
         'deleteSubject',
     ];
+    
+     /** Settings permissions */
+    public array $settings = [
+        'createSettings',
+        'viewSettings',
+        'updateSettings',
+        'deleteSettings',
+    ];
+
 
     /** Master permissions (auto-merged) */
     public array $master;
@@ -190,6 +199,9 @@ class Permissions extends BaseConfig {
     public array $ticket_module_category;
     public array $certificates;
     public array $certificates_category;
+//    Settings
+    public array $settings_module;
+    public array $settings_category;
 
     public function __construct() {
         //-----------for submenu -------------------//
@@ -231,6 +243,10 @@ class Permissions extends BaseConfig {
                 $this->leaving_certificate,
                 $this->bonafide_certificate,
         );
+        
+        $this->settings_module = array_merge(
+                $this->settings
+        );
 
         //---------------------------Main Menu Label---------------------------//
         $this->master_category = array_merge(
@@ -261,5 +277,12 @@ class Permissions extends BaseConfig {
         $this->certificates_category = array_merge(
                 $this->certificates
         );
+        
+        //settings
+         $this->settings_category = array_merge(
+                $this->settings_module
+        );
+        
+        
     }
 }

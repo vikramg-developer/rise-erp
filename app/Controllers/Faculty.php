@@ -511,7 +511,7 @@ class Faculty extends BaseController {
     }
 
     /**
-     * Generate secure random password
+     * Generate secure random password when first login
      */
     private function generateRandomPassword(int $length = 8): string {
         $upper = 'ABCDEFGHIJKLMNPQRSTUVWXYZ';
@@ -535,7 +535,7 @@ class Faculty extends BaseController {
         return implode('', $password);
     }
 
-public function getFacultyDetails()
+public function getFacultyDetails() //for canvas open in faculty reg table
 {
     $riseNo = $this->request->getPost('faculty_rise_no');
 
