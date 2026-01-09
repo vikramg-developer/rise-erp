@@ -64,6 +64,7 @@ return [
     'current' => 'Current',
     'cost' => 'Cost',
     'create' => 'Create',
+    'change'=>'Change',
     // D
     'dashboard' => 'Dashboard',
     'date' => 'Date',
@@ -236,6 +237,7 @@ return [
     'screenshot' => 'Screenshot',
     'search' => 'Search',
     'select' => 'Select',
+    'settings' => 'Settings',
     'semester' => 'Semester',
     'scholar' => 'Scholar',
     'sign' => 'Sign',
