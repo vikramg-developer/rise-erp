@@ -45,6 +45,7 @@ $routes->get('accountant-dashboard', 'Dashboard::accountant_dashboard', ['filter
 $routes->get('iqac-dashboard', 'Dashboard::iqac_dashboard', ['filter' => 'permission:viewIqacDashboard']);
 $routes->get('student-dashboard', 'Dashboard::student_dashboard', ['filter' => 'permission:viewStudentDashboard']);
 
+
 $routes->get('login', 'Login::login');
 $routes->get('forbidden', 'Error::forbidden');
 $routes->get('logout', 'Login::logout');
@@ -62,20 +63,25 @@ $routes->post('/check-user', 'Login::check_user');
 
 $routes->get('student-registration', 'StudentRegistration::index');
 $routes->post('save-registration', 'StudentRegistration::add_registration');
-$routes->get('/student-profile', 'StudentProfile::index', ['filter' => 'permission:viewStudentProfile']);
-$routes->post('add-personal-details', 'StudentProfile::add_personal_information', ['filter' => 'permission:viewStudentProfile']);
-$routes->post('add-address-details', 'StudentProfile::add_address_details', ['filter' => 'permission:viewStudentProfile']);
-$routes->get('get-pincode/(:num)', 'PincodeData::getPincode/$1', ['filter' => 'permission:viewStudentProfile']);
 
 $routes->post('/savesignup', 'Registration::saveSignup');
 $routes->get('/student-dashboard', 'Login::studentDashboard');
 $routes->get('/studentDashboard', 'Login::studentDashboard');
-$routes->post('/studentProfile', 'Registration::studentProfile');
 $routes->get('/student-list', 'FeesManagement::student_list');
 $routes->get('approve-registration', 'ApproveRegistration::index', ['filter' => 'permission:viewApproveRegistration']);
 $routes->post('fetch-registrationstudent', 'ApproveRegistration::fetch_registrationstudent', ['filter' => 'permission:createApproveRegistration']);
 $routes->post('approve-student', 'ApproveRegistration::approve_student', ['filter' => 'permission:updateApproveRegistration']);
 $routes->post('reject-student', 'ApproveRegistration::reject_student', ['filter' => 'permission:updateApproveRegistration']);
+
+
+$routes->group('studentprofile', function ($routes) {
+    $routes->get('/', 'StudentProfile::index', ['filter' => 'permission:viewStudentProfile']);
+    $routes->post('add-personal-details', 'StudentProfile::add_personal_details', ['filter' => 'permission:viewStudentProfile']);
+    $routes->post('add-address-details', 'StudentProfile::add_address_details', ['filter' => 'permission:viewStudentProfile']);
+    $routes->get('fetch-pincode/(:num)', 'PincodeData::fetchPincode/$1', ['filter' => 'permission:viewStudentProfile']);
+    $routes->post('add-parent-details', 'StudentProfile::add_parent_details', ['filter' => 'permission:viewStudentProfile']);
+
+    });
 
 $routes->group('leavingcertificate', function ($routes) {
     $routes->get('/', 'LeavingCertificate::index', ['filter' => 'permission:createLeavingCertificate']);
