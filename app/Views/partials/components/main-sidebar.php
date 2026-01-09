@@ -122,7 +122,7 @@ $permissions = config('Permissions');
                                                 <!-- Start::StudentProfile -->
                                                 <?php if (hasAnyPermission($permissions->studentProfile)): ?>
                                                     <li class="slide">
-                                                        <a href="<?php echo base_url('student-profile'); ?>" class="side-menu__item">
+                                                        <a href="<?php echo base_url('studentprofile'); ?>" class="side-menu__item">
                                                             <i class="bx bx-user side-menu__icon"></i>
                                                             <span class="side-menu__label"><?= lang('App.student'); ?> <?= lang('App.profile'); ?></span>
                                                         </a>
@@ -242,7 +242,7 @@ $permissions = config('Permissions');
                                                             <a href="javascript:void(0)"><?= lang('App.fees'); ?> <?= lang('App.management'); ?></a>
                                                         </li>                                          
                                                         <li class="slide">
-                                                            <a href="<?php echo base_url('head-fees'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.head'); ?> <?= lang('App.fees'); ?></a>
+                                                            <a href="<?php echo base_url('fees-management'); ?>" class="side-menu__item"><?= lang('App.add'); ?> <?= lang('App.fees'); ?></a>
                                                         </li>
                                                         <li class="slide">
                                                             <a href="<?php echo base_url('collect-fees'); ?>" class="side-menu__item"><?= lang('App.collect'); ?> <?= lang('App.fees'); ?></a>
@@ -357,9 +357,9 @@ $permissions = config('Permissions');
                                                             </li>
                                                         <?php endif; ?>
                                                     </ul>
-                                                </li>
+                                                <!--</li>-->
                                                 <!--===========================================End Ticket==============================================-->
-                                            </ul>
+                                            <!--</ul>-->
                                             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path> </svg></div>
 
                                             <!--=================================================Admin Section ===================================================-->
@@ -390,7 +390,30 @@ $permissions = config('Permissions');
                                             <!--===============================================Master Section===================================================-->
                                             <li class="slide__category"><span class="category-name">Master Section</span></li>
                                             <!--==============================================Master Section End==================================================-->
-
+                                            
+                                            <!--===============================================Settings Section===================================================-->
+                                            <?php if (hasAnyPermission($permissions->settings_category)): ?>
+                                            <li class="slide__category"><span class="category-name">Settings</span></li>
+                                            <?php endif; ?>
+                                            
+                                                 <?php if (hasAnyPermission($permissions->settings_module)): ?>
+                                                    <li class="slide has-sub">
+                                                        <a href="#" class="side-menu__item">
+                                                            <i class="bx bx-cog side-menu__icon"></i>
+                                                            <span class="side-menu__label"><?= lang('App.settings'); ?></span>
+                                                            <i class="fe fe-chevron-right side-menu__angle"></i>
+                                                        </a>
+                                                    <?php endif; ?>
+                                                    <ul class="slide-menu child1">
+                                                        <?php if (hasAnyPermission($permissions->settings)): ?>
+                                                            <li class="slide">
+                                                                <a href="<?php echo base_url('change-password'); ?>" class="side-menu__item"><?= lang('App.change'); ?> <?= lang('App.password'); ?></a>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                    </ul>
+                                            <!--==============================================Settings Section End==================================================-->
+                                        
+                                            
                                         </nav>
                                         <!-- End::nav -->
 

@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //submit
 $("#student-personalinfo-form").on("submit", function (e) {
+   
     e.preventDefault();
 
 
@@ -72,7 +73,7 @@ $("#student-personalinfo-form").on("submit", function (e) {
     formData.push({name: csrfName, value: csrfHash});
 
     $.ajax({
-        url: "add-personal-details",
+         url: BASE_URL + "studentprofile/add-personal-details",
         type: "POST",
         data: formData,
         dataType: "json",

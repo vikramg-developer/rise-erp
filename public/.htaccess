@@ -17,8 +17,8 @@ Options -Indexes
 	# http://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewritebase
 	# RewriteBase /
 	# Allow deploy.php to run directly (bypass CI routing)
-    RewriteCond %{REQUEST_URI} ^/deploy\.php$ [NC]
-    RewriteRule ^ - [L]
+        RewriteCond %{REQUEST_URI} ^/deploy\.php$ [NC]
+        RewriteRule ^ - [L]
 
 	# Redirect Trailing Slashes...
 	RewriteCond %{REQUEST_FILENAME} !-d
