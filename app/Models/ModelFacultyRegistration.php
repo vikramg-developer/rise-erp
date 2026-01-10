@@ -210,7 +210,9 @@ class ModelFacultyRegistration extends Model {
         ];
     }
 
+    
     protected $beforeUpdate = ['setUpdateOrDeleteDate', 'captureOldData'];
+    
     protected $afterInsert = ['logInsert'];
     protected $afterUpdate = ['logUpdate'];
 

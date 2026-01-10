@@ -1,4 +1,9 @@
-
+//  (NO SPACE) input
+nameUppercaseOnly(
+        'input[name="student_mother_name"], ' +
+        'input[name="student_father_occupation"], ' +
+        'input[name="student_mother_occupation"]'
+        );
 //submit
 $("#student-parentdetails-form").on("submit", function (e) {
     e.preventDefault();
@@ -11,7 +16,7 @@ $("#student-parentdetails-form").on("submit", function (e) {
     formData.push({name: csrfName, value: csrfHash});
 
     $.ajax({
-        url: "add-parent-details",
+       url: BASE_URL + "studentprofile/add-parent-details",
         type: "POST",
         data: formData,
         dataType: "json",

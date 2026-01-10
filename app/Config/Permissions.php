@@ -175,6 +175,23 @@ class Permissions extends BaseConfig {
         'updateSubject',
         'deleteSubject',
     ];
+    
+     /** Settings permissions */
+    public array $settings = [
+        'createSettings',
+        'viewSettings',
+        'updateSettings',
+        'deleteSettings',
+    ];
+    
+    /** ICard permissions */
+    public array $iCard = [
+        'createICard',
+        'viewICard',
+        'updateICard',
+        'deleteICard',
+    ];
+
 
 
 
@@ -269,6 +286,13 @@ class Permissions extends BaseConfig {
         return array_merge(
                 $this->faculty_registration()
         );
+        
+        //settings
+         $this->settings_category = array_merge(
+                $this->settings_module
+        );
+        
+        
     }
 
 

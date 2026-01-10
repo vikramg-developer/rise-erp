@@ -70,6 +70,7 @@ class ModelFeedback extends Model {
         $builder->join('semester s', 's.semester_id = fm.semester_id', 'left');
         $builder->join('semester_part sem_part', 'sem_part.semester_part_id = fm.semester_part_id', 'left');
         $builder->join('academic_year aca_year', 'aca_year.academic_year_id = fm.academic_year_id', 'left');
+        $builder->orderBy('feedback_master_id', 'DESC');
         return $builder->limit($length, $start)->get()->getResultArray();
     }
 

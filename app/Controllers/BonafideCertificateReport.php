@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 use App\Models\ModelBonafideCertificate;
 
+class BonafideCertificateReport extends BaseController {
 
-class BonafideCertificateReport extends BaseController{
     protected $modelbonafidecertificate;
     protected $modelyearwisestudentdata;
 
@@ -21,7 +21,7 @@ class BonafideCertificateReport extends BaseController{
         $data['departments'] = $this->modeldepartment->get_departments();
         return render_page('certificates/bonafide-certificate-report-index', $data);
     }
-    
+
     public function fetch_bonafide_report() {
         $rules = [
             'from_date' => 'required',
@@ -67,16 +67,24 @@ class BonafideCertificateReport extends BaseController{
                 $badges = '';
                 if ($bonafide['is_cancelled'] == 1) {
                     $badges = '<span class="badge bg-danger-transparent">Cancelled</span>';
-                } 
+                }
                 $buttons = '';
                 // Print Button
 //                if (hasPermission('printBonafideCertificate') || $bonafide['is_print'] == 0):
-                if ($bonafide['is_print'] == 0):
-                    $buttons .= actionButton('Print', ['bonafide-certificate-id' => $bonafide['bonafide_certificate_id']]);
-                endif;
+                $attrs = [
+                    'bonafide-certificate-id' => $bonafide['bonafide_certificate_id']
+                ];
+                // 🔒 disable ONLY when printed AND no permission
+//                if (!($bonafide['is_print'] == 0 || hasPermission('printBonafideCertificate'))) {
+                if (!($bonafide['is_print'] == 0)) {
+                    $attrs['disabled'] = 'disabled';
+                }
+                $buttons .= actionButton('Print', $attrs);
+                
+                // Cancel Button
                 $today = date('Y-m-d');
                 $bonafide_date = date('Y-m-d', strtotime($bonafide['added_at']));
-                if (hasPermission('updateBonafideCertificate') && $bonafide['is_cancelled'] != 1 && $bonafide_date === $today):               
+                if (hasPermission('updateBonafideCertificate') && $bonafide['is_cancelled'] != 1 && $bonafide_date === $today):
                     $buttons .= actionButton('Cancel', ['bonafide-certificate-id' => $bonafide['bonafide_certificate_id']]);
                 endif;
 
@@ -89,7 +97,6 @@ class BonafideCertificateReport extends BaseController{
                     $bonafide['department_name'],
                     $bonafide['year_name'],
                     $badges,
-                    
                 ];
             }
 
@@ -119,9 +126,8 @@ class BonafideCertificateReport extends BaseController{
             $data['bonafide_data'] = $bonafide_data = $this->modelbonafidecertificate->find($bonafide_id);
 
             $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_bonafide($bonafide_data['yearwise_student_data_id']);
-
         }
-       
+
         $this->modelbonafidecertificate->update($bonafide_id, ['is_print' => 1]);
         // Correct mPDF 8.2+ constructor
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L']);
