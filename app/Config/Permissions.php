@@ -176,24 +176,12 @@ class Permissions extends BaseConfig {
         'deleteSubject',
     ];
 
-    /** Master permissions (auto-merged) */
-    public array $master;
-    public array $master_dashboard;
-    public array $master_category;
-    public array $feedback_module;
-    public array $feedback_module_category;
-    public array $faculty_module;
-    public array $faculty_module_category;
-    public array $faculty_profile_module;
-//    public array $faculty_profile_module_category;
-    public array $ticket_module;
-    public array $ticket_module_category;
-    public array $certificates;
-    public array $certificates_category;
 
-    public function __construct() {
+
+//    public function __construct() {
         //-----------for submenu -------------------//
-        $this->master = array_merge(
+    public function master():array{
+        return array_merge(
                 $this->headGroup,
                 $this->head,
                 $this->department,
@@ -201,7 +189,10 @@ class Permissions extends BaseConfig {
                 $this->subjectGroup,
                 $this->subject,
         );
-        $this->dashboard = array_merge(
+    }
+    
+    public function dashboard():array{
+        return array_merge(
                 $this->adminDashboard,
                 $this->facultyDashboard,
                 $this->librarianDashboard,
@@ -209,57 +200,78 @@ class Permissions extends BaseConfig {
                 $this->iqacDashboard,
                 $this->studentDashboard
         );
-
-        $this->feedback_module = array_merge(
+    }
+    
+    public function feedback_module():array{
+        return array_merge(
                 $this->feedback
         );
+    }
 
-        //Faculty Registation (user)
-        $this->faculty_module = array_merge(
+    public function faculty_module():array{
+        return array_merge(
                 $this->faculty_registration
         );
-        
-        //faculty profile(API)
-        $this->faculty_profile_module = array_merge(
+    }
+
+    public function faculty_profile_module():array{
+        return array_merge(
                 $this->faculty_profile
         );
-
-        $this->ticket_module = array_merge(
+    }
+    
+    public function ticket_module():array{
+        return array_merge(
                 $this->Ticket
         );
-        $this->certificates = array_merge(
+    }
+    public function certificates():array{
+        return array_merge(
                 $this->leaving_certificate,
                 $this->bonafide_certificate,
         );
-
-        //---------------------------Main Menu Label---------------------------//
-        $this->master_category = array_merge(
-                $this->master
-        );
-
-        $this->feedback_module_category = array_merge(
-                $this->feedback_module
-        );
-        $this->master_dashboard = array_merge(
-                $this->dashboard
-        );
-        //Faculty Regiatration
-        $this->faculty_module_category = array_merge(
-                $this->faculty_module
-        );
-
-//        //Faculty Profile
-//        $this->faculty_profile_module_category = array_merge(
-//                $this->faculty_profile_module
-//        );
-//        
-        //Ticket
-        $this->ticket_module_category = array_merge(
-                $this->ticket_module
-        );
-
-        $this->certificates_category = array_merge(
-                $this->certificates
+    }
+    public function master_category():array{
+        return array_merge(
+                 $this->master()
         );
     }
+    public function feedback_module_category():array{
+        return array_merge(
+                $this->feedback_module()
+        );
+    }
+    public function master_dashboard():array{
+        return array_merge(
+                $this->dashboard()
+        );
+    }
+    
+    public function faculty_module_category():array{
+        return array_merge(
+               $this->faculty_module()
+        );
+    }
+    
+    public function ticket_module_category():array{
+        return array_merge(
+                $this->ticket_module()
+        );
+    }
+    
+    public function certificates_category():array{
+        return array_merge(
+                $this->certificates()
+        );
+    }
+    
+    public function faculty_registration():array{
+        return array_merge(
+                $this->faculty_registration()
+        );
+    }
+
+
+
+//    }
 }

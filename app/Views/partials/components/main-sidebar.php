@@ -25,12 +25,12 @@ $permissions = config('Permissions');
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path> </svg>
                                             </div>
                                             <ul class="main-menu">
-                                                <?php if (hasAnyPermission($permissions->faculty_module_category)): ?>
+                                                <?php if (hasAnyPermission($permissions->faculty_module_category())): ?>
                                                     <!------------------------------------------------------- start::Faculty Registration-------------------------------------------------------------->
                                                     <li class="slide__category"><span class="category-name"><?= lang('App.employee'); ?></span></li>
                                                     <!-- End::slide__category -->
                                                 <?php endif; ?>
-                                                <?php if (hasAnyPermission($permissions->faculty_module)): ?>
+                                                <?php if (hasAnyPermission($permissions->faculty_module())): ?>
                                                     <li id="mainFacultyNav" class="slide has-sub">
                                                         <a href="javascript:void(0);" class="side-menu__item">
                                                             <i class="bx bx-user-pin side-menu__icon"></i>
@@ -52,11 +52,11 @@ $permissions = config('Permissions');
 
 
                                                 <!--============================== Dashboard START ===================================-->
-                                                <?php if (hasAnyPermission($permissions->master_dashboard)): ?>
+                                                <?php if (hasAnyPermission($permissions->master_dashboard())): ?>
                                                     <li class="slide__category"><span class="category-name"><?= lang('App.dashboard'); ?></span></li>
                                                 <?php endif; ?>
 
-                                                <?php if (hasAnyPermission($permissions->dashboard)): ?>
+                                                <?php if (hasAnyPermission($permissions->dashboard())): ?>
                                                     <li id="dashboardNav" class="slide has-sub">
                                                         <a href="javascript:void(0);" class="side-menu__item">
                                                             <i class='bx  bx-dashboard'></i> 
@@ -133,10 +133,10 @@ $permissions = config('Permissions');
 
 
                                                 <!--========================= Feedback Module START =========================-->
-                                                <?php if (hasAnyPermission($permissions->feedback_module_category)): ?>
+                                                <?php if (hasAnyPermission($permissions->feedback_module_category())): ?>
                                                     <li class="slide__category"><span class="category-name"><?= lang('App.feedback'); ?> <?= lang('App.module'); ?></span></li>
                                                 <?php endif; ?>
-                                                <?php if (hasAnyPermission($permissions->feedback_module)): ?>
+                                                <?php if (hasAnyPermission($permissions->feedback_module())): ?>
                                                     <li  id="mainFeedbackNav" class="slide has-sub">
                                                         <a href="javascript:void(0);" class="side-menu__item">
                                                             <i class="bx bx-message-edit side-menu__icon"></i>
@@ -158,7 +158,7 @@ $permissions = config('Permissions');
                                                 <!--========================= Feedback Module END =========================-->
 
                                                 <!--=============================================Faculty Profile Start==============================================-->
-                                                <?php if (hasAnyPermission($permissions->faculty_profile_module)): ?>
+                                                <?php if (hasAnyPermission($permissions->faculty_profile_module())): ?>
                                                     <li class="slide has-sub">
                                                         <a href="javascript:void(0);" class="side-menu__item">
                                                             <i class=" bx bx-user-circle side-menu__icon"></i>
@@ -182,12 +182,12 @@ $permissions = config('Permissions');
 
                                                 <!--========================= Certificates Module Start =========================-->
 
-                                                <?php if (hasAnyPermission($permissions->certificates_category)): ?>
+                                                <?php if (hasAnyPermission($permissions->certificates_category())): ?>
                                                     <li class="slide__category"><span class="category-name"><?= lang('App.certificate'); ?>s</span></li>
                                                 <?php endif; ?>
                                                 <!-- Start::slide -->
 
-                                                <?php if (hasAnyPermission($permissions->certificates)): ?>
+                                                <?php if (hasAnyPermission($permissions->certificates())): ?>
                                                     <li class="slide has-sub">
                                                         <a href="javascript:void(0);" class="side-menu__item">
                                                             <i class="bx bx-medal side-menu__icon"></i>
@@ -281,11 +281,11 @@ $permissions = config('Permissions');
                                                 <!-- End::slide -->
 
                                                 <!--========================= MASTER START =========================-->
-                                                <?php if (hasAnyPermission($permissions->master_category)): ?>
+                                                <?php if (hasAnyPermission($permissions->master_category())): ?>
                                                     <li class="slide__category"><span class="category-name"><?= lang('App.master'); ?></span></li>
                                                 <?php endif; ?>
 
-                                                <?php if (hasAnyPermission($permissions->master)): ?>
+                                                <?php if (hasAnyPermission($permissions->master())): ?>
                                                     <li id="mainRoleNav" class="slide has-sub">
                                                         <a href="javascript:void(0);" class="side-menu__item">
                                                             <i class="bx bx-group side-menu__icon"></i>
@@ -338,11 +338,11 @@ $permissions = config('Permissions');
 
 
                                                 <!--==========================================Ticket Module==============================================-->
-                                                <?php if (hasAnyPermission($permissions->ticket_module_category)): ?>
+                                                <?php if (hasAnyPermission($permissions->ticket_module_category())): ?>
                                                     <li class="slide__category"><span class="category-name"><?= lang('App.ticket'); ?></span></li>
                                                 <?php endif; ?>
 
-                                                <?php if (hasAnyPermission($permissions->ticket_module)): ?>
+                                                <?php if (hasAnyPermission($permissions->ticket_module())): ?>
                                                     <li class="slide has-sub">
                                                         <a href="#" class="side-menu__item">
                                                             <i class="bx bx-receipt side-menu__icon"></i>

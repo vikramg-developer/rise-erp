@@ -24,8 +24,8 @@ class Filters extends BaseConfig {
         'honeypot' => Honeypot::class,
         'invalidchars' => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
-        'permission' => PermissionFilter::class,
         'auth' => AuthFilter::class,
+        'permission' => PermissionFilter::class,
         'sessionlogout' => SessionLogoutFilter::class,
     ];
 
