@@ -224,5 +224,17 @@
             "viewSubject",
             "deleteSubject"
         ]
+    },
+    
+     "settings": {
+        "label": "Settings",
+        "actions": [
+            "createSubject",
+            "updateSubject",
+            "viewSubject",
+            "deleteSubject"
+        ]
     }
+    
+    
 }

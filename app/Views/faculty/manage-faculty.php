@@ -96,7 +96,7 @@
 
                 <div class="d-flex mb-0">
                     <div class="me-4">
-                        <p class="fw-bold fs-20 text-fixed-white text-shadow mb-0">Employee</p>
+                        <p class="fw-bold fs-15 text-fixed-white text-shadow mb-0">Employee</p>
                         <p class="mb-0 fs-11 op-5 text-fixed-white">Details</p>
                     </div>
                 </div>
