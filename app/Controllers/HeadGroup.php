@@ -46,7 +46,7 @@ class HeadGroup extends BaseController {
         // DATA
         $rows = $this->modelheadgroup->getFilteredHeadGroup($length, $start, $search);
 
-        $facultyNameMap = $nameMap = $this->modelfacultyregistration->getRiseNoNameMap();
+        $facultyNameMap = $nameMap = $this->modelfacultyregistration->getRiseNoNameMaps();
 
         $sr_no = 1;
 

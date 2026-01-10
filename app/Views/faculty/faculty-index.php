@@ -68,7 +68,7 @@
                                     <?php
                                     foreach ($faculty_type as $type) {
                                         ?>
-                                        <option value="<?php echo $type['faculty_type_id']; ?>"><?php echo $type['faculty_type']; ?></option>
+                                        <option value="<?php echo $type['faculty_type_id']; ?>"><?php echo $type['faculty_type_name']; ?></option>
                                     <?php }
                                     ?> 
                                 </select>

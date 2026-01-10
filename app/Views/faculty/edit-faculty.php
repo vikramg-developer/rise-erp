@@ -21,6 +21,7 @@
             <div class="card custom-card">
 
                 <form id="edit-faculty-registration-form">
+                    <?= csrf_field() ?>
                     <input type="hidden" name="faculty_id" value="<?= esc($faculty['faculty_registration_id']); ?>">
 
                     <div class="card-body p-4">
@@ -37,7 +38,7 @@
                                     <?= lang('App.faculty'); ?> <?= lang('App.role'); ?> <span class="text-danger">*</span>
                                 </label>
 
-                                <select class="from-control js-example-basic-single" name="edit_faculty_role_id" id="edit_faculty_role_id">
+                                <select class="form-control js-example-basic-single" name="edit_faculty_role_id" id="edit_faculty_role_id">
                                     <option value="">  <?= lang('App.select'); ?>   <?= lang('App.role'); ?> </option>
                                     <?php foreach ($roles as $role): ?>
                                         <option value="<?= $role['role_id']; ?>"
@@ -88,12 +89,12 @@
                                     <?= lang('App.faculty'); ?> <?= lang('App.type'); ?> <span class="text-danger">*</span>
                                 </label>
 
-                                <select class="from-control js-example-basic-single" name="edit_faculty_type_id" id="edit_faculty_type_id">
+                                <select class="form-control js-example-basic-single" name="edit_faculty_type_id" id="edit_faculty_type_id">
                                     <option value="">  <?= lang('App.select'); ?>   <?= lang('App.type'); ?> </option>
                                     <?php foreach ($faculty_type as $type): ?>
                                         <option value="<?= $type['faculty_type_id']; ?>"
                                                 <?= ($faculty['faculty_type_id'] == $type['faculty_type_id']) ? 'selected' : ''; ?>>
-                                                    <?= esc($type['faculty_type']); ?>
+                                                    <?= esc($type['faculty_type_name']); ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
