@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use TCPDF;
+    use Mpdf\Mpdf;
+   use Mpdf\Barcode\BarcodeGeneratorPNG;
 
 class ICard extends BaseController {
 
@@ -102,37 +104,52 @@ class ICard extends BaseController {
 //        $mpdf->Output('I-Card.pdf', 'I');
 //        exit;
 //    }
+    
+  private function generateBarcodePNG($code)
+{
+    // TCPDF barcode class is already available
+    $barcode = new \TCPDFBarcode($code, 'C128');
 
+     // ✅ THIS RETURNS RAW PNG BINARY
+    return $barcode->getBarcodePNGData(2, 40);
+}
     public function i_card_print1() {
-         $data = [
-        'college_name'  => 'Karmaveer Bhaurao Patil College of Engineering, Satara',
-        'academic_year' => '2025 - 2026',
+    
+        $data = [
+            'sanstha_name' => 'Rayat Shikashan Sanstha',
+            'college_name' => 'Karmaveer Bhaurao Patil College of Engineering, Satara',
+            'academic_year' => '2025 - 2026',
+            'full_name' => 'SHINDE NAGESH TUKARAM',
+            'class' => 'T.Y. Civil Engineering',
+            'dob' => '2002-10-15', // always Y-m-d
+            'mobile' => '9402728656',
+            'rise_no' => '202610100001',
+            'address' => 'At post Nele, Tal. Satara, Dist. Satara - 415015',
+        ];
+        
+   // ✅ BARCODE VIA TCPDF
+    $barcodePdf = $this->generateBarcodePNG($data['rise_no']);
+    $data['barcode_base64'] = base64_encode($barcodePdf);
 
-        'full_name' => 'SHINDE NAGESH TUKARAM',
-        'class'     => 'T.Y. Civil Engineering',
-        'dob'       => '15-10-2002',
-        'mobile'    => '9402728656',
-        'rise_no'   => '202610100001',
-        'address'   => 'At post Nele, Tal. Satara, Dist. Satara - 415015',
+        $mpdf = new \Mpdf\Mpdf([
+            'mode' => 'utf-8',
+            'default_font' => 'dejavusans',
+            'format' => [56, 80], // ID card size (mm)
+            'margin_left' => 0,
+            'margin_right' => 0,
+            'margin_top' => 1,
+            'margin_bottom' => 1,
+        ]);
+        // 🔴 THIS IS THE KEY LINE (WITHOUT THIS BARCODE NEVER SHOWS)
+$mpdf->useSubstitutions = true;
 
-        // dynamic paths
-        'photo' => FCPATH . 'assets/images/profile.jpg',
-        'logo'  => FCPATH . 'assets/images/kbp_logo.jpg',
-    ];
+// Optional but safe
+$mpdf->simpleTables = true;
 
-    $mpdf = new \Mpdf\Mpdf([
-        'mode'   => 'utf-8',
-        'format' => [54, 86], // ID card size
-        'margin_left'   => 0,
-        'margin_right'  => 0,
-        'margin_top'    => 0,
-        'margin_bottom' => 0,
-    ]);
+$html = view('i_card/i-card-print', $data);
+$mpdf->WriteHTML($html);
 
-    $html = view('i_card/i-card-print', $data);
-
-    $mpdf->WriteHTML($html);
-    $mpdf->Output('ICard.pdf', 'I');
-    exit;
+$mpdf->Output('ICard.pdf', 'I');
+exit;
     }
 }
