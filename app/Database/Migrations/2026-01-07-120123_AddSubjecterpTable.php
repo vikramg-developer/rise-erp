@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Database\Migrations\Centralized;
+namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
 class AddSubjecterpTable extends Migration {
-    protected $DBGroup = 'rise_centralized'; // 🔥 FORCE centralized DB
+    protected $DBGroup = 'rise_centralized'; // 🔥 FORCE erp centralized DB
 
     public function up() {
         $fields = [
