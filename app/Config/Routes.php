@@ -77,6 +77,8 @@ $routes->group('studentprofile', function ($routes) {
     $routes->post('add-address-details', 'StudentProfile::add_address_details', ['filter' => 'permission:viewStudentProfile']);
     $routes->get('fetch-pincode/(:num)', 'PincodeData::fetchPincode/$1', ['filter' => 'permission:viewStudentProfile']);
     $routes->post('add-parent-details', 'StudentProfile::add_parent_details', ['filter' => 'permission:viewStudentProfile']);
+    $routes->post('fetch-student-educational-data', 'StudentProfile::fetch_student_educational_data', ['filter' => 'permission:viewStudentProfile']);
+    $routes->post('add-educational-details', 'StudentProfile::add_educational_details', ['filter' => 'permission:viewStudentProfile']);
 
     });
 

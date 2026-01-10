@@ -1,3 +1,9 @@
+//  (NO SPACE) input
+nameUppercaseOnly(
+        'input[name="student_permanent_address"], ' +
+        'input[name="student_correspondence_address"]'
+        );
+//submit
 // Function to load localities for a given pincode
 function loadLocalities(pincode, localitySelectId) {
     return new Promise((resolve, reject) => {

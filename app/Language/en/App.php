@@ -113,6 +113,7 @@ return [
     'generate_lc' => 'Generate LC',
     'gender' => 'Gender',
     'google' => 'Google',
+    'grade' => 'Grade',
     'group' => 'Group',
     'guided' => 'Guided',
     // H
@@ -128,9 +129,11 @@ return [
     'impact' => 'Impact',
     'in' => 'In',
     'information' => 'Information',
+    'information' => 'Information',
     'indexed' => 'Indexed',
     'index' => 'Index',
     'issue' => 'Issue',
+    'institution' => 'Institution',
     'issn' => 'ISSN',
     'isbn' => 'ISBN',
     // J
@@ -154,6 +157,8 @@ return [
     'male' => 'Male',
     'master' => 'Master',
     'marksheet' => 'Marksheet',
+    'marks' => 'Marks',
+    'marking' => 'Marking',
     'membership' => 'Membership',
     'middle' => 'Middle',
     'minority' => 'Minority',
@@ -172,6 +177,7 @@ return [
     'note' => 'Note',
     'number' => 'Number',
     // O
+    'obtain' => 'Obtain',
     'occupation' => 'Occupation',
     'of' => 'of',
     'one' => 'One',
@@ -255,7 +261,9 @@ return [
     'subject' => 'Subject',
     'submitted' => 'Submitted',
     'self' => 'Self',
-    'show' => 'Show',
+    'self' => 'Self',
+    'seat' => 'Seat',
+    'system' => 'System',
     'subcaste' => 'Subcaste',
     // T
     'taluka' => 'Taluka',
@@ -263,6 +271,7 @@ return [
     'ticket' => 'Ticket',
     'title' => 'Title',
     'to' => 'To',
+    'total' => 'Total',
     'type' => 'Type',
     'transgender' => 'Transgender',
     
