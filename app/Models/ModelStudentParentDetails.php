@@ -18,15 +18,15 @@ class ModelStudentParentDetails extends Model {
     protected $primaryKey = 'student_parent_details_id';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['student_registration_id','student_mother_name','student_father_contact','student_mother_contact','student_father_occupation', 'student_mother_occupation', 'family_income', 'added_by', 'updated_by', 'is_deleted',
+    protected $allowedFields = ['student_registration_id', 'student_mother_name', 'student_father_contact', 'student_mother_contact', 'student_father_occupation', 'student_mother_occupation', 'student_family_income', 'added_by', 'updated_by', 'is_deleted',
     ];
     protected $validationRules = [
         'student_mother_name' => 'required',
-        'student_father_contact' => 'required',
-        'student_mother_contact' => 'required',
+        'student_father_contact' => 'required|numeric|exact_length[10]',
+        'student_mother_contact' => 'required|numeric|exact_length[10]',
         'student_father_occupation' => 'required',
         'student_mother_occupation' => 'required',
-        'family_income' => 'required',
+        'student_family_income' => 'required|numeric',
     ];
     protected $validationMessages = [
         'student_mother_name' => [
@@ -34,9 +34,13 @@ class ModelStudentParentDetails extends Model {
         ],
         'student_father_contact' => [
             'required' => 'Father Contact is required',
+            'numeric' => 'Mobile number must be numeric',
+            'exact_length' => 'Mobile number must be 10 digits',
         ],
         'student_mother_contact' => [
             'required' => 'Mother Contact field is required',
+            'numeric' => 'Mobile number must be numeric',
+            'exact_length' => 'Mobile number must be 10 digits',
         ],
         'student_father_occupation' => [
             'required' => 'Father Occupation is required',
@@ -44,7 +48,10 @@ class ModelStudentParentDetails extends Model {
         'student_mother_occupation' => [
             'required' => 'Mother Occupation is required',
         ],
-       
+        'student_family_income' => [
+            'required' => 'Family Income is required',
+            'numeric' => 'Mobile number must be numeric',
+        ],
     ];
 //    // Callbacks
     protected $beforeUpdate = ['setUpdateOrDeleteDate', 'captureOldData'];
