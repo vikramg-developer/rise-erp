@@ -223,9 +223,9 @@ $routes->group('subject', function ($routes) {
     $routes->get('search-subject', 'Subject::search_subject', ['filter' => 'permission:createSubject']);
 });
 
-$routes->get('change-password', 'ChangePassword::index', ['filter' => 'permission:viewSetings']);
-$routes->post('change-password/update', 'ChangePassword::update', ['filter' => 'permission:viewSetings']);
-$routes->post('change-password/check-old', 'ChangePassword::checkOldPassword', ['filter' => 'permission:viewSetings']);
+$routes->get('change-password', 'ChangePassword::index', ['filter' => 'permission:viewSettings']);
+$routes->post('change-password/update', 'ChangePassword::update', ['filter' => 'permission:viewSettings']);
+$routes->post('change-password/check-old', 'ChangePassword::checkOldPassword', ['filter' => 'permission:viewSettings']);
 
 
 

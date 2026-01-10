@@ -11,6 +11,7 @@ class Faculty extends BaseController {
     protected $modelrole;
     protected $modelrisecounter;
     protected $modelfacultytype;
+    protected $modelacademicYear;
     protected $db;
 
     public function __construct() {
@@ -360,13 +361,13 @@ class Faculty extends BaseController {
 
     //when save button click on edit faculty
     public function update_faculty() {
-        if ($this->request->getMethod() !== 'post') {
-            return;
+        if (!$this->request->is('post')) {
+            return $this->response->setStatusCode(405);
         }
 
         $facultyId = $this->request->getPost('faculty_id');
 
-        if (!$facultyId) {
+        if (!$facultyId || $facultyId == 1) {
             return $this->response->setJSON([
                         'status' => 'error',
                         'errors' => ['general' => 'Invalid Faculty ID'],
@@ -374,19 +375,11 @@ class Faculty extends BaseController {
             ]);
         }
 
-        // Block super admin
-        if ($facultyId == 1) {
-            return $this->response->setJSON([
-                        'status' => 'invalid',
-                        'errors' => ['general' => 'Invalid Faculty ID'],
-                        'csrfHash' => csrf_hash()
-            ]);
-        }
-        //Existence check
         $faculty = $this->modelfacultyregistration->getFacultyById($facultyId);
         if (!$faculty) {
             return $this->response->setJSON([
-                        'status' => 'invalid',
+                        'status' => 'error',
+                        'errors' => ['general' => 'Faculty not found'],
                         'csrfHash' => csrf_hash()
             ]);
         }
@@ -410,7 +403,7 @@ class Faculty extends BaseController {
                 $this->modelfacultyregistration->rulesForUpdate($facultyId)
         );
 
-        if (!$this->modelfacultyregistration->update($facultyId, $updateData)) {
+        if (!$this->modelfacultyregistration->validate($updateData)) {
             return $this->response->setJSON([
                         'status' => 'error',
                         'errors' => $this->modelfacultyregistration->errors(),
@@ -418,12 +411,11 @@ class Faculty extends BaseController {
             ]);
         }
 
-        $fullName = $updateData['faculty_first_name'] . ' ' .
-                $updateData['faculty_last_name'];
+        $this->modelfacultyregistration->update($facultyId, $updateData);
 
         return $this->response->setJSON([
                     'status' => 'success',
-                    'message' => 'Faculty ' . $fullName . ' updated successfully',
+                    'message' => 'Faculty updated successfully',
                     'csrfHash' => csrf_hash()
         ]);
     }
@@ -535,46 +527,50 @@ class Faculty extends BaseController {
         return implode('', $password);
     }
 
-public function getFacultyDetails() //for canvas open in faculty reg table
-{
-    $riseNo = $this->request->getPost('faculty_rise_no');
+    public function getFacultyDetails() { //for canvas open in faculty reg table
+        $riseNo = $this->request->getPost('faculty_rise_no');
 
-    if (!$riseNo) {
+        if (!$riseNo) {
+            return $this->response->setJSON([
+                        'data' => null,
+                        'csrfHash' => csrf_hash()
+            ]);
+        }
+
+        // 1️⃣ Get faculty basic details
+        $faculty = $this->modelfacultyregistration
+                ->getFacultyDetailsByRiseNo($riseNo);
+
+        if (!$faculty) {
+            return $this->response->setJSON([
+                        'data' => null,
+                        'csrfHash' => csrf_hash()
+            ]);
+        }
+
+        // 2️⃣ Get ID → Name maps
+        $roleMap = $this->modelrole->getRoleIdNameMap();
+        $typeMap = $this->modelfacultyregistration->getFacultyRiseNumberNameMap();
+//        $facultyType = $this->modelfacultytype->getFacultyTypeIdNameMap();
+        
+      
+        $facultyTypeMap = $this->modelfacultytype->getFacultyTypeIdNameMap();
+        $typeName = $facultyTypeMap[$faculty['faculty_type_id']] ?? '-';
+
+
+        // 3️⃣ Prepare response
         return $this->response->setJSON([
-            'data' => null,
-            'csrfHash' => csrf_hash()
+                    'data' => [
+                        'name' => $faculty['faculty_first_name'] . ' ' . $faculty['faculty_last_name'],
+                        'rise_no' => $faculty['faculty_rise_no'],
+                        'gender' => ucfirst($faculty['faculty_gender']),
+                        'role' => $roleMap[$faculty['faculty_role_id']] ?? '-',
+                        'type' => $typeName,
+                        'mobile' => $faculty['faculty_contact_number'],
+                        'email' => $faculty['faculty_email_id'],
+                        'status' => $faculty['faculty_status'],
+                    ],
+                    'csrfHash' => csrf_hash()
         ]);
     }
-
-    // 1️⃣ Get faculty basic details
-    $faculty = $this->modelfacultyregistration
-                    ->getFacultyDetailsByRiseNo($riseNo);
-
-    if (!$faculty) {
-        return $this->response->setJSON([
-            'data' => null,
-            'csrfHash' => csrf_hash()
-        ]);
-    }
-
-    // 2️⃣ Get ID → Name maps
-    $roleMap = $this->modelrole->getRoleIdNameMap();
-    $typeMap = $this->modelfacultyregistration->getFacultyRiseNumberNameMap();
-
-    // 3️⃣ Prepare response
-    return $this->response->setJSON([
-        'data' => [
-            'name'    => $faculty['faculty_first_name'] . ' ' . $faculty['faculty_last_name'],
-            'rise_no' => $faculty['faculty_rise_no'],
-            'gender'  => ucfirst($faculty['faculty_gender']),
-            'role'    => $roleMap[$faculty['faculty_role_id']] ?? '-',
-            'type'    => $typeMap[$faculty['faculty_type_id']] ?? '-',
-            'mobile'  => $faculty['faculty_contact_number'],
-            'email'   => $faculty['faculty_email_id'],
-            'status'  => $faculty['faculty_status'],
-        ],
-        'csrfHash' => csrf_hash()
-    ]);
-}
-
 }
