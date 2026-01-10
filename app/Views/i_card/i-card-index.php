@@ -17,57 +17,64 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
-               
-                <div class="card-body add-products p-0">
-                    <div class="p-4">
-                        <div class="row gx-5">
-                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-6">
-                                <div class="card custom-card shadow-none mb-0 border-0">
-                                    <div class="card-body p-0">                                        
-                                        <div class="row gy-3">
-                                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                                                <label for="course-id" class="form-label"><?= lang('App.course'); ?></label>
-                                                <select class="form-control js-example-basic-single" name="course-id" id="course-id" required>
-                                                    <option value="">Select Course</option>
-                                                    <option value="1">Computer Science & Engineering</option>
-                                                    <option value="2">Civil Engineering</option>
-                                                    <option value="3">Mechanical Engineering</option>
-                                                    <option value="4">E & TC Engineering</option>
-                                                </select>
-                                            </div>                                            
-                                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                                                <label for="year-id" class="form-label"><?= lang('App.year'); ?></label>
-                                                <select class="form-control js-example-basic-single" name="year-id" id="year-id" required>
-                                                    <option value="">Select Year</option>
-                                                    <option value="1">First Year</option>
-                                                    <option value="2">Second Year</option>
-                                                    <option value="3">Third Year</option>
-                                                    <option value="4">Fourth Year</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                                                <label for="academic_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
-                                                <select class="js-example-basic-single" name="academic_year_id" id="academic_year_id" required>
-                                                    <option value="">Select Academic Year</option>
-                                                    <option value="Extra Small">2025-2026</option>
-                                                    <option value="Extra Small">2024-2025</option>
-                                                    <option value="Small">2023-2024</option>
-                                                    <option value="Medium">2022-2023</option>
-                                                    <option value="Large">2021-2022</option>
-                                                    <option value="Extra Large">2020-2021</option>
-                                                </select>
-                                            </div>
-                                        </div>                                        
+                <form method="post" action="" id="fetch_icard_student">
+                    <div class="card-body add-products p-0">
+                        <div class="p-4">
+                            <div class="row gx-5">
+                                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
+                                    <div class="card custom-card shadow-none mb-0 border-0">
+                                        <div class="card-body p-0">                                        
+                                            <div class="row gy-3">
+                                                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                                    <label for="department_id" class="form-label"><?= lang('App.department'); ?></label>
+                                                    <select class="form-control js-example-basic-single" name="department_id" id="department_id">
+                                                        <option value="">Select Department</option>
+                                                        <?php
+                                                        foreach ($departments as $department) {
+                                                            ?>
+                                                            <option value="<?php echo $department['department_id']; ?>"><?php echo $department['department_name']; ?></option>
+                                                        <?php }
+                                                        ?> 
+                                                    </select>
+                                                    <small class="text-danger field-error" id="department_id_error" style="display:none;"></small>
+                                                </div>                                            
+                                                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                                    <label for="year_id" class="form-label"><?= lang('App.year'); ?></label>
+                                                    <select class="form-control js-example-basic-single" name="year_id" id="year_id">
+                                                        <option value="">Select Year</option>
+                                                        <?php
+                                                        foreach ($years as $year) {
+                                                            ?>
+                                                            <option value="<?php echo $year['year_id']; ?>"><?php echo $year['year_name']; ?></option>
+                                                        <?php }
+                                                        ?> 
+                                                    </select>
+                                                    <small class="text-danger field-error" id="year_id_error" style="display:none;"></small>
+                                                </div>
+                                                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                                    <label for="academic_year_id" class="form-label"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></label>
+                                                    <select class="form-control js-example-basic-single" name="academic_year_id" id="academic_year_id">
+                                                        <option value="">Select Academic Year</option>
+                                                        <?php
+                                                        foreach ($academic_year as $aca_year) {
+                                                            ?>
+                                                            <option value="<?php echo $aca_year['academic_year_id']; ?>"><?php echo $aca_year['academic_year_name']; ?></option>
+                                                        <?php }
+                                                        ?>   
+                                                    </select>
+                                                    <small class="text-danger field-error" id="academic_year_id_error" style="display:none;"></small>
+                                                </div>
+                                            </div>                                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
+                            <button class="btn btn-primary m-1"><i class="bi bi-search ms-2"></i> <?= lang('App.search'); ?></button>
+                        </div>
                     </div>
-                    <div class="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
-                        <button type="" class="btn btn-primary m-1"><?= lang('App.search'); ?></button>
-                    </div>
-                </div>
-                
+                </form>
             </div>
         </div>
     </div>
@@ -83,58 +90,21 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="responsiveDataTable" class="table table-bordered text-nowrap w-100">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col"><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
-                                <th scope="col"><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>
-                                <th scope="col"><?= lang('App.mobile'); ?> <?= lang('App.no'); ?></th>
-                                <th scope="col"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
-                                <th scope="col"><?= lang('App.course'); ?></th>
-                                <th scope="col"><?= lang('App.year'); ?></th>
-                                <th scope="col"><?= lang('App.action'); ?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>202610100001</td>
-                                <td>SHINDE NAGESH TUKARAM</td>
-                                <td>9876543210</td>
-                                <td>2025-2026</td>
-                                <td>Civil Engineering</td>
-                                <td>Third Year</td>
-                                <td>
-                                    <a href="<?php echo base_url('icard/i-card-print1'); ?>" target="_blank" class="btn btn-warning mb-1" ><?= lang('App.icard'); ?></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>202610100002</td>
-                                <td>KALE RAJ AJAY</td>
-                                <td>9876656560</td>
-                                <td>2025-2026</td>
-                                <td>Civil Engineering</td>
-                                <td>Third Year</td>
-                                <td>
-                                    <a href="<?php echo base_url('icard/i-card-print'); ?>" target="_blank" class="btn btn-warning mb-1" ><?= lang('App.icard'); ?></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>202610100003</td>
-                                <td>PATIL ANIL SHANKAR</td>
-                                <td>9876543210</td>
-                                <td>2025-2026</td>
-                                <td>Civil Engineering</td>
-                                <td>Third Year</td>
-                                <td>
-                                    <a target="_blank" class="btn btn-warning mb-1" ><?= lang('App.icard'); ?></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table id="icard-student-list" class="table table-bordered text-nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col"><?= lang('App.rise'); ?> <?= lang('App.no'); ?></th>
+                                    <th scope="col"><?= lang('App.student'); ?> <?= lang('App.name'); ?></th>                               
+                                    <th scope="col"><?= lang('App.academic'); ?> <?= lang('App.year'); ?></th>
+                                    <th scope="col"><?= lang('App.department'); ?></th>
+                                    <th scope="col"><?= lang('App.year'); ?></th>
+                                    <th scope="col"><?= lang('App.generate'); ?> <?= lang('App.icard'); ?></th>
+                                </tr>
+                            </thead>
+                        </table>                    
+                    </div>
                 </div>
             </div>
         </div>
