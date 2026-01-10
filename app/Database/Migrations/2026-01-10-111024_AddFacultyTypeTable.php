@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Database\Migrations\Centralized;
+namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class AddSubjecterpTable extends Migration {
-    protected $DBGroup = 'rise_centralized'; // 🔥 FORCE centralized DB
-
-    public function up() {
-        $fields = [
-            'subject1_id' => [
+class AddFacultyTypeTable extends Migration
+{
+    public function up()
+    {
+       $fields = [
+            'faculty_type_id' => [
                 'type' => 'int',
                 'auto_increment' => true,
             ],
-            'subject1_name' => [
+            'faculty_type_name' => [
                 'type' => 'varchar',
-                'constraint' => '50',
-                'null' => false
+                'constraint' => '100',
             ],
-            'added_by' => [
+           'added_by' => [
                 'type' => 'varchar',
                 'constraint' => '50',
                 'null' => false
@@ -53,12 +52,13 @@ class AddSubjecterpTable extends Migration {
             ]
         ];
         $this->forge->addField($fields);
-        $this->forge->addPrimaryKey('subject1_id');
-        $this->forge->addUniqueKey('subject1_name');
-        $this->forge->createTable('subject1');
+        $this->forge->addPrimaryKey('faculty_type_id');
+        $this->forge->addUniqueKey('faculty_type_name');
+        $this->forge->createTable('faculty_type');
     }
 
-    public function down() {
-        $this->forge->dropTable('subject1');
+    public function down()
+    {
+        $this->forge->dropTable('faculty_type');
     }
 }
