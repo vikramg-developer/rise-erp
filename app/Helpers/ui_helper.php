@@ -74,8 +74,17 @@ if (!function_exists('actionButton')) {
 
         $attributes = '';
 
+//        foreach ($data ?? [] as $key => $value) {
+//            $attributes .= ' data-' . esc($key) . '="' . esc($value) . '"';
+//        }
         foreach ($data ?? [] as $key => $value) {
-            $attributes .= ' data-' . esc($key) . '="' . esc($value) . '"';
+
+            // allow real HTML attributes
+            if (in_array($key, ['disabled'])) {
+                $attributes .= ' ' . esc($key);
+            } else {
+                $attributes .= ' data-' . esc($key) . '="' . esc($value) . '"';
+            }
         }
         return '<button class="btn btn-icon btn-sm ' . $btn_class . ' btn-wave rounded-pill ' . $func . '" '
                 . 'data-bs-toggle="tooltip" data-bs-custom-class="' . $tooltip_class . '" data-bs-placement="top" '
@@ -154,7 +163,7 @@ if (!function_exists('formatReadableJsonGeneric')) {
                 if ($ts) {
                     $value = '<div class="small text-muted mt-1">
                         <i class="ri-time-line me-1"></i>
-                            ' . date("d M Y, h:i:s A", $ts).'</div>';
+                            ' . date("d M Y, h:i:s A", $ts) . '</div>';
                 }
             }
 

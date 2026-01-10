@@ -54,11 +54,36 @@ $(document).on('click', '.print', function () {
     let lcId = $(this).data('leaving-certificate-id');
 
 
-    let url = BASE_URL + "leavingcertificate/print-lc?lc_id=" + lcId;
+    $.ajax({
+        url: BASE_URL + "leavingcertificate/mark-lc-printed",
+        type: "POST",
+        dataType: "json",
+        data: {
+            lc_id: lcId,
+            [csrfName]: csrfHash
+        },
+        success: function (response) {
 
-    window.open(url, '_blank'); 
-    // reload DataTable
-    $('#lc-student-list').DataTable().ajax.reload(null, false);
+            csrfHash = response.csrfHash;
+
+            if (response.status === 'success') {
+
+                // ✅ reload table FIRST
+                if (table) {
+                    table.ajax.reload(null, false).draw(false);
+                }
+
+                // ✅ THEN open PDF
+                window.open(
+                    BASE_URL + "leavingcertificate/print-lc?lc_id=" + lcId,
+                    '_blank'
+                );
+            }
+        },
+        error: function (xhr) {
+            console.error(xhr.responseText);
+        }
+    });
 });
 
 $(document).on('click', '.cancel', function () {

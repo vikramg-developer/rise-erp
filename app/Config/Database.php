@@ -30,10 +30,10 @@ class Database extends Config
 //        'DSN'      => '',
 
 //        Local Database
-//        'hostname' => 'localhost',
-//        'username' => 'root',
-//        'password' => '',
-//        'database' => 'rise',
+        'hostname' => 'localhost',
+        'username' => 'root',
+        'password' => '',
+        'database' => 'rise',
      
 //        Local Server Database
 //        'hostname' => '192.168.1.247',
@@ -42,10 +42,10 @@ class Database extends Config
 //        'database' => 'rise',
         
 //        Cpanel Database
-        'hostname' => '103.133.214.177',
-        'username' => 'rayatedu_rise',
-        'password' => 'Rise@2025',
-        'database' => 'rayatedu_rise',
+//        'hostname' => '103.133.214.177',
+//        'username' => 'rayatedu_rise',
+//        'password' => 'Rise@2025',
+//        'database' => 'rayatedu_rise',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,

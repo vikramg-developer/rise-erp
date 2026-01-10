@@ -90,6 +90,7 @@ $routes->group('leavingcertificate', function ($routes) {
     $routes->get('leaving-certificate-report', 'LeavingCertificateReport::index', ['filter' => 'permission:createLeavingCertificate']);
     $routes->post('fetch-lc-report', 'LeavingCertificateReport::fetch_lc_report', ['filter' => 'permission:createLeavingCertificate']);
     $routes->get('print-lc', 'LeavingCertificateReport::print_lc', ['filter' => 'permission:createLeavingCertificate']);
+    $routes->post('mark-lc-printed', 'LeavingCertificateReport::mark_lc_printed', ['filter' => 'permission:createLeavingCertificate']);
     $routes->post('cancel-lc', 'LeavingCertificateReport::cancel_lc', ['filter' => 'permission:createLeavingCertificate']);
 });
 
@@ -106,9 +107,9 @@ $routes->group('bonafidecertificate', function ($routes) {
 });
 
 $routes->group('icard', function ($routes) {
-    $routes->get('/', 'ICard::index', ['filter' => 'permission:createFeesManagement']);
-    $routes->get('i-card-print', 'ICard::i_card_print', ['filter' => 'permission:createFeesManagement']);
-    $routes->get('i-card-print1', 'ICard::i_card_print1', ['filter' => 'permission:createFeesManagement']);
+    $routes->get('/', 'ICard::index', ['filter' => 'permission:createICard']);
+    $routes->post('fetch-icard-student-list', 'ICard::fetch_icard_student_list', ['filter' => 'permission:viewICard']);
+    $routes->get('print-i-card', 'ICard::print_i_card', ['filter' => 'permission:createICard']);
 });
 
 //---------- feedback ----------//

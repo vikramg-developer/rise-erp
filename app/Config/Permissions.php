@@ -183,6 +183,14 @@ class Permissions extends BaseConfig {
         'updateSettings',
         'deleteSettings',
     ];
+    
+    /** ICard permissions */
+    public array $iCard = [
+        'createICard',
+        'viewICard',
+        'updateICard',
+        'deleteICard',
+    ];
 
 
     /** Master permissions (auto-merged) */
