@@ -45,6 +45,7 @@ $routes->get('accountant-dashboard', 'Dashboard::accountant_dashboard', ['filter
 $routes->get('iqac-dashboard', 'Dashboard::iqac_dashboard', ['filter' => 'permission:viewIqacDashboard']);
 $routes->get('student-dashboard', 'Dashboard::student_dashboard', ['filter' => 'permission:viewStudentDashboard']);
 
+
 $routes->get('login', 'Login::login');
 $routes->get('forbidden', 'Error::forbidden');
 $routes->get('logout', 'Login::logout');
@@ -52,9 +53,6 @@ $routes->post('/add-group', 'Group::add-group');
 
 $routes->get('/collect-fees', 'FeesManagement::collect_fees');
 
-$routes->post('/fetch-head', 'FeesManagement::fetch-head');
-$routes->post('/head', 'FeesManagement::head');
-$routes->post('/head-fees', 'FeesManagement::head_fees');
 
 $routes->post('/home', 'Home::index');
 
@@ -62,20 +60,25 @@ $routes->post('/check-user', 'Login::check_user');
 
 $routes->get('student-registration', 'StudentRegistration::index');
 $routes->post('save-registration', 'StudentRegistration::add_registration');
-$routes->get('/student-profile', 'StudentProfile::index', ['filter' => 'permission:viewStudentProfile']);
-$routes->post('add-personal-details', 'StudentProfile::add_personal_information', ['filter' => 'permission:viewStudentProfile']);
-$routes->post('add-address-details', 'StudentProfile::add_address_details', ['filter' => 'permission:viewStudentProfile']);
-$routes->get('get-pincode/(:num)', 'PincodeData::getPincode/$1', ['filter' => 'permission:viewStudentProfile']);
 
 $routes->post('/savesignup', 'Registration::saveSignup');
 $routes->get('/student-dashboard', 'Login::studentDashboard');
 $routes->get('/studentDashboard', 'Login::studentDashboard');
-$routes->post('/studentProfile', 'Registration::studentProfile');
 $routes->get('/student-list', 'FeesManagement::student_list');
 $routes->get('approve-registration', 'ApproveRegistration::index', ['filter' => 'permission:viewApproveRegistration']);
 $routes->post('fetch-registrationstudent', 'ApproveRegistration::fetch_registrationstudent', ['filter' => 'permission:createApproveRegistration']);
 $routes->post('approve-student', 'ApproveRegistration::approve_student', ['filter' => 'permission:updateApproveRegistration']);
 $routes->post('reject-student', 'ApproveRegistration::reject_student', ['filter' => 'permission:updateApproveRegistration']);
+
+
+$routes->group('studentprofile', function ($routes) {
+    $routes->get('/', 'StudentProfile::index', ['filter' => 'permission:viewStudentProfile']);
+    $routes->post('add-personal-details', 'StudentProfile::add_personal_details', ['filter' => 'permission:viewStudentProfile']);
+    $routes->post('add-address-details', 'StudentProfile::add_address_details', ['filter' => 'permission:viewStudentProfile']);
+    $routes->get('fetch-pincode/(:num)', 'PincodeData::fetchPincode/$1', ['filter' => 'permission:viewStudentProfile']);
+    $routes->post('add-parent-details', 'StudentProfile::add_parent_details', ['filter' => 'permission:viewStudentProfile']);
+
+    });
 
 $routes->group('leavingcertificate', function ($routes) {
     $routes->get('/', 'LeavingCertificate::index', ['filter' => 'permission:createLeavingCertificate']);
@@ -159,6 +162,11 @@ $routes->group('head', function ($routes) {
     $routes->get('search-head', 'Head::search_head', ['filter' => 'permission:createHead']);
 });
 
+$routes->group('fees-management', function ($routes) {
+    $routes->get('/', 'FeesManagement::index', ['filter' => 'permission:viewHead']);
+    $routes->post('import', 'FeesManagement::import', ['filter' => 'permission:viewHead']);
+});
+
 $routes->group('department', function ($routes) {
     $routes->get('/', 'Department::index', ['filter' => 'permission:viewDepartment']);
     $routes->post('fetch-department', 'Department::fetch_department', ['filter' => 'permission:viewDepartment']);
@@ -193,11 +201,6 @@ $routes->group('faculty-profile', function ($routes) {
 $routes->group('activity-log', function ($routes) {
     $routes->get('/', 'ActivityLog::index', ['filter' => 'permission:viewActivityLog']);
     $routes->post('fetch-activity-log', 'ActivityLog::fetch_activity_log', ['filter' => 'permission:viewActivityLog']);
-//    $routes->post('save-department', 'Department::save_department', ['filter' => 'permission:createDepartment']);
-//    $routes->post('update-department', 'Department::update_department', ['filter' => 'permission:updateDepartment']);
-//    $routes->post('delete-department', 'Department::delete_department', ['filter' => 'permission:deleteDepartment']);
-//    $routes->post('revert-department', 'Department::revert_department', ['filter' => 'permission:deleteDepartment']);
-//    $routes->get('search-department', 'Department::search_department', ['filter' => 'permission:createDepartment']);
 });
 
 $routes->group('subjectgroup', function ($routes) {
@@ -219,6 +222,15 @@ $routes->group('subject', function ($routes) {
     $routes->post('revert-subject', 'Subject::revert_subject', ['filter' => 'permission:deleteSubject']);
     $routes->get('search-subject', 'Subject::search_subject', ['filter' => 'permission:createSubject']);
 });
+
+$routes->get('change-password', 'ChangePassword::index', ['filter' => 'permission:viewSetings']);
+$routes->post('change-password/update', 'ChangePassword::update', ['filter' => 'permission:viewSetings']);
+$routes->post('change-password/check-old', 'ChangePassword::checkOldPassword', ['filter' => 'permission:viewSetings']);
+
+
+
+
+
 
 /*
  * --------------------------------------------------------------------

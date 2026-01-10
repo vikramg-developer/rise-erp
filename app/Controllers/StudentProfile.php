@@ -13,10 +13,7 @@ class StudentProfile extends BaseController {
     protected $modelcastecategory;
     protected $modelstudentaddressdetails;
     protected $modelpincodedata;
-    protected $modelcountriesdata;
-    protected $modelstatedata;
-    protected $modeltalukadata;
-    protected $modeldistrictdata;
+    protected $modelstudentparentdetails;
 
     public function __construct() {
         $this->modelstudentregistration = model('ModelStudentRegistration');
@@ -28,10 +25,7 @@ class StudentProfile extends BaseController {
         $this->modelcastecategory = model('ModelCasteCategory');
         $this->modelstudentaddressdetails = model('ModelStudentAddressDetails');
         $this->modelpincodedata = model('ModelPincodeData');
-        $this->modelcountriesdata = model('ModelCountriesData');
-        $this->modelstatedata = model('ModelStateData');
-        $this->modeltalukadata = model('ModelTalukaData');
-        $this->modeldistrictdata = model('ModelDistrictData');
+        $this->modelstudentparentdetails = model('ModelParentDetails');
     }
 
     //=============================== Student Profile -Personal Information START===============================
@@ -48,15 +42,13 @@ class StudentProfile extends BaseController {
         $data['religion'] = $this->modelreligion->findAll();
         $data['caste'] = $this->modelcaste->findAll();
         $data['caste_category'] = $this->modelcastecategory->findAll();
-        $data['countriesdata'] = $this->modelcountriesdata->findAll();
-        $data['statedata'] = $this->modelstatedata->findAll();
-        $data['talukadata'] = $this->modeltalukadata->findAll();
-        $data['districtdata'] = $this->modeldistrictdata->findAll();
+//        $data['localitydata'] = $this->modelpincodedata->findAll();
+
         return render_page('student_profile/student-profile-dashboard', $data);
     }
 
 // Add Personal Information
-    public function add_personal_information() {
+    public function add_personal_details() {
         $studentRegistrationId = session('registration_id');
 
         $post = $this->request->getPost();
@@ -67,10 +59,7 @@ class StudentProfile extends BaseController {
                 ->first();
 
         if (!empty($post['student_contact_no'])) {
-            $mobileExists = $this->modelstudentpersonalinformation
-                    ->where('student_contact_no', $post['student_contact_no'])
-                    ->where('student_personal_info_id !=', $existing['student_personal_info_id'] ?? 0)
-                    ->first();
+            $mobileExists = $this->modelstudentpersonalinformation->where('student_contact_no', $post['student_contact_no'])->where('student_personal_info_id !=', $existing['student_personal_info_id'] ?? 0)->first();
 
             if ($mobileExists) {
                 return $this->response->setJSON([
@@ -144,28 +133,20 @@ class StudentProfile extends BaseController {
     }
 
     //=============================== Student Profile -Personal Information END===============================
-    //=============================== Student Profile -Personal Information START===============================
+    //=============================== Student Profile -Address Details START===============================
     public function add_address_details() {
         $studentRegistrationId = session('registration_id');
         $post = $this->request->getPost();
-//        print_r($studentRegistrationId);die();
-//
 //        // Check if record exists
         $existing = $this->modelstudentaddressdetails->where('student_registration_id', $studentRegistrationId)->first();
 //
         $data = [
             'student_permanent_address' => $post['student_permanent_address'],
             'student_permanent_pincode' => $post['student_permanent_pincode'],
-            'student_permanent_country' => $post['student_permanent_country'],
-            'student_permanent_state_id' => $post['student_permanent_state_id'],
-            'student_permanent_taluka_id' => $post['student_permanent_taluka_id'],
-            'student_permanent_district_id' => $post['student_permanent_district_id'],
+            'student_permanent_locality_id' => $post['student_permanent_locality_id'],
             'student_correspondence_address' => $post['student_correspondence_address'],
             'student_correspondence_pincode' => $post['student_correspondence_pincode'],
-            'student_correspondence_country' => $post['student_correspondence_country'],
-            'student_correspondence_state_id' => $post['student_correspondence_state_id'],
-            'student_correspondence_taluka_id' => $post['student_correspondence_taluka_id'],
-            'student_correspondence_district_id' => $post['student_correspondence_district_id'],
+            'student_correspondence_locality_id' => $post['student_correspondence_locality_id'],
         ];
 //
         if ($existing) {
@@ -175,7 +156,6 @@ class StudentProfile extends BaseController {
             $data['student_registration_id'] = $studentRegistrationId;
             $data['added_by'] = session('rise_no');
             $result = $this->modelstudentaddressdetails->insert($data);
-            
         }
         log_message('debug', (string) $this->modelstudentaddressdetails->db->getLastQuery());
 //
@@ -193,4 +173,47 @@ class StudentProfile extends BaseController {
                     'csrfHash' => csrf_hash(),
         ]);
     }
+        //=============================== Student Profile -Address Details END===============================
+        //=============================== Student Profile -Parent Details START===============================
+ public function add_parent_details() {
+        $studentRegistrationId = session('registration_id');
+        $post = $this->request->getPost();
+//        // Check if record exists
+        $existing = $this->modelstudentparentdetails->where('student_registration_id', $studentRegistrationId)->first();
+//
+        $data = [
+            'student_mother_name' => $post['student_mother_name'],
+            'student_mother_contact' => $post['student_mother_contact'],
+            'student_father_occupation' => $post['student_father_occupation'],
+            'student_mother_occupation' => $post['student_mother_occupation'],
+            'family_income' => $post['family_income'],
+        ];
+
+        if ($existing) {
+            $data['updated_by'] = session('rise_no');
+            $result = $this->modelstudentparentdetails->update($existing['modelstudentpdetailsarent'], $data);
+        } else {
+            $data['student_registration_id'] = $studentRegistrationId;
+            $data['added_by'] = session('rise_no');
+            $result = $this->modelstudentparentdetails->insert($data);
+        }
+        log_message('debug', (string) $this->modelstudentparentdetails->db->getLastQuery());
+//
+        if ($result === false) {
+            return $this->response->setJSON([
+                        'status' => 'error',
+                        'errors' => $this->modelstudentparentdetails->errors(),
+                        'csrfHash' => csrf_hash(),
+            ]);
+        }
+
+        return $this->response->setJSON([
+                    'status' => 'success',
+                    'message' => 'Parent Details saved successfully',
+                    'csrfHash' => csrf_hash(),
+        ]);
+    }
+    
+        //=============================== Student Profile -Parent Details End===============================
+   
 }
