@@ -95,6 +95,7 @@ class Feedback extends BaseController {
     }
 
     public function fetch_feedback_master() {
+        
         $draw = $this->request->getPost('draw');
         $start = $this->request->getPost('start');
         $length = $this->request->getPost('length');
@@ -111,7 +112,7 @@ class Feedback extends BaseController {
         $rows = $model->getFeedbackMasterList($length, $start);
 
         // MAP: rise_no => full name
-        $facultyNameMap = $this->modelfacultyregistration->getRiseNoNameMap();
+        $facultyNameMap = $this->modelfacultyregistration->getFacultyRiseNumberNameMap();
 
         $sr_no = 1;
 
