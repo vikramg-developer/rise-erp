@@ -15,102 +15,134 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <div class="row gy-3">
-                                    <div class="col-xl-6">
-                                        <label for="fullname-new" class="form-label">School/College Name</label>
-                                        <input type="text" class="form-control" id="fullname-new" placeholder="School/College Name">
-                                    </div>
-                                    <div class="col-xl-6">
-                                        <label for="email-new" class="form-label">University Name</label>
-                                        <input type="email" class="form-control" id="email-new" placeholder="University Name">
-                                    </div>
-                                    <div class="col-xl-6">
-                                        <label for="email-new" class="form-label">Date Of Passing</label>
-                                        <input type="email" class="form-control" id="email-new" placeholder="Date Of Passing">
-                                    </div>
-                                    <div class="col-xl-6">
-                                        <label for="email-new" class="form-label">Month Of Passing</label>
-                                        <input type="email" class="form-control" id="email-new" placeholder="Month Of Passing">
-                                    </div>
-                                    <div class="col-xl-6">
-                                        <label for="email-new" class="form-label">Seat No</label>
-                                        <input type="email" class="form-control" id="email-new" placeholder="Seat No">
-                                    </div>
-                                    <div class="col-xl-6">
-                                        <label for="email-new" class="form-label">Total Marks</label>
-                                        <input type="email" class="form-control" id="email-new" placeholder="Total Marks">
-                                    </div>
-                                    <div class="col-xl-6">
-                                        <label for="email-new" class="form-label">Obtained Marks</label>
-                                        <input type="email" class="form-control" id="email-new" placeholder="Obtained Marks">
-                                    </div>
+                                <form id="student-educationaldetails-form">
+                                    <div class="row gy-3">
+                                        <!--department-->
+                                        <div class="col-xl-6">
+                                            <label class="form-label"><?= lang('App.department'); ?> <?= lang('App.name'); ?><span class="text-danger">*</span></label>
+                                            <select class="form-control" name="student_department_id"id="student_department_id" >
+                                                <option value="">Select</option>
+                                                <?php foreach ($department as $d): ?> <option value="<?= esc($d['department_id']) ?>" <?= (!empty($student_educational_data['student_department_id']) && $student_educational_data['student_department_id'] == $d['department_id']) ? 'selected' : '' ?>><?= esc($d['department_name']) ?> </option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <small class="text-danger" id="student_department_id_error" style="display:none;"></small>
+                                        </div>
+                                        <!--student institution name-->
+                                        <div class="col-xl-6">
+                                            <label for="student_institution_name" class="form-label"><?= lang('App.institution'); ?> <?= lang('App.name'); ?> <span class="text-danger">*</span></label></label>
+                                            <input type="text" class="form-control" id="student_institution_name" placeholder="<?= lang('App.institution'); ?> <?= lang('App.name'); ?>" name="student_institution_name"value="<?= esc($student_educational_data['student_institution_name'] ?? '') ?>">
+                                            <small class="text-danger" id="student_institution_name_error" style="display:none;"></small>
+                                        </div>
+                                        <!--student university name-->
+                                        <div class="col-xl-6">
+                                            <label for="student_institution_university" class="form-label"><?= lang('App.university'); ?> <?= lang('App.name'); ?> <span class="text-danger">*</span></label></label>
+                                            <input type="text" class="form-control" id="student_institution_university" placeholder="<?= lang('App.university'); ?> <?= lang('App.name'); ?>" name="student_institution_university"value="<?= esc($student_educational_data['student_institution_university'] ?? '') ?>">
+                                            <small class="text-danger" id="student_institution_university_error" style="display:none;"></small>
+                                        </div>
+                                        <!--month of passing-->
+                                        <div class="col-xl-6">
+                                            <label class="form-label"><?= lang('App.month'); ?> <?= lang('App.of'); ?> <?= lang('App.passing'); ?><span class="text-danger">*</span></label>
+                                            <select class="form-control" name="student_month_of_passing"id="student_month_of_passing" >
+                                                <option value="">Select</option>
+                                                <?php foreach ($department as $d): ?> <option value="<?= esc($d['department_id']) ?>" <?= (!empty($student_educational_data['student_month_of_passing']) && $student_educational_data['student_month_of_passing'] == $d['department_id']) ? 'selected' : '' ?>><?= esc($d['department_name']) ?> </option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <small class="text-danger" id="student_month_of_passing_error" style="display:none;"></small>
+                                        </div>
+                                        <!--year of passing-->
+                                        <div class="col-xl-6">
+                                            <label class="form-label"><?= lang('App.year'); ?> <?= lang('App.of'); ?> <?= lang('App.passing'); ?><span class="text-danger">*</span></label>
+                                            <select class="form-control " name="student_year_of_passing"id="student_year_of_passing" >
+                                                <option value="">Select</option>
+                                                <?php foreach ($passing_year as $p): ?> <option value="<?= esc($p['academic_year_id']) ?>" <?= (!empty($student_educational_data['student_year_of_passing']) && $student_educational_data['student_year_of_passing'] == $p['academic_year_id']) ? 'selected' : '' ?>><?= esc($p['academic_year_name']) ?> </option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <small class="text-danger" id="student_year_of_passing_error" style="display:none;"></small>
+                                        </div>
+                                        <!--seat no-->
+                                        <div class="col-xl-6">
+                                            <label for="student_seat_no" class="form-label"><?= lang('App.seat'); ?> <?= lang('App.no'); ?> <span class="text-danger">*</span></label></label>
+                                            <input type="text" class="form-control" id="student_seat_no" placeholder="<?= lang('App.seat'); ?> <?= lang('App.no'); ?>" name="student_seat_no"value="<?= esc($student_educational_data['student_seat_no'] ?? '') ?>">
+                                            <small class="text-danger" id="student_seat_no_error" style="display:none;"></small>
+                                        </div>
+                                        <!--marking system-->
+                                        <div class="col-xl-6">
+                                            <label class="form-label"><?= lang('App.marking'); ?> <?= lang('App.system'); ?><span class="text-danger">*</span></label>
+                                            <select class="form-control" name="student_marking_system" id="student_marking_system">
+                                                <option value="">Select</option>
+                                                    <option value="indian"<?= (!empty($student_educational_data['student_marking_system']) && $student_educational_data['student_marking_system'] === 'marks') ? 'selected' : '' ?>> Marks</option>
+                                                <option value="other"<?= (!empty($student_educational_data['student_marking_system']) && $student_educational_data['student_marking_system'] === 'grade') ? 'selected' : '' ?>> Grade</option>
+                                            </select>
+                                            <small class="text-danger" id="student_marking_system_error" style="display:none;"></small>
+                                        </div>
+                                        <!--total marks-->
+                                        <div class="col-xl-6">
+                                            <label for="student_total_marks" class="form-label"><?= lang('App.total'); ?> <?= lang('App.marks'); ?> <span class="text-danger">*</span></label></label>
+                                            <input type="text" class="form-control" id="student_total_marks" placeholder="<?= lang('App.total'); ?> <?= lang('App.marks'); ?>" name="student_total_marks"value="<?= esc($student_educational_data['student_total_marks'] ?? '') ?>">
+                                            <small class="text-danger" id="student_total_marks_error" style="display:none;"></small>
+                                        </div>
+                                        <!--obtain marks-->
+                                        <div class="col-xl-6">
+                                            <label for="student_obtain_marks" class="form-label"><?= lang('App.obtain'); ?> <?= lang('App.marks'); ?> <span class="text-danger">*</span></label></label>
+                                            <input type="text" class="form-control" id="student_obtain_marks" placeholder="<?= lang('App.obtain'); ?> <?= lang('App.marks'); ?>" name="student_obtain_marks"value="<?= esc($student_educational_data['student_obtain_marks'] ?? '') ?>">
+                                            <small class="text-danger" id="student_obtain_marks_error" style="display:none;"></small>
+                                        </div>
+                                        <!--percentage-->
+                                        <div class="col-xl-6">
+                                            <label for="student_percentage" class="form-label"><?= lang('App.percentage'); ?><span class="text-danger">*</span></label></label>
+                                            <input type="text" class="form-control" id="student_percentage" placeholder="<?= lang('App.percentage'); ?>" name="student_percentage"value="<?= esc($student_educational_data['student_percentage'] ?? '') ?>">
+                                            <small class="text-danger" id="student_percentage_error" style="display:none;"></small>
+                                        </div>
+                                        <!--percentage-->
+                                        <div class="col-xl-6">
+                                            <label for="student_grade" class="form-label"><?= lang('App.grade'); ?><span class="text-danger">*</span></label></label>
+                                            <input type="text" class="form-control" id="student_grade" placeholder="<?= lang('App.grade'); ?>" name="student_grade"value="<?= esc($student_educational_data['student_grade'] ?? '') ?>">
+                                            <small class="text-danger" id="student_grade_error" style="display:none;"></small>
+                                        </div>
+                                        <!--date of passing -->
+                                        <div class="col-xl-6">
+                                            <label class="form-label"><?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.passing'); ?><span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i></div>
+                                                <input type="date"class="form-control"id="dob"name="student_date_of_passing"value="<?= esc($student_educational_data['student_birthdate'] ?? '') ?>">
+                                            </div>
+                                            <small class="text-danger" id="student_date_of_passing_error" style="display:none;"></small>
+                                        </div>
 
-                                    <div class="col-xl-6">
-                                        <label for="email-new" class="form-label">Percentage </label>
-                                        <input type="email" class="form-control" id="email-new" placeholder="Percentage">
+
                                     </div>
-
-
-                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-success">Save
-                                </button>
+                                <button type="submit" class="btn btn-success">Save</button>
                             </div>
+                            </form> 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="table-responsive">
-            <table class="table text-nowrap table-bordered">
+            <table id="fetchStudentEducationalDetails"class="table text-nowrap table-bordered">
+
                 <thead>
                     <tr>
                         <th scope="col">I</th>
-                        <th scope="col">College Name</th>
-                        <th scope="col">University Name</th>
-                        <th scope="col">Course Name</th>
-                        <th scope="col">Year Of Passing</th>
-                        <th scope="col">Month Of Passing</th>
-                        <th scope="col">Date Of Passing</th>
-                        <th scope="col">Seat No</th>
-                        <th scope="col">Total Mark</th>
-                        <th scope="col">Obtained Mark</th>
-                        <th scope="col">Percentage</th>
+                        <th scope="col"><?= lang('App.course'); ?> <?= lang('App.name'); ?></th>
+                        <th scope="col"><?= lang('App.institution'); ?> <?= lang('App.name'); ?></th>
+                        <th scope="col"><?= lang('App.university'); ?> <?= lang('App.name'); ?></th>
+                        <th scope="col"><?= lang('App.year'); ?> <?= lang('App.of'); ?> <?= lang('App.passing'); ?></th>
+                        <th scope="col"><?= lang('App.month'); ?> <?= lang('App.of'); ?> <?= lang('App.passing'); ?></th>
+                        <th scope="col"><?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.passing'); ?></th>
+                        <th scope="col"><?= lang('App.seat'); ?> <?= lang('App.no'); ?></th>
+                        <th scope="col"><?= lang('App.total'); ?> <?= lang('App.marks'); ?></th>
+                        <th scope="col"><?= lang('App.obtain'); ?> <?= lang('App.marks'); ?></th>
+                        <th scope="col"><?= lang('App.percentage'); ?></th>
+                        <th scope="col"><?= lang('App.grade'); ?> </th>
 
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>ABC College of Science</td>
-                        <td>XYZ University</td>
-                        <td>12th Sci</td>
-                        <td>2022</td>
-                        <td>May</td>
-                        <td>15</td>
-                        <td>CS2022101</td>
-                        <td>600</td>
-                        <td>510</td>
-                        <td>85.00%</td>
-                    </tr>
 
-                    <tr>
-                        <td>2</td>
-                        <td>ABC College of Science</td>
-                        <td>XYZ University</td>
-                        <td>10Th</td>
-                        <td>2020</td>
-                        <td>June</td>
-                        <td>20</td>
-                        <td>ME2021098</td>
-                        <td>800</td>
-                        <td>640</td>
-                        <td>80.00%</td>
-                    </tr>
-
-                </tbody>
             </table>
         </div>
 

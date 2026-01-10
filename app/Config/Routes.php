@@ -77,6 +77,8 @@ $routes->group('studentprofile', function ($routes) {
     $routes->post('add-address-details', 'StudentProfile::add_address_details', ['filter' => 'permission:viewStudentProfile']);
     $routes->get('fetch-pincode/(:num)', 'PincodeData::fetchPincode/$1', ['filter' => 'permission:viewStudentProfile']);
     $routes->post('add-parent-details', 'StudentProfile::add_parent_details', ['filter' => 'permission:viewStudentProfile']);
+    $routes->post('fetch-student-educational-data', 'StudentProfile::fetch_student_educational_data', ['filter' => 'permission:viewStudentProfile']);
+    $routes->post('add-educational-details', 'StudentProfile::add_educational_details', ['filter' => 'permission:viewStudentProfile']);
 
     });
 
@@ -90,6 +92,7 @@ $routes->group('leavingcertificate', function ($routes) {
     $routes->get('leaving-certificate-report', 'LeavingCertificateReport::index', ['filter' => 'permission:createLeavingCertificate']);
     $routes->post('fetch-lc-report', 'LeavingCertificateReport::fetch_lc_report', ['filter' => 'permission:createLeavingCertificate']);
     $routes->get('print-lc', 'LeavingCertificateReport::print_lc', ['filter' => 'permission:createLeavingCertificate']);
+    $routes->post('mark-lc-printed', 'LeavingCertificateReport::mark_lc_printed', ['filter' => 'permission:createLeavingCertificate']);
     $routes->post('cancel-lc', 'LeavingCertificateReport::cancel_lc', ['filter' => 'permission:createLeavingCertificate']);
 });
 
@@ -106,9 +109,9 @@ $routes->group('bonafidecertificate', function ($routes) {
 });
 
 $routes->group('icard', function ($routes) {
-    $routes->get('/', 'ICard::index', ['filter' => 'permission:createFeesManagement']);
-    $routes->get('i-card-print', 'ICard::i_card_print', ['filter' => 'permission:createFeesManagement']);
-    $routes->get('i-card-print1', 'ICard::i_card_print1', ['filter' => 'permission:createFeesManagement']);
+    $routes->get('/', 'ICard::index', ['filter' => 'permission:createICard']);
+    $routes->post('fetch-icard-student-list', 'ICard::fetch_icard_student_list', ['filter' => 'permission:viewICard']);
+    $routes->get('print-i-card', 'ICard::print_i_card', ['filter' => 'permission:createICard']);
 });
 
 //---------- feedback ----------//
@@ -223,9 +226,9 @@ $routes->group('subject', function ($routes) {
     $routes->get('search-subject', 'Subject::search_subject', ['filter' => 'permission:createSubject']);
 });
 
-$routes->get('change-password', 'ChangePassword::index', ['filter' => 'permission:viewSetings']);
-$routes->post('change-password/update', 'ChangePassword::update', ['filter' => 'permission:viewSetings']);
-$routes->post('change-password/check-old', 'ChangePassword::checkOldPassword', ['filter' => 'permission:viewSetings']);
+$routes->get('change-password', 'ChangePassword::index', ['filter' => 'permission:viewSettings']);
+$routes->post('change-password/update', 'ChangePassword::update', ['filter' => 'permission:viewSettings']);
+$routes->post('change-password/check-old', 'ChangePassword::checkOldPassword', ['filter' => 'permission:viewSettings']);
 
 
 

@@ -9,4 +9,5 @@ php spark db:seed AddSemester
 php spark db:seed AddCaste
 php spark db:seed AddCategory
 php spark db:seed AddSubjectType
+php spark db:seed AddFacultyType
 echo "✅ Database migration and seeding complete!"

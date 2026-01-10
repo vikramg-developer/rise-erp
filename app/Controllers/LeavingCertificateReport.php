@@ -71,11 +71,18 @@ class LeavingCertificateReport extends BaseController {
                     $badges = '<span class="badge bg-warning-transparent">Duplicate</span>';
                 }
                 $buttons = '';
-                // Print Button
-//                if(hasPermission('printLeavingCertificate') || $lc['is_print'] == 0):
-                if ($lc['is_print'] == 0):
-                    $buttons .= actionButton('Print', ['leaving-certificate-id' => $lc['leaving_certificate_id']]);
-                endif;
+                $attrs = [
+                    'leaving-certificate-id' => $lc['leaving_certificate_id']
+                ];
+
+                // 🔒 disable ONLY when already printed AND no permission
+//                if ($lc['is_print'] == 1 && !hasPermission('printLeavingCertificate')) {
+                if ($lc['is_print'] == 1) {
+                    $attrs['disabled'] = 'disabled';
+                }
+                $buttons .= actionButton('Print', $attrs);
+                
+                // cancel button                  
                 $today = date('Y-m-d');
                 $lc_date = date('Y-m-d', strtotime($lc['added_at']));
                 if (hasPermission('updateLeavingCertificate') && $lc['is_cancelled'] != 1 && $lc_date === $today):
@@ -123,7 +130,7 @@ class LeavingCertificateReport extends BaseController {
             //====To check Count of genrated LC for one student====
             $data['lc_count'] = $this->modelleavingcertificate->get_lc_data($lc_data['yearwise_student_data_id']);
         }
-        $this->modelleavingcertificate->update($lc_id, ['is_print' => 1]);
+//        $this->modelleavingcertificate->update($lc_id, ['is_print' => 1]);
         // Correct mPDF 8.2+ constructor
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
         $mpdf->shrink_tables_to_fit = 0;
@@ -139,6 +146,25 @@ class LeavingCertificateReport extends BaseController {
         // Output PDF
         $mpdf->Output('Leaving-Certificate.pdf', 'I');
         exit;
+    }
+
+    public function mark_lc_printed() {
+        $lc_id = $this->request->getVar('lc_id');
+
+        if (!$lc_id) {
+            return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'Invalid LC ID',
+                        'csrfHash' => csrf_hash()
+            ]);
+        }
+
+        $this->modelleavingcertificate->update($lc_id, ['is_print' => 1]);
+
+        return $this->response->setJSON([
+                    'status' => 'success',
+                    'csrfHash' => csrf_hash()
+        ]);
     }
 
     public function cancel_lc() {

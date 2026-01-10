@@ -1,4 +1,9 @@
-
+//  (NO SPACE) input
+nameUppercaseOnly(
+        'input[name="student_mother_name"], ' +
+        'input[name="student_father_occupation"], ' +
+        'input[name="student_mother_occupation"]'
+        );
 //submit
 $("#student-parentdetails-form").on("submit", function (e) {
     e.preventDefault();

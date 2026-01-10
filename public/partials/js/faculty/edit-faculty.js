@@ -9,7 +9,7 @@ nameUppercaseOnly(
         );
 
 // Mobile Number
-mobileNumberOnly('input[name="edit_faculty_mobile_number"]');
+mobileNumberOnly('input[name="edit_faculty_contact_number"]');
 
 /**
  * ================================
@@ -45,11 +45,9 @@ $(document).ready(function () {
     $(document).on('submit', '#edit-faculty-registration-form', function (e) {
         e.preventDefault();
 
-        // Clear previous errors
         $('small.text-danger').text('').hide();
 
-        let formData = $(this).serializeArray();
-        formData.push({name: csrfName, value: csrfHash});
+        let formData = $(this).serialize(); // CSRF included automatically 
 
         $.ajax({
             url: BASE_URL + 'faculty/update-faculty',
@@ -59,31 +57,28 @@ $(document).ready(function () {
 
             success: function (res) {
 
-                // Update CSRF token
-                csrfHash = res.csrfHash;
+                // update CSRF token in form
+//            $('input[name="<?= csrf_token() ?>"]').val(res.csrfHash);
+                $('input[name]').filter(function () {
+                    return this.name.indexOf('csrf') !== -1;
+                }).val(res.csrfHash);
 
-
-                // Validation errors
                 if (res.status === 'error') {
                     $.each(res.errors, function (field, message) {
-                        $('#edit_' + field + '_error')
-                                .text(message)
-                                .show();
+                        $('#edit_' + field + '_error').text(message).show();
                     });
                     return;
                 }
 
-                // Success message
                 showToast('success', res.message);
 
-                // Redirect to manage faculty page
                 setTimeout(function () {
                     window.location.href = BASE_URL + 'faculty/fetch-faculty';
                 }, 1200);
-            },
-
+            }
         });
     });
+
 
 });
 
