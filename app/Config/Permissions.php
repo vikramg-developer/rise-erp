@@ -285,12 +285,16 @@ class Permissions extends BaseConfig {
     public function faculty_registration():array{
         return array_merge(
                 $this->faculty_registration()
+        );      
+        
+    }
+    
+    public function settings_category():array{
+        return array_merge(
+//                $this->settings_module()
         );
         
-        //settings
-         $this->settings_category = array_merge(
-                $this->settings_module
-        );
+        
         
         
     }

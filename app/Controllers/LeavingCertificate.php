@@ -20,7 +20,7 @@ class LeavingCertificate extends BaseController {
         $this->modelyear = model('ModelYear');
         $this->modeldepartment = model('ModelDepartment');
         $this->modelleavingcertificatecounter = model('ModelLeavingCertificateCounter');
-        $this->db = \Config\Database::connect();
+//        $this->db = \Config\Database::connect();
     }
 
     public function index() {
