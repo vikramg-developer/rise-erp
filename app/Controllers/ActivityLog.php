@@ -46,7 +46,7 @@ class ActivityLog extends BaseController {
         // DATA
         $rows = $this->modelactivitylog->getFilteredActivityLog($length, $start, $search);
 
-        $facultyNameMap = $nameMap = $this->modelfacultyregistration->getRiseNoNameMap();
+        $facultyNameMap = $nameMap = $this->modelfacultyregistration->getFacultyRiseNumberNameMap();
 
         $sr_no = 1;
 

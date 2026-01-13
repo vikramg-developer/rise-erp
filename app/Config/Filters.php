@@ -49,22 +49,23 @@ class Filters extends BaseConfig {
                     'save-registration', //skip student registration save page
                 ]
             ],
-//            'permission' => [
-//                'before' => [
-//                    '*', //apply to all filters
-//                ],
-//                'except' => [
-//                   
-//                    'login', //skip login page
-//                    'check-user', //skip login page
-//                    'logout', //skip logout
-//                    'dashboard', //skip dashboard page
-//                    'student-registration', //skip student registration page
-//                    'save-registration', //skip student registration save page
-//                    'change-password-first-login',//skip change password page
-//                    'check-old-password',//skip for old password check first time login
-//                ]
-//            ],
+            'permission' => [
+                'before' => [
+                    '*', //apply to all filters
+                ],
+                'except' => [
+                   
+                    'login', //skip login page
+                    'check-user', //skip login page
+                    'logout', //skip logout
+                    'dashboard', //skip dashboard page
+                    'student-registration', //skip student registration page
+                    'save-registration', //skip student registration save page
+                    'change-password-first-login',//skip change password page
+                    'check-old-password',//skip for old password check first time login
+                ]
+            ],
+            
             'sessionlogout' => [
                 'before' => [
                     '*',
@@ -77,6 +78,7 @@ class Filters extends BaseConfig {
                     'save-registration',
                 ],
             ],
+            
         // 'invalidchars',
         ],
         'after' => [

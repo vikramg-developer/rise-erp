@@ -27,9 +27,7 @@ class StudentRegistration extends BaseController {
 //===============================Add Student Registration===============================
     public function add_registration() {
         $session = session();
-        if ($this->request->getMethod() !== 'post') {
-            return redirect()->to('student-registration');
-        }
+        
         // Get academic year
         $academic_year_data = $this->modelacademicyear->getCurrentAcademicYear();
         $academic_year_id = $academic_year_data['academic_year_id'];

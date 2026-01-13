@@ -168,6 +168,7 @@ $routes->group('head', function ($routes) {
 $routes->group('fees-management', function ($routes) {
     $routes->get('/', 'FeesManagement::index', ['filter' => 'permission:viewHead']);
     $routes->post('import', 'FeesManagement::import', ['filter' => 'permission:viewHead']);
+    $routes->get('print-fees-receipt', 'FeesManagement::print_fees_receipt', ['filter' => 'permission:viewHead']);
 });
 
 $routes->group('department', function ($routes) {

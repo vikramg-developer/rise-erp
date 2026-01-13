@@ -89,8 +89,7 @@
                     </div>
                     <div class="modal-body">
 
-                        <div class="row gy-3">
-                            <?= csrf_field(); ?>
+                        <div class="row gy-3">                         
                             <input type="hidden" id="yearwise_student_data_id" name="yearwise_student_data_id">
                             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
                                 <label for="examination" class="form-label"><?= lang('App.examination'); ?></label> <span class="text-danger">*</span>

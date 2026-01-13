@@ -1,3 +1,6 @@
+
+export function initStudentEducationDetails(){
+ 
 //  (NO SPACE) input
 nameUppercaseOnly(
         'input[name="student_institution_name"], ' +
@@ -66,3 +69,4 @@ $("#student-educationaldetails-form").on("submit", function (e) {
     });
 });
 
+}

@@ -1,3 +1,6 @@
+export function initStudentPersonalDetails(){
+    
+
 //age calculation
 function calculateAge() {
     var dob = document.getElementById('dob').value;
@@ -35,30 +38,19 @@ document.getElementById('sport_reserv').addEventListener('change', function () {
     }
 });
 //handicap type div
-document.addEventListener('DOMContentLoaded', function () {
-
-    const handicapSelect = document.getElementById('student_physically_handicap');
+document.getElementById('student_physically_handicap').onchange = function () {
     const handicapTypeDiv = document.getElementById('handicap_type_div');
     const handicapTypeSelect = document.getElementById('student_physically_handicap_type');
 
-    function toggleHandicapType() {
-        if (handicapSelect.value === 'yes') {
-            handicapTypeDiv.style.display = 'block';
-            handicapTypeSelect.required = true; // set required on the select
-        } else {
-            handicapTypeDiv.style.display = 'none';
-            handicapTypeSelect.value = ''; // reset value
-            handicapTypeSelect.required = false; // remove required
-        }
+    if (this.value === 'yes') {
+        handicapTypeDiv.style.display = 'block';
+        handicapTypeSelect.required = true;
+    } else {
+        handicapTypeDiv.style.display = 'none';
+        handicapTypeSelect.value = '';
+        handicapTypeSelect.required = false;
     }
-
-    // On page load
-    toggleHandicapType();
-
-    // On change
-    handicapSelect.addEventListener('change', toggleHandicapType);
-});
-
+};
 
 //submit
 $("#student-personalinfo-form").on("submit", function (e) {
@@ -96,4 +88,4 @@ $("#student-personalinfo-form").on("submit", function (e) {
         }
     });
 });
-
+}

@@ -137,7 +137,7 @@ class Permissions extends BaseConfig {
     ];
 
     /** leaving certificate permissions */
-    public array $leaving_certificate = [
+    public array $leavingCertificate = [
         'createLeavingCertificate',
         'updateLeavingCertificate',
         'viewLeavingCertificate',
@@ -145,13 +145,13 @@ class Permissions extends BaseConfig {
     ];
 
     /** bonafide certificate permissions */
-    public array $bonafide_certificate = [
+    public array $bonafideCertificate = [
         'createBonafideCertificate',
         'updateBonafideCertificate',
         'viewBonafideCertificate',
         'deleteBonafideCertificate'
     ];
-    
+
     /** Activity Log permissions */
     public array $activity_log = [
         'createActivityLog',
@@ -159,7 +159,7 @@ class Permissions extends BaseConfig {
         'viewActivityLog',
         'deleteActivityLog'
     ];
-    
+
     /** Subject Group permissions */
     public array $subjectGroup = [
         'createSubjectGroup',
@@ -175,15 +175,15 @@ class Permissions extends BaseConfig {
         'updateSubject',
         'deleteSubject',
     ];
-    
-     /** Settings permissions */
+
+    /** Settings permissions */
     public array $settings = [
         'createSettings',
         'viewSettings',
         'updateSettings',
         'deleteSettings',
     ];
-    
+
     /** ICard permissions */
     public array $iCard = [
         'createICard',
@@ -192,12 +192,9 @@ class Permissions extends BaseConfig {
         'deleteICard',
     ];
 
-
-
-
 //    public function __construct() {
-        //-----------for submenu -------------------//
-    public function master():array{
+    //-----------for submenu -------------------//
+    public function master(): array {
         return array_merge(
                 $this->headGroup,
                 $this->head,
@@ -207,8 +204,8 @@ class Permissions extends BaseConfig {
                 $this->subject,
         );
     }
-    
-    public function dashboard():array{
+
+    public function dashboard(): array {
         return array_merge(
                 $this->adminDashboard,
                 $this->facultyDashboard,
@@ -218,88 +215,81 @@ class Permissions extends BaseConfig {
                 $this->studentDashboard
         );
     }
-    
-    public function feedback_module():array{
+
+    public function feedback_module(): array {
         return array_merge(
                 $this->feedback
         );
     }
 
-    public function faculty_module():array{
+    public function faculty_module(): array {
         return array_merge(
                 $this->faculty_registration
         );
     }
 
-    public function faculty_profile_module():array{
+    public function faculty_profile_module(): array {
         return array_merge(
                 $this->faculty_profile
         );
     }
-    
-    public function ticket_module():array{
+
+    public function ticket_module(): array {
         return array_merge(
                 $this->Ticket
         );
     }
-    public function certificates():array{
+
+    public function certificates(): array {
         return array_merge(
-                $this->leaving_certificate,
-                $this->bonafide_certificate,
+                $this->leavingCertificate,
+                $this->bonafideCertificate,
         );
     }
-    public function master_category():array{
+
+//    gray names (category)
+    public function master_category(): array {
         return array_merge(
-                 $this->master()
+                $this->master()
         );
     }
-    public function feedback_module_category():array{
+
+    public function feedback_module_category(): array {
         return array_merge(
                 $this->feedback_module()
         );
     }
-    public function master_dashboard():array{
+
+    public function master_dashboard(): array {
         return array_merge(
                 $this->dashboard()
         );
     }
-    
-    public function faculty_module_category():array{
+
+    public function faculty_module_category(): array {
         return array_merge(
-               $this->faculty_module()
+                $this->faculty_module()
         );
     }
-    
-    public function ticket_module_category():array{
+
+    public function ticket_module_category(): array {
         return array_merge(
                 $this->ticket_module()
         );
     }
-    
-    public function certificates_category():array{
-        return array_merge(
-                $this->certificates()
-        );
-    }
-    
-    public function faculty_registration():array{
+
+    public function faculty_registration(): array {
         return array_merge(
                 $this->faculty_registration()
         );      
         
     }
-    
-    public function settings_category():array{
+
+    public function settings_category(): array {
         return array_merge(
-//                $this->settings_module()
-        );
-        
-        
-        
-        
+//                $this->settings_module,
+        );  
     }
 
 
-
-//    }
 }

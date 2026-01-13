@@ -1,3 +1,6 @@
+
+export function initStudentAddressDetails(){
+ 
 //  (NO SPACE) input
 nameUppercaseOnly(
         'input[name="student_permanent_address"], ' +
@@ -153,3 +156,4 @@ $("#student-addressdetails-form").on("submit", function (e) {
         }
     });
 });
+}

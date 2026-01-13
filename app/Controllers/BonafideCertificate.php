@@ -167,13 +167,12 @@ class BonafideCertificate extends BaseController {
 
     public function print_bonafide_certificate() {
         $bonafide_id = $this->request->getVar('bonafide_id');
+        $ysd_id = $this->request->getVar('yearwise_student_data_id');
         if ($bonafide_id) {
             $data['bonafide_data'] = $bonafide_data = $this->modelbonafidecertificate->find($bonafide_id);
 
             $data['yearwise_data'] = $this->modelyearwisestudentdata->get_student_data_for_bonafide($bonafide_data['yearwise_student_data_id']);
-        } elseif ($this->request->getMethod() === 'post') {
-            $ysd_id = $this->request->getVar('yearwise_student_data_id');
-//            print_r($ysd_id);die();
+        } elseif ($ysd_id) {            
             $data['bonafide_data'] = [
                 'authorized_person' => $this->request->getVar('authorized_person'),
                 'bonafide_valid_upto' => $this->request->getVar('bonafide_valid_upto'),

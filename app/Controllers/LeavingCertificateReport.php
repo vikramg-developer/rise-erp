@@ -8,6 +8,7 @@ class LeavingCertificateReport extends BaseController {
 
     protected $modelleavingcertificate;
     protected $modelyearwisestudentdata;
+    protected $modeldepartment;
 
     public function __construct() {
         $this->modelleavingcertificate = model('ModelLeavingCertificate');

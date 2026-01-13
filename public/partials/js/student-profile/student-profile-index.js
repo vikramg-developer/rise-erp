@@ -1,10 +1,11 @@
-function loadJS(url) {
-    const script = document.createElement('script');
-    script.src = url;
-    script.defer = true;
-    document.head.appendChild(script);
-}
+import{initStudentPersonalDetails} from './student-personal-details.js';
+import{initStudentAddressDetails} from './student-address-details.js';
+import{initStudentParentDetails} from './student-parent-details.js';
+import{initStudentEducationDetails} from './student-educational-details.js';
 
-// load other JS files
-loadJS('/partials/js/student-profile/student-personal-details.js');
-loadJS('/partials/js/student-profile/student-address-details.js');
+document.addEventListener('DOMContentLoaded',function(){
+    initStudentPersonalDetails();
+    initStudentAddressDetails();
+     initStudentParentDetails();
+    initStudentEducationDetails();
+});

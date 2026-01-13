@@ -1,10 +1,10 @@
-let table;
+let lc_report_table;
 //let reloadAfterLC = false;
 $("#lc_report").on("submit", function (e) {
 
     e.preventDefault();
-    if (!table) {
-        table = $('#lc-student-list').DataTable({
+    if (!lc_report_table) {
+        lc_report_table = $('#lc-student-list').DataTable({
             processing: true,
             serverSide: true,
 //        destroy: true,
@@ -44,7 +44,7 @@ $("#lc_report").on("submit", function (e) {
         });
     } else {
         // 🔁 Subsequent searches → reload data only
-        table.ajax.reload();
+        lc_report_table.ajax.reload();
     }
 
 });
@@ -68,9 +68,9 @@ $(document).on('click', '.print', function () {
 
             if (response.status === 'success') {
 
-                // ✅ reload table FIRST
-                if (table) {
-                    table.ajax.reload(null, false).draw(false);
+                // ✅ reload lc report table FIRST
+                if (lc_report_table) {
+                    lc_report_table.ajax.reload(null, false).draw(false);
                 }
 
                 // ✅ THEN open PDF

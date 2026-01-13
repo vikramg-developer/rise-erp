@@ -20,7 +20,7 @@ class LeavingCertificate extends BaseController {
         $this->modelyear = model('ModelYear');
         $this->modeldepartment = model('ModelDepartment');
         $this->modelleavingcertificatecounter = model('ModelLeavingCertificateCounter');
-//        $this->db = \Config\Database::connect();
+        $this->db = \Config\Database::connect();
     }
 
     public function index() {
@@ -197,6 +197,7 @@ class LeavingCertificate extends BaseController {
 
     public function print_leaving_certificate() {
         $lc_id = $this->request->getVar('lc_id');
+        $ysd_id = $this->request->getVar('yearwise_student_data_id');
 //        $ysd_id = $this->request->getGet('ysd_id');
         if ($lc_id) {
             $data['lc_data'] = $lc_data = $this->modelleavingcertificate->find($lc_id);
@@ -205,8 +206,8 @@ class LeavingCertificate extends BaseController {
             //====To check Count of genrated LC for one student====
             $data['previous_lc_date'] = $this->modelleavingcertificate->get_previous_lc_date($lc_data['yearwise_student_data_id']);
 //            print_r($data['previous_lc_date']);die();
-        } elseif ($this->request->getMethod() === 'post') {
-            $ysd_id = $this->request->getVar('yearwise_student_data_id');
+        } elseif ($ysd_id) {
+//            $ysd_id = $this->request->getVar('yearwise_student_data_id');
             $data['lc_data'] = [
                 'examination' => $this->request->getVar('examination'),
                 'exam_period' => $this->request->getVar('exam_period'),

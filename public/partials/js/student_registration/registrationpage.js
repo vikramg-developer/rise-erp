@@ -1,18 +1,18 @@
 
-const inputs = document.querySelectorAll('.required-input');
-const createBtn = document.getElementById('createBtn');
-
-function validateInputs() {
-    let allFilled = true;
-
-    inputs.forEach(input => {
-        if (input.value.trim() === '') {
-            allFilled = false;
-        }
-    });
-
-    createBtn.disabled = !allFilled;
-}
+//const inputs = document.querySelectorAll('.required-input');
+//const createBtn = document.getElementById('createBtn');
+//
+//function validateInputs() {
+//    let allFilled = true;
+//
+//    inputs.forEach(input => {
+//        if (input.value.trim() === '') {
+//            allFilled = false;
+//        }
+//    });
+//
+//    createBtn.disabled = !allFilled;
+//}
 function isValidPassword(password) {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
     return passwordRegex.test(password);

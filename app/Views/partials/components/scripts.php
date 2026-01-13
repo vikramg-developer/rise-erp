@@ -111,14 +111,16 @@
 <script src="<?php echo base_url('assets/js/show-password.js'); ?>"></script>
 
 <script src="<?= base_url('partials/js/common-inputs/common-inputs.js'); ?>"></script>
+<!--student-profile js files-->
 
 <script src="<?php // echo base_url('partials/js/student-profile/student-profile-index.js'); ?>"></script>
-<script src="<?php echo base_url('partials/js/student-profile/student-personal-details.js'); ?>"></script>
-<script src="<?php echo base_url('partials/js/student-profile/student-address-details.js'); ?>"></script>
-<script src="<?php echo base_url('partials/js/student-profile/student-parent-details.js'); ?>"></script>
-<script src="<?php echo base_url('partials/js/student-profile/student-educational-details.js'); ?>"></script>
+<script src="<?php //echo base_url('partials/js/student-profile/student-personal-details.js'); ?>"></script>
+<script src="<?php //echo base_url('partials/js/student-profile/student-address-details.js'); ?>"></script>
+<script src="<?php// echo base_url('partials/js/student-profile/student-parent-details.js'); ?>"></script>
+<script src="<?php// echo base_url('partials/js/student-profile/student-educational-details.js'); ?>"></script>
 
 <?php if (isset($jspath)): ?>
-    <script src="<?php echo base_url('partials/js/') . $jspath . '.js'; ?>"></script>
+    <script type="module" src="<?php echo base_url('partials/js/') . $jspath . '.js'; ?>"></script>
 <?php endif; ?>
+
 

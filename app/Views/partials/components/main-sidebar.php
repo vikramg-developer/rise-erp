@@ -182,9 +182,9 @@ $permissions = config('Permissions');
 
                                                 <!--========================= Certificates Module Start =========================-->
 
-                                                <?php if (hasAnyPermission($permissions->certificates_category())): ?>
+                                                <?php //if (hasAnyPermission($permissions->certificates_category())): ?>
                                                     <li class="slide__category"><span class="category-name"><?= lang('App.certificate'); ?>s</span></li>
-                                                <?php endif; ?>
+                                                <?php// endif; ?>
                                                 <!-- Start::slide -->
 
                                                 <?php if (hasAnyPermission($permissions->certificates())): ?>
@@ -198,7 +198,7 @@ $permissions = config('Permissions');
                                                             <li class="slide side-menu__label1">
                                                                 <a href="javascript:void(0)"><?= lang('App.certificate'); ?></a>
                                                             </li>
-                                                            <?php if (hasAnyPermission($permissions->leaving_certificate)): ?>
+                                                            <?php if (hasAnyPermission($permissions->leavingCertificate)): ?>
                                                                 <li class="slide">
                                                                     <a href="<?php echo base_url('leavingcertificate'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?></a>
                                                                 </li>
@@ -207,7 +207,7 @@ $permissions = config('Permissions');
                                                                     <a href="<?php echo base_url('leavingcertificate/leaving-certificate-report'); ?>" class="side-menu__item"><?= lang('App.leaving'); ?> <?= lang('App.certificate'); ?> <?= lang('App.report'); ?></a>
                                                                 </li>
                                                             <?php endif; ?>
-                                                            <?php if (hasAnyPermission($permissions->bonafide_certificate)): ?>
+                                                            <?php if (hasAnyPermission($permissions->bonafideCertificate)): ?>
                                                                 <li class="slide">
                                                                     <a href="<?php echo base_url('bonafidecertificate'); ?>" class="side-menu__item"><?= lang('App.bonafide'); ?> <?= lang('App.certificate'); ?></a>
                                                                 </li>
@@ -220,13 +220,14 @@ $permissions = config('Permissions');
                                                     </li>
                                                 <?php endif; ?>
                                                 <!--===========================================Certificates Module End ================================== -->
-
+                                                <?php if (hasAnyPermission($permissions->iCard)): ?>
                                                 <li class="slide">
                                                     <a href="<?php echo base_url('icard'); ?>" class="side-menu__item">
                                                         <i class="bx bx-id-card side-menu__icon"></i>
                                                         <span class="side-menu__label"><?= lang('App.icard'); ?></span>
                                                     </a>
                                                 </li>
+                                                <?php endif; ?>
 
 
                                                 <!--=============================================Fee Management Start==============================================-->
@@ -396,7 +397,7 @@ $permissions = config('Permissions');
                                             <li class="slide__category"><span class="category-name">Settings</span></li>
                                             <?php endif; ?>
                                             
-                                                 <?php //if (hasAnyPermission($permissions->settings_module)): ?>
+                                                 <?php// if (hasAnyPermission($permissions->settings_module)): ?>
                                                     <li class="slide has-sub">
                                                         <a href="#" class="side-menu__item">
                                                             <i class="bx bx-cog side-menu__icon"></i>

@@ -46,7 +46,7 @@ class Department extends BaseController {
         // DATA
         $rows = $this->modeldepartment->getFilteredDepartment($length, $start, $search);
 
-        $facultyNameMap = $nameMap = $this->modelfacultyregistration->getRiseNoNameMap();
+        $facultyNameMap = $nameMap = $this->modelfacultyregistration->getFacultyRiseNumberNameMap();
 
         $sr_no = 1;
 

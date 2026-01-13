@@ -36,6 +36,7 @@ class StudentProfile extends BaseController {
     public function index() {
 
         $student_registration_id = session()->get('registration_id');
+          $data['jspath'] = 'student-profile/student-profile-index';
         $data['title'] = lang('App.rise') . "-" . lang('App.student') . " " . lang('App.profile');
         $data['student_registration_data'] = $this->modelstudentregistration->find($student_registration_id);
         $data['student_personalinfo_data'] = $this->modelstudentpersonalinformation->where('student_registration_id', $student_registration_id)->first();

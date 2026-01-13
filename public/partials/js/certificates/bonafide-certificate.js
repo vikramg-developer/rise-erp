@@ -1,10 +1,10 @@
-let table;
-//let reloadAfterLC = false;
+let bonafide_table;
+//let reloadAfterbonafide = false;
 $("#fetch_bonafide_student").on("submit", function (e) {
 
     e.preventDefault();
-    if (!table) {
-        table = $('#bonafide-student-list').DataTable({
+    if (!bonafide_table) {
+        bonafide_table = $('#bonafide-student-list').DataTable({
             processing: true,
             serverSide: true,
 //        destroy: true,
@@ -43,7 +43,7 @@ $("#fetch_bonafide_student").on("submit", function (e) {
         });
     } else {
         // 🔁 Subsequent searches → reload data only
-        table.ajax.reload();
+        bonafide_table.ajax.reload();
     }
 
 });
@@ -116,7 +116,7 @@ $("#bonafide_modal_form").on("submit", function (e) {
             }
 
             // success
-            reloadAfterbonafide = true;   // flag
+//            reloadAfterbonafide = true;   // flag
             $("#bonafide_modal").modal('hide');
             window.open(
                     BASE_URL + "bonafidecertificate/print-bonafide-certificate?bonafide_id=" + response.bonafide_id,
@@ -138,10 +138,10 @@ $('#bonafide_modal').on('hidden.bs.modal', function () {
     $('.field-error').text('').hide();
 
     // 🔥 reload ONLY when LC was generated
-    if (reloadAfterLC) {
-        reloadAfterLC = false;
-        if (table) {
-            table.ajax.reload(null, false); // 🔥 THIS IS THE KEY
-        }
-    }
+//    if (reloadAfterLC) {
+//        reloadAfterLC = false;
+//        if (bonafide_table) {
+//            bonafide_table.ajax.reload(null, false); // 🔥 THIS IS THE KEY
+//        }
+//    }
 });

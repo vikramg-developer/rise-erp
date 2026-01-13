@@ -1,10 +1,10 @@
-let table;
+let lc_table;
 let reloadAfterLC = false;
 $("#fetch_lc_student").on("submit", function (e) {
 
     e.preventDefault();
-    if (!table) {
-        table = $('#lc-student-list').DataTable({
+    if (!lc_table) {
+        lc_table = $('#lc-student-list').DataTable({
             processing: true,
             serverSide: true,
 //        destroy: true,
@@ -43,18 +43,10 @@ $("#fetch_lc_student").on("submit", function (e) {
         });
     } else {
         // 🔁 Subsequent searches → reload data only
-        table.ajax.reload();
+        lc_table.ajax.reload();
     }
 
 });
-
-//$(document).on('click', '.lc_btn', function () {
-//
-//    $('#yearwise_student_data_id').val($(this).data('yearwise_student_data_id'));
-//
-//    // 🔑 keep CSRF in sync
-//    $('#lc_modal_form input[name="' + csrfName + '"]').val(csrfHash);
-//});
 
 $(document).on('click', '.lc_btn', function () {
 
@@ -192,8 +184,8 @@ $('#lc_modal').on('hidden.bs.modal', function () {
     // 🔥 reload ONLY when LC was generated
     if (reloadAfterLC) {
         reloadAfterLC = false;
-        if (table) {
-            table.ajax.reload(null, false); // 🔥 THIS IS THE KEY
+        if (lc_table) {
+            lc_table.ajax.reload(null, false); // 🔥 THIS IS THE KEY
         }
     }
 });

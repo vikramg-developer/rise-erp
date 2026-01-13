@@ -66,8 +66,9 @@
             }
 
             /* PHOTO */
-            .photo{
-                margin-top:0;
+            .profile_photo{
+                margin-top:1mm;
+                /*padding-bottom:0;*/
                 text-align:center;
             }
 
@@ -84,7 +85,7 @@
                 width:100%;
                 font-size:8px;
                 font-weight:bold;
-                margin-top:2mm;
+                /*margin-top:mm;*/
             }
             .student_details td{
                 vertical-align:top;
@@ -141,9 +142,9 @@
                 height:1mm;           /* bold thickness */
                 background: linear-gradient(
                     to right,
-                    #2f2fb3,   /* blue */
-                    #6a1b9a,   /* purple */
-                    #c2185b    /* red */
+                    #2f2fb3,    blue 
+                    #6a1b9a,    purple 
+                    #c2185b     red 
                     );
                 margin-bottom:3mm;
             }
@@ -199,12 +200,12 @@
                         </div>-->
 
             <!-- PHOTO -->
-            <div class="photo">
+            <div class="profile_photo">
                 <img src="<?= base_url('assets/images/profile.jpg') ?>" style="width:60px;height:60px ">
             </div>
 
             <!-- NAME -->
-            <div class="name"><?php echo esc($yearwise_data['student_last_name'] . ' ' . $yearwise_data['student_first_name'] . ' ' . $yearwise_data['student_middle_name']) ?></div>
+            <div class="name">JADHAV SONAL SURYAKANT ATUB AKBAR MUDDSARA<?php //echo esc($yearwise_data['student_last_name'] . ' ' . $yearwise_data['student_first_name'] . ' ' . $yearwise_data['student_middle_name']) ?></div>
 
             <!-- DETAILS -->
             <table class="student_details">

@@ -30,13 +30,13 @@
                                         <!--student institution name-->
                                         <div class="col-xl-6">
                                             <label for="student_institution_name" class="form-label"><?= lang('App.institution'); ?> <?= lang('App.name'); ?> <span class="text-danger">*</span></label></label>
-                                            <input type="text" class="form-control" id="student_institution_name" placeholder="<?= lang('App.institution'); ?> <?= lang('App.name'); ?>" name="student_institution_name"value="<?= esc($student_educational_data['student_institution_name'] ?? '') ?>">
+                                            <input type="text" class="form-control" id="student_institution_name" placeholder="<?= lang('App.institution'); ?> <?= lang('App.name'); ?>" name="student_institution_name"value="">
                                             <small class="text-danger" id="student_institution_name_error" style="display:none;"></small>
                                         </div>
                                         <!--student university name-->
                                         <div class="col-xl-6">
                                             <label for="student_institution_university" class="form-label"><?= lang('App.university'); ?> <?= lang('App.name'); ?> <span class="text-danger">*</span></label></label>
-                                            <input type="text" class="form-control" id="student_institution_university" placeholder="<?= lang('App.university'); ?> <?= lang('App.name'); ?>" name="student_institution_university"value="<?= esc($student_educational_data['student_institution_university'] ?? '') ?>">
+                                            <input type="text" class="form-control" id="student_institution_university" placeholder="<?= lang('App.university'); ?> <?= lang('App.name'); ?>" name="student_institution_university"value="">
                                             <small class="text-danger" id="student_institution_university_error" style="display:none;"></small>
                                         </div>
                                         <!--month of passing-->
@@ -62,7 +62,7 @@
                                         <!--seat no-->
                                         <div class="col-xl-6">
                                             <label for="student_seat_no" class="form-label"><?= lang('App.seat'); ?> <?= lang('App.no'); ?> <span class="text-danger">*</span></label></label>
-                                            <input type="text" class="form-control" id="student_seat_no" placeholder="<?= lang('App.seat'); ?> <?= lang('App.no'); ?>" name="student_seat_no"value="<?= esc($student_educational_data['student_seat_no'] ?? '') ?>">
+                                            <input type="text" class="form-control" id="student_seat_no" placeholder="<?= lang('App.seat'); ?> <?= lang('App.no'); ?>" name="student_seat_no"value="">
                                             <small class="text-danger" id="student_seat_no_error" style="display:none;"></small>
                                         </div>
                                         <!--marking system-->
@@ -70,33 +70,33 @@
                                             <label class="form-label"><?= lang('App.marking'); ?> <?= lang('App.system'); ?><span class="text-danger">*</span></label>
                                             <select class="form-control" name="student_marking_system" id="student_marking_system">
                                                 <option value="">Select</option>
-                                                    <option value="indian"<?= (!empty($student_educational_data['student_marking_system']) && $student_educational_data['student_marking_system'] === 'marks') ? 'selected' : '' ?>> Marks</option>
-                                                <option value="other"<?= (!empty($student_educational_data['student_marking_system']) && $student_educational_data['student_marking_system'] === 'grade') ? 'selected' : '' ?>> Grade</option>
+                                                <option value="marks"> Marks</option>
+                                                <option value="grade"> Grade</option>
                                             </select>
                                             <small class="text-danger" id="student_marking_system_error" style="display:none;"></small>
                                         </div>
                                         <!--total marks-->
                                         <div class="col-xl-6">
                                             <label for="student_total_marks" class="form-label"><?= lang('App.total'); ?> <?= lang('App.marks'); ?> <span class="text-danger">*</span></label></label>
-                                            <input type="text" class="form-control" id="student_total_marks" placeholder="<?= lang('App.total'); ?> <?= lang('App.marks'); ?>" name="student_total_marks"value="<?= esc($student_educational_data['student_total_marks'] ?? '') ?>">
+                                            <input type="text" class="form-control" id="student_total_marks" placeholder="<?= lang('App.total'); ?> <?= lang('App.marks'); ?>" name="student_total_marks"value="">
                                             <small class="text-danger" id="student_total_marks_error" style="display:none;"></small>
                                         </div>
                                         <!--obtain marks-->
                                         <div class="col-xl-6">
                                             <label for="student_obtain_marks" class="form-label"><?= lang('App.obtain'); ?> <?= lang('App.marks'); ?> <span class="text-danger">*</span></label></label>
-                                            <input type="text" class="form-control" id="student_obtain_marks" placeholder="<?= lang('App.obtain'); ?> <?= lang('App.marks'); ?>" name="student_obtain_marks"value="<?= esc($student_educational_data['student_obtain_marks'] ?? '') ?>">
+                                            <input type="text" class="form-control" id="student_obtain_marks" placeholder="<?= lang('App.obtain'); ?> <?= lang('App.marks'); ?>" name="student_obtain_marks"value="">
                                             <small class="text-danger" id="student_obtain_marks_error" style="display:none;"></small>
                                         </div>
                                         <!--percentage-->
                                         <div class="col-xl-6">
                                             <label for="student_percentage" class="form-label"><?= lang('App.percentage'); ?><span class="text-danger">*</span></label></label>
-                                            <input type="text" class="form-control" id="student_percentage" placeholder="<?= lang('App.percentage'); ?>" name="student_percentage"value="<?= esc($student_educational_data['student_percentage'] ?? '') ?>">
+                                            <input type="text" class="form-control" id="student_percentage" placeholder="<?= lang('App.percentage'); ?>" name="student_percentage"value="">
                                             <small class="text-danger" id="student_percentage_error" style="display:none;"></small>
                                         </div>
                                         <!--percentage-->
                                         <div class="col-xl-6">
                                             <label for="student_grade" class="form-label"><?= lang('App.grade'); ?><span class="text-danger">*</span></label></label>
-                                            <input type="text" class="form-control" id="student_grade" placeholder="<?= lang('App.grade'); ?>" name="student_grade"value="<?= esc($student_educational_data['student_grade'] ?? '') ?>">
+                                            <input type="text" class="form-control" id="student_grade" placeholder="<?= lang('App.grade'); ?>" name="student_grade"value="">
                                             <small class="text-danger" id="student_grade_error" style="display:none;"></small>
                                         </div>
                                         <!--date of passing -->
@@ -104,7 +104,7 @@
                                             <label class="form-label"><?= lang('App.date'); ?> <?= lang('App.of'); ?> <?= lang('App.passing'); ?><span class="text-danger">*</span></label>
                                             <div class="input-group">
                                                 <div class="input-group-text text-muted"> <i class="ri-calendar-line"></i></div>
-                                                <input type="date"class="form-control"id="dob"name="student_date_of_passing"value="<?= esc($student_educational_data['student_birthdate'] ?? '') ?>">
+                                                <input type="date"class="form-control"id="dob"name="student_date_of_passing">
                                             </div>
                                             <small class="text-danger" id="student_date_of_passing_error" style="display:none;"></small>
                                         </div>
